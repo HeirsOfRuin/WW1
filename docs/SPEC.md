@@ -1,6 +1,6 @@
 # WW1 (working title): spec, draft
 
-Status: **draft, revision 2, not approved** (2026-11-08). Stage 1 of the game-building
+Status: **draft, revision 3, not approved** (2026-11-08). Stage 1 of the game-building
 workflow (`Game-Workshop/skills/game-building/SKILL.md`). Nothing is built until the
 author approves this page and the kill gate passes.
 
@@ -16,12 +16,75 @@ author approves this page and the kill gate passes.
 | 2026-11-08 | The whole war is very hard; not every ending is death or disability | "going through the entire war should be incredibly hard, but that doesn't mean every end should be death or disability either" |
 | 2026-11-08 | 3 or 4 stages; survive a stage, go home on leave, choose to stay home or go back | "if you survive to specific dates, set at different historic stages of the war (3 or 4 of them), you get sent home for leave, see home and their life, then get the option to stay at home or reenlist and continue the war" |
 | 2026-11-08 | Going back guarantees a promotion; each stage has 2 or 3 paths by rank, position and specialty | "Each time you reenlist, you get a guaranteed promotion, so if you didn't get a promotion during that stage. That way each stage only needs 2 or 3 paths based on the players rank, position and specialty" |
+| 2026-11-08 | "Stay home" is an earned home posting (instructor, medical downgrade, war work) | "1. Yes" |
+| 2026-11-08 | Going back gives one step; promotions earned in a stage stack on top | "2. Yes" |
+| 2026-11-08 | Four stages: 1915 Loos, 1916 Somme, 1917, 1918 | "3. Yes" |
+| 2026-11-08 | Targets: best play reaches the Armistice in 5-10% of runs, reckless near 0%, competent play survives Stage 1 in 60-75% | "4. Yes" |
+| 2026-11-08 | Four backgrounds/towns at character creation, with hometown skills chosen there; war skills learned while deployed | "I think having 4 different backgrounds/towns to choose from help set the character creation up, besides choosing some hometown skills, then make sure we talk war skills learned while deployed" |
 
 ## Pitch
 
 An 18-year-old volunteer in a fictional New Army battalion, 1914 to the Armistice. You do not
 choose the war, the battles or the orders. You choose how much risk you take and for whom,
 and at the end of each year whether to go back.
+
+## Character creation: four towns, hometown skills
+
+The player picks one of four home towns, then a few hometown skills from that town's list
+and a short general list. Age is fixed at 18; name and family are chosen.
+
+### The four towns (proposed)
+
+Fictional towns of real types. Each one sets the section's trades and accents, which
+specialties come easily, and which war work is offered as a home posting at leave.
+
+| Town type | Hometown skills on offer | Takes easily to | War work offered at leave |
+|---|---|---|---|
+| Pit village (coalfield) | Digging, timbering, working in the dark, stamina | Wiring, tunnelling (transfer to a tunnelling company) | Released back to the pits |
+| Mill town (textiles) | Machinery, working in noise, stamina | Lewis gun (mechanical), signals | Munitions |
+| City office (clerk) | Literacy, figures, a rifle club or Territorial drill | Signals, runner, orderly room; commission eligibility | A staff or depot clerk post |
+| Farm village (rural) | Fieldcraft, shooting, horses | Sniping, scouting, transport | Land work |
+
+General list (any town): first aid (St John Ambulance), sport (a strong throwing arm helps a
+bomber), a chapel or choir voice (standing with the section), football.
+
+**How the four share one battalion.** One fictional New Army service battalion; each of its
+four companies drawn from one of the four towns. Locally raised companies are plausible for
+1914 service battalions (to be checked). The player's town sets his company and his section.
+The battle skeletons stay one per stage, and the other three companies are on the same field:
+men from the other towns appear as neighbours, rivals and replacements.
+
+### War skills: learned only at the front
+
+| War skill | Learned by | Opens |
+|---|---|---|
+| Trench sense (reading shellfire, where not to stand) | Time in the line | Fewer casualties on every path |
+| Bombing | Course or a raid | Specialist path (bomber) |
+| Lewis gun | Course | Specialist path (Lewis gunner) |
+| Sniping and scouting | Course or patrols | Specialist path (sniper) |
+| Signals | Course | Specialist path (signaller or runner) |
+| Wiring and digging | Working parties | Fewer losses on night work; tunnelling transfer |
+| Gas drill | Training, then the first gas attack | Survives gas phases |
+| Leadership | Leading men in a battle phase | NCO path, commission eligibility |
+
+Rules for both kinds of skill:
+- Hometown skills set the starting point and how fast a war skill grows; they never stand in
+  for it. A miner learns wiring faster; he does not start a wirer.
+- War skills come only from doing or from a course. No points to spend.
+- Keep the total at about 12 skills. Every one must move an outcome (inert check, rule 2)
+  or be cut.
+- Home-posting offers derive from skills: instructor needs a war skill, war work needs the
+  hometown trade. One function decides both what is shown and what is offered (rule 1).
+- No town may be best on both survival and grade (kill gate).
+
+### The content cost of four towns, and the containment
+
+Four towns times four leaves is 16 home chapters, and four sections of 8-10 men is about 40
+named men. Contained by:
+- Each leave chapter is a shared national layer (casualty lists, rationing, conscription,
+  air raids) plus a short town layer (family, trade, the war work, the families of the section).
+- Each town has 2-3 written friends; the rest of the section is generated from a regional
+  name and trade pool and becomes known through events.
 
 ## Structure: four stages, each ending in home leave
 
@@ -149,6 +212,8 @@ while the death rate makes it a real risk.
 Numbers-only sim of rotations, generic battles and the four leave decisions, no UI, in
 `prototypes/`. About 200+ seeds per policy.
 
+Every policy runs from each of the four towns.
+
 | Policy | Volunteering | At leave |
 |---|---|---|
 | Reckless | Always | Always go back |
@@ -166,12 +231,16 @@ Proposed targets (the author's call; numbers to be set):
 | Survive Stage 1, competent play | 60-75% |
 | Quit-after-Stage-1 average grade | Clearly below going back for a competent policy |
 | Every policy | Has at least one losing route; none best on both survival and grade |
+| Every town | Best somewhere; none best on both survival and grade |
 
 ## Open questions for the author
 
-1. The home-posting fix for "stay home": accept?
-2. Earned promotions stack with the guaranteed one: accept?
-3. Four stages as tabled: accept?
-4. The targets above: what share of runs should reach the Armistice?
-5. The home town: northern industrial, or somewhere else? (Gives the section's accents,
-   trades and the war work on offer.)
+1. The four town types (pit, mill, city office, farm): accept, or swap one (a port or
+   shipyard town is the obvious alternative)?
+2. One battalion with a company per town: accept?
+3. How many hometown skills at creation: two from the town list plus one general (recommended)?
+4. Then approve this spec as a whole, which opens the kill gate.
+
+To check against sources before writing: whether a 1914 service battalion could fight at
+Loos (Stage 1), locally raised companies, leave frequency for other ranks, and the routes to a
+home posting.
