@@ -24,6 +24,16 @@ switch:
   - { if: ["war.battle == loos", "war.phase == 2", "war.path == rifleman"], go: b_loos_trench }
   - { if: ["war.battle == loos", "war.phase == 3", "war.path == rifleman"], go: b_loos_hold }
   - { if: ["war.pending == leave", "war.stage == 1", "start == mill"], go: l_mill_1915 }
+  # the mill town, 1916 (docs/FRAME-1916.md)
+  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 2", "start == mill"], go: { pool: front_1916_mill, count: 1, then: w_duty } }
+  - { if: ["war.battle == somme_1_july", "war.phase == 1", "start == mill"], go: b_somme_1 }
+  - { if: ["war.battle == somme_1_july", "war.phase == 2", "start == mill"], go: b_somme_2 }
+  - { if: ["war.battle == somme_1_july", "war.phase == 3", "start == mill"], go: b_somme_3 }
+  - { if: ["war.battle == somme_1_july", "war.phase == 4", "start == mill"], go: b_somme_4 }
+  - { if: ["war.battle == somme_autumn", "war.phase == 1", "start == mill"], go: b_somme_autumn_1 }
+  - { if: ["war.battle == somme_autumn", "war.phase == 2", "start == mill"], go: b_somme_autumn_2 }
+  - { if: ["war.battle == somme_autumn", "war.phase == 3", "start == mill"], go: b_somme_autumn_3 }
+  - { if: ["war.pending == leave", "war.stage == 2", "start == mill"], go: l_mill_1916 }
   # the war's questions
   - { if: "war.pending == tunnel", go: w_tunnel }
   - { if: "war.pending == duty", go: w_duty }

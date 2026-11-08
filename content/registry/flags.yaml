@@ -19,3 +19,11 @@ silent_at_roll: { description: "Kept what he saw" }
 wrote_to_mrs_shaw: { description: "Wrote to Albert Shaw's mother yourself; she sends for you at leave" }
 wrote_to_mrs_duckworth: { description: "Wrote to Harry Duckworth's parents with his jokes; his dad laughs at leave" }
 wrote_to_mrs_pilling: { description: "Wrote to Walter Pilling's mother; a cake on your mother's step at leave" }
+# The mill town, 1916 (content/scenes/war/1916-mill.yaml):
+y16_started: { description: "The 1916 events have begun (chains them)" }
+best_man: { description: "Said yes to standing up with Shaw; Edith says he kept your place" }
+after_the_war: { description: "Told Shaw to ask after the war; Edith asks what he has said" }
+urged_pilling_go: { description: "Told Pilling to take the papers and go; his mother knows who didn't lose them" }
+let_pilling_stay: { description: "Left it to Pilling; his mother is proud and furious" }
+after_july: { description: "The weeks after 1 July have been played (chains the events)" }
+brought_discs: { description: "Went out for the identity discs; at leave you look at every woman in black" }

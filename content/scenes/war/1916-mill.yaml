@@ -1,0 +1,467 @@
+# The mill town, 1916 (docs/FRAME-1916.md, option A: the war's numbers unchanged). Written to the
+# voice in content/style-guide.md. His path now matters in the words: battle phases carry a
+# paragraph for each path he can be on in 1916 (rifleman, section leader, Lewis gunner,
+# signaller, bomber, sniper), and the choices are worded for it. The resolver already gives each
+# path its own risk.
+#
+# Events come from the pool front_1916_mill at the first call for men each tour (content/route.yaml).
+# Stage 2 runs tours 10 to 19; 1 July is tour 14, the October battle tour 18.
+
+# ---- events ----------------------------------------------------------------------------------
+
+- id: v16_tin_hats
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  once: true
+  on_enter: [ { set: flag.y16_started } ]
+  title: Tin hats
+  text: |
+    February, and the ground's iron. Your breath freezes on the blanket round your face and in the
+    morning you crack it off like the skin on cold gravy.
+
+    The tin hats come up with the rations, a whole limber of them. They're heavier than they look
+    and they sit on your head like a basin, and the leather lining smells of somebody else's sweat
+    already. The sergeant says they'll stop shrapnel but not a bullet, so don't go getting ideas.
+
+    [if war.mate2]Duckworth wears his on the back of his head and calls it his Sunday best.[/if] A draft comes up the same week: Derby men, attested
+    last autumn, some of them older than your father, one with a cough you can hear three bays off.
+    They look at the old hands the way you looked at the old hands, last May.
+  choices:
+    - id: carry_on
+      text: Show the new men how to stand on a firestep.
+      next: "@return"
+
+- id: v16_edith
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  once: true
+  requires: [ "war.tour >= 12", flag.y16_started, war.mate1 ]
+  title: Edith
+  text: |
+    Shaw has a photograph in his pay book now, between the pages where he keeps his next-of-kin.
+    A girl in a white blouse in front of a painted garden at the studio on Market Street, trying
+    not to laugh.
+
+    "Edith," he says. "Edith Holt. From the card room." He keeps it out of the wet in an oilskin
+    tobacco pouch. "We're getting wed. Next leave, if they give me one before Whitsun."
+
+    He's red to the ears. He keeps turning the pouch over in his fingers like a shuttle.
+
+    "Will you stand up with me? Best man. You're the one who wrote her the letters, near enough."
+  choices:
+    - id: best_man
+      text: Say yes. Shake his hand on it.
+      effects: [ { set: flag.best_man } ]
+      text_after: |
+        His grip's like a vice. "Right," he says. "Right, then." And then, because he can't think
+        of anything else: "She does a lovely meat-and-potato pie." It's the most words in a row
+        you've had out of him since France.
+      next: "@return"
+    - id: after_the_war
+      text: Tell him to ask you after the war, when it's done.
+      effects: [ { set: flag.after_the_war } ]
+      text_after: |
+        "After the war," he says, as if he's trying the words for size. He puts the photograph back
+        in the pouch, and the pouch back in the pay book, carefully, and buttons the pocket.
+      next: "@return"
+
+- id: v16_pilling_papers
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  once: true
+  weight: 100
+  requires: [ "war.tour == 11", war.mate3 ]
+  title: Papers
+  text: |
+    March, and it's Pilling's birthday, and his mam's sent a cake in a tin with SEVENTEEN TODAY
+    piped on it in white. Everybody in the bay reads it. Nobody says owt.
+
+    By the next morning there's a paper for him at the orderly room. His mother's written to the
+    War Office, and to the MP, and the War Office has finally written to the battalion. He's to go
+    down the line to the base, until he's old enough.
+
+    He comes and finds you behind the cook-house with the paper folded small in his fist.
+
+    "I'm not going," he says. "I'm not leaving you lot. They'll put me in a bloody bakery, and
+    you'll all be up here." His voice cracks on bloody, and he's furious about it.
+  choices:
+    - id: tell_him_go
+      text: Tell him to go. Get on the lorry and don't look back.
+      effects: [ { set: flag.urged_pilling_go } ]
+      text_after: |
+        He goes to the orderly room. He comes back an hour later without the paper. "They've lost
+        it," he says. He doesn't look sorry. He doesn't look at you either.
+      next: "@return"
+    - id: let_him_stay
+      text: Tell him it's his choice to make, not yours.
+      effects: [ { set: flag.let_pilling_stay } ]
+      text_after: |
+        He tears the paper up small and puts the bits in the brazier, one at a time, and
+        watches each one catch. Then he cuts the cake with his bayonet, eight ways.
+      next: "@return"
+
+- id: v16_eve_somme
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  once: true
+  weight: 100
+  requires: [ "war.tour == 13" ]
+  title: The bombardment
+  text: |
+    A week of it. Seven days and nights of our guns, so many of them that the noise stops being
+    noise and turns into the ground you stand on. You feel it in your back teeth. You feel it in
+    your water. They say nothing can live under it. They say the wire will be cut.
+
+    At night the sky over their line flickers like the cinema on Bury Road with the reel slipping.
+    You can't sleep and then you sleep standing up.
+
+    The colonel comes round. Walking pace, he says. Keep your dressing. The guns will have done
+    it for you; you'll be in their third line by dinner.
+
+    [if flag.last_letter]Your letter from Loos is still in your pay book, gone soft as cloth.[/if] The company sergeant major is round with the pay books again.
+  choices:
+    - id: letter
+      text: Write a letter for the pay book. A new one.
+      effects: [ { set: flag.last_letter } ]
+      text_after: |
+        It comes out different this time. Shorter. You tell them you're not frightened, which they
+        won't believe, and that if it comes to it, it'll have been quick, which nobody can promise.
+        You tell your father he was right about the trade.
+      next: "@return"
+    - id: no_letter
+      text: Leave the pay book as it is.
+      text_after: |
+        You lie on the firestep with your eyes shut and count the guns till you lose count, and
+        then you start again.
+      next: "@return"
+
+- id: v16_after
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 15" ]
+  on_enter: [ { set: flag.after_july } ]
+  title: July
+  text: |
+    For weeks after, the men who were caught on the wire are still on it. Nobody can get out to
+    them in daylight and at night their snipers watch the wire. July is hot. When the wind comes
+    from no man's land you breathe through your mouth and it doesn't help, because then you can
+    taste it.
+
+    The battalion that walked out on the first of July was eight hundred men and some. The one that
+    answered the roll the next day you could have got in the chapel.
+
+    One night they ask for men to go out and bring in identity discs. Just the discs. So the
+    mothers will know.
+  choices:
+    - id: discs
+      text: Go out for the discs.
+      effects: [ { set: flag.brought_discs } ]
+      text_after: |
+        Two hours on your belly in the dark, with a pair of scissors and a sandbag. You cut the
+        cords by feel. Some of the faces you know by feel too. You bring back nineteen. Your hands
+        stink for a week however you scrub them, and you scrub them till they bleed.
+      next: "@return"
+    - id: stay_in
+      text: Stay in. You haven't got it in you tonight.
+      text_after: |
+        You lie in the dugout and listen to the others go out, and come in, one at a time, quiet.
+        Nobody says anything to you about it, then or after.
+      next: "@return"
+
+- id: v16_tank
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  once: true
+  requires: [ "war.tour >= 16", flag.after_july ]
+  title: The tank
+  text: |
+    September. Behind the lines one evening there's a noise like the engine house at the mill when
+    the big flywheel's going, and something comes down the road at walking pace that you have no
+    word for. An iron box the size of a tram, with a gun sticking out of each side and a tail of
+    two wheels dragging behind it, and it stinks of hot oil and petrol and men.
+
+    The crew climb out at the end of the road, and they're grey in the face and being sick in the
+    ditch, and one of them's got blood running out of his ear.
+
+    [if war.mate2]"It's a loom," says Duckworth, staring. "It's a bloody loom on legs. Me dad'd have it running in a week."[else]Somebody says it's a water carrier. Somebody says it'll end the war by Christmas. The crew don't say anything at all.[/if]
+  choices:
+    - id: look
+      text: Walk round it once. Put your hand on the iron.
+      next: "@return"
+
+- id: v16_word_from_crater
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  once: true
+  requires: [ "war.tour >= 16", flag.after_july, flag.met_fritz ]
+  title: A letter from the old line
+  text: |
+    A letter comes from a man you knew at the depot, who went to the other battalion. They're in
+    your old line now, by the crater. He writes that it's quiet. He writes that they've had three
+    men killed in a month, all in the same bay, all through the head, all in the morning.
+
+    "The lads call him Fritz-at-the-crater," he writes, as if you wouldn't know. "Somebody says he
+    was there before your lot came. Somebody says he's been there since 1914."
+
+    You fold the letter up and put it with the others. You can see the bay. You can see the sack
+    over the low place.
+  choices:
+    - id: write_back
+      text: Write back. Tell him where the low places are.
+      next: "@return"
+
+# ---- the Somme, 1 July ---------------------------------------------------------------------------
+
+- id: b_somme_1
+  chapter: front
+  title: The first of July
+  text: |
+    The first of July comes up hot. Mist in the valley, burning off, and by seven the sun's on your
+    neck. You're carrying sixty-odd pounds: rifle, two hundred rounds, a pick, rations, two
+    sandbags, a groundsheet, a tin triangle sewn to your pack so the gunners can see how far you've
+    got. It's like a sack of flour on your shoulders, and the sack has to walk.
+
+    At twenty past seven, away to the south, a mine goes up under their line. The ground lifts
+    under your boots like the shed floor when the engine starts. Then our guns stop, all of them,
+    and in the quiet you can hear a man three bays down being sick, and a bird, and your heart.
+
+    Half past seven. Whistles.
+
+    [if war.path == rifleman]You go up the ladder behind your corporal with {mate} on the next rung down.[/if][if war.path == nco]The section's yours now. Seven men on the ladder behind you, looking at your back to see when to go.[/if][if war.path == lewis]You go in the second line with the gun on your shoulder and your No. 2 behind you with the drums. Twenty-eight pounds of gun on top of the sixty.[/if][if war.path == signals]You go with the company officer, a reel of cable paying out behind you and the telephone banging on your hip. Battalion will want to know where the company is. The line has to get there with you.[/if][if war.path == bomb]You're with the bombers, a bucket of Mills bombs in each hand. Their trench is your job, if anybody gets there.[/if][if war.path == snipe]You go behind the second line with the scoped rifle wrapped in sacking. Their machine gunners are your job, if you can find them.[/if]
+
+    [if war.stalled]By the time you're up, the first line is lying down in rows forty yards out, and the noise from the ridge has started: their machine guns, the whole length of the ridge at once, like every loom in the shed starting together. Their wire is standing. Nobody cut it. It's thick as a hedge, and there are men hung up on it like washing.[else]The first line is walking, rifles at the port, and the noise from the ridge has started: their machine guns, the whole length of the ridge at once, like every loom in the shed starting together. Men go down in rows, neatly, the way washing comes off the line in a wind. Some get up again.[/if]
+  choices:
+    - id: push
+      text: "[if war.path == lewis]Get the gun into a shell hole and fire on their guns.[/if][if war.path == signals]Keep going, paying out the wire.[/if][if war.path == bomb]Run for their wire with the buckets.[/if][if war.path == snipe]Find a fire position and hunt their gunners.[/if][if war.path == nco]Take the section on at a walk.[/if][if war.path == rifleman]Walk on into it.[/if] ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "[if war.path == nco]Get your wounded into cover first.[/if][if war.path == lewis]Get the drums forward to the men who need them.[/if][if war.path == rifleman]Drag {mate} into a shell hole. He's hit in the leg.[/if][if war.path == signals]Stay with the officer. He's down.[/if][if war.path == bomb]Get a wounded bomber back to the sap.[/if][if war.path == snipe]Spot for the Lewis gun beside you.[/if] ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down. Wait for the fire to slacken. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_somme_2
+  chapter: front
+  title: The first of July
+  text: |
+    You don't remember crossing. You remember the wire: a gap a shell had blown, men crowding to it,
+    and the machine gun that knew about the gap. Then you're down in their trench, and it's quiet,
+    and it's deep, deeper than ours, with steps cut down into the chalk. At the bottom of the steps
+    there's electric light. Wooden walls. Bunks with blankets. A picture postcard of a woman pinned
+    over a bunk, and a coffee pot, and the coffee's still warm.
+
+    Then the bombs start coming over the traverse from the next bay.
+
+    [if war.path == lewis]The gun's choked with chalk. You strip the cocking handle with your fingers shaking and it goes on the parapet, facing the wrong way, and your No. 2 is gone and you don't know when.[/if][if war.path == nco]You count your men. Four. You don't know where the others are and there isn't time to know.[/if][if war.path == signals]The wire's cut somewhere behind you. You've two pigeons in a wicker basket on your back, and one of them is dead.[/if][if war.path == bomb]This is your work. A bay at a time: pin, throw, count, round the traverse after it.[/if][if war.path == snipe]In a trench the scoped rifle's a club. You leave it in the dugout and pick up a dead man's rifle with a bayonet on.[/if][if war.path == rifleman]You've lost your corporal. {mate} is with you, white as paper, his rifle shaking.[/if]
+
+    [if war.stalled]There are eleven of you. You can't see anyone else from the battalion, left or right. Behind you no man's land is a field of men lying down.[/if]
+  choices:
+    - id: push
+      text: "[if war.path == bomb]Round the traverse with the bombs.[/if][if war.path == lewis]Clear the gun and hose the next bay.[/if][if war.path == nco]Lead the four of them round the traverse.[/if][if war.path == rifleman || war.path == signals || war.path == snipe]Round the traverse after the bombers.[/if] ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Keep the wounded together at the dugout steps. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down into the dugout entrance and stay there. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_somme_3
+  chapter: front
+  title: The first of July
+  text: |
+    The afternoon goes on and on. The sun comes round and the trench fills with heat and flies.
+    You've drunk your water. You've drunk the water of the dead man by the steps. Your lips have
+    split and your tongue's a strip of leather.
+
+    Nobody's coming. Every time anyone puts his head over the back, towards our line, the machine
+    guns open up on no man's land again, and no man's land is full of men who aren't moving, and
+    some who are.
+
+    [if war.path == lewis]You're on your last drum. You've been counting rounds in your head the way you'd count picks on a loom.[/if][if war.path == nco]You've four men, and a lance corporal who won't stop talking about his allotment.[/if][if war.path == signals]You let the live pigeon go with a message on its leg: cut off, need bombs and water. It goes round twice and then off the right way, and you watch it till it's gone.[/if][if war.path == bomb]You've six bombs left, and their bombers have the whole of their own trench to fetch more from.[/if][if war.path == snipe || war.path == rifleman]You've ninety rounds and a bayonet and your own two hands.[/if]
+
+    They come at you from both ends of the trench at once, about four o'clock. Bombs first.
+  choices:
+    - id: push
+      text: "Up on the firestep. Meet them. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Pass up bombs and clips. Keep the others fighting. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Stay under the parapet. Throw blind. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_somme_4
+  chapter: front
+  title: The first of July
+  text: |
+    Dark at last. Somebody says go, and you go, back over the parapet into no man's land.
+
+    It isn't empty. It's full. Men lying everywhere in the long grass, and the ones who are alive are
+    calling out. Water. Stretcher-bearer. Mother. A name, over and over, a girl's name. One of them
+    gets hold of your ankle as you go past and doesn't let go.
+
+    A flare goes up and everybody freezes and the machine guns sweep the field low, just over the
+    grass, and stop. The calling starts again.
+  choices:
+    - id: push
+      text: "Get up and run for our wire. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Bring in the man who has your ankle. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Crawl, shell hole to shell hole, as slow as it takes. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- the Somme, October --------------------------------------------------------------------------
+
+- id: b_somme_autumn_1
+  chapter: front
+  title: The Somme, October
+  text: |
+    It's rained for a week. The ground between here and the next ridge isn't ground any more, it's
+    porridge with things in it. Your puttees are clay to the knee and the clay weighs more than
+    your boots.
+
+    On the right one of the new tanks is going forward, slow as a cart, rocking like a boat. It
+    noses down into a shell hole, and stops, and sits there tilted with its tail in the air,
+    smoking. Nobody climbs out.
+
+    [if war.path == lewis]The gun's wrapped in a groundsheet against the wet and it'll jam the moment it comes out.[/if][if war.path == signals]Nobody has even tried to run a wire across this. It's runners or nothing.[/if][if war.path == nco]Your section is three old hands and four lads from the last draft, who've never been over.[/if][if war.path == bomb]The bombs are wet. Half of them won't go.[/if][if war.path == snipe]You can't see fifty yards in this rain.[/if][if war.path == rifleman]{mate} goes in to the waist in the first ten yards and you haul him out by his webbing.[/if]
+
+    [if war.stalled]The first wave's stuck in the mud forty yards out, going nowhere, and they're being shot where they stand.[else]Whistles. Up and over, and the mud takes your boot off on the first step.[/if]
+  choices:
+    - id: push
+      text: "Keep going. Get across before you sink. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Haul out the men who are stuck. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down in a shell hole, water or not. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_somme_autumn_2
+  chapter: front
+  title: The Somme, October
+  text: |
+    Their trench, when you get to it, is mostly water, with duckboards floating in it and a dead man
+    floating face down among the duckboards. The Germans in it are as wet and as filthy as you are.
+    Some of them want to surrender and some of them don't, and you can't tell which from their faces.
+
+    Somebody's bombing up the trench towards you, steady, a bay at a time.
+  choices:
+    - id: push
+      text: "Go to meet them round the traverse. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Get the prisoners down and the wounded out of the water. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down behind the traverse and hold it. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_somme_autumn_3
+  chapter: front
+  title: The Somme, October
+  text: |
+    Night, and the rain again, and they come back at you out of it. You only see them by the flashes:
+    a helmet, a face, a man with his mouth open, gone. You fire at where the last flash was. Your
+    hands are so cold you can't feel the bolt.
+  choices:
+    - id: push
+      text: "Stand up in the water and fire. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Keep the new lads firing. Load for them. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Stay down in the water and fire over the top. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- the 1916 leave -------------------------------------------------------------------------------
+
+- id: l_mill_1916
+  chapter: front
+  title: Home on leave
+  text: |
+    December again, the second one. The town's quieter than you remember, and it takes you till the
+    end of the station road to work out why. There are women everywhere: on the trams, in the
+    railway yard in men's caps, coming off shift at the mill with their hair tied up in scarves.
+    And every third house has its blinds down.
+
+    July came here too. It came in August, mostly, in buff envelopes, a street at a time. Your
+    mother says Mrs Ormerod had two in one week.
+
+    [if war.mate1 && flag.best_man]Shaw and Edith were wed in October on his leave. You weren't there. He had his cousin stand up with him instead. Edith shows you the photograph and says, "He kept your place," and you don't know what to say to that.[/if][if war.mate1 && flag.after_the_war]Edith Holt stops you on Market Street. "Has he said anything?" she says. "About after?" You tell her he has. You don't tell her he's waiting till it's over.[/if][if !war.mate1]Edith Holt is in black, though they weren't wed. Nobody tells her she can't be.[/if]
+
+    [if war.mate3]Mrs Pilling has a new hat. [if flag.urged_pilling_go]"They lost the papers," she says, "can you credit it," and looks at you as if she knows exactly who didn't lose them.[/if][if flag.let_pilling_stay]"He wrote me," she says. "He says he's needed." She says it with her mouth tight, proud and furious at once.[/if][/if][if !war.mate3]The Pillings have taken in a lodger, a Belgian. Mrs Pilling doesn't go out.[/if]
+
+    [if flag.brought_discs]Somewhere in this town a mother has a disc on a cord that you cut by feel in the dark. You'll never know which one. You look at every woman in black at chapel and wonder.[/if]
+
+    Your mother took your father to see the Somme film at the Hippodrome in the summer. She tells you
+    about it at tea: the guns, the men going over, the wounded smiling at the camera. She wants to
+    know if it's like that. You say yes.
+
+    In September a Zeppelin came over in the night and bombed Bolton. Your father went up on the
+    roof to watch. You can hear the pride in his voice, telling it.
+
+    {offers_line}
+  choices:
+    - id: back
+      text: Go back on the tenth day. The battalion promotes the men who return.
+      effects: [ { war: back } ]
+      next: "@war"
+    - id: commission
+      text: Go before the board for a commission.
+      visible_if: war.commission
+      effects: [ { war: commission } ]
+      next: "@war"
+    - id: posting_0
+      text: "Take it: {offer0}. Your war ends here."
+      visible_if: "war.offers >= 1"
+      effects: [ { war: "posting:0" } ]
+      next: "@war"
+    - id: posting_1
+      text: "Take it: {offer1}. Your war ends here."
+      visible_if: "war.offers >= 2"
+      effects: [ { war: "posting:1" } ]
+      next: "@war"
+    - id: posting_2
+      text: "Take it: {offer2}. Your war ends here."
+      visible_if: "war.offers >= 3"
+      effects: [ { war: "posting:2" } ]
+      next: "@war"

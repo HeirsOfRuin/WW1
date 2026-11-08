@@ -28,7 +28,8 @@ export function riskWord(p: number): string {
   if (p < 0.03) return 'low risk';
   if (p < 0.08) return 'real risk';
   if (p < 0.18) return 'high risk';
-  return 'very high risk';
+  if (p < 0.4) return 'very high risk';
+  return 'almost certain to be hit'; // the stalled first of July: without this every choice read the same
 }
 
 const DUTY_NAMES: Record<string, string> = {
@@ -163,7 +164,7 @@ export function statusOf(s: CoreState): { rank: string; role: string; nerve: str
 
 // ---- paths -------------------------------------------------------------------------------------
 
-const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course'] as const;
+const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take'] as const;
 const PENDING = ['none', 'tunnel', 'duty', 'mission', 'sick', 'course', 'battle', 'leave'];
 const ENDINGS = ['none', 'armistice', 'posting', 'captured', 'invalided', 'killed', 'broken', 'court_martial'];
 /** content ids are lower_snake_case; the war layer's ending names are its own */
@@ -194,6 +195,8 @@ function value(s: CoreState, field: string): number | string | boolean | undefin
     case 'fallen': { const f = writtenFallen(w); return w.cursor.at === 'done' || !f ? 0 : f.i + 1; }
     case 'fallen_present': return !!writtenFallen(w)?.present;
     case 'course': return p?.kind === 'course' ? p.skill : 'none';
+    // which of two written takes a recurring scene shows (alternates by tour), so a mission is not word for word the last one
+    case 'take': return w.clock % 2;
     case 'call': return p?.kind === 'duty' && w.cursor.at === 'duty' ? (w.cursor as { i: number }).i + 1 : 0;
     case 'mate1': case 'mate2': case 'mate3': return w.friends[Number(field.slice(4)) - 1]!;
   }

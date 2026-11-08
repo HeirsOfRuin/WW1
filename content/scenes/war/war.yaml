@@ -180,14 +180,16 @@
   chapter: front
   title: Your own work
   text: |
-    As {path_name} you are wanted for {mission_name}. You can say no. You will usually be sent anyway.
+    [if war.path == lewis && war.take == 0]A raid is going over at two in the morning and the gun's to cover it. You set up in a sap head out past the wire with your No. 2 and four drums. The barrel shroud is so cold it burns your fingers through the mittens. When the raiders go, you fire short bursts over their heads at the German parapet, and every burst lights you up like a lamp in a window, and every German on that stretch can see exactly where you are.[/if][if war.path == lewis && war.take == 1]A German two-seater comes over low in the evening, slow and fat and close enough to see the observer's goggles. The officer wants the gun up on its post for it. You'll be standing in the open with the gun pointing at the sky and your back to their line, firing up at it while it fires down at you.[/if][if war.path == signals && war.take == 0]The line to battalion's gone again. Somewhere in the half mile of communication trench behind you a shell has cut it, and the colonel wants the company commander and can't have him. You take the pliers, a reel of D3 cable and the buzzer, and go along it in the dark, running the wire through your fingers, feeling for the break.[/if][if war.path == signals && war.take == 1]A message has to go to battalion, and the wires are all down, and the lamp can't be seen through the smoke. Somebody has to run it. Four hundred yards of open ground they've been shelling since dawn, with the message in your breast pocket in case they find you.[/if][if war.path == bomb]A bombing raid tonight: eight of you, faces blacked with burnt cork, no cap badges, no pay books, a sandbag each of Mills bombs. Into their trench, along it a bay at a time, a prisoner if you can get one, and back before their machine guns wake up.[/if][if war.path == snipe]Before dawn you crawl into the hide in the parapet, a steel plate with a slit, a sack over the slit, your observer beside you with the telescope and the notebook. You stay till dark. They have snipers looking for this plate. Some mornings you see a man over there shaving in a bit of mirror, his braces down, and he puts you in mind of your father at the scullery sink.[/if][if war.path == tunnel]Down the shaft, along the gallery on your back on the trolley, to the face. Candle, the smell of wet clay and your own sweat. You lie with the listening stick against the clay and listen for them. If you can hear them digging, they're far enough off. If they stop, they're listening for you. If it goes quiet for a day, they've laid a charge.[/if]
+
+    The work's yours now. You can say you're not fit for it. You'll usually be sent anyway.
   choices:
     - id: go
-      text: "Go. ({mission_risk})"
+      text: "[if war.path == lewis]Take the gun up.[/if][if war.path == signals]Go.[/if][if war.path == bomb]Black your face and go.[/if][if war.path == snipe]Go out to the hide.[/if][if war.path == tunnel]Go down.[/if] ({mission_risk})"
       effects: [ { war: go } ]
       next: "@war"
     - id: decline
-      text: Say you are not fit for it tonight.
+      text: Say you're not fit for it tonight.
       effects: [ { war: decline } ]
       next: "@war"
 
@@ -195,7 +197,15 @@
   chapter: front
   title: Rest
   text: |
-    Out of the line, in a barn behind the lines. Your hands will not keep still.
+    [if war.take == 0]Out at rest, in a barn behind the lines. Somebody's got a mouth organ going and somebody else is
+    frying bread in a mess tin, and the smell of it should make you hungry. You hold your mug of
+    tea in both hands so the others won't see it shake. It shakes anyway. The tea goes cold and you
+    don't drink it.[else]Out at rest. You've slept twelve hours and you're more tired than when you lay down. Every time a door
+    bangs in the farmyard you're flat on the straw before you know you've moved, and the others
+    pretend they haven't noticed, which is kind of them, and you hate it.[/if]
+
+    The medical officer holds a sick parade every morning at seven. He's a busy man, and a tired
+    one, and he's seen everything.
   choices:
     - id: report
       text: Report sick. The medical officer may give you a tour out of the line.
