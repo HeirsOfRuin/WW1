@@ -1,4 +1,4 @@
-# WW1 (working title): spec, draft
+# In the Trenches: spec
 
 Status: **approved** (2026-11-08), revision 3. Stage 1 of the game-building workflow
 (`Game-Workshop/skills/game-building/SKILL.md`). Kill gate: **passed**, round 2 with the author's
@@ -26,6 +26,8 @@ answers (`docs/KILLGATE.md`, 2026-11-09). Design: `docs/DESIGN.md`, draft for ap
 | 2026-11-09 | Kill gate open issue 2: the tunnelling transfer becomes a real trade, not a trap (or is cut) | "2. Yes" |
 | 2026-11-09 | Kill gate open issue 3: the grade weights as set in the kill gate are accepted for now (stage credit 8/24/48/90; Armistice x1.4, posting x1.0, wounded out and captured x0.8, shell shock x0.6, killed x0.4, court-martial x0.1) | "3. Yes" |
 | 2026-11-09 | Specialist roles: each brings role-specific missions, slightly better pay, circumstances and kit than a rifleman, and an easier promotion when the missions go well; and puts him at risk more often | "Each role should provide some new, role specific missions, gives you slightly better pay/circumstances/kit compared to a regular rifleman, and make it easier to get a promotion should the missions go well, but they also put you at risk more often, despite the benefits." |
+| 2026-11-09 | DESIGN.md approved; pay becomes money sent home that changes the family's circumstances on leave (after the slice); the vertical slice is 1915 for the mill town | "I agree with your recommendations." |
+| 2026-11-09 | Title: *In the Trenches* | "We'll call it... In the Trenches, or something like that" |
 
 ## Pitch
 

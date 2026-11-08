@@ -1,0 +1,128 @@
+{
+ "format": "in-the-trenches-save",
+ "saveVersion": 1,
+ "contentHash": "105361f6c883",
+ "state": {
+  "version": 1,
+  "contentHash": "105361f6c883",
+  "seed": 12345,
+  "rng": [
+   3497751176,
+   1374560474,
+   3782063374,
+   2397394850
+  ],
+  "characters": {
+   "hero": {
+    "name": "Fixture",
+    "sex": "male",
+    "born": -64,
+    "alive": true,
+    "attributes": {
+     "strength": 3,
+     "wits": 2,
+     "presence": 2
+    },
+    "skills": {
+     "boatcraft": 2,
+     "talk": 0,
+     "lore": 1
+    },
+    "health": 8,
+    "traits": [],
+    "injuries": [
+     {
+      "id": "cracked_ribs",
+      "since": 0
+     }
+    ],
+    "items": [],
+    "station": "hand"
+   }
+  },
+  "hero": "hero",
+  "start": "heir",
+  "ferry": {
+   "takings": 0,
+   "repair": 1
+  },
+  "chapter": "ch1",
+  "scene": "e_otter",
+  "returnStack": [
+   "c_reckoning"
+  ],
+  "time": 0,
+  "rep": {
+   "village": 0
+  },
+  "res": {
+   "coin": 120
+  },
+  "favors": {},
+  "flags": {
+   "mended_boat": true,
+   "carried_friar": true
+  },
+  "counters": {
+   "trust": 1
+  },
+  "npcs": {
+   "aldith": {
+    "met": false,
+    "alive": true,
+    "affection": 0,
+    "respect": 1,
+    "loyalty": 0,
+    "grudges": []
+   },
+   "osric": {
+    "met": true,
+    "alive": true,
+    "affection": 0,
+    "respect": 0,
+    "loyalty": 0,
+    "grudges": []
+   }
+  },
+  "aliases": {},
+  "queue": [],
+  "seen": {
+   "c_first_morning": 0,
+   "c_flood": 0,
+   "e_otter": 0
+  },
+  "journal": [
+   {
+    "at": 0,
+    "scene": "c_first_morning",
+    "sceneTitle": "The first morning",
+    "choice": "Mend the boat before you take anyone across.",
+    "outcome": "The caulking takes the morning. The first passengers wait on the bank and watch you do it properly.",
+    "changes": [
+     "The boat: sounder"
+    ]
+   },
+   {
+    "at": 0,
+    "scene": "c_flood",
+    "sceneTitle": "High water",
+    "choice": "Cross for the friar now, flood or not.",
+    "outcome": "The current turns the boat broadside and slams you into the post. You get him over. Your ribs will tell you about it for weeks.",
+    "changes": [
+     "Injury: Cracked ribs"
+    ]
+   }
+  ],
+  "checkpoint": "c_first_morning",
+  "lastOutcome": {
+   "text": "The current turns the boat broadside and slams you into the post. You get him over. Your ribs will tell you about it for weeks.",
+   "changes": [
+    "Injury: Cracked ribs"
+   ],
+   "check": {
+    "band": "Even",
+    "result": "partial"
+   }
+  }
+ }
+}

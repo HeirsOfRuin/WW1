@@ -1,4 +1,4 @@
-# WW1 (working title): working rules
+# In the Trenches: working rules
 
 - Read `docs/SPEC.md` first in every new session (the design and every decision in the
   author's words), then `docs/KILLGATE.md` (what the numbers model showed, and the open
@@ -6,8 +6,11 @@
 - Built with the HeirsOfRuin game-building skills (`Game-Workshop/skills/`). Read
   `game-building/SKILL.md` before writing game logic. Follow its stages and gates; skipping
   a stage is allowed, skipping it silently is not.
-- Every commit runs `npm run check` first. Every change to the model's numbers or rules
-  re-runs `npm run gate` and puts the numbers, with their ± error, in the commit message.
+- Read `docs/DESIGN.md` (approved) before touching `src/`. The war layer's rules of record are
+  the kill-gate prototype until Phase 1 reproduces its numbers; then the prototype is retired.
+- Every commit runs `npm run check` first (build, tests, validate, text tools, bot, smoke).
+  Every change to the war layer's numbers or rules re-runs the gate and puts the numbers,
+  with their ± error, in the commit message. The prototype's own tools are `npm run proto:*`.
 - The kit files in `prototypes/killgate/` (`run.js`, `ablate.js`, `stats.js`,
   `measure-lib.js`, `rng.js`) are copied from Game-Workshop and not edited here.
 - Content is fiction: a fictional battalion and towns in real battles. Historical numbers

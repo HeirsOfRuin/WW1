@@ -1,0 +1,4 @@
+name: The flood
+start: stranger
+seed: 5
+choices: [c_first_morning/toll, c_flood/carry!failure]

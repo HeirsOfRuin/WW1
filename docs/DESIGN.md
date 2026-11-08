@@ -1,9 +1,10 @@
-# DESIGN: WW1 (working title)
+# DESIGN: In the Trenches
 
 Stage 3 of the game-building workflow: the Phase 0 proposal. Stack, architecture, state,
 content schema, saves, instruments, screens, look, scope and the build plan.
 
-Status: **draft, not approved** (2026-11-09). Nothing is built until the author approves it.
+Status: **approved** (2026-11-09): "I agree with your recommendations." Pay as money sent
+home (after the slice), the mill-town slice and the title *In the Trenches* are decided (SPEC).
 It builds on `SPEC.md` (what the game is, every decision in the author's words) and
 `KILLGATE.md` (the numbers model the rules below come from). Where this page and the SPEC
 disagree, the SPEC wins and this page is wrong.
@@ -48,7 +49,7 @@ Shape C, the same as Knight of Adalia and Vikingr, laid by game-scaffold and gam
 | Content | YAML, compiled to one JSON bundle; Zod schema | Prose is easier in YAML; the validator, bot and tests read the same bundle |
 | Tests | Vitest | |
 | Deploy | GitHub Actions to Pages; installable PWA, offline after first load | Same workflow as the other games |
-| Saves | localStorage autosave, plus a text save code (`WWIR1.` + base64url of deflated JSON) | Same family as `KOAD1.` and `VIKR1.` |
+| Saves | localStorage autosave, plus a text save code (`TRENCH1.` + base64url of deflated JSON) | Same family as `KOAD1.` and `VIKR1.` |
 
 **Not single-file.** The content and the war layer together are past the size where shape A
 or B works.
@@ -269,9 +270,9 @@ is not mentioned before 1916; ages come from the birth date. `continuity --stric
 
 ## 8. Saves
 
-- Key `wwir.save.v1`; payload with `v`; a migration chain; a fixture from every shipped
+- Key `in-the-trenches.save.v1`; payload with `v`; a migration chain; a fixture from every shipped
   version, loaded and played on in tests.
-- Text save code `WWIR1.`; a file download too.
+- Text save code `TRENCH1.`; a file download too.
 - RNG streams in the save (fire, duty, section, battle, career, leave), as in the kill gate.
 - A scene id that no longer exists falls back to the stage checkpoint, with a journal line.
 

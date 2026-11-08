@@ -1,0 +1,6 @@
+# A start: who you are when the game begins. Scenes can vary their text by start (variants:).
+id: heir
+label: The ferryman's child
+summary: Your father kept this ferry for thirty years. His back has gone, and the village is watching to see what you are.
+start_scene: c_first_morning
+hero: { age: 16, station: hand, attributes: { strength: 3, wits: 2, presence: 2 }, skills: { boatcraft: 2, talk: 0, lore: 1 }, coin: 120 }

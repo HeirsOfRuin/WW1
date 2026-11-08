@@ -1,0 +1,4 @@
+name: The ferry kept
+start: heir
+seed: 3
+choices: [c_first_morning/mend, c_flood/carry!success, c_reckoning/truth]

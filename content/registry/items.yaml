@@ -1,0 +1,1 @@
+good_pole: { label: A good pole, description: "Ash, iron-shod. Worth a point of boatcraft in a current.", mods: { skill.boatcraft: 1 } }

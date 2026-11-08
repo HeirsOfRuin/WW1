@@ -1,0 +1,117 @@
+# Chapter 1, the whole placeholder story. Every construct the engine reads appears once here,
+# with a comment naming it, so this file is the quick reference (docs/CONTENT.md is the full one).
+# Replace it with the game; keep a test arc like it in tests/fixtures (the engine tests use it).
+
+- id: c_first_morning
+  chapter: ch1
+  checkpoint: true                     # a save whose scene is later removed resumes here
+  title: The first morning
+  text: |
+    The river is up a hand's breadth since yesterday, brown and quick at the edges.
+    [if start == heir]Your father's boat is where he left it, and so is his pole, and so is the rope he always meant to replace.[else]The boat they gave you is older than you are, and the rope is older than the boat.[/if]
+    [break]
+    The first knock on the landing comes before the light does. {name}, says a voice. Is the ferry running or not?
+  variants:                            # a start can replace the whole text (start ids: content/starts/)
+    stranger: |
+      Nobody in the village has said your name yet. They call you the ferry, as if you were the boat.
+      [break]
+      The first knock on the landing comes before the light does. Is the ferry running or not?
+  choices:
+    - id: mend                         # direct choice: effects, then text_after, then next
+      text: Mend the boat before you take anyone across.
+      tags: [careful]
+      effects:
+        - { set: flag.mended_boat }
+        - { mend: 1 }                  # a game effect (src/game/module.ts)
+        - { add: { counter.trust: 1 } }
+      text_after: The caulking takes the morning. The first passengers wait on the bank and watch you do it properly.
+      next: c_flood
+    - id: toll
+      text: Take the first fare now and mend it later.
+      tags: [coin]
+      effects: [ { toll: 6 } ]
+      text_after: Six pence, and the boat takes water at the seam all the way over.
+      next: c_flood
+    - id: reeve
+      text: Go up to the reeve's house and ask what she expects of you.
+      tags: [talk]
+      requires: "skill.talk >= 1"        # visible but locked, with its reason, when unmet
+      effects: [ { meet: aldith }, { add: { rel.aldith.respect: 1 } }, { journal: "Asked Mistress Aldith what the ferry owes the village." } ]
+      text_after: |
+        Aldith hears you out at her door. "Run it every day the river lets you," she says. "And tell me the truth when it does not."
+      next: c_flood
+
+- id: c_flood
+  chapter: ch1
+  title: High water
+  text: |
+    By noon the river is over the lower step. A friar in a grey habit is on the far bank, waving, and behind you a wool-man with a cart is offering money to go first.
+  choices:
+    - id: carry
+      text: Cross for the friar now, flood or not.
+      tags: [brave]
+      lethal: true                     # a choice that can kill must warn, and must have a check
+      warn: The river is in flood. A bad crossing can drown you.
+      check: { attr: strength, skill: boatcraft, difficulty: 6, mods: [ { if: flag.mended_boat, add: 1, label: "the boat is sound" } ] }
+      success:
+        text: You come in on the bend the way your hands remember, and the friar steps off dry-shod. "Brother Osric," he says. "I will remember this ferry."
+        effects: [ { set: flag.carried_friar }, { meet: osric }, { add: { rep.village: 1, counter.trust: 1 } } ]
+        next: { pool: river, then: c_reckoning }   # draw one interlude from the river pool, then go on
+      partial:
+        text: The current turns the boat broadside and slams you into the post. You get him over. Your ribs will tell you about it for weeks.
+        effects: [ { set: flag.carried_friar }, { meet: osric }, { injury: cracked_ribs } ]
+        next: { pool: river, then: c_reckoning }
+      failure:
+        text: The rope parts at the second bend.
+        effects: [ { die: "The river took you at the second bend, in the spring flood." } ]
+    - id: wait
+      text: Wait for the water to drop, and let him wait too.
+      tags: [careful]
+      effects: [ { add: { counter.trust: -1 } }, { queue: { event: q_friar_word, delay: { seasons: 1 } } } ]
+      text_after: The friar sits down on the far bank to wait. He does not look pleased.
+      next: { pool: river, then: c_reckoning }
+    - id: bribe
+      text: Take the wool-man's coin and carry his cart over first.
+      tags: [coin]
+      visible_if: "ferry.repair >= 1"    # hidden entirely unless it holds (here: only a mended boat could take a cart)
+      effects: [ { toll: 20 }, { set: flag.took_bribe } ]
+      text_after: Twenty pence, and the friar watches you take it.
+      next: { pool: river, then: c_reckoning }
+
+- id: c_reckoning
+  chapter: ch1
+  title: Michaelmas
+  on_enter: [ { advance: { seasons: 2 } } ]   # the calendar moves: spring to autumn
+  text: |
+    By Michaelmas the ferry has taken {takings} at the landing. Aldith comes down to the river to settle the year.
+    [if flag.took_bribe]She knows about the wool-man. Everyone does.[elif flag.carried_friar]Brother Osric has been telling the story of the flood in every village south of here.[else]She has heard about the friar who waited on the bank.[/if]
+  choices:
+    - id: truth
+      text: Tell her exactly what the ferry did and did not do.
+      effects: [ { set: flag.told_reeve }, { add: { counter.trust: 1 } } ]
+      next:
+        switch:                          # the first branch whose condition holds
+          - { if: "counter.trust >= 2", go: e_kept }
+          - { if: [flag.told_reeve, "rel.aldith.respect >= 1"], go: e_kept }
+        default: e_lost
+    - id: boast
+      text: Tell her the ferry never missed a day.
+      effects: [ { add: { counter.trust: -1 } } ]
+      next:
+        switch:
+          - { if: "counter.trust >= 2", go: e_kept }
+        default: e_lost
+
+- id: e_kept
+  chapter: ch1
+  kind: ending
+  ending: kept
+  title: The ferry kept
+  text: Aldith nods once. "Next year, then." It is the most anyone in the village has ever said to you about the ferry, and it is enough.
+
+- id: e_lost
+  chapter: ch1
+  kind: ending
+  ending: lost
+  title: The ferry lost
+  text: Aldith gives the ferry to her cousin's boy at Candlemas. You watch him from the bank, taking water at the seam.

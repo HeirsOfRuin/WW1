@@ -1,6 +1,8 @@
 node_modules/
-out/
 dist/
 release/
-tools/_*.mjs
+out/
+# scratch scripts: name them tools/_*.mjs or *.tmp.* and they never get committed
+tools/_*
 *.tmp.*
+.DS_Store

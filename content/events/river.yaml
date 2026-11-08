@@ -1,0 +1,47 @@
+# Interludes: pool scenes drawn by weight (pool: river), and a queued one (queue: in an effect).
+# A pool scene ends with next: "@return" and play goes on to the pool's `then`.
+
+- id: e_otter
+  chapter: ch1
+  kind: pool
+  pool: river
+  weight: 10
+  once: true                           # never drawn twice in one game
+  title: The otter
+  text: An otter surfaces beside the boat in the slack water, looks at you as if you owed it money, and is gone.
+  choices:
+    - id: watch
+      text: Watch where it goes.
+      effects: [ { add: { skill.lore: 1 } } ]
+      text_after: It goes where the fish are. You remember the place.
+      next: "@return"
+    - id: on
+      text: Pull on.
+      effects: [ { add: { skill.boatcraft: 1 } } ]
+      next: "@return"
+
+- id: e_quiet
+  chapter: ch1
+  kind: pool
+  pool: river
+  weight: 5
+  once: false
+  cooldown: { seasons: 1 }             # may come again, but not within a season
+  title: A quiet day
+  text: Nobody comes to the landing all day. You sit in the boat and listen to the river.
+  choices:
+    - id: rest
+      text: Rest while you can.
+      effects: [ { add: { health: 1 } } ]
+      next: "@return"
+
+- id: q_friar_word
+  chapter: ch1
+  kind: queued                         # comes when the delay runs out, wherever the story is
+  title: Word from the south
+  text: A carter brings word that a grey friar has been telling the villages south of here about a ferry that would not cross.
+  choices:
+    - id: shrug
+      text: Shrug. The river was in flood.
+      effects: [ { add: { rep.village: -1 } } ]
+      next: "@return"

@@ -1,0 +1,2 @@
+kept: { label: The ferry kept, description: You kept the crossing through the season and the village knows it., chapter: ch1 }
+lost: { label: The ferry lost, description: The reeve gave the ferry to someone else., chapter: ch1 }

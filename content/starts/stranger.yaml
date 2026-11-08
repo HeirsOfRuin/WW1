@@ -1,0 +1,5 @@
+id: stranger
+label: The stranger
+summary: You came down the road in the winter with nothing, and the reeve gave you the ferry because nobody else would take it.
+start_scene: c_first_morning
+hero: { age: 22, station: hand, attributes: { strength: 2, wits: 3, presence: 2 }, skills: { boatcraft: 0, talk: 2, lore: 1 }, coin: 40 }

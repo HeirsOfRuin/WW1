@@ -1,0 +1,1 @@
+cracked_ribs: { label: Cracked ribs, description: Every stroke of the oar hurts., mods: { attr.strength: -1 }, heals_after: 2, serious: false }
