@@ -1,10 +1,10 @@
 // Fixed policies for the kill gate. Each is a written rule, not a search.
 // volunteer(s, key, duty, friendAtRisk) · battle(s, phase, battle) -> push|help|ground
-// sick(s) · course(s, skill) · tunnel(s) · leave(s, offers, commission) -> back|posting|commission
+// mission(s, role) · sick(s) · course(s, skill) · tunnel(s) · leave(s, offers, commission) -> back|posting|commission
 
 const anyFriend = (s) => s.friends.some(Boolean);
 
-const always = { sick: () => false, course: () => true, tunnel: () => false };
+const always = { sick: () => false, course: () => true, tunnel: () => false, mission: () => true };
 
 const reckless = {
   ...always,
@@ -15,6 +15,7 @@ const reckless = {
 
 const careful = {
   volunteer: () => false,
+  mission: () => false,
   battle: () => 'ground',
   sick: (s) => s.nerve < 40,
   course: () => true,
@@ -24,6 +25,7 @@ const careful = {
 
 const mates = {
   volunteer: (s, k, d, friendAtRisk) => friendAtRisk,
+  mission: (s) => s.nerve > 60,
   battle: (s) => (anyFriend(s) ? 'help' : 'push'),
   sick: (s) => s.nerve < 20,
   course: () => false, // stays with the section
@@ -49,6 +51,7 @@ const PHASE_RULE = {
 };
 const adaptive = {
   volunteer: (s, k, d) => (d.hit <= 0.04 ? s.nerve > 55 : s.nerve > 75),
+  mission: (s) => s.nerve > 50,
   battle: (s, i, b, stalled) => (stalled ? 'ground' : PHASE_RULE[b.phases[i][2]](s)),
   sick: (s) => s.nerve < 25,
   course: () => true,

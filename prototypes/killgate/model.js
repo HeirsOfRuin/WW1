@@ -6,7 +6,7 @@
 import { makeRng, hashString } from './rng.js';
 import {
   TOWNS, DEFAULT_GENERAL, WAR_SKILLS, SPECIALIST, APTITUDE, TOWN_COURSE, WAR_WORK, STAGES,
-  DUTIES, WOUND, PATHS, CHOICES, GRADE, SECTION_SIZE, SUBALTERN, TOP_OR, RANKS, REST, FRIEND_BATTLE, PHASE_HIT, STALL,
+  DUTIES, WOUND, PATHS, CHOICES, GRADE, SECTION_SIZE, SUBALTERN, TOP_OR, RANKS, REST, FRIEND_BATTLE, PHASE_HIT, STALL, ROLES, ROLE, COMMISSION_BOARD,
 } from './data.js';
 import { POLICIES } from './policies.js';
 
@@ -26,10 +26,10 @@ export function newGame(seed, opts = {}) {
     homeSet, war: Object.fromEntries(WAR_SKILLS.map((k) => [k, 0])),
     nerve: 75, standing: 40, rank: 0, commissioned: false, transferred: false,
     awards: [], friends: Array.from({ length: SECTION_SIZE }, () => true),
-    severe: 0, out: 0, battleNow: false, inBattle: false, blightyThisStage: false, courseThisStage: false,
+    merit: 0, severe: 0, out: 0, battleNow: false, inBattle: false, blightyThisStage: false, courseThisStage: false,
     stage: 1, clock: 0, path: 'rifleman', promotedThisStage: false,
     ending: null, endedStage: 0, stagesDone: 0, posting: null,
-    stats: { minNerve: 75, lowNerve: 0, rotations: 0, volunteered: 0, detailed: 0, courses: 0, battles: 0, missedBattles: 0, offersAtLeave: {}, friendsLostWithYou: 0 },
+    stats: { minNerve: 75, lowNerve: 0, rotations: 0, volunteered: 0, detailed: 0, courses: 0, battles: 0, missedBattles: 0, offersAtLeave: {}, friendsLostWithYou: 0, missions: 0, missionsWon: 0 },
     log: [], rng: streams,
   };
 }
@@ -140,9 +140,12 @@ function award(s, pts) {
 
 // ---- the rotation -----------------------------------------------------------
 
+const isRole = (s) => s.path in ROLES;
+
 function rest(s) {
-  const present = withSection(s) ? aliveFriends(s) : 0;
-  s.nerve = clamp(s.nerve + REST.base + REST.voice * home(s, 'voice') + REST.perFriend * present, -10, 100);
+  const present = withSection(s) ? aliveFriends(s) : s.transferred && s.out === 0 ? ROLE.crew : 0;
+  const pay = isRole(s) ? ROLE.restBonus : 0;
+  s.nerve = clamp(s.nerve + REST.base + REST.voice * home(s, 'voice') + REST.perFriend * present + pay, -10, 100);
   if (home(s, 'voice') && withSection(s)) s.standing = clamp(s.standing + 1, 0, 100);
 }
 
@@ -160,7 +163,6 @@ function rotation(s, pol, st) {
   if (path.collapse && s.rng.fire.chance(path.collapse * (1 - 0.12 * skill(s, 'tunnel')))) { end(s, 'killed', 'mine collapse or camouflet'); return; }
   spendNerve(s, st.nerve);
   learn(s, 'trench', 0.25);
-  if (s.transferred) learn(s, 'tunnel', 0.3);
 
   const keys = Object.keys(DUTIES);
   const offered = s.transferred ? [] : [s.rng.duty.pick(keys), s.rng.duty.pick(keys)];
@@ -191,6 +193,8 @@ function rotation(s, pol, st) {
       if (d.award) award(s, d.award * (1 + 0.5 * home(s, 'sport')) * s.rng.career.float(0.3, 1.2));
     } else s.standing = clamp(s.standing + 0.5, 0, 100);
   }
+  if (isRole(s) && s.out === 0 && !s.ending) roleMission(s, pol);
+  if (s.ending) return;
   // Support and reserve: lighter shelling.
   if (s.out === 0 && s.rng.fire.chance(st.fire * 0.25 * trenchMod(s))) hit(s, 'shelled in support');
   if (s.ending) return;
@@ -204,7 +208,8 @@ function rotation(s, pol, st) {
     say(s, 'reported sick: excused one tour');
   }
   if (!s.courseThisStage && !s.transferred && s.standing >= 45 && s.rng.career.chance(0.22 + 0.1 * home(s, 'lit'))) {
-    const k = s.rank >= 1 && skill(s, 'lead') < 2 ? 'lead' : TOWN_COURSE[s.town];
+    // The army offers the town's trade half the time, and whatever it is short of the rest.
+    const k = s.rank >= 1 && skill(s, 'lead') < 2 ? 'lead' : s.rng.career.chance(0.5) ? TOWN_COURSE[s.town] : s.rng.career.pick(SPECIALIST);
     if (pol.course(s, k)) {
       s.courseThisStage = true; s.stats.courses++;
       s.out = Math.max(s.out, 1); learn(s, k, 2); s.standing = clamp(s.standing + 2, 0, 100);
@@ -213,6 +218,26 @@ function rotation(s, pol, st) {
   }
   if (s.rank < 3 && s.standing >= 55 + 10 * s.rank && s.rng.career.chance(0.1)) promote(s, 'standing');
   if (s.nerve <= 0) end(s, 'broken', 'nerve gone in the line');
+}
+
+// A specialist's own work. Declining is possible but he is usually sent anyway.
+function roleMission(s, pol) {
+  const m = ROLES[s.path];
+  if (!s.rng.duty.chance(m.chance)) return;
+  const k = s.path;
+  const vol = pol.mission(s, m);
+  if (!vol && !s.rng.duty.chance(ROLE.detail)) { s.standing = clamp(s.standing - 2, 0, 100); return; }
+  s.stats.missions++;
+  if (s.rng.duty.chance(m.hit * trenchMod(s) * (1 - ROLE.hitPerSkill * skill(s, k)))) hit(s, m.mission);
+  if (s.ending || s.out > 0) return;
+  spendNerve(s, m.nerve);
+  learn(s, k, 0.3);
+  if (s.rng.duty.chance(m.success + ROLE.successPerSkill * skill(s, k))) {
+    s.stats.missionsWon++; s.merit += 1;
+    s.standing = clamp(s.standing + 4, 0, 100);
+    award(s, m.award * s.rng.career.float(0.4, 1.4));
+    if (s.merit >= ROLE.meritToPromote && s.rng.career.chance(ROLE.promoteChance)) { s.merit = 0; promote(s, `${m.mission} went well`); }
+  } else spendNerve(s, 3);
 }
 
 // ---- battle -----------------------------------------------------------------
@@ -278,8 +303,11 @@ export function postingOffers(s) {
 }
 
 export function commissionOffer(s) {
-  return s.stage === 3 && !s.commissioned && s.rank >= 3 && s.standing >= 65
-    && (home(s, 'lit') || s.awards.some((a) => a !== 'MiD') || skill(s, 'lead') >= 3.5);
+  // A selection board turns down about half of the eligible: the draw is stored in the leave
+  // stream, so asking twice cannot change it.
+  return s.stage === 3 && !s.commissioned && s.rank >= 3 && s.standing >= 70
+    && (home(s, 'lit') || s.awards.some((a) => a !== 'MiD') || skill(s, 'lead') >= 3.5)
+    && s.rng.leave.chance(COMMISSION_BOARD);
 }
 
 function leave(s, pol) {
@@ -300,7 +328,8 @@ function pathFor(s) {
   if (s.transferred) return 'tunnel';
   let best = null;
   for (const k of SPECIALIST) if (skill(s, k) >= 2 && (!best || skill(s, k) > skill(s, best))) best = k;
-  if (s.rank >= 2 && !(best && skill(s, best) >= 3.5)) return 'nco';
+  // A trained specialist keeps his role when promoted: the Lewis gun corporal stays on the gun.
+  if (s.rank >= 2 && !(best && skill(s, best) >= ROLE.keepRole)) return 'nco';
   return best || 'rifleman';
 }
 
@@ -317,6 +346,8 @@ export function play(seed, opts = {}) {
   else if (opts.battle === 'ignoreStall') pol.battle = (s, i, b) => base.battle(s, i, b, false);
   else if (opts.battle) pol.battle = () => opts.battle;
   if (opts.volunteer !== undefined) pol.volunteer = () => opts.volunteer;
+  if (opts.noRoles) pol.course = (s, k) => k === 'lead' && base.course(s, k);
+  if (opts.tunnel !== undefined) pol.tunnel = () => opts.tunnel;
   learn(s, 'trench', 0.5); // training
   for (const st of STAGES) {
     s.stage = st.n; s.promotedThisStage = false; s.blightyThisStage = false;

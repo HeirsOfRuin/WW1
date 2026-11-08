@@ -6,6 +6,7 @@
     "check": "node prototypes/killgate/check.js",
     "gate": "node prototypes/killgate/gate.js 500",
     "choices": "node prototypes/killgate/ablate.js prototypes/killgate/ablations/choices.js --adapter=prototypes/killgate/adapter.js",
-    "skills": "node prototypes/killgate/ablate.js prototypes/killgate/ablations/skills.js --adapter=prototypes/killgate/adapter.js --inert"
+    "skills": "node prototypes/killgate/ablate.js prototypes/killgate/ablations/skills.js --adapter=prototypes/killgate/adapter.js --inert",
+    "roles": "node prototypes/killgate/ablate.js prototypes/killgate/ablations/roles.js --adapter=prototypes/killgate/adapter.js"
   }
 }

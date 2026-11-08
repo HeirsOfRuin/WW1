@@ -38,6 +38,8 @@ export function metrics(s) {
     rank: s.rank,
     awards: s.awards.length,
     medal: s.awards.some((a) => a !== 'MiD'),
+    roleMissions: s.stats.missions,
+    tunneller: s.transferred && s.ending !== null && s.stats.missions >= 0 && s.path === 'tunnel',
     friendsAlive: aliveFriends(s),
     endStage: s.endedStage,
   };

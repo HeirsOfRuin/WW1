@@ -1,8 +1,8 @@
 # WW1 (working title): spec, draft
 
 Status: **approved** (2026-11-08), revision 3. Stage 1 of the game-building workflow
-(`Game-Workshop/skills/game-building/SKILL.md`). Kill gate: **passed with nine open issues**
-(`docs/KILLGATE.md`, 2026-11-08). Next: `docs/DESIGN.md`.
+(`Game-Workshop/skills/game-building/SKILL.md`). Kill gate: **passed**, round 2 with the author's
+answers (`docs/KILLGATE.md`, 2026-11-09). Next: `docs/DESIGN.md`.
 
 ## Decisions
 
@@ -22,6 +22,10 @@ Status: **approved** (2026-11-08), revision 3. Stage 1 of the game-building work
 | 2026-11-08 | Targets: best play reaches the Armistice in 5-10% of runs, reckless near 0%, competent play survives Stage 1 in 60-75% | "4. Yes" |
 | 2026-11-08 | Four backgrounds/towns at character creation, with hometown skills chosen there; war skills learned while deployed | "I think having 4 different backgrounds/towns to choose from help set the character creation up, besides choosing some hometown skills, then make sure we talk war skills learned while deployed" |
 | 2026-11-08 | Spec approved: four town types (pit, mill, city office, farm), one battalion with a company per town, two town skills plus one general at creation; go to the kill gate | "Yes to all. Go ahead" |
+| 2026-11-09 | Kill gate open issue 1: move risk from the line into battles and widen the gap between the safest and riskiest battle choice, so battle choices change whether he lives | "1. Yes" |
+| 2026-11-09 | Kill gate open issue 2: the tunnelling transfer becomes a real trade, not a trap (or is cut) | "2. Yes" |
+| 2026-11-09 | Kill gate open issue 3: the grade weights as set in the kill gate are accepted for now (stage credit 8/24/48/90; Armistice x1.4, posting x1.0, wounded out and captured x0.8, shell shock x0.6, killed x0.4, court-martial x0.1) | "3. Yes" |
+| 2026-11-09 | Specialist roles: each brings role-specific missions, slightly better pay, circumstances and kit than a rifleman, and an easier promotion when the missions go well; and puts him at risk more often | "Each role should provide some new, role specific missions, gives you slightly better pay/circumstances/kit compared to a regular rifleman, and make it easier to get a promotion should the missions go well, but they also put you at risk more often, despite the benefits." |
 
 ## Pitch
 

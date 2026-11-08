@@ -37,23 +37,23 @@ export const WAR_WORK = {
 // A battle: phases, each [base hit chance, nerve cost, phase type]. The type decides which
 // choice is safest (PHASE_HIT): no choice is safest everywhere.
 export const STAGES = [
-  { n: 1, year: 1915, rotations: 9, fire: 0.045, sectionLoss: 0.006, nerve: 5,
-    battles: { 6: { name: 'Loos', phases: [[0.13, 10, 'advance'], [0.11, 9, 'trench'], [0.08, 8, 'hold']] } } },
-  { n: 2, year: 1916, rotations: 10, fire: 0.066, sectionLoss: 0.0075, nerve: 6,
+  { n: 1, year: 1915, rotations: 9, fire: 0.04, sectionLoss: 0.006, nerve: 5,
+    battles: { 6: { name: 'Loos', phases: [[0.16, 10, 'advance'], [0.13, 9, 'trench'], [0.10, 8, 'hold']] } } },
+  { n: 2, year: 1916, rotations: 10, fire: 0.046, sectionLoss: 0.0075, nerve: 6,
     battles: {
-      4: { name: 'Somme, 1 July', phases: [[0.33, 13, 'advance'], [0.22, 10, 'trench'], [0.18, 9, 'hold'], [0.12, 7, 'hold']] },
-      8: { name: 'Somme, autumn', phases: [[0.21, 10, 'advance'], [0.18, 9, 'trench'], [0.12, 8, 'hold']] },
+      4: { name: 'Somme, 1 July', phases: [[0.40, 13, 'advance'], [0.26, 10, 'trench'], [0.22, 9, 'hold'], [0.14, 7, 'hold']] },
+      8: { name: 'Somme, autumn', phases: [[0.25, 10, 'advance'], [0.22, 9, 'trench'], [0.14, 8, 'hold']] },
     } },
-  { n: 3, year: 1917, rotations: 10, fire: 0.073, sectionLoss: 0.0075, nerve: 7,
+  { n: 3, year: 1917, rotations: 10, fire: 0.051, sectionLoss: 0.0075, nerve: 7,
     battles: {
-      3: { name: 'Arras', phases: [[0.21, 10, 'advance'], [0.18, 9, 'trench'], [0.13, 8, 'hold']] },
-      7: { name: 'Passchendaele', phases: [[0.22, 13, 'advance'], [0.21, 13, 'trench'], [0.18, 12, 'hold'], [0.13, 11, 'hold']] },
+      3: { name: 'Arras', phases: [[0.25, 10, 'advance'], [0.22, 9, 'trench'], [0.16, 8, 'hold']] },
+      7: { name: 'Passchendaele', phases: [[0.26, 13, 'advance'], [0.25, 13, 'trench'], [0.22, 12, 'hold'], [0.16, 11, 'hold']] },
     } },
-  { n: 4, year: 1918, rotations: 10, fire: 0.066, sectionLoss: 0.0075, nerve: 7,
+  { n: 4, year: 1918, rotations: 10, fire: 0.046, sectionLoss: 0.0075, nerve: 7,
     battles: {
-      2: { name: 'Spring Offensive', defence: true, capture: 0.05, phases: [[0.22, 12, 'defence'], [0.19, 11, 'defence'], [0.17, 10, 'defence'], [0.13, 9, 'defence']] },
-      6: { name: 'Hundred Days, August', phases: [[0.18, 9, 'advance'], [0.13, 8, 'trench'], [0.12, 7, 'hold']] },
-      9: { name: 'Hundred Days, October', phases: [[0.17, 9, 'advance'], [0.12, 8, 'trench'], [0.10, 7, 'hold']] },
+      2: { name: 'Spring Offensive', defence: true, capture: 0.05, phases: [[0.26, 12, 'defence'], [0.23, 11, 'defence'], [0.20, 10, 'defence'], [0.16, 9, 'defence']] },
+      6: { name: 'Hundred Days, August', phases: [[0.22, 9, 'advance'], [0.16, 8, 'trench'], [0.14, 7, 'hold']] },
+      9: { name: 'Hundred Days, October', phases: [[0.20, 9, 'advance'], [0.14, 8, 'trench'], [0.12, 7, 'hold']] },
     } },
 ];
 
@@ -73,11 +73,11 @@ export const WOUND = { killed: 0.32, severe: 0.23, light: 0.45, downgrade: 0.35 
 // Path modifiers in battle: hit chance multiplier, award multiplier, section-loss multiplier.
 export const PATHS = {
   rifleman: { hit: 1.0, award: 1.0, section: 1.0 },
-  bomb: { hit: 1.15, award: 1.6, section: 1.0 },
-  lewis: { hit: 1.1, award: 1.3, section: 0.95, defence: 0.75 },
-  snipe: { hit: 0.8, award: 1.1, section: 1.0 },
-  signals: { hit: 1.05, award: 1.2, section: 1.0 },
-  tunnel: { hit: 0.8, award: 0.8, section: 1.0, fire: 0.990, collapse: 0.015 },
+  bomb: { hit: 1.5, award: 1.6, section: 1.0 },
+  lewis: { hit: 1.4, award: 1.3, section: 0.95, defence: 0.85 },
+  snipe: { hit: 1.2, award: 1.1, section: 1.0 },
+  signals: { hit: 1.45, award: 1.2, section: 1.0 },
+  tunnel: { hit: 0.7, award: 0.9, section: 1.0, fire: 0.9, collapse: 0.007 },
   nco: { hit: 1.15, award: 1.2, section: 0.8 },
   subaltern: { hit: 1.45, award: 1.6, section: 0.75 },
 };
@@ -94,13 +94,13 @@ export const CHOICES = {
 // trench is the most dangerous work, keeping down the safest. Hold: the counter-attack comes
 // to you. Defence: going to ground risks being overrun (capture doubles, model.js).
 export const PHASE_HIT = {
-  advance: { push: 1.0, help: 1.3, ground: 1.15 },
-  trench: { push: 1.4, help: 1.1, ground: 0.6 },
-  hold: { push: 1.25, help: 0.95, ground: 0.75 },
-  defence: { push: 1.25, help: 1.0, ground: 0.8 },
+  advance: { push: 0.85, help: 1.35, ground: 1.35 },
+  trench: { push: 1.55, help: 1.1, ground: 0.5 },
+  hold: { push: 1.4, help: 0.85, ground: 0.7 },
+  defence: { push: 1.35, help: 0.95, ground: 0.75 },
   // An attack that has stalled (uncut wire, the barrage gone ahead): pushing on is suicide,
   // the whole line goes to ground, and going down costs no standing. The player is told.
-  stalled: { push: 1.9, help: 1.25, ground: 0.65 },
+  stalled: { push: 2.3, help: 1.3, ground: 0.5 },
 };
 // Chance an advance or trench phase has stalled.
 export const STALL = 0.25;
@@ -117,6 +117,28 @@ export const GRADE = {
 };
 
 export const SECTION_SIZE = 9;
+
+// Specialist roles (author, 2026-11-09): role missions, slightly better pay, circumstances and
+// kit, an easier promotion when missions go well, and more risk more often.
+// mission: chance one is put to him per front tour; hit, nerve, award points, base success.
+// A specialist who declines is usually detailed anyway (detail): it is his job.
+export const ROLES = {
+  bomb: { mission: 'bombing raid', chance: 0.6, hit: 0.11, nerve: 6, award: 2.0, success: 0.55 },
+  lewis: { mission: 'covering a raid with the Lewis gun', chance: 0.6, hit: 0.08, nerve: 5, award: 1.4, success: 0.6 },
+  snipe: { mission: 'sniping from a hide', chance: 0.6, hit: 0.065, nerve: 4, award: 1.2, success: 0.5 },
+  signals: { mission: 'running a message under fire', chance: 0.6, hit: 0.08, nerve: 5, award: 1.2, success: 0.65 },
+  tunnel: { mission: 'listening for enemy miners; blowing a camouflet', chance: 0.6, hit: 0.045, nerve: 6, award: 1.2, success: 0.55 },
+};
+export const ROLE = {
+  detail: 0.6, // chance a specialist who declines is sent anyway
+  successPerSkill: 0.06, hitPerSkill: 0.06,
+  restBonus: 1.0, // better pay, billets and kit: nerve back at rest
+  crew: 4, // a tunneller's crew stands in for the section at rest
+  meritToPromote: 2, promoteChance: 0.4, // successful missions count toward a stripe
+  keepRole: 2.5, // specialist skill at which a promoted man keeps his role instead of leading a section
+};
+// Share of eligible sergeants a commissioning board accepts.
+export const COMMISSION_BOARD = 0.5;
 // A friend's chance of being killed per battle phase, as a share of the phase's hit chance.
 export const FRIEND_BATTLE = 0.16;
 
