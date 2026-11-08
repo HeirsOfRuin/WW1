@@ -59,6 +59,11 @@ switch:
   - { if: ["war.sortie == tunnel", "war.step == 2"], go: s_tunnel_2 }
   - { if: ["war.sortie == tunnel", "war.step == 3"], go: s_tunnel_3 }
   - { if: "war.pending == step", go: w_step }
+  # a title page for each year, before anything else that year (content/scenes/war/years.yaml)
+  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 1", { not: flag.year_1915 }], go: y_1915 }
+  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 2", { not: flag.year_1916 }], go: y_1916 }
+  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 3", { not: flag.year_1917 }], go: y_1917 }
+  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 4", { not: flag.year_1918 }], go: y_1918 }
   # authored moments (calibration, the mill town 1915)
   # front-line events: at the first call for men each tour, one from the pool if one is due;
   # each is once, and requires says when (an empty draw goes straight to the duty)
@@ -77,6 +82,16 @@ switch:
   - { if: ["war.battle == somme_autumn", "war.phase == 2", "start == mill"], go: b_somme_autumn_2 }
   - { if: ["war.battle == somme_autumn", "war.phase == 3", "start == mill"], go: b_somme_autumn_3 }
   - { if: ["war.pending == leave", "war.stage == 2", "start == mill"], go: l_mill_1916 }
+  # the mill town, 1917 (content/scenes/war/1917-mill.yaml)
+  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 3", "start == mill"], go: { pool: front_1917_mill, count: 1, then: w_duty } }
+  - { if: ["war.battle == arras", "war.phase == 1", "start == mill"], go: b_arras_1 }
+  - { if: ["war.battle == arras", "war.phase == 2", "start == mill"], go: b_arras_2 }
+  - { if: ["war.battle == arras", "war.phase == 3", "start == mill"], go: b_arras_3 }
+  - { if: ["war.battle == passchendaele", "war.phase == 1", "start == mill"], go: b_pass_1 }
+  - { if: ["war.battle == passchendaele", "war.phase == 2", "start == mill"], go: b_pass_2 }
+  - { if: ["war.battle == passchendaele", "war.phase == 3", "start == mill"], go: b_pass_3 }
+  - { if: ["war.battle == passchendaele", "war.phase == 4", "start == mill"], go: b_pass_4 }
+  - { if: ["war.pending == leave", "war.stage == 3", "start == mill"], go: l_mill_1917 }
   # the war's questions
   - { if: "war.pending == tunnel", go: w_tunnel }
   - { if: "war.pending == duty", go: w_duty }

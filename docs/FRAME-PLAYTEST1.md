@@ -91,4 +91,24 @@ full transcript of a year read end to end before each commit.
   the battle scale every step read "low risk". Gate after both: best play 5.3% ±0.5 to the
   Armistice, reckless 0.4% ±0.1, survives 1915 75.7% ±1.0, going back after 1915 +10.2 grade.
 
-Still to do for the book: chapter pages for each year, and second takes for steps 2 and 3.
+Still to do for the book: second takes for steps 2 and 3.
+
+## As built: year pages and 1917 (2026-11-09)
+
+- **A title page for each year** (1915 to 1918), each its own chapter so the engine shows it once:
+  the year, a subtitle, a soldiers' song of the time as the epigraph ("We're here because we're
+  here"; "Hanging on the old barbed wire"; "Oh, it's a lovely war"; "When this lousy war is
+  over"), the date, age, rank and role, the section, battles, and the names of the friends killed
+  since the last page; then a page of where he stands. The old "France" card is gone (it would
+  have come back after every year page). The engine's Station and Purse rows are not shown.
+- **1917 for the mill town**: eight events (the caves under Arras; the airman, Bloody April;
+  the hunt for Fritz-at-the-crater, which ends with a single shot and no one ever sure; Shaw a
+  father or Edith gone to the gasworks lad; Pilling at eighteen; mustard gas and the line of
+  blinded men; your mother on the queues and the Ashton explosion of June 1917); Arras in three
+  phases (out of the caves into sleet behind a creeping barrage; the cavalry; the counter-attack
+  in snow); Passchendaele in four (the duckboards, the pillbox, the shell-hole line, the night);
+  the 1917 leave (war bread, the butter saved for a week, the baby's grip, the commission letter
+  behind the clock). The tour before Arras is now April (the caves are the night before 9 April).
+- **For the author's next playtest**: a man who volunteers often plays sortie after sortie, up to
+  a dozen screens in a tour. Is that the pace wanted, or should duties you are detailed for
+  (not volunteered) resolve in one line?

@@ -15,7 +15,7 @@ import {
   run, decide, setHome, newsOf, aliveFriends, grade, dutyHit, missionHit, phaseHit, battleOf,
   RANKS, ROLES, DUTIES, STAGES, SORTIES, sortieHit, type Decision, type War, type SortieChoice,
 } from './war/index';
-import { warMonth, seasonOf, monthName } from './war/calendar';
+import { warMonth, seasonOf, monthName, monthOfClock } from './war/calendar';
 
 const st = (s: CoreState) => s as GameState;
 const ct = (c: CoreContent) => c as ContentBundle;
@@ -337,6 +337,8 @@ export const module: GameModule = {
       case 'nerve_word': return nerveWord(w.nerve);
       case 'standing_word': return standingWord(w.standing);
       case 'rank_name': return RANKS[w.rank]!;
+      // the rank in running prose: 'You're a corporal now'
+      case 'rank_a': { const r = RANKS[w.rank]!.toLowerCase(); return w.rank === 4 ? `company sergeant major` : `a ${r}`; }
       case 'path_name': return PATH_NAMES[w.path] ?? w.path;
       case 'section_line': {
         const n = aliveFriends(w);
@@ -393,7 +395,21 @@ export const module: GameModule = {
     }
     return undefined;
   },
-  checkTextVar: (name) => (['lost_last_name', 'award_last_name', 'risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line'].includes(name) ? [] : undefined),
+  checkTextVar: (name) => (['rank_a', 'lost_last_name', 'award_last_name', 'risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line'].includes(name) ? [] : undefined),
+  // the year's title page: where he stands, and who of the nine has died since the last page
+  cardRows: (_c, s) => {
+    const w = war(s);
+    return [['Rank', `${RANKS[w.rank]}, ${PATH_NAMES[w.path] ?? w.path}`], ['The section from home', `${aliveFriends(w)} of 9`], ['Battles', String(w.stats.battles)]];
+  },
+  cardDead: (_c, s, from) => {
+    const w = war(s); const names = SECTION_NAMES[w.town]!;
+    const out: string[] = [];
+    for (const l of w.log) {
+      const m = /^S(\d) r(\d+) \| friend (\d+) killed/.exec(l);
+      if (m && seasonOf(monthOfClock(Number(m[1]), Number(m[2]))) >= from) out.push(names[Number(m[3]) - 1]!);
+    }
+    return out;
+  },
   variantKey: (s) => st(s).start,
   startScene: (s, c) => ct(c).starts[st(s).start]?.start_scene,
   date: (s) => monthName(warMonth(war(s))),

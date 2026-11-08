@@ -10,9 +10,13 @@ skills: [soldiering]
 stations: [ranker]
 tracks: [service]
 seasons: [spring, summer, autumn, winter]
-chapters: [enlist, front, end]
+chapters: [enlist, y1915, y1916, y1917, y1918, front, end]
 counter_labels: {}
 aliases: []
 chapter_cards:
   enlist: { title: "Kitchener's Army", subtitle: "Autumn 1914", epigraph: "Your country needs you." }
-  front: { title: "France", subtitle: "The line", epigraph: "Front line, support, reserve, rest. Then the front line." }
+  # one title page a year (content/scenes/war/years.yaml); 'front' has none, or it would come back after every year page
+  y1915: { title: "1915", subtitle: "France", epigraph: "We're here because we're here because we're here." }
+  y1916: { title: "1916", subtitle: "The Somme", epigraph: "If you want the old battalion, I know where they are: they're hanging on the old barbed wire." }
+  y1917: { title: "1917", subtitle: "Arras and Flanders", epigraph: "Oh, oh, oh, it's a lovely war." }
+  y1918: { title: "1918", subtitle: "The last year", epigraph: "When this lousy war is over, no more soldiering for me." }

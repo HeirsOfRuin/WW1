@@ -7,7 +7,7 @@ import type { ContentBundle } from '../content/schema';
 import type { GameState } from './state';
 import { heroOf } from '@engine/character';
 import { RANKS, STAGES, ROLES, home, skill, aliveFriends, type War } from './war/index';
-import { ROTATION_MONTHS, monthName, TRAINING } from './war/calendar';
+import { ROTATION_MONTHS, monthName, monthOfClock, TRAINING } from './war/calendar';
 import { SECTION_NAMES, PATH_NAMES, nerveWord, standingWord, whereOf, offerWords } from './module';
 
 export interface Line { label: string; note?: string }
@@ -61,19 +61,19 @@ const TRAITS: [string, string, string][] = [
   ['spoke_at_roll', 'Bears witness', 'Answered at roll call for the men he saw fall.'],
   ['brought_discs', 'Went out for the discs', 'Brought in identity discs from the wire, July 1916.'],
   ['best_man', 'A promise to Shaw', 'Said he would stand up with him and Edith.'],
+  ['carved_name', 'Left his name', 'Carved his name in the chalk of the caves under Arras.'],
+  ['hunted_fritz', 'Went after the man at the crater', 'Three days in the crater lip with the sniping officer. Nobody knows for sure.'],
+  ['led_the_gassed', 'Led the blind', 'Led a line of gassed men down to the aid post, July 1917.'],
+  ['wet_babys_head', 'Wet the baby\'s head', 'Drank the health of Albert Shaw\'s son in the section\'s rum.'],
+  ['stood_shaws_watch', 'A good pal', 'Stood Shaw\'s sentry so he could write home.'],
+  ['sat_with_shaw', 'Sits up with a friend', 'Stayed on the firestep with Shaw the night Edith wrote.'],
+  ['went_to_airman', 'Saw the airman', 'Ran to the burning aeroplane. There was nothing to do.'],
   ['wrote_to_mrs_shaw', 'Writes to the mothers', 'Wrote to a dead friend\'s mother himself.'],
   ['wrote_to_mrs_duckworth', 'Writes to the mothers', 'Wrote to a dead friend\'s mother himself.'],
   ['wrote_to_mrs_pilling', 'Writes to the mothers', 'Wrote to a dead friend\'s mother himself.'],
 ];
 
-/** The month of a tour, from the war's absolute tour count. */
-function monthOfTour(stage: number, clock: number): string {
-  if (clock <= 0) return monthName(TRAINING);
-  let before = 0;
-  for (const st of STAGES) { if (st.n >= stage) break; before += st.rotations; }
-  const rot = ROTATION_MONTHS[stage]!.rotations;
-  return monthName(rot[Math.min(Math.max(clock - before - 1, 0), rot.length - 1)]!);
-}
+const monthOfTour = (stage: number, clock: number) => monthName(monthOfClock(stage, clock));
 
 function parseLog(w: War): { stage: number; clock: number; msg: string }[] {
   return w.log.map((l) => {
@@ -112,7 +112,7 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
   if (home(w, 'stamina') && w.severe === 0 && w.clock > 15) traits.push({ label: 'Never badly hit', note: 'Not yet.' });
 
   const rivals: Line[] = [];
-  if (flags.met_fritz) rivals.push({ label: 'Fritz-at-the-crater', note: 'A sniper with a telescopic sight, behind their wire by the old mine crater. Nobody has seen him. He has killed men in your bay.' });
+  if (flags.met_fritz) rivals.push({ label: 'Fritz-at-the-crater', note: flags.hunted_fritz ? 'A sniper behind their wire by the old mine crater. You went after him in 1917. After that week nobody was shot in that bay. Nobody ever saw him.' : flags.left_fritz ? 'A sniper behind their wire by the old mine crater. Somebody went after him in 1917. You never found out who fired the last shot.' : 'A sniper with a telescopic sight, behind their wire by the old mine crater. Nobody has seen him. He has killed men in your bay.' });
 
   const friends = names.map((n, i) => {
     const alive = !!w.friends[i];

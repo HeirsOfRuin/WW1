@@ -1,0 +1,499 @@
+# The mill town, 1917 (stage 3: tours 20 to 29; Arras is tour 23, Passchendaele tour 27). Written
+# to the voice in content/style-guide.md. Battle phases carry a paragraph for each 1917 path.
+# Events come from the pool front_1917_mill at the first call for men each tour.
+
+# ---- events ----------------------------------------------------------------------------------
+
+- id: v17_pilling_eighteen
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  once: true
+  requires: [ "war.tour >= 24", war.mate3 ]
+  title: Eighteen
+  text: |
+    In March Pilling turned eighteen, and nobody sent a cake. He's old enough now, in the eyes of the
+    War Office. He's been old enough in everybody else's for a year.
+
+    He's not the lad who cried for his mam on the boat. He volunteers for everything, raids,
+    patrols, wiring, as if he's owed something and means to collect it. He's got a German officer's
+    watch on his wrist that he won't talk about. When the new draft comes up he looks at them the
+    way the old sweats looked at you.
+
+    "Eighteen," he says, and laughs, and it isn't his laugh. "Me mam said I could join up at
+    eighteen."
+  choices:
+    - id: ease_off
+      text: Tell him to ease off. Nobody's counting.
+      effects: [ { set: flag.told_pilling_ease } ]
+      text_after: |
+        "Somebody is," he says. He doesn't say who. That night he's out with the wiring party,
+        and he comes back with his hands cut to ribbons, singing.
+      next: "@return"
+    - id: leave_him
+      text: Leave him be. He's a man now; it's his war.
+      text_after: |
+        You share your rum with him, without saying it's a birthday present, and he knows, and
+        doesn't say thank you, and drinks it.
+      next: "@return"
+
+- id: v17_caves
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  once: true
+  weight: 100
+  requires: [ "war.tour == 22" ]
+  title: The caves
+  text: |
+    Under Arras there are caves, old chalk quarries from hundreds of years back, and the tunnellers
+    have joined them up into a town under the town. Thousands of you are down here, waiting. There's
+    electric light strung along the walls, and a light railway, and water dripping everywhere, and
+    the air is thick with the breath of a whole brigade and the smell of wet chalk and paraffin and
+    feet.
+
+    Somebody's carved his name in the chalk, and a date, and a girl's name. Somebody else has
+    carved a picture of a woman that the sergeant major makes them chip off.
+
+    The attack's tomorrow. Up the steps and out into the morning. You can't sleep. Nobody can.
+  choices:
+    - id: letter
+      text: Write a letter for the pay book.
+      effects: [ { set: flag.last_letter } ]
+      text_after: |
+        You write it on your knee by the electric light. It's the third one now. They get shorter
+        each time. This one says: Look after Mother. Tell Jack he's not to join up, whatever they
+        say at the drill hall.
+      next: "@return"
+    - id: carve
+      text: Carve your own name in the chalk.
+      effects: [ { set: flag.carved_name } ]
+      text_after: |
+        You do it with your bayonet, slowly, in capitals, and the town after it, and the date. The
+        chalk comes away soft as cheese. It'll be there, you think, after.
+      next: "@return"
+
+- id: v17_airman
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  once: true
+  requires: [ "war.tour >= 24" ]
+  on_enter: [ { set: flag.y17_after_arras } ]
+  title: Aeroplanes
+  text: |
+    Since Arras the sky has been full of aeroplanes, theirs and ours, and every afternoon there's a
+    fight up there that you watch with your neck cricked back, like a football crowd. Ours keep
+    falling. The lads called April Bloody April, and they meant the Flying Corps.
+
+    One comes down near your bay in the evening, on fire, slowly, turning over and over, and you
+    can see a man in it. It hits beyond the support line with a sound like a dropped tray.
+  choices:
+    - id: go_to_it
+      text: Run to the wreck with the others.
+      effects: [ { set: flag.went_to_airman } ]
+      text_after: |
+        There's nothing to do when you get there. The smell of the burning dope on the wings is
+        sweet and chemical, like pear drops, and under it the other smell. One of the lads takes
+        the pilot's goggles, which are lying in the grass without a mark on them. You don't stop him.
+      next: "@return"
+    - id: stay
+      text: Stay where you are. Turn away.
+      text_after: |
+        You turn your back on it and clean your rifle, every part of it, twice, until it's dark.
+      next: "@return"
+
+- id: v17_crater_hunt
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  once: true
+  weight: 50
+  requires: [ "war.tour >= 24", flag.met_fritz ]
+  title: The crater again
+  text: |
+    After Arras they send the battalion north, to rest, they say, and it turns out to mean the old
+    line. The crater. The same bay, the same low place, the sandbags rotted and patched and rotted
+    again.
+
+    He's still there. Two men from the battalion you relieved were shot through the head in that bay
+    last month, both in the morning, both looking at the sunrise.
+
+    The sniping officer, a long thin man from Fleetwood who used to shoot rabbits for a living, is
+    going to have him. He wants a man who knows the ground. [if war.path == snipe]He wants you. It's your work, now.[else]He looks at you.[/if]
+  choices:
+    - id: hunt
+      text: Go with him. Find the man at the crater.
+      effects: [ { set: flag.hunted_fritz } ]
+      text_after: |
+        Three days in a hide in the old crater lip, lying in the stink of it, watching a heap of
+        bricks through a telescope until your eye waters. On the third morning, the flash. The
+        officer fires once. Nothing more comes from the bricks, that day or any day after.
+
+        Nobody ever sees him. Nobody ever knows for sure. But after that week no one is shot in that
+        bay again, and the men stand up in it to stretch, and after a while they forget they ever
+        didn't.
+      next: "@return"
+    - id: leave_him
+      text: Let somebody else go. You've had enough of that bay.
+      effects: [ { set: flag.left_fritz } ]
+      text_after: |
+        The officer goes with somebody else. Three days later there's a single shot from the old
+        crater lip, early, and then nothing, and nobody tells you anything, and you never find out
+        whose shot it was.
+      next: "@return"
+
+- id: v17_shaw_father
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  once: true
+  requires: [ "war.tour >= 25", war.mate1, flag.best_man ]
+  title: A letter for Shaw
+  text: |
+    Shaw gets a letter and reads it standing up, by the ration dump, and then sits down on a box
+    of bombs, which you're not supposed to do, and reads it again.
+
+    "A lad," he says. "Seven pound four. Born Tuesday." He looks up at you and his face is wet and
+    he doesn't seem to know it. "She's calling him Albert. I told her not to. She's calling him
+    Albert anyway."
+  choices:
+    - id: wet_head
+      text: Wet the baby's head with the section's rum.
+      effects: [ { set: flag.wet_babys_head } ]
+      text_after: |
+        The corporal looks the other way. The rum goes round the section in a mess tin lid, each man
+        saying something, to the lad, to Albert, to Edith, to home. Somebody sings. Shaw keeps the
+        letter inside his shirt against his skin.
+      next: "@return"
+    - id: take_his_watch
+      text: Take his turn on sentry so he can write back.
+      effects: [ { set: flag.stood_shaws_watch } ]
+      text_after: |
+        You stand his two hours on the firestep in the cold. Behind you in the dugout you can hear
+        him writing, the pencil going slow and careful, the way you taught him or the way he taught
+        himself.
+      next: "@return"
+
+- id: v17_shaw_edith_writes
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  once: true
+  requires: [ "war.tour >= 22", war.mate1, flag.after_the_war ]
+  title: A letter for Shaw
+  text: |
+    Shaw gets a letter and reads it once and folds it small and puts it in his pocket and
+    goes back to cleaning his rifle.
+
+    It's two days before he says anything, and then it's in the dark, on sentry. "She's walking
+    out with a lad from the gasworks," he says. "Exempt. Reserved occupation." He says it as if he's
+    reading it off a notice. "Said she couldn't wait for after. Said after might not come."
+
+    He's quiet a long while. "She's not wrong," he says.
+  choices:
+    - id: stay_with_him
+      text: Stay on the firestep with him till his turn's done.
+      effects: [ { set: flag.sat_with_shaw } ]
+      text_after: |
+        Neither of you says anything else. Towards dawn he gives you half his cigarette without
+        being asked, and you smoke it, and the sky gets light over the German wire.
+      next: "@return"
+    - id: leave_him
+      text: Leave him be. He'll want to be on his own.
+      text_after: |
+        You leave him be. In the morning he's the same as always, and nobody mentions Edith Holt
+        again, ever.
+      next: "@return"
+
+- id: v17_mustard
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  once: true
+  requires: [ "war.tour >= 26", flag.y17_after_arras ]
+  on_enter: [ { set: flag.y17_mustard } ]
+  title: Mustard
+  text: |
+    A new gas, in Flanders. The shells come over with a soft plop, not a bang, and you think
+    they're duds. It doesn't smell of much: mustard, some say, or garlic, or horseradish. It hangs
+    in the shell holes and the low places and soaks into everything.
+
+    Hours later the men who were in it start to blister, under the arms, between the legs, wherever
+    they were sweating. Then their eyes go. They come down the communication trench in a line, each
+    man with his hand on the shoulder of the man in front, bandages over their eyes, shuffling, like
+    a Sunday school treat going home.
+  choices:
+    - id: lead_them
+      text: Lead the line of blinded men down to the aid post.
+      effects: [ { set: flag.led_the_gassed } ]
+      text_after: |
+        The first man's hand is on your shoulder all the way, light, trusting, and he keeps asking
+        whether it's dark yet, because he can't tell.
+      next: "@return"
+    - id: stay_at_post
+      text: Stay at your post. Somebody has to.
+      text_after: |
+        You watch them go past you, one hand on each shoulder, and the line goes round the traverse,
+        and the last man's hand is reaching for a shoulder that's already gone round the corner.
+      next: "@return"
+
+- id: v17_mother_letter
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  once: true
+  requires: [ "war.tour >= 27", flag.y17_mustard ]
+  title: A letter from home
+  text: |
+    "Dear Son, just a few lines. We are all right but the queues are something cruel, I stood two
+    hours for margarine Saturday and they run out before me. Sugar is a scandal. Your father says
+    the Germans are trying to starve us out with their submarines and they will not manage it
+    because Lancashire folk can live on fresh air and spite.
+
+    You will have heard about the explosion at Ashton in June. We heard it here, it rattled every
+    window in the street. Forty-odd killed, they say, women and children some of them.
+
+    [if !war.mate1]Mrs Shaw asked after you. She asks every week.[/if][if war.mate1]Mrs Shaw says to tell Albert his dad's chest is bad again.[/if] Look after yourself. Do not volunteer for anything. I know you. Your loving Mother."
+  choices:
+    - id: keep
+      text: Keep it in your breast pocket with the others.
+      text_after: |
+        It goes in with the rest, a fat damp wad of them now, held with a bootlace. You've never
+        thrown one away.
+      next: "@return"
+
+# ---- Arras, 9 April 1917 -----------------------------------------------------------------------
+
+- id: b_arras_1
+  chapter: front
+  title: Arras
+  text: |
+    Up the steps out of the caves at half past five, into sleet. After a night underground the cold
+    takes your breath. The guns open all at once behind you, more guns than you knew there were in
+    the world, and the barrage starts walking, a wall of bursts a hundred yards in front, moving
+    forward a bit at a time like a man pacing out an allotment.
+
+    "Lean on it," the officers keep saying. "Keep close to the barrage. Lean on it."
+
+    [if war.path == rifleman]{mate} is beside you, snow on his helmet.[/if][if war.path == nco]Your section's behind you in a line, and the new men are watching the old ones to see what to do.[/if][if war.path == lewis]The gun's on your shoulder, wet, the drums in their panniers clanking behind you.[/if][if war.path == signals]You go with the company officer and the wire goes out behind you, and for once, the first hour, it holds.[/if][if war.path == bomb]Their first trench is yours if it's still got men in it.[/if][if war.path == snipe]You go behind the first wave, looking for the machine guns the barrage missed.[/if]
+
+    [if war.stalled]On the left the barrage has got away from the men. It's two hundred yards ahead and their machine guns are up and firing into the gap.[else]Their front line comes up out of the sleet, smashed flat, the wire in heaps, and grey figures climbing out of it with their hands up.[/if]
+  choices:
+    - id: push
+      text: "Lean on the barrage. Keep right up to it. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Keep the line together. Bring up the stragglers. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down and let the barrage go on ahead. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_arras_2
+  chapter: front
+  title: Arras
+  text: |
+    It's working. For the first time in two years, it's working. You're through their first line
+    and their second and there are prisoners going back past you in dozens, some of them carrying
+    our wounded without being asked.
+
+    Then, unbelievably, cavalry. A whole squadron of them, coming up behind you at a trot through
+    the snow, lances up, the horses steaming. The lads cheer them. Ten minutes later you see some of
+    the horses coming back with no riders.
+
+    Then a pocket of them in a sunken road that the barrage missed, firing.
+  choices:
+    - id: push
+      text: "Go for the sunken road. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Get the wounded and the prisoners down into cover. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down in their trench and fire on the road. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_arras_3
+  chapter: front
+  title: Arras
+  text: |
+    By evening it's snowing properly, big wet flakes that settle on the dead. The guns can't get
+    forward over the broken ground and you're out on your own on the far slope, in shell holes, with
+    no wire, no water and no hot food. Your feet have gone.
+
+    In the dusk they come back at you, out of the village on the hill, in long grey lines.
+  choices:
+    - id: push
+      text: "Stand up and fire. Stop them coming. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Go along the shell holes, keep the men firing. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Keep down in the shell hole. Fire from cover. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- Passchendaele, August 1917 -----------------------------------------------------------------
+
+- id: b_pass_1
+  chapter: front
+  title: Flanders
+  text: |
+    It hasn't stopped raining since the end of July. The ground here was always low and wet, and
+    the shelling has smashed the ditches that used to drain it, and now it's not ground. It's a sea
+    of mud and water with shell holes in it, rim to rim, each one full to the brim with green water
+    and some of them with men in.
+
+    You go up to the start line in the dark on the duckboard track, single file, a pace apart. Step
+    off the boards and the mud takes you to the thigh. A man two ahead slips off and goes in to his
+    chest and they can't get him out, and the column can't stop, and you go past him.
+
+    [if war.path == lewis]The gun's twenty-eight pounds and the mud's on it like porridge.[/if][if war.path == signals]No wire across this. Runners and pigeons, and the pigeons won't fly in the rain.[/if][if war.path == nco]You've counted your men onto the duckboards and you count them off.[/if][if war.path == bomb]The bombs are in a sandbag on your back, wrapped in your groundsheet against the wet.[/if][if war.path == snipe]Your rifle's wrapped in sacking, and so is the sight.[/if][if war.path == rifleman]{mate} has his hand on your pack strap so as not to lose you in the dark.[/if]
+
+    [if war.stalled]At zero the barrage goes over and the first wave goes out after it, and the barrage gets away from them in ten minutes because nobody can walk fast in this.[else]At zero the barrage goes over, and you go out after it, slow, from shell-hole rim to shell-hole rim, like walking on a pudding.[/if]
+  choices:
+    - id: push
+      text: "Keep up with the barrage, whatever the mud does. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Pull men out of the shell holes as you go. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Go to ground on the nearest rim. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_pass_2
+  chapter: front
+  title: Flanders
+  text: |
+    A pillbox. You've heard about them: concrete, three feet thick, half sunk in the mud, with a
+    machine gun firing out of a slit at the level of your knees. Our shells bounce off them. This one
+    sits on a little rise and fires across everything.
+
+    The bombers are working round it from the side, in the mud, a yard at a time. Somebody has to
+    keep its slit busy while they do.
+  choices:
+    - id: push
+      text: "Work round to the back of it and bomb the door. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Fire at the slit to keep their heads down. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down behind the rim and wait for it to be over. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_pass_3
+  chapter: front
+  title: Flanders
+  text: |
+    There's no trench to hold. There's a line of shell holes with men in them, up to their waists in
+    water, a few yards apart, and that's the new front line. The rain keeps coming. Your rifle's so
+    caked with mud the bolt won't move, and you open it with the heel of your hand, and it jams again.
+
+    Their counter-attack comes in the afternoon, through the rain.
+  choices:
+    - id: push
+      text: "Climb out of the water and fire standing. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Keep the next hole's men supplied and firing. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Stay down in the water. Fire over the rim. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_pass_4
+  chapter: front
+  title: Flanders
+  text: |
+    Night, and the relief. Getting out is worse than getting in. It takes six men to carry one
+    stretcher across this, and they have to put it down every fifty yards, and there are more
+    stretchers than there are men.
+
+    Around you in the dark, in the shell holes, the wounded who can't be got to are calling. Some of
+    them are sliding down, slowly, into the water, and calling all the way.
+  choices:
+    - id: push
+      text: "Get yourself out. Keep to the boards. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Take a corner of a stretcher. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Wait in the hole for the shelling to stop. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- the 1917 leave ----------------------------------------------------------------------------
+
+- id: l_mill_1917
+  chapter: front
+  title: Home on leave
+  text: |
+    The third December. Your mother looks smaller. She's had her hair cut short, for the mill, and
+    she touches the back of her neck all the time as if she's forgotten.
+
+    There's no sugar in the tea and the bread's grey, war bread, with potato in it. She's saved
+    the butter ration for a week so you can have it on your first morning, and she watches you eat
+    it and won't have any.
+
+    [if war.mate1 && flag.best_man]Edith brings the baby round. He grabs your finger and won't let go, and Edith laughs and says he's got his father's grip, and you look at the little fist and think of Shaw's hand on the rung of the ladder at Loos.[/if][if war.mate1 && flag.best_man && flag.wet_babys_head] "Albert wrote that the whole section drank his health," she says. "In rum. I hope you all had headaches."[/if][if war.mate1 && flag.best_man && flag.stood_shaws_watch] "His long letter came," she says. "Six pages. He said a pal stood his watch for him." She looks at you.[/if][if war.mate1 && flag.after_the_war]Edith Holt is married, to the lad from the gasworks. You see her in the Co-op queue. She looks at you and away.[/if][if war.mate1 && flag.after_the_war && flag.sat_with_shaw] You think of the firestep, and the half cigarette, and you look away first.[/if][if !war.mate1 && flag.best_man]Edith brings the baby round. She's in black. The baby grabs your finger and won't let go. "He's got his dad's grip," she says, and then she has to go outside.[/if]
+
+    [if war.mate3]Mrs Pilling asks if he's eating. He's eighteen and he's killed men, and he's still not eating, and you tell her he is.[/if][if !war.mate3 && flag.wrote_to_mrs_pilling]Mrs Pilling has your letter in a frame, next to his photograph.[/if]
+
+    [if flag.went_to_airman]Your mother's bought pear drops for you from the Co-op, a quarter in a paper twist, as a treat. You can't eat them. You can't say why.[/if][if flag.led_the_gassed] At chapel on Sunday the minister reads about the blind leading the blind, and you get up in the middle of it and go out.[/if]
+
+    [if flag.left_fritz]Some nights you wake to a single shot from a crater lip, and lie there not knowing whose it was.[/if]
+
+    [if flag.hunted_fritz]You don't tell anyone about the crater. There's nothing to tell, and too much.[/if][if flag.carved_name]Somewhere under Arras your name's carved in the chalk, and the town, and the date. Nobody here will ever see it.[/if]
+
+    [if war.commission]A letter has come for you, buff, official: you're to go before a board for a commission. An officer. You. Your mother reads it four times and puts it behind the clock with the rent book, and then she takes it out and reads it again.[/if]
+
+    {offers_line}
+  choices:
+    - id: back
+      text: Go back on the tenth day. The battalion promotes the men who return.
+      effects: [ { war: back } ]
+      next: "@war"
+    - id: commission
+      text: Go before the board. Come back an officer, a temporary gentleman.
+      visible_if: war.commission
+      effects: [ { war: commission } ]
+      next: "@war"
+    - id: posting_0
+      text: "Take it: {offer0}. Your war ends here."
+      visible_if: "war.offers >= 1"
+      effects: [ { war: "posting:0" } ]
+      next: "@war"
+    - id: posting_1
+      text: "Take it: {offer1}. Your war ends here."
+      visible_if: "war.offers >= 2"
+      effects: [ { war: "posting:1" } ]
+      next: "@war"
+    - id: posting_2
+      text: "Take it: {offer2}. Your war ends here."
+      visible_if: "war.offers >= 3"
+      effects: [ { war: "posting:2" } ]
+      next: "@war"

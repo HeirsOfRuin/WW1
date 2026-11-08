@@ -63,7 +63,7 @@
 
     You don't open it. You put it inside your tunic, and you can feel it there all night, square and stiff against your chest.[/if]
 
-    [if war.stage == 1]He was sixteen. He'd have been seventeen in March.[else]He was eighteen. He'd been telling everybody since March.[/if][if flag.told_on_pilling] You tried, you tell yourself. You tried.[/if]
+    [if war.stage == 1]He was sixteen. He'd have been seventeen in March.[else]He was eighteen. He'd been telling everybody since March.[/if][if flag.told_on_pilling] You tried, you tell yourself. You tried.[/if][if flag.told_pilling_ease] You told him to ease off. He told you somebody was counting.[/if]
   choices:
     - id: write_mother
       text: Write to Mrs Pilling. Tell her about the birthday cakes.

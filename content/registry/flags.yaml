@@ -27,3 +27,20 @@ urged_pilling_go: { description: "Told Pilling to take the papers and go; his mo
 let_pilling_stay: { description: "Left it to Pilling; his mother is proud and furious" }
 after_july: { description: "The weeks after 1 July have been played (chains the events)" }
 brought_discs: { description: "Went out for the identity discs; at leave you look at every woman in black" }
+# Year pages (content/scenes/war/years.yaml): each read by the route, so the page comes once
+year_1915: { description: "The 1915 title page has been shown" }
+year_1916: { description: "The 1916 title page has been shown" }
+year_1917: { description: "The 1917 title page has been shown" }
+year_1918: { description: "The 1918 title page has been shown" }
+# The mill town, 1917 (content/scenes/war/1917-mill.yaml)
+told_pilling_ease: { description: "Told Pilling to ease off at eighteen" }
+carved_name: { description: "Carved his name in the chalk of the Arras caves; the leave remembers" }
+y17_after_arras: { description: "The aeroplane event has been played (chains the events)" }
+went_to_airman: { description: "Ran to the burning aeroplane" }
+hunted_fritz: { description: "Went out with the sniping officer after Fritz-at-the-crater" }
+left_fritz: { description: "Let somebody else go after him" }
+wet_babys_head: { description: "Wet the head of Shaw's son with the section's rum" }
+stood_shaws_watch: { description: "Stood Shaw's sentry so he could write to Edith" }
+sat_with_shaw: { description: "Sat with Shaw on the firestep the night Edith wrote" }
+y17_mustard: { description: "The mustard gas event has been played (chains the events)" }
+led_the_gassed: { description: "Led a line of blinded men down to the aid post" }

@@ -23,7 +23,7 @@ export function playGame(content: ContentBundle, o: BotOptions): GameState {
     if (v.sceneId.startsWith('c_enlist_')) id = `pick_${o.pick ?? 0}`;
     else if (v.sceneId === 'c_general') id = o.general ?? 'firstaid';
     else if (v.sceneId === 'c_training') id = 'embark';
-    else if (content.scenes[v.sceneId]?.kind === 'pool' || v.sceneId.startsWith('x_')) id = v.choices.find((x) => x.available)!.id; // an event or news: no war question
+    else if (content.scenes[v.sceneId]?.kind === 'pool' || v.sceneId.startsWith('x_') || v.sceneId.startsWith('y_')) id = v.choices.find((x) => x.available)!.id; // an event or news: no war question
     else {
       const q = s.war.pending;
       if (!q) throw new Error(`${v.sceneId}: no question pending`);

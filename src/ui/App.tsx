@@ -58,7 +58,10 @@ export function App({ content }: { content: ContentBundle }) {
       {note && <p class="banner">{note} <button onClick={() => setNote(null)}>OK</button></p>}
       <main class="panel">
         {tab === 'story' && <>
-          {v.card && page === 0 && <section class="card"><h2>{v.card.title}</h2>{v.card.subtitle && <p>{v.card.subtitle}</p>}{v.card.epigraph && <p class="hint">{v.card.epigraph}</p>}</section>}
+          {v.card && page === 0 && <section class="card"><h2>{v.card.title}</h2>{v.card.subtitle && <p>{v.card.subtitle}</p>}{v.card.epigraph && <p class="hint"><em>{v.card.epigraph}</em></p>}
+            {/* the engine always adds Station and Purse; this game has neither, so they are not shown */}
+            {v.card.rows.filter(([k]) => k !== 'Station' && k !== 'Purse').map(([k, val]) => <p class="row"><span class="hint">{k}</span> {val}</p>)}
+            {v.card.since.map((l) => <p class="hint">{l}</p>)}</section>}
           {(v.outcome?.text || (v.outcome?.changes.length ?? 0) > 0) && page === 0 && <section class="outcome">{v.outcome!.text && paras(v.outcome!.text)}{v.outcome!.changes.length > 0 && <p class="hint">{v.outcome!.changes.join(' · ')}</p>}</section>}
           {v.cause && <p class="hint">Because: {v.cause.text}</p>}
           {page === 0 && artUrl(artOf(state)) && <img class="band" src={artUrl(artOf(state))} alt="" width={400} height={200} />}

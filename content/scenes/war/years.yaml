@@ -1,0 +1,63 @@
+# A title page for each year (config.chapter_cards), shown at the first call for men of the year,
+# with a page of where he stands. Each is its own chapter, so the engine shows the card once.
+
+- id: y_1915
+  chapter: y1915
+  on_enter: [ { set: flag.year_1915 } ]
+  title: France
+  text: |
+    You come off the boat at Boulogne into rain, and march up a cobbled hill past French women who
+    don't look at you, to a camp of wet tents on a cliff. The sea's grey and the sky's grey and
+    somewhere inland, so faint you think it's thunder, you can hear the guns.
+
+    Nine of you from home in the same section. {section_line}
+  choices:
+    - id: on
+      text: Go up the line.
+      next: "@war"
+
+- id: y_1916
+  chapter: y1916
+  on_enter: [ { set: flag.year_1916 } ]
+  title: The second year
+  text: |
+    A year in France. You know now what you didn't know last spring: which noise to duck for and
+    which to ignore, how to sleep in four inches of water, how to eat with a dead man in the
+    parapet a yard from your mess tin.
+
+    You're {rank_a} now. {section_line} Everybody says this is the year. The big push. The
+    end of it by the autumn.
+  choices:
+    - id: on
+      text: Go back up the line.
+      next: "@war"
+
+- id: y_1917
+  chapter: y1917
+  on_enter: [ { set: flag.year_1917 } ]
+  title: The third year
+  text: |
+    Nobody says it'll be over by the autumn any more. Nobody says anything about when.
+
+    You're {rank_a} now, and you've been out long enough that the new lads call you an old
+    sweat and mean it. {section_line} [if war.section <= 5]You don't make friends with the new men the way you did. You learn their names when you have to.[/if]
+  choices:
+    - id: on
+      text: Go back up the line.
+      next: "@war"
+
+- id: y_1918
+  chapter: y1918
+  on_enter: [ { set: flag.year_1918 } ]
+  title: The fourth year
+  text: |
+    The Russians are out of it. The Americans are coming, they say, millions of them, and nobody
+    has seen one. Everybody knows the Germans have men to spare now, and that they'll come in the
+    spring.
+
+    You're {rank_a}. {section_line} You can't remember the shed, some days. You can remember
+    the noise of it. You can't remember your mother's face without the photograph.
+  choices:
+    - id: on
+      text: Go back up the line.
+      next: "@war"
