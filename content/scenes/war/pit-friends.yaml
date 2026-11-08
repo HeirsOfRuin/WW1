@@ -1,0 +1,75 @@
+# The pit town's three written friends, killed. One scene each, for whenever it happens; the route
+# sends the player here before the next question. With him, or hearing it after. The choice (write
+# to his family yourself, or not) is read at the next leave.
+
+- id: x_fallen_robson
+  chapter: front
+  title: Tommy Robson
+  text: |
+    [if war.fallen_present]It happens {fallen_where}. Robson's beside you and then he's on his knees, and then he's sat back on his heels, the way he'd sit at the face to eat his bait, looking at his hands.
+
+    He doesn't say anything. He never did. He looks at you as if he's going to, and then he puts his head down on his chest as if he's tired, and that's all.
+
+    You kneel with him till somebody pulls you up. His hands are black with the earth, the way they always were, and you can't stop looking at them.[else]You hear it at the ration dump, in the dark. Robson. Killed {fallen_where}.
+
+    You were marras at the face two years. You knew where he'd be in the dark by the sound of his pick. You stand there with the bread under your arm and listen for it.[/if]
+
+    At the end of the rows his da will be out at the cree in the morning, letting the birds go.
+  choices:
+    - id: write
+      text: Write to his da yourself, tonight.
+      effects: [ { set: flag.pit_wrote_robson }, { war_ack: fallen } ]
+      text_after: |
+        You put that he didn't suffer, which you don't know. You put what he said about the army's
+        pigeons, that they were nowt special, because his da will know it's true.
+      next: "@war"
+    - id: leave_it
+      text: Leave it to the officer's letter. You can't.
+      effects: [ { war_ack: fallen } ]
+      next: "@war"
+
+- id: x_fallen_bell
+  chapter: front
+  title: Jim Bell
+  text: |
+    [if war.fallen_present]It happens {fallen_where}. Bell's talking, he's always talking, telling you what the owners will be making out of this one, and then he stops in the middle of a word, and sits down hard, surprised, with his mouth open on the rest of it.
+
+    "Hang on," he says. "Hang on, man." And that's the last thing Jim Bell ever says, and he'd have hated it, that it was nothing.[else]Somebody tells you at the water cart. Jim Bell. Killed {fallen_where}.
+
+    It's quiet in the bay without him. You never knew how much of the noise was his.[/if][if flag.told_bell_shut] You told him not here, not now. He asked you when, and you hadn't an answer.[/if][if flag.stood_with_bell] You think of him in the beer vat with the Herald held up out of the water, grinning.[/if]
+  choices:
+    - id: write
+      text: Write to his father at the lodge.
+      effects: [ { set: flag.pit_wrote_bell }, { war_ack: fallen } ]
+      text_after: |
+        You tell his father that Jim argued with everybody, sergeants and officers and the Germans
+        across the wire, and that he was right more often than they liked. His father will read
+        that out at the Miners' Hall. You know he will.
+      next: "@war"
+    - id: leave_it
+      text: Leave it. You'd never get it right.
+      effects: [ { war_ack: fallen } ]
+      next: "@war"
+
+- id: x_fallen_charlton
+  chapter: front
+  title: George Charlton
+  text: |
+    [if war.fallen_present]It happens {fallen_where}. Charlton goes down and curls up small on his side, and calls out, not for his mam, for the pony, for Captain, the way he'd call him in the dark of the stables to come up.
+
+    You hold on to him. He's not frightened, that's the strange thing. He's talking to the pony, low, steady, the way he talked to the mules, and he's still doing it when he goes.[/if][if !war.fallen_present && flag.pit_helped_charlton]The transport sergeant comes up himself to tell you, which nobody expected. George Charlton, killed {fallen_where}. The sergeant stands there turning his cap in his hands. "Best lad with a horse I ever had," he says. "Best I ever had."[/if][if !war.fallen_present && !flag.pit_helped_charlton]You hear it at the ration dump, in the dark. George Charlton, killed {fallen_where}. The man who tells you says it quickly, to get it said, and goes, and you stand there thinking of the pony stables.[/if]
+
+    He was the gentlest of all of you. He used to carry his pony's bait down the shaft in his own pocket.
+  choices:
+    - id: write
+      text: Write to Mrs Charlton. Tell her about the mules.
+      effects: [ { set: flag.pit_wrote_charlton }, { war_ack: fallen } ]
+      text_after: |
+        You tell her about the mule that leaned on him in the dark like Captain used to, and how he
+        saved his crusts. You tell her he wasn't frightened, which is the only thing you know for
+        certain.
+      next: "@war"
+    - id: leave_it
+      text: Leave it. She'll have the official letter.
+      effects: [ { war_ack: fallen } ]
+      next: "@war"

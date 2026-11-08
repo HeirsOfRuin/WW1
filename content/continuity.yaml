@@ -13,6 +13,9 @@ rules:
   - { match: "Duckworth (teaches the cat|has a sweep|gets his mouth|adopts one|looks at him like|starts to tell|says, licking)|You and Duckworth eat", allow: war.mate2, why: Harry Duckworth only acts while alive (1918) }
   - { match: "Pilling's a corporal now|Pilling's telling|Pilling sees you|Pilling's is half a page|Pilling stands in the road", allow: war.mate3, why: Walter Pilling only acts while alive (1918) }
   - { match: "Shaw's is on top|Shaw's had a new photograph|Shaw sits down in the road|Shaw says, flat", allow: war.mate1, why: Albert Shaw only acts while alive (1918) }
+  - { match: "Robson's not looking|Robson's beside you, digging|Robson\n? *stares|Robson finds it|Robson listens to all", allow: war.mate1, why: Tommy Robson only acts while alive }
+  - { match: "Bell's in the vat|Bell grins at|Bell looks at you a long|Bell says he came out|Our Jim says you stood", allow: war.mate2, why: Jim Bell only acts while alive }
+  - { match: "Charlton has been on a mule|Charlton's taken to going|Mrs Charlton has had a letter from George|Mrs Charlton asks if George", allow: war.mate3, why: George Charlton only acts while alive }
   - match: "All nine of the section"
     allow: "war.section == 9"
     why: The whole section alive only while all nine are.

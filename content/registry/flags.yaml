@@ -56,3 +56,23 @@ told_jack_truth: { description: "Wrote to his brother Jack what it is like" }
 told_jack_easy: { description: "Wrote to his brother Jack that it is not so bad" }
 walked_old_ground: { description: "Walked out on the old 1 July ground in August 1918" }
 promised_shaw: { description: "Promised Shaw he would get him home to see his son walk" }
+# The pit town, 1915 (content/scenes/war/1915-pit.yaml, pit-friends.yaml)
+pit_first_night: { description: "The pit's first night (Robson hears them digging) has been played; chains the events" }
+pit_reported: { description: "Reported the tapping under the trench; the bay was thinned before the mine went up" }
+pit_letter: { description: "The pit's 1915 letter from home has come (chains the events)" }
+pit_wrote_home: { description: "Answered the pit letter properly; the leave remembers" }
+pit_postcard: { description: "Answered with a field postcard; his father reads it out at leave" }
+pit_saw_loft: { description: "Stayed at the army pigeon loft with Robson; his da laughs at leave" }
+stood_with_bell: { description: "Stood by Jim Bell in the baths over the Welsh strike" }
+told_bell_shut: { description: "Told Jim Bell to give it a rest" }
+pit_mine: { description: "The German mine has gone up four bays along (the tunnellers' officer knows of it)" }
+pit_dug_out: { description: "Dug for the buried men in the mine crater; a pint at the club at leave" }
+pit_held_lip: { description: "Held the crater lip while others dug" }
+pit_roll: { description: "The pit's roll call after Loos (the tokens) has been played" }
+pit_spoke_at_roll: { description: "Answered at roll call for the men he saw fall (pit)" }
+pit_silent_at_roll: { description: "Kept what he saw (pit)" }
+pit_helped_charlton: { description: "Put a word in for Charlton with the transport sergeant" }
+pit_kept_charlton: { description: "Told Charlton the section needed him" }
+pit_wrote_robson: { description: "Wrote to Robson's da; he gives you a bird at leave" }
+pit_wrote_bell: { description: "Wrote to Bell's father at the lodge" }
+pit_wrote_charlton: { description: "Wrote to Mrs Charlton about the mules" }

@@ -32,6 +32,7 @@ answers (`docs/KILLGATE.md`, 2026-11-09). Design: `docs/DESIGN.md`, draft for ap
 | 2026-11-09 | Playtest 1: a Soldier tab (skills, traits, awards, career, rank, friends, rivals); prose with the depth of a book or a life; missions played out, not go or stay (sorties; the prototype retired) | "The game needs a character tab that tracks skills, traits, awards, career, rank, friends, rivals, etc. The narrative prose needs more depth. I want it to have a touch of a book or life about it. Not just snapshots over weeks. There needs to be more actions and playing out missions. Just taking whether you go or not is no fun" |
 | 2026-11-09 | The story leads: a general playthrough (volunteering half the time) should be about half story, half generic missions. Each tour opens on its own page; a duty is offered on 60% of tours; ordered duties play out off-screen (FRAME-STORY.md) | "I think we will set it up to follow a story more so than just just playing generic missions. Have a general play through (only volunteering half the time) to split between story and generic missions 50/50" |
 | 2026-11-09 | Write 1918 for the mill town: the Spring Offensive, Amiens, October, the Armistice; the platoon officer's path; the friends' threads closed (FRAME-1918.md) | "Go ahead" |
+| 2026-11-09 | The pit town's opening and 1915: the Miners' Hall, Robson, Bell and Charlton, the tapping and the mine, Loos across a coalfield, the first leave, the tunnellers' offer (FRAME-PIT-1915.md) | "Go ahead" |
 
 ## Pitch
 

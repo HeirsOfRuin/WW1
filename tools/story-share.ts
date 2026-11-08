@@ -9,7 +9,7 @@ import { POLICIES, decideFor, battleOf } from '../src/game/war/index';
 
 /** Generic: the war's own questions and missions. Everything else is story. */
 export function kindOf(id: string): 'story' | 'generic' {
-  if (id === 'w_tour') return 'story'; // the tour's passage of the year
+  if (id === 'w_tour' || id === 'w_tunnel_pit') return 'story'; // the tour's passage of the year; the pit's written offer
   if (/^(w_|s_)/.test(id) || /^x_(raid|patrol|wiring|listening|carrying|bomb|lewis|snipe|signals|tunnel)_done$/.test(id) || id === 'x_sortie') return 'generic';
   return 'story';
 }

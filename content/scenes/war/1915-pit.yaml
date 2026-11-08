@@ -1,0 +1,487 @@
+# The pit town, 1915 (docs/FRAME-PIT-1915.md), written to the voice in content/style-guide.md.
+# Blackhaugh, a Northumberland pit village. Three written friends: Tommy Robson, your marra at the
+# face, a pigeon man who says nothing; Jim Bell, the union man, who says everything; George
+# Charlton, the pony driver. Events come from the pool front_1915_pit on the tour page, once each,
+# in the order their flags chain. Stage 1 is tours 1 to 9; Loos is tour 7.
+
+# ---- events -----------------------------------------------------------------------------------
+
+- id: v_pit_first_night
+  chapter: front
+  kind: pool
+  pool: front_1915_pit
+  once: true
+  on_enter: [ { set: flag.pit_first_night } ]
+  title: First night in the line
+  text: |
+    Up the communication trench in the dark, single file, the boards rocking under your boots and
+    water slopping under the boards. Then the firestep, and your rifle, and the dark.
+
+    You've been in darker places. Two hundred fathoms down with your lamp out, that's dark. This is
+    different. Underground the dark keeps still. This dark moves. A flare goes up and hangs, white,
+    and everything stops, the wire and the posts and a tree with no top, and then the flare dies and
+    it all moves again.
+
+    The trench stinks of chloride of lime, and under the lime of something sweet.
+
+    [if war.mate1]Robson's not looking over the parapet. He's down on his knees on the duckboards with his ear flat to the trench wall, the way he'd listen to the roof at the face. He stays like that a long time. Then he looks up at you.
+
+    "They're working," he says. "Under us. Can you not hear it?"
+
+    You put your ear where his was. Wet clay, cold on your cheek. And then, so faint you think it's your own blood, a tap. A wait. A tap.[else]Somebody along the bay is down on his knees with his ear to the trench wall, the way a man listens to the roof at the face. "They're working," he says. "Under us." You put your ear to the clay. Wet, cold. A tap. A wait. A tap.[/if]
+  choices:
+    - id: report
+      text: Go and tell the officer. Now, tonight.
+      effects: [ { set: flag.pit_reported } ]
+      text_after: |
+        The officer is twenty, with a moustache he's still growing, and he hears you out in the
+        dugout by a candle. He doesn't laugh. He writes it down, the bay number and the time, and
+        says he'll pass it up. "You're colliers," he says. "You'd know." You don't know whether he
+        believes it or just wants you out of his dugout.
+      next: "@return"
+    - id: leave_it
+      text: Leave it. Who's going to listen to a private?
+      text_after: |
+        You stand your sentry and try not to listen, and listen anyway, all night, the way you'd
+        listen to a bad roof, waiting for the crack that comes before it goes.
+      next: "@return"
+
+- id: v_pit_letter
+  chapter: front
+  kind: pool
+  pool: front_1915_pit
+  once: true
+  requires: [ "war.tour >= 2", flag.pit_first_night ]
+  on_enter: [ { set: flag.pit_letter } ]
+  title: A letter from home
+  text: |
+    The post comes up with the rations after dark. A parcel for you in brown paper, smelling of the
+    kitchen when you open it: a cake wrapped in a bit of cloth, socks, a quarter of black bullets
+    from the Store, and a tin of the ointment your father uses on his hands.
+
+    And a letter, in pencil, two sides.
+
+    "Dear Son, I hope this finds you well as it leaves us at present. Your father is on fore shift
+    and his chest is no better but he will not go to the doctor. The manager has been round the
+    rows asking the lads not to go for soldiers, he says coal is war work and they are short at
+    the face, and your father says it is a bit late for that. [if war.mate1]Old Mr Robson says to tell Tommy the young birds are flying well and he took first at Bedlington with the blue hen.[else]Old Mr Robson has not been out to his birds since the telegram. Mrs Robson lets them out of a morning and stands and watches them go round.[/if] Keep your feet dry. Your loving Mother."
+  choices:
+    - id: write
+      text: Write back tonight, two sides, by a candle end.
+      effects: [ { set: flag.pit_wrote_home } ]
+      text_after: |
+        You tell her the cake came whole. You tell her the French have pits too, with the winding
+        towers just like at home, and you can see them on a clear day from the support line. You
+        tell your father to go to the doctor, which he won't, and you know it.
+      next: "@return"
+    - id: postcard
+      text: Send the field postcard. Cross out what doesn't apply.
+      effects: [ { set: flag.pit_postcard } ]
+      text_after: |
+        I am quite well. Letter follows at first opportunity. You strike out the rest. The black
+        bullets you share round the bay, and the lads suck them on sentry, and the whole trench
+        smells of aniseed for a night.
+      next: "@return"
+
+- id: v_pit_pigeons
+  chapter: front
+  kind: pool
+  pool: front_1915_pit
+  once: true
+  requires: [ "war.tour >= 3", flag.pit_letter, war.mate1 ]
+  title: The loft
+  text: |
+    Behind the lines there's an army pigeon loft on the back of a lorry, painted grey, and a
+    sapper corporal who looks after the birds and talks to them the way men talk to dogs.
+
+    Robson finds it the first afternoon at rest. You find him there, stood at the wire mesh with his
+    hands in his pockets, watching the birds walk up and down. He doesn't say anything for a long
+    while. The loft smells of corn and droppings and warm feathers, of Saturday afternoons in his
+    da's cree at the end of the rows.
+
+    "They're nowt special," he says at last. "Me da's got better at home." Then: "He'll
+    be out to them now. Clocking them in."
+  choices:
+    - id: stay_with_him
+      text: Stay with him and talk birds with the corporal.
+      effects: [ { set: flag.pit_saw_loft } ]
+      text_after: |
+        The corporal lets Robson hold one, a blue chequer cock, and Robson turns it over in his big
+        hands, gentle, opening a wing with one finger, and tells the corporal what's wrong with it,
+        and the corporal agrees. Walking back, Robson says more words in a row than you've had out
+        of him since the cage.
+      next: "@return"
+    - id: leave_him
+      text: Leave him to it. He'll want it to himself.
+      text_after: |
+        You go back to the barn. He comes in after dark and lies down on the straw without a word,
+        and smells of the loft, and goes straight to sleep, the first time you've seen him sleep
+        easy since the boat.
+      next: "@return"
+
+- id: v_pit_baths
+  chapter: front
+  kind: pool
+  pool: front_1915_pit
+  once: true
+  requires: [ "war.tour >= 4", "war.tour <= 5", flag.pit_letter, war.mate2 ]
+  title: The baths
+  text: |
+    Baths, at a brewery behind the lines: the big vats filled with hot water, ten men to a
+    vat, steam up to the rafters and the whole place smelling of old beer and carbolic and men.
+    You get your uniform back from the fumigator still warm, and the lice in the seams are
+    sleeping, not dead.
+
+    Bell's in the vat with you, up to his chest, a newspaper held up out of the water. The Herald,
+    a week old.
+
+    "The Welsh lads came out," he says. "Two hundred thousand of them, in July. They called them
+    traitors in the Commons." He folds the paper so you can see. "The owners are making more out of
+    coal than they ever made, and the Welsh lads asked for their share, and they're traitors." His
+    voice is getting louder. "First bath the army's given us. You know what? It's the first bath
+    I've had at work in my life. The owners never gave us one."
+
+    A sergeant from another company, in the next vat, tells him to shut his mouth or he'll shut it
+    for him.
+  choices:
+    - id: stand_by
+      text: Stand by Bell. He's not wrong.
+      effects: [ { set: flag.stood_with_bell } ]
+      text_after: |
+        You say it, loud enough. The sergeant looks at the pair of you, two pitmen up to your necks
+        in a beer vat, and laughs, and says, "Geordie agitators," and turns his back. Bell grins at
+        you through the steam like a lad who's just won at quoits.
+      next: "@return"
+    - id: shut_him
+      text: Tell Bell to give it a rest. Not here.
+      effects: [ { set: flag.told_bell_shut } ]
+      text_after: |
+        "Not here," you say. "Not now." Bell looks at you a long time with the water dripping off
+        his nose. Then he folds the paper away. "When, then?" he says. You haven't an answer for
+        him, and he knows it.
+      next: "@return"
+
+- id: v_pit_mine
+  chapter: front
+  kind: pool
+  pool: front_1915_pit
+  once: true
+  weight: 50
+  requires: [ "war.tour >= 4", flag.pit_first_night ]
+  on_enter: [ { set: flag.pit_mine } ]
+  title: The mine
+  text: |
+    It goes up at stand-to, in the grey, four bays along. You feel it before you hear it: the
+    firestep lifts under your boots like the cage when it takes the weight, and then the noise,
+    and then the earth comes down, clods of it, stones, sandbags, a boot, rattling on your helmet
+    like hail on a tin roof. Where the bay was there's a crater you could put the chapel in, still
+    smoking, stinking like the shot-firer's smoke after a round at the face, a hundred times over.
+
+    [if flag.pit_reported]They'd listened. Two sappers came up a week back with a thing like a doctor's stethoscope and lay on the floor of that bay for a whole night, and the next day the bay was thinned out to two sentries.[else]Nobody listened, because nobody told them. The bay was full. Eight men.[/if]
+
+    Men are buried in it. You can hear one of them.
+
+    And across the way, their whistles. They'll be coming for the crater lip.
+  choices:
+    - id: dig
+      text: Get in the crater with a shovel. Dig for the buried men.
+      effects: [ { set: flag.pit_dug_out } ]
+      text_after: |
+        It's a fall. That's all it is, a fall, and you know what to do in a fall: you dig with your
+        hands near the face so you don't take a man's head off with the shovel, and you listen,
+        and you shout to him to keep shouting. [if war.mate1]Robson's beside you, digging like a machine. [/if]You get one out alive, grey with earth, his mouth full of it, and you clear it with your finger like you would at the pit. The rest you get out later.
+      next: "@return"
+    - id: hold
+      text: Get up on the crater lip with your rifle. Hold it.
+      effects: [ { set: flag.pit_held_lip } ]
+      text_after: |
+        You lie on the loose earth of the lip, warm from the blast, and fire into the grey till
+        your shoulder's numb. They don't get the crater. Behind you, under you, the diggers work,
+        and you can hear the man still shouting, and then you can't.
+      next: "@return"
+
+- id: v_pit_eve_loos
+  chapter: front
+  kind: pool
+  pool: front_1915_pit
+  once: true
+  weight: 100
+  requires: [ "war.tour == 6" ]
+  title: Moving up
+  text: |
+    Three nights of marching in the rain, never in daylight, and on the third morning you come up
+    into the assembly trenches and look over, and it's home.
+
+    It's a coalfield. Pit heads, winding gear, the big black slag heaps, rows of little brick
+    houses with their backs to the pits. Over the village they're to take stand two great winding
+    towers side by side, iron, joined at the top. The lads are calling it Tower Bridge. [if war.mate1]Robson
+    stares at it a long time. "Like gannin' to work," he says.[/if][if !war.mate1]Somebody says it's like going to work, and nobody laughs.[/if]
+
+    Along the parapet, under sacking, the gas cylinders. Nobody's to say the word.
+
+    [if war.mate3]Charlton has been on a mule party all night, bringing the cylinders up, and he comes in with his hands stinking of mule and his eyes shining, because they were good mules, he says, they never once played up, and one of them leaned on him in the dark like old Captain used to in the stables.[/if]
+
+    The company sergeant major comes round with pay books. If you want to write anything, now's
+    the time.
+  choices:
+    - id: last_letter
+      text: Write a letter and leave it in your pay book.
+      effects: [ { set: flag.last_letter } ]
+      text_after: |
+        You don't know what to put. In the end you put that your father is to go to the doctor about
+        his chest, and that your pit boots are to go to whoever needs them, and that you love them.
+        You've never said that in that house. You fold it small.
+      next: "@return"
+    - id: no_letter
+      text: Leave it. Writing one is asking for it.
+      text_after: |
+        You leave it. You eat your bait instead, bully and a biscuit, and save the last bit of
+        your mother's cake for after, because there has to be an after if there's cake waiting for it.
+      next: "@return"
+
+- id: v_pit_roll
+  chapter: front
+  kind: pool
+  pool: front_1915_pit
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 8" ]
+  on_enter: [ { set: flag.pit_roll } ]
+  title: The tokens
+  text: |
+    At the pit, going down, you hand your token in at the lamp cabin, a little brass disc with
+    your number on, and it goes on the board. Coming up, you take it back. At the end of a shift,
+    any token still on the board is a man still down. Every bairn in the rows knows what it means
+    when the women go and stand at the lamp cabin and look at the board.
+
+    They form what's left of the battalion up in a field behind the old line, in the rain, and the
+    sergeant major reads the roll, and you stand there and watch the tokens left on the board.
+
+    [if war.mate1]"Robson." "Here, sir." Low and flat, the way he says everything.[else]"Robson." Nothing. "Robson, T." The rain on the caps.[/if]
+    [if war.mate2]"Bell." "Here, sir," and you can hear in it that he's got something to say after, and will.[else]"Bell." Nothing. For once in his life Jim Bell has nothing to say.[/if]
+    [if war.mate3]"Charlton." "Here." He's shaking. He's been shaking since Saturday.[else]"Charlton." Nothing. You think of the pony stables, and the ponies, and who'll tell them.[/if]
+  choices:
+    - id: answer
+      text: Answer for the men you saw fall, when their names come.
+      effects: [ { set: flag.pit_spoke_at_roll } ]
+      text_after: |
+        "Killed, sir. I saw him." The sergeant major makes his mark. You think of the women at the
+        lamp cabin, and that this is the same, only the board is in France and the women don't
+        know yet.
+      next: "@return"
+    - id: stay_silent
+      text: Say nothing. Let somebody else tell it.
+      effects: [ { set: flag.pit_silent_at_roll } ]
+      text_after: |
+        Somebody else does, or nobody does, and the names go down as missing. You keep what you
+        saw. It sits in you like stone dust.
+      next: "@return"
+
+- id: v_pit_horses
+  chapter: front
+  kind: pool
+  pool: front_1915_pit
+  once: true
+  requires: [ "war.tour >= 8", flag.pit_roll, war.mate3 ]
+  title: The transport lines
+  text: |
+    Charlton's taken to going down to the transport lines when you're at rest. The horses and
+    mules stand in a field of mud in long rows, steaming, with their rugs on, and Charlton walks
+    up and down the rows with his hands in their manes and talks to them. The transport sergeant's
+    noticed. He's short of drivers.
+
+    "I could do it," Charlton says. "I could. I was the best driver at the pit, everybody says.
+    Captain would go for nobody else." He's looking at you as if it's yours to give. "Only it's
+    leaving the section. It's leaving you lot."
+  choices:
+    - id: go
+      text: Tell him to go. Put a word in with the sergeant.
+      effects: [ { set: flag.pit_helped_charlton } ]
+      text_after: |
+        The transport sergeant looks Charlton over and says he'll ask. Charlton walks back up the
+        road beside you with his hands in his pockets, whistling, and stops twice to look back at
+        the horse lines, as if they might not be there.
+      next: "@return"
+    - id: stay
+      text: Tell him the section needs him. It does.
+      effects: [ { set: flag.pit_kept_charlton } ]
+      text_after: |
+        "Aye," he says. "Aye, I know." He goes on going down to the horse lines at rest, every
+        time, with his pockets full of crusts saved off his own bread.
+      next: "@return"
+
+# ---- Loos, for the pit company: a coalfield --------------------------------------------------
+
+- id: b_loos_pit_advance
+  chapter: front
+  title: Loos
+  text: |
+    Rum at five, from a stone jar, a tot in the lid of your mess tin. It goes down like hot
+    coals and sits there.
+
+    At ten to six the gas goes over. A hiss all down the line, like the compressed air when they
+    open the valve on the haulage, and then the cloud, white and greenish, leaning towards their
+    wire. Some of it comes back along the trench. Pepper and pineapple and a bite under it that
+    gets in your throat like bad air in an old working. You pull the hood down. Wet flannel, the
+    stink of the chemical, your own breath going hot against the little window.
+
+    Through the eyepiece, through the smoke, the winding towers.
+
+    Half past six. The guns stop.
+
+    Beside you on the ladder is {mate}. In the hood his breath goes in and out, in and out, and
+    you think of the cage at the top of the shaft, the gate going across, the drop.
+
+    [if war.stalled]You get your head over the top. The first wave is lying down in rows in the grass, too straight, and in front of them their wire is standing whole.[else]You get your head over the top. The first wave is walking into the smoke towards the pit heaps with their rifles at the port, and nobody's falling yet.[/if]
+  choices:
+    - id: push
+      text: "Over the top. Walk with the wave. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Go up with {mate}. Stay at his shoulder. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Over, and straight down into the first shell hole. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_loos_pit_trench
+  chapter: front
+  title: Loos
+  text: |
+    Their front line, chalk and grey men, and then the village beyond it, and it's a pit village.
+    Rows of little brick houses, back to back, with their yards and their wash-houses and their
+    netties at the bottom, the same as Blackhaugh, only smashed. A woman's apron on a line. A
+    birdcage in a window with no glass.
+
+    The Germans are in the cellars. You go along the rows, house by house, and the bombs go down the
+    cellar steps, and the cellars cough smoke and plaster dust, and sometimes men.
+
+    [if war.stalled]A machine gun in the end house opens up straight down the row, and the bombers go flat in the yards, and don't get up, and the row is theirs again.[else]The sergeant's lost his hood and half his ear. "Down the row! Clear the cellars! Go on, go on!"[/if]
+  choices:
+    - id: push
+      text: "Down the row after the bombers. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Stay with {mate}. Watch his back at the doors. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down in a yard behind the wash-house wall. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_loos_pit_hold
+  chapter: front
+  title: Loos
+  text: |
+    By the afternoon you're dug in at the foot of a slag heap, and the rain's come on. The heap's
+    been burning inside for years, the way they do, and where the shells have opened it the smoke
+    comes out yellow and stinking of sulphur, the smell of the pit heap at home on a wet night, so
+    strong you could cry.
+
+    Nobody's brought water. The gas has left a taste like sucking a penny.
+
+    They're on the top of the heap. They've been there all along. And now they're coming down it.
+  choices:
+    - id: push
+      text: "Stand up and fire up the heap at them. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Keep {mate} fed with clips. Stay low beside him. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down in the slag and fire from cover. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- the first leave, December 1915 ---------------------------------------------------------------
+
+- id: l_pit_1915
+  chapter: front
+  title: Home on leave
+  text: |
+    The last train up the branch line, and the dark, and the pit heap glowing red on the skyline
+    where it's been burning since your grandfather's time, and then the smell of it through the
+    carriage window, sulphur and smoke, and you have to put your face against the glass.
+
+    The rows are dark. The buzzer goes for the night shift while you're walking up from the station,
+    and you stop dead in the street, because you haven't heard it in seven months, and it sounds
+    like a shell coming.
+
+    Your mother has the set-pot boiling before you're through the door. She doesn't say anything.
+    She puts the tin bath in front of the fire, the way she has for your father every day of his
+    life, and you get in it, and she washes your back, which she's not done since you were small,
+    and the water goes grey with France. [if flag.pit_wrote_home]Your letter's on the mantel behind the tea caddy, with your father's pay notes.[/if][if flag.pit_postcard]The field postcard is on the mantel. "Quite well," your father says, from his chair, and coughs, and says it again. "Quite well."[/if][if !flag.pit_letter]"You might have written," she says, to the set-pot.[/if]
+
+    Your father coughs half the night through the wall. He's still on the fore shift.
+
+    [if war.mate1]On the Saturday old Mr Robson takes you down to his cree at the end of the rows and shows you the young birds, one at a time, and asks after Tommy. You tell him Tommy's well.[/if][if war.mate1 && flag.pit_saw_loft] You tell him what Tommy said about the army's birds. The old man laughs out loud, the first time anybody can remember. "Nowt special," he says. "Nowt special. That's my lad."[/if][if !war.mate1]The Robsons' blinds are down. Old Mr Robson's birds are still flying. He lets them out every morning and stands in the yard and watches them go round, and doesn't clock them in.[/if][if !war.mate1 && flag.pit_wrote_robson] He's had your letter. He doesn't say anything about it. He gives you a bird to take back, a blue hen, in a basket, and you can't tell him they'd never let you.[/if]
+
+    [if war.mate2 && flag.stood_with_bell]At the Miners' Hall on the Sunday, Bell's father, who's on the lodge committee, shakes your hand in front of everybody. "Our Jim says you stood up for him," he says. "In a beer vat." The whole hall laughs.[/if][if war.mate2 && flag.told_bell_shut]At the Miners' Hall, Bell's father asks after Jim, and you tell him Jim's well, still talking. "Aye," he says. "He would be. Somebody has to."[/if][if !war.mate2]Bell's father is on the lodge committee. He gets up at the Miners' Hall on the Sunday and starts to say something about his lad, and can't, and sits down.[/if][if !war.mate2 && flag.pit_wrote_bell] He keeps your letter in his jacket. He reads bits of it to men in the club who never asked.[/if]
+
+    [if war.mate3 && flag.pit_helped_charlton]Mrs Charlton has had a letter from George. He's with the horses. She reads it to you on the step, all of it, and it's all horses, a page and a half about a mule called Jerusalem, and nothing at all about the war, and she's never been so happy.[/if][if war.mate3 && !flag.pit_helped_charlton]Mrs Charlton asks if George is eating. You tell her he gives his crusts to the mules. She laughs, and says that's him, that's him.[/if][if war.mate3 && flag.pit_kept_charlton] You told him the section needed him more than the horses did. You don't tell her that.[/if][if !war.mate3]Down at the pit stables, the old horse-keeper tells you Captain's not been right since George went. He doesn't know about George yet. You don't tell him.[/if][if !war.mate3 && flag.pit_wrote_charlton] Mrs Charlton has your letter. She's put it in the Bible.[/if]
+
+    [if flag.pit_dug_out]At the club a man from the next row stands you a pint and won't say why. Later somebody tells you: his cousin was the one you dug out of the crater, and wrote home about it.[/if][if flag.pit_held_lip]In the club they've heard about the mine. Everybody wants to know about the mine, and they're pitmen, and they all know what a fall is, so you don't have to tell them much.[/if]
+
+    [if flag.pit_spoke_at_roll]On the Sunday a woman from the far end of the rows stops you on the chapel steps. "You were the one who said about our Ned," she says. "They wrote that he never knew." She holds your hand in both of hers. You don't remember if he knew. You say he didn't.[/if][if flag.pit_silent_at_roll]In the Store a woman is saying that her lad's only missing, that missing means taken, he'll turn up. You saw. You buy your father's baccy and go out without your change.[/if]
+
+    At night you lie in your own bed and listen for the roof.
+
+    {offers_line}
+  choices:
+    - id: back
+      text: Go back on the tenth day. The battalion promotes the men who return.
+      effects: [ { war: back } ]
+      next: "@war"
+    - id: commission
+      text: Go before the board for a commission.
+      visible_if: war.commission
+      effects: [ { war: commission } ]
+      next: "@war"
+    - id: posting_0
+      text: "Take it: {offer0}. Your war ends here."
+      visible_if: "war.offers >= 1"
+      effects: [ { war: "posting:0" } ]
+      next: "@war"
+    - id: posting_1
+      text: "Take it: {offer1}. Your war ends here."
+      visible_if: "war.offers >= 2"
+      effects: [ { war: "posting:1" } ]
+      next: "@war"
+    - id: posting_2
+      text: "Take it: {offer2}. Your war ends here."
+      visible_if: "war.offers >= 3"
+      effects: [ { war: "posting:2" } ]
+      next: "@war"
+
+# ---- the tunnellers' offer, January 1916 (war.ts: pending tunnel, a pit man with digging) --------
+
+- id: w_tunnel_pit
+  chapter: front
+  title: The tunnellers
+  text: |
+    A Royal Engineers officer comes to the billet in the new year with a list. He's not like the
+    infantry officers. He's got clay on his boots up to the ankle and he talks like a mining
+    engineer, because that's what he was, and he wants colliers.
+
+    Six shillings a day, against your shilling. Work you know: picks, timber, pumps, air,
+    listening. The tunnellers don't go over the top. They go under it.
+
+    [if flag.pit_reported]"Somebody in this company heard them digging last summer," he says, "and told his officer, and we had that bay down to two sentries before it went." He looks round the barn. You keep quiet.[/if][if flag.pit_mine && !flag.pit_reported]"You'll have seen what a mine does," he says. "Last summer, four bays along. Eight men. That's what we're for."[/if]
+
+    [if war.mate1]Robson listens to all of it with his arms folded. "It's the face," he says to you after. "Only the face, with Germans at the far end of it." He doesn't put his name down. "I'm stopping with the lads," he says. "Somebody has to."[/if][if war.mate2] Bell says he came out to fight Germans, not to dig for them, and he's not leaving the section.[/if]
+  choices:
+    - id: transfer
+      text: Go to the tunnellers. You'll leave the section.
+      effects: [ { war: transfer } ]
+      next: "@war"
+    - id: stay
+      text: Stay with the men from home.
+      effects: [ { war: stay } ]
+      next: "@war"

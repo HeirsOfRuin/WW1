@@ -55,8 +55,7 @@
     has seen one. Everybody knows the Germans have men to spare now, and that they'll come in the
     spring.
 
-    You're {rank_a}. {section_line} You can't remember the shed, some days. You can remember
-    the noise of it. You can't remember your mother's face without the photograph.
+    You're {rank_a}. {section_line} [if start == mill]You can't remember the shed, some days. You can remember the noise of it.[/if][if start == pit]You can't remember the pit, some days. You can remember the dark of it, and the smell of the lamp.[/if][if start == city]You can't remember the office, some days. You can remember the scratch of the pens.[/if][if start == farm]You can't remember the farm, some days. You can remember the smell of the byre on a winter morning.[/if] You can't remember your mother's face without the photograph.
   choices:
     - id: on
       text: Go back up the line.

@@ -44,24 +44,45 @@
 - id: c_enlist_pit
   chapter: enlist
   checkpoint: true
-  title: The recruiting office
+  title: The Miners' Hall
   text: |
-    You are {age}. The colliery band played the first lot to the station.
-    The manager says coal is war work too, but the queue at the welfare hall is longer than the
-    shift at the pithead.
+    The queue comes out of the Miners' Hall door and goes down past the Store and the Primitive
+    Methodist chapel nearly to the pit gates, and behind it the winding wheel's still turning,
+    because the fore shift isn't up yet. When they do come up they come straight over, black to the
+    eyes, bait tins under their arms, and join the end of it, and nobody tells them to go home and
+    wash first.
+
+    The colliery band played the first lot to the station in August. They're not playing today.
+    They're in the queue.
+
+    The street smells of the pit on a hundred men: coal dust and wet pit clothes and sweat, and
+    over it all the sulphur off the heap that's been burning since before you were born. There's a
+    blue mark on every forehead and every set of knuckles, where the coal got into a cut and healed
+    in.
+
+    The manager came down this morning in his good coat and said coal was war work too. Jim Bell
+    asked him if coal would pay the widows, and the manager went red and went home.
+
+    "Age?"
+
+    "Just gone {age_words}, sir."
+
+    Tommy Robson's in front of you, your marra at the face these two years, saying nothing, which
+    is how Tommy says most things. George Charlton's behind you, still smelling of the stables,
+    because he went down the pit last night to tell his pony he was going.
     [break]
-    What you bring from underground is what you will have out there.
+    What you bring from underground is what you'll have out there.
   choices:
     - id: pick_0
-      text: "Bring digging and timbering, and stamina from a long working day."
+      text: Digging and timbering, and a back for a long shift.
       effects: [ { war_home: [dig, stamina] } ]
       next: c_general
     - id: pick_1
-      text: "Bring digging and timbering, and a hand with machinery."
+      text: Digging and timbering, and a hand with the engines and the pumps.
       effects: [ { war_home: [dig, mech] } ]
       next: c_general
     - id: pick_2
-      text: "Bring stamina from a long working day, and a hand with machinery."
+      text: A back for a long shift, and a hand with the engines and the pumps.
       effects: [ { war_home: [stamina, mech] } ]
       next: c_general
 
@@ -146,7 +167,7 @@
     one day you don't.
 
     You learn to sleep anywhere. You learn to eat anything. You learn the men from home all over
-    again, the way you never knew them in the shed: who snores, who cries, who shares.
+    again, the way you never knew them [if start == mill]in the shed[/if][if start == pit]at the face[/if][if start == city]across the office[/if][if start == farm]in the fields[/if]: who snores, who cries, who shares.
 
     In May the orders come. France.
 

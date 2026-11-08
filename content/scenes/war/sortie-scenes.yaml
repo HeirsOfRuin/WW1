@@ -119,7 +119,7 @@
 
     No man's land at night isn't empty and isn't quiet. Rats. A tin rolling in the wind. Somewhere
     out to the left a wounded man from last week, or a cat, or the wind in the wire.[/if][if war.stake == 1]The sunken road again, a corporal and {mate} and you, to see what they've done to their wire since.
-    Fog tonight, thick as the shed on a damp morning, so you can't see the man in front,
+    Fog tonight, [if start == mill]thick as the shed on a damp morning[/if][if start == pit]thick as the reek off the pit heap on a wet night[/if][if start == city || start == farm]thick as wet wool[/if], so you can't see the man in front,
     only hear the creak of his webbing and his breath going in and out.
 
     The fog tastes of coal smoke from somewhere far off, which makes no sense out here.[/if]

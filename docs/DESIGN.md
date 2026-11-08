@@ -486,6 +486,10 @@ story` measures the share: 53.6% story for a player who volunteers half the time
 per path (the platoon officer included), and the mill town's own Armistice ending. The 1918
 story share went from 25.4% to 51.8%.
 
+**The pit town, 1915 (FRAME-PIT-1915.md).** The second town written: enlistment, nine events,
+its own Loos, the leave, the tunnellers' offer, and three friends' deaths. Pit 1915 story share
+49.0% to 61.3%. The town structure carried over without a code change.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.
