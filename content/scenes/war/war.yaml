@@ -1,0 +1,350 @@
+# Phase 1 placeholder content: character creation, one scene per question the war asks, and
+# the endings. Plain words, period-true; the voice is settled at calibration (DESIGN §13).
+# Every decision scene's choices run one `war:` effect and then follow the same route (&route):
+# to the scene for the war's next question, or to the ending. The route is defined once, on the
+# first decision below, and reused with *route.
+
+- id: c_enlist_mill
+  chapter: enlist
+  checkpoint: true
+  title: The recruiting office
+  text: |
+    You are {age}. The mill has let the men go to enlist and promised the jobs
+    back. Half your street is in the queue at the drill hall, and they are taking the whole street
+    together, into one company.
+    [break]
+    What you bring from the mill is what you will have out there.
+  choices:
+    - id: pick_0
+      text: "Bring a hand with machinery, and stamina from a long working day."
+      effects: [ { war_home: [mech, stamina] } ]
+      next: c_general
+    - id: pick_1
+      text: "Bring a hand with machinery, and a chapel voice."
+      effects: [ { war_home: [mech, voice] } ]
+      next: c_general
+    - id: pick_2
+      text: "Bring stamina from a long working day, and a chapel voice."
+      effects: [ { war_home: [stamina, voice] } ]
+      next: c_general
+
+- id: c_enlist_pit
+  chapter: enlist
+  checkpoint: true
+  title: The recruiting office
+  text: |
+    You are {age}. The colliery band played the first lot to the station.
+    The manager says coal is war work too, but the queue at the welfare hall is longer than the
+    shift at the pithead.
+    [break]
+    What you bring from underground is what you will have out there.
+  choices:
+    - id: pick_0
+      text: "Bring digging and timbering, and stamina from a long working day."
+      effects: [ { war_home: [dig, stamina] } ]
+      next: c_general
+    - id: pick_1
+      text: "Bring digging and timbering, and a hand with machinery."
+      effects: [ { war_home: [dig, mech] } ]
+      next: c_general
+    - id: pick_2
+      text: "Bring stamina from a long working day, and a hand with machinery."
+      effects: [ { war_home: [stamina, mech] } ]
+      next: c_general
+
+- id: c_enlist_city
+  chapter: enlist
+  checkpoint: true
+  title: The recruiting office
+  text: |
+    You are {age}. The office manager shook your hand and said the firm would
+    make up your pay. The clerks are going together, a company of them, from desks all over the city.
+    [break]
+    What you bring from the office is what you will have out there.
+  choices:
+    - id: pick_0
+      text: "Bring reading and figures, and a bowler's throwing arm."
+      effects: [ { war_home: [lit, sport] } ]
+      next: c_general
+    - id: pick_1
+      text: "Bring reading and figures, and St John Ambulance first aid."
+      effects: [ { war_home: [lit, firstaid] } ]
+      next: c_general
+    - id: pick_2
+      text: "Bring a bowler's throwing arm, and St John Ambulance first aid."
+      effects: [ { war_home: [sport, firstaid] } ]
+      next: c_general
+
+- id: c_enlist_farm
+  chapter: enlist
+  checkpoint: true
+  title: The recruiting office
+  text: |
+    You are {age}. The harvest is in and the recruiting sergeant came out to the
+    village on a wagon. The squire's son is taking a commission; the rest of you are taking the shilling.
+    [break]
+    What you bring from the fields is what you will have out there.
+  choices:
+    - id: pick_0
+      text: "Bring fieldcraft and a shotgun, and stamina from a long working day."
+      effects: [ { war_home: [field, stamina] } ]
+      next: c_general
+    - id: pick_1
+      text: "Bring fieldcraft and a shotgun, and a hand with machinery."
+      effects: [ { war_home: [field, mech] } ]
+      next: c_general
+    - id: pick_2
+      text: "Bring stamina from a long working day, and a hand with machinery."
+      effects: [ { war_home: [stamina, mech] } ]
+      next: c_general
+
+- id: c_general
+  chapter: enlist
+  title: Before you go
+  text: |
+    One more thing you have that the army did not give you.
+  choices:
+    - id: firstaid
+      text: First aid. You took the St John Ambulance course at the works.
+      effects: [ { war_general: firstaid } ]
+      next: c_training
+    - id: sport
+      text: A throwing arm. You bowled for the town second eleven.
+      effects: [ { war_general: sport } ]
+      next: c_training
+    - id: voice
+      text: A voice. You sang in the chapel choir, and men listen when you speak.
+      effects: [ { war_general: voice } ]
+      next: c_training
+
+- id: c_training
+  chapter: enlist
+  title: Training
+  text: |
+    Eight months of drill, route marches and digging practice trenches in a field. The battalion
+    has its rifles by Christmas and its khaki by the spring. In May the orders come: France.
+    [break]
+    {section_line}
+  choices:
+    - id: embark
+      text: Go aboard.
+      effects: [ { war_run: true } ]
+      next: &route
+        switch:
+          - { if: "war.ending == killed", go: e_killed }
+          - { if: "war.ending == armistice", go: e_armistice }
+          - { if: "war.ending == posting", go: e_posting }
+          - { if: "war.ending == captured", go: e_captured }
+          - { if: "war.ending == invalided", go: e_invalided }
+          - { if: "war.ending == broken", go: e_broken }
+          - { if: "war.ending == court_martial", go: e_court }
+          - { if: "war.pending == tunnel", go: w_tunnel }
+          - { if: "war.pending == duty", go: w_duty }
+          - { if: "war.pending == mission", go: w_mission }
+          - { if: "war.pending == sick", go: w_sick }
+          - { if: "war.pending == course", go: w_course }
+          - { if: "war.pending == battle", go: w_battle }
+          - { if: "war.pending == leave", go: w_leave }
+        default: e_error
+
+- id: w_duty
+  chapter: front
+  title: A front-line tour
+  text: |
+    {tour_line}
+
+    The sergeant wants men for {duty_name} tonight. {friend_line}
+  choices:
+    - id: volunteer
+      text: "Volunteer. ({duty_risk}, {duty_cost})"
+      effects: [ { war: volunteer } ]
+      next: *route
+    - id: stay_back
+      text: Keep your head down and let him choose.
+      effects: [ { war: stay_back } ]
+      next: *route
+
+- id: w_mission
+  chapter: front
+  title: Your own work
+  text: |
+    As {path_name} you are wanted for {mission_name}. You can say no. You will usually be sent anyway.
+  choices:
+    - id: go
+      text: "Go. ({mission_risk})"
+      effects: [ { war: go } ]
+      next: *route
+    - id: decline
+      text: Say you are not fit for it tonight.
+      effects: [ { war: decline } ]
+      next: *route
+
+- id: w_sick
+  chapter: front
+  title: Rest
+  text: |
+    Out of the line, in a barn behind the lines. Your hands will not keep still.
+  choices:
+    - id: report
+      text: Report sick. The medical officer may give you a tour out of the line.
+      effects: [ { war: report } ]
+      next: *route
+    - id: carry_on
+      text: Say nothing and carry on.
+      effects: [ { war: carry_on } ]
+      next: *route
+
+- id: w_course
+  chapter: front
+  title: A course
+  text: |
+    The company sergeant major has a place on a course in {course_name}, two weeks behind the lines.
+  choices:
+    - id: take
+      text: Take it.
+      effects: [ { war: take } ]
+      next: *route
+    - id: decline
+      text: Stay with the section.
+      effects: [ { war: decline } ]
+      next: *route
+
+- id: w_tunnel
+  chapter: front
+  title: The tunnellers
+  text: |
+    The Royal Engineers want miners. Six shillings a day against your one, out of the attacks, and
+    work you know. The tunnellers do not go over the top. They go under it.
+  choices:
+    - id: transfer
+      text: Go to the tunnellers. You will leave the section.
+      effects: [ { war: transfer } ]
+      next: *route
+    - id: stay
+      text: Stay with the men from home.
+      effects: [ { war: stay } ]
+      next: *route
+
+- id: w_battle
+  chapter: front
+  title: "{battle_name}"
+  text: |
+    {phase_count} {phase_line}
+  choices:
+    - id: push
+      text: "Push on. ({risk_push})"
+      effects: [ { war: push } ]
+      next: *route
+    - id: help
+      text: "Help the man beside you. ({risk_help})"
+      effects: [ { war: help } ]
+      next: *route
+    - id: ground
+      text: "Go to ground. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: *route
+
+- id: w_leave
+  chapter: front
+  title: Home on leave
+  text: |
+    Ten days at home. The town has its own war now: the casualty lists in the paper, the women in
+    the works, the houses with the blinds down.
+    {section_line} {offers_line}
+  choices:
+    - id: back
+      text: "Go back. A stripe is waiting: the battalion promotes the men who return."
+      effects: [ { war: back } ]
+      next: *route
+    - id: commission
+      text: Go before the board for a commission.
+      visible_if: war.commission
+      effects: [ { war: commission } ]
+      next: *route
+    - id: posting_0
+      text: "Take it: {offer0}. Your war ends here."
+      visible_if: "war.offers >= 1"
+      effects: [ { war: "posting:0" } ]
+      next: *route
+    - id: posting_1
+      text: "Take it: {offer1}. Your war ends here."
+      visible_if: "war.offers >= 2"
+      effects: [ { war: "posting:1" } ]
+      next: *route
+    - id: posting_2
+      text: "Take it: {offer2}. Your war ends here."
+      visible_if: "war.offers >= 3"
+      effects: [ { war: "posting:2" } ]
+      next: *route
+
+- id: e_armistice
+  chapter: end
+  kind: ending
+  ending: armistice
+  title: The Armistice
+  text: |
+    At eleven o'clock the guns stop. You are {age} years old, and alive: {rank_name}, after four years.
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
+
+- id: e_posting
+  chapter: end
+  kind: ending
+  ending: posting
+  title: Home
+  text: |
+    {ending_line} The war goes on without you.
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
+
+- id: e_captured
+  chapter: end
+  kind: ending
+  ending: captured
+  title: Taken
+  text: |
+    {ending_line} The rest of your war is behind German wire.
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
+
+- id: e_invalided
+  chapter: end
+  kind: ending
+  ending: invalided
+  title: Wounded out
+  text: |
+    {ending_line}
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
+
+- id: e_killed
+  chapter: end
+  kind: ending
+  ending: killed
+  title: Killed
+  text: |
+    {ending_line}
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
+
+- id: e_broken
+  chapter: end
+  kind: ending
+  ending: broken
+  title: Shell shock
+  text: |
+    {ending_line} They take you down the line shaking.
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
+
+- id: e_court
+  chapter: end
+  kind: ending
+  ending: court_martial
+  title: Court-martial
+  text: |
+    {ending_line}
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
+
+- id: e_error
+  chapter: end
+  kind: ending
+  ending: error
+  title: Lost track
+  text: |
+    The war asked a question no scene answers. This is a content bug: Menu, Save code, and send it with a note.
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.

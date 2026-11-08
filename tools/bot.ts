@@ -19,7 +19,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const a = process.argv.slice(2);
   const runs = Number(a[a.indexOf('--runs') + 1]) || 50;
   const res = runBot(runs);
-  const bad = res.filter((r) => r.outcome !== 'ending');
+  // e_error is an ending scene the route falls to when no scene answers the war's question: a bug
+  const bad = res.filter((r) => r.outcome !== 'ending' || r.ending === 'error');
   const tally: Record<string, Record<string, number>> = {};
   for (const r of res) { const k = r.outcome === 'ending' ? r.ending! : r.outcome; (tally[r.start] ??= {})[k] = (tally[r.start]![k] ?? 0) + 1; }
   for (const [s, t] of Object.entries(tally)) console.log(`${s.padEnd(12)} ${Object.entries(t).map(([k, n]) => `${k} ${n}`).join(' · ')}`);

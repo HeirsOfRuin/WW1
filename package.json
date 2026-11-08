@@ -26,7 +26,12 @@
     "proto:gate": "node prototypes/killgate/gate.js 500",
     "proto:choices": "node prototypes/killgate/ablate.js prototypes/killgate/ablations/choices.js --adapter=prototypes/killgate/adapter.js",
     "proto:roles": "node prototypes/killgate/ablate.js prototypes/killgate/ablations/roles.js --adapter=prototypes/killgate/adapter.js",
-    "proto:skills": "node prototypes/killgate/ablate.js prototypes/killgate/ablations/skills.js --adapter=prototypes/killgate/adapter.js --inert"
+    "proto:skills": "node prototypes/killgate/ablate.js prototypes/killgate/ablations/skills.js --adapter=prototypes/killgate/adapter.js --inert",
+    "gate": "tsx sim/gate.ts 500",
+    "measure": "tsx sim/run.js --adapter=sim/adapter.ts",
+    "choices": "tsx sim/ablate.js sim/ablations/choices.js --adapter=sim/adapter.ts",
+    "roles": "tsx sim/ablate.js sim/ablations/roles.js --adapter=sim/adapter.ts",
+    "skills": "tsx sim/ablate.js sim/ablations/skills.js --adapter=sim/adapter.ts --inert"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.6",

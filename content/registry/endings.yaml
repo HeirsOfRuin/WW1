@@ -1,2 +1,9 @@
-kept: { label: The ferry kept, description: You kept the crossing through the season and the village knows it., chapter: ch1 }
-lost: { label: The ferry lost, description: The reeve gave the ferry to someone else., chapter: ch1 }
+# How a war can end (src/game/war/data.ts Ending; the grade multipliers are in GRADE.mult).
+armistice: { label: The Armistice, description: Alive on 11 November 1918., chapter: end }
+posting: { label: A home posting, description: Took a posting at home on leave; his war ended there., chapter: end }
+captured: { label: Taken prisoner, description: Overrun and taken; the war ended for him behind the wire., chapter: end }
+invalided: { label: Wounded out, description: A wound that downgraded him; home service or discharge., chapter: end }
+killed: { label: Killed, description: Killed in France., chapter: end }
+broken: { label: Shell shock, description: His nerve went; evacuated., chapter: end }
+court_martial: { label: Court-martial, description: Charged with cowardice after freezing under fire., chapter: end }
+error: { label: Lost track, description: "A content bug: the war asked a question no scene answers.", chapter: end }

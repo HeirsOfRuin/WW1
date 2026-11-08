@@ -11,8 +11,12 @@
 - Every commit runs `npm run check` first (build, tests, validate, text tools, bot, smoke).
   Every change to the war layer's numbers or rules re-runs the gate and puts the numbers,
   with their ± error, in the commit message. The prototype's own tools are `npm run proto:*`.
-- The kit files in `prototypes/killgate/` (`run.js`, `ablate.js`, `stats.js`,
-  `measure-lib.js`, `rng.js`) are copied from Game-Workshop and not edited here.
+- The war layer (`src/game/war/`) must play the same war as the kill-gate prototype on the same
+  seed (`tests/game.test.ts`). A deliberate rule change retires that test and the prototype
+  together, in the same commit, with the before and after `npm run gate` numbers.
+- Measurement: `npm run gate` (the KILLGATE tables from the real game), `choices`, `roles`,
+  `skills`, `measure`. The kit files in `sim/` and `prototypes/killgate/` (`run.js`, `ablate.js`,
+  `stats.js`, `measure-lib.js`, `rng.js`) are copied from Game-Workshop and not edited here.
 - Content is fiction: a fictional battalion and towns in real battles. Historical numbers
   go in data tables with sources once checked; until then they are marked as tuned, not sourced.
 - Decisions go in the SPEC's dated table with the author's words quoted.

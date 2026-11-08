@@ -1,0 +1,6 @@
+id: city
+town: city
+label: The city office
+summary: A clerk's stool in a shipping office, a season ticket on the tram, and a rifle club on Saturdays.
+start_scene: c_enlist_city
+hero: { age: 18, station: ranker, attributes: { body: 2 }, skills: { soldiering: 0 }, coin: 0 }

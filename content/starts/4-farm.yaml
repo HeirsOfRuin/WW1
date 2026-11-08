@@ -1,0 +1,6 @@
+id: farm
+town: farm
+label: The farm village
+summary: Horses, hedges and a shotgun for the rooks. The harvest was in when the recruiting sergeant came.
+start_scene: c_enlist_farm
+hero: { age: 18, station: ranker, attributes: { body: 2 }, skills: { soldiering: 0 }, coin: 0 }

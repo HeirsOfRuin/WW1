@@ -210,6 +210,13 @@ below 20; 12% end in shell shock.
    check the shape against sources: deaths in the line vs in battle, leave frequency, how
    often a 1914 volunteer was wounded, home-posting routes, tunneller casualties.
 
+## Reproduced by the game (2026-11-09)
+
+Phase 1 ported this model into the game as its war layer. Played through the story engine by
+the same policies on the same seeds, the game's `npm run gate` prints these tables exactly,
+and `tests/game.test.ts` holds 160 wars equal to the prototype's. Every number above is the
+game's number until a rule changes (DESIGN §15).
+
 ## Next
 
 Stage 3: `docs/DESIGN.md` (stack, architecture, schema, scope), for the author's approval.

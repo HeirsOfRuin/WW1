@@ -38,5 +38,9 @@
     "tests",
     "vite.config.ts",
     "packages"
+  ],
+  "exclude": [
+    "tools/_*",
+    "**/*.tmp.*"
   ]
 }

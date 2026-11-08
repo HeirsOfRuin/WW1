@@ -1,0 +1,6 @@
+id: pit
+town: pit
+label: The pit village
+summary: The colliery, the chapel and the club. You have worked underground since you were fourteen.
+start_scene: c_enlist_pit
+hero: { age: 18, station: ranker, attributes: { body: 2 }, skills: { soldiering: 0 }, coin: 0 }

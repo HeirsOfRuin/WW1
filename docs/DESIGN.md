@@ -379,6 +379,66 @@ within 2 SE; `npm run check` green; installs on a phone.
 ### Phase 8: release
 game-release: the itch kit and the Pages link.
 
+## 15. As built: Phase 1 (2026-11-09)
+
+Where the build differs from the plan above, this section wins.
+
+**What exists**
+- The scaffold (game-scaffold shape C) and the story engine (game-narrative, unchanged), with
+  the Pages workflow, the PWA (offline, installable, build-id service worker) and the phone
+  smoke test.
+- **The war layer** (`src/game/war/`): the kill-gate model ported as a step machine that stops
+  at every decision (`war.ts`), its random streams (`rng.ts`), its numbers (`data.ts`), the
+  dates (`calendar.ts`) and the eight policies as the bot (`policies.ts`).
+- **The game module** (`src/game/module.ts`): `war.*` paths, the `war_home`, `war_general`,
+  `war_run` and `war` effects, 28 text variables, the date line, the status line, risk words
+  from the resolver, ending causes in words.
+- **Content** (placeholder prose): four towns as starts, an enlistment scene per town (three
+  pairs of town skills), the general skill, training, one scene per question the war asks
+  (duty, mission, sick, course, tunnelling, battle phase, leave), seven endings and an error
+  ending the route falls to if no scene answers. 21 scenes.
+- **Instruments**: `tests/game.test.ts` (18 tests with the save contract), the policy bot
+  through the engine (`tools/war-bot.ts`), the measurement kit on the real game (`sim/`:
+  `npm run gate`, `measure`, `choices`, `roles`, `skills`).
+
+**The exit criteria**
+
+| Criterion | Result |
+|---|---|
+| The bot plays 16,000 runs with no stalls | `npm run gate`: 16,000 wars through the engine, 40 s, none stalled |
+| The gate tables match `KILLGATE.md` within 2 SE | **Identical**, not within noise: the engine's gate output equals the prototype's character for character on the same seeds, and `tests/game.test.ts` holds 160 wars equal to the fourth decimal of nerve |
+| `npm run check` green | Build, 18 tests, validate, style lint, continuity, render scan (1,822 views, no leaks), 400-run random bot, bundle check, smoke test |
+| Installs on a phone | Offline, manifest, maskable icon and service worker pass in the smoke test. A real phone install needs the Pages site, which deploys from the default branch only: see Next |
+
+**The calendar risk (§2) is retired.** The war layer owns the date; the engine's season count
+is moved to it after every decision. Tested: the date line equals the war's month on every
+screen of 24 random wars, the engine's season never runs backwards, and a man at the Armistice
+is 22 in November 1918.
+
+**What the instruments found while building**
+1. A death screen read "listening." (the raw duty id), and the record (friends home, the grade)
+   sat on a second page the ending screen never showed. Fixed: every cause is worded
+   (`endingLine`), a test plays 1,280 wars and fails on any unworded cause, and endings are one page.
+2. Battle names with a comma ("Somme, 1 July") fell through the cause parser to "in France".
+   Caught by that test; fixed.
+3. Decision scenes were two pages, so every duty cost an extra tap and a reload went back a
+   page (smoke test: "save survives a reload"). Every decision is now one screen.
+4. Two duty prompts in a row could look identical, so a tap seemed to do nothing (smoke test:
+   "clock advanced"). Each prompt now names its tour and call; battle screens name the phase;
+   the changes from the last choice (nerve, standing) show even without prose.
+5. Hard-coded ages ("You are eighteen", "twenty-two") replaced by `{age}` (rule 8).
+
+**The prototype.** `prototypes/killgate/` stays as the reference while the equivalence test
+holds; `npm run proto:*` still runs it. At the first deliberate change to a war rule, the
+equivalence test and the prototype are retired together, and `npm run gate` becomes the only
+measurement.
+
+**Next**
+- The author switches Pages on once (Settings, Pages, Source: GitHub Actions) and makes this
+  branch the default, or merges it, so the phone install can be tried.
+- Phase 2, calibration (§13): one Loos phase written for the rifleman, one rotation event, one
+  leave scene for the mill town, a style tile and two pixel scenes.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.

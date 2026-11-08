@@ -14,9 +14,13 @@ export type { CondInput, Config } from '@engine/schema';
 export const GAME_ID = 'trenches';
 
 // ---- Effects --------------------------------------------------------------
+const HOME = z.enum(['dig', 'mech', 'lit', 'field', 'stamina', 'firstaid', 'sport', 'voice']);
+export const DECISION = z.enum(['transfer', 'stay', 'volunteer', 'stay_back', 'go', 'decline', 'report', 'carry_on', 'take', 'push', 'help', 'ground', 'back', 'commission', 'posting:0', 'posting:1', 'posting:2']);
 export const GAME_EFFECTS = [
-  z.object({ toll: z.number().int() }).strict(), // pence taken at the landing (ferry.takings)
-  z.object({ mend: z.number().int().min(1) }).strict(), // work on the boat (ferry.repair, 0..3)
+  z.object({ war_home: z.array(HOME).length(2) }).strict(), // creation: the two town skills
+  z.object({ war_general: z.enum(['firstaid', 'sport', 'voice']) }).strict(), // creation: the general skill
+  z.object({ war_run: z.literal(true) }).strict(), // the war begins: run to its first question
+  z.object({ war: DECISION }).strict(), // the answer to the war's pending question (src/game/war/war.ts decide)
 ] as const;
 const BaseEffectSchema = z.union([...CORE_EFFECTS, ...GAME_EFFECTS]);
 export type BaseEffect = z.infer<typeof BaseEffectSchema>;
@@ -41,6 +45,8 @@ export const StartSchema = z.object({
   summary: z.string(),
   start_scene: Id,
   hero: z.object({ age: z.number().int(), station: Id, attributes: StatBlock, skills: StatBlock, coin: z.number().int() }).strict(),
+  /** the war layer's town (src/game/war/data.ts TOWNS) */
+  town: z.enum(['pit', 'mill', 'city', 'farm']),
 }).strict();
 export type Start = z.infer<typeof StartSchema>;
 

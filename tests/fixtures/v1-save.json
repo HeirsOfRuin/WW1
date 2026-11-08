@@ -1,128 +1,161 @@
 {
  "format": "in-the-trenches-save",
  "saveVersion": 1,
- "contentHash": "105361f6c883",
+ "contentHash": "aa4dcc14c946",
  "state": {
   "version": 1,
-  "contentHash": "105361f6c883",
+  "contentHash": "aa4dcc14c946",
   "seed": 12345,
   "rng": [
-   3497751176,
-   1374560474,
-   3782063374,
-   2397394850
+   194968149,
+   4048065787,
+   4205630669,
+   2397394848
   ],
   "characters": {
    "hero": {
     "name": "Fixture",
     "sex": "male",
-    "born": -64,
+    "born": -72,
     "alive": true,
     "attributes": {
-     "strength": 3,
-     "wits": 2,
-     "presence": 2
+     "body": 2
     },
     "skills": {
-     "boatcraft": 2,
-     "talk": 0,
-     "lore": 1
+     "soldiering": 0
     },
     "health": 8,
     "traits": [],
-    "injuries": [
-     {
-      "id": "cracked_ribs",
-      "since": 0
-     }
-    ],
+    "injuries": [],
     "items": [],
-    "station": "hand"
+    "station": "ranker"
    }
   },
   "hero": "hero",
-  "start": "heir",
-  "ferry": {
-   "takings": 0,
-   "repair": 1
-  },
-  "chapter": "ch1",
-  "scene": "e_otter",
-  "returnStack": [
-   "c_reckoning"
-  ],
-  "time": 0,
-  "rep": {
-   "village": 0
-  },
-  "res": {
-   "coin": 120
-  },
-  "favors": {},
-  "flags": {
-   "mended_boat": true,
-   "carried_friar": true
-  },
-  "counters": {
-   "trust": 1
-  },
-  "npcs": {
-   "aldith": {
-    "met": false,
-    "alive": true,
-    "affection": 0,
-    "respect": 1,
-    "loyalty": 0,
-    "grudges": []
+  "start": "mill",
+  "war": {
+   "seed": 12345,
+   "town": "mill",
+   "homeSet": {
+    "mech": 1,
+    "stamina": 1,
+    "firstaid": 1
    },
-   "osric": {
-    "met": true,
-    "alive": true,
-    "affection": 0,
-    "respect": 0,
-    "loyalty": 0,
-    "grudges": []
-   }
+   "off": [],
+   "war": {
+    "trench": 0,
+    "bomb": 0,
+    "lewis": 0,
+    "snipe": 0,
+    "signals": 0,
+    "lead": 0,
+    "tunnel": 0
+   },
+   "nerve": 75,
+   "standing": 40,
+   "rank": 0,
+   "commissioned": false,
+   "transferred": false,
+   "awards": [],
+   "friends": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "merit": 0,
+   "severe": 0,
+   "out": 0,
+   "battleNow": false,
+   "inBattle": false,
+   "blightyThisStage": false,
+   "courseThisStage": false,
+   "stage": 1,
+   "clock": 0,
+   "clockInStage": 0,
+   "r": 0,
+   "path": "rifleman",
+   "promotedThisStage": false,
+   "ending": null,
+   "endedStage": 0,
+   "stagesDone": 0,
+   "posting": null,
+   "stats": {
+    "minNerve": 75,
+    "lowNerve": 0,
+    "rotations": 0,
+    "volunteered": 0,
+    "detailed": 0,
+    "courses": 0,
+    "battles": 0,
+    "missedBattles": 0,
+    "offersAtLeave": {},
+    "friendsLostWithYou": 0,
+    "missions": 0,
+    "missionsWon": 0
+   },
+   "log": [],
+   "rng": {
+    "fire": 3242973920,
+    "duty": 3864564640,
+    "section": 1353072235,
+    "battle": 988624614,
+    "career": 3708804774,
+    "leave": 755306771
+   },
+   "cursor": {
+    "at": "train"
+   },
+   "pending": null
   },
+  "home": {
+   "picks": [
+    "mech",
+    "stamina"
+   ],
+   "general": "firstaid"
+  },
+  "chapter": "enlist",
+  "scene": "c_training",
+  "returnStack": [],
+  "time": 2,
+  "rep": {},
+  "res": {},
+  "favors": {},
+  "flags": {},
+  "counters": {},
+  "npcs": {},
   "aliases": {},
   "queue": [],
   "seen": {
-   "c_first_morning": 0,
-   "c_flood": 0,
-   "e_otter": 0
+   "c_enlist_mill": 2,
+   "c_general": 2,
+   "c_training": 2
   },
   "journal": [
    {
-    "at": 0,
-    "scene": "c_first_morning",
-    "sceneTitle": "The first morning",
-    "choice": "Mend the boat before you take anyone across.",
-    "outcome": "The caulking takes the morning. The first passengers wait on the bank and watch you do it properly.",
-    "changes": [
-     "The boat: sounder"
-    ]
+    "at": 2,
+    "scene": "c_enlist_mill",
+    "sceneTitle": "The recruiting office",
+    "choice": "Bring a hand with machinery, and stamina from a long working day.",
+    "changes": []
    },
    {
-    "at": 0,
-    "scene": "c_flood",
-    "sceneTitle": "High water",
-    "choice": "Cross for the friar now, flood or not.",
-    "outcome": "The current turns the boat broadside and slams you into the post. You get him over. Your ribs will tell you about it for weeks.",
-    "changes": [
-     "Injury: Cracked ribs"
-    ]
+    "at": 2,
+    "scene": "c_general",
+    "sceneTitle": "Before you go",
+    "choice": "First aid. You took the St John Ambulance course at the works.",
+    "changes": []
    }
   ],
-  "checkpoint": "c_first_morning",
+  "checkpoint": "c_enlist_mill",
   "lastOutcome": {
-   "text": "The current turns the boat broadside and slams you into the post. You get him over. Your ribs will tell you about it for weeks.",
-   "changes": [
-    "Injury: Cracked ribs"
-   ],
-   "check": {
-    "band": "Even",
-    "result": "partial"
-   }
+   "changes": []
   }
  }
 }

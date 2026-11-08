@@ -3,7 +3,7 @@
 // the clock, [data-action] for choices, [data-tab] for tabs.
 import { useState } from 'preact/hooks';
 import type { ContentBundle } from '../content/schema';
-import { newGame, view, choose, startsOf, type GameState, type SceneView } from '../game/index';
+import { newGame, view, choose, startsOf, statusOf, type GameState, type SceneView } from '../game/index';
 import { toSave, fromSave, encodeSaveCode, decodeSaveCode, SAVE_KEY } from '../game/save';
 import { STORAGE_OK, lsGet, lsSet } from './storage.js';
 
@@ -20,7 +20,7 @@ export function App({ content }: { content: ContentBundle }) {
   const [page, setPage] = useState(0);
   const [note, setNote] = useState<string | null>(null);
   const commit = (s: GameState | null) => { setState(s); setPage(0); if (s) lsSet(SAVE_KEY, JSON.stringify(toSave(s, content))); };
-  const begin = (start: string) => { commit(newGame(content, { start, seed: (Math.random() * 2 ** 31) >>> 0, name: 'Hal' })); setTab('story'); };
+  const begin = (start: string) => { commit(newGame(content, { start, seed: (Math.random() * 2 ** 31) >>> 0, name: 'Tom' })); setTab('story'); };
 
   if (!state) {
     const saved = load(content);
@@ -50,11 +50,12 @@ export function App({ content }: { content: ContentBundle }) {
   return (
     <>
       <header class="hud"><span class="turn">{v.date}</span><span>{v.title}</span></header>
+      {state.war.clock > 0 && !v.ended && (() => { const t = statusOf(state); return <p class="status" data-status>{t.rank}, {t.role} · <strong>{t.nerve}</strong> · {t.standing} · {t.section}</p>; })()}
       {note && <p class="banner">{note} <button onClick={() => setNote(null)}>OK</button></p>}
       <main class="panel">
         {tab === 'story' && <>
           {v.card && page === 0 && <section class="card"><h2>{v.card.title}</h2>{v.card.subtitle && <p>{v.card.subtitle}</p>}{v.card.epigraph && <p class="hint">{v.card.epigraph}</p>}</section>}
-          {v.outcome?.text && page === 0 && <section class="outcome">{paras(v.outcome.text)}{v.outcome.changes.length > 0 && <p class="hint">{v.outcome.changes.join(' · ')}</p>}</section>}
+          {(v.outcome?.text || (v.outcome?.changes.length ?? 0) > 0) && page === 0 && <section class="outcome">{v.outcome!.text && paras(v.outcome!.text)}{v.outcome!.changes.length > 0 && <p class="hint">{v.outcome!.changes.join(' · ')}</p>}</section>}
           {v.cause && <p class="hint">Because: {v.cause.text}</p>}
           <h2>{v.title}</h2>
           {paras(pages[Math.min(page, pages.length - 1)] ?? '')}

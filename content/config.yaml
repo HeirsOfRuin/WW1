@@ -1,16 +1,18 @@
 # The game's fixed lists. Every id here is checked against the content by the validator.
+# Time: the engine counts seasons from spring 1914; the war layer owns the date line
+# (src/game/war/calendar.ts, GameModule.date), so regnal years are never shown.
 title: "In the Trenches"
-start_year: 3                # the year of the reign the game opens in: "Spring, year 3 of King Edmund"
-regnal_king: Edmund          # whose reign dates count in, until reigns: says otherwise
+start_year: 1914
+regnal_king: George
 reigns: []
-attributes: [strength, wits, presence]
-skills: [boatcraft, talk, lore]
-stations: [hand, ferryman]
-tracks: [river]
+attributes: [body]
+skills: [soldiering]
+stations: [ranker]
+tracks: [service]
 seasons: [spring, summer, autumn, winter]
-chapters: [ch1]
-counter_labels:
-  trust: "The village's trust"   # a counter named here shows in a choice's stakes line
+chapters: [enlist, front, end]
+counter_labels: {}
 aliases: []
 chapter_cards:
-  ch1: { title: "The Crossing", subtitle: "One season at the ferry", epigraph: "Whoever keeps the ferry keeps the road." }
+  enlist: { title: "Kitchener's Army", subtitle: "Autumn 1914", epigraph: "Your country needs you." }
+  front: { title: "France", subtitle: "The line", epigraph: "Front line, support, reserve, rest. Then the front line." }

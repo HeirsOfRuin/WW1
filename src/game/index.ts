@@ -9,14 +9,20 @@ import { enterScene } from '@engine/director';
 import { bornAtAge } from '@engine/character';
 import { EngineError } from '@engine/index';
 import type { Character, Sex } from '@engine/state';
+import { newWar, TOWNS, DEFAULT_GENERAL } from './war/index';
+import { seasonOf, TRAINING } from './war/calendar';
 
 export { EngineError, view, choose, visibleChoices, isAvailable } from '@engine/index';
 export type { ChoiceView, SceneView, ChooseResult } from '@engine/index';
 export { describeDate } from '@engine/calendar';
 export { heroOf } from '@engine/character';
 export type { GameState } from './state';
+export { statusOf } from './module';
 
 export interface NewGameOptions { start: string; seed: number; name: string; sex?: Sex }
+
+/** The engine's season count at the start: autumn 1914, training (src/game/war/calendar.ts). */
+const START_TIME = seasonOf(TRAINING);
 
 export function newGame(content: ContentBundle, opts: NewGameOptions): GameState {
   const st = content.starts[opts.start];
@@ -25,7 +31,7 @@ export function newGame(content: ContentBundle, opts: NewGameOptions): GameState
   if (!scene) throw new EngineError(`start ${st.id}: unknown scene ${st.start_scene}`);
   const rng = new RngCursor(seedRng(opts.seed));
   const hero: Character = {
-    name: opts.name.trim() || 'Wat',
+    name: opts.name.trim() || 'Tom',
     sex: opts.sex ?? 'male',
     born: bornAtAge(st.hero.age),
     alive: true,
@@ -37,6 +43,7 @@ export function newGame(content: ContentBundle, opts: NewGameOptions): GameState
     items: [],
     station: st.hero.station,
   };
+  const town = st.town;
   const state: GameState = {
     version: 1,
     contentHash: content.hash,
@@ -45,13 +52,14 @@ export function newGame(content: ContentBundle, opts: NewGameOptions): GameState
     characters: { [HERO_ID]: hero },
     hero: HERO_ID,
     start: st.id,
-    ferry: { takings: 0, repair: 0 },
+    war: newWar({ seed: opts.seed, town }),
+    home: { picks: [...TOWNS[town].pick], general: DEFAULT_GENERAL },
     chapter: scene.chapter,
     scene: scene.id,
     returnStack: [],
-    time: 0,
+    time: START_TIME,
     rep: Object.fromEntries(Object.keys(content.registry.factions).map((id) => [id, 0])),
-    res: { coin: st.hero.coin },
+    res: {},
     favors: {},
     flags: {},
     counters: {},
