@@ -27,7 +27,8 @@
     "choices": "tsx sim/ablate.js sim/ablations/choices.js --adapter=sim/adapter.ts",
     "roles": "tsx sim/ablate.js sim/ablations/roles.js --adapter=sim/adapter.ts",
     "skills": "tsx sim/ablate.js sim/ablations/skills.js --adapter=sim/adapter.ts --inert",
-    "steps": "tsx sim/ablate.js sim/ablations/steps.js --adapter=sim/adapter.ts"
+    "steps": "tsx sim/ablate.js sim/ablations/steps.js --adapter=sim/adapter.ts",
+    "story": "tsx tools/story-share.ts 200"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.6",

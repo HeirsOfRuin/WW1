@@ -477,6 +477,11 @@ Saves made before `news` existed load and play on (`newsOf`).
 **Dates.** The tour before Loos moved from August to September 1915, so "Moving up" is dated
 the month of the battle.
 
+**The story leads (FRAME-STORY.md).** Each tour opens on `w_tour` (the month, last tour),
+and the story events and year pages route there. A duty is offered on 60% of tours, and ordered
+duties play out off-screen at steady. Duties are harder to keep the war's difficulty. `npm run
+story` measures the share: 53.6% story for a player who volunteers half the time.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.

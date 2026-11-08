@@ -48,22 +48,24 @@ export const WAR_WORK: Record<Town, { skill: string; from: number }> = {
 };
 
 // Stages: rotations, battle slots, shellfire per front tour, section loss per rotation.
+// nerve: drain per tour in the line; +2 each on 2026-11-09 (+3 overshot: best play 4.0%), when duties went from two a tour to one
+// on 60% of tours and breakdowns fell from 12.8% to 7.6% (the line has to wear men down now).
 // A battle: phases, each [base hit chance, nerve cost, phase type]. The type decides which
 // choice is safest (PHASE_HIT): no choice is safest everywhere.
 export const STAGES: Stage[] = [
-  { n: 1, year: 1915, rotations: 9, fire: 0.04, sectionLoss: 0.006, nerve: 5,
+  { n: 1, year: 1915, rotations: 9, fire: 0.046, sectionLoss: 0.006, nerve: 7,
     battles: { 6: { name: 'Loos', phases: [[0.16, 10, 'advance'], [0.13, 9, 'trench'], [0.10, 8, 'hold']] } } },
-  { n: 2, year: 1916, rotations: 10, fire: 0.046, sectionLoss: 0.0075, nerve: 6,
+  { n: 2, year: 1916, rotations: 10, fire: 0.046, sectionLoss: 0.0075, nerve: 8,
     battles: {
       4: { name: 'Somme, 1 July', phases: [[0.40, 13, 'advance'], [0.26, 10, 'trench'], [0.22, 9, 'hold'], [0.14, 7, 'hold']] },
       8: { name: 'Somme, autumn', phases: [[0.25, 10, 'advance'], [0.22, 9, 'trench'], [0.14, 8, 'hold']] },
     } },
-  { n: 3, year: 1917, rotations: 10, fire: 0.051, sectionLoss: 0.0075, nerve: 7,
+  { n: 3, year: 1917, rotations: 10, fire: 0.051, sectionLoss: 0.0075, nerve: 9,
     battles: {
       3: { name: 'Arras', phases: [[0.25, 10, 'advance'], [0.22, 9, 'trench'], [0.16, 8, 'hold']] },
       7: { name: 'Passchendaele', phases: [[0.26, 13, 'advance'], [0.25, 13, 'trench'], [0.22, 12, 'hold'], [0.16, 11, 'hold']] },
     } },
-  { n: 4, year: 1918, rotations: 10, fire: 0.046, sectionLoss: 0.0075, nerve: 7,
+  { n: 4, year: 1918, rotations: 10, fire: 0.046, sectionLoss: 0.0075, nerve: 9,
     battles: {
       2: { name: 'Spring Offensive', defence: true, capture: 0.05, phases: [[0.26, 12, 'defence'], [0.23, 11, 'defence'], [0.20, 10, 'defence'], [0.16, 9, 'defence']] },
       6: { name: 'Hundred Days, August', phases: [[0.22, 9, 'advance'], [0.16, 8, 'trench'], [0.14, 7, 'hold']] },
@@ -73,12 +75,15 @@ export const STAGES: Stage[] = [
 
 // Duties offered on a front tour: extra hit chance, nerve cost, standing if volunteered,
 // war skill learned, award points.
+// hit x1.25 and nerve x1.5 on 2026-11-09: one duty on 60% of tours instead of two every tour, so each
+// one counts for more (without the nerve, volunteering for everything stopped breaking men: 19% -> 6%)
 export const DUTIES: Record<string, Duty> = {
-  raid: { hit: 0.09, nerve: 8, standing: 6, skill: 'bomb', award: 2, night: false, field: true },
-  patrol: { hit: 0.04, nerve: 6, standing: 4, skill: 'snipe', award: 1, night: true, field: true },
-  wiring: { hit: 0.03, nerve: 4, standing: 3, skill: 'trench', award: 0, night: true, dig: true },
-  listening: { hit: 0.02, nerve: 5, standing: 2, skill: 'trench', award: 0, night: true },
-  carrying: { hit: 0.015, nerve: 2, standing: 1, skill: 'trench', award: 0, night: true, dig: true },
+  raid: { hit: 0.15, // raids are where volunteering for everything kills a man (2026-11-09)
+    nerve: 12, standing: 6, skill: 'bomb', award: 2, night: false, field: true },
+  patrol: { hit: 0.05, nerve: 9, standing: 4, skill: 'snipe', award: 1, night: true, field: true },
+  wiring: { hit: 0.0375, nerve: 6, standing: 3, skill: 'trench', award: 0, night: true, dig: true },
+  listening: { hit: 0.025, nerve: 8, standing: 2, skill: 'trench', award: 0, night: true },
+  carrying: { hit: 0.0187, nerve: 3, standing: 1, skill: 'trench', award: 0, night: true, dig: true },
 };
 
 // What a hit does. Shares of hits.
@@ -148,6 +153,7 @@ export const ROLE = {
   successPerSkill: 0.06, hitPerSkill: 0.06,
   restBonus: 1.0, // better pay, billets and kit: nerve back at rest
   crew: 4, // a tunneller's crew stands in for the section at rest
+  dutyChance: 0.6, // chance a tour in the line has a duty to volunteer for (one, not two: 2026-11-09)
   turnBackStanding: 6, turnBackNerve: 4, // what turning back costs: the section knows, and he knows
   meritToPromote: 2, promoteChance: 0.4, // successful missions count toward a stripe
   keepRole: 2.5, // specialist skill at which a promoted man keeps his role instead of leading a section
@@ -168,7 +174,7 @@ export const REST = { base: 4.5, voice: 2, perFriend: 0.4, leave: 30 };
 // back (where the step allows it) ends the sortie, safely-ish, with nothing to show.
 export type SortieChoice = 'bold' | 'steady' | 'careful' | 'back';
 export const SORTIE_CHOICE: Record<SortieChoice, { hit: number; gain: number; nerve: number; ends?: boolean }> = {
-  bold: { hit: 1.6, gain: 2, nerve: 1.15 },
+  bold: { hit: 1.8, gain: 2, nerve: 1.15 }, // 1.8 since 2026-11-09 (2.2 was tried: it barely moved reckless play)
   steady: { hit: 1.0, gain: 1, nerve: 1.0 },
   careful: { hit: 0.5, gain: 0, nerve: 0.9 },
   // turning back: coming in alone in the dark is not safe, and it eats at a man (measured: at 0.35 and

@@ -45,10 +45,19 @@ const adaptive: Policy = {
   battle: (w, _i, type, stalled) => (stalled ? 'ground' : PHASE_RULE[type](w)),
   sick: (w) => w.nerve < 25, course: () => true, tunnel: () => true, leave: (_w, _o, c) => (c ? 'commission' : 'back'),
 };
+// A general player (the author, 2026-11-09: "only volunteering half the time"): volunteers for
+// about half the duties and missions, plays steps steady, fights as adaptive does. Deterministic:
+// it alternates on the count of duties already decided, so the same seed plays the same game.
+const half: Policy = {
+  ...adaptive,
+  volunteer: (w) => (w.stats.volunteered + w.stats.detailed + w.clock) % 2 === 0,
+  mission: (w) => (w.stats.missions + w.clock) % 2 === 0,
+  step: () => 'steady',
+};
 const quitter = (n: number): Policy => ({ ...adaptive, leave: (w, o, c) => (w.stage >= n && o.length ? 'posting' : c ? 'commission' : 'back') });
 
 export const POLICIES: Record<string, Policy> = {
-  reckless, careful, mates, climber, adaptive, quit1: quitter(1), quit2: quitter(2), quit3: quitter(3),
+  reckless, careful, mates, climber, adaptive, quit1: quitter(1), quit2: quitter(2), quit3: quitter(3), half,
 };
 
 /** Measurement hooks: force one decision while the policy plays the rest as written. */
@@ -71,6 +80,7 @@ export function withForce(base: Policy, f: Force = {}): Policy {
 /** The decision a policy makes on the war's pending question. */
 export function decideFor(p: Policy, w: War, q: Pending, battleOf: (w: War) => Battle): Decision {
   switch (q.kind) {
+    case 'tour': return 'on';
     case 'tunnel': return p.tunnel(w) ? 'transfer' : 'stay';
     case 'duty': return p.volunteer(w, q.duty, DUTIES[q.duty]!, q.friendAtRisk) ? 'volunteer' : 'stay_back';
     case 'mission': return p.mission(w) ? 'go' : 'decline';

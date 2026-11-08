@@ -9,6 +9,7 @@ import { toSave, fromSave, encodeSaveCode, decodeSaveCode } from '../src/game/sa
 import { warMonth, seasonOf, monthName, ARMISTICE } from '../src/game/war/calendar';
 import { phaseHit, battleOf } from '../src/game/war/index';
 import { riskWord, whereOf, endingLine } from '../src/game/module';
+import { share } from '../tools/story-share';
 
 const content = loadContent();
 const TOWNS = ['pit', 'mill', 'city', 'farm'] as const;
@@ -64,7 +65,8 @@ describe('what the screen says is what the resolver does', () => {
     for (let step = 0; step < 4000 && !s.ended; step++) {
       const v = view(content, s);
       const q = s.war.pending;
-      if (q?.kind === 'battle') {
+      // a news scene (a friend killed) can show while a battle question waits: check battle screens only
+      if (q?.kind === 'battle' && (v.sceneId.startsWith('b_') || v.sceneId === 'w_battle')) {
         const b = battleOf(s.war);
         for (const c of ['push', 'help', 'ground'] as const) {
           const word = riskWord(phaseHit(s.war, b, b.phases[q.phase]![0], q.type, c));
@@ -95,6 +97,22 @@ describe('endings say what happened, in words', () => {
     }
     expect([...seen].sort()).toEqual(['armistice', 'broken', 'captured', 'courtMartial', 'invalided', 'killed', 'posting']);
   }, 60_000); // 1,280 whole wars through the engine
+});
+
+describe('the story leads', () => {
+  // The author, 2026-11-09: "follow a story more so than just playing generic missions. Have a
+  // general play through (only volunteering half the time) to split between story and generic
+  // missions 50/50". Measured on the written years (the mill town, 1915-1917): a year that drifts
+  // far from even fails here. 1918 is not written yet and is left out.
+  it('story is about half the screens in each written year', () => {
+    const r = share(40);
+    for (const y of [1, 2, 3]) {
+      const c = r.byYear[y]!;
+      const p = c.story / (c.story + c.generic);
+      expect(p, `year ${1914 + y}: story ${(100 * p).toFixed(1)}%`).toBeGreaterThan(0.44);
+      expect(p, `year ${1914 + y}: story ${(100 * p).toFixed(1)}%`).toBeLessThan(0.7);
+    }
+  }, 120_000);
 });
 
 describe('saves', () => {

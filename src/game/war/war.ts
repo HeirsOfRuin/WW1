@@ -19,6 +19,8 @@ import {
 /** What the war is waiting for the player to decide. */
 export type Pending =
   | { kind: 'tunnel' }
+  /** the start of a tour in the line: a story stop, no decision (the tour's passage, the year page, an event) */
+  | { kind: 'tour' }
   | { kind: 'duty'; duty: string; friendAtRisk: boolean }
   | { kind: 'mission'; role: string }
   | { kind: 'sick' }
@@ -36,7 +38,8 @@ export type Decision =
   | 'take'                              // course
   | BattleChoice                        // battle
   | 'back' | 'commission' | `posting:${number}` // leave
-  | SortieChoice; // a sortie step ('back' turns back)
+  | SortieChoice // a sortie step ('back' turns back)
+  | 'on'; // past a story stop
 
 /** Where the machine is. Saved, so a war resumes mid-rotation. */
 type Cursor =
@@ -44,6 +47,7 @@ type Cursor =
   | { at: 'stage' }
   | { at: 'path' }
   | { at: 'rotation' }
+  | { at: 'tour' }
   | { at: 'duty'; sectionP: number; offered: string[]; i: number; cover: number }
   | { at: 'mission'; sectionP: number; cover: number }
   | { at: 'support'; sectionP: number; cover: number }
@@ -296,9 +300,13 @@ function step(w: War): void {
         return;
       }
       if (b) w.stats.missedBattles++;
+      // a story stop at the start of every tour he is in the line for (the author, 2026-11-09:
+      // "follow a story more"); it draws nothing, so it changes no numbers
+      if (w.out === 0) { w.cursor = { at: 'tour' }; w.pending = { kind: 'tour' }; return; }
       rotationStart(w, st);
       return;
     }
+    case 'tour': rotationStart(w, st); return;
     case 'duty': nextDuty(w, c); return;
     case 'mission': {
       if (isRole(w) && w.out === 0 && !w.ending) {
@@ -368,9 +376,9 @@ function rotationStart(w: War, st: Stage): void {
   spendNerve(w, st.nerve);
   learn(w, 'trench', 0.25);
   const keys = Object.keys(DUTIES);
-  // two different duties: the same one twice in a tour read as a repeat (playtest 1, 2026-11-09)
-  const first = w.transferred ? null : pick(w.rng, 'duty', keys);
-  const offered = first === null ? [] : [first, pick(w.rng, 'duty', keys.filter((k) => k !== first))];
+  // one duty, on some tours: two every tour made the war a list of missions (the author,
+  // 2026-11-09: story and generic missions 50/50 for a man who volunteers half the time)
+  const offered = w.transferred || !ch(w, 'duty', ROLE.dutyChance) ? [] : [pick(w.rng, 'duty', keys)];
   w.cursor = { at: 'duty', sectionP, offered, i: 0, cover: 1 };
 }
 
@@ -455,6 +463,15 @@ function askStep(w: War): void {
   w.pending = { kind: 'step', key: c.key, role: c.role, step: c.i, of: so.shares.length, vol: c.vol, canBack: so.back[c.i]! };
 }
 
+/** A sortie he was ordered on, played steady without the player, and logged for the next tour's
+ *  passage ("Last tour the sergeant put you on a wiring party; it went well"). */
+function autoSortie(w: War, key: string): void {
+  for (let guard = 0; guard < 5 && w.cursor.at === 'sortie' && w.pending?.kind === 'step'; guard++) { w.pending = null; stepSortie(w, 'steady'); }
+  const r = newsOf(w).sortie;
+  if (r) say(w, `detailed: ${key} ${r.ok ? 'ok' : 'failed'}`);
+  newsOf(w).sortie = null;
+}
+
 function stepSortie(w: War, choice: SortieChoice): void {
   const c = w.cursor as Extract<Cursor, { at: 'sortie' }>;
   const so = SORTIES[c.key]!;
@@ -524,6 +541,7 @@ export function decide(w: War, d: Decision): War {
       if (vol && p.friendAtRisk) { c.cover *= 0.75; w.nerve = clamp(w.nerve + 2, 0, 100); }
       void dd;
       startSortie(w, key, false, vol, p.friendAtRisk, c);
+      if (!vol) { autoSortie(w, key); break; } // ordered, not volunteered: played off-screen, told next tour
       return w;
     }
     case 'mission': {
@@ -534,6 +552,7 @@ export function decide(w: War, d: Decision): War {
       w.stats.missions++;
       void m;
       startSortie(w, k, true, d === 'go', false, w.cursor);
+      if (d !== 'go') { autoSortie(w, k); break; } // sent anyway: played off-screen
       return w;
     }
     case 'sick': {
@@ -593,6 +612,7 @@ export function decide(w: War, d: Decision): War {
       stepSortie(w, d as SortieChoice);
       break;
     }
+    case 'tour': break; // run() goes on from the tour cursor
     case 'leave': {
       say(w, `leave after stage ${w.stage}: offers [${p.offers.join(', ')}]${p.commission ? ' + commission' : ''} -> ${d}`);
       if (d.startsWith('posting:') && p.offers.length) {

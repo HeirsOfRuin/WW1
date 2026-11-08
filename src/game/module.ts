@@ -131,8 +131,8 @@ export function nerveWord(n: number): string {
 const pend = (s: CoreState) => war(s).pending;
 
 /** What the war's log says happened since the last tour: read by the tour opening. */
-function recent(w: War): { backFromWound: boolean; lost: number[]; promoted: boolean; award: string | null } {
-  const out = { backFromWound: false, lost: [] as number[], promoted: false, award: null as string | null };
+function recent(w: War): { backFromWound: boolean; lost: number[]; promoted: boolean; award: string | null; detailed: { key: string; ok: boolean } | null } {
+  const out = { backFromWound: false, lost: [] as number[], promoted: false, award: null as string | null, detailed: null as { key: string; ok: boolean } | null };
   for (const l of w.log) {
     const m = /^S\d r(\d+) \| (.*)$/.exec(l);
     if (!m) continue;
@@ -145,6 +145,8 @@ function recent(w: War): { backFromWound: boolean; lost: number[]; promoted: boo
     if (/^promoted to/.test(msg)) out.promoted = true;
     const am = /^awarded (\w+)/.exec(msg);
     if (am) out.award = am[1]!;
+    const dm = /^detailed: (\w+) (ok|failed)/.exec(msg);
+    if (dm) out.detailed = { key: dm[1]!, ok: dm[2] === 'ok' };
   }
   return out;
 }
@@ -193,8 +195,8 @@ export function statusOf(s: CoreState): { rank: string; role: string; nerve: str
 
 // ---- paths -------------------------------------------------------------------------------------
 
-const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key', 'month', 'stake', 'back_from_wound', 'lost_last', 'promoted_last', 'award_last', 'first_tour', 'back_from_leave'] as const;
-const PENDING = ['none', 'tunnel', 'duty', 'mission', 'sick', 'course', 'battle', 'leave', 'step'];
+const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key', 'month', 'stake', 'back_from_wound', 'lost_last', 'promoted_last', 'award_last', 'first_tour', 'back_from_leave', 'detailed_last', 'detailed_ok'] as const;
+const PENDING = ['none', 'tunnel', 'duty', 'mission', 'sick', 'course', 'battle', 'leave', 'step', 'tour'];
 const ENDINGS = ['none', 'armistice', 'posting', 'captured', 'invalided', 'killed', 'broken', 'court_martial'];
 /** content ids are lower_snake_case; the war layer's ending names are its own */
 const endingId = (e: string) => (e === 'courtMartial' ? 'court_martial' : e);
@@ -239,6 +241,8 @@ function value(s: CoreState, field: string): number | string | boolean | undefin
     case 'award_last': return recent(w).award !== null;
     case 'first_tour': return w.clockInStage === 1;
     case 'back_from_leave': return w.clockInStage === 1 && w.stage > 1;
+    case 'detailed_last': return recent(w).detailed?.key ?? 'none';
+    case 'detailed_ok': return !!recent(w).detailed?.ok;
     // which written take a sortie shows: alternates with every sortie played, so two in a row differ
     case 'stake': return (w.stats.sorties ?? 0) % 2;
     // which of two written takes a recurring scene shows (alternates by tour), so a mission is not word for word the last one
@@ -273,7 +277,7 @@ export const module: GameModule = {
     return (FIELDS as readonly string[]).includes(field ?? '') ? null : `unknown war field in "${path}" (${FIELDS.join(', ')})`;
   },
   labelFor: (_c, path) => ({ 'war.nerve': 'Nerve', 'war.standing': 'Standing', 'war.section': 'The section', 'war.rank': 'Rank' })[path],
-  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.duty' ? ['none', ...Object.keys(DUTIES)] : path === 'war.wound' ? ['none', 'light', 'severe'] : path === 'war.sortie' || path === 'war.result_key' ? ['none', ...Object.keys(SORTIES)] : path === 'war.result' ? ['none', 'ok', 'failed', 'turned'] : path === 'war.course' ? ['none', 'bomb', 'lewis', 'snipe', 'signals', 'lead'] : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
+  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.duty' ? ['none', ...Object.keys(DUTIES)] : path === 'war.wound' ? ['none', 'light', 'severe'] : path === 'war.sortie' || path === 'war.result_key' || path === 'war.detailed_last' ? ['none', ...Object.keys(SORTIES)] : path === 'war.result' ? ['none', 'ok', 'failed', 'turned'] : path === 'war.course' ? ['none', 'bomb', 'lewis', 'snipe', 'signals', 'lead'] : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
   effects: {
     /** character creation: the two hometown skills from the town's list */
     war_home(s, _c, e) {

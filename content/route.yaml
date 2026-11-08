@@ -59,21 +59,21 @@ switch:
   - { if: ["war.sortie == tunnel", "war.step == 2"], go: s_tunnel_2 }
   - { if: ["war.sortie == tunnel", "war.step == 3"], go: s_tunnel_3 }
   - { if: "war.pending == step", go: w_step }
-  # a title page for each year, before anything else that year (content/scenes/war/years.yaml)
-  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 1", { not: flag.year_1915 }], go: y_1915 }
-  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 2", { not: flag.year_1916 }], go: y_1916 }
-  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 3", { not: flag.year_1917 }], go: y_1917 }
-  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 4", { not: flag.year_1918 }], go: y_1918 }
+  # a title page for each year, at the first tour of the year (content/scenes/war/years.yaml)
+  - { if: ["war.pending == tour", "war.stage == 1", { not: flag.year_1915 }], go: y_1915 }
+  - { if: ["war.pending == tour", "war.stage == 2", { not: flag.year_1916 }], go: y_1916 }
+  - { if: ["war.pending == tour", "war.stage == 3", { not: flag.year_1917 }], go: y_1917 }
+  - { if: ["war.pending == tour", "war.stage == 4", { not: flag.year_1918 }], go: y_1918 }
   # authored moments (calibration, the mill town 1915)
-  # front-line events: at the first call for men each tour, one from the pool if one is due;
+  # front-line events: at the start of each tour, one from the pool if one is due;
   # each is once, and requires says when (an empty draw goes straight to the duty)
-  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 1", "start == mill"], go: { pool: front_1915_mill, count: 1, then: w_duty } }
+  - { if: ["war.pending == tour", "war.stage == 1", "start == mill"], go: { pool: front_1915_mill, count: 1, then: w_tour } }
   - { if: ["war.battle == loos", "war.phase == 1", "war.path == rifleman"], go: b_loos_advance }
   - { if: ["war.battle == loos", "war.phase == 2", "war.path == rifleman"], go: b_loos_trench }
   - { if: ["war.battle == loos", "war.phase == 3", "war.path == rifleman"], go: b_loos_hold }
   - { if: ["war.pending == leave", "war.stage == 1", "start == mill"], go: l_mill_1915 }
   # the mill town, 1916 (docs/FRAME-1916.md)
-  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 2", "start == mill"], go: { pool: front_1916_mill, count: 1, then: w_duty } }
+  - { if: ["war.pending == tour", "war.stage == 2", "start == mill"], go: { pool: front_1916_mill, count: 1, then: w_tour } }
   - { if: ["war.battle == somme_1_july", "war.phase == 1", "start == mill"], go: b_somme_1 }
   - { if: ["war.battle == somme_1_july", "war.phase == 2", "start == mill"], go: b_somme_2 }
   - { if: ["war.battle == somme_1_july", "war.phase == 3", "start == mill"], go: b_somme_3 }
@@ -83,7 +83,7 @@ switch:
   - { if: ["war.battle == somme_autumn", "war.phase == 3", "start == mill"], go: b_somme_autumn_3 }
   - { if: ["war.pending == leave", "war.stage == 2", "start == mill"], go: l_mill_1916 }
   # the mill town, 1917 (content/scenes/war/1917-mill.yaml)
-  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 3", "start == mill"], go: { pool: front_1917_mill, count: 1, then: w_duty } }
+  - { if: ["war.pending == tour", "war.stage == 3", "start == mill"], go: { pool: front_1917_mill, count: 1, then: w_tour } }
   - { if: ["war.battle == arras", "war.phase == 1", "start == mill"], go: b_arras_1 }
   - { if: ["war.battle == arras", "war.phase == 2", "start == mill"], go: b_arras_2 }
   - { if: ["war.battle == arras", "war.phase == 3", "start == mill"], go: b_arras_3 }
@@ -94,6 +94,7 @@ switch:
   - { if: ["war.pending == leave", "war.stage == 3", "start == mill"], go: l_mill_1917 }
   # the war's questions
   - { if: "war.pending == tunnel", go: w_tunnel }
+  - { if: "war.pending == tour", go: w_tour }
   - { if: "war.pending == duty", go: w_duty }
   - { if: "war.pending == mission", go: w_mission }
   - { if: "war.pending == sick", go: w_sick }
