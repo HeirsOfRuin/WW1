@@ -3,7 +3,7 @@
 // the clock, [data-action] for choices, [data-tab] for tabs.
 import { useState } from 'preact/hooks';
 import type { ContentBundle } from '../content/schema';
-import { newGame, view, choose, startsOf, statusOf, artOf, type GameState, type SceneView } from '../game/index';
+import { newGame, view, choose, startsOf, statusOf, artOf, recordOf, type GameState, type SceneView, type SoldierRecord } from '../game/index';
 
 // Scene pictures (DESIGN §11): tools/art.ts writes src/art/<key>.png; the game asks artOf(state) which one.
 const ART = import.meta.glob('../art/*.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
@@ -20,7 +20,7 @@ const paras = (t: string) => t.trim().split(/\n\s*\n/).map((p) => <p>{p}</p>);
 
 export function App({ content }: { content: ContentBundle }) {
   const [state, setState] = useState<GameState | null>(null);
-  const [tab, setTab] = useState<'story' | 'journal' | 'menu'>('story');
+  const [tab, setTab] = useState<'story' | 'soldier' | 'journal' | 'menu'>('story');
   const [page, setPage] = useState(0);
   const [note, setNote] = useState<string | null>(null);
   const commit = (s: GameState | null) => { setState(s); setPage(0); if (s) lsSet(SAVE_KEY, JSON.stringify(toSave(s, content))); };
@@ -80,6 +80,7 @@ export function App({ content }: { content: ContentBundle }) {
                     </button>
                   ))}</div>}
         </>}
+        {tab === 'soldier' && <Soldier r={recordOf(content, state)} />}
         {tab === 'journal' && <><h2>Journal</h2>{state.journal.length
           ? <ol class="journal">{[...state.journal].reverse().map((j) => <li><strong>{j.sceneTitle ?? j.scene}</strong>: {j.choice}{j.changes.length > 0 && <small> ({j.changes.join(' · ')})</small>}</li>)}</ol>
           : <p class="empty">Empty so far: every choice you make is written here.</p>}</>}
@@ -90,8 +91,48 @@ export function App({ content }: { content: ContentBundle }) {
           <p class="hint">Saves live in this browser on this device. A save code moves a game to another.</p></>}
       </main>
       <nav class="tabs">
-        {(['story', 'journal', 'menu'] as const).map((t) => <button data-tab={t} class={tab === t ? 'on' : ''} onClick={() => setTab(t)}>{t[0]!.toUpperCase() + t.slice(1)}</button>)}
+        {(['story', 'soldier', 'journal', 'menu'] as const).map((t) => <button data-tab={t} class={tab === t ? 'on' : ''} onClick={() => setTab(t)}>{t[0]!.toUpperCase() + t.slice(1)}</button>)}
       </nav>
     </>
+  );
+}
+
+// The Soldier tab: the record from recordOf(), shown, never computed here.
+const bar = (value: number, max: number) => <span class="bar" role="img" aria-label={`${value} of ${max}`}><span style={{ width: `${Math.min(100, (100 * value) / max)}%` }} /></span>;
+const lines = (xs: { label: string; note?: string }[], empty: string) =>
+  xs.length ? <dl class="lines">{xs.map((x) => <><dt>{x.label}</dt>{x.note && <dd>{x.note}</dd>}</>)}</dl> : <p class="empty">{empty}</p>;
+
+function Soldier({ r }: { r: SoldierRecord }) {
+  return (
+    <div class="soldier">
+      <h2>{r.rank} {r.name}</h2>
+      <p class="hint">{r.role}, {r.town}. Age {r.age}.</p>
+      <p><strong>Nerve</strong>: {r.nerve.word} {bar(r.nerve.value, 100)}</p>
+      <p><strong>Standing</strong>: {r.standing}</p>
+
+      <h3>From home</h3>
+      {lines(r.home, 'Nothing chosen yet.')}
+
+      <h3>Learnt at the front</h3>
+      <dl class="lines">{r.war.map((k) => <><dt>{k.label} {bar(k.level, 5)}</dt><dd>{k.note}</dd></>)}</dl>
+
+      <h3>Traits</h3>
+      {lines(r.traits, 'None yet. Traits come from what you do, and the story remembers them.')}
+
+      <h3>Awards</h3>
+      {lines(r.awards, 'None yet. Medals come from battles and missions that go well.')}
+
+      <h3>Career</h3>
+      {lines(r.career, 'Not yet begun.')}
+
+      <h3>The section from home</h3>
+      <ul class="section">{r.friends.map((f) => <li class={f.alive ? '' : 'dead'}><strong>{f.name}</strong>{f.written ? '' : ''}<br /><small>{f.status}</small></li>)}</ul>
+
+      <h3>Rivals</h3>
+      {lines(r.rivals, 'None yet.')}
+
+      <h3>In all</h3>
+      {lines(r.totals, '')}
+    </div>
   );
 }

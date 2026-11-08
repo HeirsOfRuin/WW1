@@ -41,7 +41,7 @@ const SKILL_NAMES: Record<string, string> = {
   stamina: 'stamina', firstaid: 'first aid', sport: 'a throwing arm', voice: 'a chapel voice',
   trench: 'trench sense', bomb: 'bombing', lewis: 'the Lewis gun', snipe: 'sniping', signals: 'signals', lead: 'leadership', tunnel: 'tunnelling',
 };
-const PATH_NAMES: Record<string, string> = {
+export const PATH_NAMES: Record<string, string> = {
   rifleman: 'rifleman', bomb: 'bomber', lewis: 'Lewis gunner', snipe: 'sniper', signals: 'signaller', tunnel: 'tunneller', nco: 'section leader', subaltern: 'platoon officer',
 };
 const PHASE_LINES: Record<string, string> = {
@@ -103,14 +103,14 @@ export function endingLine(w: War): string {
   return '';
 }
 
-function standingWord(n: number): string {
+export function standingWord(n: number): string {
   if (n >= 75) return 'the officers know your name';
   if (n >= 55) return 'the sergeant trusts you';
   if (n >= 35) return 'one of the section';
   return 'marked as a shirker';
 }
 
-function nerveWord(n: number): string {
+export function nerveWord(n: number): string {
   if (n >= 70) return 'steady';
   if (n >= 45) return 'worn';
   if (n >= 25) return 'frayed';

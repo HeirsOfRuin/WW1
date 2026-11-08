@@ -10,7 +10,7 @@
 // ---- ADAPT THESE to the game's screens (the rest is generic) ---------------
 export const START = ['[data-act="new"]'];           // clicks that begin a game
 export const CLOCK = 'main.panel';                    // narrative: a choice changes the page (the date moves per season)                    // element whose text is the game clock
-export const TABS = ['[data-tab="story"]', '[data-tab="journal"]', '[data-tab="menu"]'];
+export const TABS = ['[data-tab="story"]', '[data-tab="soldier"]', '[data-tab="journal"]', '[data-tab="menu"]'];
 export const TURNS = Number(process.env.TURNS || 10);
 
 /** Take one turn the way a player would; return true if the clock moved. */
