@@ -10,6 +10,9 @@ rules:
   - { match: "Is our Albert eating", allow: war.mate1, why: Mrs Shaw asks after a living son }
   - { match: "Albert's voice is a croak", allow: war.mate1, why: Shaw answers the roll only alive }
   - { match: "Shaw has a letter-card", allow: war.mate1, why: Shaw writes home only alive }
+  - { match: "Duckworth (teaches the cat|has a sweep|gets his mouth|adopts one|looks at him like|starts to tell|says, licking)|You and Duckworth eat", allow: war.mate2, why: Harry Duckworth only acts while alive (1918) }
+  - { match: "Pilling's a corporal now|Pilling's telling|Pilling sees you|Pilling's is half a page|Pilling stands in the road", allow: war.mate3, why: Walter Pilling only acts while alive (1918) }
+  - { match: "Shaw's is on top|Shaw's had a new photograph|Shaw sits down in the road|Shaw says, flat", allow: war.mate1, why: Albert Shaw only acts while alive (1918) }
   - match: "All nine of the section"
     allow: "war.section == 9"
     why: The whole section alive only while all nine are.

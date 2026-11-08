@@ -1,0 +1,672 @@
+# The mill town, 1918 (stage 4: tours 30 to 39; the Spring Offensive is tour 32, Amiens tour 36,
+# October tour 39, then the Armistice). Written to the voice in content/style-guide.md; the plan
+# is docs/FRAME-1918.md. Battle phases carry a paragraph for each 1918 path, the platoon officer
+# included. Events come from the pool front_1918_mill on the tour page.
+
+# ---- events ----------------------------------------------------------------------------------
+
+- id: v18_french_line
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  once: true
+  weight: 100
+  requires: [ "war.tour == 30" ]
+  title: The French line
+  text: |
+    January, and they've moved you south, a long way south, to take over a stretch of line from
+    the French. The French have left it the way the French leave things: a stove in every dugout,
+    empty wine bottles in the sump, a cat that won't come out from under the duckboards, and a
+    picture of a woman in stockings pasted on the dugout wall. Nobody chips her off this time.
+
+    It's quiet. The old hands say it's too quiet, and then laugh at themselves for saying it. On a
+    still night you can hear a cart on the German side, miles off, with a wheel that wants grease.
+
+    And there's no line, not as you'd know it. The new idea is posts: little islands of men in the
+    chalk, a hundred yards apart, with wire round them, and the big redoubts further back. Between
+    the posts there's nothing but frost.
+
+    The ground's frozen a foot down. The pick rings on it like on a flagstone and jars you to the
+    teeth.
+  choices:
+    - id: dig
+      text: Dig the post deeper while there's time.
+      effects: [ { set: flag.dug_deep } ]
+      text_after: |
+        Three weeks of it, in shifts, through the frost and then the thaw. Chalk under your nails,
+        chalk in your tea, chalk in the cracks of your hands till they look like your gran's. By
+        February there's a dugout under the post, twenty steps down, timbered with planks you
+        stole from the French.
+      next: "@return"
+    - id: stove
+      text: Get the French stove going. Make the post fit to live in.
+      effects: [ { set: flag.french_stove } ]
+      text_after: |
+        It roars like the boiler house and you sit round it in your shirtsleeves for the first time
+        since October, toasting bread on bayonets, the cat on somebody's knee.[if war.mate2]
+        Duckworth teaches the cat to sit up for bacon rind and calls it Joffre.[/if]
+      next: "@return"
+
+- id: v18_waiting
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  once: true
+  weight: 200
+  requires: [ "war.tour == 31" ]
+  title: Waiting
+  text: |
+    February. They're coming. Everybody knows it. The prisoners say it, the airmen say it, the
+    deserters who come over in the night with their hands up say it, and give dates, and the dates
+    are all different.
+
+    You can hear them getting ready. Every night there are carts and lorries on roads you can't
+    see, and the clink of harness, more of it every week. Their guns register one at a time, a
+    single shell here, a single shell there, careful, like a man tapping the walls of a house he
+    means to buy.
+
+    At stand-to you look at the grey wire and the grey sky and think about the shed at half past
+    five on a winter morning, the gas mantles popping on one after another down the long room and
+    the first looms starting up. You'd give your back teeth for that noise.
+
+    [if war.mate2]Duckworth has a sweep going on the date. A franc a go. He's written the days up on a bit of ration box, and men keep coming to look at it as if it'll tell them.[else]A lance-corporal in B Company has a sweep going on the date. A franc a go, the days written up on a bit of ration box, and men keep coming to look at it as if it'll tell them.[/if]
+  choices:
+    - id: sweep
+      text: Put a franc on the twenty-first.
+      effects: [ { set: flag.sweep_21 } ]
+      text_after: |
+        [if war.mate2]"The twenty-first," Duckworth says, licking the pencil. "That's a Thursday. Nowt ever happens of a Thursday."[else]He writes your name against the twenty-first. "Thursday," he says. "Nowt ever happens of a Thursday."[/if]
+      next: "@return"
+    - id: keep
+      text: Keep your franc. It's asking for it.
+      text_after: |
+        You keep it. It's a dirty little paper note with a corner torn off, and you fold it into your
+        pay book, and it's still there months after, gone soft as cloth.
+      next: "@return"
+
+- id: v18_boys
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  once: true
+  weight: 100
+  requires: [ "war.tour == 33" ]
+  title: Backs to the wall
+  text: |
+    April. What's left of the battalion is out of the line in a village nobody's heard of, being
+    made up with drafts. The drafts are boys. After March they've started sending them out at
+    eighteen and a half, and here they are, boots squeaking, hair cropped by the depot barber,
+    eating anything they can find.
+
+    On parade the colonel reads out an order from the Commander-in-Chief. Every position to be held
+    to the last man. No retirement. Our backs to the wall. He reads it twice, the second time
+    slower, because the wind took it the first time.
+
+    The boys listen with their mouths open. The old hands look at their boots.
+
+    [if war.mate3]Pilling's a corporal now, nineteen, with a face like a shut door. He's been given a lad called Tattersall from Darwen, who follows him round like a dog and stands the way he stands.[/if][if war.mate3 && flag.told_pilling_ease] He's stopped volunteering for everything. He says it's because he's got Tattersall to think about.[/if]
+  choices:
+    - id: take_one
+      text: Take one of the boys on. Show him how to stay alive.
+      effects: [ { set: flag.took_a_lad } ]
+      text_after: |
+        His name's Clegg and he's from Rochdale and he's frightened of everything except what he
+        ought to be frightened of. You show him how to keep his feet dry, how to tell their shells
+        from ours by the sound, when to run and when to lie still. He writes it down in a notebook
+        with a pencil he keeps behind his ear.[if war.mate3] Across the billet Pilling's telling
+        Tattersall the same things in the same order, in the words you used to him in 1915, and
+        doesn't know you can hear.[/if]
+      next: "@return"
+    - id: keep_away
+      text: Keep away from the boys. Don't learn their names.
+      text_after: |
+        You don't learn their names. You learn them anyway, the way you learn the looms in a shed
+        without meaning to: Clegg, Tattersall, the two Hargreaves who aren't brothers.[if war.mate3]
+        Pilling sees you not looking at them. "You were like that with me," he says. "At first."[/if]
+      next: "@return"
+
+- id: v18_flu
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  once: true
+  weight: 60
+  requires: [ "war.tour == 34" ]
+  title: Three-day fever
+  text: |
+    May, and the weather's turned lovely, and the battalion's going down like skittles.
+    Three-day fever, the MO calls it. The papers from home call it the Spanish flu. A man goes from
+    right as rain to shaking in an hour, with a head like a cracked slate and his bones aching from
+    the inside, and three days later he's up again, wobbly on his legs, and the man next to him is
+    going down.
+
+    You feel it coming on at stand-to: a heat behind the eyes, a cold sweat down the back, the
+    rifle sling too heavy all at once for your shoulder.
+  choices:
+    - id: go_sick
+      text: Go sick. Lie down before you fall down.
+      effects: [ { set: flag.had_the_flu } ]
+      text_after: |
+        Three days in a barn on straw with forty other men, sweating and shivering and coughing in
+        the dark, an orderly coming round with a bucket of tea and a tin of Number Nines. You dream
+        about the shed, the racket of it, and wake with your teeth chattering in time to the looms.
+      next: "@return"
+    - id: stay
+      text: Stay at duty. Everybody's got it.
+      effects: [ { set: flag.had_the_flu } ]
+      text_after: |
+        You stand your sentry with your teeth going and the wire swimming in front of you. At dawn
+        the sergeant takes one look and sends you down anyway, and you cry all the way to the aid
+        post. It's the fever, you tell yourself. It's only the fever.
+      next: "@return"
+
+- id: v18_yanks
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 34", war.mate2 ]
+  title: Americans
+  text: |
+    Americans, at last. A company of them comes up to learn the line, big and well fed, with
+    cigarettes in packets of twenty with pictures on, and tinned peaches, and they call everybody
+    buddy, and they want to see a German so badly it hurts to watch.
+
+    Duckworth adopts one, a long lad from somewhere called Ohio who has never seen a mill and wants
+    to hear all about it. So Duckworth tells him. The shed, the noise, the tackler, the weavers
+    mee-mawing to each other across the looms because you can't hear yourself speak, the knocker-up
+    rattling the bedroom window at five. The American listens as if it's the Bible.
+  choices:
+    - id: peaches
+      text: Trade him your spare cap badge for a tin of peaches.
+      effects: [ { set: flag.peaches } ]
+      text_after: |
+        He gives you two tins, and a packet of cigarettes, and shakes your hand as if you'd given
+        him a medal. You and Duckworth eat the peaches in the bottom of the trench off a jack-knife,
+        turn and turn about, drinking the juice out of the tin, and they're so sweet that neither
+        of you can talk.
+      next: "@return"
+    - id: joke
+      text: Get Duckworth to tell him a tackler's tale.
+      effects: [ { set: flag.tackler_tale } ]
+      text_after: |
+        It's the one about the tackler who took his pigeon to the doctor's. It has never once been
+        funny, not in the shed, not in the drill hall, not at Loos. The American laughs till he has
+        to sit down on the firestep and wipe his eyes, and Duckworth looks at him like a man who has
+        found the one person in the world who understands him.
+      next: "@return"
+
+- id: v18_censor
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  once: true
+  weight: 80
+  requires: [ "war.tour >= 30", "war.path == subaltern" ]
+  title: The letters
+  text: |
+    Every night in the dugout, by a candle in a bottle, you read the platoon's letters. It's an
+    officer's job. You sit with a blue pencil and a pile of envelopes and read their mothers and
+    their wives and their girls, and strike out the names of places, and pass the rest, and sign
+    the corner.
+
+    You know these men. You know their mothers. You stood in the Co-op queue behind some of them.
+
+    [if war.mate1]Shaw's is on top, in the round careful hand he learned out here.[/if][if war.mate1 && flag.best_man] "Dear Edith, I am keeping well.[/if][if war.mate1 && !flag.best_man] "Dear Mother, I am keeping well.[/if][if war.mate1] We have a new officer, you know who. He is all right. He still has his tea out of the dixie with us when he thinks nobody is looking."[/if][if war.mate3] Pilling's is half a page of nothing, I am well, hope you are well, and at the bottom, crossed out, but you can read it: Mam I am that tired.[/if][if !war.mate1 && !war.mate3]A boy from Bacup has written to his mother that the new officer is a mill lad himself, and the men don't know yet whether to like it.[/if]
+  choices:
+    - id: pass
+      text: Pass them all as they are. Sign the corners.
+      text_after: |
+        You sign them and seal them and they go down the line in the sack with the rest. You don't
+        strike a word. Let somebody at home know where we are, you think. Let somebody know.
+      next: "@return"
+    - id: book
+      text: Do it by the book. Strike out the places.
+      text_after: |
+        Blue pencil through every village and every wood. That's the rule, and men have died for
+        less than a careless letter.[if war.mate3] You leave Pilling's crossed-out line alone.
+        It isn't a place.[/if]
+      next: "@return"
+
+- id: v18_moving_up
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  once: true
+  weight: 200
+  requires: [ "war.tour == 35" ]
+  title: Keep your mouth shut
+  text: |
+    July. They move you at night, only at night, and in the day you lie up in woods and barns out
+    of sight of the aeroplanes. Somebody has pasted a notice inside the cover of every pay book:
+    KEEP YOUR MOUTH SHUT. The roads at night are packed with guns, limbers, lorries, and tanks under
+    tarpaulins, all going one way with no lights, the drivers swearing in whispers. The air's thick
+    with petrol and horse dung and the dust off the road, and it never settles.
+
+    Something big. Nobody says it.
+
+    The post comes up with the rations, and there's one from your mother.
+
+    "Dear Son, just a few lines. Our Jack has had his papers, he went Tuesday to the camp at Prees
+    Heath. Your father walked him to the station and came home and went straight down the yard and
+    stopped there. Jack keeps asking me what it is like out there and I said ask your brother. So
+    he will be writing to you. Your loving Mother."
+  choices:
+    - id: truth
+      text: Write to Jack and tell him what it's like.
+      effects: [ { set: flag.told_jack_truth } ]
+      text_after: |
+        You write it in a barn by a candle stuck in a bully tin, and it takes two nights. You can't
+        tell him the worst of it. You tell him enough. Keep your feet dry. Keep your head down. Don't
+        volunteer. Don't believe a word they tell you at the depot. Write to Mother every week, even
+        if it's only a field card, because she stands at the door for the post.
+      next: "@return"
+    - id: easy
+      text: Write to Jack that it's not so bad.
+      effects: [ { set: flag.told_jack_easy } ]
+      text_after: |
+        You tell him the grub's all right and the lads are a good crowd and he'll be fine if he keeps
+        his nose clean. It's all true, near enough. You write it fast so you won't put anything
+        else, and seal it before you can read it back.
+      next: "@return"
+
+- id: v18_old_ground
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  once: true
+  weight: 200
+  requires: [ "war.tour == 37" ]
+  title: The old ground
+  text: |
+    The end of August, and you're going forward. Forward, every day. You come over a rise one
+    morning and you know it before you know why: the slope of the land, the line of a road, a
+    stump of a tree. It's the old ground. The first of July.
+
+    There's our old front line, the trench you went over from, fallen in and grassed over. The wire
+    in front of it is still there, rusted the colour of a cart axle, with grass growing up through
+    it. Out in the middle the craters have gone soft and green, with poppies in them, and there are
+    little crosses everywhere, leaning, dozens of them, and in the long grass the bits of things: a
+    water bottle, a boot, a helmet with a hole in it, a tin of something with the label gone.
+
+    It smells of hay. You'd forgotten how short a walk it was.
+  choices:
+    - id: walk_out
+      text: Walk out to where you think it was.
+      effects: [ { set: flag.walked_old_ground } ]
+      text_after: |
+        You can't find it. Everything's where it was and nothing is. [if flag.brought_discs]You stand where you think you crawled out for the discs, that night, and there's only grass, and a lark going up.[else]You stand in the long grass where you think it was, and a lark goes up, and keeps going up, singing, till you lose it in the sun.[/if]
+      next: "@return"
+    - id: keep_on
+      text: Keep your eyes on the man in front. Keep walking.
+      text_after: |
+        You keep walking. The column goes down the road into the next valley and the old ground
+        falls behind, and you don't look back, and you know exactly where it is behind you all day,
+        the way you know where the fire is in a dark room.
+      next: "@return"
+
+- id: v18_shaw_photo
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  once: true
+  weight: 50
+  requires: [ "war.tour >= 37", war.mate1, flag.best_man ]
+  title: Walking
+  text: |
+    Shaw's had a new photograph from home: the lad, stood up, holding on to a chair, in a little
+    frock, with his hair done in a curl on top. Albert Shaw, a year old and a bit.
+
+    "He's walking," Shaw says. "Edith says he's walking. He was walking in June and I never knew
+    till now."
+
+    He keeps it in the oilskin pouch with the old one of Edith from the studio on Market Street,
+    and on sentry you see him take it out and hold it up to the light of the flares, and put it
+    back, and take it out again.
+  choices:
+    - id: promise
+      text: Tell him you'll get him home to see it.
+      effects: [ { set: flag.promised_shaw } ]
+      text_after: |
+        "You will," Shaw says, flat, as if you'd told him the time. He puts the photograph away. Then,
+        not looking at you: "You'd better."
+      next: "@return"
+    - id: look
+      text: Ask to see it properly.
+      text_after: |
+        He hands it over as if it's an egg. The lad's got Shaw's ears, sticking out, and Edith's
+        mouth. On the back, in pencil, in Edith's hand: For his Dad.[if flag.wet_babys_head] "He's
+        had his rum ration already," Shaw says. "Off the section. He'll be a sergeant."[/if]
+      next: "@return"
+
+# ---- the Spring Offensive, 21 March 1918 (a defence: he can be overrun and taken) --------------
+
+- id: b_spring_1
+  chapter: front
+  title: The twenty-first of March
+  text: |
+    You wake because the ground is moving. It's a little before five and dark, and the whole of
+    the east is lit up from underneath, end to end, flickering, like the sky over the foundry on a
+    casting night. Then the noise reaches you, and it isn't guns any more. There are no gaps in it
+    to count.
+
+    Gas with it. The sneezing kind first, that gets in behind the mask and makes you want to tear
+    it off, then the other kind. Through the eyepieces everything's green and running, and the
+    rubber stinks, and your own breath roars in your ears.
+
+    When it gets light, it doesn't get light. Fog. Thick as a wet blanket on a line. You can't see
+    the next post, forty yards off. You can hear it.
+
+    [if flag.dug_deep]The dugout you dug in January holds. The timbers groan and drop chalk down your neck, but they hold.[/if][if flag.french_stove]The French stove goes over in the first minute and you stamp out the coals in the dark with your mask on, and the post fills with the stink of hot iron and scorched wool.[/if][if flag.sweep_21 && war.mate2] Duckworth gets his mouth right up against your ear in the din. "You've won," he shouts. "You jammy beggar. You've won the sweep."[/if]
+
+    [if war.path == rifleman]Beside you {mate} is counting the shells under his breath, and gives up.[/if][if war.path == nco]Your section is spread over two posts you can't see from each other. You have to choose which one you're in.[/if][if war.path == lewis]The gun's on the parapet under a groundsheet, the drums stacked in the recess, and there's nothing in the fog to fire at.[/if][if war.path == signals]The buried cable goes in the first ten minutes. A lamp's no use in fog. You've two pigeons in a basket, and a runner, and the runner's gone.[/if][if war.path == bomb]You've two boxes of Mills bombs and a fog you can't see ten yards into.[/if][if war.path == snipe]A sniper in fog is a man with a rifle. You wrap the telescope in a sock and put it in your pack.[/if][if war.path == tunnel]You're with the tunnellers in the battle zone, behind, with charges laid under the bridges and the dumps, and orders to blow them when the infantry are back through.[/if][if war.path == subaltern]Your platoon is in four posts and you can see none of them. The last order from company, an hour old, was to hold the forward zone at all costs. You've a revolver, a whistle and a map of a country you can't see.[/if]
+
+    Then, somewhere about twenty to ten, the noise changes. The shells go over, further back. Out in
+    the fog, something is coming.
+  choices:
+    - id: push
+      text: "Get up on the firestep, mask on, and face the fog. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Go along the post getting the masks on the new lads. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down the dugout steps till it lifts. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_spring_2
+  chapter: front
+  title: Out of the fog
+  text: |
+    They don't come at the front. They come round. The first you see of them is a man on the
+    parados, behind you, in a coal-scuttle helmet, throwing something. Then they're everywhere,
+    little groups of them, quick, with light machine guns and flame-throwers, slipping between
+    the posts in the fog and leaving the posts for the men behind them.
+
+    The post on your left goes quiet. Then the one past it. You hear them go out, one at a time, by
+    the sound: the rifles, a bomb, shouting, then nothing.
+
+    Down the trench a whole platoon comes up out of a deep dugout with their hands up, one man at a
+    time, blinking in the fog, because a German at the top of the steps has a bomb in his hand and
+    there's only one way out.[if flag.dug_deep] Twenty steps. You dug every one.[/if]
+
+    [if war.path == lewis]The gun fires at shapes. You change drums by feel.[/if][if war.path == subaltern]A runner gets through to you with an order from company to fall back on the redoubt. He's the third they sent.[/if][if war.path == nco]You count your men. You keep getting a different number.[/if]
+  choices:
+    - id: push
+      text: "Fire at the shapes, front and back. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Get the post back to the redoubt together, wounded and all. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Stay down in the bottom of the trench and let it go over. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_spring_3
+  chapter: front
+  title: Back
+  text: |
+    After that it's back. Five days, six, you lose count. March by night, dig in by day, and they're
+    on you again by the afternoon. Men go to sleep walking and walk into the man in front. A
+    quartermaster pours a whole dump of rum into a ditch so the Germans won't get it, and men lie
+    down in the ditch to drink it.
+
+    Behind you the dumps burn. Bully beef, biscuits, a canteen store with tins of pineapple bursting
+    in the fire, so the whole night smells of burnt sugar and petrol.
+
+    And the names on the signposts. You know the names. You're going back over the old Somme ground,
+    the ground that took a summer and a half to win, and you're giving it up in a day.[if flag.brought_discs]
+    Somewhere out there is where you crawled for the discs.[/if]
+
+    [if war.path == tunnel]Your charge is under a bridge over a canal. You wait in the reeds for the last of the infantry, counting them over. Behind them, the first grey helmets.[/if][if war.path == signals]No wire, no lamps, no pigeons. You carry messages on foot, and half the time the battalion headquarters has moved before you find it.[/if][if war.path == subaltern]You've nineteen men left of thirty-eight, and a map that ran out yesterday.[/if]
+  choices:
+    - id: push
+      text: "Stay with the rearguard on the ridge. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Carry the wounded lad between you, whatever it slows you. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Lie up in a cellar and let them go by. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_spring_4
+  chapter: front
+  title: The embankment
+  text: |
+    The end of March, and a railway embankment in front of a town you've never heard of, and
+    somebody says that's it, no further. You believe it because you can't walk any further.
+
+    They've slowed. The word is they stopped at our dumps, and found the white bread and the jam and
+    the boots and the whisky, and couldn't believe it, and some of them are drunk in the cellars.
+    They thought we were starving.
+
+    New men come up on your right in slouch hats, Australians, who look at you as if you're
+    something the cat brought in, and give you their water.
+
+    At dusk the grey lines come up the slope at you one more time.
+
+    [if war.path == lewis]You set the gun up on the rails, on its bipod, between two sleepers, and the barrel's still hot from the morning.[/if][if war.path == subaltern]You walk the embankment behind your men, which is where an officer walks, and the bullets go over the rails with a noise like tearing calico.[/if]
+  choices:
+    - id: push
+      text: "Get up on the embankment and fire into them. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Go along the embankment with ammunition. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Keep under the embankment and let the guns do it. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- Amiens, 8 August 1918 --------------------------------------------------------------------
+
+- id: b_amiens_1
+  chapter: front
+  title: The eighth of August
+  text: |
+    Twenty past four in the morning, and fog again. This time it's ours.
+
+    There's been no bombardment, no days of it the way there was before the Somme, no warning. The
+    guns open all at once, every gun at once, and the barrage comes down a couple of hundred yards
+    in front and starts walking. Out of the fog behind you come the tanks, dozens, more than you
+    knew there were in France, lurching and roaring, and the air's full of hot oil and petrol and
+    their exhaust.
+
+    The ground's green. That's what you can't get over. Standing corn, uncut, up to your waist, and
+    poppies in it, and the fog lying on it white.
+
+    [if war.path == rifleman]Beside you, {mate} wades through the corn with his rifle held up out of it like a man crossing a river.[/if][if war.path == nco]Your section goes forward behind a tank, the way they've practised, in little worms of men, and you've never seen it work before.[/if][if war.path == lewis]You fire from the hip as you go, the way you were never taught, and the corn in front of you jumps.[/if][if war.path == signals]You go behind the company with a reel on your back, and the wire runs out behind you in the wet corn, and holds.[/if][if war.path == bomb]You've bombs in a bucket, and the men you're going for are behind the tanks, not in front of them.[/if][if war.path == snipe]You're out on the flank looking for their machine guns in the edges of the woods.[/if][if war.path == tunnel]You go up behind the infantry to search the dugouts they take for charges set to blow. They've been leaving them, lately, under the stairs.[/if][if war.path == subaltern]You blow your whistle and nobody hears it, and they go anyway, because they know what to do now better than you do.[/if]
+
+    [if war.stalled]On the left the fog lifts too soon. A tank's burning by a copse, black smoke rolling off it low over the corn, and a machine gun in the copse has the whole company down.[else]Their front line comes up out of the fog, and it's half empty, and the men in it have their hands up before you get there. Their breakfast is still on the fire.[/if]
+  choices:
+    - id: push
+      text: "Keep up with the tanks. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Keep the section together in the fog. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down in the corn till the fog clears. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_amiens_2
+  chapter: front
+  title: The wood
+  text: |
+    A wood, with a road running into it, and machine guns at the edge. The tanks go at it and one
+    stops with smoke coming out of it, and the crew climb out and lie under it.
+
+    Most of them give up. They come out of the dugouts in crowds, with their hands up and their kit
+    packed, as if they'd been waiting. An officer asks you in English for a receipt for his field
+    glasses. But the machine-gunners at the edge of the wood are the other sort, the old sort, and
+    they fight till they're dead.
+  choices:
+    - id: push
+      text: "Go in at the guns from the side. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Get the tank crew back out of the open. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down behind the bank and fire at the wood's edge. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_amiens_3
+  chapter: front
+  title: Open country
+  text: |
+    By the afternoon you're further than anybody has been since 1914. Seven miles, somebody says.
+    There are no trenches here. There are fields and hedges and a farmhouse with the washing still
+    on the line, and cavalry go past you at a trot, real cavalry, through the oats.
+
+    Their field guns are firing over open sights from behind a hedge, at the tanks, and at you.
+    You dig in at dusk in a field of oats, scraping a hole with your entrenching tool, and the
+    earth's soft and brown and smells of rain. Like the allotment.
+  choices:
+    - id: push
+      text: "Go for the guns behind the hedge. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Dig the hole for two. Bring the wounded man in. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Dig in deep and keep down. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- October 1918 -----------------------------------------------------------------------------
+
+- id: b_oct_1
+  chapter: front
+  title: The river
+  text: |
+    A river, in October, in the dark. The sappers have been out all night putting footbridges over
+    it, planks on floats, and you go over in single file with the water black and quick under the
+    boards and the smell of it cold and green, like the canal under the mill in winter.
+
+    Gas in the valley, lying in the low places. Fog over it.
+
+    [if war.path == rifleman]Behind you, {mate} has hold of your pack strap. On the bridge his boot goes through between two planks and you haul him up by the collar.[/if][if war.path == nco]You count your section onto the bridge, and off.[/if][if war.path == lewis]The gun's on your shoulder. If you go in, you'll go straight to the bottom with it.[/if][if war.path == signals]The wire goes over the river with you, pegged to the floats.[/if][if war.path == bomb]You go over with the bombs in a sandbag held up against your chest.[/if][if war.path == snipe]On the far bank, the railway embankment. You know they're on it. You look for the glint.[/if][if war.path == tunnel]You're on the bridges themselves, up to your waist in it, lashing the floats while they cross.[/if][if war.path == subaltern]Your platoon's first over. You go first on the bridge, which is what they pay you for.[/if]
+
+    [if war.stalled]The far bank opens up before half of you are over. A bridge goes, men and all, and the river takes them.[else]On the far bank there's an embankment, and a hedge, and the barrage coming down on both.[/if]
+  choices:
+    - id: push
+      text: "Get over and up the embankment. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Stop on the bank and pull men out of the water. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down under the near bank. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_oct_2
+  chapter: front
+  title: The village
+  text: |
+    A village, still standing, with roofs on, and people in it.
+
+    They come up out of the cellars when the firing's moved on: old men, women, children with faces
+    the colour of candles. Four years they've been behind the German lines. An old woman in a black
+    shawl kisses you on both cheeks and smells of onions and cellars, and pushes a cup into your
+    hands. It's coffee made of roasted barley, and it's the best thing you've ever tasted.
+
+    There's a machine gun in the church tower. It's firing down the street.
+  choices:
+    - id: push
+      text: "Go for the church through the gardens. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Get the people back down into the cellars. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get into a doorway and fire at the tower. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_oct_3
+  chapter: front
+  title: The last of it
+  text: |
+    They come back once more, at evening, out of an orchard, and it's half-hearted, and it's still
+    enough to kill men. Apples on the ground everywhere, gone soft, and wasps in them, and the smell
+    of cider in the dusk.
+
+    After that, quiet. Just the guns, further off every day.
+
+    There's a rumour, the way there's always a rumour. Only this time the officers are saying it too.
+  choices:
+    - id: push
+      text: "Go out into the orchard after them. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Get the wounded in out of the orchard. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Keep down behind the wall. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- the Armistice, for the mill town ----------------------------------------------------------
+
+- id: e_armistice_mill
+  chapter: end
+  kind: ending
+  ending: armistice
+  title: The Armistice
+  text: |
+    {ending_line}
+
+    It comes up in the morning with the rations, on a message form, in the adjutant's hand.
+    Hostilities will cease at 1100 hours today. Nobody believes it. Then everybody does, all at
+    once, and nobody knows what to do with their hands.
+
+    The guns go on to the last minute. A battery behind you fires off everything it has, as if it's
+    somebody's birthday, and at a minute to eleven a German machine gun across the valley fires a
+    whole belt into the sky. Then a man stands up beside it, takes his helmet off, bows, and walks
+    away.
+
+    Then eleven. It goes so quiet you can hear a wood pigeon, and a cart a long way off, and the man
+    next to you breathing.
+
+    [if war.mate1 && flag.best_man]Shaw sits down in the road and gets the photograph out, and doesn't put it away again all day.[/if][if war.mate1 && flag.promised_shaw] "Well," he says. "You got me home, then." It isn't true yet. You let him have it.[/if][if !war.mate1 && flag.promised_shaw]You told Shaw you'd get him home to see the lad walk. You think of Edith, and the little fist round your finger.[/if][if war.mate2] Duckworth starts to tell a joke and can't get to the end of it.[/if][if war.mate2 && flag.tackler_tale] "There's a lad in Ohio," he says, "telling the one about the pigeon. That's what I did in the war."[/if][if !war.mate2 && flag.gave_fags] You light a Woodbine and think of Duckworth, who owed you one, and paid up.[/if][if war.mate3] Pilling stands in the road and doesn't know what to do, and in the end he takes his tin hat off and throws it as far as he can into a field of turnips.[/if][if !war.mate3] You think of Walter Pilling, sixteen at Loos, who'd have been twenty in March.[/if]
+
+    You don't get home till the spring. The letters come. The influenza's in the street, the bad
+    sort this time; Mrs Ormerod's two girls; the schools shut. On the day, your mother says, every
+    mill buzzer in the town went off at eleven, all at once, and the chapel bells after, and your
+    father stood in the yard and wouldn't come in for an hour.[if flag.had_the_flu] You've had it,
+    out here, and got up again. You read that part twice.[/if]
+
+    [if flag.told_jack_truth]Our Jack never went out. He was at Prees Heath when it finished. He writes that he read your letter till it fell to bits, and he's glad, and he's sorry, and he doesn't know which.[/if][if flag.told_jack_easy]Our Jack never went out. He was at Prees Heath when it finished, and he writes that he's fed up, he's missed it, it isn't fair. You put the letter in the stove.[/if][if !flag.told_jack_truth && !flag.told_jack_easy]Our Jack never went out. He was at the camp when it finished. Your mother says it three times in one letter, as if she's counting.[/if][if flag.walked_old_ground] Some nights you're back in the long grass on the old ground, looking for the place.[/if][if flag.peaches] You can't look at a tin of peaches.[/if][if flag.took_a_lad] Clegg writes from Rochdale, once, to say he's back at the dye works and thank you.[/if]
+
+    You are {age} years old and {rank_a}, and you went out of the shed a boy.
+
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.

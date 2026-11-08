@@ -102,11 +102,11 @@ describe('endings say what happened, in words', () => {
 describe('the story leads', () => {
   // The author, 2026-11-09: "follow a story more so than just playing generic missions. Have a
   // general play through (only volunteering half the time) to split between story and generic
-  // missions 50/50". Measured on the written years (the mill town, 1915-1917): a year that drifts
-  // far from even fails here. 1918 is not written yet and is left out.
+  // missions 50/50". Measured on the written years (the mill town, 1915-1918): a year that drifts
+  // far from even fails here.
   it('story is about half the screens in each written year', () => {
     const r = share(40);
-    for (const y of [1, 2, 3]) {
+    for (const y of [1, 2, 3, 4]) {
       const c = r.byYear[y]!;
       const p = c.story / (c.story + c.generic);
       expect(p, `year ${1914 + y}: story ${(100 * p).toFixed(1)}%`).toBeGreaterThan(0.44);

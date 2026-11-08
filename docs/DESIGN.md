@@ -482,6 +482,10 @@ and the story events and year pages route there. A duty is offered on 60% of tou
 duties play out off-screen at steady. Duties are harder to keep the war's difficulty. `npm run
 story` measures the share: 53.6% story for a player who volunteers half the time.
 
+**1918 for the mill town (FRAME-1918.md).** Nine events, ten battle phases with a paragraph
+per path (the platoon officer included), and the mill town's own Armistice ending. The 1918
+story share went from 25.4% to 51.8%.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.

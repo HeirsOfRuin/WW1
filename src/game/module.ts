@@ -85,6 +85,12 @@ export function offerWords(o: string): string {
 }
 
 /** Where a wound or a death happened, in words, from the cause the resolver recorded. */
+// battle names in a sentence: "Killed at Spring Offensive" read like a form
+const BATTLE_WHERE: Record<string, string> = {
+  'Somme, 1 July': 'on the Somme, on the first of July', 'Somme, autumn': 'on the Somme, in the autumn',
+  'Spring Offensive': 'in the German offensive, in March', 'Hundred Days, August': 'at Amiens, in August',
+  'Hundred Days, October': 'in the advance, in October',
+};
 export function whereOf(cause: string): string {
   // the resolver appends what happened (", severe wound, downgraded", ": shell shock"); battle names keep their commas
   const c = cause.replace(/(, severe wound, downgraded|: [^:]*)$/, '').trim();
@@ -94,7 +100,7 @@ export function whereOf(cause: string): string {
   if (c === 'mine collapse or camouflet') return 'underground, when a gallery came in';
   if (DUTY_NAMES[c]) return `on ${DUTY_NAMES[c]}`;
   if (ROLE_WHERE[c]) return ROLE_WHERE[c]!;
-  if (BATTLES.has(c)) return `at ${c}`;
+  if (BATTLES.has(c)) return BATTLE_WHERE[c] ?? `at ${c}`;
   return 'in France';
 }
 

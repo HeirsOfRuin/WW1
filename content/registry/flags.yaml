@@ -44,3 +44,15 @@ stood_shaws_watch: { description: "Stood Shaw's sentry so he could write to Edit
 sat_with_shaw: { description: "Sat with Shaw on the firestep the night Edith wrote" }
 y17_mustard: { description: "The mustard gas event has been played (chains the events)" }
 led_the_gassed: { description: "Led a line of blinded men down to the aid post" }
+# The mill town, 1918 (content/scenes/war/1918-mill.yaml)
+dug_deep: { description: "Dug the January post a deep dugout; it holds on 21 March, and it is a trap" }
+french_stove: { description: "Got the French stove going in January; it goes over on 21 March" }
+sweep_21: { description: "Put a franc on the twenty-first in the sweep; he wins it on the morning" }
+took_a_lad: { description: "Took one of the 1918 boys (Clegg) on; he writes after the war" }
+had_the_flu: { description: "Had the three-day fever in May; the Armistice letter about the flu at home" }
+peaches: { description: "Traded a cap badge to an American for peaches, with Duckworth" }
+tackler_tale: { description: "Duckworth told the American a tackler's tale; he remembers it at the Armistice" }
+told_jack_truth: { description: "Wrote to his brother Jack what it is like" }
+told_jack_easy: { description: "Wrote to his brother Jack that it is not so bad" }
+walked_old_ground: { description: "Walked out on the old 1 July ground in August 1918" }
+promised_shaw: { description: "Promised Shaw he would get him home to see his son walk" }
