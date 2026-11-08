@@ -148,6 +148,7 @@ export const ROLE = {
   successPerSkill: 0.06, hitPerSkill: 0.06,
   restBonus: 1.0, // better pay, billets and kit: nerve back at rest
   crew: 4, // a tunneller's crew stands in for the section at rest
+  turnBackStanding: 6, turnBackNerve: 4, // what turning back costs: the section knows, and he knows
   meritToPromote: 2, promoteChance: 0.4, // successful missions count toward a stripe
   keepRole: 2.5, // specialist skill at which a promoted man keeps his role instead of leading a section
 };
@@ -158,3 +159,35 @@ export const FRIEND_BATTLE = 0.16;
 
 // Nerve recovered at rest (per rotation, plus per friend alive and with you) and on home leave.
 export const REST = { base: 4.5, voice: 2, perFriend: 0.4, leave: 30 };
+
+// ---- sorties: duties and role missions played out (the author, 2026-11-09: "There needs to be
+// more actions and playing out missions. Just taking whether you go or not is no fun") ----------
+// A duty or mission is three steps. Each step carries a share of the duty's old single-roll hit
+// chance; played steadily throughout, the whole sortie is about as dangerous as the old roll.
+// Each step's choice scales its share: bold earns more and risks more; careful the reverse; turning
+// back (where the step allows it) ends the sortie, safely-ish, with nothing to show.
+export type SortieChoice = 'bold' | 'steady' | 'careful' | 'back';
+export const SORTIE_CHOICE: Record<SortieChoice, { hit: number; gain: number; nerve: number; ends?: boolean }> = {
+  bold: { hit: 1.6, gain: 2, nerve: 1.15 },
+  steady: { hit: 1.0, gain: 1, nerve: 1.0 },
+  careful: { hit: 0.5, gain: 0, nerve: 0.9 },
+  // turning back: coming in alone in the dark is not safe, and it eats at a man (measured: at 0.35 and
+  // a small standing cost, turning back was the best road to the Armistice and to the grade)
+  back: { hit: 0.6, gain: 0, nerve: 1.0, ends: true },
+};
+export interface Sortie { shares: [number, number, number]; back: [boolean, boolean, boolean]; skill: string; need: number }
+/** Need: points for success. Steady throughout gives 3, bold 2 a step, plus half a point per skill level, plus luck
+ *  in -1..1. At 3.5 a beginner who plays it steady succeeds one time in four and a bold step makes it likely;
+ *  skill closes the gap (first try at 3 made steady succeed nearly always, so bold bought nothing: measured). */
+export const SORTIES: Record<string, Sortie> = {
+  raid: { shares: [0.3, 0.4, 0.3], back: [true, false, false], skill: 'bomb', need: 3.5 },
+  patrol: { shares: [0.3, 0.45, 0.25], back: [true, true, false], skill: 'snipe', need: 3.5 },
+  wiring: { shares: [0.3, 0.45, 0.25], back: [false, false, true], skill: 'trench', need: 3 },
+  listening: { shares: [0.25, 0.5, 0.25], back: [false, false, false], skill: 'trench', need: 3 },
+  carrying: { shares: [0.3, 0.45, 0.25], back: [false, false, false], skill: 'trench', need: 3 },
+  bomb: { shares: [0.3, 0.45, 0.25], back: [true, false, false], skill: 'bomb', need: 3.5 },
+  lewis: { shares: [0.25, 0.5, 0.25], back: [false, false, false], skill: 'lewis', need: 3.5 },
+  snipe: { shares: [0.2, 0.55, 0.25], back: [false, true, false], skill: 'snipe', need: 3.5 },
+  signals: { shares: [0.3, 0.45, 0.25], back: [false, false, false], skill: 'signals', need: 3.5 },
+  tunnel: { shares: [0.25, 0.5, 0.25], back: [false, true, false], skill: 'tunnel', need: 3.5 },
+};

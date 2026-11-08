@@ -16,6 +16,9 @@ switch:
   - { if: ["war.fallen == 2", "start == mill"], go: x_fallen_duckworth }
   - { if: ["war.fallen == 3", "start == mill"], go: x_fallen_pilling }
   - { if: "war.fallen >= 1", go: x_fallen }
+  # how a sortie went, then its next step (content/scenes/war/sorties.yaml)
+  - { if: "war.result != none", go: x_sortie }
+  - { if: "war.pending == step", go: w_step }
   # authored moments (calibration, the mill town 1915)
   # front-line events: at the first call for men each tour, one from the pool if one is due;
   # each is once, and requires says when (an empty draw goes straight to the duty)

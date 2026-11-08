@@ -9,15 +9,13 @@ import { toSave, fromSave, encodeSaveCode, decodeSaveCode } from '../src/game/sa
 import { warMonth, seasonOf, monthName, ARMISTICE } from '../src/game/war/calendar';
 import { phaseHit, battleOf } from '../src/game/war/index';
 import { riskWord, whereOf, endingLine } from '../src/game/module';
-// The kill-gate prototype: the rules of record until Phase 1 retires it (DESIGN §9).
-import { play as protoPlay } from '../prototypes/killgate/model.js';
-import { digest as protoDigest } from '../prototypes/killgate/adapter.js';
 
 const content = loadContent();
 const TOWNS = ['pit', 'mill', 'city', 'farm'] as const;
 const POLICIES = ['reckless', 'careful', 'mates', 'climber', 'adaptive', 'quit1', 'quit2', 'quit3'];
 const seedOf = (i: number, town: string) => 1 + i * 7919 + town.charCodeAt(0) * 131 + town.charCodeAt(1);
-const warDigest = (s: GameState) => protoDigest({ ...s.war, off: new Set() });
+// the end state of a war, for comparing two plays of the same game
+const warDigest = (s: GameState) => JSON.stringify([s.war.ending, s.war.clock, s.war.rank, s.war.nerve.toFixed(4), s.war.standing.toFixed(4), s.war.awards, s.war.friends]);
 
 describe('content', () => {
   it('validates with no errors', () => {
@@ -26,17 +24,6 @@ describe('content', () => {
   it('random players reach a real ending every time', () => {
     const bad = runBot(10).filter((r) => r.outcome !== 'ending' || r.ending === 'error');
     expect(bad.map((r) => `${r.start} ${r.seed}: ${r.outcome} ${r.ending ?? ''} ${r.detail ?? ''}`)).toEqual([]);
-  });
-});
-
-describe('the war through the engine equals the kill-gate prototype', () => {
-  // Same seed, same policy: the same war, to the fourth decimal of nerve. While this holds,
-  // KILLGATE.md's tables are this game's. Remove it at the first deliberate change of a rule.
-  for (const policy of POLICIES) it(policy, () => {
-    for (const town of TOWNS) for (let i = 0; i < 5; i++) {
-      const seed = seedOf(i, town);
-      expect(warDigest(playGame(content, { seed, town, policy })), `${policy} ${town} ${seed}`).toBe(protoDigest(protoPlay(seed, { policy, town })));
-    }
   });
 });
 

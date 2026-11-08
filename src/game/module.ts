@@ -13,7 +13,7 @@ import { GAME_ID, type ContentBundle } from '../content/schema';
 import type { GameState } from './state';
 import {
   run, decide, setHome, newsOf, aliveFriends, grade, dutyHit, missionHit, phaseHit, battleOf,
-  RANKS, ROLES, DUTIES, STAGES, type Decision, type War,
+  RANKS, ROLES, DUTIES, STAGES, SORTIES, sortieHit, type Decision, type War, type SortieChoice,
 } from './war/index';
 import { warMonth, seasonOf, monthName } from './war/calendar';
 
@@ -164,8 +164,8 @@ export function statusOf(s: CoreState): { rank: string; role: string; nerve: str
 
 // ---- paths -------------------------------------------------------------------------------------
 
-const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take'] as const;
-const PENDING = ['none', 'tunnel', 'duty', 'mission', 'sick', 'course', 'battle', 'leave'];
+const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key'] as const;
+const PENDING = ['none', 'tunnel', 'duty', 'mission', 'sick', 'course', 'battle', 'leave', 'step'];
 const ENDINGS = ['none', 'armistice', 'posting', 'captured', 'invalided', 'killed', 'broken', 'court_martial'];
 /** content ids are lower_snake_case; the war layer's ending names are its own */
 const endingId = (e: string) => (e === 'courtMartial' ? 'court_martial' : e);
@@ -195,6 +195,13 @@ function value(s: CoreState, field: string): number | string | boolean | undefin
     case 'fallen': { const f = writtenFallen(w); return w.cursor.at === 'done' || !f ? 0 : f.i + 1; }
     case 'fallen_present': return !!writtenFallen(w)?.present;
     case 'course': return p?.kind === 'course' ? p.skill : 'none';
+    case 'sortie': return p?.kind === 'step' ? p.key : 'none';
+    case 'step': return p?.kind === 'step' ? p.step + 1 : 0;
+    case 'can_back': return p?.kind === 'step' && p.canBack;
+    case 'vol': return p?.kind === 'step' && p.vol;
+    // a finished sortie not yet told: ok, failed, turned (back), or none
+    case 'result': { const r = w.cursor.at === 'done' ? null : w.news?.sortie; return r ? (r.turned ? 'turned' : r.ok ? 'ok' : 'failed') : 'none'; }
+    case 'result_key': return w.news?.sortie?.key ?? 'none';
     // which of two written takes a recurring scene shows (alternates by tour), so a mission is not word for word the last one
     case 'take': return w.clock % 2;
     case 'call': return p?.kind === 'duty' && w.cursor.at === 'duty' ? (w.cursor as { i: number }).i + 1 : 0;
@@ -227,7 +234,7 @@ export const module: GameModule = {
     return (FIELDS as readonly string[]).includes(field ?? '') ? null : `unknown war field in "${path}" (${FIELDS.join(', ')})`;
   },
   labelFor: (_c, path) => ({ 'war.nerve': 'Nerve', 'war.standing': 'Standing', 'war.section': 'The section', 'war.rank': 'Rank' })[path],
-  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.duty' ? ['none', ...Object.keys(DUTIES)] : path === 'war.wound' ? ['none', 'light', 'severe'] : path === 'war.course' ? ['none', 'bomb', 'lewis', 'snipe', 'signals', 'lead'] : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
+  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.duty' ? ['none', ...Object.keys(DUTIES)] : path === 'war.wound' ? ['none', 'light', 'severe'] : path === 'war.sortie' || path === 'war.result_key' ? ['none', ...Object.keys(SORTIES)] : path === 'war.result' ? ['none', 'ok', 'failed', 'turned'] : path === 'war.course' ? ['none', 'bomb', 'lewis', 'snipe', 'signals', 'lead'] : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
   effects: {
     /** character creation: the two hometown skills from the town's list */
     war_home(s, _c, e) {
@@ -249,8 +256,9 @@ export const module: GameModule = {
     /** a wound or a friend's death has been shown: clear it so the route moves on */
     war_ack(s, _c, e) {
       const w = war(s);
-      const what = (e as { war_ack: 'wound' | 'fallen' }).war_ack;
-      if (what === 'wound') newsOf(w).wound = null;
+      const what = (e as { war_ack: 'wound' | 'fallen' | 'sortie' }).war_ack;
+      if (what === 'sortie') newsOf(w).sortie = null;
+      else if (what === 'wound') newsOf(w).wound = null;
       else { const f = writtenFallen(w); if (f) newsOf(w).fallen.splice(newsOf(w).fallen.indexOf(f), 1); }
     },
     /** the player's answer to the war's question */
@@ -259,7 +267,8 @@ export const module: GameModule = {
       const w = war(s);
       if (!w.pending) throw new Error(`war: "${d}" with no question pending`);
       newsOf(w).fallen = newsOf(w).fallen.filter((f) => f.i < 3); // the six unwritten men are a line in the changes
-      newsOf(w).wound = null; // shown already, or happened in a war that has moved on
+      newsOf(w).wound = null;
+      newsOf(w).sortie = null; // shown already, or happened in a war that has moved on
       const before = { nerve: w.nerve, standing: w.standing, rank: w.rank, section: aliveFriends(w), awards: w.awards.length };
       decide(w, d as Decision);
       const dn = Math.round(w.nerve - before.nerve);
@@ -297,6 +306,10 @@ export const module: GameModule = {
       case 'mate': return mate(s);
       case 'mate1': case 'mate2': case 'mate3': { const n = SECTION_NAMES[w.town]![Number(name.slice(4)) - 1]!; return w.friends[Number(name.slice(4)) - 1] ? surname(n) : n; }
       case 'mate1_first': case 'mate2_first': case 'mate3_first': return SECTION_NAMES[w.town]![Number(name[4]) - 1]!.split(' ')[0]!;
+      case 'risk_bold': case 'risk_steady': case 'risk_careful': case 'risk_back': {
+        if (p?.kind !== 'step') return '';
+        return riskWord(sortieHit(w, p.key, p.role, p.step, name.slice(5) as SortieChoice));
+      }
       case 'wound_where': return w.news?.wound ? whereOf(w.news.wound.cause) : '';
       case 'fallen_name': { const f = writtenFallen(w); return f ? SECTION_NAMES[w.town]![f.i]! : ''; }
       case 'fallen_first': { const f = writtenFallen(w); return f ? SECTION_NAMES[w.town]![f.i]!.split(' ')[0]! : ''; }
@@ -335,7 +348,7 @@ export const module: GameModule = {
     }
     return undefined;
   },
-  checkTextVar: (name) => (['wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line'].includes(name) ? [] : undefined),
+  checkTextVar: (name) => (['risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line'].includes(name) ? [] : undefined),
   variantKey: (s) => st(s).start,
   startScene: (s, c) => ct(c).starts[st(s).start]?.start_scene,
   date: (s) => monthName(warMonth(war(s))),

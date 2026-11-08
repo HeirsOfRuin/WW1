@@ -11,7 +11,7 @@ import { chance, float, pick, raw, seedStreams, type Streams, type StreamName } 
 import {
   TOWNS, DEFAULT_GENERAL, WAR_SKILLS, SPECIALIST, APTITUDE, TOWN_COURSE, WAR_WORK, STAGES, DUTIES, WOUND, PATHS,
   CHOICES, GRADE, SECTION_SIZE, SUBALTERN, TOP_OR, RANKS, REST, FRIEND_BATTLE, PHASE_HIT, STALL, ROLES, ROLE,
-  COMMISSION_BOARD, type Town, type Ending, type BattleChoice, type Battle, type Stage,
+  COMMISSION_BOARD, SORTIES, SORTIE_CHOICE, type SortieChoice, type Town, type Ending, type BattleChoice, type Battle, type Stage,
 } from './data';
 
 // ---- state -------------------------------------------------------------------------------
@@ -24,7 +24,9 @@ export type Pending =
   | { kind: 'sick' }
   | { kind: 'course'; skill: string }
   | { kind: 'battle'; battle: string; phase: number; type: string; stalled: boolean }
-  | { kind: 'leave'; offers: string[]; commission: boolean };
+  | { kind: 'leave'; offers: string[]; commission: boolean }
+  /** a step of a duty or role mission being played out (SORTIES) */
+  | { kind: 'step'; key: string; role: boolean; step: number; of: number; vol: boolean; canBack: boolean };
 
 export type Decision =
   | 'transfer' | 'stay'                 // tunnel
@@ -33,7 +35,8 @@ export type Decision =
   | 'report' | 'carry_on'               // sick
   | 'take'                              // course
   | BattleChoice                        // battle
-  | 'back' | 'commission' | `posting:${number}`; // leave
+  | 'back' | 'commission' | `posting:${number}` // leave
+  | SortieChoice; // a sortie step ('back' turns back)
 
 /** Where the machine is. Saved, so a war resumes mid-rotation. */
 type Cursor =
@@ -48,12 +51,15 @@ type Cursor =
   | { at: 'battle'; i: number; pts: number }
   | { at: 'tally' }
   | { at: 'leave' }
+  | { at: 'sortie'; key: string; role: boolean; i: number; pts: number; vol: boolean; friendAtRisk: boolean; ret: Cursor }
   | { at: 'done' };
 
 export interface WarStats {
   minNerve: number; lowNerve: number; rotations: number; volunteered: number; detailed: number; courses: number;
   battles: number; missedBattles: number; offersAtLeave: Record<number, number>; friendsLostWithYou: number;
   missions: number; missionsWon: number;
+  /** duties and missions played out, and how many went well (absent in saves before sorties) */
+  sorties?: number; sortiesOk?: number;
 }
 
 export interface War {
@@ -76,7 +82,7 @@ export interface War {
   endWhy: string;
   /** what happened that the player has not yet been shown as a scene: a wound, friends killed.
    *  Recorded only; nothing in the war reads it, so the war's numbers do not depend on it. */
-  news: { wound: { kind: 'light' | 'severe'; cause: string } | null; fallen: { i: number; why: string; present: boolean }[] };
+  news: { wound: { kind: 'light' | 'severe'; cause: string } | null; fallen: { i: number; why: string; present: boolean }[]; sortie?: { key: string; ok: boolean; vol: boolean; turned: boolean } | null };
   stats: WarStats;
   log: string[];
   rng: Streams;
@@ -425,6 +431,73 @@ export function phaseHit(w: War, b: Battle, base: number, type: string, choice: 
   return hp;
 }
 
+// ---- sorties: a duty or a role mission played out in three steps ---------------------------------
+
+/** Chance of being hit on one step of a sortie for a choice, as resolved: the duty's (or mission's)
+ *  whole-sortie chance times the step's share times the choice. The risk words read this. */
+export function sortieHit(w: War, key: string, role: boolean, step: number, choice: SortieChoice): number {
+  const base = role ? missionHit(w, key) : dutyHit(w, key);
+  // x1.08: three smaller rolls add up to slightly less than one big one; this keeps a steady sortie
+  // as dangerous as the single roll it replaced
+  return base * SORTIES[key]!.shares[step]! * SORTIE_CHOICE[choice].hit * 1.08;
+}
+
+function startSortie(w: War, key: string, role: boolean, vol: boolean, friendAtRisk: boolean, ret: Cursor): void {
+  w.cursor = { at: 'sortie', key, role, i: 0, pts: 0, vol, friendAtRisk, ret };
+  askStep(w);
+}
+
+function askStep(w: War): void {
+  const c = w.cursor as Extract<Cursor, { at: 'sortie' }>;
+  const so = SORTIES[c.key]!;
+  w.pending = { kind: 'step', key: c.key, role: c.role, step: c.i, of: so.shares.length, vol: c.vol, canBack: so.back[c.i]! };
+}
+
+function stepSortie(w: War, choice: SortieChoice): void {
+  const c = w.cursor as Extract<Cursor, { at: 'sortie' }>;
+  const so = SORTIES[c.key]!;
+  // a step that cannot be turned back from treats 'back' as keeping your head down
+  const eff: SortieChoice = choice === 'back' && !so.back[c.i] ? 'careful' : choice;
+  const cm = SORTIE_CHOICE[eff];
+  const cause = c.role ? ROLES[c.key]!.mission : c.key;
+  const fullNerve = c.role ? ROLES[c.key]!.nerve : DUTIES[c.key]!.nerve;
+  if (ch(w, 'duty', sortieHit(w, c.key, c.role, c.i, eff))) hit(w, cause);
+  if (w.ending) { w.cursor = { at: 'tally' }; return; }
+  spendNerve(w, fullNerve * so.shares[c.i]! * cm.nerve);
+  c.pts += cm.gain;
+  const turned = !!cm.ends;
+  if (w.out > 0 || turned || c.i + 1 >= so.shares.length) { endSortie(w, c, turned); return; }
+  c.i += 1;
+  askStep(w);
+}
+
+function endSortie(w: War, c: Extract<Cursor, { at: 'sortie' }>, turned: boolean): void {
+  const so = SORTIES[c.key]!;
+  const ok = !turned && w.out === 0 && c.pts + 0.5 * skill(w, so.skill) + float(w.rng, 'duty', -1, 1) >= so.need;
+  if (turned) { w.standing = clamp(w.standing - ROLE.turnBackStanding, 0, 100); spendNerve(w, ROLE.turnBackNerve); }
+  newsOf(w).sortie = { key: c.key, ok, vol: c.vol, turned };
+  w.stats.sorties = (w.stats.sorties ?? 0) + 1; if (ok) w.stats.sortiesOk = (w.stats.sortiesOk ?? 0) + 1;
+  if (c.role) {
+    learn(w, c.key, 0.3);
+    if (ok) {
+      const m = ROLES[c.key]!;
+      w.stats.missionsWon++; w.merit += 1;
+      w.standing = clamp(w.standing + 4, 0, 100);
+      award(w, m.award * float(w.rng, 'career', 0.4, 1.4));
+      if (w.merit >= ROLE.meritToPromote && ch(w, 'career', ROLE.promoteChance)) { w.merit = 0; promote(w, `${m.mission} went well`); }
+    } else if (!turned) spendNerve(w, 3);
+    w.cursor = c.ret;
+    return;
+  }
+  const dd = DUTIES[c.key]!;
+  learn(w, dd.skill, ok ? 0.6 : 0.4);
+  if (c.vol) {
+    w.standing = clamp(w.standing + (turned ? 0 : dd.standing) + (ok ? 2 : 0), 0, 100);
+    if (ok && dd.award) award(w, dd.award * (1 + 0.5 * home(w, 'sport')) * float(w.rng, 'career', 0.6, 1.4));
+  } else w.standing = clamp(w.standing + (turned ? 0 : 0.5) + (ok ? 1 : 0), 0, 100);
+  w.cursor = c.ret;
+}
+
 // ---- decisions ----------------------------------------------------------------------------------
 
 /** Apply the player's decision to the pending question, then run to the next one. */
@@ -446,16 +519,10 @@ export function decide(w: War, d: Decision): War {
       c.i += 1;
       if (!vol && !detailed) { w.standing = clamp(w.standing - (p.friendAtRisk ? 2 : 1), 0, 100); break; }
       if (vol) w.stats.volunteered++; else w.stats.detailed++;
-      if (ch(w, 'duty', dutyHit(w, key))) hit(w, key);
-      if (w.ending) { w.cursor = { at: 'tally' }; break; }
-      spendNerve(w, dd.nerve);
-      learn(w, dd.skill, 0.4);
-      if (vol) {
-        w.standing = clamp(w.standing + dd.standing, 0, 100);
-        if (p.friendAtRisk) { c.cover *= 0.75; w.nerve = clamp(w.nerve + 2, 0, 100); }
-        if (dd.award) award(w, dd.award * (1 + 0.5 * home(w, 'sport')) * float(w.rng, 'career', 0.3, 1.2));
-      } else w.standing = clamp(w.standing + 0.5, 0, 100);
-      break;
+      if (vol && p.friendAtRisk) { c.cover *= 0.75; w.nerve = clamp(w.nerve + 2, 0, 100); }
+      void dd;
+      startSortie(w, key, false, vol, p.friendAtRisk, c);
+      return w;
     }
     case 'mission': {
       const c = w.cursor as Extract<Cursor, { at: 'mission' }>;
@@ -463,18 +530,9 @@ export function decide(w: War, d: Decision): War {
       w.cursor = { at: 'support', sectionP: c.sectionP, cover: c.cover };
       if (d !== 'go' && !ch(w, 'duty', ROLE.detail)) { w.standing = clamp(w.standing - 2, 0, 100); break; }
       w.stats.missions++;
-      if (ch(w, 'duty', missionHit(w, k))) hit(w, m.mission);
-      if (w.ending) { w.cursor = { at: 'tally' }; break; }
-      if (w.out > 0) break;
-      spendNerve(w, m.nerve);
-      learn(w, k, 0.3);
-      if (ch(w, 'duty', m.success + ROLE.successPerSkill * skill(w, k))) {
-        w.stats.missionsWon++; w.merit += 1;
-        w.standing = clamp(w.standing + 4, 0, 100);
-        award(w, m.award * float(w.rng, 'career', 0.4, 1.4));
-        if (w.merit >= ROLE.meritToPromote && ch(w, 'career', ROLE.promoteChance)) { w.merit = 0; promote(w, `${m.mission} went well`); }
-      } else spendNerve(w, 3);
-      break;
+      void m;
+      startSortie(w, k, true, d === 'go', false, w.cursor);
+      return w;
     }
     case 'sick': {
       if (d === 'report' && ch(w, 'career', 0.5)) {
@@ -527,6 +585,10 @@ export function decide(w: War, d: Decision): War {
       c.i += 1;
       if (c.i < b.phases.length) { askPhase(w, b, c.i); return w; }
       finishBattle(w, c.pts);
+      break;
+    }
+    case 'step': {
+      stepSortie(w, d as SortieChoice);
       break;
     }
     case 'leave': {

@@ -1,0 +1,38 @@
+# Sorties: a duty or role mission played out in three steps (src/game/war/data.ts SORTIES).
+# w_step and x_sortie are the fallbacks for any sortie that has no written scenes; the written
+# ones (s_<key>_<step>, x_<key>) take over through content/route.yaml.
+
+- id: w_step
+  chapter: front
+  title: Out there
+  text: |
+    [if war.step == 1]You go out.[/if][if war.step == 2]Halfway. The worst of it is now.[/if][if war.step == 3]Nearly done. Getting back is its own job.[/if]
+  choices:
+    - id: bold
+      text: "Push it. Get it done fast. ({risk_bold})"
+      effects: [ { war: bold } ]
+      next: "@war"
+    - id: steady
+      text: "Steady. Do it the way you were taught. ({risk_steady})"
+      effects: [ { war: steady } ]
+      next: "@war"
+    - id: careful
+      text: "Careful. Keep low and take your time. ({risk_careful})"
+      effects: [ { war: careful } ]
+      next: "@war"
+    - id: back
+      text: "Turn back. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      next: "@war"
+
+- id: x_sortie
+  chapter: front
+  title: Back in
+  text: |
+    [if war.result == ok]It went the way it was meant to. The sergeant nods at you, which from him is a speech.[/if][if war.result == failed]It went wrong, the way these things do, and nobody can say quite where.[/if][if war.result == turned]You came back without doing it. Nobody says anything. Everybody knows.[/if]
+  choices:
+    - id: on
+      text: Get your head down while you can.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"

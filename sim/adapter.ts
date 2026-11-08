@@ -47,6 +47,7 @@ export function metrics(s: GameState) {
     medal: w.awards.some((a) => a !== 'MiD'),
     friendsAlive: aliveFriends(w), endStage: w.endedStage,
     roleMissions: w.stats.missions,
+    sortieOk: w.stats.sorties ? Math.round((100 * (w.stats.sortiesOk ?? 0)) / w.stats.sorties) : NaN,
     age: Math.floor((s.time - s.characters[s.hero]!.born) / 4),
   };
 }
