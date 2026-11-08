@@ -1,130 +1,177 @@
 # WW1 (working title): spec, draft
 
-Status: **draft, not approved** (2026-11-07). Stage 1 of the game-building workflow
-(`Game-Workshop/skills/game-building/SKILL.md`). Nothing is built until the author
-approves this page and the kill gate passes.
+Status: **draft, revision 2, not approved** (2026-11-08). Stage 1 of the game-building
+workflow (`Game-Workshop/skills/game-building/SKILL.md`). Nothing is built until the
+author approves this page and the kill gate passes.
 
-## The idea, in the author's words
+## Decisions
 
-> "A new game, one based on WW1, where you play a recruit who joins the British or
-> German army as an 18 year old recruit. You fight in some of the most deadliest and
-> famous battles of the war, earning awards, promotions, making friends, nameless or
-> even faceless rivals, etc." (2026-11-07)
+| Date | Decision | The author's words |
+|---|---|---|
+| 2026-11-07 | The premise | "A new game, one based on WW1, where you play a recruit who joins the British or German army as an 18 year old recruit. You fight in some of the most deadliest and famous battles of the war, earning awards, promotions, making friends, nameless or even faceless rivals, etc." |
+| 2026-11-08 | British first; German later | "British first" |
+| 2026-11-08 | One life per run | "one life per run" |
+| 2026-11-08 | Fictional battalion in real battles | "fictional battalion" |
+| 2026-11-08 | Art as Vikingr (photo source to pixel scene, `Vikingr/tools/art.ts`, `docs/ART.md`) | "Art like vikingr" |
+| 2026-11-08 | The whole war is very hard; not every ending is death or disability | "going through the entire war should be incredibly hard, but that doesn't mean every end should be death or disability either" |
+| 2026-11-08 | 3 or 4 stages; survive a stage, go home on leave, choose to stay home or go back | "if you survive to specific dates, set at different historic stages of the war (3 or 4 of them), you get sent home for leave, see home and their life, then get the option to stay at home or reenlist and continue the war" |
+| 2026-11-08 | Going back guarantees a promotion; each stage has 2 or 3 paths by rank, position and specialty | "Each time you reenlist, you get a guaranteed promotion, so if you didn't get a promotion during that stage. That way each stage only needs 2 or 3 paths based on the players rank, position and specialty" |
 
 ## Pitch
 
-An 18-year-old volunteer, August 1914 to the Armistice. You do not choose the war, the
-battles or the orders. You choose how much of yourself you spend inside them, and on whom.
+An 18-year-old volunteer in a fictional New Army battalion, 1914 to the Armistice. You do not
+choose the war, the battles or the orders. You choose how much risk you take and for whom,
+and at the end of each year whether to go back.
 
-## The design problem to solve first: agency
+## Structure: four stages, each ending in home leave
 
-A private controls almost nothing. If the game hands him strategic choices it stops being
-the First World War; if it gives him none it is a slideshow with dice. The lever is
-**exposure**: the calendar and the battles are fixed, but how much risk he takes, when,
-and for whom is his. Volunteer for the raid or keep your head down. Go back for a mate or
-keep moving. Take the stripe and the responsibility, or stay one of the lads.
+| Stage | Period | Main battle(s) | Enters at (minimum) | Ends with |
+|---|---|---|---|---|
+| 1 | Enlistment, training, France 1915 | Loos (Sept 1915) | Private | Home leave, winter 1915-16 |
+| 2 | 1916 | The Somme (July-Nov) | Lance corporal | Home leave, winter 1916-17 |
+| 3 | 1917 | Arras, Passchendaele or Cambrai | Corporal | Home leave, winter 1917-18 |
+| 4 | 1918 | The Spring Offensive, the Hundred Days | Sergeant (or second lieutenant) | The Armistice |
 
-## Loop
+Four rather than three: the war falls into four years of action for a 1914 volunteer, and the
+year-end leave matches the real pace (other ranks got home leave rarely, about once a year;
+to be checked). Dates and which battles a New Army battalion could plausibly fight are to be
+checked against sources before any writing.
+
+### Inside a stage
 
 | Layer | Turn | What the player decides |
 |---|---|---|
 | Rotation (systemic) | One cycle, about 2-3 weeks: front line, support, reserve, rest | Which duties to volunteer for (wiring party, raid, listening post, sniping, carrying); report sick or not; how to spend rest |
-| Battle (authored set piece) | 4-8 phases: the approach, the assault, the consolidation, the counter-attack | Personal choices under fire. Chance moves numbers; it never decides what beats what |
-| Between | Leave, letters, courses (bombing, Lewis gun, NCO), transfers after wounds | Where to put your standing and time |
+| Battle (authored set piece) | 4-8 phases | Choices under fire. Chance moves numbers; it never decides what beats what |
+| Between | Courses, letters, transfers after wounds | Where to spend standing and time; which specialty to train in |
+
+### Paths: what the 2-3 per stage are
+
+A path is the role you fight the stage's battle in. One battle skeleton per stage; the path
+changes the decisions in it, not the battle.
+
+| Path | Decides for | Unlocked by |
+|---|---|---|
+| Rifleman | Himself and the man beside him | Default at Private and Lance corporal |
+| Specialist (bomber, Lewis gunner, sniper, runner) | His team and his weapon | A course in the stage before |
+| Section or platoon NCO | His section | Corporal and above |
+| Subaltern (Stage 4 only) | His platoon, and he writes the letters home | A commission (see below) |
+
+That is about 10 path-stage combinations across the game, not 4 stages times every rank.
+
+### Home leave
+
+Each leave is a short chapter in the same fictional home town, with a recurring cast: family,
+a sweetheart or not, the families of the section. The town changes year to year (casualty
+lists, rationing, women in the munitions works, conscription from 1916, air raids). The friends
+in your section are from that town, so the dead are missed there too. Leave is where the cost
+of the stage shows, not just the score.
+
+## The stay-or-go-back choice: historical problem and recommended fix
+
+**The problem.** A British volunteer signed for three years or the duration. He could not
+choose to stay home on leave, and from 1916 conscription would have taken him back anyway.
+Played literally, the choice would be invented.
+
+**Recommended fix.** Keep the choice; change what "stay" means. At each leave the player can
+take a **home posting** he has earned, which were real routes out of the line:
+
+- Instructor at a training depot (an experienced NCO, or a man with a specialty).
+- Unfit for front-line service after a wound (medical downgrade, home service).
+- Released to war work (a skilled tradesman or miner was sometimes recalled).
+
+Which postings are offered depends on rank, specialty, wounds and standing, so a run that
+earned more has more ways home. Taking one ends the run with a graded ending, not a loss.
+
+**Going back** is "return to the front" rather than "re-enlist", and the promotion is grounded:
+battalions lost NCOs faster than they could replace them, and survivors were promoted to fill
+the gaps.
+
+## Promotion: the guarantee must not make earned promotion worthless
+
+As written, an in-stage promotion and the guaranteed one could land you on the same rank, so
+earning one would buy nothing at the stage boundary (failure F2: a declared effect that changes
+nothing). **Recommended:** going back always gives one step, and steps earned during a stage
+stack on top. A strong run reaches sergeant by Stage 3 and becomes eligible for a commission
+(officer cadet course at home during the Stage 3 leave, back as a second lieutenant for Stage 4).
+That commission is the British case for the game: a working-class volunteer made an officer.
+
+## Endings
+
+| Ending | When | Grade |
+|---|---|---|
+| Killed | Any time | The record stands: rank, awards, what the section remembers |
+| Broken (shell shock) | Nerve at zero | Evacuated; the war ends for him |
+| Court-martial | Desertion, cowardice, striking a superior | The worst ending |
+| Home posting | At any leave, by choice | Graded by stage reached, rank, awards, friends alive, nerve |
+| The Armistice | Survive Stage 4 | The best grade available |
+
+Wounded and captured are branches, not endings, unless the wound downgrades him (then a home
+posting is offered).
 
 ## Scarce resource
 
 **Nerve.** Spent by shellfire, losses and raids; recovered slowly by rest, leave and friends
-still alive. Low nerve locks options, and the locked option says why. Supporting stats:
-health (wounds), standing (with NCOs and officers: promotion, choice of duties) and the
-section (8-10 named men, each with a bond).
+still alive. Low nerve locks options, and the locked option says why. Supporting: health,
+standing (with NCOs and officers), the section (8-10 named men from home, each with a bond).
 
-## Per-turn decision
+## The push-your-luck question the kill gate must answer
 
-How much exposure to accept this rotation, and for whom: yourself (standing, awards), your
-mates (their survival, your nerve), or nobody (you survive; standing falls; the section notices).
+Every leave is a cash-out point. If going home after Stage 1 grades nearly as well as pushing
+on, careful players quit early and never see the Somme. If pushing on is clearly better, the
+choice is fake. The grade has to reward each extra stage enough that going back is tempting,
+while the death rate makes it a real risk.
 
-## Ways to lose
+## Ranks and awards
 
-1. **Killed.**
-2. **Broken.** Nerve reaches zero: shell shock, evacuated, your war ends.
-3. **Court-martial.** Desertion, cowardice, striking a superior.
-
-Not losses: a wound (a time skip, often a new battalion), capture (a branch that ends the
-fighting; a prisoner chapter is a later feature).
-
-## One way to win
-
-Be alive on 11 November 1918. The grade is what you bring home: rank, awards, men of your
-first section still alive, nerve left.
-
-## Ranks and awards: the case for two armies
-
-| | British | German |
-|---|---|---|
-| Ladder | Pte, L/Cpl, Cpl, Sgt, CSM; commission from the ranks common by 1917-18 | Soldat, Gefreiter, Unteroffizier, Vizefeldwebel, Offizierstellvertreter; commission from the ranks rare |
-| Awards | Mention in Despatches, Military Medal (from 1916), DCM, VC | Iron Cross 2nd class (common), 1st class (rare), state orders |
-| Discipline | Death sentences carried out far more often | Far fewer executions |
-
-Every award must change something (rule 2): leave, standing, course places, commission
-eligibility, how replacements treat you. An award that only displays is cut.
-
-## Battle calendar (to be checked against sources before writing)
-
-| Year | British track (Kitchener volunteer, overseas at 19) | German track (Kriegsfreiwilliger) |
-|---|---|---|
-| 1914 | Training | First Ypres / Langemarck (the volunteer regiments) |
-| 1915 | Loos | Second Ypres or Champagne |
-| 1916 | The Somme | Verdun, the Somme |
-| 1917 | Arras, Passchendaele, Cambrai | Arras or Passchendaele |
-| 1918 | The Spring Offensive (defending), the Hundred Days | Operation Michael, the retreat |
-
-One man at every famous battle is a stretch. Wounds, transfers and reconstituted battalions
-route him there; the game says when that routing happened.
+| Ladder | Pte, L/Cpl, Cpl, Sgt, CSM; commission from the ranks |
+|---|---|
+| Awards | Mention in Despatches, Military Medal (from 1916), DCM, VC |
+| Each award changes | Standing, home-posting offers, course places, commission eligibility, how replacements treat you |
 
 ## Friends and rivals
 
-- **Section:** 8-10 named men with bonds. They are killed, wounded, transferred and replaced
-  by strangers. The dead stay dead (game-narrative continuity tool).
+- **Section:** 8-10 named men from home. Killed, wounded, transferred, replaced by strangers.
+  The dead stay dead, at the front and in the town (game-narrative continuity tool).
 - **Rivals in your own lines:** an NCO who has it in for you; a man after the same stripe.
 - **Faceless rivals across the wire:** a sniper or an opposing regiment that recurs, known only
-  by what it does (a periscope shot out, a man dropped at the same loophole).
-- **Later option:** both tracks share one world, so the British track's faceless enemy is the
-  German protagonist's unit and the reverse. Strong hook, doubles the continuity load.
+  by what it does.
 
-## Scope (recommended)
+## Scope
 
-- One army first. British: longer rank ladder (commission), clearer award ladder, more
-  English sources. German as the second start after the first ships, with the F10
-  scope-widening check.
-- Western Front only.
+- British, Western Front only. German track later, with its own version of the stay-or-go
+  choice (it will not be the same) and the F10 scope-widening check.
 - Not a tactics game: the player never moves units on a map.
-- A fictional battalion inside a real division's battles: accuracy without misattributing
-  deeds to real units.
 - Shape C (Vite + Preact + TS + YAML) with game-narrative, as Knight of Adalia and Vikingr.
-
-## Distance from the built games
-
-Closest: Knight of Adalia and Vikingr (a life RPG), The Lists (a career ladder). New here:
-no strategic control, a fixed calendar, and nerve rather than money or land as the thing
-you run out of. If the kill gate shows exposure is not a real choice, this is a reskin of
-Vikingr and should not be built.
 
 ## Kill gate (Stage 2)
 
-Numbers-only sim of the rotation loop and generic battles, no UI, in `prototypes/`.
-Policies x seeds (about 200+ each): always volunteer, never volunteer, mates first,
-standing first, adaptive (spend nerve, rest when low). Measure survival to the Armistice,
-end rank, awards, section survivors, nerve left, and the cause of each loss.
+Numbers-only sim of rotations, generic battles and the four leave decisions, no UI, in
+`prototypes/`. About 200+ seeds per policy.
 
-Passes if: no policy dominates on both survival and grade; "never volunteer" survives more
-but grades poorly and risks a court-martial path; every policy has a losing route.
+| Policy | Volunteering | At leave |
+|---|---|---|
+| Reckless | Always | Always go back |
+| Careful | Never | Always go back |
+| Mates first | When a friend is at risk | Always go back |
+| Climber | When it earns standing | Go back while promotions keep coming |
+| Quitter N | Adaptive | Take a home posting after Stage N (N = 1, 2, 3) |
+
+Proposed targets (the author's call; numbers to be set):
+
+| Measure | Proposed |
+|---|---|
+| Reach the Armistice, best policy | 5-10% of runs |
+| Reach the Armistice, reckless | near 0% |
+| Survive Stage 1, competent play | 60-75% |
+| Quit-after-Stage-1 average grade | Clearly below going back for a competent policy |
+| Every policy | Has at least one losing route; none best on both survival and grade |
 
 ## Open questions for the author
 
-1. British first? (Recommended.)
-2. One life per run (shorter, replayable through different regiments and enlistment years),
-   or one long story where death is an ending?
-3. Target share of runs that reach the Armistice.
-4. Art: text only, or period-photo pixel scenes (the Vikingr pipeline)?
-5. Real battalion, or a fictional one in real battles? (Fictional recommended.)
+1. The home-posting fix for "stay home": accept?
+2. Earned promotions stack with the guaranteed one: accept?
+3. Four stages as tabled: accept?
+4. The targets above: what share of runs should reach the Armistice?
+5. The home town: northern industrial, or somewhere else? (Gives the section's accents,
+   trades and the war work on offer.)
