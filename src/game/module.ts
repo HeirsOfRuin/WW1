@@ -23,6 +23,16 @@ const war = (s: CoreState) => st(s).war;
 
 // ---- words -----------------------------------------------------------------------------------
 
+/** Risk on one step of a sortie, in words. A step carries a third of a duty's risk, so the battle
+ *  scale read "low risk" for every choice (playtest 1): steps get their own, finer scale. */
+export function stepRiskWord(p: number): string {
+  if (p < 0.005) return 'little risk';
+  if (p < 0.012) return 'some risk';
+  if (p < 0.025) return 'real risk';
+  if (p < 0.05) return 'high risk';
+  return 'very high risk';
+}
+
 /** Risk of being hit, in words. The number behind it is the resolver's own (dutyHit, phaseHit). */
 export function riskWord(p: number): string {
   if (p < 0.03) return 'low risk';
@@ -119,6 +129,25 @@ export function nerveWord(n: number): string {
 }
 
 const pend = (s: CoreState) => war(s).pending;
+
+/** What the war's log says happened since the last tour: read by the tour opening. */
+function recent(w: War): { backFromWound: boolean; lost: number[]; promoted: boolean; award: string | null } {
+  const out = { backFromWound: false, lost: [] as number[], promoted: false, award: null as string | null };
+  for (const l of w.log) {
+    const m = /^S\d r(\d+) \| (.*)$/.exec(l);
+    if (!m) continue;
+    const c = Number(m[1]); const msg = m[2]!;
+    const wm = /wound \(.*\): .*out (\d+) rotation/.exec(msg);
+    if (wm && c + Number(wm[1]) + 1 === w.clock) out.backFromWound = true;
+    if (c !== w.clock - 1) continue;
+    const fm = /^friend (\d+) killed/.exec(msg);
+    if (fm) out.lost.push(Number(fm[1]) - 1);
+    if (/^promoted to/.test(msg)) out.promoted = true;
+    const am = /^awarded (\w+)/.exec(msg);
+    if (am) out.award = am[1]!;
+  }
+  return out;
+}
 /** The first of the written friends (the first three of the section) killed and not yet shown. */
 const writtenFallen = (w: War) => newsOf(w).fallen.find((f) => f.i < 3);
 
@@ -164,7 +193,7 @@ export function statusOf(s: CoreState): { rank: string; role: string; nerve: str
 
 // ---- paths -------------------------------------------------------------------------------------
 
-const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key'] as const;
+const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key', 'month', 'stake', 'back_from_wound', 'lost_last', 'promoted_last', 'award_last', 'first_tour', 'back_from_leave'] as const;
 const PENDING = ['none', 'tunnel', 'duty', 'mission', 'sick', 'course', 'battle', 'leave', 'step'];
 const ENDINGS = ['none', 'armistice', 'posting', 'captured', 'invalided', 'killed', 'broken', 'court_martial'];
 /** content ids are lower_snake_case; the war layer's ending names are its own */
@@ -202,8 +231,18 @@ function value(s: CoreState, field: string): number | string | boolean | undefin
     // a finished sortie not yet told: ok, failed, turned (back), or none
     case 'result': { const r = w.cursor.at === 'done' ? null : w.news?.sortie; return r ? (r.turned ? 'turned' : r.ok ? 'ok' : 'failed') : 'none'; }
     case 'result_key': return w.news?.sortie?.key ?? 'none';
+    case 'month': return warMonth(w)[1];
+    // what happened since the last time he was asked anything: the tour opening carries it (playtest 1)
+    case 'back_from_wound': return recent(w).backFromWound;
+    case 'lost_last': return recent(w).lost.length;
+    case 'promoted_last': return recent(w).promoted;
+    case 'award_last': return recent(w).award !== null;
+    case 'first_tour': return w.clockInStage === 1;
+    case 'back_from_leave': return w.clockInStage === 1 && w.stage > 1;
+    // which written take a sortie shows: alternates with every sortie played, so two in a row differ
+    case 'stake': return (w.stats.sorties ?? 0) % 2;
     // which of two written takes a recurring scene shows (alternates by tour), so a mission is not word for word the last one
-    case 'take': return w.clock % 2;
+    case 'take': return (w.clock + w.stage) % 2; // + stage: the same month reads differently in the next year
     case 'call': return p?.kind === 'duty' && w.cursor.at === 'duty' ? (w.cursor as { i: number }).i + 1 : 0;
     case 'mate1': case 'mate2': case 'mate3': return w.friends[Number(field.slice(4)) - 1]!;
   }
@@ -308,13 +347,19 @@ export const module: GameModule = {
       case 'mate1_first': case 'mate2_first': case 'mate3_first': return SECTION_NAMES[w.town]![Number(name[4]) - 1]!.split(' ')[0]!;
       case 'risk_bold': case 'risk_steady': case 'risk_careful': case 'risk_back': {
         if (p?.kind !== 'step') return '';
-        return riskWord(sortieHit(w, p.key, p.role, p.step, name.slice(5) as SortieChoice));
+        return stepRiskWord(sortieHit(w, p.key, p.role, p.step, name.slice(5) as SortieChoice));
       }
       case 'wound_where': return w.news?.wound ? whereOf(w.news.wound.cause) : '';
       case 'fallen_name': { const f = writtenFallen(w); return f ? SECTION_NAMES[w.town]![f.i]! : ''; }
       case 'fallen_first': { const f = writtenFallen(w); return f ? SECTION_NAMES[w.town]![f.i]!.split(' ')[0]! : ''; }
       case 'fallen_surname': { const f = writtenFallen(w); return f ? surname(SECTION_NAMES[w.town]![f.i]!) : ''; }
       case 'fallen_where': { const f = writtenFallen(w); return f ? whereOf(f.why) : ''; }
+      case 'lost_last_name': {
+        const r = recent(w);
+        const named = r.lost.find((i) => i < 3);
+        return named !== undefined ? SECTION_NAMES[w.town]![named]!.split(' ')[0]! : r.lost.length > 1 ? `${r.lost.length} of the section` : SECTION_NAMES[w.town]![r.lost[0] ?? 3]!.split(' ')[0]!;
+      }
+      case 'award_last_name': { const a = recent(w).award; return a === 'MM' ? 'Military Medal' : a === 'DCM' ? 'Distinguished Conduct Medal' : a === 'MC' ? 'Military Cross' : a === 'VC' ? 'Victoria Cross' : 'mention in despatches'; }
       case 'tour_line': {
         const i = w.cursor.at === 'duty' ? (w.cursor as { i: number }).i : 0;
         return `Tour ${w.clock} in the line. ${i === 0 ? 'The first' : 'A second'} call for men this tour.`;
@@ -348,7 +393,7 @@ export const module: GameModule = {
     }
     return undefined;
   },
-  checkTextVar: (name) => (['risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line'].includes(name) ? [] : undefined),
+  checkTextVar: (name) => (['lost_last_name', 'award_last_name', 'risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line'].includes(name) ? [] : undefined),
   variantKey: (s) => st(s).start,
   startScene: (s, c) => ct(c).starts[st(s).start]?.start_scene,
   date: (s) => monthName(warMonth(war(s))),

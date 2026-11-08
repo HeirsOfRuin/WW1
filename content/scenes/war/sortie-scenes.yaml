@@ -1,0 +1,916 @@
+# Sorties written out (docs/FRAME-PLAYTEST1.md): every duty and role mission, three steps each,
+# and how it went. Shared by every town. Choices are always bold, steady, careful, and back where
+# the step allows it (src/game/war/data.ts SORTIES); their words change with the work. Each
+# choice's text_after is what you did, shown at the top of the next step.
+
+# ---- a trench raid ---------------------------------------------------------------------------------
+
+- id: s_raid_1
+  chapter: front
+  title: The raid
+  text: |
+    [if war.stake == 0][if war.vol]You put your name down.[else]The sergeant picked you.[/if] Burnt cork on your face and hands, cap badge off, pay
+    book left with the quartermaster. A cosh made of an entrenching-tool handle with a nut bolted on
+    the end. The officer goes through it again in a whisper in the sap: out through our wire, across,
+    in at the place where their parapet's been knocked about, a prisoner if we can, back in twenty
+    minutes.
+
+    Out in front the grass is wet and it's dark as a coal hole, and the dark smells of turned earth and cordite.
+    Behind you is {mate}. You can hear him breathing.[/if][if war.stake == 1]Raid night. The burnt cork, the cosh, and an officer younger than you who keeps
+    looking at his wristwatch as if it might tell him something. There's a thin moon. He says it'll be
+    behind cloud by midnight. He's wrong.
+
+    The sap smells of wet sandbags and of the cork, which smells like a blown-out candle. Behind you is
+    {mate}, chewing on nothing.[/if]
+  choices:
+    - id: bold
+      text: "Go fast and upright to the gap. Time matters more than cover. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run bent double across the grass, every step loud as a door slamming, and nobody fires.
+      next: "@war"
+    - id: steady
+      text: "Crawl it the way you practised, one arm at a time. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Elbows and knees, face in the wet grass, a yard at a time. It takes an age.
+      next: "@war"
+    - id: careful
+      text: "Go wide round the shell holes, slow, freezing at every flare. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lose the others twice in the dark and find them again by the smell of the cork.
+      next: "@war"
+    - id: back
+      text: "Tell the officer your rifle's jammed, and go back in. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: He looks at you in the dark for a moment and says nothing at all.
+      next: "@war"
+
+- id: s_raid_2
+  chapter: front
+  title: The raid
+  text: |
+    Their wire. Close up it's not a fence, it's a thicket, rusty, taller than you, with tins hung in
+    it to rattle. The gap the guns made is narrower than the officer said. Somebody's cutting with
+    the long-handled cutters, each snip like a gunshot in your head.
+
+    Ten yards beyond it, their parapet. You can hear a man coughing on the other side, and smell
+    pipe tobacco, and something frying.
+  choices:
+    - id: bold
+      text: "Through the gap and straight over their parapet. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The wire takes a strip out of your sleeve and your arm with it, and then you're over, and dropping.
+      next: "@war"
+    - id: steady
+      text: "Wait for the cutters, then go through in turn. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Snip. Snip. Your turn. You go through on your belly with the barbs catching your back.
+      next: "@war"
+    - id: careful
+      text: "Hold back at the wire and cover the others in. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie at the wire with your rifle on their parapet, and the others go in without you.
+      next: "@war"
+
+- id: s_raid_3
+  chapter: front
+  title: The raid
+  text: |
+    In their trench. It's cleaner than ours, and deeper, and for one second it's empty. Then a man
+    comes round the traverse with a mess tin in each hand and stops dead, and looks at you, and
+    opens his mouth.
+
+    There's a dugout entrance two yards on, steps going down, a blanket over the door, light under it.
+  choices:
+    - id: bold
+      text: "Grab the man with the mess tins. He's your prisoner. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: He doesn't fight. He drops the tins and puts his hands up, and the stew goes all over your boots, and it's still hot.
+      next: "@war"
+    - id: steady
+      text: "Bomb the dugout and get out the way you came. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Pin, throw, down. The blanket blows out flat. You don't wait to see.
+      next: "@war"
+    - id: careful
+      text: "Shout the others back now, before their trench wakes up. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You're back over their parapet before the first flare goes up.
+      next: "@war"
+
+- id: x_raid_done
+  chapter: front
+  title: After the raid
+  text: |
+    [if war.result == ok]You come back in through our wire with the dawn starting, and a prisoner, or near enough: a pay book, a shoulder strap, something the intelligence officer can read. The colonel sends down a rum ration for the raiders. The cork won't come off your face for two days. You keep finding it in your ears.[/if][if war.result == failed]It goes wrong somewhere between the wire and the way back. Their machine gun wakes up early. Two of the party don't come in. You lie in the sap afterwards, shaking so hard your teeth click, and somebody puts a lit cigarette in your mouth without a word.[/if][if war.result == turned]The raid goes over without you. You hear it from the firestep: the bombs, the shouting, their flares going up one after another. When they come back in, nobody looks at you.[/if]
+  choices:
+    - id: on
+      text: Get your head down.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"
+
+# ---- a patrol ---------------------------------------------------------------------------------------
+
+- id: s_patrol_1
+  chapter: front
+  title: Patrol
+  text: |
+    [if war.stake == 0]Three of you, a corporal and {mate} and you, out through the gap in our wire at eleven. The job is
+    to find out whether they've put new wire out by the old sunken road, and come back and say.
+
+    No man's land at night isn't empty and isn't quiet. Rats. A tin rolling in the wind. Somewhere
+    out to the left a wounded man from last week, or a cat, or the wind in the wire.[/if][if war.stake == 1]The sunken road again, a corporal and {mate} and you, to see what they've done to their wire since.
+    Fog tonight, thick as the shed on a damp morning, so you can't see the man in front,
+    only hear the creak of his webbing and his breath going in and out.
+
+    The fog tastes of coal smoke from somewhere far off, which makes no sense out here.[/if]
+  choices:
+    - id: bold
+      text: "Go straight for the sunken road. Get there and get back. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go quickly, crouched, and get there in ten minutes, with your heart going like a shuttle.
+      next: "@war"
+    - id: steady
+      text: "Bound from shell hole to shell hole, the way you were taught. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Hole to hole. Down, listen, count twenty, up. The mud gets into everything.
+      next: "@war"
+    - id: careful
+      text: "Lie still a while first and listen to their trench. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie with your face in the wet and listen to them talking, and someone over there laughs, and it's like a knife.
+      next: "@war"
+    - id: back
+      text: "Tell the corporal you've heard something, and you should go back. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: He knows you've heard nothing. He takes you back anyway.
+      next: "@war"
+
+- id: s_patrol_2
+  chapter: front
+  title: Patrol
+  text: |
+    The sunken road. And there's somebody in it.
+
+    A German patrol, six or seven, lying up along the bank thirty yards from you, the same as you, in
+    the dark, listening. You can see a helmet against the sky. You can hear one of them breathing
+    through his mouth. A hand closes on your arm: {mate}.
+  choices:
+    - id: bold
+      text: "Bomb them, now, while they don't know you're there. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Two bombs, and the dark goes white and loud, and somebody over there screams in German, and you're running.
+      next: "@war"
+    - id: steady
+      text: "Lie flat and count them. That's what you're out here for. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Seven. One has a machine pistol. One is smoking under his coat, the fool. You count them twice.
+      next: "@war"
+    - id: careful
+      text: "Ease back out of the road, an inch at a time. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: It takes you twenty minutes to go thirty yards backwards on your belly.
+      next: "@war"
+    - id: back
+      text: "Get out of there and go back in, quick and low. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You go back too fast and a sentry nearly shoots you at our wire.
+      next: "@war"
+
+- id: s_patrol_3
+  chapter: front
+  title: Patrol
+  text: |
+    Coming back is the dangerous bit, everybody says, and everybody's right. Our own sentries are
+    jumpy. The password this week is Blackpool. The gap in our wire is somewhere ahead, and in the
+    dark one stretch of wire looks like every other.
+  choices:
+    - id: bold
+      text: "Stand up at the wire and call the password. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: '"Blackpool!" A rifle bolt, a pause, and a voice from home: "Come on then, you daft beggar."'
+      next: "@war"
+    - id: steady
+      text: "Feel along the wire for the gap with your hands. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You find the gap by the strip of white tape somebody tied to the picket. You could kiss him.
+      next: "@war"
+    - id: careful
+      text: "Wait in a shell hole till the flares die, then crawl in. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You get in just before stand-to with the cold right through you.
+      next: "@war"
+
+- id: x_patrol_done
+  chapter: front
+  title: After the patrol
+  text: |
+    [if war.result == ok]You report to the company officer in his dugout, standing with the mud drying on you, and he writes down what you say about the sunken road and the patrol in it and the new wire. He gives you his own tin of cigarettes. Two days later, our guns shell the sunken road all night.[/if][if war.result == failed]You come back with nothing anybody can use. The corporal tells the officer it was too dark, and it was. You lie awake till stand-to, seeing that helmet against the sky.[/if][if war.result == turned]The corporal reports you came back because you'd heard something. He doesn't say what. He doesn't look at you while he says it.[/if]
+  choices:
+    - id: on
+      text: Get your head down.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"
+
+# ---- a wiring party ------------------------------------------------------------------------------------
+
+- id: s_wiring_1
+  chapter: front
+  title: Wiring
+  text: |
+    [if war.stake == 0]Out in front with a coil of barbed wire on a stick across two men's shoulders, and screw pickets,
+    and mallets with sacking tied round the heads. The barbs catch your gloves, your puttees, your
+    face. Every few minutes a flare goes up from their side, and the whole party freezes where it
+    stands like children playing statues.[/if][if war.stake == 1]Pickets and a coil tonight, and two knife rests, wooden frames already strung with wire, carried out
+    between two men to drop across the worst gaps. They catch on everything. The wire sings
+    when it brushes against itself, a thin high note, and you'd swear the whole German army can hear it.[/if]
+  choices:
+    - id: bold
+      text: "Work fast. Get the pickets in before the moon's up. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You get six pickets screwed in, your hands raw, before the corporal tells you to slow down.
+      next: "@war"
+    - id: steady
+      text: "Work with the others, a picket at a time. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Screw, turn, turn, turn. The picket bites into the clay and holds.
+      next: "@war"
+    - id: careful
+      text: "Do the work close to our own wire, where there's cover. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You do the easy end. Nobody says anything. Somebody has to do the far end.
+      next: "@war"
+
+- id: s_wiring_2
+  chapter: front
+  title: Wiring
+  text: |
+    A flare goes up right over you. It hangs, and hangs, and you're stood in the open with a coil of
+    wire in your arms and every bit of you lit up white, and you can see your own shadow on the
+    ground going round slowly as the flare swings.
+  choices:
+    - id: bold
+      text: "Keep working. Moving men are harder to see than you'd think. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You keep unrolling the wire, slowly, steadily, and the flare dies, and nobody fires.
+      next: "@war"
+    - id: steady
+      text: "Freeze. Don't move a finger till it dies. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You don't breathe. The flare comes down somewhere behind you, fizzing in the grass.
+      next: "@war"
+    - id: careful
+      text: "Drop flat into the nearest shell hole. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You're down in the water before you know you've moved, and the wire's somewhere on top of you.
+      next: "@war"
+
+- id: s_wiring_3
+  chapter: front
+  title: Wiring
+  text: |
+    One more length and it's done, the corporal says. It's nearly light. You can see the shape of
+    their parapet now, which means they can see the shape of you.
+  choices:
+    - id: bold
+      text: "Finish the length. Whatever it takes. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run the last coil out and stamp it down and you're in through our wire as the light comes up grey.
+      next: "@war"
+    - id: steady
+      text: "Finish what you can and come in with the party. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You get most of it in, and come back in with the others, and the corporal says it'll do.
+      next: "@war"
+    - id: careful
+      text: "Come in now and leave the last of it. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You leave the last coil lying in no man's land. Someone will have to go out for it.
+      next: "@war"
+    - id: back
+      text: "Tell the corporal you're done in, and go back first. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You go back in on your own, and leave them to it.
+      next: "@war"
+
+- id: x_wiring_done
+  chapter: front
+  title: After wiring
+  text: |
+    [if war.result == ok]In the morning you look over the parapet with a periscope and there it is, your wire, a new belt of it, grey and nasty in the daylight. You put that there. It's a strange thing to be proud of.[/if][if war.result == failed]In daylight the new belt is a mess, half of it lying flat, a gap at one end you could drive a cart through. The officer looks at it through the periscope and says nothing, and you'll be out there again tonight.[/if][if war.result == turned]The others come in after it's light, with the wire done. The corporal hands you a cup of tea and doesn't say a word.[/if]
+  choices:
+    - id: on
+      text: Get your head down.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"
+
+# ---- a listening post -----------------------------------------------------------------------------------
+
+- id: s_listening_1
+  chapter: front
+  title: Listening post
+  text: |
+    [if war.stake == 0]A hole in the ground out past our wire, two men in it, a string running back to the trench. One
+    tug for all right, two for something moving, three for them coming. You've a rifle, four bombs
+    and a flask of cold tea, and three hours to lie here.
+
+    In the hole with you is {mate}. His knee is pressed against yours. You can feel it trembling, or
+    it's yours.[/if][if war.stake == 1]The Coffin, they call this post, because of its shape and for the other reason. Two hours in it with
+    rain on your back the whole time, running down your neck, filling your boots. The string runs back
+    into the dark and you keep your hand on it like a rosary.
+
+    In the post with you is {mate}, so close you can smell the tea on his breath.[/if]
+  choices:
+    - id: bold
+      text: "Crawl out ahead of the post to see better. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You lie out in front of the post in the grass, ten yards nearer them, with your ear on the ground.
+      next: "@war"
+    - id: steady
+      text: "Settle in the hole and listen, the way you were told. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You settle in, and the cold comes up out of the ground into you, and you listen.
+      next: "@war"
+    - id: careful
+      text: "Keep down below the lip of the hole. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You keep your head down below the lip, and the night goes on over you.
+      next: "@war"
+
+- id: s_listening_2
+  chapter: front
+  title: Listening post
+  text: |
+    A sound. Out in front, to the right, the wire rattling, or a rat at it. Then nothing. Then again:
+    a click, metal on metal, and a whisper you can't make out. It might be a German patrol. It might
+    be a loose picket in the wind. It's two in the morning and every sound is a man.
+  choices:
+    - id: bold
+      text: "Throw a bomb at the sound. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The bomb goes off in the wire, and somebody over there yells, and their whole trench opens up on the dark.
+      next: "@war"
+    - id: steady
+      text: "Two tugs on the string. Let the trench know. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Two tugs. The string comes back once. They've got it.
+      next: "@war"
+    - id: careful
+      text: "Lie still. Wait to be sure. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait. The sound doesn't come again. You'll never know.
+      next: "@war"
+
+- id: s_listening_3
+  chapter: front
+  title: Listening post
+  text: |
+    The relief's late. The sky's going grey in the east. If they don't come soon you'll have to get
+    back across in daylight, and their snipers will be up.
+  choices:
+    - id: bold
+      text: "Go back now, before it's any lighter. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run for our wire in the grey, and dive through the gap, and land on somebody's breakfast.
+      next: "@war"
+    - id: steady
+      text: "Wait for the relief. That's the order. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: They come at last, swearing about the communication trench, and you crawl back in.
+      next: "@war"
+    - id: careful
+      text: "Stay in the hole all day if you have to. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie in the hole all day with the flies, and come in after dark, stiff as a board.
+      next: "@war"
+
+- id: x_listening_done
+  chapter: front
+  title: After the listening post
+  text: |
+    [if war.result == ok]Two nights later a German raid comes over on exactly that stretch, and walks into rifles that are waiting for it. The company sergeant major makes a point of saying who heard them coming.[/if][if war.result == failed]Nobody comes, that you know of. The night was full of sounds and you can't swear to any of them. You come in with your ears ringing from listening.[/if][if war.result == turned]You came in early. Nobody saw anything on that stretch all night, so it doesn't matter, except that it does.[/if]
+  choices:
+    - id: on
+      text: Get your head down.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"
+
+# ---- a carrying party ------------------------------------------------------------------------------------
+
+- id: s_carrying_1
+  chapter: front
+  title: Carrying party
+  text: |
+    [if war.stake == 0]The ration dump at the end of the communication trench: boxes of small-arms ammunition, coils of
+    wire, duckboards, sandbags of bread, a dixie of tea for the front line with the lid tied on with
+    string. You're to take it all up. Two miles of trench, in the dark, in the wet, under a German
+    battery that knows the route as well as you do.[/if][if war.stake == 1]Rations and ammunition as usual from the dump, and on top of them tonight trench mortar bombs, the
+    ones the lads call toffee apples, a ball on a stick, slung on poles between pairs of men. If one goes off, the carrying party goes with it. Nobody
+    smokes. Nobody even talks about smoking.[/if]
+  choices:
+    - id: bold
+      text: "Take two loads at once and save a journey. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You set off with an ammunition box on each shoulder, and your shoulders tell you about it every yard.
+      next: "@war"
+    - id: steady
+      text: "Take your load and go with the party. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You get the dixie of tea, which is the worst job, because if you spill it the front line will kill you.
+      next: "@war"
+    - id: careful
+      text: "Take the light load: the bread. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You take the bread. It's the lightest load and everybody knows it.
+      next: "@war"
+
+- id: s_carrying_2
+  chapter: front
+  title: Carrying party
+  text: |
+    Halfway up, the battery starts. Whizz-bangs, you hear them after they arrive: a crack and a
+    flash and earth coming down on your helmet like rain on a slate roof. The trench is knee-deep in
+    places and the duckboards float. Somebody ahead is shouting to keep moving.
+  choices:
+    - id: bold
+      text: "Keep moving. Get through the shelled stretch fast. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run, bent double, slopping through the water, with the load banging your back.
+      next: "@war"
+    - id: steady
+      text: "Get down between shells, then move. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Down, count, up, move. Down. You've got the rhythm of it now. That frightens you.
+      next: "@war"
+    - id: careful
+      text: "Shelter in a dugout entrance till it stops. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You squeeze into a dugout entrance with three others and the load, and wait it out.
+      next: "@war"
+
+- id: s_carrying_3
+  chapter: front
+  title: Carrying party
+  text: |
+    The last stretch. There's a man down in the trench in front of you, one of the party, sitting in
+    the water holding his leg and swearing, quietly, in a steady stream, like a man reading a list.
+  choices:
+    - id: bold
+      text: "Take his load too, and leave him for the bearers. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You get both loads up to the front line, staggering, and fall asleep on the firestep the minute you put them down.
+      next: "@war"
+    - id: steady
+      text: "Get him up and walk him in with you. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You get his arm over your shoulder and walk him in, and he swears at you all the way, and thanks you at the end.
+      next: "@war"
+    - id: careful
+      text: "Stay with him and wait for the stretcher-bearers. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait with him in the water. The bearers come an hour later. The load doesn't get up till morning.
+      next: "@war"
+
+- id: x_carrying_done
+  chapter: front
+  title: After the carrying party
+  text: |
+    [if war.result == ok]Everything gets up. The front line has its ammunition and its wire and, still warm, its tea. A sergeant you don't know shakes your hand as if you'd brought him a letter from home.[/if][if war.result == failed]Half of it doesn't get up. The tea's spilt and the bread's soaked and an ammunition box is somewhere at the bottom of the trench water. The front line goes without, tonight.[/if][if war.result == turned]You came back without it. Somebody else takes it up.[/if]
+  choices:
+    - id: on
+      text: Get your head down.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"
+
+# ---- the bomber's mission ---------------------------------------------------------------------------------
+
+- id: s_bomb_1
+  chapter: front
+  title: Bombing raid
+  text: |
+    Eight bombers and a sergeant, a sandbag of Mills bombs each, in the sap at one in the morning. The
+    pins are bent back ready so you won't fumble them. The bombs are cold and heavy and fit your hand
+    the way a cricket ball does.
+  choices:
+    - id: bold
+      text: "Lead the way out to their wire. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go first, and the others follow your shape in the dark.
+      next: "@war"
+    - id: steady
+      text: "Go out in your place in the party. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You go out fourth, behind the sergeant's boots.
+      next: "@war"
+    - id: careful
+      text: "Go out last and keep the line back to the sap. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You go last, the safest place, and the job nobody wants to be seen wanting.
+      next: "@war"
+    - id: back
+      text: "Tell the sergeant you can't go tonight. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: The sergeant looks at you a long moment and takes your bombs off you himself.
+      next: "@war"
+
+- id: s_bomb_2
+  chapter: front
+  title: Bombing raid
+  text: |
+    In their trench. This is the work: along it a bay at a time. Pin, throw over the traverse, count,
+    down, the bang, then round the corner fast before they can throw back. Their bombs come over
+    too, the stick ones, turning end over end in the light of the last explosion.
+  choices:
+    - id: bold
+      text: "Lead round each traverse. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Three bays. Four. You stop counting. Your arm aches from throwing.
+      next: "@war"
+    - id: steady
+      text: "Throw for the man in front. Keep him supplied. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You throw, and pass up bombs, and throw, and the trench fills with smoke you can taste.
+      next: "@war"
+    - id: careful
+      text: "Hold the bay you're in. Block it with sandbags. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You build a block out of their own sandbags, and hold it, and the others go on without you.
+      next: "@war"
+
+- id: s_bomb_3
+  chapter: front
+  title: Bombing raid
+  text: |
+    The sergeant blows his whistle. Out. Their machine gun has started from somewhere further along
+    and the gap in the wire is behind you and getting further away.
+  choices:
+    - id: bold
+      text: "Bomb the machine gun before you go. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Your bomb goes over the sandbags at the muzzle flash, and the flash stops.
+      next: "@war"
+    - id: steady
+      text: "Go back with the party, carrying the wounded. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You go back with a man over your shoulder who keeps apologising.
+      next: "@war"
+    - id: careful
+      text: "Run for the gap. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You run, and dive, and you're through.
+      next: "@war"
+
+- id: x_bomb_done
+  chapter: front
+  title: After the bombing raid
+  text: |
+    [if war.result == ok]Their trench is blocked for a hundred yards and there's a dugout that won't be used again. The bombing officer says the brigadier has heard. You can't get the smell of the explosive off your hands, sweet and chemical, like pear drops.[/if][if war.result == failed]It went wrong. Their bombers were waiting. The sergeant's arm is in a sling and two of the eight aren't back.[/if][if war.result == turned]They went without you. The bombing officer has your name in his notebook now, and not in the good column.[/if]
+  choices:
+    - id: on
+      text: Get your head down.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"
+
+# ---- the Lewis gunner's mission ------------------------------------------------------------------------
+
+- id: s_lewis_1
+  chapter: front
+  title: The gun
+  text: |
+    Getting the gun into position: twenty-eight pounds of it, the drums in their canvas panniers, your
+    No. 2 behind you with the spares, out along a sap to a shell hole with a view. You've cleaned it
+    twice since dark. You can feel every grain of grit in it.
+  choices:
+    - id: bold
+      text: "Set up in the forward hole with the best field of fire. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The forward hole. You can see the whole of their parapet from here, which means it can see you.
+      next: "@war"
+    - id: steady
+      text: "Set up where you were told. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: The bipod legs bed into the sandbags. The butt goes into your shoulder like it lives there.
+      next: "@war"
+    - id: careful
+      text: "Set up back in the sap, under cover. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You set up in the sap. You can see half as much from here. You're twice as safe.
+      next: "@war"
+
+- id: s_lewis_2
+  chapter: front
+  title: The gun
+  text: |
+    You open up. The gun shakes against your shoulder and the cooling fins go hot and the empty cases
+    spill out of the side and ring off the sandbags. Forty-seven rounds, and you're changing the drum
+    by feel. Then it stops. A stoppage. The cocking handle's forward. You know what that is. Your
+    hands know before you do.
+  choices:
+    - id: bold
+      text: "Clear it fast and keep firing. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Pull, pull, a new drum, and it's going again, and the muzzle flash lights up the whole hole.
+      next: "@war"
+    - id: steady
+      text: "Clear it properly, by the drill. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: First position, second position. Your No. 2 hands you the drum without being asked.
+      next: "@war"
+    - id: careful
+      text: "Get the gun down out of sight while you clear it. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You get it down into the bottom of the hole and work on it blind, and the firing stops for a minute too long.
+      next: "@war"
+
+- id: s_lewis_3
+  chapter: front
+  title: The gun
+  text: |
+    It's done. Now the gun has to come back in, and their machine gunners know exactly where it's
+    been. The first shells are already coming down behind you.
+  choices:
+    - id: bold
+      text: "Carry the gun back yourself, fast. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run with the gun across your shoulders, and it gets heavier with every yard.
+      next: "@war"
+    - id: steady
+      text: "Take it back in turns with your No. 2. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Gun, then drums, then gun. The sap's longer than it was.
+      next: "@war"
+    - id: careful
+      text: "Wait in the hole for the shelling to ease. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait with the gun in your lap like a sleeping child, until it eases.
+      next: "@war"
+
+- id: x_lewis_done
+  chapter: front
+  title: After the gun
+  text: |
+    [if war.result == ok]The raid came back in under your fire, every man of it, and the raid officer comes along the trench afterwards to find the gunner. You're cleaning the gun. You keep cleaning it while he talks. Your hands won't stop otherwise.[/if][if war.result == failed]The gun was quiet when it was needed. Somebody out there paid for it. Nobody blames you to your face.[/if][if war.result == turned]You didn't take the gun up. Somebody else's team did.[/if]
+  choices:
+    - id: on
+      text: Clean the gun.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"
+
+# ---- the signaller's mission -----------------------------------------------------------------------
+
+- id: s_signals_1
+  chapter: front
+  title: The line
+  text: |
+    The pliers in your pocket, the reel of cable on your back, the buzzer in its leather case banging
+    on your hip. Somewhere between here and battalion the line is cut, and battalion is shouting into
+    a dead telephone.
+  choices:
+    - id: bold
+      text: "Run along the top of the trench where it's quickest. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run along the top in the dark with the wire running through your fingers.
+      next: "@war"
+    - id: steady
+      text: "Follow the wire along the trench floor. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You follow it bay by bay, the wire cold and wet in your hand.
+      next: "@war"
+    - id: careful
+      text: "Wait for the shelling to slacken first. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait. Battalion waits. The colonel's voice, they'll tell you later, went quiet.
+      next: "@war"
+
+- id: s_signals_2
+  chapter: front
+  title: The line
+  text: |
+    The break, at last, in the worst place: where the communication trench has been blown in, and
+    the two ends of the wire are fifteen yards apart across open ground that's under fire.
+  choices:
+    - id: bold
+      text: "Run the new wire across the open in one go. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run, paying out cable, and fall flat at the far end with your heart hammering, and the cable's across.
+      next: "@war"
+    - id: steady
+      text: "Crawl the wire across. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You crawl it across with the reel on your back and the bullets cracking overhead.
+      next: "@war"
+    - id: careful
+      text: "Take the long way round, through the next trench. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: It takes three times as much cable and three times as long, and you nearly run out.
+      next: "@war"
+
+- id: s_signals_3
+  chapter: front
+  title: The line
+  text: |
+    You splice it, fingers numb, by feel, the rubber tape in your teeth. Now to test it.
+  choices:
+    - id: bold
+      text: "Test it there, in the open. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You clip on the buzzer. Dot dash. Battalion answers.
+      next: "@war"
+    - id: steady
+      text: "Get back into cover, then test it. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: In the trench, the buzzer. It answers.
+      next: "@war"
+    - id: careful
+      text: "Leave it for the next man to test. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You get back in and tell them it's done, and hope it is.
+      next: "@war"
+
+- id: x_signals_done
+  chapter: front
+  title: After the line
+  text: |
+    [if war.result == ok]The line holds till morning. The colonel gets his company commander, and the company gets its guns when it needs them. The signals sergeant gives you a slice of his wife's cake, which is the highest honour in the signals.[/if][if war.result == failed]The line goes again within the hour. They send a runner, in the end, and he doesn't come back.[/if][if war.result == turned]You didn't go. Another signaller did.[/if]
+  choices:
+    - id: on
+      text: Get your head down.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"
+
+# ---- the sniper's mission --------------------------------------------------------------------------------
+
+- id: s_snipe_1
+  chapter: front
+  title: The hide
+  text: |
+    Before dawn you crawl into the hide: a hollow in the parapet behind a steel plate with a slit in
+    it, a sack over the slit, your observer beside you with the telescope and the notebook. You stay
+    till dark. Fourteen hours. You've a bottle to piss in and a tin of bully.
+  choices:
+    - id: bold
+      text: "Take the forward hide, the one with the better view. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The forward hide. You can see their trench from here, and the ruined house behind it, and everything in between.
+      next: "@war"
+    - id: steady
+      text: "Take your usual hide. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Your hide. You know every lump in its sandbags.
+      next: "@war"
+    - id: careful
+      text: "Take the deep hide, with the narrow slit. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: The deep hide. You can see a slice of their parapet the width of your hand.
+      next: "@war"
+
+- id: s_snipe_2
+  chapter: front
+  title: The hide
+  text: |
+    Mid-morning. Your observer touches your arm. At a loophole in their parapet, a piece of mirror,
+    and behind it a man shaving, his braces down, the lather white on his face. He puts you in mind
+    of your father at the scullery sink. He has no idea.
+  choices:
+    - id: bold
+      text: "Take the shot. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The rifle kicks. The mirror's gone. Your observer writes something in the notebook and doesn't look at you.
+      next: "@war"
+    - id: steady
+      text: "Watch the loophole and wait for a better target. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You wait. He finishes shaving. At noon a man with an officer's cap comes to the same loophole.
+      next: "@war"
+    - id: careful
+      text: "Let him shave. Mark the loophole and keep still. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You watch him rinse his razor, and wipe his face, and go.
+      next: "@war"
+    - id: back
+      text: "Pack it in for the day. Something's wrong out there. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You've a feeling a plate's been moved over there. You trust it, and get out.
+      next: "@war"
+
+- id: s_snipe_3
+  chapter: front
+  title: The hide
+  text: |
+    Afternoon. A rifle bullet hits your steel plate with a sound like a bell, and the whole hide
+    rings. They've found you. Their sniper is out there somewhere, and he's looking at your slit.
+  choices:
+    - id: bold
+      text: "Find him. He fired; he's shown himself. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You find the flash, a dark place in a heap of bricks. You wait. You fire.
+      next: "@war"
+    - id: steady
+      text: "Close the slit and wait for dark. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You close the slit and lie in the dark with the plate between you and him, and the hours go slow.
+      next: "@war"
+    - id: careful
+      text: "Crawl out the back of the hide, now. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You go out the back on your belly, and leave the hide to him.
+      next: "@war"
+
+- id: x_snipe_done
+  chapter: front
+  title: After the hide
+  text: |
+    [if war.result == ok]The observer's notebook goes back to the sniping officer with two entries in it, and a sketch of the loophole. Nobody shaves at that mirror again. You eat your bully beef in the dark afterwards and it tastes of the inside of the tin.[/if][if war.result == failed]A day in the hide with nothing in the notebook but times and weather. Their side was careful today. So were you.[/if][if war.result == turned]You came out early. The notebook's blank.[/if]
+  choices:
+    - id: on
+      text: Clean the rifle.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"
+
+# ---- the tunneller's mission -------------------------------------------------------------------------
+
+- id: s_tunnel_1
+  chapter: front
+  title: The gallery
+  text: |
+    Down the shaft on the ladder, sixty feet, the air getting thicker and warmer. Along the gallery on
+    your back on the trolley, to the face. The candle goes small and blue. Clay, wet, the smell of it
+    and of men's sweat and of the bags of spoil going back hand to hand.
+  choices:
+    - id: bold
+      text: "Work the face, kicking the clay out fast. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You lie on the cross and kick at the clay with the grafting tool, and the spoil goes back down the line.
+      next: "@war"
+    - id: steady
+      text: "Work it quietly, the way you were taught. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Quiet as you can, the clay coming away in lumps, each one handed back without a word.
+      next: "@war"
+    - id: careful
+      text: "Shore it up first, frame by frame. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You get the timbers in before you dig another foot. The roof creaks, and holds.
+      next: "@war"
+
+- id: s_tunnel_2
+  chapter: front
+  title: The gallery
+  text: |
+    You put your ear to the listening stick against the clay. You can hear them. The Germans, digging
+    their own gallery, close: the scrape, the thud, a voice. Then the digging stops. They're
+    listening too.
+  choices:
+    - id: bold
+      text: "Keep digging, quietly. Get to them first. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You keep digging, slow, silent, and your own heartbeat is the loudest thing in the gallery.
+      next: "@war"
+    - id: steady
+      text: "Stop and listen. Count how long they're quiet. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You lie still with your ear to the clay for an hour. They start again. You breathe.
+      next: "@war"
+    - id: careful
+      text: "Pull back down the gallery and report it. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You crawl back down the gallery on your belly and tell the officer, in a whisper, though you're a hundred yards off.
+      next: "@war"
+    - id: back
+      text: "Get everybody out of the gallery. Now. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You get everyone out, and up the shaft, and nothing happens, and then you have to go back down.
+      next: "@war"
+
+- id: s_tunnel_3
+  chapter: front
+  title: The gallery
+  text: |
+    The officer decides: a camouflet, a small charge, to blow in their gallery before they blow in
+    yours. The ammonal comes down the line in bags. Somebody has to tamp it and lay the leads.
+  choices:
+    - id: bold
+      text: "Lay the charge yourself. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You lay it with your hands steady, which surprises you, and you're up the shaft when it goes. The ground jumps.
+      next: "@war"
+    - id: steady
+      text: "Tamp and pass up the bags, with the others. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You tamp the charge with sandbags, bag after bag, till the gallery's sealed.
+      next: "@war"
+    - id: careful
+      text: "Work the windlass at the top of the shaft. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wind, and wind, and the men come up out of the dark one by one, grey with clay.
+      next: "@war"
+
+- id: x_tunnel_done
+  chapter: front
+  title: After the gallery
+  text: |
+    [if war.result == ok]Their gallery is gone. The listening officer says there's been no digging since. You sleep twelve hours in the tunnellers' dugout and dream of nothing, which is the best kind.[/if][if war.result == failed]It went off too soon, or too late. Our gallery came in at the end. Two men are still down there, and you know their names, and the officer has started a new shaft.[/if][if war.result == turned]You came up. Somebody else went down.[/if]
+  choices:
+    - id: on
+      text: Wash the clay off, if you can.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"

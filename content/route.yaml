@@ -17,7 +17,47 @@ switch:
   - { if: ["war.fallen == 3", "start == mill"], go: x_fallen_pilling }
   - { if: "war.fallen >= 1", go: x_fallen }
   # how a sortie went, then its next step (content/scenes/war/sorties.yaml)
+  - { if: ["war.result != none", "war.result_key == raid"], go: x_raid_done }
+  - { if: ["war.result != none", "war.result_key == patrol"], go: x_patrol_done }
+  - { if: ["war.result != none", "war.result_key == wiring"], go: x_wiring_done }
+  - { if: ["war.result != none", "war.result_key == listening"], go: x_listening_done }
+  - { if: ["war.result != none", "war.result_key == carrying"], go: x_carrying_done }
+  - { if: ["war.result != none", "war.result_key == bomb"], go: x_bomb_done }
+  - { if: ["war.result != none", "war.result_key == lewis"], go: x_lewis_done }
+  - { if: ["war.result != none", "war.result_key == snipe"], go: x_snipe_done }
+  - { if: ["war.result != none", "war.result_key == signals"], go: x_signals_done }
+  - { if: ["war.result != none", "war.result_key == tunnel"], go: x_tunnel_done }
   - { if: "war.result != none", go: x_sortie }
+  - { if: ["war.sortie == raid", "war.step == 1"], go: s_raid_1 }
+  - { if: ["war.sortie == raid", "war.step == 2"], go: s_raid_2 }
+  - { if: ["war.sortie == raid", "war.step == 3"], go: s_raid_3 }
+  - { if: ["war.sortie == patrol", "war.step == 1"], go: s_patrol_1 }
+  - { if: ["war.sortie == patrol", "war.step == 2"], go: s_patrol_2 }
+  - { if: ["war.sortie == patrol", "war.step == 3"], go: s_patrol_3 }
+  - { if: ["war.sortie == wiring", "war.step == 1"], go: s_wiring_1 }
+  - { if: ["war.sortie == wiring", "war.step == 2"], go: s_wiring_2 }
+  - { if: ["war.sortie == wiring", "war.step == 3"], go: s_wiring_3 }
+  - { if: ["war.sortie == listening", "war.step == 1"], go: s_listening_1 }
+  - { if: ["war.sortie == listening", "war.step == 2"], go: s_listening_2 }
+  - { if: ["war.sortie == listening", "war.step == 3"], go: s_listening_3 }
+  - { if: ["war.sortie == carrying", "war.step == 1"], go: s_carrying_1 }
+  - { if: ["war.sortie == carrying", "war.step == 2"], go: s_carrying_2 }
+  - { if: ["war.sortie == carrying", "war.step == 3"], go: s_carrying_3 }
+  - { if: ["war.sortie == bomb", "war.step == 1"], go: s_bomb_1 }
+  - { if: ["war.sortie == bomb", "war.step == 2"], go: s_bomb_2 }
+  - { if: ["war.sortie == bomb", "war.step == 3"], go: s_bomb_3 }
+  - { if: ["war.sortie == lewis", "war.step == 1"], go: s_lewis_1 }
+  - { if: ["war.sortie == lewis", "war.step == 2"], go: s_lewis_2 }
+  - { if: ["war.sortie == lewis", "war.step == 3"], go: s_lewis_3 }
+  - { if: ["war.sortie == snipe", "war.step == 1"], go: s_snipe_1 }
+  - { if: ["war.sortie == snipe", "war.step == 2"], go: s_snipe_2 }
+  - { if: ["war.sortie == snipe", "war.step == 3"], go: s_snipe_3 }
+  - { if: ["war.sortie == signals", "war.step == 1"], go: s_signals_1 }
+  - { if: ["war.sortie == signals", "war.step == 2"], go: s_signals_2 }
+  - { if: ["war.sortie == signals", "war.step == 3"], go: s_signals_3 }
+  - { if: ["war.sortie == tunnel", "war.step == 1"], go: s_tunnel_1 }
+  - { if: ["war.sortie == tunnel", "war.step == 2"], go: s_tunnel_2 }
+  - { if: ["war.sortie == tunnel", "war.step == 3"], go: s_tunnel_3 }
   - { if: "war.pending == step", go: w_step }
   # authored moments (calibration, the mill town 1915)
   # front-line events: at the first call for men each tour, one from the pool if one is due;

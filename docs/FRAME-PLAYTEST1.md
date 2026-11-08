@@ -55,7 +55,7 @@ still met. Medals for the adaptive soldier 22.7% → 18.9%.
 
 **The prototype is retired** with this change (CLAUDE.md): the game no longer plays its war.
 
-## Depth: the book (next)
+## Depth: the book (built, first pass)
 
 The fault: a tour is a card. The sergeant wants men; a choice; numbers; the next card weeks on.
 Nothing carries from one to the next except what the status line says.
@@ -74,3 +74,21 @@ The fix, in order:
 
 The gate after every rule change; the validator, style lint, continuity and render scan; and a
 full transcript of a year read end to end before each commit.
+
+## As built: the book, first pass (2026-11-09)
+
+- **Every sortie written**: ten kinds (five duties, five roles), three steps each, with a line for
+  what you did after every choice and an ending for each sortie in three versions (went well, went
+  wrong, turned back). The first step of each duty has a second take, alternating with every
+  sortie played, so two in a row never read the same.
+- **The tour opens as a passage of the year**: a paragraph for each month, two takes each,
+  alternating by tour and by year (the weather, the light, the food, the smell, the work), and
+  then what has happened since the last tour, read from the war's own log: back from leave, back
+  from a wound, a friend's place taken by a draft lad, a new stripe sewn on crooked, a medal in
+  battalion orders that nobody mentions to your face.
+- **Two rules changed for it**, both measured: the two duties offered in a tour are now different
+  (the same one twice read as a repeat); sortie steps have their own finer risk words, because on
+  the battle scale every step read "low risk". Gate after both: best play 5.3% ±0.5 to the
+  Armistice, reckless 0.4% ±0.1, survives 1915 75.7% ±1.0, going back after 1915 +10.2 grade.
+
+Still to do for the book: chapter pages for each year, and second takes for steps 2 and 3.

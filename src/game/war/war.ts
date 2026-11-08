@@ -368,7 +368,9 @@ function rotationStart(w: War, st: Stage): void {
   spendNerve(w, st.nerve);
   learn(w, 'trench', 0.25);
   const keys = Object.keys(DUTIES);
-  const offered = w.transferred ? [] : [pick(w.rng, 'duty', keys), pick(w.rng, 'duty', keys)];
+  // two different duties: the same one twice in a tour read as a repeat (playtest 1, 2026-11-09)
+  const first = w.transferred ? null : pick(w.rng, 'duty', keys);
+  const offered = first === null ? [] : [first, pick(w.rng, 'duty', keys.filter((k) => k !== first))];
   w.cursor = { at: 'duty', sectionP, offered, i: 0, cover: 1 };
 }
 
