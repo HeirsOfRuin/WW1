@@ -74,6 +74,9 @@ export interface War {
   ending: Ending | null; endedStage: number; stagesDone: number; posting: string | null;
   /** what ended it, as the resolver recorded it (a duty, a battle, shellfire); worded by the module */
   endWhy: string;
+  /** what happened that the player has not yet been shown as a scene: a wound, friends killed.
+   *  Recorded only; nothing in the war reads it, so the war's numbers do not depend on it. */
+  news: { wound: { kind: 'light' | 'severe'; cause: string } | null; fallen: { i: number; why: string; present: boolean }[] };
   stats: WarStats;
   log: string[];
   rng: Streams;
@@ -93,7 +96,7 @@ export function newWar(o: NewWarOptions): War {
     awards: [], friends: Array.from({ length: SECTION_SIZE }, () => true),
     merit: 0, severe: 0, out: 0, battleNow: false, inBattle: false, blightyThisStage: false, courseThisStage: false,
     stage: 1, clock: 0, clockInStage: 0, r: 0, path: 'rifleman', promotedThisStage: false,
-    ending: null, endedStage: 0, stagesDone: 0, posting: null, endWhy: '',
+    ending: null, endedStage: 0, stagesDone: 0, posting: null, endWhy: '', news: { wound: null, fallen: [] },
     stats: { minNerve: 75, lowNerve: 0, rotations: 0, volunteered: 0, detailed: 0, courses: 0, battles: 0, missedBattles: 0, offersAtLeave: {}, friendsLostWithYou: 0, missions: 0, missionsWon: 0 },
     log: [], rng: seedStreams(o.seed), cursor: { at: 'train' }, pending: null,
   };
@@ -118,6 +121,11 @@ const SEVERE_OUT = 4;
 const ch = (w: War, l: StreamName, p: number) => chance(w.rng, l, p);
 const stageOf = (w: War): Stage => STAGES[w.stage - 1]!;
 export const isRole = (w: War) => w.path in ROLES;
+
+/** The news record, created for a save made before it existed (2026-11-09). */
+export function newsOf(w: War): War['news'] {
+  return (w.news ??= { wound: null, fallen: [] });
+}
 
 function end(w: War, kind: Ending, why: string): void {
   if (w.ending) return;
@@ -159,10 +167,12 @@ function hit(w: War, cause: string): void {
     if (ch(w, 'fire', WOUND.downgrade) || w.severe >= 3) return end(w, 'invalided', `${cause}, severe wound, downgraded`);
     w.out = SEVERE_OUT; w.blightyThisStage = true;
     w.nerve = clamp(w.nerve + 10, 0, 100);
+    newsOf(w).wound = { kind: 'severe', cause };
     return say(w, `severe wound (${cause}): hospital in England, out ${SEVERE_OUT} rotations`);
   }
   w.out = home(w, 'stamina') ? 1 : 2;
   spendNerve(w, 4);
+  newsOf(w).wound = { kind: 'light', cause };
   say(w, `light wound (${cause}): out ${w.out} rotation(s)`);
 }
 
@@ -172,6 +182,7 @@ function friendLosses(w: War, p: number, why: string): void {
     if (!w.friends[i]) continue;
     if (ch(w, 'section', p)) {
       w.friends[i] = false;
+      newsOf(w).fallen.push({ i, why, present });
       spendNerve(w, present ? 7 : 3);
       if (present) w.stats.friendsLostWithYou++;
       say(w, `friend ${i + 1} killed (${why})`);

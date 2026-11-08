@@ -16,3 +16,6 @@ last_letter: { description: "Left a letter in the pay book before Loos; read if 
 roll_called: { description: "The roll call after Loos has been played" }
 spoke_at_roll: { description: "Answered at roll call for the men he saw fall" }
 silent_at_roll: { description: "Kept what he saw" }
+wrote_to_mrs_shaw: { description: "Wrote to Albert Shaw's mother yourself; she sends for you at leave" }
+wrote_to_mrs_duckworth: { description: "Wrote to Harry Duckworth's parents with his jokes; his dad laughs at leave" }
+wrote_to_mrs_pilling: { description: "Wrote to Walter Pilling's mother; a cake on your mother's step at leave" }

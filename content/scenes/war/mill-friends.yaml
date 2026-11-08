@@ -1,0 +1,75 @@
+# The mill town's three written friends, killed. One scene each, for whenever it happens; the
+# route sends the player here before the next question. With him, or hearing it after. The choice
+# (write to his mother yourself, or not) is read at the next leave.
+
+- id: x_fallen_shaw
+  chapter: front
+  title: Albert Shaw
+  text: |
+    [if war.fallen_present]It happens {fallen_where}, three yards from you. Shaw sits down the way a man sits on a step at the end of a shift, and puts his hand flat on his chest, and looks at it.
+
+    "Oh, hell," he says. "Oh, me mam."
+
+    You get to him. You get your field dressing out with your teeth. There's nowhere to put it that would be any use. He's looking past you at something, and then he isn't looking at anything.
+
+    Somebody pulls you off him. You've got him to the elbows and it's going cold already, sticky, and it smells like the back of the butcher's on Bury Road.[else]You hear it at the ration dump, in the dark. Shaw. Killed {fallen_where}. The man who tells you says it quickly, to get it said, and goes.
+
+    You sit on the firestep with the bread under your arm.[if flag.wrote_for_shaw] His mother's last letter from him was in your handwriting. The next one will be in an officer's, and she'll know the difference.[/if][/if]
+
+    His mother lives two doors up from yours.
+  choices:
+    - id: write_mother
+      text: Write to Mrs Shaw yourself, tonight.
+      effects: [ { set: flag.wrote_to_mrs_shaw }, { war_ack: fallen } ]
+      text_after: |
+        It takes you till stand-to. You put that he didn't suffer, which you don't know. You put
+        that he talked about her, which is true.
+      next: "@war"
+    - id: leave_it
+      text: Leave it to the officer's letter. You can't.
+      effects: [ { war_ack: fallen } ]
+      next: "@war"
+
+- id: x_fallen_duckworth
+  chapter: front
+  title: Harry Duckworth
+  text: |
+    [if war.fallen_present]It happens {fallen_where}. Duckworth's halfway through a joke, the one about the tackler and the parson's wife, and then he isn't. There's no sound to it that you can pick out from all the other noise. He's just down, face first, with his rifle under him, and when you turn him over the joke's still on his face.
+
+    You stay with him longer than you should. Somebody has to kick your boot.[else]Somebody tells you at the water cart. Duckworth. Killed {fallen_where}.
+
+    "He wouldn't have known a thing," they say. You hope it's true. You hope it hard, like a prayer, standing there with the water tins.[/if]
+  choices:
+    - id: write_mother
+      text: Write to his mam and dad yourself.
+      effects: [ { set: flag.wrote_to_mrs_duckworth }, { war_ack: fallen } ]
+      text_after: |
+        You tell them about the Woodbines on the first night, and the jokes, all of them, even the
+        one about the parson's wife, because his dad will laugh at that one and his mam will pretend
+        she didn't hear.
+      next: "@war"
+    - id: leave_it
+      text: Leave it. You wouldn't know what to put.
+      effects: [ { war_ack: fallen } ]
+      next: "@war"
+
+- id: x_fallen_pilling
+  chapter: front
+  title: Walter Pilling
+  text: |
+    [if war.fallen_present]It happens {fallen_where}. Pilling's next to you and then he's in the bottom of the trench, curled up small, calling for his mam in a voice you've not heard out of him since he was nine and fell off the canal wall.
+
+    You hold his hand. It's all there is. His grip goes tight, tighter, like a child's at the fair when the crowd closes in, and then it doesn't.[else]The post comes up and there's a letter for Pilling, from his mam, in her careful round hand. The corporal gives it to you because you're from the same street. Pilling was killed {fallen_where} two days since.
+
+    You don't open it. You put it inside your tunic, and you can feel it there all night, square and stiff against your chest.[/if]
+
+    [if war.stage == 1]He was sixteen. He'd have been seventeen in March.[else]He was eighteen. He'd been telling everybody since March.[/if][if flag.told_on_pilling] You tried, you tell yourself. You tried.[/if]
+  choices:
+    - id: write_mother
+      text: Write to Mrs Pilling. Tell her about the birthday cakes.
+      effects: [ { set: flag.wrote_to_mrs_pilling }, { war_ack: fallen } ]
+      next: "@war"
+    - id: leave_it
+      text: Leave it. She'll have the official letter.
+      effects: [ { war_ack: fallen } ]
+      next: "@war"

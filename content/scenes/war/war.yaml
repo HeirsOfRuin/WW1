@@ -210,10 +210,14 @@
   chapter: front
   title: A course
   text: |
-    The company sergeant major has a place on a course in {course_name}, two weeks behind the lines.
+    The company sergeant major stops you at the water cart. There's a place going on a course,
+    two weeks behind the lines, and he's put your name down unless you'd rather he didn't.
+
+    [if war.course == lewis]The Lewis gun: twenty-eight pounds of it, a drum of forty-seven rounds on top like a gramophone record, and a temper. When it jams it jams in the worst place. The gun team are out of the attacks till they're needed and then they're needed more than anybody, and every German gunner looks for them first.[/if][if war.course == signals]Signals: flags, lamps, the buzzer, the field telephone and its miles of wire. When the wire's cut, and it's always cut, the signaller runs the message himself, across whatever's between him and battalion.[/if][if war.course == bomb]Bombing: the Mills bomb, pin and lever, four seconds. The bombers go first along an enemy trench, a bay at a time, and the men who come back from a bombing course don't joke about it.[/if][if war.course == snipe]Sniping: a rifle with a telescopic sight, a hide in the parapet, a partner with a periscope and a notebook. Hours of nothing. Then a second.[/if][if war.course == lead]An NCO course: map reading, fire orders, how to keep a section together when the corporal's gone. They want men who can take charge.[/if]
+    [if start == mill && war.course == lewis && war.mate2] Duckworth says his dad could strip one blindfold. "It's only a loom that shoots," he says.[/if]
   choices:
     - id: take
-      text: Take it.
+      text: Take it. Two weeks out of the line, and a trade after.
       effects: [ { war: take } ]
       next: "@war"
     - id: decline

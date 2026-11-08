@@ -465,6 +465,15 @@ there in October. His arc continues in 1916.
 gate's war exactly (the equivalence test holds). Events changing nerve or standing are the
 first deliberate rule change; that retires the prototype (§15).
 
+**What happens, shown.** A wound (light, or severe enough for England) and the death of a
+written friend are now scenes, not a line in the changes. The war records them as news
+(`War.news`), which nothing in the war reads, so the numbers are unchanged; the route shows the
+news before the next question and `war_ack` clears it. The mill town's friends each have a death
+scene, with him or hearing it after, and a choice to write to his mother that the leave reads.
+Saves made before `news` existed load and play on (`newsOf`).
+
+**The course offer** is written for each specialty: the role it opens is fought from 1916.
+
 **Dates.** The tour before Loos moved from August to September 1915, so "Moving up" is dated
 the month of the battle.
 

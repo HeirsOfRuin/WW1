@@ -9,6 +9,13 @@ switch:
   - { if: "war.ending == invalided", go: e_invalided }
   - { if: "war.ending == broken", go: e_broken }
   - { if: "war.ending == court_martial", go: e_court }
+  # what just happened, before anything else is asked (content/scenes/war/news.yaml)
+  - { if: "war.wound == light", go: x_wound_light }
+  - { if: "war.wound == severe", go: x_wound_severe }
+  - { if: ["war.fallen == 1", "start == mill"], go: x_fallen_shaw }
+  - { if: ["war.fallen == 2", "start == mill"], go: x_fallen_duckworth }
+  - { if: ["war.fallen == 3", "start == mill"], go: x_fallen_pilling }
+  - { if: "war.fallen >= 1", go: x_fallen }
   # authored moments (calibration, the mill town 1915)
   # front-line events: at the first call for men each tour, one from the pool if one is due;
   # each is once, and requires says when (an empty draw goes straight to the duty)

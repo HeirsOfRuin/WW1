@@ -112,7 +112,7 @@
     "Dear Son, just a few lines hoping this finds you as it leaves us at present. They have took
     girls on in the card room and your father says it will be the ruin of the trade but he says
     that about everything. [if war.mate1]Mrs Shaw says {mate1_first} never writes, so you tell him
-    from me he wants a clip round the ear.[else]Mrs Shaw has had the telegram about {mate1_first}. She
+    from me he wants a clip round the ear.[else]Mrs Shaw has had the letter about {mate1_first}. She
     has not been to chapel since and I don't blame her.[/if] Keep your feet dry. Are you eating.
     Don't do anything daft. Your loving Mother."
   choices:
@@ -269,7 +269,7 @@
 
     [if war.mate1]"Shaw." "Here, sir." Albert's voice is a croak.[else]"Shaw." Nothing. He says it again. "Shaw, A." The rain on the caps.[/if]
     [if war.mate2]"Duckworth." "Present and correct, sir," and somebody near him nearly laughs.[else]"Duckworth." Nothing. You stare at the back of the neck in front of you till it blurs.[/if]
-    [if war.mate3]"Pilling." "Here." High, like a lad answering the register.[else]"Pilling." Nothing. Nobody says he was seventeen.[/if]
+    [if war.mate3]"Pilling." "Here." High, like a lad answering the register.[else]"Pilling." Nothing. Nobody says he was sixteen.[/if]
 
     It takes most of the afternoon. The field smells of trodden grass and wet wool and the cookers
     going behind the hedge, and nobody eats when the stew comes.
@@ -429,9 +429,11 @@
     father's old coat, and listen to the clock on the mantel. You'd forgotten the clock.
     [if flag.wrote_home]Your letter is behind it with the rent book, gone soft at the folds.[/if][if flag.sent_postcard]The field postcard is propped against it. "I am quite well," she reads out, not looking at you. "Quite well." She doesn't say anything else about it, and it would be better if she did.[/if][if !flag.letter_mill]"You might have written," she says to the copper.[/if]
 
-    [if war.mate1]In the morning Mrs Shaw is on her step two doors up, in her shawl, waiting for you. "Is he eating?" she says. "Is our {mate1_first} eating?" You tell her yes. You tell her he's grown a moustache. [if flag.taught_shaw]"He wrote me himself," she says. "Six lines. Spelt allotment right and all." [/if][if flag.wrote_for_shaw]"He wrote," she says, and looks at you. "It were your hand." She doesn't mind. [/if]She laughs, and then puts her apron up to her face.[else]In the morning the blinds are down at the Shaws'. They've been down since the telegram. Mrs Shaw doesn't come out, and you don't knock, and you hate yourself for it all the way to the end of the street.[/if]
+    [if war.mate1]In the morning Mrs Shaw is on her step two doors up, in her shawl, waiting for you. "Is he eating?" she says. "Is our {mate1_first} eating?" You tell her yes. You tell her he's grown a moustache. [if flag.taught_shaw]"He wrote me himself," she says. "Six lines. Spelt allotment right and all." [/if][if flag.wrote_for_shaw]"He wrote," she says, and looks at you. "It were your hand." She doesn't mind. [/if]She laughs, and then puts her apron up to her face.[else]In the morning the blinds are down at the Shaws'. They've been down since the buff envelope came. [if flag.wrote_to_mrs_shaw]On the second day Mrs Shaw sends their girl round for you. She has your letter in her apron pocket, creased to rags already. She wants it all again, every bit, and you tell her, and leave out what she can't have.[else]Mrs Shaw doesn't come out, and you don't knock, and you hate yourself for it all the way to the end of the street.[/if][/if]
 
-    [if flag.told_on_pilling && war.mate3]Mrs Pilling stops you outside the Co-op. "They told me you tried," she says. "With the sergeant. I wrote to the War Office twice." She grips your sleeve. "Thank you for trying, love."[/if][if flag.kept_pilling_secret && war.mate3]Mrs Pilling stops you outside the Co-op. "Is our Walter behaving himself?" she says. You tell her he is. You don't tell her anything else.[/if][if !war.mate3]The Pillings' blinds are down as well. Walter was seventeen.[/if][if !war.mate3 && flag.kept_pilling_secret] You knew how old he was and you kept it for him. You'd keep it again. It doesn't help.[/if][if !war.mate3 && flag.told_on_pilling] Mrs Pilling sees you from her window and lets the curtain drop.[/if]
+    [if !war.mate2]The Duckworths have a black ribbon on the knocker.[/if][if !war.mate2 && flag.wrote_to_mrs_duckworth] His dad stops you at the corner, a tackler, hands like shovels. "That joke," he says. "The parson's wife." He laughs till he has to hold the wall.[/if]
+
+    [if flag.told_on_pilling && war.mate3]Mrs Pilling stops you outside the Co-op. "They told me you tried," she says. "With the sergeant. I wrote to the War Office twice." She grips your sleeve. "Thank you for trying, love."[/if][if flag.kept_pilling_secret && war.mate3]Mrs Pilling stops you outside the Co-op. "Is our Walter behaving himself?" she says. You tell her he is. You don't tell her anything else.[/if][if !war.mate3]The Pillings' blinds are down as well. Walter was sixteen.[/if][if !war.mate3 && flag.wrote_to_mrs_pilling] Mrs Pilling has your letter. She doesn't come out, but on your last morning there's a cake on your mother's step in a tin, and no note.[/if][if !war.mate3 && flag.kept_pilling_secret] You knew how old he was and you kept it for him. You'd keep it again. It doesn't help.[/if][if !war.mate3 && flag.told_on_pilling] Mrs Pilling sees you from her window and lets the curtain drop.[/if]
 
     [if flag.spoke_at_roll]On Sunday after chapel a woman you don't know takes hold of your hand in both of hers. "You were the one who told them," she says. "About our Ernest, in B Company. They wrote that it were quick." You don't remember whether it was quick. You tell her it was.[/if][if flag.silent_at_roll]In the Co-op a woman is telling the girl behind the counter that her lad is only missing, that missing means a German hospital, he'll turn up, you'll see. You saw. You pay for your father's tobacco and go out without your change.[/if]
 

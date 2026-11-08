@@ -1,0 +1,66 @@
+# What happened, shown as scenes: wounds, and the deaths of the written friends. The war records
+# these as news (src/game/war/war.ts) and content/route.yaml sends the player here before the next
+# question. Each scene ends with war_ack, which clears the news so the route moves on.
+# Shared by every town; a town's own friends have their own scenes (mill-friends.yaml).
+
+- id: x_wound_light
+  chapter: front
+  title: Hit
+  text: |
+    Hit {wound_where}.
+
+    It's like a cricket bat across the shoulder, hard, and you're sat down in the muck before you
+    know why. Then the heat comes, and the wet. There's a hole in your sleeve you could put your
+    thumb in.
+
+    "You lucky sod," somebody says, crouching over you. "That's not even a Blighty one."
+
+    The stretcher-bearers have worse to carry. You walk, down the communication trench with your
+    arm held against you like a parcel, to the aid post in a cellar. It smells of iodine and
+    paraffin and blood gone cold. The doctor looks for four seconds. Iodine that makes you shout,
+    a dressing, a label tied to your tunic button. A week behind the lines, maybe two. Then back.
+  choices:
+    - id: go_down
+      text: Go down the line.
+      effects: [ { war_ack: wound } ]
+      next: "@war"
+
+- id: x_wound_severe
+  chapter: front
+  title: A Blighty one
+  text: |
+    Hit {wound_where}.
+
+    You don't remember the first part. You remember a stretcher, the bearers swearing at the mud,
+    the sky going past in strips between the trench walls. Morphia at the aid post, warm and heavy,
+    like falling asleep in front of the fire. A tent at the clearing station, a long row of you,
+    chloroform and wet canvas. A train with the windows painted over. A boat. The Channel's rough
+    and the man in the cot above you is sick all the way across, and you don't care, because
+    somebody said Southampton.
+
+    A hospital in England. Clean sheets that crackle. A nurse from Leeds who calls everybody "my
+    lad" and smells of soap. Your mother comes on the train with a cake in a tin and sits by the
+    bed for two hours not knowing what to say, and it's the best two hours of the war.
+
+    In a couple of months the wound will close, and they'll send you back.
+  choices:
+    - id: mend
+      text: Get well. Then go back.
+      effects: [ { war_ack: wound } ]
+      next: "@war"
+
+# A written friend killed, for a town whose friends have no scenes of their own yet.
+- id: x_fallen
+  chapter: front
+  title: "{fallen_name}"
+  text: |
+    {fallen_name} is killed {fallen_where}.
+
+    [if war.fallen_present]You're near enough to see it, and far enough that there's nothing to do. Afterwards you can never get the order right in your head: the noise, or him going down, or the noise again.[else]You hear it at the ration dump, in the dark, from a man who says it quickly to get it said.[/if]
+
+    You knew him before any of this. You knew his mother's kitchen.
+  choices:
+    - id: carry_on
+      text: Go on.
+      effects: [ { war_ack: fallen } ]
+      next: "@war"
