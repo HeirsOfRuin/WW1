@@ -2,7 +2,7 @@
 
 Status: **approved** (2026-11-08), revision 3. Stage 1 of the game-building workflow
 (`Game-Workshop/skills/game-building/SKILL.md`). Kill gate: **passed**, round 2 with the author's
-answers (`docs/KILLGATE.md`, 2026-11-09). Next: `docs/DESIGN.md`.
+answers (`docs/KILLGATE.md`, 2026-11-09). Design: `docs/DESIGN.md`, draft for approval.
 
 ## Decisions
 
