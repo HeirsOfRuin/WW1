@@ -1,8 +1,8 @@
 # WW1 (working title): spec, draft
 
-Status: **draft, revision 3, not approved** (2026-11-08). Stage 1 of the game-building
-workflow (`Game-Workshop/skills/game-building/SKILL.md`). Nothing is built until the
-author approves this page and the kill gate passes.
+Status: **approved** (2026-11-08), revision 3. Stage 1 of the game-building workflow
+(`Game-Workshop/skills/game-building/SKILL.md`). Kill gate: **passed with nine open issues**
+(`docs/KILLGATE.md`, 2026-11-08). Next: `docs/DESIGN.md`.
 
 ## Decisions
 
@@ -21,6 +21,7 @@ author approves this page and the kill gate passes.
 | 2026-11-08 | Four stages: 1915 Loos, 1916 Somme, 1917, 1918 | "3. Yes" |
 | 2026-11-08 | Targets: best play reaches the Armistice in 5-10% of runs, reckless near 0%, competent play survives Stage 1 in 60-75% | "4. Yes" |
 | 2026-11-08 | Four backgrounds/towns at character creation, with hometown skills chosen there; war skills learned while deployed | "I think having 4 different backgrounds/towns to choose from help set the character creation up, besides choosing some hometown skills, then make sure we talk war skills learned while deployed" |
+| 2026-11-08 | Spec approved: four town types (pit, mill, city office, farm), one battalion with a company per town, two town skills plus one general at creation; go to the kill gate | "Yes to all. Go ahead" |
 
 ## Pitch
 

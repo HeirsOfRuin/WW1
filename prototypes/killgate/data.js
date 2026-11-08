@@ -1,0 +1,124 @@
+// Kill-gate data: every tunable number in one place. Numbers only, no prose.
+// These are prototype values to be tuned against the SPEC targets, not history.
+
+export const RANKS = ['Private', 'Lance corporal', 'Corporal', 'Sergeant', 'Company sergeant major', 'Second lieutenant'];
+export const SUBALTERN = 5;
+export const TOP_OR = 4; // highest rank an other rank can reach
+
+// Hometown skills. Each town offers three; the player picks two, plus one general.
+export const TOWNS = {
+  pit: { list: ['dig', 'stamina', 'mech'], pick: ['dig', 'stamina'] },
+  mill: { list: ['mech', 'stamina', 'voice'], pick: ['mech', 'stamina'] },
+  city: { list: ['lit', 'sport', 'firstaid'], pick: ['lit', 'sport'] },
+  farm: { list: ['field', 'stamina', 'mech'], pick: ['field', 'stamina'] },
+};
+export const GENERAL = ['firstaid', 'sport', 'voice'];
+export const DEFAULT_GENERAL = 'firstaid';
+export const HOME_SKILLS = ['dig', 'mech', 'lit', 'field', 'stamina', 'firstaid', 'sport', 'voice'];
+
+// War skills, learned only at the front. Specialist skills open the specialist path.
+export const WAR_SKILLS = ['trench', 'bomb', 'lewis', 'snipe', 'signals', 'lead', 'tunnel'];
+export const SPECIALIST = ['bomb', 'lewis', 'snipe', 'signals'];
+// Which hometown skill speeds which war skill (x1.6 learning).
+export const APTITUDE = { bomb: 'sport', lewis: 'mech', snipe: 'field', signals: 'lit', trench: 'dig' };
+// The specialty a town's man is steered to when offered a course.
+export const TOWN_COURSE = { pit: 'bomb', mill: 'lewis', city: 'signals', farm: 'snipe' };
+
+// War work offered at leave: [hometown skill required, first stage it exists].
+// Pits from 1916 (miners recalled), munitions from 1915, clerks from 1915, land work from 1917.
+export const WAR_WORK = {
+  pit: { skill: 'dig', from: 2 },
+  mill: { skill: 'mech', from: 1 },
+  city: { skill: 'lit', from: 1 },
+  farm: { skill: 'field', from: 3 },
+};
+
+// Stages: rotations, battle slots, shellfire per front tour, section loss per rotation.
+// A battle: phases, each [base hit chance, nerve cost, phase type]. The type decides which
+// choice is safest (PHASE_HIT): no choice is safest everywhere.
+export const STAGES = [
+  { n: 1, year: 1915, rotations: 9, fire: 0.045, sectionLoss: 0.006, nerve: 5,
+    battles: { 6: { name: 'Loos', phases: [[0.13, 10, 'advance'], [0.11, 9, 'trench'], [0.08, 8, 'hold']] } } },
+  { n: 2, year: 1916, rotations: 10, fire: 0.066, sectionLoss: 0.0075, nerve: 6,
+    battles: {
+      4: { name: 'Somme, 1 July', phases: [[0.33, 13, 'advance'], [0.22, 10, 'trench'], [0.18, 9, 'hold'], [0.12, 7, 'hold']] },
+      8: { name: 'Somme, autumn', phases: [[0.21, 10, 'advance'], [0.18, 9, 'trench'], [0.12, 8, 'hold']] },
+    } },
+  { n: 3, year: 1917, rotations: 10, fire: 0.073, sectionLoss: 0.0075, nerve: 7,
+    battles: {
+      3: { name: 'Arras', phases: [[0.21, 10, 'advance'], [0.18, 9, 'trench'], [0.13, 8, 'hold']] },
+      7: { name: 'Passchendaele', phases: [[0.22, 13, 'advance'], [0.21, 13, 'trench'], [0.18, 12, 'hold'], [0.13, 11, 'hold']] },
+    } },
+  { n: 4, year: 1918, rotations: 10, fire: 0.066, sectionLoss: 0.0075, nerve: 7,
+    battles: {
+      2: { name: 'Spring Offensive', defence: true, capture: 0.05, phases: [[0.22, 12, 'defence'], [0.19, 11, 'defence'], [0.17, 10, 'defence'], [0.13, 9, 'defence']] },
+      6: { name: 'Hundred Days, August', phases: [[0.18, 9, 'advance'], [0.13, 8, 'trench'], [0.12, 7, 'hold']] },
+      9: { name: 'Hundred Days, October', phases: [[0.17, 9, 'advance'], [0.12, 8, 'trench'], [0.10, 7, 'hold']] },
+    } },
+];
+
+// Duties offered on a front tour: extra hit chance, nerve cost, standing if volunteered,
+// war skill learned, award points.
+export const DUTIES = {
+  raid: { hit: 0.09, nerve: 8, standing: 6, skill: 'bomb', award: 2, night: false, field: true },
+  patrol: { hit: 0.04, nerve: 6, standing: 4, skill: 'snipe', award: 1, night: true, field: true },
+  wiring: { hit: 0.03, nerve: 4, standing: 3, skill: 'trench', award: 0, night: true, dig: true },
+  listening: { hit: 0.02, nerve: 5, standing: 2, skill: 'trench', award: 0, night: true },
+  carrying: { hit: 0.015, nerve: 2, standing: 1, skill: 'trench', award: 0, night: true, dig: true },
+};
+
+// What a hit does. Shares of hits.
+export const WOUND = { killed: 0.32, severe: 0.23, light: 0.45, downgrade: 0.35 };
+
+// Path modifiers in battle: hit chance multiplier, award multiplier, section-loss multiplier.
+export const PATHS = {
+  rifleman: { hit: 1.0, award: 1.0, section: 1.0 },
+  bomb: { hit: 1.15, award: 1.6, section: 1.0 },
+  lewis: { hit: 1.1, award: 1.3, section: 0.95, defence: 0.75 },
+  snipe: { hit: 0.8, award: 1.1, section: 1.0 },
+  signals: { hit: 1.05, award: 1.2, section: 1.0 },
+  tunnel: { hit: 0.8, award: 0.8, section: 1.0, fire: 0.990, collapse: 0.015 },
+  nco: { hit: 1.15, award: 1.2, section: 0.8 },
+  subaltern: { hit: 1.45, award: 1.6, section: 0.75 },
+};
+
+// Battle choices: standing, award points, friend-loss multiplier, nerve.
+export const CHOICES = {
+  push: { standing: 5, award: 1.6, friends: 0.95, nerve: 0, lead: 0.4 },
+  help: { standing: 1, award: 0.3, friends: 0.4, nerve: -1, lead: 0.15 },
+  ground: { standing: -5, award: 0, friends: 1.05, nerve: 0, lead: 0 },
+};
+
+// Hit multiplier by phase type and choice. Advance: going to ground in no man's land leaves
+// you in the open under the barrage, so pushing on is safest. Trench: bombing up an enemy
+// trench is the most dangerous work, keeping down the safest. Hold: the counter-attack comes
+// to you. Defence: going to ground risks being overrun (capture doubles, model.js).
+export const PHASE_HIT = {
+  advance: { push: 1.0, help: 1.3, ground: 1.15 },
+  trench: { push: 1.4, help: 1.1, ground: 0.6 },
+  hold: { push: 1.25, help: 0.95, ground: 0.75 },
+  defence: { push: 1.25, help: 1.0, ground: 0.8 },
+  // An attack that has stalled (uncut wire, the barrage gone ahead): pushing on is suicide,
+  // the whole line goes to ground, and going down costs no standing. The player is told.
+  stalled: { push: 1.9, help: 1.25, ground: 0.65 },
+};
+// Chance an advance or trench phase has stalled.
+export const STALL = 0.25;
+
+// Awards: points needed (drawn per battle), ladder by stage. MM exists from 1916.
+export const AWARDS = { MiD: 3, MM: 7, MC: 7, DCM: 12, VC: 22 };
+
+// The grade: record times the ending's multiplier. Prototype weights, the author's call later.
+export const GRADE = {
+  // Cumulative credit for stages completed (0..4): later years are worth more.
+  stages: [0, 8, 24, 48, 90], perRank: 6, subalternBonus: 8, perFriend: 2, nervePer10: 1,
+  award: { MiD: 3, MM: 8, MC: 8, DCM: 14, VC: 30 },
+  mult: { armistice: 1.4, posting: 1.0, captured: 0.8, invalided: 0.8, killed: 0.4, broken: 0.6, courtMartial: 0.1 },
+};
+
+export const SECTION_SIZE = 9;
+// A friend's chance of being killed per battle phase, as a share of the phase's hit chance.
+export const FRIEND_BATTLE = 0.16;
+
+// Nerve recovered at rest (per rotation, plus per friend alive and with you) and on home leave.
+export const REST = { base: 4.5, voice: 2, perFriend: 0.4, leave: 30 };
