@@ -1,5 +1,18 @@
 # Every flag the content sets or reads. The validator fails on an undeclared one and warns on one
-# set but never read.
-letter_mill: { description: "The 1915 letter from home has come (mill town); read by the route, so it comes once" }
+# set but never read. The mill town, 1915 (content/scenes/war/1915-mill.yaml):
+first_night: { description: "The first night in the line has been played (chains the events)" }
+gave_fags: { description: "Gave Duckworth a Woodbine the first night; he pays it back before Loos" }
+lice_seen: { description: "The chatting scene has been played (chains the events)" }
+kept_pilling_secret: { description: "Kept Walter Pilling's age to yourself; his mother asks after him at leave" }
+told_on_pilling: { description: "Told the sergeant Pilling is seventeen; Pilling knows; his mother thanks you" }
+letter_mill: { description: "The 1915 letter from home has come" }
 wrote_home: { description: "Answered the 1915 letter properly; the first leave remembers it" }
 sent_postcard: { description: "Answered the 1915 letter with a field postcard; the first leave remembers it" }
+wrote_for_shaw: { description: "Wrote Albert Shaw's letter for him; his mother knows the hand" }
+taught_shaw: { description: "Made Shaw write it himself; his mother is proud of the spelling" }
+met_fritz: { description: "The sniper at the crater has killed a man in your bay" }
+built_up_crater: { description: "Built the low place up under the flares; it is still there in October" }
+last_letter: { description: "Left a letter in the pay book before Loos; read if he is killed" }
+roll_called: { description: "The roll call after Loos has been played" }
+spoke_at_roll: { description: "Answered at roll call for the men he saw fall" }
+silent_at_roll: { description: "Kept what he saw" }

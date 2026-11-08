@@ -441,6 +441,33 @@ measurement.
 - Phase 2, calibration (§13): one Loos phase written for the rifleman, one rotation event, one
   leave scene for the mill town, a style tile and two pixel scenes.
 
+## 16. As built: the 1915 mill-town slice (2026-11-09)
+
+Phase 3 began on the author's word after calibration ("Continue building").
+
+**Content.** The mill-town enlistment (the drill hall), the last night at home, training; eight
+front-line events from the pool `front_1915_mill`, one at the first call for men each tour,
+chained by flags so they come in order (the first night, chatting and Walter Pilling's age, the
+letter, eggs and chips and Albert Shaw's letter, the sniper at the crater, moving up to Loos,
+the roll call, back to the crater); all three phases of Loos for a rifleman, each with a stalled
+version; the 1915 leave, which remembers six of those choices; texture for each kind of duty;
+all seven endings rewritten for every town. 33 scenes.
+
+**The three friends.** Albert Shaw (two doors up; can barely write), Harry Duckworth (jokes
+when he is frightened; the Woodbine he owes you), Walter Pilling (seventeen in March). Every
+line where one of them acts is guarded on his being alive, with continuity rules that fail the
+check otherwise; their mothers at leave have a version for each.
+
+**The faceless rival.** Fritz-at-the-crater, the sniper, introduced in the summer and still
+there in October. His arc continues in 1916.
+
+**Mechanics untouched.** No event changes the war's numbers, so the game still plays the kill
+gate's war exactly (the equivalence test holds). Events changing nerve or standing are the
+first deliberate rule change; that retires the prototype (§15).
+
+**Dates.** The tour before Loos moved from August to September 1915, so "Moving up" is dated
+the month of the battle.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.

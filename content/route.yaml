@@ -10,8 +10,12 @@ switch:
   - { if: "war.ending == broken", go: e_broken }
   - { if: "war.ending == court_martial", go: e_court }
   # authored moments (calibration, the mill town 1915)
-  - { if: ["war.pending == duty", "war.stage == 1", "war.tour >= 3", "start == mill", { not: flag.letter_mill }], go: v_letter_mill }
+  # front-line events: at the first call for men each tour, one from the pool if one is due;
+  # each is once, and requires says when (an empty draw goes straight to the duty)
+  - { if: ["war.pending == duty", "war.call == 1", "war.stage == 1", "start == mill"], go: { pool: front_1915_mill, count: 1, then: w_duty } }
   - { if: ["war.battle == loos", "war.phase == 1", "war.path == rifleman"], go: b_loos_advance }
+  - { if: ["war.battle == loos", "war.phase == 2", "war.path == rifleman"], go: b_loos_trench }
+  - { if: ["war.battle == loos", "war.phase == 3", "war.path == rifleman"], go: b_loos_hold }
   - { if: ["war.pending == leave", "war.stage == 1", "start == mill"], go: l_mill_1915 }
   # the war's questions
   - { if: "war.pending == tunnel", go: w_tunnel }

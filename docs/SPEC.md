@@ -28,6 +28,7 @@ answers (`docs/KILLGATE.md`, 2026-11-09). Design: `docs/DESIGN.md`, draft for ap
 | 2026-11-09 | Specialist roles: each brings role-specific missions, slightly better pay, circumstances and kit than a rifleman, and an easier promotion when the missions go well; and puts him at risk more often | "Each role should provide some new, role specific missions, gives you slightly better pay/circumstances/kit compared to a regular rifleman, and make it easier to get a promotion should the missions go well, but they also put you at risk more often, despite the benefits." |
 | 2026-11-09 | DESIGN.md approved; pay becomes money sent home that changes the family's circumstances on leave (after the slice); the vertical slice is 1915 for the mill town | "I agree with your recommendations." |
 | 2026-11-09 | Title: *In the Trenches* | "We'll call it... In the Trenches, or something like that" |
+| 2026-11-09 | Calibration verdict on the prose: real and human, not machine-sounding; emotional, hard or quiet as the moment needs; the prose carries the senses the game does not show. Then build on | "The prose isn't quite right. Keep it from sounding too Ai-esque. It should sound real, human, emotional at times, hard and action filled when needed, and quiet or cautious in the right places. The prose needs to help fill in the other senses that don't get used in this game. Continue building" |
 
 ## Pitch
 

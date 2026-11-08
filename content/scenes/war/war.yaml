@@ -7,24 +7,37 @@
 - id: c_enlist_mill
   chapter: enlist
   checkpoint: true
-  title: The recruiting office
+  title: The drill hall
   text: |
-    You are {age}. The mill has let the men go to enlist and promised the jobs
-    back. Half your street is in the queue at the drill hall, and they are taking the whole street
-    together, into one company.
+    The queue starts at the drill hall door and goes back past the Co-op and round into Bury Road.
+    Somebody has chalked GOD SAVE THE KING on the wall, and under it somebody else has put AND OUR
+    ALBERT, and Albert Shaw is stood right in front of it pretending he can't read.
+
+    It's warm for September. The street smells of the mill on a hundred men at once: machine oil,
+    cotton fluff in their hair, the sour sweat of the weaving shed. Without the looms going your
+    ears feel hollow, the way they do on a Sunday.
+
+    The recruiting sergeant doesn't shout. He's like a good tackler: he doesn't need to.
+
+    "Age?"
+
+    "Just turned {age_words}, sir."
+
+    Behind you Walter Pilling is going to say nineteen. Walter Pilling was born the same winter as
+    your sister, and everybody in the queue knows it, and nobody says a word.
     [break]
-    What you bring from the mill is what you will have out there.
+    What you take with you from the shed is what you'll have out there.
   choices:
     - id: pick_0
-      text: "Bring a hand with machinery, and stamina from a long working day."
+      text: The knack you have with a loom, and legs for a ten-hour day.
       effects: [ { war_home: [mech, stamina] } ]
       next: c_general
     - id: pick_1
-      text: "Bring a hand with machinery, and a chapel voice."
+      text: The knack you have with a loom, and the voice that leads the chapel choir.
       effects: [ { war_home: [mech, voice] } ]
       next: c_general
     - id: pick_2
-      text: "Bring stamina from a long working day, and a chapel voice."
+      text: Legs for a ten-hour day, and the voice that leads the chapel choir.
       effects: [ { war_home: [stamina, voice] } ]
       next: c_general
 
@@ -100,20 +113,24 @@
 
 - id: c_general
   chapter: enlist
-  title: Before you go
+  title: The last night
   text: |
-    One more thing you have that the army did not give you.
+    Your mother has sewn your name into everything you own. The kitchen smells of hot iron and the
+    starch she's put in your collars, which the army will take off you in a week. She's not
+    talking much. She keeps finding things to fold.
+
+    There's one more thing you've got that the army didn't give you.
   choices:
     - id: firstaid
-      text: First aid. You took the St John Ambulance course at the works.
+      text: First aid. The ambulance class at the works, certificate in a frame.
       effects: [ { war_general: firstaid } ]
       next: c_training
     - id: sport
-      text: A throwing arm. You bowled for the town second eleven.
+      text: A throwing arm. Second eleven, and you can hit a stump from the boundary.
       effects: [ { war_general: sport } ]
       next: c_training
     - id: voice
-      text: A voice. You sang in the chapel choir, and men listen when you speak.
+      text: A voice. When you start a hymn, men join in.
       effects: [ { war_general: voice } ]
       next: c_training
 
@@ -121,9 +138,18 @@
   chapter: enlist
   title: Training
   text: |
-    Eight months of drill, route marches and digging practice trenches in a field. The battalion
-    has its rifles by Christmas and its khaki by the spring. In May the orders come: France.
-    [break]
+    Eight months of it. Huts with floors that never dry. Drill in your own clothes till Christmas,
+    then in blue serge, then at last in khaki that smells of the store and makes your neck raw.
+    Route marches in the rain until your feet are one blister and then they harden and you stop
+    noticing. Digging practice trenches in a field and filling them in again. Bayonet drill on
+    sacks of straw, the corporal yelling at you to scream, and you feel daft screaming, and then
+    one day you don't.
+
+    You learn to sleep anywhere. You learn to eat anything. You learn the men from home all over
+    again, the way you never knew them in the shed: who snores, who cries, who shares.
+
+    In May the orders come. France.
+
     {section_line}
   choices:
     - id: embark
@@ -138,6 +164,8 @@
     {tour_line}
 
     The sergeant wants men for {duty_name} tonight. {friend_line}
+
+    [if war.duty == raid]A raid: blackened faces, cap badges off, no pay books, coshes and bombs, and a run across in the dark to drag a prisoner back. The ones who come back from raids don't sleep for a day after.[/if][if war.duty == patrol]A patrol means lying in no man's land for hours, cold right through, listening to them talk in their trench and trying not to breathe.[/if][if war.duty == wiring]Wiring means out in front with mallets wrapped in sacking and coils of wire that bite through your gloves, freezing every time a flare goes up.[/if][if war.duty == listening]A listening post is a hole in the ground out past the wire, two men and a string back to the trench, and every sound in the dark is somebody coming.[/if][if war.duty == carrying]A carrying party: up the communication trench and back with ammunition boxes and duckboards and coils of wire, all night, in the wet, shelled by guns that know the route as well as you do.[/if]
   choices:
     - id: volunteer
       text: "Volunteer. ({duty_risk}, {duty_cost})"
@@ -267,7 +295,17 @@
   ending: armistice
   title: The Armistice
   text: |
-    At eleven o'clock the guns stop. You are {age} years old, and alive: {rank_name}, after four years.
+    {ending_line}
+
+    Nobody cheers, where you are. The guns stop, and the silence comes down so hard that men look
+    up at the sky as if something's wrong with it. Somebody starts to laugh and can't stop. A
+    corporal sits down on an ammunition box and takes his boots off, both of them, right there in
+    the open, and nobody tells him not to.
+
+    You are {age} years old and {rank_name}, and you have been in France since you were a boy. You
+    can smell the wet and the cordite and the horse lines, and under all of it, for the first time
+    in years, nothing burning.
+
     Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
 
 - id: e_posting
@@ -276,7 +314,15 @@
   ending: posting
   title: Home
   text: |
-    {ending_line} The war goes on without you.
+    {ending_line}
+
+    The war goes on without you. You read it in the paper over breakfast, like everybody else,
+    the long columns in small print, and you read every name, every day, and you know some of them.
+
+    Some nights you're glad. Some nights you lie awake in a proper bed with clean sheets, listening
+    to the rain on the slates, and you'd give anything to be in a wet bay with the lads, and you
+    couldn't say to anybody why.
+
     Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
 
 - id: e_captured
@@ -285,7 +331,17 @@
   ending: captured
   title: Taken
   text: |
-    {ending_line} The rest of your war is behind German wire.
+    {ending_line}
+
+    A boy in grey with a rifle bigger than he is takes your water bottle and your cigarettes and,
+    after a moment, gives you one of the cigarettes back. You walk east all day with your hands on
+    your head, then without, past their guns and their horses and their wounded, who look exactly
+    like yours.
+
+    The rest of your war is behind wire: black bread, turnip soup, work in a salt mine or on a
+    farm, letters that take months. Your mother gets a card in your handwriting from a camp with a
+    name she can't say, and she takes it round to every house in the street.
+
     Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
 
 - id: e_invalided
@@ -295,6 +351,16 @@
   title: Wounded out
   text: |
     {ending_line}
+
+    Morphia at the dressing station, a label tied to your tunic button, a train with the windows
+    painted over. The hospital ship smells of carbolic and vomit and the sea. In England a woman
+    gives you tea with sugar in it and you cry like a child and can't stop and she just holds the
+    cup for you till you can.
+
+    You go home in hospital blue, then in your own clothes that don't fit. [if war.stage >= 2]A silver badge on your
+    lapel, so that nobody in the street hands you a white feather.[else]In the street a girl you've never seen
+    pushes a white feather into your buttonhole, because you're young and out of uniform, and you let her.[/if] The wound aches when it rains.
+
     Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
 
 - id: e_killed
@@ -304,6 +370,17 @@
   title: Killed
   text: |
     {ending_line}
+
+    You don't hear the one that does it. The man nearest you does, and afterwards he'll say you
+    made a small sound, surprised, as if you'd dropped something.
+
+    At home it comes three weeks later in a buff envelope, Army Form B.104-82: "it is my painful
+    duty to inform you". Your mother reads it on the doorstep with the postman still stood there,
+    because she knew from his face. He keeps his cap in his hands till she shuts the door.
+    [if flag.last_letter]
+
+    The letter from your pay book comes later, with your things: a razor, a comb, a photograph gone soft at the corners. She reads it at the kitchen table, and then she reads it again.[/if]
+
     Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
 
 - id: e_broken
@@ -312,7 +389,17 @@
   ending: broken
   title: Shell shock
   text: |
-    {ending_line} They take you down the line shaking.
+    {ending_line}
+
+    It's your hands first. You look down and they won't stop, and then it's your legs, and then
+    you're lying in the bottom of the trench and you can hear somebody making a noise like a
+    kicked dog and it's you. They carry you down the line on a stretcher, though there's not a
+    mark on you, and you're ashamed of that the whole way.
+
+    The doctors call it neurasthenia. At home a door banging sends you under the table. Your
+    mother learns to close them quietly. Your father doesn't talk about it, which is how he
+    talks about it.
+
     Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
 
 - id: e_court
@@ -322,6 +409,15 @@
   title: Court-martial
   text: |
     {ending_line}
+
+    The court sits in a schoolroom behind the lines, three officers at a table with the children's
+    sums still on the blackboard behind them. Nobody asks how long you'd been in the line. You
+    don't know how to tell them about the noise. It takes twenty minutes.
+
+    Most sentences are commuted. Most men go to prison, or back to the line under a cloud that
+    follows them into every bay. Your name goes in the paper at home, or it doesn't, and either way
+    your mother stops going to chapel.
+
     Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
 
 - id: e_error

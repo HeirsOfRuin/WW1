@@ -96,7 +96,7 @@ export function endingLine(w: War): string {
     case 'courtMartial': return `You froze ${whereOf(why)} and were charged with cowardice.`;
     case 'captured': return `Overrun ${whereOf(why)} and taken prisoner.`;
     case 'posting': return `You took the posting: ${offerWords(w.posting ?? '')}.`;
-    case 'armistice': return 'The guns stopped at eleven o\'clock on 11 November 1918.';
+    case 'armistice': return 'Monday, 11 November 1918. Eleven o\'clock in the morning.';
   }
   return '';
 }
@@ -135,7 +135,7 @@ const surname = (n: string) => n.split(' ').slice(-1)[0]!;
 function mate(s: CoreState): string {
   const w = war(s); const names = SECTION_NAMES[w.town]!;
   for (let i = 0; i < 3; i++) if (w.friends[i]) return surname(names[i]!);
-  return 'the man beside you';
+  return 'a man from the next section';
 }
 
 /** The scene's picture, if it has one (DESIGN §11): a key in src/art/. One function, so the UI computes nothing. */
@@ -160,7 +160,7 @@ export function statusOf(s: CoreState): { rank: string; role: string; nerve: str
 
 // ---- paths -------------------------------------------------------------------------------------
 
-const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3'] as const;
+const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call'] as const;
 const PENDING = ['none', 'tunnel', 'duty', 'mission', 'sick', 'course', 'battle', 'leave'];
 const ENDINGS = ['none', 'armistice', 'posting', 'captured', 'invalided', 'killed', 'broken', 'court_martial'];
 /** content ids are lower_snake_case; the war layer's ending names are its own */
@@ -186,6 +186,8 @@ function value(s: CoreState, field: string): number | string | boolean | undefin
     case 'battle': return p?.kind === 'battle' ? battleSlug(p.battle) : 'none';
     case 'phase': return p?.kind === 'battle' ? p.phase + 1 : 0;
     case 'tour': return w.clock;
+    case 'duty': return p?.kind === 'duty' ? p.duty : 'none';
+    case 'call': return p?.kind === 'duty' && w.cursor.at === 'duty' ? (w.cursor as { i: number }).i + 1 : 0;
     case 'mate1': case 'mate2': case 'mate3': return w.friends[Number(field.slice(4)) - 1]!;
   }
   return undefined;
@@ -215,7 +217,7 @@ export const module: GameModule = {
     return (FIELDS as readonly string[]).includes(field ?? '') ? null : `unknown war field in "${path}" (${FIELDS.join(', ')})`;
   },
   labelFor: (_c, path) => ({ 'war.nerve': 'Nerve', 'war.standing': 'Standing', 'war.section': 'The section', 'war.rank': 'Rank' })[path],
-  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
+  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.duty' ? ['none', ...Object.keys(DUTIES)] : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
   effects: {
     /** character creation: the two hometown skills from the town's list */
     war_home(s, _c, e) {

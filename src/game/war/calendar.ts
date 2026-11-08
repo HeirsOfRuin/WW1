@@ -12,7 +12,8 @@ const M = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Augu
 
 /** [year, month 1-12] of each rotation, by stage; then the month of that stage's leave. */
 export const ROTATION_MONTHS: Record<number, { rotations: [number, number][]; leave: [number, number] }> = {
-  1: { rotations: [[1915, 5], [1915, 6], [1915, 6], [1915, 7], [1915, 8], [1915, 8], [1915, 9], [1915, 10], [1915, 11]], leave: [1915, 12] },
+  // the tour before Loos is September: the battalion marched up to the assembly trenches that month
+  1: { rotations: [[1915, 5], [1915, 6], [1915, 6], [1915, 7], [1915, 8], [1915, 9], [1915, 9], [1915, 10], [1915, 11]], leave: [1915, 12] },
   2: { rotations: [[1916, 2], [1916, 3], [1916, 4], [1916, 5], [1916, 7], [1916, 7], [1916, 8], [1916, 9], [1916, 10], [1916, 11]], leave: [1916, 12] },
   3: { rotations: [[1917, 1], [1917, 2], [1917, 3], [1917, 4], [1917, 5], [1917, 6], [1917, 7], [1917, 8], [1917, 9], [1917, 10]], leave: [1917, 12] },
   4: { rotations: [[1918, 1], [1918, 2], [1918, 3], [1918, 4], [1918, 5], [1918, 6], [1918, 8], [1918, 8], [1918, 9], [1918, 10]], leave: [1918, 11] },

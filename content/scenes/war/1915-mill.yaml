@@ -1,74 +1,441 @@
-# Calibration (DESIGN §13, Phase 2): three pieces at full polish, for the author's verdict on voice,
-# look, screen density and the number of choices. The mill town, 1915. Each takes over the war's
-# generic scene for one moment through content/route.yaml; its choices answer the same question.
+# The mill town, 1915: the vertical slice (DESIGN §13 Phase 3), written to the voice the author
+# set after calibration (content/style-guide.md, "Voice"). Three written friends: Albert Shaw,
+# two doors up, who can barely write; Harry Duckworth, a tackler's lad who jokes when he is
+# frightened; Walter Pilling, who lied about his age. And a man nobody sees: the sniper at the
+# crater.
+#
+# Events come from the pool front_1915_mill at the first call for men each tour (content/route.yaml),
+# once each, in the order their flags chain. Their choices set flags that later scenes read.
 
-# A rotation event: a letter from home. Sets what the first leave remembers.
+# ---- events -----------------------------------------------------------------------------------
+
+- id: v_first_night
+  chapter: front
+  kind: pool
+  pool: front_1915_mill
+  once: true
+  on_enter: [ { set: flag.first_night } ]
+  title: First night in the line
+  text: |
+    You came up the communication trench in the dark, single file, each man holding the scabbard
+    of the man in front. The boards rocked under your boots. There was water under them. You
+    could hear it slopping and couldn't see it.
+
+    Now you're on the firestep with your rifle and the dark is full of noises. Somewhere to the
+    left a machine gun is traversing, and the bullets come over in a long crack-crack-crack like a
+    lad running a stick along the park railings. A flare goes up, white, and hangs. Everything
+    stops. Wire, posts, a tree with no top, a boot in the wire with something still in it. Then
+    the flare dies and it all moves again.
+
+    The trench stinks of chloride of lime, and under the lime there's something sweet you don't
+    want to think about.
+
+    "Got a fag?" Duckworth's on the step next to you, whispering. "I've lost mine. I've lost me
+    nerve and all, but I'll settle for the fag."
+  choices:
+    - id: give
+      text: Give him one of your last two Woodbines.
+      effects: [ { set: flag.gave_fags } ]
+      text_after: |
+        He cups the match in both hands under the parapet. In the glow his face is grey and
+        about twelve years old. "You're a pal," he says, and coughs, and laughs at himself for
+        coughing.
+      next: "@return"
+    - id: keep
+      text: Tell him you've none left.
+      text_after: |
+        "Liar," he says, without any heat in it. You smoke one later, alone, cupped low, and it
+        doesn't taste of much.
+      next: "@return"
+
+- id: v_lice
+  chapter: front
+  kind: pool
+  pool: front_1915_mill
+  once: true
+  requires: [ "war.tour >= 2", flag.first_night, war.mate3 ]
+  on_enter: [ { set: flag.lice_seen } ]
+  title: Chatting
+  text: |
+    Out at rest, in a barn that used to have cows in it and still has one at the far end. The
+    straw is warm and damp and smells of her. Everybody's chatting: shirts off, candle stubs on
+    upturned buckets, running thumbnails down the seams. The lice crack. [if war.mate2]Duckworth keeps count
+    out loud like the tally at the end of a shift.[/if]
+
+    Walter Pilling sits apart with his back to the wall. There's not a hair on his chest. When he
+    sees you looking he pulls his shirt back on with the lice still in it.
+
+    "I'm nineteen," he says, before you've opened your mouth.
+
+    He'll be seventeen in March. You know because his mam made the cake for his birthday and your
+    sister's the same week, and you ate half of both.
+
+    "Don't tell Sarge." He's whispering. "They'll send me home. Me mam'll have written already, I
+    know she has. Don't you tell him."
+  choices:
+    - id: keep_quiet
+      text: Keep it to yourself.
+      effects: [ { set: flag.kept_pilling_secret } ]
+      text_after: |
+        You throw him your candle stub. He catches it and doesn't say thank you, and then he
+        starts on his seams, and after a while he's counting under his breath.
+      next: "@return"
+    - id: tell
+      text: Tell the sergeant. He's a child.
+      effects: [ { set: flag.told_on_pilling } ]
+      text_after: |
+        Sarge hears you out with his pipe in his teeth. "Pilling is nineteen," he says. "It says so
+        on his attestation, and I'm not paid to read minds." He looks at you a bit longer. "Nor
+        are you."
+
+        Pilling doesn't speak to you for a week. Somebody has told him.
+      next: "@return"
+
 - id: v_letter_mill
   chapter: front
-  title: A letter from home
+  kind: pool
+  pool: front_1915_mill
+  once: true
+  requires: [ "war.tour >= 3", flag.lice_seen ]
   on_enter: [ { set: flag.letter_mill } ]
+  title: A letter from home
   text: |
-    The post comes up with the rations. A parcel in brown paper, string knotted three times the way
-    your mother knots it: socks, a tin of toffee from the Co-op, and two sides in pencil.
+    The post comes up after dark with the rations, the mailbags slung in among the bread and the
+    tins of bully and the jars of plum and apple. There's a parcel for you, brown paper and string
+    knotted three times, which is how your mother knots everything.
 
-    "The mill has taken girls on in the card room, and they say there will be more. Your father
-    is the same. [if war.mate1]Mrs Shaw says {mate1_first} never writes, so tell him from me.[else]Mrs Shaw has had the telegram about {mate1_first}. She has not been to chapel since.[/if]
-    Are you eating. Do not do anything daft."
+    Socks. A tin of toffee from the Co-op. A bar of carbolic, and the smell of it in the dugout is
+    so like the scullery at home that you have to sit down on the ammunition box.
 
-    Somebody down the bay is already eating your toffee.
+    And a letter, two sides in pencil, pressed so hard you can read it backwards through the paper.
+
+    "Dear Son, just a few lines hoping this finds you as it leaves us at present. They have took
+    girls on in the card room and your father says it will be the ruin of the trade but he says
+    that about everything. [if war.mate1]Mrs Shaw says {mate1_first} never writes, so you tell him
+    from me he wants a clip round the ear.[else]Mrs Shaw has had the telegram about {mate1_first}. She
+    has not been to chapel since and I don't blame her.[/if] Keep your feet dry. Are you eating.
+    Don't do anything daft. Your loving Mother."
   choices:
     - id: write
-      text: Write back tonight. Two sides, by a candle end.
+      text: Write back tonight, two sides, by a candle end.
       effects: [ { set: flag.wrote_home } ]
-      text_after: You tell her the food is good, which is a lie, and that you are well, which is half of one.
-      next: "@war"
+      text_after: |
+        You tell her the food is good. You tell her about the farm woman at the billet who
+        laughs at the way you say eggs. You don't tell her about the boot in the wire. By the time
+        the candle goes your hand has cramped, and you sleep better than you have since you came
+        out.
+      next: "@return"
     - id: postcard
-      text: Send the field postcard. Cross out what does not apply.
+      text: Send the field postcard. Cross out what doesn't apply.
       effects: [ { set: flag.sent_postcard } ]
-      text_after: '"I am quite well." You leave that line and cross out the rest. It goes down the line with the empty ration bags.'
-      next: "@war"
+      text_after: |
+        I am quite well. You leave that line and strike out the rest with the stub of pencil. You
+        mean to do a proper letter at rest. You put the toffee in your pack and the carbolic under
+        your pillow, if you can call it a pillow.
+      next: "@return"
 
-# Loos, the first phase, for a rifleman.
+- id: v_billet
+  chapter: front
+  kind: pool
+  pool: front_1915_mill
+  once: true
+  requires: [ "war.tour >= 4", flag.letter_mill, war.mate1 ]
+  title: Eggs and chips
+  text: |
+    Behind the lines, in the village with half a church. The estaminet is somebody's front room
+    with a counter put in, a stove going, and a woman who knows exactly enough English: egg, chip,
+    beer, no, finish. You eat egg and chips off a cracked plate, the yolk running into the chips,
+    and the beer is thin and sour and you'd fight a man for the next one. For a quarter of an
+    hour the war is somewhere else.
+
+    Shaw has a letter-card on the table and a stub of pencil, and he's been looking at them both
+    since the eggs came.
+
+    "Will you do it for me?" Low, so nobody else will hear. "I can read all right. It's the
+    putting it down. I'll tell you what to say. She'll think I've gone soft, else, never writing."
+  choices:
+    - id: write_for_him
+      text: Write it for him. Every word he says.
+      effects: [ { set: flag.wrote_for_shaw } ]
+      text_after: |
+        He tells it to you slowly, looking at the stove. That he is well. That the French have
+        funny bread. That she's to tell his dad the allotment wants turning before the frost. Then
+        he stops, and you wait with the pencil, and he says, "Put that I think about her," and
+        goes red to his ears.
+      next: "@return"
+    - id: teach_him
+      text: Make him write it. Help him with the spelling.
+      effects: [ { set: flag.taught_shaw } ]
+      text_after: |
+        It takes the whole evening. He holds the pencil like a shuttle he's afraid of dropping.
+        Allotment has two Ls; frost has one T. When it's done it's six lines and a blot, and he
+        reads it back to himself three times with his lips moving, pleased as a lad with a
+        sixpence.
+      next: "@return"
+
+- id: v_sniper
+  chapter: front
+  kind: pool
+  pool: front_1915_mill
+  once: true
+  requires: [ "war.tour >= 4", flag.letter_mill ]
+  on_enter: [ { set: flag.met_fritz } ]
+  title: The crater
+  text: |
+    There's a place in the bay by the old mine crater where the sandbags have settled, a hand's
+    width lower than the rest. This morning a man from C Company straightened up in it to ease his
+    back. One shot. You heard it after. It went in just under his cap badge, and he sat down on
+    the firestep as if somebody had called his name.
+
+    They've hung a sack over the low place since. Somewhere out there, in the grey mess of stumps
+    and chalk behind their wire, a man with a telescopic sight is looking at that sack. He knew
+    where the low place was before you did.
+
+    The lads have started calling him Fritz-at-the-crater. [if war.mate2]Duckworth says it like a music-hall
+    turn. Nobody laughs.[/if]
+  choices:
+    - id: build_up
+      text: Build the low place up tonight, under the flares.
+      effects: [ { set: flag.built_up_crater } ]
+      text_after: |
+        Three hours of it, filling sandbags on your knees, passing them up, the chalk cold and
+        wet under your nails. Every time a flare goes up you freeze with a bag in your arms like a
+        baby. By stand-to it's level. Your back aches all the next day and you don't mind it.
+      next: "@return"
+    - id: leave_it
+      text: Leave it. Duck as you pass, and tell the new men.
+      text_after: |
+        You duck there every time, the way you'd duck the low beam in the shed. You stop thinking
+        about it. That's the part that frightens you, when you notice it.
+      next: "@return"
+
+- id: v_eve_loos
+  chapter: front
+  kind: pool
+  pool: front_1915_mill
+  once: true
+  weight: 100
+  requires: [ "war.tour == 6" ]
+  title: Moving up
+  text: |
+    Three nights of marching in the rain, never in daylight. The roads are so full of men and
+    guns and limbers that you go ten yards and stop, ten yards and stop, and sleep standing up
+    against the man in front.
+
+    Now you're in the assembly trenches. Along the parapet, under sacking, are the cylinders. Big
+    grey iron things, rows of them. Nobody's to say the word. The officers call it the accessory.
+    The men from the Special Companies who look after them have their own armbands and won't talk
+    to you.
+
+    [if flag.gave_fags && war.mate2]Duckworth finds you in the dark and pushes a Woodbine into your hand. "I owed
+    you," he says. "Don't say I never pay up."[/if][if !flag.gave_fags && war.mate2]Duckworth's further down, telling the same joke
+    over and over to anybody who'll listen. You can hear his voice going higher.[/if] [if war.mate3]Pilling
+    is asleep sitting up with his mouth open, his rifle across his knees like a toy.[/if]
+
+    The company sergeant major comes round with pay books. If you want to write anything, now's
+    the time.
+  choices:
+    - id: last_letter
+      text: Write a letter and leave it in your pay book.
+      effects: [ { set: flag.last_letter } ]
+      text_after: |
+        You don't know what to put. In the end you put that you love them, which you have never
+        said out loud in that house, and that your mother is to have your Sunday boots mended and
+        give them to our Jack. You fold it small. It sits against your chest like a hot hand.
+      next: "@return"
+    - id: no_letter
+      text: Leave it. Writing one is asking for it.
+      text_after: |
+        Half the company thinks the same. Half the company is writing anyway, licking the pencils,
+        hiding the pages with their arms like boys in a schoolroom. You watch them and say nothing.
+      next: "@return"
+
+- id: v_roll_call
+  chapter: front
+  kind: pool
+  pool: front_1915_mill
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 8" ]
+  on_enter: [ { set: flag.roll_called } ]
+  title: Roll call
+  text: |
+    They form what's left of the battalion up in a field behind the old line, in the rain. The
+    sergeant major has the roll. He reads it in the same voice he reads everything.
+
+    A name, and somebody says "Here." A name, and nobody does, and he says it again, and then
+    somebody says, "Killed, sir, I saw him," or "Wounded, sir," or just nothing, and he puts a mark
+    and goes on.
+
+    [if war.mate1]"Shaw." "Here, sir." Albert's voice is a croak.[else]"Shaw." Nothing. He says it again. "Shaw, A." The rain on the caps.[/if]
+    [if war.mate2]"Duckworth." "Present and correct, sir," and somebody near him nearly laughs.[else]"Duckworth." Nothing. You stare at the back of the neck in front of you till it blurs.[/if]
+    [if war.mate3]"Pilling." "Here." High, like a lad answering the register.[else]"Pilling." Nothing. Nobody says he was seventeen.[/if]
+
+    It takes most of the afternoon. The field smells of trodden grass and wet wool and the cookers
+    going behind the hedge, and nobody eats when the stew comes.
+  choices:
+    - id: answer
+      text: Answer for the men you saw fall, when their names come.
+      effects: [ { set: flag.spoke_at_roll } ]
+      text_after: |
+        "Killed, sir. I saw him." Your own voice sounds like somebody else's. The sergeant major
+        nods and makes his mark, and that's the man written down, and you think: his mother will
+        get a letter with my words in it.
+      next: "@return"
+    - id: stay_silent
+      text: Say nothing. Let somebody else tell it.
+      effects: [ { set: flag.silent_at_roll } ]
+      text_after: |
+        Somebody else does. Or nobody does, and the names go down as missing, and you stand there
+        with what you saw and keep it.
+      next: "@return"
+
+- id: v_crater_again
+  chapter: front
+  kind: pool
+  pool: front_1915_mill
+  once: true
+  requires: [ "war.tour >= 8", flag.met_fritz, flag.roll_called ]
+  title: Back to the crater
+  text: |
+    They put you back in the old line in October, by the crater, as if Loos was something that
+    happened to somebody else. Same sandbags. Same smell. New faces in the bays, half of them
+    from the drafts, lads who don't know where to put their feet.
+
+    [if flag.built_up_crater]Your bit of parapet is still level, a bit slumped, holding. You put your hand flat on it going past, the way you'd pat a horse.[else]The sack is still over the low place. It's rotted through at one corner and nobody's mended it.[/if]
+
+    On the second morning a draft lad from Rochdale stands up two bays along to look at the
+    sunrise. You hear the shot after.
+
+    Fritz-at-the-crater is still there. He's had the whole of Loos and he's still there.
+  choices:
+    - id: carry_on
+      text: Show the new lads where the low places are.
+      next: "@return"
+
+# ---- Loos, for a rifleman ------------------------------------------------------------------------
+
 - id: b_loos_advance
   chapter: front
   title: Loos
   text: |
-    Half past six. The gas went over at ten to six and most of it went the right way. Some of it
-    lay in the bay with you, and a man two along was sick into his hood.
+    Rum at five, from a stone jar, a tot in the lid of your mess tin. It burns all the way down
+    and sits in your stomach like a lump of coal from the grate.
 
-    "Walk," says the sergeant. "Keep your dressing. Nobody runs till I say."
+    At ten to six the gas goes over. You hear it before you see it, a long hiss all down the line,
+    like every steam pipe in the shed letting go at once. Then the cloud comes up, white and
+    greenish, and leans towards their wire. Not all of it. A drift of it comes back along the
+    trench, smelling of pepper and pineapple and something under both that bites the back of your
+    throat. You pull the hood down. Wet flannel, the chemical stink of it, your own breath going
+    hot against the little window.
 
-    The whistles go up and down the line. On the ladder next to you is {mate}, looking at the rung
-    in front of his face. "See you over there," he says.
+    Half past six. The guns stop. In the gap a man down the bay is saying the Lord's Prayer too
+    fast to get to the end of it.
 
-    [if war.stalled]Out in front the first wave is lying down in the chalk, fifty yards out, in rows. The wire in front of them is not cut.[else]The first wave is halfway over already, walking into the smoke, the way they were told.[/if]
+    "Walk," says the sergeant through his hood. "Keep your dressing. Nobody runs till I say."
+
+    Beside you on the ladder is {mate}. His hands are shaking so hard the rung is ticking against
+    the sandbags. [if flag.told_on_pilling && war.mate3]Further along, Pilling is looking at you. He looks away.[/if]
+
+    [if war.stalled]You get your head over the top. The first wave went fifty yards. They're lying down in the chalk in rows, too straight, the way lads lie down for a photograph on the moor, and in front of them their wire is standing whole.[else]You get your head over the top. The first wave is walking into the smoke with their rifles at the port, and nobody's falling yet.[/if]
   choices:
     - id: push
-      text: "Go up the ladder and walk with the wave. ({risk_push})"
+      text: "Over the top. Walk with the wave. ({risk_push})"
       effects: [ { war: push } ]
       next: "@war"
     - id: help
-      text: "Go up with {mate} and stay with him. ({risk_help})"
+      text: "Go up with {mate}. Stay at his shoulder. ({risk_help})"
       effects: [ { war: help } ]
       next: "@war"
     - id: ground
-      text: "Go up and drop into the first shell hole. ({risk_ground})"
+      text: "Over, and straight down into the first shell hole. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
 
-# The first leave, December 1915.
+- id: b_loos_trench
+  chapter: front
+  title: Loos
+  text: |
+    Their front line is a ditch of white chalk and grey men. Some of the grey men are dead. Some
+    have their hands up. One of them, a lad with spectacles, keeps saying the same word over and
+    over, and you don't know what it means, and you will never know.
+
+    Your ears have gone. Everything comes through cotton wool, like the shed when you've done a
+    double shift: the bombs going off along the trench to the right, a crump and a scream and a
+    crump, a bay at a time.
+
+    [if war.stalled]Then a machine gun opens up from the second line, straight down the communication trench, and the bombing stops dead. Men come back round the traverse fast with their heads down. One of them hasn't got a rifle any more. One of them hasn't got a face.[else]The sergeant has lost his hood and his cap and half his ear, and he's pointing. "Up the communication trench. Bombers first. Clear it. Go on, go on!"[/if]
+  choices:
+    - id: push
+      text: "Round the traverse after the bombers. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Stay with {mate}. Watch his back round the corner. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down in the bottom of the trench and stay there. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_loos_hold
+  chapter: front
+  title: Loos
+  text: |
+    By the afternoon the rain's come in, thin and cold, and the chalk goes to paste. You're holding
+    a length of their trench that faces the wrong way. The firestep is on the other side, so you
+    stand on dead men's packs to see over.
+
+    Nobody has brought water. Your tongue sticks to the roof of your mouth. The gas has left a
+    taste like sucking a penny.
+
+    Shouting on the left. Then rifle fire, picking up the way rain does on the shed roof, a few
+    drops and then all of it.
+
+    "Stand to! They're coming back! Stand to!"
+  choices:
+    - id: push
+      text: "Up on the packs. Fire till they stop coming. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Keep {mate} fed with clips. Stay low beside him. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Stay under the parapet. Fire blind over the top. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- the first leave, December 1915 ---------------------------------------------------------------
+
 - id: l_mill_1915
   chapter: front
   title: Home on leave
   text: |
-    The train gets in after dark. The street smells of wet soot and the mill, the same as it always
-    did, and your boots are louder on the setts than you remember.
+    The train's three hours late and so cold the window has frosted on the inside. When it pulls
+    in, the station smells of coal smoke and fish from the market platform and the wet wool of
+    your own greatcoat, and under all of it, home. You have to stand still on the platform a
+    minute before your legs will go.
 
-    Your mother has the kettle on before you are through the door. [if flag.wrote_home]Your letter is
-    behind the clock, with the rent book.[/if][if flag.sent_postcard]"A postcard," she says. "I am quite
-    well. Quite well, {name}."[/if][if !flag.letter_mill]"You might write," she says.[/if]
+    Your mother has the door open before you knock. She doesn't say anything. She puts her hand
+    flat on your cheek, the way she did when you had the measles. Then she smells you, and takes
+    you straight through to the scullery.
 
-    [if war.mate1]Mrs Shaw is on her step, two doors up. "Is our {mate1_first} eating?" she says. You tell her he is.[else]The blinds are down at the Shaws'. Mrs Shaw does not come to her door.[/if]
+    "Get them off," she says. "All of it. They're walking."
+
+    She boils your shirt in the copper. You sit in the tin bath in front of the fire in your
+    father's old coat, and listen to the clock on the mantel. You'd forgotten the clock.
+    [if flag.wrote_home]Your letter is behind it with the rent book, gone soft at the folds.[/if][if flag.sent_postcard]The field postcard is propped against it. "I am quite well," she reads out, not looking at you. "Quite well." She doesn't say anything else about it, and it would be better if she did.[/if][if !flag.letter_mill]"You might have written," she says to the copper.[/if]
+
+    [if war.mate1]In the morning Mrs Shaw is on her step two doors up, in her shawl, waiting for you. "Is he eating?" she says. "Is our {mate1_first} eating?" You tell her yes. You tell her he's grown a moustache. [if flag.taught_shaw]"He wrote me himself," she says. "Six lines. Spelt allotment right and all." [/if][if flag.wrote_for_shaw]"He wrote," she says, and looks at you. "It were your hand." She doesn't mind. [/if]She laughs, and then puts her apron up to her face.[else]In the morning the blinds are down at the Shaws'. They've been down since the telegram. Mrs Shaw doesn't come out, and you don't knock, and you hate yourself for it all the way to the end of the street.[/if]
+
+    [if flag.told_on_pilling && war.mate3]Mrs Pilling stops you outside the Co-op. "They told me you tried," she says. "With the sergeant. I wrote to the War Office twice." She grips your sleeve. "Thank you for trying, love."[/if][if flag.kept_pilling_secret && war.mate3]Mrs Pilling stops you outside the Co-op. "Is our Walter behaving himself?" she says. You tell her he is. You don't tell her anything else.[/if][if !war.mate3]The Pillings' blinds are down as well. Walter was seventeen.[/if][if !war.mate3 && flag.kept_pilling_secret] You knew how old he was and you kept it for him. You'd keep it again. It doesn't help.[/if][if !war.mate3 && flag.told_on_pilling] Mrs Pilling sees you from her window and lets the curtain drop.[/if]
+
+    [if flag.spoke_at_roll]On Sunday after chapel a woman you don't know takes hold of your hand in both of hers. "You were the one who told them," she says. "About our Ernest, in B Company. They wrote that it were quick." You don't remember whether it was quick. You tell her it was.[/if][if flag.silent_at_roll]In the Co-op a woman is telling the girl behind the counter that her lad is only missing, that missing means a German hospital, he'll turn up, you'll see. You saw. You pay for your father's tobacco and go out without your change.[/if]
+
+    At night the quiet keeps waking you up.
 
     {offers_line}
   choices:

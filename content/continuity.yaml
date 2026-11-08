@@ -1,6 +1,15 @@
 # Continuity rules: npm run continuity (tools/narrative/continuity.ts, from the game-narrative skill).
 # Each rule: a phrase (regex) the prose may only use while a condition holds in the run showing it.
 rules:
+  - { match: "silver badge", allow: "war.stage >= 2", why: The Silver War Badge was introduced in September 1916 }
+  # the mill town's written friends: alive in the run, or not named as alive
+  - { match: "Duckworth (keeps count|says it like|finds you|'s further down|'s on the step)", allow: war.mate2, why: Harry Duckworth only acts while alive }
+  - { match: "Present and correct", allow: war.mate2, why: Duckworth answers the roll only alive }
+  - { match: "Pilling (is asleep|is looking at you|sits apart)", allow: war.mate3, why: Walter Pilling only acts while alive }
+  - { match: "Is our Walter behaving", allow: war.mate3, why: his mother asks after a living son }
+  - { match: "Is our Albert eating", allow: war.mate1, why: Mrs Shaw asks after a living son }
+  - { match: "Albert's voice is a croak", allow: war.mate1, why: Shaw answers the roll only alive }
+  - { match: "Shaw has a letter-card", allow: war.mate1, why: Shaw writes home only alive }
   - match: "All nine of the section"
     allow: "war.section == 9"
     why: The whole section alive only while all nine are.

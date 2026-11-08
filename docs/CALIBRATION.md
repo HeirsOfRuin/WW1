@@ -40,3 +40,23 @@ Screenshots at phone size: `out/calib/` (made by a scratch script, not committed
 4. **Risk words.** Shown on every choice ("high risk"). Keep them, soften them, or hide them
    and let the prose carry it?
 5. **Names.** Shaw, Duckworth, Pilling for the mill town. Right for the place?
+
+## The author's verdict, round 1 (2026-11-09)
+
+> "The prose isn't quite right. Keep it from sounding too Ai-esque. It should sound real, human,
+> emotional at times, hard and action filled when needed, and quiet or cautious in the right
+> places. The prose needs to help fill in the other senses that don't get used in this game."
+
+Questions 2-5 (look, density, risk words, names) had no objection; they stand as built.
+
+**What changed.** The style guide's Voice section now holds the author's words and turns them
+into rules a writer (or a later session) can follow: at least two senses that are not sight in
+every scene, rhythm that follows the moment (hard and short in action, room to breathe at rest,
+watchful in caution), comparisons from his own life (the shed, the looms, chapel, the Co-op),
+emotion that arrives through a thing and is allowed to land, and a list of what makes prose
+sound machine-written (the neat closing quip, lists of three, "not X but Y", summary words,
+everything at one temperature). The lint watches for eight of those patterns.
+
+**Round 2** is the slice itself, written to that guide (`content/scenes/war/1915-mill.yaml` and
+the shared scenes in `war.yaml`): the enlistment, the last night at home, training; eight
+front-line events; all three phases of Loos for a rifleman; the first leave; all seven endings.

@@ -107,7 +107,7 @@ describe('endings say what happened, in words', () => {
       expect(v.text).not.toMatch(/^\s*(raid|patrol|wiring|listening|carrying|shellfire|courtMartial)\.?\s*$/m);
     }
     expect([...seen].sort()).toEqual(['armistice', 'broken', 'captured', 'courtMartial', 'invalided', 'killed', 'posting']);
-  });
+  }, 60_000); // 1,280 whole wars through the engine
 });
 
 describe('saves', () => {
