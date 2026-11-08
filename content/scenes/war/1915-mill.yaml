@@ -1,0 +1,98 @@
+# Calibration (DESIGN §13, Phase 2): three pieces at full polish, for the author's verdict on voice,
+# look, screen density and the number of choices. The mill town, 1915. Each takes over the war's
+# generic scene for one moment through content/route.yaml; its choices answer the same question.
+
+# A rotation event: a letter from home. Sets what the first leave remembers.
+- id: v_letter_mill
+  chapter: front
+  title: A letter from home
+  on_enter: [ { set: flag.letter_mill } ]
+  text: |
+    The post comes up with the rations. A parcel in brown paper, string knotted three times the way
+    your mother knots it: socks, a tin of toffee from the Co-op, and two sides in pencil.
+
+    "The mill has taken girls on in the card room, and they say there will be more. Your father
+    is the same. [if war.mate1]Mrs Shaw says {mate1_first} never writes, so tell him from me.[else]Mrs Shaw has had the telegram about {mate1_first}. She has not been to chapel since.[/if]
+    Are you eating. Do not do anything daft."
+
+    Somebody down the bay is already eating your toffee.
+  choices:
+    - id: write
+      text: Write back tonight. Two sides, by a candle end.
+      effects: [ { set: flag.wrote_home } ]
+      text_after: You tell her the food is good, which is a lie, and that you are well, which is half of one.
+      next: "@war"
+    - id: postcard
+      text: Send the field postcard. Cross out what does not apply.
+      effects: [ { set: flag.sent_postcard } ]
+      text_after: '"I am quite well." You leave that line and cross out the rest. It goes down the line with the empty ration bags.'
+      next: "@war"
+
+# Loos, the first phase, for a rifleman.
+- id: b_loos_advance
+  chapter: front
+  title: Loos
+  text: |
+    Half past six. The gas went over at ten to six and most of it went the right way. Some of it
+    lay in the bay with you, and a man two along was sick into his hood.
+
+    "Walk," says the sergeant. "Keep your dressing. Nobody runs till I say."
+
+    The whistles go up and down the line. On the ladder next to you is {mate}, looking at the rung
+    in front of his face. "See you over there," he says.
+
+    [if war.stalled]Out in front the first wave is lying down in the chalk, fifty yards out, in rows. The wire in front of them is not cut.[else]The first wave is halfway over already, walking into the smoke, the way they were told.[/if]
+  choices:
+    - id: push
+      text: "Go up the ladder and walk with the wave. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Go up with {mate} and stay with him. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Go up and drop into the first shell hole. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# The first leave, December 1915.
+- id: l_mill_1915
+  chapter: front
+  title: Home on leave
+  text: |
+    The train gets in after dark. The street smells of wet soot and the mill, the same as it always
+    did, and your boots are louder on the setts than you remember.
+
+    Your mother has the kettle on before you are through the door. [if flag.wrote_home]Your letter is
+    behind the clock, with the rent book.[/if][if flag.sent_postcard]"A postcard," she says. "I am quite
+    well. Quite well, {name}."[/if][if !flag.letter_mill]"You might write," she says.[/if]
+
+    [if war.mate1]Mrs Shaw is on her step, two doors up. "Is our {mate1_first} eating?" she says. You tell her he is.[else]The blinds are down at the Shaws'. Mrs Shaw does not come to her door.[/if]
+
+    {offers_line}
+  choices:
+    - id: back
+      text: Go back on the tenth day. The battalion promotes the men who return.
+      effects: [ { war: back } ]
+      next: "@war"
+    - id: commission
+      text: Go before the board for a commission.
+      visible_if: war.commission
+      effects: [ { war: commission } ]
+      next: "@war"
+    - id: posting_0
+      text: "Take it: {offer0}. Your war ends here."
+      visible_if: "war.offers >= 1"
+      effects: [ { war: "posting:0" } ]
+      next: "@war"
+    - id: posting_1
+      text: "Take it: {offer1}. Your war ends here."
+      visible_if: "war.offers >= 2"
+      effects: [ { war: "posting:1" } ]
+      next: "@war"
+    - id: posting_2
+      text: "Take it: {offer2}. Your war ends here."
+      visible_if: "war.offers >= 3"
+      effects: [ { war: "posting:2" } ]
+      next: "@war"

@@ -3,7 +3,11 @@
 // the clock, [data-action] for choices, [data-tab] for tabs.
 import { useState } from 'preact/hooks';
 import type { ContentBundle } from '../content/schema';
-import { newGame, view, choose, startsOf, statusOf, type GameState, type SceneView } from '../game/index';
+import { newGame, view, choose, startsOf, statusOf, artOf, type GameState, type SceneView } from '../game/index';
+
+// Scene pictures (DESIGN §11): tools/art.ts writes src/art/<key>.png; the game asks artOf(state) which one.
+const ART = import.meta.glob('../art/*.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+const artUrl = (key: string | undefined) => (key ? ART[`../art/${key}.png`] : undefined);
 import { toSave, fromSave, encodeSaveCode, decodeSaveCode, SAVE_KEY } from '../game/save';
 import { STORAGE_OK, lsGet, lsSet } from './storage.js';
 
@@ -57,6 +61,7 @@ export function App({ content }: { content: ContentBundle }) {
           {v.card && page === 0 && <section class="card"><h2>{v.card.title}</h2>{v.card.subtitle && <p>{v.card.subtitle}</p>}{v.card.epigraph && <p class="hint">{v.card.epigraph}</p>}</section>}
           {(v.outcome?.text || (v.outcome?.changes.length ?? 0) > 0) && page === 0 && <section class="outcome">{v.outcome!.text && paras(v.outcome!.text)}{v.outcome!.changes.length > 0 && <p class="hint">{v.outcome!.changes.join(' · ')}</p>}</section>}
           {v.cause && <p class="hint">Because: {v.cause.text}</p>}
+          {page === 0 && artUrl(artOf(state)) && <img class="band" src={artUrl(artOf(state))} alt="" width={400} height={200} />}
           <h2>{v.title}</h2>
           {paras(pages[Math.min(page, pages.length - 1)] ?? '')}
           {v.ended

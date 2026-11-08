@@ -1,8 +1,8 @@
 # Phase 1 placeholder content: character creation, one scene per question the war asks, and
 # the endings. Plain words, period-true; the voice is settled at calibration (DESIGN §13).
-# Every decision scene's choices run one `war:` effect and then follow the same route (&route):
-# to the scene for the war's next question, or to the ending. The route is defined once, on the
-# first decision below, and reused with *route.
+# Every decision scene's choices run one `war:` effect and then go to "@war": the content loader
+# replaces that with the one route in content/route.yaml (the scene for the war's next question,
+# an authored scene that takes it over, or the ending).
 
 - id: c_enlist_mill
   chapter: enlist
@@ -129,23 +129,7 @@
     - id: embark
       text: Go aboard.
       effects: [ { war_run: true } ]
-      next: &route
-        switch:
-          - { if: "war.ending == killed", go: e_killed }
-          - { if: "war.ending == armistice", go: e_armistice }
-          - { if: "war.ending == posting", go: e_posting }
-          - { if: "war.ending == captured", go: e_captured }
-          - { if: "war.ending == invalided", go: e_invalided }
-          - { if: "war.ending == broken", go: e_broken }
-          - { if: "war.ending == court_martial", go: e_court }
-          - { if: "war.pending == tunnel", go: w_tunnel }
-          - { if: "war.pending == duty", go: w_duty }
-          - { if: "war.pending == mission", go: w_mission }
-          - { if: "war.pending == sick", go: w_sick }
-          - { if: "war.pending == course", go: w_course }
-          - { if: "war.pending == battle", go: w_battle }
-          - { if: "war.pending == leave", go: w_leave }
-        default: e_error
+      next: "@war"
 
 - id: w_duty
   chapter: front
@@ -158,11 +142,11 @@
     - id: volunteer
       text: "Volunteer. ({duty_risk}, {duty_cost})"
       effects: [ { war: volunteer } ]
-      next: *route
+      next: "@war"
     - id: stay_back
       text: Keep your head down and let him choose.
       effects: [ { war: stay_back } ]
-      next: *route
+      next: "@war"
 
 - id: w_mission
   chapter: front
@@ -173,11 +157,11 @@
     - id: go
       text: "Go. ({mission_risk})"
       effects: [ { war: go } ]
-      next: *route
+      next: "@war"
     - id: decline
       text: Say you are not fit for it tonight.
       effects: [ { war: decline } ]
-      next: *route
+      next: "@war"
 
 - id: w_sick
   chapter: front
@@ -188,11 +172,11 @@
     - id: report
       text: Report sick. The medical officer may give you a tour out of the line.
       effects: [ { war: report } ]
-      next: *route
+      next: "@war"
     - id: carry_on
       text: Say nothing and carry on.
       effects: [ { war: carry_on } ]
-      next: *route
+      next: "@war"
 
 - id: w_course
   chapter: front
@@ -203,11 +187,11 @@
     - id: take
       text: Take it.
       effects: [ { war: take } ]
-      next: *route
+      next: "@war"
     - id: decline
       text: Stay with the section.
       effects: [ { war: decline } ]
-      next: *route
+      next: "@war"
 
 - id: w_tunnel
   chapter: front
@@ -219,11 +203,11 @@
     - id: transfer
       text: Go to the tunnellers. You will leave the section.
       effects: [ { war: transfer } ]
-      next: *route
+      next: "@war"
     - id: stay
       text: Stay with the men from home.
       effects: [ { war: stay } ]
-      next: *route
+      next: "@war"
 
 - id: w_battle
   chapter: front
@@ -234,15 +218,15 @@
     - id: push
       text: "Push on. ({risk_push})"
       effects: [ { war: push } ]
-      next: *route
+      next: "@war"
     - id: help
       text: "Help the man beside you. ({risk_help})"
       effects: [ { war: help } ]
-      next: *route
+      next: "@war"
     - id: ground
       text: "Go to ground. ({risk_ground})"
       effects: [ { war: ground } ]
-      next: *route
+      next: "@war"
 
 - id: w_leave
   chapter: front
@@ -255,27 +239,27 @@
     - id: back
       text: "Go back. A stripe is waiting: the battalion promotes the men who return."
       effects: [ { war: back } ]
-      next: *route
+      next: "@war"
     - id: commission
       text: Go before the board for a commission.
       visible_if: war.commission
       effects: [ { war: commission } ]
-      next: *route
+      next: "@war"
     - id: posting_0
       text: "Take it: {offer0}. Your war ends here."
       visible_if: "war.offers >= 1"
       effects: [ { war: "posting:0" } ]
-      next: *route
+      next: "@war"
     - id: posting_1
       text: "Take it: {offer1}. Your war ends here."
       visible_if: "war.offers >= 2"
       effects: [ { war: "posting:1" } ]
-      next: *route
+      next: "@war"
     - id: posting_2
       text: "Take it: {offer2}. Your war ends here."
       visible_if: "war.offers >= 3"
       effects: [ { war: "posting:2" } ]
-      next: *route
+      next: "@war"
 
 - id: e_armistice
   chapter: end

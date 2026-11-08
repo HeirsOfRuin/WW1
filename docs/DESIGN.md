@@ -308,6 +308,8 @@ release needs a mill trade, and the pits do not recall men until 1916."
 
 ## 11. Look and art
 
+**As built at calibration (2026-11-09; `docs/CALIBRATION.md`):** the band is 2:1 (400 × 200), the palette is "Field Service" (`src/ui/art/palette.ts`), and `tools/art.ts` is Vikingr's converter with this palette. Where this section differs, that wins.
+
 **Art as Vikingr** (decided 2026-11-08): a source image per key scene (a period photograph
 or a generated image), converted by a committed tool (Vikingr's `tools/art.ts`, copied) to
 wide pixel art in one fixed master palette; no dithering; sources kept in `art/src/`; a

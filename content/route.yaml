@@ -1,0 +1,24 @@
+# The war's route: where every `next: "@war"` goes (tools/content-loader.ts substitutes it).
+# First match wins. Authored scenes that take over a question for a moment of the war go ABOVE
+# the generic scene for that question; endings come first.
+switch:
+  - { if: "war.ending == killed", go: e_killed }
+  - { if: "war.ending == armistice", go: e_armistice }
+  - { if: "war.ending == posting", go: e_posting }
+  - { if: "war.ending == captured", go: e_captured }
+  - { if: "war.ending == invalided", go: e_invalided }
+  - { if: "war.ending == broken", go: e_broken }
+  - { if: "war.ending == court_martial", go: e_court }
+  # authored moments (calibration, the mill town 1915)
+  - { if: ["war.pending == duty", "war.stage == 1", "war.tour >= 3", "start == mill", { not: flag.letter_mill }], go: v_letter_mill }
+  - { if: ["war.battle == loos", "war.phase == 1", "war.path == rifleman"], go: b_loos_advance }
+  - { if: ["war.pending == leave", "war.stage == 1", "start == mill"], go: l_mill_1915 }
+  # the war's questions
+  - { if: "war.pending == tunnel", go: w_tunnel }
+  - { if: "war.pending == duty", go: w_duty }
+  - { if: "war.pending == mission", go: w_mission }
+  - { if: "war.pending == sick", go: w_sick }
+  - { if: "war.pending == course", go: w_course }
+  - { if: "war.pending == battle", go: w_battle }
+  - { if: "war.pending == leave", go: w_leave }
+default: e_error

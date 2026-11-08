@@ -17,7 +17,7 @@ export type { ChoiceView, SceneView, ChooseResult } from '@engine/index';
 export { describeDate } from '@engine/calendar';
 export { heroOf } from '@engine/character';
 export type { GameState } from './state';
-export { statusOf } from './module';
+export { statusOf, artOf } from './module';
 
 export interface NewGameOptions { start: string; seed: number; name: string; sex?: Sex }
 

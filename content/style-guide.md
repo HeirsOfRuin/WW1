@@ -28,7 +28,8 @@ counts them as warnings; each is allowed rarely.
 ## Numbers, names and time
 - The hero's age is {age_words}, never typed: play speed varies. Years and dates come from {date} or the state.
 - A person's title, office or ruler only once it is true in the run: continuity.yaml holds the rules.
-- Period time and money: <the game's units, e.g. canonical hours and pence, or watches and silver by weight>.
+- Period time and money: shillings and pence (a private's shilling a day); clock times in words ("half past six"), army time only inside an order.
+- Men are named the way they were: surnames among the men, Christian names at home, rank and surname from officers.
 
 ## Lint lists
 Each line is one pattern. Plain lines match as whole words or phrases, case-insensitive. Lines
@@ -51,6 +52,19 @@ no problem
 makes sense
 stressed
 you've got this
+# war-film and memorial phrases: the narration never editorialises the war (DESIGN §12)
+lions led by donkeys
+lost generation
+the war to end all wars
+lest we forget
+the fallen
+the glorious dead
+heroic sacrifice
+senseless slaughter
+the horrors of war
+hell on earth
+band of brothers
+brothers in arms
 # machine-prose stock phrases
 a testament to
 tapestry

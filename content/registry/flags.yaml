@@ -1,2 +1,5 @@
-# None yet (Phase 1).
-{}
+# Every flag the content sets or reads. The validator fails on an undeclared one and warns on one
+# set but never read.
+letter_mill: { description: "The 1915 letter from home has come (mill town); read by the route, so it comes once" }
+wrote_home: { description: "Answered the 1915 letter properly; the first leave remembers it" }
+sent_postcard: { description: "Answered the 1915 letter with a field postcard; the first leave remembers it" }
