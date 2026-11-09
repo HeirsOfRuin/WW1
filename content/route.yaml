@@ -76,6 +76,16 @@ switch:
   - { if: ["war.battle == loos", "war.phase == 3", "start == pit"], go: b_loos_pit_hold }
   - { if: ["war.pending == leave", "war.stage == 1", "start == pit"], go: l_pit_1915 }
   - { if: ["war.pending == tunnel", "start == pit"], go: w_tunnel_pit }
+  # the pit town, 1916 (content/scenes/war/1916-pit.yaml; docs/FRAME-PIT-1916.md): two roads
+  - { if: ["war.pending == tour", "war.stage == 2", "start == pit"], go: { pool: front_1916_pit, count: 1, then: w_tour } }
+  - { if: ["war.battle == somme_1_july", "war.phase == 1", "start == pit"], go: b_somme_pit_1 }
+  - { if: ["war.battle == somme_1_july", "war.phase == 2", "start == pit"], go: b_somme_pit_2 }
+  - { if: ["war.battle == somme_1_july", "war.phase == 3", "start == pit"], go: b_somme_pit_3 }
+  - { if: ["war.battle == somme_1_july", "war.phase == 4", "start == pit"], go: b_somme_pit_4 }
+  - { if: ["war.battle == somme_autumn", "war.phase == 1", "start == pit"], go: b_butte_1 }
+  - { if: ["war.battle == somme_autumn", "war.phase == 2", "start == pit"], go: b_butte_2 }
+  - { if: ["war.battle == somme_autumn", "war.phase == 3", "start == pit"], go: b_butte_3 }
+  - { if: ["war.pending == leave", "war.stage == 2", "start == pit"], go: l_pit_1916 }
   # authored moments (calibration, the mill town 1915)
   # front-line events: at the start of each tour, one from the pool if one is due;
   # each is once, and requires says when (an empty draw goes straight to the duty)

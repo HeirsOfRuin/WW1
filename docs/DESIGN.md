@@ -490,6 +490,10 @@ story share went from 25.4% to 51.8%.
 its own Loos, the leave, the tunnellers' offer, and three friends' deaths. Pit 1915 story share
 49.0% to 61.3%. The town structure carried over without a code change.
 
+**The pit town, 1916 (FRAME-PIT-1916.md).** Two roads: with the section (La Boisselle, beside
+the great mine) or with the tunnellers (who fired it). Events are tagged by
+`war.transferred`. Pit 1916 story share went from 29.2% to 58.5%.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.

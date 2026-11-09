@@ -76,3 +76,15 @@ pit_kept_charlton: { description: "Told Charlton the section needed him" }
 pit_wrote_robson: { description: "Wrote to Robson's da; he gives you a bird at leave" }
 pit_wrote_bell: { description: "Wrote to Bell's father at the lodge" }
 pit_wrote_charlton: { description: "Wrote to Mrs Charlton about the mules" }
+# The pit town, 1916 (content/scenes/war/1916-pit.yaml)
+p16_backed_matty: { description: "Told Bell his conscientious-objector brother had nerve; Mrs Bell at leave" }
+p16_birds: { description: "Helped Robson with the company's pigeons; the bird released from the crater on 1 July" }
+p16_read_lists: { description: "Read the casualty lists from home in July 1916" }
+p16_saved_mule: { description: "Got Charlton's mule out of the shell hole on a rope" }
+p16_shot_mule: { description: "Told Charlton the mule was finished" }
+p16_told_evans: { description: "Told Evans of the Rhondda about Jim Bell in the beer vat" }
+p16_chalked_tin: { description: "Chalked his name on the last tin of the 1 July charge" }
+p16_blew_camouflet: { description: "Reported the German miners at once; the camouflet blown" }
+p16_heard_the_song: { description: "Lay and listened to the German miners' song before reporting it" }
+p16_visited: { description: "Walked over to the battalion at rest and stayed till dark" }
+p16_wrote_father: { description: "Wrote to his father, the first letter ever; he keeps it at leave" }

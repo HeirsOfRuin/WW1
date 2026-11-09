@@ -16,6 +16,9 @@ rules:
   - { match: "Robson's not looking|Robson's beside you, digging|Robson\n? *stares|Robson finds it|Robson listens to all", allow: war.mate1, why: Tommy Robson only acts while alive }
   - { match: "Bell's in the vat|Bell grins at|Bell looks at you a long|Bell says he came out|Our Jim says you stood", allow: war.mate2, why: Jim Bell only acts while alive }
   - { match: "Charlton has been on a mule|Charlton's taken to going|Mrs Charlton has had a letter from George|Mrs Charlton asks if George", allow: war.mate3, why: George Charlton only acts while alive }
+  - { match: "Robson watches them go|Robson, on the next step|Twenty men look at Robson|Robson has the basket|Robson's there, sat|Old Mr Robson's out at the cree", allow: war.mate1, why: Tommy Robson only acts while alive (1916) }
+  - { match: "Bell's had a letter|Bell looks at you a long time in the dark|Bell's there, and talks|Jim wrote that you stuck", allow: war.mate2, why: Jim Bell only acts while alive (1916) }
+  - { match: "Charlton's been taking mules|Charlton's in the water|Charlton's down at the horse lines|Mrs Charlton has a letter from George", allow: war.mate3, why: George Charlton only acts while alive (1916) }
   - match: "All nine of the section"
     allow: "war.section == 9"
     why: The whole section alive only while all nine are.

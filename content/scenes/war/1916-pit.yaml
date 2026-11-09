@@ -1,0 +1,692 @@
+# The pit town, 1916 (docs/FRAME-PIT-1916.md). Two roads: the section's (the pit company on the
+# Somme at La Boisselle) and the tunneller's (he went to the tunnellers in January; war.transferred).
+# Events are tagged by road. Stage 2 is tours 10 to 19; 1 July is tour 14, the autumn battle tour 18.
+# Written to the voice in content/style-guide.md.
+
+# ---- the section's road -----------------------------------------------------------------------
+
+- id: v16p_gone_under
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 10", { not: war.transferred } ]
+  title: The ones who went under
+  text: |
+    February, and eleven men from the company have gone to the tunnellers. Six shillings a day.
+    You see them sometimes, coming up out of a hole behind the support line at the end of a shift,
+    grey-white with chalk from head to foot, blinking at the daylight the way you used to at bank.
+    They walk different already. They walk like men going home.
+
+    The infantry don't like them. The infantry say they're paid six times as much to stay out of
+    the rain. Then one night a camouflet goes up under the next company's sap, and in the morning
+    the tunnellers carry out four of their own, wrapped in groundsheets, and nobody says it again.
+
+    [if war.mate1]Robson watches them go down every evening. "I could have," he says.[/if]
+  choices:
+    - id: watch
+      text: Stand with Robson and watch the shift go down.
+      visible_if: war.mate1
+      text_after: |
+        Neither of you says anything. The last man down turns on the ladder, a pitman from the
+        next row at home, and lifts a hand to you, the way you would at the shaft top.
+      next: "@return"
+    - id: away
+      text: Go back to the dugout. You made your choice.
+      text_after: |
+        You made it. You stay with it. That night, on sentry, you listen to the ground under your
+        boots, and it's the tunnellers you hear now, and you can't
+        tell if that's worse or better.
+      next: "@return"
+
+- id: v16p_bell_brother
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  requires: [ "war.tour >= 11", { not: war.transferred }, war.mate2 ]
+  title: Matty Bell
+  text: |
+    Bell's had a letter, and he's not said a word about it for two days, which is the longest
+    he's been quiet since the Miners' Hall.
+
+    It comes out on sentry. His brother Matty, the young one, who's not down the pit because he
+    was bad with his chest as a bairn and works in the Store. He's had his papers under the new Act,
+    and he's gone before the tribunal and said he won't. Won't fight, won't wear the uniform, won't
+    carry a stretcher. Conscience. The tribunal gave him nothing. He's in the guardroom at Newcastle,
+    and they say he'll go to prison.
+
+    "Our Matty," Bell says. "Wouldn't hurt a fly. Used to cry at the killing of the pig." He's
+    looking out at the wire. "Half the company'd shoot him. I don't know if I would."
+
+    [if war.mate1]Robson, on the next step, says nothing at all.[/if]
+  choices:
+    - id: back_him
+      text: Tell Bell his brother has more nerve than most of the company.
+      effects: [ { set: flag.p16_backed_matty } ]
+      text_after: |
+        Bell looks at you a long time in the dark. "Aye," he says. "Aye. He has." And then, because
+        he's Bell: "Daft little beggar." He laughs, and it cracks in the middle.
+      next: "@return"
+    - id: say_nowt
+      text: Say nowt. It's not a thing you can say anything to.
+      text_after: |
+        You stand the rest of the watch together and don't talk. Near dawn he hands you his tin of
+        tobacco without being asked, which is Bell's way of saying he knows.
+      next: "@return"
+
+- id: v16p_birds
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  requires: [ "war.tour >= 12", { not: war.transferred }, war.mate1 ]
+  title: The basket
+  text: |
+    For the big push every company is to carry pigeons, two birds in a wicker basket, with little
+    aluminium tubes for messages, because the telephone wires won't last. The company officer
+    asks who knows birds.
+
+    Twenty men look at Robson.
+
+    He takes the basket like it's a bairn somebody's handed him. That night in the dugout he has
+    the lid open and the birds out, one in each hand, turning them over, looking at their eyes and
+    their feathers, talking to them low. "This one's a good 'un," he says. "This one wants feeding
+    up." He saves bits of his biscuit for them, soaked in his tea.
+  choices:
+    - id: help
+      text: Help him look after them. Learn the message tubes.
+      effects: [ { set: flag.p16_birds } ]
+      text_after: |
+        He shows you how to roll the flimsy and slide it into the tube, and how to hold a bird so
+        it doesn't panic: firm round the wings, its feet between your fingers. It's warm, and its
+        heart goes like a watch. "If I'm down," Robson says, "you take the basket." It's the most
+        he's said about the first of July.
+      next: "@return"
+    - id: leave
+      text: Leave him to it. They're his.
+      text_after: |
+        He doesn't mind. He sits up with them by the candle long after the dugout's asleep, and in
+        the morning the basket smells of tea.
+      next: "@return"
+
+- id: v16p_bombardment
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  weight: 100
+  requires: [ "war.tour == 13", { not: war.transferred } ]
+  title: The bombardment
+  text: |
+    A week of it. Our guns, all of them, day and night, and the noise goes on so long you stop
+    hearing it, the way you stop hearing the screens at bank, and then you only hear it when it
+    stops for a minute and the quiet hits you like cold water.
+
+    The lads are cheerful. Nothing can live under that. We'll walk over, the officers say. Take a
+    walking stick.
+
+    In front of you, across the valley, the German line goes up past the village on a little rise,
+    and just to the right of the village is the place they call the Glory Hole, where the lines
+    are so close you can hear them cough. Everybody knows by now. Under the Glory Hole the
+    tunnellers have put a mine. The biggest ever, they say. It goes up two minutes before zero.
+
+    [if war.mate3]Charlton's been taking mules up with ammunition every night. He says there are more guns behind you than there are lamps in the lamp cabin, wheel to wheel, all down the valley.[/if]
+  choices:
+    - id: letter
+      text: Write a letter and leave it in your pay book.
+      effects: [ { set: flag.last_letter } ]
+      text_after: |
+        It's shorter than the one before Loos. Look after Father. Make him go to the doctor. The
+        pit boots to whoever needs them. Love to all. You fold it small and it sits against your
+        chest.
+      next: "@return"
+    - id: sleep
+      text: Try to sleep. You'll need it.
+      text_after: |
+        You lie on the firestep with your helmet over your face and the guns going and you
+        sleep, an hour, two, and dream you're at the face with your father, and the roof's talking,
+        and he says it's all right, it's only the roof.
+      next: "@return"
+
+- id: v16p_july
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 15", { not: war.transferred } ]
+  title: July
+  text: |
+    For days after, they're still coming in from no man's land, the ones who can crawl. Then the
+    ones who can't are brought in by the burial parties.
+
+    The crater's a mark on everything. You can see it from anywhere: a white hole in the chalk a
+    hundred yards across, deep as a shaft, and men from both sides still in the bottom of it. The
+    smell of it comes over on the wind in the evenings, chalk and lime and the other thing.
+
+    The battalion's a third of what it was. They bring the company out to a field and sort out who's
+    left into new sections, and the sergeant major reads names off a list, and men from Blackhaugh
+    are put with men from places they've never heard of, and stand there not looking at each other.
+
+    The papers from home come up a week late. The whole of the North East is in them. Column after
+    column. Every village.
+  choices:
+    - id: read
+      text: Read the lists. Every name.
+      effects: [ { set: flag.p16_read_lists } ]
+      text_after: |
+        It takes you an hour, in small print, by the light from the dugout door. Men you went to
+        school with. Men you stood beside at the face. Two from your own row. You read every name
+        and you put the paper down, and then you pick it up and read them again.
+      next: "@return"
+    - id: dont
+      text: Don't. You were there.
+      text_after: |
+        You use the paper to light the brazier. It catches slowly, the lists curling and going
+        brown and then black, and you hold your hands over it till the warmth comes.
+      next: "@return"
+
+- id: v16p_mule
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  requires: [ "war.tour >= 16", { not: war.transferred }, war.mate3 ]
+  title: The mule
+  text: |
+    September, and the rain's come, and the tracks behind the line have gone to porridge. You're on
+    a carrying party, coming back empty, and you come on Charlton's limber stuck to the axles, and
+    one of his mules gone off the track into a shell hole full of water. It's in up to the neck. Its
+    eyes are rolling. It's making a noise you didn't know a mule could make.
+
+    Charlton's in the water with it, holding its head up, talking to it, the way he used to talk
+    to the ponies when the roof was working. A corporal from the transport is standing on the edge
+    with his rifle.
+
+    "Can't get her out," the corporal says. "I've seen 'em go like this. She's finished."
+
+    "She's not," Charlton says. "She's not. Give us a rope."
+  choices:
+    - id: rope
+      text: Get the party on a rope. Pull.
+      effects: [ { set: flag.p16_saved_mule } ]
+      text_after: |
+        Eight of you on the rope, up to your knees in the porridge, heaving, and Charlton in the
+        water pushing from behind, and she comes out of it at last with a great sucking noise,
+        shaking and steaming, and stands on the track with her legs spread. Charlton puts his face
+        against her neck. Nobody says anything about the time.
+      next: "@return"
+    - id: shoot
+      text: Tell Charlton the corporal's right. Get him out of the water.
+      effects: [ { set: flag.p16_shot_mule } ]
+      text_after: |
+        You get him out. He comes, in the end, because he knows. He turns his back while the
+        corporal does it, and you stand with him on the track, and he's shaking, and it isn't the
+        cold. "I'll not forget her," he says. "Her name was Bella."
+      next: "@return"
+
+# ---- the tunneller's road ---------------------------------------------------------------------
+
+- id: v16p_first_shift
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 10", war.transferred ]
+  title: Under
+  text: |
+    The shaft goes down from a dugout behind the support line, forty feet on a ladder, and at the
+    bottom it's chalk. Not coal. White chalk, wet, that glows in the candlelight and takes the print
+    of your hand.
+
+    You work it with a bayonet, not a pick. A pick rings. You work in your socks, on sandbags laid
+    along the floor, and nobody talks above a whisper, because somewhere the other side of the
+    chalk the Germans are working too, and listening. You prise out a lump, catch it before it
+    falls, pass it back hand to hand to the man with the sandbags. Hour after hour. The air's thick
+    and warm and stinks of candle smoke and sweat and wet chalk, and after an hour your head aches
+    with it, the way it does when the air's going in an old working.
+
+    There's a canary in a cage at the face. You know what it's for. Every man here knows what it's
+    for. You look at it more than you look at anything.
+
+    It's the face. It's only the face. You'd forgotten how much you'd missed it, and how much you
+    hated it.
+  choices:
+    - id: on
+      text: Get your head down and work.
+      next: "@return"
+
+- id: v16p_crew
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  requires: [ "war.tour >= 11", war.transferred ]
+  title: The crew
+  text: |
+    There are four of you on a shift, and you live together, eat together, sleep in the same hole
+    in the chalk, and you know them by their breathing in the dark.
+
+    Evans is from the Rhondda, a hewer, short and wide, with a voice that fills a gallery when he
+    forgets to whisper. He came out with the rest of South Wales last July. "They called us
+    traitors," he says, "and then they sent for us to dig." Pascoe's a tin miner from Camborne, old,
+    forty if he's a day, who's dug in Cornwall and South Africa and Montana and never once raised his
+    voice. And Mott, the kicker, a little Londoner who dug the tunnels for the Underground railway
+    lying on his back on a wooden cross, kicking out the clay with a spade on his feet. He talks
+    about the Tube as if it's a cathedral.
+
+    Four trades, four ways of talking. Underground none of it matters. You can all hear the same
+    thing.
+  choices:
+    - id: bell
+      text: Tell Evans about Jim Bell in the beer vat.
+      visible_if: flag.stood_with_bell
+      effects: [ { set: flag.p16_told_evans } ]
+      text_after: |
+        Evans laughs so loud Pascoe has to put a hand over his mouth. "Your Bell," he says, in a
+        whisper, delighted. "I'd buy your Bell a pint. I'd buy him a barrel."
+      next: "@return"
+    - id: listen
+      text: Listen to them. Say little.
+      text_after: |
+        You say little. It's a pitman's way, and they're all pitmen of some sort, and they don't
+        mind. By the end of the month Pascoe calls you "my 'andsome" and Mott calls you "Geordie"
+        and Evans calls you "boyo", and you answer to all three.
+      next: "@return"
+
+- id: v16p_charge
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  weight: 100
+  requires: [ "war.tour == 13", war.transferred ]
+  title: The charge
+  text: |
+    June, and the guns going day and night overhead so the chalk trembles, and down here it's
+    quiet as chapel. You're carrying the charge in.
+
+    Ammonal, in tins like syrup tins, fifty pound a time, passed hand to hand along the gallery,
+    man to man, in silence, from the shaft to the chamber at the end, a thousand feet away under
+    their line. Then sandbags to tamp it, hundreds of them, packed tight behind the charge so the
+    blast goes up and not back. Then the leads, paid out carefully all the way back.
+
+    It takes days. When it's done, the chamber at the end of the gallery has more explosive in it
+    than you thought was in the world. The men in the trench above it are Germans. You've heard
+    them, through the chalk, through the geophone, talking, coughing, a gramophone once.
+
+    The last tin goes in. Somebody's chalked something on it.
+  choices:
+    - id: chalk
+      text: Chalk your own name on a tin, and the date.
+      effects: [ { set: flag.p16_chalked_tin } ]
+      text_after: |
+        Your name, and BLACKHAUGH, and 28.6.16, in chalk on the lid, by the light of a candle. Evans
+        writes CYMRU on the next one. You don't know why you did it. It's like signing your name
+        to something before you know what it is.
+      next: "@return"
+    - id: no
+      text: Leave it. Just get it done.
+      text_after: |
+        You pass the last tin on and wipe your hands on your trousers and don't look back down the
+        gallery. Mott, behind you, whistles under his breath, low, a music-hall tune, the
+        same three bars over and over, until Pascoe tells him to stop.
+      next: "@return"
+
+- id: v16p_listening
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  requires: [ "war.tour >= 15", war.transferred ]
+  title: The geophone
+  text: |
+    A listening post at the end of a gallery, alone, on your stomach in the chalk, with the two
+    discs of the geophone pressed to the floor and the earpieces in your ears like a doctor's. It's
+    so quiet you can hear your own blood.
+
+    Then you hear them. Picks, faint as a clock in the next house. A pause. Voices. Germans, talking, not whispering, the
+    way men talk at the face when they think nobody's near. Somebody laughs. Somebody starts singing,
+    a slow song, a hymn maybe, and the others join in, and it comes through the chalk thin and
+    far away, like the chapel choir heard from the end of the rows on a summer night.
+
+    They're close. Ten feet. Less. If they're laying a charge, it'll be under the gallery Evans and
+    Pascoe are working in.
+
+    The rule's simple. You report it, and the officer decides, and he'll blow a camouflet, and
+    the singing will stop.
+  choices:
+    - id: report
+      text: Go back and report it. Now.
+      effects: [ { set: flag.p16_blew_camouflet } ]
+      text_after: |
+        The officer listens himself, then nods. The charge goes in that night, a small one, tamped
+        hard, meant to crush their gallery without breaking the surface. When it goes, the ground
+        thumps under you like a door slamming in an empty house. Next shift you listen at the same
+        place, a long time. Nothing. Only the chalk.
+      next: "@return"
+    - id: wait
+      text: Wait. Let them finish their song.
+      effects: [ { set: flag.p16_heard_the_song } ]
+      text_after: |
+        You lie there till they finish. It's a long song. Then you go back and report it, and the
+        officer blows a camouflet that night, and it's the same in the end, and it isn't. You find
+        yourself humming the tune for weeks, and you never learn what it was.
+      next: "@return"
+
+- id: v16p_visit
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  requires: [ "war.tour >= 15", war.transferred ]
+  title: The battalion
+  text: |
+    The battalion's out at rest in a village four miles back, and you walk over on your afternoon
+    off to find the lads. It takes you an hour to find anybody you know.
+
+    It's a third of what it was. There are new faces everywhere, lads from Sunderland and Hull and
+    places you've never heard of, in Blackhaugh's company.
+
+    [if war.mate1]Robson's there, sat on an upturned bucket cleaning his rifle. He looks up, and nods, as if you'd been gone ten minutes. "All right," he says. "All right, Tommy," you say.[/if][if !war.mate1]Robson's not there. Somebody tells you, as if you knew.[/if][if war.mate2] Bell's there, and talks for an hour without stopping, about July, about the generals, about the wire that was never cut, and his voice goes on and on and you let it.[/if][if !war.mate2] Bell's not there either.[/if][if war.mate3] Charlton's down at the horse lines. He walks you back to the road with his hand on a mule's neck.[/if][if !war.mate3] Nobody's at the horse lines that you know.[/if]
+  choices:
+    - id: stay
+      text: Stay till dark. Share what you've got.
+      effects: [ { set: flag.p16_visited } ]
+      text_after: |
+        You've a tin of pineapple chunks and twenty cigarettes, six shillings a day buys a lot,
+        and they go round. When you leave in the dark, walking back to your hole in the chalk, you
+        feel like a man who's been to a funeral and a wedding on the same day.
+      next: "@return"
+    - id: go
+      text: Go back early. You're not one of them now.
+      text_after: |
+        You go before the light goes. On the road back you meet a sapper from your own company and
+        walk with him, and talk about timbering, and it's easier.
+      next: "@return"
+
+# ---- both roads -------------------------------------------------------------------------------
+
+- id: v16p_letter
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  requires: [ "war.tour >= 16" ]
+  title: A letter from home
+  text: |
+    "Dear Son, I hope this finds you well as it leaves us at present. Your father has had to come
+    off the face. His chest got too bad. They have put him on at bank on the screens with the old
+    men and the lads, picking stone out of the coal, and he comes home and sits in the chair and
+    does not say anything. He says it is like being a bairn again.
+
+    They have took boys on underground at thirteen now, they are that short. Mrs Armstrong's
+    youngest went down Monday. [if war.transferred]Your money came. I have bought a new mangle and put the rest in the Store, and your father says six shillings a day is more than he ever made and he does not know whether to be proud or ashamed.[/if][if !war.transferred]The whole village had the blinds down in July. There is not a row without one.[/if]
+
+    Keep your feet dry. Your loving Mother."
+  choices:
+    - id: write_father
+      text: Write to your father. Just to him.
+      effects: [ { set: flag.p16_wrote_father } ]
+      text_after: |
+        It's the first letter you've ever written him. You don't know what to say, so you tell him
+        about the face, [if war.transferred]the chalk and the socks and the canary, the timbering,[/if][if !war.transferred]the timbering in the German dugouts, the depth of them,[/if] the things he'd want to know.
+        At the end you put: I wish you were here to see it. You don't know if that's true, but it's
+        what you'd say to him at the face.
+      next: "@return"
+    - id: keep
+      text: Keep it with the others.
+      text_after: |
+        It goes in your breast pocket. You read the bit about the screens again, by the brazier, and
+        you can see him, bent over the belt with the old men, picking stone, coughing.
+      next: "@return"
+
+# ---- the first of July, La Boisselle --------------------------------------------------------------
+
+- id: b_somme_pit_1
+  chapter: front
+  title: The first of July
+  text: |
+    The first of July comes up hot, mist in the valley burning off, and by seven the sun's on your
+    neck.
+
+    [if war.path == tunnel]You're at the firing point, a dugout at the head of the gallery, with the leads coming up out of the dark and the exploder on a ration box. The officer looks at his watch every half a minute. Down there, at the end of a thousand feet of chalk, is every tin you carried.[else]You're in the assembly trench at the head of the valley, sixty pounds on your back, and to your right, on the rise, is the Glory Hole. Under it is the mine. Everybody's watching it. Nobody's watching anything else.[/if]
+
+    Twenty-eight minutes past seven.[if war.path == tunnel] The officer pushes the handle down.[/if]
+
+    The ground doesn't shake. It lifts, like the floor of the cage when the brake comes off. Then
+    the noise, and a column of earth and chalk goes up out of the German line, higher than the pit
+    heap, higher than the church, higher than anything, and hangs there, and comes down. For two
+    minutes it rains chalk: lumps the size of a man's head, then stones, then dust, white over
+    everything, in your mouth, tasting of chalk and burnt ammonal.
+
+    Half past seven. Whistles. Somewhere on the left, pipes.
+
+    [if war.path == rifleman]You go up the ladder with {mate} on the next rung, chalk dust coming down on you both like flour.[/if][if war.path == nco]Seven men on the ladder behind you, watching your back to see when to go.[/if][if war.path == lewis]You go in the second line with the gun on your shoulder and your No. 2 behind you with the drums.[/if][if war.path == signals]You go with the company officer, a reel of wire paying out behind you.[/if][if war.path == bomb]You go with the bombers, a bucket of Mills bombs in each hand, for the crater.[/if][if war.path == snipe]You go behind the second line with the scoped rifle wrapped in sacking, looking for their machine guns.[/if][if war.path == tunnel]You go over in the second wave with a party of sappers, for the crater, to blow in any dugout that still has Germans in it.[/if]
+
+    [if war.stalled]The mine didn't touch the village. The machine guns in it open up straight down the valley, all of them at once, like the coal-cutter starting at the face, only it doesn't stop. The first line goes down before it's twenty yards out, in rows.[else]The first line goes forward into the white dust. The machine guns in the village open up, and men go down in rows, and some get up, and the rest go on.[/if]
+  choices:
+    - id: push
+      text: "[if war.path == lewis]Get the gun into a shell hole and fire on the village.[/if][if war.path == signals]Keep going, paying out the wire.[/if][if war.path == bomb]Run for the crater with the buckets.[/if][if war.path == snipe]Find a fire position and hunt the guns in the village.[/if][if war.path == nco]Take the section on at a walk.[/if][if war.path == rifleman]Walk on into it.[/if][if war.path == tunnel]Go for the crater with the sappers.[/if] ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "[if war.path == nco]Get your wounded into cover first.[/if][if war.path == lewis]Get the drums forward to the men who need them.[/if][if war.path == rifleman]Drag {mate} into a shell hole. He's hit in the leg.[/if][if war.path == signals]Stay with the officer. He's down.[/if][if war.path == bomb]Get a wounded bomber back to the sap.[/if][if war.path == snipe]Spot for the Lewis gun beside you.[/if][if war.path == tunnel]Carry a wounded sapper back to the trench.[/if] ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down. Wait for the fire to slacken. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_somme_pit_2
+  chapter: front
+  title: The crater
+  text: |
+    The crater. You've never seen a hole like it, not at any pit, not anywhere. A hundred yards
+    across and deep as a shaft, white chalk sides still smoking, and men sliding down into it for
+    cover, ours and theirs, and at the bottom water and broken timber and things you don't look at.
+    [if war.path == tunnel]You made it. You carried it in, tin by tin.[/if][if war.path == tunnel && flag.p16_chalked_tin] Somewhere down in the bottom of it, in a thousand pieces, is your name.[/if]
+
+    On the far lip, what's left of their trench. Their dugouts go down thirty feet into the chalk,
+    timbered better than any pit you ever worked, and there are Germans in them still, and the
+    bombs start coming over the lip at you.
+
+    [if war.path == bomb]This is your work. Pin, throw, count, along the lip.[/if][if war.path == tunnel]A dugout entrance, smoke coming out of it. You've a charge in your haversack and a fuse.[/if][if war.path == nco]You count your men. Four.[/if][if war.path == lewis]The gun's choked with chalk. You strip it with your fingers shaking.[/if][if war.path == rifleman]{mate} is beside you on the lip, white with chalk, like a man come up from the screens.[/if]
+  choices:
+    - id: push
+      text: "[if war.path == tunnel]Blow the dugout entrance.[/if][if war.path != tunnel]Go round the lip for their trench.[/if] ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Get the wounded down into the crater out of the fire. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down on the crater's inside slope and stay there. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_somme_pit_3
+  chapter: front
+  title: The crater
+  text: |
+    The afternoon in the crater. Hot. No water. The chalk throws the sun back at you so your eyes
+    run, and the flies come, thousands of them, and the shells come in on the lip and every one
+    brings the sides down in a slide of chalk and stones.
+
+    Nobody knows where anybody is. Battalion doesn't know where you are. The wire's long gone.
+
+    [if war.mate1 && flag.p16_birds]Robson has the basket. He writes the message out on his knee, the officer's words, slow and careful, and rolls it and slides it into the tube on the bird's leg, and holds her up in both his big hands, and lets her go. She goes up out of the crater, round once, round twice over the chalk, the way his da's birds go round over the rows, and then straight west, and Robson watches her till she's gone.[/if][if !war.mate1 && flag.p16_birds]You have the basket. Robson said you'd take it if he was down. You write the message, and roll it, and hold the bird the way he showed you, firm round the wings, and let her go. She goes round once over the crater and then west, and you watch her all the way.[/if]
+
+    Late in the afternoon they come out of the village to take the crater back.
+  choices:
+    - id: push
+      text: "Up on the lip and fire into them. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Pass up ammunition from the dead. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Keep down inside the crater. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_somme_pit_4
+  chapter: front
+  title: Night
+  text: |
+    Night, and quiet, or nearly. Out in the valley, all across it, the wounded are calling. Hundreds
+    of them. Water, and stretcher-bearer, and names, and mam. Some of them in Blackhaugh voices. You
+    know some of the voices.
+
+    You know what you'd do if a man was trapped at the face. Everybody would go. Nobody would wait to
+    be asked.
+
+    But this isn't the face, and the flares are going up, and their machine guns traverse the valley
+    every few minutes, slow, like a man sweeping a yard.
+  choices:
+    - id: push
+      text: "Go back across for water and bring it out. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Crawl out to the nearest voice and bring him in. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Stay in the crater till you're relieved. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- the autumn: the Butte ----------------------------------------------------------------------
+
+- id: b_butte_1
+  chapter: front
+  title: The Butte
+  text: |
+    October. The rain hasn't stopped in a fortnight and the ground's gone to a paste that takes your
+    boots off. In front of you, across a mile of it, there's a hill, if you can call it a hill: a
+    great white mound of chalk, bare, with nothing growing on it, like the pit heap at home if the
+    pit heap were made of bone. They call it the Butte. The Germans have tunnelled it through and
+    through, and it's full of machine guns.
+
+    [if war.path == tunnel]You're up with the infantry to dig them in on whatever they take, and to find the tunnels in the Butte if anybody gets there.[/if][if war.path == rifleman]{mate} goes over the bag beside you and sinks to his knees in the first yard.[/if][if war.path == nco]Your section goes over the bags behind you, slow, the mud holding every step.[/if][if war.path == lewis]The gun's caked. The drums are caked. You've wrapped the gun in a sandbag and you'll unwrap it when you get there.[/if][if war.path == signals]No wire across this. Runners. You're the runner.[/if][if war.path == bomb]The bombs are in a sandbag on your back, wrapped against the wet.[/if][if war.path == snipe]Your rifle's wrapped in sacking. You're looking for the slits in the chalk.[/if]
+
+    [if war.stalled]The barrage gets away from you in five minutes. Nobody can walk fast in this. The Butte opens up, and men stand stuck in the mud and are shot standing.[else]The barrage goes over, and you go after it, slow, a yard at a time, like wading the burn in flood.[/if]
+  choices:
+    - id: push
+      text: "Keep up with the barrage, whatever the mud does. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Pull men out of the mud as you go. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get into a shell hole and wait for the fire to slacken. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_butte_2
+  chapter: front
+  title: The Butte
+  text: |
+    A trench at the foot of the Butte, or what was one, half full of water, and Germans in it with
+    their hands up, and Germans in it fighting, and you can't tell which from ten yards in the
+    rain.
+
+    Above you, in the white side of the Butte, the slits. Every one of them a gun.
+  choices:
+    - id: push
+      text: "Bomb up the slope at the nearest slit. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Get the prisoners and the wounded down into the trench. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down in the water and fire at the slits. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_butte_3
+  chapter: front
+  title: The Butte
+  text: |
+    Night, and rain, and the Butte still theirs above you, and the trench you've got is a ditch with
+    the dead in the water. Your hands are so cold you can't feel the bolt. Somebody passes along a
+    tin of rum and it's the only warm thing in France.
+
+    Before dawn they come down the Butte at you, out of the tunnels, out of the chalk, like men
+    coming up out of a drift.
+  choices:
+    - id: push
+      text: "Stand up in the ditch and fire into them. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Keep the next man's rifle working. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Keep down below the lip of the ditch. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- the 1916 leave ---------------------------------------------------------------------------------
+
+- id: l_pit_1916
+  chapter: front
+  title: Home on leave
+  text: |
+    December, and the village is quiet the way it's never quiet. The buzzer still goes, the cage
+    still winds, the heap still burns red on the skyline, but the rows are full of drawn blinds and
+    black armbands, and the women stand in their doorways in the cold and watch you come up the
+    street, and you know every one of them is looking at your face to see if it's somebody else's.
+
+    Your father's in his chair by the fire. He's thinner. He doesn't get up. He holds his hand out
+    and you take it, and it's an old man's hand, soft from the screens, the calluses gone.[if flag.p16_wrote_father] "I got your letter," he says. He's got it in his waistcoat pocket. He doesn't say anything else about it. He doesn't need to.[/if]
+
+    [if war.transferred]Your mother's got a new mangle in the wash-house, and she shows it to you twice. "Six shillings a day," your father says, and coughs. "Down a hole. In France." He laughs till the coughing stops him. "I could have told you that was where you'd end."[/if][if war.transferred && flag.p16_chalked_tin] You don't tell anybody about the tins, and your name on the last one.[/if][if war.transferred && flag.p16_blew_camouflet] Some nights in your own bed you feel the ground thump under you, like a door slamming in an empty house, and you're awake before you know why.[/if][if war.transferred && flag.p16_visited] You carry the lads' messages round the rows, from the afternoon you walked over to the battalion, and the mothers make you say them twice.[/if][if war.transferred && flag.p16_heard_the_song] At chapel on Sunday they sing a hymn you don't know, and for a moment, in the second verse, you think it's the one. It isn't.[/if]
+
+    [if !war.transferred && flag.p16_read_lists]You know every house with the blinds down. You read them all, in France, in small print. You go round them, one a day, and sit in their kitchens, and tell the mothers what you can.[/if][if !war.transferred && !flag.p16_read_lists]You didn't read the lists. You learn them now, walking up the rows, a blind at a time.[/if]
+
+    [if war.mate2 && flag.p16_backed_matty]Mrs Bell takes you aside at the Store. Matty's in prison, in Durham. Jim wrote that you stuck up for him. She doesn't say thank you. She gives you a quarter of black bullets and goes.[/if][if !war.mate2]Bell's father doesn't come to the Miners' Hall any more. Matty's in prison. Jim's in France, under it.[/if]
+
+    [if war.mate1]Old Mr Robson's out at the cree. [if flag.p16_birds]Tommy wrote him about the basket on the first of July. He wants to know everything: which way she went, how long she circled, whether she came in. You tell him she came in. You don't know. He nods as if he knew she would.[/if][if !flag.p16_birds]He asks after Tommy, and you tell him Tommy's well, still saying nothing.[/if][/if][if !war.mate1]Old Mr Robson's given up the birds. The cree's empty, the door open, banging in the wind.[/if]
+
+    [if war.mate3 && flag.p16_saved_mule]Mrs Charlton has a letter from George, all about a mule called Bella who fell in a shell hole and came out again. "You were there," she says. "He says you were on the rope."[/if][if war.mate3 && flag.p16_shot_mule]Mrs Charlton says George's letters have gone short. She doesn't know why. You do, and don't tell her.[/if][if !war.mate3]In the pit stables, the old horse-keeper has put George's photograph up on a nail by Captain's stall.[/if]
+
+    {offers_line}
+  choices:
+    - id: back
+      text: Go back on the tenth day. The battalion promotes the men who return.
+      effects: [ { war: back } ]
+      next: "@war"
+    - id: commission
+      text: Go before the board for a commission.
+      visible_if: war.commission
+      effects: [ { war: commission } ]
+      next: "@war"
+    - id: posting_0
+      text: "Take it: {offer0}. Your war ends here."
+      visible_if: "war.offers >= 1"
+      effects: [ { war: "posting:0" } ]
+      next: "@war"
+    - id: posting_1
+      text: "Take it: {offer1}. Your war ends here."
+      visible_if: "war.offers >= 2"
+      effects: [ { war: "posting:1" } ]
+      next: "@war"
+    - id: posting_2
+      text: "Take it: {offer2}. Your war ends here."
+      visible_if: "war.offers >= 3"
+      effects: [ { war: "posting:2" } ]
+      next: "@war"
