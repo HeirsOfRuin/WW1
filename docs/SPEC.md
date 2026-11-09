@@ -34,6 +34,7 @@ answers (`docs/KILLGATE.md`, 2026-11-09). Design: `docs/DESIGN.md`, draft for ap
 | 2026-11-09 | Write 1918 for the mill town: the Spring Offensive, Amiens, October, the Armistice; the platoon officer's path; the friends' threads closed (FRAME-1918.md) | "Go ahead" |
 | 2026-11-09 | The pit town's opening and 1915: the Miners' Hall, Robson, Bell and Charlton, the tapping and the mine, Loos across a coalfield, the first leave, the tunnellers' offer (FRAME-PIT-1915.md) | "Go ahead" |
 | 2026-11-09 | The pit town's 1916 on two roads: with the section at La Boisselle, or with the tunnellers who fired the mine; the Butte; the 1916 leave (FRAME-PIT-1916.md) | "Go ahead" |
+| 2026-11-09 | The pit town's 1917 on two roads: the section at Arras and Passchendaele (the mill's battles, shared), the tunneller from the Arras subways to Messines; his father's death (FRAME-PIT-1917.md) | "Go ahead" |
 
 ## Pitch
 

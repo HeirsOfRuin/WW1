@@ -88,3 +88,16 @@ p16_blew_camouflet: { description: "Reported the German miners at once; the camo
 p16_heard_the_song: { description: "Lay and listened to the German miners' song before reporting it" }
 p16_visited: { description: "Walked over to the battalion at rest and stayed till dark" }
 p16_wrote_father: { description: "Wrote to his father, the first letter ever; he keeps it at leave" }
+# The pit town, 1917 (content/scenes/war/1917-pit.yaml)
+p17_dug_frost: { description: "Dug the frozen trench all night in January 1917 (rum first)" }
+p17_kiwi: { description: "Talked timber with a New Zealand tunneller in the Arras caves" }
+p17_toasted_russia: { description: "Drank to the Russian soldiers and workmen with Bell" }
+p17_blue_hen: { description: "Told Robson his da did a fine thing giving the blue hen to the army" }
+p17_sat_with_charlton: { description: "Sat in the mud with Charlton and the dying grey" }
+p17_exits: { description: "Set every prop in his Arras exit gallery true" }
+p17_saved_pascoe: { description: "Went in with the Proto set and brought Pascoe out alive" }
+p17_lost_pascoe: { description: "Waited for the rescue men; Pascoe died" }
+p17_learned_kick: { description: "Learned clay-kicking from Mott under Messines" }
+p17_saw_messines: { description: "Climbed the shaft to see the Messines ridge go up" }
+p17_father_letter: { description: "The letter telling him his father died has reached him" }
+p17_asked_leave: { description: "Asked for compassionate leave for his father; refused" }

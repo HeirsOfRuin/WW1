@@ -1,0 +1,447 @@
+# The pit town, 1917 (docs/FRAME-PIT-1917.md). Two roads, as in 1916: the section's and the
+# tunneller's (war.transferred). The battles, Arras and Passchendaele, are shared with the mill
+# (content/scenes/war/1917-mill.yaml): one battalion, one battle. Stage 3 is tours 20 to 29;
+# Arras is tour 23, Passchendaele tour 27. Written to the voice in content/style-guide.md.
+
+# ---- the section's road -----------------------------------------------------------------------
+
+- id: v17p_frost
+  chapter: front
+  kind: pool
+  pool: front_1917_pit
+  once: true
+  weight: 100
+  requires: [ "war.tour <= 21", { not: war.transferred } ]
+  title: Frost
+  text: |
+    The hardest winter anybody can remember. The ground's iron a foot down, and the bread comes up
+    frozen, and the tea freezes in the dixie between the cookhouse and the line. Men lose toes.
+    The latrine buckets freeze solid and have to be chipped.
+
+    And the battalion wants a new trench dug. In this.
+
+    The officers look at the ground and then they look at the Blackhaugh company, because
+    everybody knows pitmen can dig anything.
+
+    [if war.mate2]Bell's on his feet before the sergeant's finished. "Rum first," he says. "Before, not after. That's the rate for hard ground at any pit in the county." The sergeant stares at him. The officer, who's from Gateshead, starts to laugh.[else]Somebody from the back says rum first, before, not after, that's the rate for hard ground at any pit in the county. The officer, who's from Gateshead, starts to laugh.[/if]
+  choices:
+    - id: dig
+      text: Get stuck in. Show them how it's done.
+      effects: [ { set: flag.p17_dug_frost } ]
+      text_after: |
+        You get the rum first. Then you dig, all night, in shifts, the way you'd work a hard seam,
+        short and steady, nobody racing, the picks ringing on the frozen clay like on stone. By
+        dawn there's a trench where there wasn't, and the company from Hull that was meant to help
+        is stood watching with their hands in their armpits.
+      next: "@return"
+    - id: pace
+      text: Dig at the pit's pace. No faster than you're paid for.
+      text_after: |
+        Steady, and not a stroke more. The officer comes by at two in the morning and watches you
+        a while and says nothing, because it's the right pace, and he can see it is.
+      next: "@return"
+
+- id: v17p_caves
+  chapter: front
+  kind: pool
+  pool: front_1917_pit
+  once: true
+  weight: 100
+  requires: [ "war.tour == 22", { not: war.transferred } ]
+  title: Under Arras
+  text: |
+    Under Arras there are old chalk quarries, hundreds of years old, and somebody's joined them up
+    with tunnels into a town under the town. Thousands of you are down here waiting, under electric
+    light, with water dripping and the air thick with the breath of a brigade.
+
+    You can't stop looking at the workings. Galleries cut square, timbered right, the props set
+    true, drainage in the floor. Whoever did this knew the job. The tunnels have names painted up
+    at the junctions: Wellington, Auckland, Christchurch. New Zealanders, a sapper tells you. Gold
+    miners and navvies from the other side of the world.
+
+    The attack's in the morning. Up the steps and out.
+  choices:
+    - id: ask
+      text: Find a New Zealander and ask about the timbering.
+      effects: [ { set: flag.p17_kiwi } ]
+      text_after: |
+        He's a big quiet man from a place called Waihi, a gold miner, and he talks timber with you
+        for an hour in the electric light like two men at the pit gates on a Sunday. When you go
+        he shakes your hand. "Good luck in the morning, mate," he says. "Keep your head down when
+        you come out the top. That's where they'll be looking."
+      next: "@return"
+    - id: letter
+      text: Write a letter for the pay book.
+      effects: [ { set: flag.last_letter } ]
+      text_after: |
+        The third one now. They get shorter. This one says: Look after Father. Make him rest. Tell
+        him the timbering here is the best I ever saw, he'd like it.
+      next: "@return"
+
+- id: v17p_russia
+  chapter: front
+  kind: pool
+  pool: front_1917_pit
+  once: true
+  requires: [ "war.tour >= 24", { not: war.transferred }, war.mate2 ]
+  title: News
+  text: |
+    The news comes up the line in old newspapers, and it comes all at once. The Tsar of Russia's
+    gone. Thrown out, by his own soldiers and his own workmen. And the Americans have come in.
+
+    Bell reads it out in the dugout by a candle, every word, twice, and then he puts the paper down
+    and he's grinning like a lad.
+
+    "Soldiers and workmen," he says. "Did you hear that? His own soldiers and his own workmen. Ten
+    million men, and they just said no more." He looks round at all of you. "Imagine that."
+
+    A corporal from another company tells him to watch his mouth. Bell doesn't hear him.
+  choices:
+    - id: drink
+      text: Drink to it with him, in tea.
+      effects: [ { set: flag.p17_toasted_russia } ]
+      text_after: |
+        Two mess tins of cold tea, clinked. "To the soldiers and the workmen," Bell says, and drinks.
+        You drink. You don't know what you're drinking to, quite. Neither does he.
+      next: "@return"
+    - id: careful
+      text: Tell him to be careful who hears him.
+      text_after: |
+        "I know," he says. "I know." He folds the paper small and puts it in his breast pocket,
+        over his heart, and pats it. "But it happened. They can't make it not have happened."
+      next: "@return"
+
+- id: v17p_blue_hen
+  chapter: front
+  kind: pool
+  pool: front_1917_pit
+  once: true
+  requires: [ "war.tour >= 24", { not: war.transferred }, war.mate1 ]
+  title: The blue hen
+  text: |
+    Robson has a letter from his da, and he reads it standing up, and then he sits on the firestep
+    with it on his knee.
+
+    The army's asking the fanciers at home for birds. His da's given them his best. The blue hen
+    that took first at Bedlington, and the two cocks he's been breeding off her for four years.
+    They've gone in a basket on the train to the army loft.
+
+    "Me da," Robson says. "He'd not sell her for ten pound. He turned down ten pound." He looks at
+    the letter. "He's given her to the army."
+  choices:
+    - id: proud
+      text: Tell him his da's done a fine thing.
+      effects: [ { set: flag.p17_blue_hen } ]
+      text_after: |
+        "Aye," Robson says. "Aye, he has." After a while: "Might be her carries the next one out of
+        a crater. Might be she knows the way better than the army's birds." He nearly smiles.
+      next: "@return"
+    - id: quiet
+      text: Say nothing. Sit with him.
+      text_after: |
+        You sit with him. He folds the letter up small, and smaller. Then he unfolds it and reads it again,
+        and you know he's reading the bit about the hen.
+      next: "@return"
+
+- id: v17p_horses
+  chapter: front
+  kind: pool
+  pool: front_1917_pit
+  once: true
+  requires: [ "war.tour >= 26", { not: war.transferred }, war.mate3 ]
+  title: The horse lines
+  text: |
+    Flanders, and the shells come down on the horse lines at night the way they come down on
+    everything. In the morning there are horses dead in their rows, still tied, and mules lying
+    in the mud with their legs out stiff, and a smell of singed hair and blood and dung.
+
+    [if flag.pit_helped_charlton]Charlton's been up all night with them. He's sat in the mud with a horse's head in his lap, a big grey that can't get up, and he's stroking its face and talking to it, and he won't let the farrier near it yet.[else]Charlton went down to the horse lines as soon as he heard. He's sat in the mud with a big grey's head in his lap, a horse that can't get up, stroking its face, talking to it, and won't let the farrier near.[/if]
+  choices:
+    - id: stay
+      text: Sit in the mud with him till the farrier comes.
+      effects: [ { set: flag.p17_sat_with_charlton } ]
+      text_after: |
+        You sit with him. The grey's breath comes slower, warm on your hands. When the farrier
+        comes Charlton nods, and stands, and turns his back, and you turn with him.
+      next: "@return"
+    - id: farrier
+      text: Get the farrier. It's kinder.
+      text_after: |
+        You fetch the farrier and Charlton lets him. He doesn't look at you for two days. On the
+        third he gives you half his bread without a word, and that's that.
+      next: "@return"
+
+# ---- the tunneller's road ---------------------------------------------------------------------
+
+- id: v17p_subways
+  chapter: front
+  kind: pool
+  pool: front_1917_pit
+  once: true
+  weight: 100
+  requires: [ "war.tour <= 22", war.transferred ]
+  title: The subways
+  text: |
+    They've sent the company to Arras, to help join up the old quarries under the town with
+    subways out to the front line, so a whole army can wait underground and come up at the
+    moment. New Zealanders did most of it: gold miners, navvies, men from the other side of the
+    world, who name their galleries after home. Wellington. Auckland. Christchurch.
+
+    Your job's the exits. Short galleries running up from the subways to just under the front-line
+    trench, stopped a few feet short of the air. On the morning, you'll blow the last few feet, and
+    the infantry will come up out of the ground.
+
+    [if war.mate1 || war.mate2 || war.mate3]Somewhere in these galleries, on the night, the Blackhaugh company will be waiting with the rest. You think of them coming up past you into the daylight.[/if]
+  choices:
+    - id: good
+      text: Do the job right. Every exit true.
+      effects: [ { set: flag.p17_exits } ]
+      text_after: |
+        You set the props in your exit as if your father were coming up through it. Evans laughs at
+        you for it. Then he goes back and redoes his own.
+      next: "@return"
+    - id: quick
+      text: Get it done. There's no time for the fine work.
+      text_after: |
+        You get it done. It's a good enough job. Pascoe goes along after you, without a word, and
+        knocks in two more wedges you'd missed.
+      next: "@return"
+
+- id: v17p_gas
+  chapter: front
+  kind: pool
+  pool: front_1917_pit
+  once: true
+  requires: [ "war.tour >= 21", war.transferred ]
+  title: The canary
+  text: |
+    After a blow, the gallery fills with the fumes, and the fumes don't smell of anything, and that's
+    what kills you. You know that. Every pitman knows that. It's afterdamp. It's the thing that
+    killed the men at every disaster your father ever told you about.
+
+    Pascoe went in too soon to look at the face. Now he's not answering. The canary in the cage at
+    the gallery mouth is on its back on the floor of the cage.
+
+    There's a Proto set hanging in the shaft dugout, the breathing apparatus, the same as the rescue
+    brigade's at Blackhaugh, that you trained on once on a Sunday in the welfare hall. The rescue
+    men are coming. They're ten minutes away.
+  choices:
+    - id: go_in
+      text: Get the Proto on and go in for him.
+      effects: [ { set: flag.p17_saved_pascoe } ]
+      text_after: |
+        The mask, the nose clip, the bag on your chest, oxygen hissing, and the gallery in the light
+        of your lamp, quiet, and Pascoe on his face at the end of it like a man asleep. You get him
+        under the arms and drag him the whole way. He comes round on the shaft floor, grey and
+        sick, and spends a week coughing, and lives. "My 'andsome," he says, when he can talk. It's
+        all he says about it.
+      next: "@return"
+    - id: wait
+      text: Wait for the rescue men. That's the rule.
+      effects: [ { set: flag.p17_lost_pascoe } ]
+      text_after: |
+        That's the rule, because men who go in without the training die beside the men they went
+        for. You know it. You wait the ten minutes. They bring him out on a stretcher, and the
+        officer kneels by him, and shakes his head. Pascoe, from Camborne, who dug in Cornwall and
+        Africa and Montana and never once raised his voice.
+      next: "@return"
+
+- id: v17p_clay
+  chapter: front
+  kind: pool
+  pool: front_1917_pit
+  once: true
+  weight: 150
+  requires: [ "war.tour == 24", war.transferred ]
+  title: Blue clay
+  text: |
+    After Arras they send the company north, to Flanders, to the galleries under the Messines
+    ridge. These galleries are older than your time in France. Some were started in 1915. A
+    hundred feet down, under the wet sand, there's a blue clay, smooth and stiff as cold suet,
+    and it holds without timber, and it makes no noise when you work it.
+
+    It's Mott's clay. London clay, he says, it's the same as the Tube. He lies on his back on his
+    cross, a plank set at a slant against the face, with a spade on his feet, and kicks out the
+    clay, a lump at a time, silent, and passes it back, all shift, without a word, as happy as
+    you've ever seen a man.
+
+    The galleries run out under the German ridge. At the ends of them, the charges have been in
+    place a long time, waiting. Your work is keeping the water out, and listening.
+  choices:
+    - id: learn
+      text: Get Mott to teach you to kick.
+      effects: [ { set: flag.p17_learned_kick } ]
+      text_after: |
+        It takes a week, and your back aches in places it never ached at the face. "Like riding a
+        bike," Mott says. "Backwards. Lying down. Underground." By the end of the week you can do
+        it, slow. Mott's as proud of you as if he'd taught you to read.
+      next: "@return"
+    - id: pumps
+      text: Stay on the pumps. You know pumps.
+      text_after: |
+        The pumps go day and night, and you nurse them like the engine-man at Blackhaugh nursed his,
+        by the sound. When one starts to labour you hear it before anyone, and that's worth
+        something here, where water will drown a gallery in a night.
+      next: "@return"
+
+- id: v17p_messines
+  chapter: front
+  kind: pool
+  pool: front_1917_pit
+  once: true
+  weight: 200
+  requires: [ "war.tour == 25", war.transferred ]
+  title: Messines
+  text: |
+    Ten past three in the morning, the seventh of June. You're in a dugout at the top of a shaft,
+    with the crew, waiting. Nobody's talking. Evans has his hand flat on the timber of the dugout
+    wall, the way you'd feel a roof.
+
+    Nineteen of them. Nineteen mines, under the whole length of the ridge, some of them two years
+    in the making. Every gallery you've kept dry since May is under that ridge, full to the end.
+
+    Then they go.
+
+    It isn't a noise. It's the ground being taken out from under you and given back. The dugout
+    lifts and drops and lifts. Dust comes out of every crack in the timber. Up above, through the
+    shaft, a light, red, then white, all along the ridge, as if the sun's come up wrong. And then
+    the noise arrives, after, rolling, like every pit heap in Northumberland falling at once.
+
+    They'll say later that they heard it in England.
+  choices:
+    - id: up
+      text: Go up the shaft and look.
+      effects: [ { set: flag.p17_saw_messines } ]
+      text_after: |
+        You climb out into the dawn. The ridge is gone, and where it was there's smoke and dust going
+        up into the sky, and the guns have started behind you, all of them. Evans comes up beside you
+        and stands there with his mouth open, and says something in Welsh, and you'll never know
+        what, and you don't need to.
+      next: "@return"
+    - id: down
+      text: Stay below. You don't want to see it.
+      text_after: |
+        You stay in the dugout with your back against the timber, feeling it shake as the guns open
+        up, and you think of the Germans in their galleries, the ones you've heard through the clay
+        for a month, laughing, coughing, singing. You don't go up. Mott brings you down a tin of tea.
+      next: "@return"
+
+- id: v17p_evans
+  chapter: front
+  kind: pool
+  pool: front_1917_pit
+  once: true
+  requires: [ "war.tour >= 27", war.transferred ]
+  title: Singing
+  text: |
+    Autumn, and the rain, and the company building deep dugouts behind the line in Flanders, forty
+    feet down in the clay, for headquarters that will move in when they're done and never say thank
+    you.
+
+    At the end of a shift, in the dugout, Evans starts to sing. Not loud. In Welsh, a hymn, slow,
+    and the dugout goes quiet. His voice fills the timbered dark the way it fills a gallery when he
+    forgets to whisper, and the drips from the roof keep time.
+
+    [if flag.p17_lost_pascoe]Pascoe used to hum along. Nobody does now.[/if][if flag.p17_saved_pascoe]Pascoe, on his bunk, still coughing, hums along under his breath.[/if]
+  choices:
+    - id: join
+      text: Join in. You know the tune from chapel, if not the words.
+      text_after: |
+        You know the tune. Half of Blackhaugh chapel sings it in English. You come in on the second
+        verse in English, and Evans doesn't stop, and the two languages go on together in the dark
+        and it sounds right.
+      next: "@return"
+    - id: listen
+      text: Lie on your bunk and listen.
+      text_after: |
+        You lie and listen with your eyes shut. When he stops, nobody says anything, and Mott, who
+        has never been to chapel in his life, says "Again," and Evans sings it again.
+      next: "@return"
+
+# ---- both roads -------------------------------------------------------------------------------
+
+- id: v17p_father
+  chapter: front
+  kind: pool
+  pool: front_1917_pit
+  once: true
+  weight: 200
+  requires: [ "war.tour >= 26" ]
+  on_enter: [ { set: flag.p17_father_letter } ]
+  title: A letter from home
+  text: |
+    It's in your mother's hand, but the pencil's gone soft and wandering, as if she wrote it on her
+    knee.
+
+    "Dear Son, I do not know how to put this so I will just put it. Your father passed away on
+    Thursday night. It was his chest. He was in his chair and he said he was tired and he would go
+    up, and I went up after and he had gone. He did not suffer the doctor says.
+
+    The lodge sent the banner and the band and they walked him up to the chapel, the whole row came
+    out. The manager sent a wreath. Your father would have had something to say about that.
+
+    I am all right. Mary is with me. Do not worry about me. Keep yourself safe, that is all I want
+    now. Your loving Mother."
+  choices:
+    - id: ask_leave
+      text: Ask for compassionate leave.
+      effects: [ { set: flag.p17_asked_leave } ]
+      text_after: |
+        [if war.transferred]Your officer hears you out, and he's sorry, and he means it. There's no leave. There's no leave for anybody this summer.[else]The company officer hears you out in his dugout, and he's sorry, and he means it. There's no leave. Not this summer. Not for anybody.[/if] You knew. You had to ask.
+      next: "@return"
+    - id: write
+      text: Write to your mother tonight.
+      text_after: |
+        You write it three times. In the end you put that you're proud of him, and that he was the
+        best man at the face in Blackhaugh, and that you'll be home at Christmas, and you'll go up
+        to the chapel with her. You don't know if that last part is true. You put it anyway.
+      next: "@return"
+
+# ---- the 1917 leave ---------------------------------------------------------------------------
+
+- id: l_pit_1917
+  chapter: front
+  title: Home on leave
+  text: |
+    [if flag.p17_father_letter]The chair's still by the fire. Nobody sits in it. Your mother's put his pipe on the mantel and his cap on the hook by the door, where they always were, and she doesn't move them.[else]Nobody wrote it to you. Your mother couldn't, and the letter she tried went somewhere in France and never found you. She tells you on the step, before you've put your kit down. Your father's dead since the summer. His chest. The chair's still by the fire.[/if]
+
+    You go up to the chapel on the Sunday, the way you said you would[if !flag.p17_father_letter], though you never said it[/if], and stand at the grave with her. It's raw yet. The lodge has put a stone, plain, with his name and the pit and the years. Your mother holds your arm and doesn't cry, and you know she's done her crying, and that she's done it alone.
+
+    [if flag.p17_asked_leave]The company officer wrote to her himself, in the summer, to say he was sorry he couldn't send you home. She's kept it with your father's papers.[/if]
+
+    The heap's still burning on the skyline. The buzzer still goes. Your sister Mary's at the munitions works in Newcastle now, and comes home yellow, from the powder, and laughs about it.
+
+    [if !war.transferred && flag.p17_dug_frost]At the club they've heard, from somebody's letter, that the Blackhaugh lads dug a trench through frozen ground in one night that the Hull company couldn't have dug in a week. By the time it reaches you it's a mile long.[/if][if war.transferred && flag.p17_learned_kick] Some nights you're on Mott's cross again, kicking the clay, and you wake with your legs going.[/if][if war.transferred && flag.p17_saw_messines]You tell nobody about Messines. Then in the club an old pitman says they heard a bang in the night in June, the windows rattled, they thought it was the pit, and you have to go outside.[/if][if war.transferred && flag.p17_saved_pascoe] A letter's come for you from Camborne, from Pascoe's wife. You don't open it till you're on the train.[/if][if war.transferred && flag.p17_lost_pascoe] You write to Camborne, to Pascoe's wife, from your mother's kitchen table. It takes all evening.[/if]
+
+    [if war.mate1 && flag.p17_blue_hen]Old Mr Robson's had a letter from the army loft. The blue hen's been flying messages. He keeps the letter in the cree, pinned up over the nesting boxes.[/if][if !war.mate1]The Robsons' cree is empty and the door's off. Somebody's had it for firewood.[/if]
+
+    [if war.mate2 && flag.p17_toasted_russia]Bell's father asks if Jim's still talking about Russia. You tell him he's never stopped. "Good," the old man says. "Good lad."[/if][if !war.mate2]On the board for the lodge's dead at the Miners' Hall, Jim Bell's name is spelt right and his age is wrong, and nobody's put it straight. He'd have had something to say.[/if]
+
+    [if war.mate3 && flag.p17_sat_with_charlton]Mrs Charlton says George wrote about a grey horse. Just that, a page about a grey horse. She doesn't understand why he'd write a whole page about a horse, and you don't explain.[/if][if !war.mate3]Down at the pit stables somebody's tied a black ribbon on Captain's stall, and nobody's taken it off.[/if]
+
+    {offers_line}
+  choices:
+    - id: back
+      text: Go back on the tenth day. The battalion promotes the men who return.
+      effects: [ { war: back } ]
+      next: "@war"
+    - id: commission
+      text: Go before the board for a commission.
+      visible_if: war.commission
+      effects: [ { war: commission } ]
+      next: "@war"
+    - id: posting_0
+      text: "Take it: {offer0}. Your war ends here."
+      visible_if: "war.offers >= 1"
+      effects: [ { war: "posting:0" } ]
+      next: "@war"
+    - id: posting_1
+      text: "Take it: {offer1}. Your war ends here."
+      visible_if: "war.offers >= 2"
+      effects: [ { war: "posting:1" } ]
+      next: "@war"
+    - id: posting_2
+      text: "Take it: {offer2}. Your war ends here."
+      visible_if: "war.offers >= 3"
+      effects: [ { war: "posting:2" } ]
+      next: "@war"

@@ -113,9 +113,9 @@ describe('the story leads', () => {
       expect(p, `year ${1914 + y}: story ${(100 * p).toFixed(1)}%`).toBeLessThan(0.7);
     }
   }, 120_000);
-  it('the pit town\'s written years (1915-1916) are about half story too', () => {
+  it('the pit town\'s written years (1915-1917) are about half story too', () => {
     const r = share(40, 'pit');
-    for (const y of [1, 2]) {
+    for (const y of [1, 2, 3]) {
       const c = r.byYear[y]!;
       const p = c.story / (c.story + c.generic);
       expect(p, `pit ${1914 + y}: story ${(100 * p).toFixed(1)}%`).toBeGreaterThan(0.44);

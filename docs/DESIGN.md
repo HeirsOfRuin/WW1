@@ -494,6 +494,9 @@ its own Loos, the leave, the tunnellers' offer, and three friends' deaths. Pit 1
 the great mine) or with the tunnellers (who fired it). Events are tagged by
 `war.transferred`. Pit 1916 story share went from 29.2% to 58.5%.
 
+**The pit town, 1917 (FRAME-PIT-1917.md).** Two roads, with the mill's battles shared by both
+towns and Messines as the tunneller's event. Pit 1917 story share went from 29.4% to 56.6%.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.

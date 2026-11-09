@@ -12,7 +12,7 @@
 
     You kneel with him till somebody pulls you up. His hands are black with the earth, the way they always were, and you can't stop looking at them.[else][if war.transferred]Word comes over from the battalion. Robson. Killed {fallen_where}.[/if][if !war.transferred]You hear it at the ration dump, in the dark. Robson. Killed {fallen_where}.[/if]
 
-    You were marras at the face two years. You knew where he'd be in the dark by the sound of his pick. [if !war.transferred]You stand there with the bread under your arm and listen for it.[/if][if war.transferred]You'll listen for it in the chalk tonight, and every night.[/if][/if]
+    You were marras at the face two years. You knew where he'd be in the dark by the sound of his pick. [if !war.transferred]You stand there with the bread under your arm and listen for it.[/if][if war.transferred]You'll listen for it underground tonight, and every night.[/if][/if]
 
     At the end of the rows his da will be out at the cree in the morning, letting the birds go.
   choices:
