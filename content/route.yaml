@@ -4,6 +4,7 @@
 switch:
   - { if: "war.ending == killed", go: e_killed }
   - { if: ["war.ending == armistice", "start == mill"], go: e_armistice_mill }
+  - { if: ["war.ending == armistice", "start == pit"], go: e_armistice_pit }
   - { if: "war.ending == armistice", go: e_armistice }
   - { if: "war.ending == posting", go: e_posting }
   - { if: "war.ending == captured", go: e_captured }
@@ -89,6 +90,8 @@ switch:
   # the pit town, 1917 (content/scenes/war/1917-pit.yaml; docs/FRAME-PIT-1917.md); its battles are the mill's
   - { if: ["war.pending == tour", "war.stage == 3", "start == pit"], go: { pool: front_1917_pit, count: 1, then: w_tour } }
   - { if: ["war.pending == leave", "war.stage == 3", "start == pit"], go: l_pit_1917 }
+  # the pit town, 1918 (content/scenes/war/1918-pit.yaml; docs/FRAME-PIT-1918.md); its battles are the mill's
+  - { if: ["war.pending == tour", "war.stage == 4", "start == pit"], go: { pool: front_1918_pit, count: 1, then: w_tour } }
   # authored moments (calibration, the mill town 1915)
   # front-line events: at the start of each tour, one from the pool if one is due;
   # each is once, and requires says when (an empty draw goes straight to the duty)
@@ -119,16 +122,16 @@ switch:
   - { if: ["war.pending == leave", "war.stage == 3", "start == mill"], go: l_mill_1917 }
   # the mill town, 1918 (content/scenes/war/1918-mill.yaml; docs/FRAME-1918.md)
   - { if: ["war.pending == tour", "war.stage == 4", "start == mill"], go: { pool: front_1918_mill, count: 1, then: w_tour } }
-  - { if: ["war.battle == spring_offensive", "war.phase == 1", "start == mill"], go: b_spring_1 }
-  - { if: ["war.battle == spring_offensive", "war.phase == 2", "start == mill"], go: b_spring_2 }
-  - { if: ["war.battle == spring_offensive", "war.phase == 3", "start == mill"], go: b_spring_3 }
-  - { if: ["war.battle == spring_offensive", "war.phase == 4", "start == mill"], go: b_spring_4 }
-  - { if: ["war.battle == hundred_days_august", "war.phase == 1", "start == mill"], go: b_amiens_1 }
-  - { if: ["war.battle == hundred_days_august", "war.phase == 2", "start == mill"], go: b_amiens_2 }
-  - { if: ["war.battle == hundred_days_august", "war.phase == 3", "start == mill"], go: b_amiens_3 }
-  - { if: ["war.battle == hundred_days_october", "war.phase == 1", "start == mill"], go: b_oct_1 }
-  - { if: ["war.battle == hundred_days_october", "war.phase == 2", "start == mill"], go: b_oct_2 }
-  - { if: ["war.battle == hundred_days_october", "war.phase == 3", "start == mill"], go: b_oct_3 }
+  - { if: ["war.battle == spring_offensive", "war.phase == 1", { any: ["start == mill", "start == pit"] }], go: b_spring_1 }
+  - { if: ["war.battle == spring_offensive", "war.phase == 2", { any: ["start == mill", "start == pit"] }], go: b_spring_2 }
+  - { if: ["war.battle == spring_offensive", "war.phase == 3", { any: ["start == mill", "start == pit"] }], go: b_spring_3 }
+  - { if: ["war.battle == spring_offensive", "war.phase == 4", { any: ["start == mill", "start == pit"] }], go: b_spring_4 }
+  - { if: ["war.battle == hundred_days_august", "war.phase == 1", { any: ["start == mill", "start == pit"] }], go: b_amiens_1 }
+  - { if: ["war.battle == hundred_days_august", "war.phase == 2", { any: ["start == mill", "start == pit"] }], go: b_amiens_2 }
+  - { if: ["war.battle == hundred_days_august", "war.phase == 3", { any: ["start == mill", "start == pit"] }], go: b_amiens_3 }
+  - { if: ["war.battle == hundred_days_october", "war.phase == 1", { any: ["start == mill", "start == pit"] }], go: b_oct_1 }
+  - { if: ["war.battle == hundred_days_october", "war.phase == 2", { any: ["start == mill", "start == pit"] }], go: b_oct_2 }
+  - { if: ["war.battle == hundred_days_october", "war.phase == 3", { any: ["start == mill", "start == pit"] }], go: b_oct_3 }
   # the war's questions
   - { if: "war.pending == tunnel", go: w_tunnel }
   - { if: "war.pending == tour", go: w_tour }

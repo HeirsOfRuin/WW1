@@ -101,3 +101,15 @@ p17_learned_kick: { description: "Learned clay-kicking from Mott under Messines"
 p17_saw_messines: { description: "Climbed the shaft to see the Messines ridge go up" }
 p17_father_letter: { description: "The letter telling him his father died has reached him" }
 p17_asked_leave: { description: "Asked for compassionate leave for his father; refused" }
+# The pit town, 1918 (content/scenes/war/1918-pit.yaml); dug_deep is shared with the mill
+p18_ribbed_bell: { description: "Saluted Lance-Corporal Bell" }
+p18_helped_bell: { description: "Did the new lads' feet with Bell" }
+p18_showed_todd: { description: "Showed Joe Todd from the comb-out the ropes" }
+p18_not_going_down: { description: "Told Robson he would not go back down the pit after the war" }
+p18_going_down: { description: "Told Robson he would go back down the pit" }
+p18_gave_mule: { description: "Helped Charlton leave a lame mule with a French farmer" }
+p18_carried_mott: { description: "Carried Mott to the aid post with his Blighty one" }
+p18_traced_wire: { description: "Traced and cut the booby-trap wire under the gramophone" }
+p18_reported: { description: "Told the officer what the ground was saying before 21 March" }
+p18_wrote_after: { description: "Wrote his mother about after the war" }
+p18_walked_crater: { description: "Walked round the rim of the La Boisselle crater in August 1918" }

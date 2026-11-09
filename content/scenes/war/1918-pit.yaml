@@ -1,0 +1,411 @@
+# The pit town, 1918 (docs/FRAME-PIT-1918.md). Two roads (war.transferred). The battles are the
+# mill's (content/scenes/war/1918-mill.yaml): one battalion, one battle. Stage 4 is tours 30 to
+# 39; the Spring Offensive is tour 32, Amiens 36, October 39, then the Armistice.
+
+# ---- the section's road -----------------------------------------------------------------------
+
+- id: v18p_ashington
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  weight: 100
+  requires: [ "war.tour == 30", { not: war.transferred } ]
+  title: The new posts
+  text: |
+    January, and the battalion's moved south into a quiet stretch the French have handed over.
+    The new idea is posts, little islands of men in the chalk a hundred yards apart, with
+    nothing between them but frost.
+
+    And new men. A Tyneside battalion has been broken up, there aren't enough men to go round any
+    more, and sixty of them come into the company in one night. Pitmen, most of them, from
+    Ashington and Bedlington and Choppington, with the same blue marks on their foreheads as you,
+    and they stand in the snow with their kit at their feet and won't look at anybody, because
+    their battalion's gone, and their pals with it.
+
+    The ground in the posts is frozen. The officer wants them deepened.
+  choices:
+    - id: dig_deep
+      text: Get the Ashington men on the picks with you. Dig the post deep.
+      effects: [ { set: flag.dug_deep } ]
+      text_after: |
+        You put them on the picks beside the Blackhaugh lads and by the end of the first shift
+        they're talking, about seams, about managers, about whose pit has the worst roof. By
+        February there's a dugout under the post, twenty steps down, timbered the way you'd timber
+        at home, and the Ashington men did half of it.
+      next: "@return"
+    - id: leave_them
+      text: Leave them be. Let them grieve their own battalion.
+      text_after: |
+        You leave them be. They keep to themselves in the next post, and sing at night, low, their
+        own songs, and after a week one of them comes over for a light and stays an hour.
+      next: "@return"
+
+- id: v18p_bell_corporal
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  requires: [ "war.tour >= 33", { not: war.transferred }, war.mate2 ]
+  title: Lance-Corporal Bell
+  text: |
+    They've given Bell a stripe. Jim Bell, who argued with every sergeant in France, who read the
+    Herald in the beer vat, who drank to the Russians. A lance-corporal.
+
+    "They've run out of men," he says. "That's all it is. They've run clean out." But he's sewn it
+    on straight, you notice, and he's the first up at stand-to now, and he goes round the new lads
+    at night making sure their feet are dry, and he gives them his own socks when theirs are wet.
+
+    "Somebody has to look after them," he says, when he sees you watching. "God knows nobody else
+    will."
+  choices:
+    - id: rib
+      text: Call him Corporal, and salute.
+      effects: [ { set: flag.p18_ribbed_bell } ]
+      text_after: |
+        He tells you exactly where to put your salute, in words the Herald wouldn't print. Then he
+        laughs, properly, the first time since the spring. "Corporal," he says, trying it. "Me da'll
+        never live it down."
+      next: "@return"
+    - id: help
+      text: Help him with the new lads. Say nothing about the stripe.
+      effects: [ { set: flag.p18_helped_bell } ]
+      text_after: |
+        You do the feet with him, the two of you going along the posts in the dark with a tin of
+        whale oil and a sack of dry socks. He talks the whole time, about the war, about the owners,
+        about after. You let him. Somebody has to listen.
+      next: "@return"
+
+- id: v18p_combout
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  weight: 100
+  requires: [ "war.tour == 33", { not: war.transferred } ]
+  title: The comb-out
+  text: |
+    April, and after March the battalion is half new faces. Some of the faces you know. The army's
+    combed out the pits for men, the young starred men they kept back as war work, and here they
+    are in a draft from the depot: lads you went to school with, who stayed at the face when you
+    went, in khaki now, with new boots.
+
+    Joe Todd from the bottom row, who was a shot-firer, comes up to you at the cookhouse. He went
+    down the pit the same week as you. He stayed. He looks at you the way you'd look at a man who'd
+    come up out of a fall.
+
+    "They said you'd be here," he says. "I didn't think you would be. Still."
+  choices:
+    - id: show
+      text: Show him the ropes. All of it.
+      effects: [ { set: flag.p18_showed_todd } ]
+      text_after: |
+        You show him where to stand, when to duck, how to keep his feet, the sound of the shells
+        that matter. He listens the way he'd listen to a deputy. At the end of it he says, "You've
+        changed." You don't know what to say to that, so you say nowt.
+      next: "@return"
+    - id: cold
+      text: Leave him to the sergeant. He stayed home.
+      text_after: |
+        You leave him to it. It isn't fair, and you know it isn't. He didn't choose to be starred any
+        more than you chose to be eighteen. But you can't make yourself, not yet.
+      next: "@return"
+
+- id: v18p_robson
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  requires: [ "war.tour >= 34", { not: war.transferred }, war.mate1 ]
+  title: After
+  text: |
+    A warm evening behind the line, the two of you sat on a bank with your backs to a hedge,
+    and swallows going over. Robson's quiet, the way he always is. Then he says the longest thing
+    you've ever heard him say.
+
+    "I'm not going back down. After. If there's an after. I've been under the ground in France
+    four year one way and another, and I've been under it at home since I was twelve, and I'm not
+    going back down." He's pulling at the grass. "Me da's got the birds. I'll get a bit of a
+    smallholding. Hens. Birds. I'll work in the light."
+
+    He looks at you. "What about you?"
+  choices:
+    - id: not_me_either
+      text: Tell him you're not going back down either.
+      effects: [ { set: flag.p18_not_going_down } ]
+      text_after: |
+        "Good," Robson says. "Good." He goes back to pulling at the grass. After a while: "You'll
+        have to come and help with the hens, then. You're no use for owt else." It's the nearest
+        he's ever come to a joke.
+      next: "@return"
+    - id: going_back
+      text: Tell him you'll go back. It's what you know.
+      effects: [ { set: flag.p18_going_down } ]
+      text_after: |
+        He nods. He doesn't argue. "Aye," he says. "Your da did." After a while he says, "I'll keep
+        you a pair of birds. You can fly them from the pit gates," and that's the end of it.
+      next: "@return"
+
+- id: v18p_charlton
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  requires: [ "war.tour >= 37", { not: war.transferred }, war.mate3 ]
+  title: The farmer
+  text: |
+    Going forward through villages the Germans have held since 1914, and in one of them an old
+    farmer standing in his yard with nothing in it. No cow. No pig. No horse. The Germans took the
+    lot. He's stood looking at the empty stalls.
+
+    Charlton's with the transport, coming up the road behind the battalion, and he sees the old
+    man, and stops. He's got a spare mule, lame in the off fore, that the transport officer's
+    marked down to be shot.
+  choices:
+    - id: give
+      text: Help Charlton leave the mule in the old man's yard.
+      effects: [ { set: flag.p18_gave_mule } ]
+      text_after: |
+        Charlton leads her in and ties her in an empty stall and shows the old man the bad foot,
+        in signs, and how to poultice it, and the old man takes hold of Charlton's face in both his
+        hands and kisses him on the forehead. The transport officer is told she died. Charlton
+        whistles all the way to the next village.
+      next: "@return"
+    - id: no
+      text: Tell him he'll be on a charge. Keep going.
+      text_after: |
+        Charlton keeps going. He looks back once at the old man in his empty yard, and the mule
+        limps along behind the limber, and that night the farrier shoots her, and Charlton doesn't
+        eat.
+      next: "@return"
+
+# ---- the tunneller's road ---------------------------------------------------------------------
+
+- id: v18p_dugouts
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  weight: 100
+  requires: [ "war.tour == 30", war.transferred ]
+  title: Dugouts
+  text: |
+    January, and the mining war's over, near enough. Nobody's digging under anybody's line now.
+    The company's put to dugouts for headquarters, and subways, and bridges, and once, for a
+    week, a bath-house for a general.
+
+    [if !flag.p17_lost_pascoe]Pascoe says it's the first time in thirty year he's dug a hole that nobody wanted to blow up.[/if][if flag.p17_lost_pascoe]Evans says it's a waste of good miners. He says it every day, the way Pascoe used to say his prayers.[/if] Mott says he'd sooner have the Tube.
+
+    And the officer wants the dugout under the forward post sunk deep, in case they come in the
+    spring.
+  choices:
+    - id: deep
+      text: Sink it deep. Twenty steps at least.
+      effects: [ { set: flag.dug_deep } ]
+      text_after: |
+        Twenty steps, timbered like a shaft, the way your father taught you to set a prop. You put
+        the last frame in on the first of February and stand at the bottom looking up at the square
+        of grey sky, and think, that'll hold anything.
+      next: "@return"
+    - id: enough
+      text: Dig it to the book and no more.
+      text_after: |
+        To the book, and the book's not bad. You finish a week early and get three days in a barn
+        with straw and a stove, and Mott teaches the crew a card game from the docks that nobody
+        else in France has heard of.
+      next: "@return"
+
+- id: v18p_mott
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  requires: [ "war.tour >= 33", war.transferred ]
+  title: Mott
+  text: |
+    A shell on the dump at the shaft head, and Mott's in the way of it. Not bad. His leg, below the
+    knee, a clean one. A Blighty one. He's sat on the duckboards grinning white while you put the
+    dressing on.
+
+    "Blighty," he says. "Blighty, Geordie. I'll be on the Tube by Sunday." Then he stops grinning
+    and grips your sleeve. "You look after Evans. He's soft, under all that singing."
+  choices:
+    - id: carry
+      text: Carry him down to the aid post yourself.
+      effects: [ { set: flag.p18_carried_mott } ]
+      text_after: |
+        Two miles on your back, him talking the whole way, about the Tube, about his mum's pie shop
+        in Bermondsey, about a girl. At the aid post he shakes your hand like a man at a station.
+        "Come and see the Tube," he says. "I'll show you every yard of it."
+      next: "@return"
+    - id: stretcher
+      text: Get him onto a stretcher and get back to the shaft.
+      text_after: |
+        The bearers take him. He waves from the stretcher like a lad on a charabanc. You go back
+        down, and Evans is at the face on his own, not singing, and you take Mott's place beside
+        him.
+      next: "@return"
+
+- id: v18p_traps
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  requires: [ "war.tour >= 37", war.transferred ]
+  title: Traps
+  text: |
+    Going forward, and the Germans have left their dugouts full of presents. A helmet on a table
+    with a wire under it. A loose duckboard on the stairs. A stove that will go up when it's lit.
+    And worse: charges buried under crossroads and bridges with clocks on them, acid eating
+    through a copper wire, set to go days after the last German has gone.
+
+    The infantry won't go into a dugout now till the tunnellers have been through it. So you go
+    first. Down the steps with a candle, slow, looking at everything, the way you'd go into an old
+    working that's been shut up for years, feeling for the wire before you see it.
+
+    At the bottom of this one there's a gramophone on a box, and a record on it, and the handle
+    wound.
+  choices:
+    - id: trace
+      text: Leave it. Trace the wire first, however long it takes.
+      effects: [ { set: flag.p18_traced_wire } ]
+      text_after: |
+        An hour on your knees with the candle. There's a wire, fine as cotton, from under the
+        gramophone down into the floor, to enough explosive to bring down the dugout and everybody
+        in it. You cut it. Then, because nobody's looking, you play the record. It's a waltz, and
+        it's scratched, and it goes round and round in the dugout under the ground.
+      next: "@return"
+    - id: call
+      text: Get out and call up the officer. It's his decision.
+      text_after: |
+        The officer comes, and looks, and has the whole dugout blown in with a charge from the top,
+        gramophone and all. Probably the right thing. You hear the record in your head for a week,
+        a tune you never heard.
+      next: "@return"
+
+# ---- both roads -------------------------------------------------------------------------------
+
+- id: v18p_waiting
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  weight: 200
+  requires: [ "war.tour == 31" ]
+  title: The ground
+  text: |
+    February. They're coming. Everybody knows it. The deserters say it, the airmen say it.
+
+    [if war.transferred]Down in your dugout you lie with your ear to the floor at night, the way you'd listen to a roof, and the ground's alive with it. Not picks: wheels, thousands of them, and hooves, and the deep thud of guns being dug in, miles off, coming through the chalk like through a drum.[/if][if !war.transferred && war.mate1]Robson's on his knees on the floor of the post with his ear to the chalk, the way he was the first night in 1915. He stays there a long time. "Wheels," he says. "Thousands. And guns, being dug in. It's coming through the ground like a drum."[/if][if !war.transferred && !war.mate1]You put your ear to the floor of the post at night, the way Robson did the first night in 1915. Wheels, thousands of them, and the thud of guns being dug in, miles off, coming through the chalk like through a drum.[/if]
+  choices:
+    - id: report
+      text: Tell the officer what the ground's saying.
+      effects: [ { set: flag.p18_reported } ]
+      text_after: |
+        He listens. He writes it down. "Everybody's hearing it," he says. "Everybody knows." He looks
+        at you. "Still. Thank you. [if flag.pit_reported]You're the one who heard them in 1915, aren't you? Somebody told me.[/if][if !flag.pit_reported]Pitmen hear things.[/if]"
+      next: "@return"
+    - id: sleep
+      text: Lie and listen. There's nothing anybody can do.
+      text_after: |
+        You lie and listen till you can't tell it from your own heart. Then you sleep, and dream of
+        the cage going down, and the roof talking, and your father saying it's only the roof.
+      next: "@return"
+
+- id: v18p_letter
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  weight: 200
+  requires: [ "war.tour == 35" ]
+  title: A letter from home
+  text: |
+    "Dear Son, just a few lines. I am keeping well. Mary is still at the works in Newcastle and
+    comes home yellow and says the girls call each other canaries and laugh about it. I do not
+    think it is funny.
+
+    They have combed the pit again and took the young starred men. The manager has took women on
+    at bank, on the screens, where your father was. I went to look. I could not stop.
+
+    [if war.transferred]Your money still comes. I have put most of it in the Store. You will want something when you come home, for a start, whatever you do.[/if][if !war.transferred]Mrs Todd says her Joe is with you now, and she is glad of it, she says it is the only thing that lets her sleep.[/if]
+
+    I sit in your father's chair now of a night. I could not, at first. Your loving Mother."
+  choices:
+    - id: write
+      text: Write back. Tell her about after.
+      effects: [ { set: flag.p18_wrote_after } ]
+      text_after: |
+        You tell her about after: [if flag.p18_not_going_down]that you'll not go back down, that you'll find something in the light, that Tommy Robson's going to keep hens and you'll help[/if][if flag.p18_going_down]that you'll go back down, to the face, your father's seam[/if][if !flag.p18_not_going_down && !flag.p18_going_down]that you don't know yet, that you'll know when you're home, that there'll be time[/if]. You tell her to keep sitting in the chair.
+      next: "@return"
+    - id: keep
+      text: Keep it with the others.
+      text_after: |
+        It goes in your breast pocket with the rest. Your father's letter's in there too, the one
+        he never wrote, the one you keep expecting.
+      next: "@return"
+
+- id: v18p_crater
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  weight: 200
+  requires: [ "war.tour == 37" ]
+  title: The Glory Hole
+  text: |
+    The end of August, going forward, and the road goes past La Boisselle. Past the crater.
+
+    It's grassed over at the edges now. Poppies on the lip. A hundred yards across, and the white
+    chalk still showing on the steep sides where nothing will grow, and at the bottom a pool of
+    green water. There are crosses round the rim, little wooden ones, and some have names you know.
+
+    [if war.transferred]You made it. Two years ago, with Evans and Pascoe and Mott, tin by tin, in your socks, in the dark.[/if][if war.transferred && flag.p16_chalked_tin] Somewhere in all this, your name in chalk on a syrup tin.[/if][if !war.transferred]You stood there that morning and watched it go up, higher than the pit heap, higher than anything. You were in it all that afternoon.[/if][if !war.transferred && flag.p16_birds] It's where the bird went up from, round once, round twice, and west.[/if]
+  choices:
+    - id: walk
+      text: Fall out for a minute. Walk round the rim.
+      effects: [ { set: flag.p18_walked_crater } ]
+      text_after: |
+        The sergeant lets you. You walk round the lip slowly, reading the crosses. [if !war.mate1]You look for Robson's name, and don't know if you want to find it.[/if][if war.mate1]Robson walks round with you, and doesn't say anything, and stops at one cross, and stays there till the sergeant shouts.[/if] At the far side there's a lark going up, and you stand and listen to it, and then you go after the column.
+      next: "@return"
+    - id: march
+      text: Keep marching. Don't look.
+      text_after: |
+        You keep your eyes on the pack in front. You can feel it there on your left all the way
+        past, the way you can feel a pit shaft in the dark without seeing it.
+      next: "@return"
+
+# ---- the Armistice, for the pit town -------------------------------------------------------------
+
+- id: e_armistice_pit
+  chapter: end
+  kind: ending
+  ending: armistice
+  title: The Armistice
+  text: |
+    {ending_line}
+
+    It comes up in the morning on a message form. Hostilities will cease at 1100 hours today.
+    Nobody believes it, and then everybody does.
+
+    The guns go on to the last minute. Then eleven. And then a quiet like the quiet at the face
+    when the cutter stops and the dust settles, a quiet you can hear, and in it, somebody's
+    laughing, and somebody's crying, and a wood pigeon.
+
+    [if war.transferred]Evans sings, in Welsh, and this time nobody tells him to whisper.[/if][if war.transferred && flag.p18_carried_mott] Mott's on the Tube by now. He wrote you twice, from Bermondsey, on pie-shop paper.[/if][if war.transferred && flag.p17_saved_pascoe] Pascoe's somewhere behind the line, coughing. He'll go home to Camborne.[/if][if war.transferred && flag.p17_lost_pascoe] You think of Pascoe, who never raised his voice.[/if]
+
+    [if war.mate1]Robson sits down at the roadside and takes off his helmet and lifts his face to the sky, and keeps it there.[/if][if war.mate1 && flag.p18_not_going_down] "Hens," he says, to nobody. "Birds. In the light."[/if][if !war.mate1]Robson isn't here to hear it. He'd have had his ear to the ground.[/if][if war.mate2] Lance-Corporal Bell gets the section in a ring and makes a speech, about the soldiers and the workmen, about after, about the owners, and for once nobody tells him to shut his mouth.[/if][if war.mate2 && flag.p18_ribbed_bell] He still won't let you salute him.[/if][if war.mate2 && flag.p18_helped_bell] After, he tells you he'd never have managed the feet on his own, and it's the only time he ever thanks anybody for anything.[/if][if !war.mate2] Jim Bell would have had something to say about it, and it would have taken all afternoon.[/if][if war.mate3] Charlton's down with the transport, and you find him in the horse lines with his face against a mule's neck.[/if][if war.mate3 && flag.p18_gave_mule] "There's a mule in a French farmer's yard," he says, "that's never going to hear a gun again."[/if][if !war.mate3] Somewhere at home there's a black ribbon on a pony's stall.[/if]
+
+    [if !war.transferred && flag.p18_showed_todd]Joe Todd from the bottom row finds you in the road and shakes your hand, and doesn't say why, and doesn't need to.[/if][if war.transferred && flag.p18_traced_wire]Some nights for years you'll hear a scratched waltz going round under the ground.[/if][if flag.p18_walked_crater] Some nights you're on the rim of the crater again, reading the crosses.[/if]
+
+    You don't get home till the spring. When you do, the heap's still burning on the skyline, and at
+    eleven on the day, your mother says, the pit buzzer went and didn't stop, five minutes of it, and
+    the whole village came out into the rows, and nobody knew what to do, so they went to chapel.
+
+    Your father's chair is by the fire. Your mother sits in it now.[if flag.p18_wrote_after] Your letter about after is on the mantel, behind the tea caddy, where his pay notes used to go.[/if]
+
+    [if flag.p18_not_going_down]You don't go back down. You told Robson you wouldn't, and you don't. You stand at the pit gates on the first Monday, and watch the cage go, and walk away up the road in the light.[/if][if flag.p18_going_down]On the first Monday you go back down, to your father's seam. The cage drops and the dark comes up round you, still dark, the dark that doesn't move, and you're surprised how glad you are of it.[/if][if !flag.p18_not_going_down && !flag.p18_going_down]On the first Monday you walk to the pit gates and stand there. The cage is winding. You don't know yet. You stand there a long time.[/if]
+
+    You are {age} years old and {rank_a}.
+
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.

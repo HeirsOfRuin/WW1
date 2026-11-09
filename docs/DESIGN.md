@@ -497,6 +497,11 @@ the great mine) or with the tunnellers (who fired it). Events are tagged by
 **The pit town, 1917 (FRAME-PIT-1917.md).** Two roads, with the mill's battles shared by both
 towns and Messines as the tunneller's event. Pit 1917 story share went from 29.4% to 56.6%.
 
+**The pit town, 1918 (FRAME-PIT-1918.md).** The pit is written through. Its 1918 shares the
+mill's battles and has its own Armistice ending. Pit 1918 story share went from 38.9% to 70.2%:
+51% for a man who stays with the section, 70% for a tunneller, whose war layer has fewer
+generic missions (an open question for the author).
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.
