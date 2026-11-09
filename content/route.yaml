@@ -20,6 +20,9 @@ switch:
   - { if: ["war.fallen == 1", "start == pit"], go: x_fallen_robson }
   - { if: ["war.fallen == 2", "start == pit"], go: x_fallen_bell }
   - { if: ["war.fallen == 3", "start == pit"], go: x_fallen_charlton }
+  - { if: ["war.fallen == 1", "start == farm"], go: x_fallen_cottle }
+  - { if: ["war.fallen == 2", "start == farm"], go: x_fallen_pearce }
+  - { if: ["war.fallen == 3", "start == farm"], go: x_fallen_yeo }
   - { if: "war.fallen >= 1", go: x_fallen }
   # how a sortie went, then its next step (content/scenes/war/sorties.yaml)
   - { if: ["war.result != none", "war.result_key == raid"], go: x_raid_done }
@@ -92,6 +95,12 @@ switch:
   - { if: ["war.pending == leave", "war.stage == 3", "start == pit"], go: l_pit_1917 }
   # the pit town, 1918 (content/scenes/war/1918-pit.yaml; docs/FRAME-PIT-1918.md); its battles are the mill's
   - { if: ["war.pending == tour", "war.stage == 4", "start == pit"], go: { pool: front_1918_pit, count: 1, then: w_tour } }
+  # the farm town, 1915 (content/scenes/war/1915-farm.yaml; docs/FRAME-FARM-1915.md): above the mill's Loos
+  - { if: ["war.pending == tour", "war.stage == 1", "start == farm"], go: { pool: front_1915_farm, count: 1, then: w_tour } }
+  - { if: ["war.battle == loos", "war.phase == 1", "start == farm"], go: b_loos_farm_advance }
+  - { if: ["war.battle == loos", "war.phase == 2", "start == farm"], go: b_loos_farm_trench }
+  - { if: ["war.battle == loos", "war.phase == 3", "start == farm"], go: b_loos_farm_hold }
+  - { if: ["war.pending == leave", "war.stage == 1", "start == farm"], go: l_farm_1915 }
   # authored moments (calibration, the mill town 1915)
   # front-line events: at the start of each tour, one from the pool if one is due;
   # each is once, and requires says when (an empty draw goes straight to the duty)

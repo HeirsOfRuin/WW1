@@ -1,0 +1,477 @@
+# The farm town, 1915 (docs/FRAME-FARM-1915.md), written to the voice in content/style-guide.md.
+# Dunsworthy, a farming village on the edge of Exmoor. Three written friends: Will Cottle, the
+# shepherd's son; Dan Pearce, the poacher; Bert Yeo, who rang the tenor bell. And young Mr Venn,
+# the squire's son, the platoon officer. Events come from the pool front_1915_farm on the tour
+# page. Stage 1 is tours 1 to 9; Loos is tour 7.
+
+# ---- events -----------------------------------------------------------------------------------
+
+- id: v_farm_first_night
+  chapter: front
+  kind: pool
+  pool: front_1915_farm
+  once: true
+  on_enter: [ { set: flag.farm_first_night } ]
+  title: First night in the line
+  text: |
+    Up the communication trench in the dark, single file, each man holding the scabbard of the
+    man in front. Then the firestep, and your rifle, and the dark.
+
+    You've been out on the moor at night after a lost ewe, with no moon and the fog down. You know
+    dark. This dark is wrong. It smells wrong, of lime and something sweet under it, and it's never
+    quiet the way a field's quiet. A flare goes up and everything stands still, wire and posts and
+    a tree with no top, like rabbits in a lamp.
+
+    And then, behind the line somewhere, in what's left of a wood, a nightingale starts.
+
+    [if war.mate2]Pearce has his head up over the parapet, which you're not to do, sniffing the air like a dog. "There's a hare out there," he says. "In the wire. I can see her ears." He's got a bit of brass wire in his pocket. Of course he has. "Back in ten minutes."[else]Down the bay a lad from Brendon has his head up over the parapet, which you're not to do. "There's a hare out there," he says. "In the wire."[/if]
+  choices:
+    - id: go_with
+      text: Go over with Pearce. Somebody has to watch his back.
+      visible_if: war.mate2
+      effects: [ { set: flag.farm_went_out } ]
+      text_after: |
+        Over the parapet on your belly, through our wire by the gap the wiring party left, out into
+        the long grass, and Pearce moving through it like water, not a sound. He sets his wire in
+        the dark by feel. A flare goes up and you both lie with your faces in the dirt and the
+        nightingale still going. Back in twenty minutes. In the morning there's a hare in the wire,
+        his wire, and the sergeant wants to know whose it is, and nobody knows.
+      next: "@return"
+    - id: stop
+      text: Pull him down. You'll both be shot.
+      effects: [ { set: flag.farm_stopped_pearce } ]
+      text_after: |
+        [if war.mate2]You get him by the belt and haul him down off the step. He swears at you, low. Then he grins. "You'm right," he says. "Not tonight. They don't know me yet." The nightingale goes on.[else]Somebody pulls the lad down. The nightingale goes on, and you stand and listen to it till stand-to.[/if]
+      next: "@return"
+
+- id: v_farm_letter
+  chapter: front
+  kind: pool
+  pool: front_1915_farm
+  once: true
+  requires: [ "war.tour >= 2", flag.farm_first_night ]
+  on_enter: [ { set: flag.farm_letter } ]
+  title: A letter from home
+  text: |
+    A parcel, brown paper and binder twine, and the smell of the kitchen when you open it: a
+    saffron cake, socks, a twist of tea, a pot of cream with a bit of muslin over it gone sour on
+    the way.
+
+    "Dear Son, I hope this finds you as it leaves us. Your father is ploughing the Long Field with
+    old Blossom on her own since they took Prince and Duke for the army, and it takes him the week.
+    He says the mare is too old for it and so is he. The squire has taken on two maids from the
+    town for the dairy and they do not know one end of a cow from the other.
+
+    [if war.mate1]Mr Cottle says to tell Will that Fly is off her food and lies by the gate in the evenings looking up the lane.[else]Mr Cottle has not been to market since the letter came about Will. Fly lies by the gate in the evenings looking up the lane.[/if]
+
+    Keep your feet dry. Your loving Mother."
+  choices:
+    - id: write
+      text: Write back tonight, two sides, by a candle end.
+      effects: [ { set: flag.farm_wrote_home } ]
+      text_after: |
+        You tell her the French farm the same as us, only worse, with oxen and their women at the
+        plough. You tell your father to rest the mare. You tell her the cream came sour and you ate
+        it anyway, with a spoon, in the bottom of the trench, and it tasted of home.
+      next: "@return"
+    - id: postcard
+      text: Send the field postcard. Cross out what doesn't apply.
+      effects: [ { set: flag.farm_postcard } ]
+      text_after: |
+        I am quite well. You strike out the rest. The saffron cake goes round the bay in a quarter
+        of an hour, and the lads from the town have never had it before, and want to know what makes
+        it yellow.
+      next: "@return"
+
+- id: v_farm_venn
+  chapter: front
+  kind: pool
+  pool: front_1915_farm
+  once: true
+  requires: [ "war.tour >= 2", flag.farm_first_night ]
+  title: Mr Venn
+  text: |
+    The platoon officer is young Mr Venn from the big house. You were a beater on his father's
+    shoots from when you were ten: sixpence and a pasty to walk through the wet bracken with a stick,
+    driving the birds over the guns. He was one of the guns.
+
+    He stops you in the support line. "Good to see a Dunsworthy face," he says, and calls you by
+    your Christian name, and then remembers, and goes red, and calls you by your surname.
+
+    He wants a servant. Somebody to keep his kit, bring his water, make his tea, look after him. A
+    soldier-servant. You'd be excused fatigues. You'd be with him in the line, always.
+  choices:
+    - id: accept
+      text: Say yes. He's from home.
+      effects: [ { set: flag.farm_servant } ]
+      text_after: |
+        You clean his boots in the dugout by candlelight, and he sits writing to his mother, and
+        sometimes reads you a line, about the dogs, about the house, as if you were at home together
+        in the gunroom. You find you don't mind. You find you like him.
+      next: "@return"
+    - id: decline
+      text: Say no, sir. You'd sooner stop with the lads.
+      text_after: |
+        "Of course," he says. "Of course." He takes a lad from Taunton instead. When he passes you in
+        the trench after, he nods, and it's as if you'd both been caught at something.
+      next: "@return"
+
+- id: v_farm_bell
+  chapter: front
+  kind: pool
+  pool: front_1915_farm
+  once: true
+  requires: [ "war.tour >= 3", flag.farm_letter, war.mate3 ]
+  title: The bell
+  text: |
+    At rest, in a village with half a church. The tower's still up, though the roof of the nave
+    is gone, and there's a bell rope hanging down in the dust inside the tower door.
+
+    Bert Yeo stands and looks at it the way other men look at a girl. He rang the tenor at
+    Dunsworthy from the age of twelve. Every Sunday, every wedding, every funeral. He takes hold of
+    the rope and tests the pull of it, and you can see his whole body wants to pull.
+
+    But in the line, any bell is the gas alarm. A bell rung here, this close, and the whole village
+    will be in its masks.
+  choices:
+    - id: one
+      text: Let him ring it once. Say it was you, if anybody asks.
+      effects: [ { set: flag.farm_bert_rang } ]
+      text_after: |
+        He pulls, once, the way you'd ring a tenor down, and the bell speaks, one deep note that goes
+        out over the broken roofs and the orchards. Somewhere a dog starts barking. Men come out of
+        barns with their masks half on. The sergeant major wants to know who. You say it was you.
+        Bert stands behind you with his face shining like a lad at his first wedding.
+      next: "@return"
+    - id: no
+      text: Take his hand off the rope. Not here.
+      effects: [ { set: flag.farm_bert_stopped } ]
+      text_after: |
+        He lets go. He stands there a minute longer with his hand still curled the way it held the
+        sally. "After," he says. "I'll ring the whole peal, after. When we get home." You walk him
+        back to the billet.
+      next: "@return"
+
+- id: v_farm_hare
+  chapter: front
+  kind: pool
+  pool: front_1915_farm
+  once: true
+  requires: [ "war.tour >= 4", flag.farm_letter, war.mate2 ]
+  title: Pearce
+  text: |
+    The military police have got Pearce. Behind the lines, at rest, with two hares and a brace of
+    French partridges in the bottom of his pack and a set of wires in his pocket. The farmer's
+    complained. The French farmers complain about everything, and this time they've a case.
+
+    It's Field Punishment Number One. Tied to a limber wheel for two hours a day, in the open, by
+    the road, where everybody going past can see. Twenty-eight days of it.
+
+    [if flag.farm_went_out]Since the hare the first night he's been out every night at rest, and you've known, and said nothing.[/if][if flag.farm_stopped_pearce]You pulled him down off the parapet the first night. You couldn't pull him down for ever.[/if]
+
+    Pearce isn't saying anything. He's looking at the ground. The partridges are on the table at
+    the orderly room, and the corporal asks if he was alone.
+  choices:
+    - id: share
+      text: Say one of the hares was for you. Share it.
+      effects: [ { set: flag.farm_shared_pearce } ]
+      text_after: |
+        You both get fourteen days. Two hours a day on the wheel by the Béthune road, side by side,
+        arms out, in the August sun, with the columns going past and the lads from home calling out.
+        Pearce talks to you the whole two hours, every day, about rabbits and ferrets and which
+        keeper on Exmoor was the worst. It's the most you've ever liked anybody.
+      next: "@return"
+    - id: quiet
+      text: Say nothing. He knew the risk.
+      text_after: |
+        Twenty-eight days on the wheel. You walk past him on the road going up, and he's tied there
+        in the sun with his arms spread, and he catches your eye and winks, and you can't tell if
+        it's forgiveness or a joke.
+      next: "@return"
+
+- id: v_farm_harvest
+  chapter: front
+  kind: pool
+  pool: front_1915_farm
+  once: true
+  requires: [ "war.tour >= 4", flag.farm_letter ]
+  title: Harvest
+  text: |
+    August, at rest, and the French women are getting the harvest in by hand, the ones whose men are
+    away, with the old men and the children. They're cutting a field of oats with sickles behind the
+    billet, slow, in a line, bent double in the heat.
+
+    You stand at the gate and watch them, and your hands ache for a scythe the way a drinking man's
+    ache for a glass. You can smell it: cut oats, dust, sweat, the hot green smell of the stubble.
+    [if war.mate1]Cottle's beside you at the gate. He's not said a word. He's got his sleeves rolled up already.[/if]
+  choices:
+    - id: help
+      text: Go in and help. Find a scythe.
+      effects: [ { set: flag.farm_harvested } ]
+      text_after: |
+        The farmer's wife finds you two scythes in the barn, rusty, and you stone them up, and go
+        into the oats in a line, swinging. You haven't forgotten. The body never does. By evening
+        the field's down and stooked, the way your father taught you, and the old woman brings you
+        cider in a jug and won't take any money, and kisses you on both cheeks. Your back aches like
+        home.
+      next: "@return"
+    - id: rest
+      text: Rest. You'll need your strength in the line.
+      text_after: |
+        You lie in the shade of the hedge and watch them work. It's the hardest thing you've done in
+        France, lying there. You can hear the sickles all afternoon.
+      next: "@return"
+
+- id: v_farm_eve_loos
+  chapter: front
+  kind: pool
+  pool: front_1915_farm
+  once: true
+  weight: 100
+  requires: [ "war.tour == 6" ]
+  title: Moving up
+  text: |
+    Three nights of marching in the rain, and on the third morning you come up into the assembly
+    trenches and look over, and it's open country, flat, with slag heaps on the skyline and pit
+    towers, and halfway across no man's land, on its own, a tree. A cherry tree, the lads say, a
+    little one, all on its own between the lines, with its leaves still on. Everybody's calling it
+    the Lone Tree. It's where you're to go.
+
+    Along the parapet, under sacking, the gas cylinders.
+
+    [if war.mate1]Cottle's looking at the tree. "Like the one beech on Dunsworthy Down," he says. "You can see that from every farm in the parish."[/if][if flag.farm_servant] Mr Venn has you lay out his things on the firestep: a clean collar, a letter for his mother, a hunting flask. "In case," he says, and laughs, and doesn't finish it.[/if]
+
+    The company sergeant major comes round with pay books. If you want to write anything, now's
+    the time.
+  choices:
+    - id: last_letter
+      text: Write a letter and leave it in your pay book.
+      effects: [ { set: flag.last_letter } ]
+      text_after: |
+        You don't know what to put. In the end you put that your father's to rest the mare, and that
+        your mother's to have your best boots for whoever needs them, and that you love them. You've
+        never said that in that kitchen. You fold it small.
+      next: "@return"
+    - id: no_letter
+      text: Leave it. Writing one is asking for it.
+      text_after: |
+        You leave it. You eat the last of the saffron cake from your mother's parcel, slow, a crumb at
+        a time, and look at the tree.
+      next: "@return"
+
+- id: v_farm_count
+  chapter: front
+  kind: pool
+  pool: front_1915_farm
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 8" ]
+  on_enter: [ { set: flag.farm_counted } ]
+  title: The count
+  text: |
+    After the big snow of the winter you were fourteen, you went up on the moor with Will Cottle's
+    father to count the flock, and dug them out of the drifts one at a time, and counted. And at the
+    end of the day the old man stood at the gate and counted again, and said the number, and went
+    quiet, and that was how you knew how many were still under the snow.
+
+    They form what's left of the battalion up in a field behind the line, in the rain, and the
+    sergeant major reads the roll.
+
+    [if war.mate1]"Cottle." "Here, sir." Slow, the way he says everything.[else]"Cottle." Nothing. "Cottle, W." The rain on the caps.[/if]
+    [if war.mate2]"Pearce." "Here, sir," and you can hear he's grinning, and you don't know how.[else]"Pearce." Nothing. Pearce, who could cross a field in the dark without a sound.[/if]
+    [if war.mate3]"Yeo." "Here." Like the first note of a peal.[else]"Yeo." Nothing. You think of the tenor bell at home, with nobody to ring it.[/if]
+
+    And then the officers. Second Lieutenant Venn is read out with the dead.[if flag.farm_servant] You laid out his clean collar on the firestep that morning.[/if]
+  choices:
+    - id: answer
+      text: Answer for the men you saw fall, when their names come.
+      effects: [ { set: flag.farm_spoke_at_roll } ]
+      text_after: |
+        "Killed, sir. I saw him." The sergeant major makes his mark. You think of old Cottle at the
+        gate, counting, and the number he didn't say.
+      next: "@return"
+    - id: stay_silent
+      text: Say nothing. Let somebody else tell it.
+      effects: [ { set: flag.farm_silent_at_roll } ]
+      text_after: |
+        Somebody else does, or nobody does, and the names go down as missing. You stand in the rain
+        and keep what you saw, like a ewe under the snow nobody's found.
+      next: "@return"
+
+- id: v_farm_venn_letter
+  chapter: front
+  kind: pool
+  pool: front_1915_farm
+  once: true
+  requires: [ "war.tour >= 8", flag.farm_counted ]
+  title: Mrs Venn
+  text: |
+    A letter for you, in a hand you don't know, on thick cream paper with a crest. From the big
+    house. From Mrs Venn.
+
+    "I am told that you were near my son. I would be so grateful for anything you could tell me. The
+    War Office says so little. I know you will not want to write it. I would rather know."
+
+    You've never had a letter from the big house in your life.
+  choices:
+    - id: tell
+      text: Write and tell her the truth, as gently as you can.
+      effects: [ { set: flag.farm_wrote_venn } ]
+      text_after: |
+        It takes you three nights. [if flag.farm_servant]You were his servant. You ask the men who were near him at the end, and tell her he was in front, and that he was laughing at something just before, which is true, and that it was quick, which you don't know. You tell her about the hunting flask, and the letter he had on the firestep for her.[else]You weren't near him, but you ask the men who were, and you put down what they tell you, and leave out what they don't say.[/if] You sign it with your full name, the way she wrote hers.
+      next: "@return"
+    - id: leave
+      text: Leave it. You don't know how to write to the big house.
+      text_after: |
+        You carry the letter about in your tunic for a month, meaning to. You never do. The paper goes
+        soft at the folds, and the crest wears off.
+      next: "@return"
+
+# ---- Loos, for the farm company: the Lone Tree ----------------------------------------------
+
+- id: b_loos_farm_advance
+  chapter: front
+  title: Loos
+  text: |
+    Rum at five, from a stone jar. It goes down like the first cider at harvest home and sits there.
+
+    At ten to six the gas goes over. A hiss all down the line, like the threshing engine letting off
+    steam at the end of a day, and the cloud comes up, white and greenish, and leans out over no
+    man's land. Then the wind drops, and some of it comes back. Pepper and pineapple and a sting
+    under it. You pull the hood down. Wet flannel, the stink, your own breath hot against the
+    window.
+
+    Through the eyepiece, the tree, in the smoke, on its own.
+
+    Half past six. The guns stop.
+
+    Beside you on the ladder is {mate}. [if flag.farm_servant]Mr Venn's at the foot of it with his whistle in his teeth, white as a sheet, and he looks at you, and nods, as if you were both back at the big house waiting for the first drive.[/if]
+
+    [if war.stalled]You get your head over the top. The first wave is lying down in the grass by the Lone Tree in rows, too straight, the way the corn lies after the binder, and in front of them their wire is standing whole.[else]You get your head over the top. The first wave is walking towards the tree with their rifles at the port, through the long grass, and nobody's falling yet.[/if]
+  choices:
+    - id: push
+      text: "Over the top. Walk with the wave. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Go up with {mate}. Stay at his shoulder. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Over, and straight down into the first shell hole. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_loos_farm_trench
+  chapter: front
+  title: Loos
+  text: |
+    The tree. You go past it close enough to touch. A little cherry, the bark ripped, the leaves
+    still on, and men lying all round its foot, the way sheep lie up under the one tree in a field
+    in the heat. Some of them are ours from the first wave. None of them move.
+
+    Their wire beyond it is cut in places, in places not. You go through a gap with a crowd of men
+    and the machine gun that knows about the gap, and then you're down in their trench in the
+    white chalk, deafened, and the bombs are going off round the traverse a bay at a time.
+
+    [if war.stalled]A machine gun opens up from the second line straight down the trench, and the bombing stops dead, and men come back round the traverse fast, and one of them hasn't a face.[else]"Up the trench!" Somebody's shouting. "Bombers first! Go on, go on!"[/if]
+  choices:
+    - id: push
+      text: "Round the traverse after the bombers. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Stay with {mate}. Watch his back round the corner. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down in the bottom of the trench and stay there. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_loos_farm_hold
+  chapter: front
+  title: Loos
+  text: |
+    By the afternoon the rain's come in, thin and cold, off a sky like the moor in November. You're
+    holding a length of their trench that faces the wrong way. Nobody's brought water. The gas has
+    left a taste like a mouthful of copper.
+
+    Back across no man's land you can see the tree, small now, with the rain on it.
+
+    Shouting on the left. Then the rifles, picking up the way the rain does on the barn roof, a few
+    drops and then all of it.
+
+    "Stand to! They're coming back!"
+  choices:
+    - id: push
+      text: "Up on the parapet. Fire till they stop coming. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Keep {mate} fed with clips. Stay low beside him. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Stay under the parapet. Fire blind over the top. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- the first leave, December 1915 -----------------------------------------------------------
+
+- id: l_farm_1915
+  chapter: front
+  title: Home on leave
+  text: |
+    The train to South Molton, and the carrier's cart the rest of the way, and then you walk the
+    last two miles up the lane in the dark because you can't sit still. The smell comes to you
+    before the farm does: woodsmoke, and the muck heap, and wet sheep, and you stand in the lane and
+    breathe it like a man come up out of water.
+
+    The dogs know you before your mother does. Then the door opens and the light comes out across the
+    yard, and she's there. She doesn't say anything. She puts her hand flat on your chest as if to
+    make sure. Then she smells you, and sends you to the wash-house.
+
+    [if flag.farm_wrote_home]Your letter's on the dresser, behind the willow-pattern plate, gone soft at the folds.[/if][if flag.farm_postcard]The field postcard's on the dresser. "Quite well," your father says from his chair, and puts his pipe back in his mouth. "Quite well."[/if][if !flag.farm_letter]"You might have written," she says, to the kettle.[/if]
+
+    Your father's thinner. The stable's half empty. Old Blossom puts her head over the door and
+    whickers at you, and there's nobody in Prince's stall or Duke's.[if flag.farm_harvested] You tell him about the French oats, and the scythes, and he laughs, and says you never stooked that well at home.[/if]
+
+    [if war.mate1]On the Sunday old Mr Cottle takes you up on the moor to see the ewes, with Fly at his heel, and asks after Will. Fly runs to you, and then runs on up the track, and stops, and looks back for somebody else.[/if][if !war.mate1]Up at Cottle's the blinds are down. Fly still lies by the gate in the evenings. Old Mr Cottle has stopped calling her in.[/if][if !war.mate1 && flag.farm_wrote_cottle] He has your letter in his coat pocket. He doesn't speak of it. He gives you a ewe lamb's fleece for your mother, which is what he has.[/if]
+
+    [if war.mate2 && flag.farm_shared_pearce]Mrs Pearce has heard about the limber wheel, from Dan's letter, and is furious, with Dan and with you and with the army, and gives you a rabbit pie to take back for the both of you.[/if][if war.mate2 && !flag.farm_shared_pearce]Mrs Pearce asks if Dan's behaving. You tell her he is, near enough.[/if][if !war.mate2]The keeper at the big house stops you in the lane. He spent fifteen years trying to catch Dan Pearce. "I'll miss him," he says, and means it.[/if][if !war.mate2 && flag.farm_wrote_pearce] Mrs Pearce has your letter. She reads you the bit about the hare in the wire, and laughs, and then can't stop.[/if]
+
+    [if war.mate3 && flag.farm_bert_rang]On the Sunday the ringers are short, with Bert away, and they ask you to take a rope. You can't ring. You stand in the tower and listen to them, and think of one note going out over a French village, and the dogs barking.[/if][if war.mate3 && flag.farm_bert_stopped]The ringers ask after Bert. You tell them he means to ring the whole peal when he's home. They say they'll keep the tenor for him.[/if][if !war.mate3]The bells don't ring at Dunsworthy now. They rang Bert Yeo's half-muffled the Sunday after the letter came, and not since.[/if][if !war.mate3 && flag.farm_wrote_yeo] Mrs Yeo has your letter in her Bible.[/if]
+
+    The big house has its blinds down for Mr Venn.[if flag.farm_wrote_venn] Mrs Venn sends the groom down for you. You sit in her drawing room in your uniform on a chair too good to sit on, and she asks you everything, and you tell her, and she holds her teacup without drinking it the whole time.[/if][if !flag.farm_wrote_venn] You walk past the lodge gates and don't go in.[/if]
+
+    [if flag.farm_spoke_at_roll]At church a woman from Brendon takes your hand at the lych-gate. "You were the one who told them about our Sid," she says. "They wrote it was quick." You tell her it was.[/if][if flag.farm_silent_at_roll]At market a woman is telling everybody her lad's only missing, missing means taken, he'll turn up. You saw. You buy your father's tobacco and go without your change.[/if]
+
+    At night the quiet keeps waking you. Then an owl, and you sleep.
+
+    {offers_line}
+  choices:
+    - id: back
+      text: Go back on the tenth day. The battalion promotes the men who return.
+      effects: [ { war: back } ]
+      next: "@war"
+    - id: commission
+      text: Go before the board for a commission.
+      visible_if: war.commission
+      effects: [ { war: commission } ]
+      next: "@war"
+    - id: posting_0
+      text: "Take it: {offer0}. Your war ends here."
+      visible_if: "war.offers >= 1"
+      effects: [ { war: "posting:0" } ]
+      next: "@war"
+    - id: posting_1
+      text: "Take it: {offer1}. Your war ends here."
+      visible_if: "war.offers >= 2"
+      effects: [ { war: "posting:1" } ]
+      next: "@war"
+    - id: posting_2
+      text: "Take it: {offer2}. Your war ends here."
+      visible_if: "war.offers >= 3"
+      effects: [ { war: "posting:2" } ]
+      next: "@war"

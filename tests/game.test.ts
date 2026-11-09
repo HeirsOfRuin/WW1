@@ -124,6 +124,15 @@ describe('the story leads', () => {
   }, 120_000);
 });
 
+describe('the farm town', () => {
+  it('the farm town\'s written year (1915) is about half story', () => {
+    const c = share(40, 'farm').byYear[1]!;
+    const p = c.story / (c.story + c.generic);
+    expect(p, `farm 1915: story ${(100 * p).toFixed(1)}%`).toBeGreaterThan(0.44);
+    expect(p, `farm 1915: story ${(100 * p).toFixed(1)}%`).toBeLessThan(0.7);
+  }, 120_000);
+});
+
 describe('saves', () => {
   it('a war saved and loaded mid-rotation plays on exactly as if never saved', async () => {
     let a = newGame(content, { start: 'pit', seed: 4242, name: 'Save' });

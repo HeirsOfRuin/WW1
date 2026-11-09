@@ -112,23 +112,38 @@
 - id: c_enlist_farm
   chapter: enlist
   checkpoint: true
-  title: The recruiting office
+  title: Harvest home
   text: |
-    You are {age}. The harvest is in and the recruiting sergeant came out to the
-    village on a wagon. The squire's son is taking a commission; the rest of you are taking the shilling.
+    The harvest's in, and the harvest supper's in the big barn at Court Farm, the way it is every
+    year: trestle tables, a ham, cider from the squire's own press, the fiddler from Brendon, and
+    the barn still smelling of the corn it held all summer. Only this year the squire stands up at
+    the end with a paper in his hand, and there's a recruiting sergeant beside him in a red sash,
+    and nobody's dancing.
+
+    The squire's son, young Mr Venn, is taking a commission. He'll have a platoon, the squire says,
+    and he'd like it to be Dunsworthy men.
+
+    Will Cottle puts his tankard down and stands up first, because his father's looking at him and
+    he can't bear it. Dan Pearce stands up because Will has, and because it's further from the
+    keeper. Bert Yeo, who rang the bells for the harvest thanksgiving that morning, stands up
+    because everybody else is.
+
+    The sergeant writes your name. "Age?"
+
+    "Just gone {age_words}, sir."
     [break]
-    What you bring from the fields is what you will have out there.
+    What you bring from the land is what you'll have out there.
   choices:
     - id: pick_0
-      text: "Bring fieldcraft and a shotgun, and stamina from a long working day."
+      text: A shotgun and a poacher's eye, and the legs to walk the moor all day.
       effects: [ { war_home: [field, stamina] } ]
       next: c_general
     - id: pick_1
-      text: "Bring fieldcraft and a shotgun, and a hand with machinery."
+      text: A shotgun and a poacher's eye, and a hand with the threshing engine.
       effects: [ { war_home: [field, mech] } ]
       next: c_general
     - id: pick_2
-      text: "Bring stamina from a long working day, and a hand with machinery."
+      text: The legs to walk the moor all day, and a hand with the threshing engine.
       effects: [ { war_home: [stamina, mech] } ]
       next: c_general
 

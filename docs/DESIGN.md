@@ -502,6 +502,10 @@ mill's battles and has its own Armistice ending. Pit 1918 story share went from 
 51% for a man who stays with the section, 70% for a tunneller, whose war layer has fewer
 generic missions (an open question for the author).
 
+**The farm town, 1915 (FRAME-FARM-1915.md).** The third town written: the harvest supper, nine
+events, Loos at the Lone Tree, the leave, three friends' deaths, and the squire's son as a fixed
+loss. Farm 1915 story share went from 49.2% to 61.5%.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.

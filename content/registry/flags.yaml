@@ -113,3 +113,22 @@ p18_traced_wire: { description: "Traced and cut the booby-trap wire under the gr
 p18_reported: { description: "Told the officer what the ground was saying before 21 March" }
 p18_wrote_after: { description: "Wrote his mother about after the war" }
 p18_walked_crater: { description: "Walked round the rim of the La Boisselle crater in August 1918" }
+# The farm town, 1915 (content/scenes/war/1915-farm.yaml, farm-friends.yaml)
+farm_first_night: { description: "The farm's first night (the hare in the wire) has been played; chains the events" }
+farm_went_out: { description: "Went into no man's land with Pearce to set a wire for the hare" }
+farm_stopped_pearce: { description: "Pulled Pearce down off the parapet the first night" }
+farm_letter: { description: "The farm's 1915 letter from home has come (chains the events)" }
+farm_wrote_home: { description: "Answered the farm letter properly; the leave remembers" }
+farm_postcard: { description: "Answered with a field postcard; his father reads it out at leave" }
+farm_servant: { description: "Became young Mr Venn's soldier-servant" }
+farm_bert_rang: { description: "Let Bert Yeo ring the French church bell once, and took the blame" }
+farm_bert_stopped: { description: "Took Bert's hand off the bell rope; he'll ring the peal after" }
+farm_shared_pearce: { description: "Claimed a hare to share Pearce's field punishment" }
+farm_harvested: { description: "Helped a French farmer's wife get the oats in" }
+farm_counted: { description: "The farm's roll call after Loos (the count) has been played" }
+farm_spoke_at_roll: { description: "Answered at roll call for the men he saw fall (farm)" }
+farm_silent_at_roll: { description: "Kept what he saw (farm)" }
+farm_wrote_venn: { description: "Wrote to Mrs Venn about her son; she sends for him at leave" }
+farm_wrote_cottle: { description: "Wrote to old Mr Cottle; a fleece for his mother at leave" }
+farm_wrote_pearce: { description: "Wrote to Mrs Pearce about the hare in the wire" }
+farm_wrote_yeo: { description: "Wrote to Mrs Yeo about the bell" }

@@ -1,0 +1,72 @@
+# The farm town's three written friends, killed. One scene each, for whenever it happens; the
+# route sends the player here before the next question. The choice (write to his family yourself,
+# or not) is read at the next leave.
+
+- id: x_fallen_cottle
+  chapter: front
+  title: Will Cottle
+  text: |
+    [if war.fallen_present]It happens {fallen_where}. Cottle goes down on one knee, slow, the way he'd kneel to look at a ewe's foot, and then he's on his side in the grass.
+
+    "Fly," he says. Just that. The dog's name. And then he's looking past you up at the sky, the way he'd look for weather from the top of the moor, and he doesn't stop looking.[else]You hear it at the ration dump, in the dark. Will Cottle. Killed {fallen_where}.
+
+    You stand there with the bread under your arm. You knew him before you could walk. You learned to whistle a dog from his father.[/if]
+
+    At home there's a black and white dog lying by a gate, looking up the lane.
+  choices:
+    - id: write
+      text: Write to old Mr Cottle yourself, tonight.
+      effects: [ { set: flag.farm_wrote_cottle }, { war_ack: fallen } ]
+      text_after: |
+        You put that he didn't suffer, which you don't know. You put that the last thing he said was
+        the dog's name. His father will want that.
+      next: "@war"
+    - id: leave
+      text: Leave it to the officer's letter. You can't.
+      effects: [ { war_ack: fallen } ]
+      next: "@war"
+
+- id: x_fallen_pearce
+  chapter: front
+  title: Dan Pearce
+  text: |
+    [if war.fallen_present]It happens {fallen_where}. Pearce was always quick. He's quick now: up and then down, all at once, flat in the grass with his face turned to you, surprised, as if somebody had come on him with a gun when he'd thought the keeper was miles off.
+
+    "Well," he says. "They've had me, then." And that's Dan Pearce.[else]Somebody tells you at the water cart. Dan Pearce. Killed {fallen_where}.
+
+    You think of him going through the long grass the first night like water. Nobody ever caught Dan Pearce. Fifteen years the keeper tried.[/if][if flag.farm_shared_pearce] Fourteen days on the wheel together, side by side, and he never once stopped talking.[/if]
+  choices:
+    - id: write
+      text: Write to his mother. Tell her about the hare in the wire.
+      effects: [ { set: flag.farm_wrote_pearce }, { war_ack: fallen } ]
+      text_after: |
+        You tell her about the hare in the wire the first night, and the partridges, and the wheel.
+        You tell her he was the best man in the battalion at being where he wasn't supposed to be.
+        She'll laugh. Then she won't.
+      next: "@war"
+    - id: leave
+      text: Leave it. You'd never get him right.
+      effects: [ { war_ack: fallen } ]
+      next: "@war"
+
+- id: x_fallen_yeo
+  chapter: front
+  title: Bert Yeo
+  text: |
+    [if war.fallen_present]It happens {fallen_where}. Bert's beside you, and then he's sat down, and he's holding his hands in front of him, curled, the way they curled round the sally of the tenor bell, as if he's waiting for the rope to come down to him.
+
+    You hold on to him. He says something you can't hear for the noise. You think it might be a hymn.[else]You hear it from a stretcher-bearer who knew him. Bert Yeo. Killed {fallen_where}.
+
+    He was eighteen. He'd rung the tenor at Dunsworthy since he was twelve.[/if][if flag.farm_bert_stopped] He was going to ring the whole peal, after. When you got home.[/if][if flag.farm_bert_rang] He rang one bell in France, once, and you took the blame for it.[/if]
+  choices:
+    - id: write
+      text: Write to Mrs Yeo. Tell her about the bell.
+      effects: [ { set: flag.farm_wrote_yeo }, { war_ack: fallen } ]
+      text_after: |
+        You tell her about the French church with half a roof, and Bert with the rope in his hands.
+        You don't know if it's the right thing to tell a mother. It's the true thing.
+      next: "@war"
+    - id: leave
+      text: Leave it. She'll have the official letter.
+      effects: [ { war_ack: fallen } ]
+      next: "@war"

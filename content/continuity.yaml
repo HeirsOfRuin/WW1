@@ -25,6 +25,9 @@ rules:
   - { match: "given Bell a stripe|Lance-Corporal Bell gets|tells you exactly where to put", allow: war.mate2, why: Jim Bell only acts while alive (1918) }
   - { match: "Robson's quiet, the way|Robson's on his knees on the floor|Robson walks round with you|Robson sits down at the roadside", allow: war.mate1, why: Tommy Robson only acts while alive (1918) }
   - { match: "Charlton's with the transport, coming|Charlton leads her in|Charlton's down with the transport", allow: war.mate3, why: George Charlton only acts while alive (1918) }
+  - { match: "Pearce has his head up|Pearce talks to you the whole|Pearce moving through|Pearce sees you|Mrs Pearce asks if Dan|Mrs Pearce has heard", allow: war.mate2, why: Dan Pearce only acts while alive }
+  - { match: "Cottle's beside you|Cottle's looking at the tree|old Mr Cottle takes you up", allow: war.mate1, why: Will Cottle only acts while alive }
+  - { match: "Bert Yeo stands and looks|The ringers ask after Bert", allow: war.mate3, why: Bert Yeo only acts while alive }
   - match: "All nine of the section"
     allow: "war.section == 9"
     why: The whole section alive only while all nine are.
