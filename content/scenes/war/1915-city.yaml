@@ -1,0 +1,452 @@
+# The city town, 1915 (docs/FRAME-CITY-1915.md), written to the voice in content/style-guide.md.
+# London clerks from the insurance offices of the City. Three written friends: Arthur Webb, your
+# desk neighbour, who keeps a diary; Percy Fenton, the office eleven's centre-forward; Leonard
+# Marsh, who learned the eye chart by heart. Events come from the pool front_1915_city on the tour
+# page. Stage 1 is tours 1 to 9; Loos is tour 7.
+
+# ---- events -----------------------------------------------------------------------------------
+
+- id: v_city_first_night
+  chapter: front
+  kind: pool
+  pool: front_1915_city
+  once: true
+  on_enter: [ { set: flag.city_first_night } ]
+  title: First night in the line
+  text: |
+    Up the communication trench in the dark, single file. Then the firestep, and your rifle, and
+    the dark.
+
+    You've never seen dark like it. In Leyton there's always a lamp somewhere, a gas mantle in a
+    window, the glow of the town on the clouds. Here there's nothing, and then a flare, white,
+    hanging, and everything stands still like a photograph, wire and posts and a tree with no top,
+    and then it goes out and you're blind again.
+
+    The trench stinks of chloride of lime and something sweet under it.
+
+    [if war.mate1]Beside you Webb has his little black notebook out, the one he kept the petty cash in, and a stub of pencil, and every time a shell comes over he makes a mark. "Fourteen," he whispers. "Since stand-to. I'll want the totals." He's writing down everything. Time, weather, the names of the trenches.[else]Down the bay a clerk from the Prudential has a notebook out, and every time a shell comes over he makes a mark. "Fourteen," he whispers. "I'll want the totals."[/if]
+  choices:
+    - id: warn
+      text: Tell Webb diaries are forbidden. If he's taken, they read it.
+      visible_if: war.mate1
+      effects: [ { set: flag.city_diary_warned } ]
+      text_after: |
+        "I know," Webb says. "I know what the order says." He closes the notebook and holds it. "But
+        somebody ought to keep the books. Properly. Or afterwards nobody will know what happened."
+        He puts it in his inside pocket, over his heart, where the pay book goes.
+      next: "@return"
+    - id: let_him
+      text: Let him count. It's keeping his hands steady.
+      effects: [ { set: flag.city_diary_kept } ]
+      text_after: |
+        You let him. His pencil goes all night. By stand-to his hand's stopped shaking and yours
+        hasn't, and you think he may have the right idea.
+      next: "@return"
+
+- id: v_city_letter
+  chapter: front
+  kind: pool
+  pool: front_1915_city
+  once: true
+  requires: [ "war.tour >= 2", flag.city_first_night ]
+  on_enter: [ { set: flag.city_letter } ]
+  title: A letter from home
+  text: |
+    A parcel, done up properly in brown paper and sealing wax the way your father does the gas
+    company's, and inside: socks, a tin of Huntley and Palmers biscuits, a bar of Pears soap, and
+    the smell of the scullery in Leyton coming off all of it.
+
+    "Dear Son, I hope this finds you well. You will have read in the papers about the Zeppelin.
+    It came over on Monday night, and we stood in the street and watched it, everybody did, like a
+    great silver cigar up in the searchlights, and it was beautiful, God forgive me. It dropped its
+    bombs on Stoke Newington and Hoxton, and they say children were killed. Your father has
+    put the shutters up.
+
+    [if war.mate1]Mrs Webb says Arthur writes every day, and they are like an accountant's report. Can you not get him to say how he is.[else]Mrs Webb has had the letter about Arthur. She has stopped going to church.[/if]
+
+    Keep your feet dry. Your loving Mother."
+  choices:
+    - id: write
+      text: Write back tonight, two sides, in ink.
+      effects: [ { set: flag.city_wrote_home } ]
+      text_after: |
+        You tell her the French have Pears soap too, which isn't true. You tell her to stay in the
+        house when the Zeppelins come. You don't tell her that half the men in the section have
+        stood in the street at home and watched one, and all of them say it was beautiful.
+      next: "@return"
+    - id: postcard
+      text: Send the field postcard. Cross out what doesn't apply.
+      effects: [ { set: flag.city_postcard } ]
+      text_after: |
+        I am quite well. Strike out the rest. The biscuits go round the bay, and the soap goes in your
+        pack, and you take it out at night and smell it.
+      next: "@return"
+
+- id: v_city_desk
+  chapter: front
+  kind: pool
+  pool: front_1915_city
+  once: true
+  requires: [ "war.tour >= 3", flag.city_letter ]
+  title: The office
+  text: |
+    A long envelope with the firm's crest: the Gresham and Lombard Assurance, Cornhill. The manager
+    writes to all the men from the office on active service, every quarter, a typed letter. The
+    firm is proud of you. Your salary is being made up and paid to your mother. There is a Roll of
+    Honour in the front hall, in gilt, and four names on it already in a separate column.
+
+    And a second sheet, folded inside, handwritten.
+
+    "Dear Sir, You will not know me. I am Miss Holland and I have been given your desk while you
+    are away. I am learning the ledgers and I hope I am not making a mess of them. I have kept your
+    pen rest and your blotter, I did not like to throw them out. If there is anything you would like
+    sent, the office is happy to send it. Yours sincerely, F. Holland."
+  choices:
+    - id: write_her
+      text: Write back to Miss Holland.
+      effects: [ { set: flag.city_wrote_holland } ]
+      text_after: |
+        You tell her where the key to the bottom drawer is, and which of the old ledgers lie, and that
+        Mr Gedge in Marine likes his tea without sugar but won't say so. You tell her to keep the pen
+        rest. You don't know why you tell her about the fog on the river from the third-floor window,
+        but you do.
+      next: "@return"
+    - id: leave
+      text: Put it away. You don't know what to say to a girl at your desk.
+      text_after: |
+        You put it in your pay book. Every so often you take it out and read it, F. Holland, and try
+        to think what the F stands for.
+      next: "@return"
+
+- id: v_city_match
+  chapter: front
+  kind: pool
+  pool: front_1915_city
+  once: true
+  requires: [ "war.tour >= 4", flag.city_letter, war.mate2 ]
+  title: The match
+  text: |
+    At rest, and Fenton's got a football. Of course he has. He carried it up from the boat in his
+    pack, deflated, with the bladder wrapped in his spare shirt, and now it's blown up hard and he's
+    challenged the pitmen in B Company to a match.
+
+    It's in a stubble field with a goal at each end made of rifles. The pitmen are short and wide and
+    don't run, they barge, and they've a man in goal who's built like a coal tub. Half the battalion
+    is round the edge of the field, shouting.
+
+    Fenton played centre-forward for the office eleven on Saturday afternoons at Walthamstow. He's
+    better than anybody on the field and everybody knows it.
+  choices:
+    - id: play
+      text: Play. Right half, behind Fenton.
+      effects: [ { set: flag.city_played } ]
+      text_after: |
+        You lose four goals to two. One of their half-backs puts you on your back in the stubble so
+        hard you see stars, then picks you up and dusts you off and says "Howay, man, you're all
+        right," and you are. Fenton scores both. He's grinning for a week. For an hour and a half
+        nobody thinks about anything else at all.
+      next: "@return"
+    - id: watch
+      text: Watch from the edge with a mug of tea.
+      text_after: |
+        You stand on the edge with the others and shout yourself hoarse. The pitmen win four goals
+        to two. Fenton scores both and walks off the field with his arm round their goalkeeper, and
+        the two of them are talking about Newcastle United like old friends.
+      next: "@return"
+
+- id: v_city_spectacles
+  chapter: front
+  kind: pool
+  pool: front_1915_city
+  once: true
+  requires: [ "war.tour >= 4", flag.city_letter, war.mate3 ]
+  title: Spectacles
+  text: |
+    Marsh has broken his spectacles. A rifle butt in a crowded trench, an accident. One lens is gone
+    altogether and the other's starred across.
+
+    He can't see. You didn't know how badly. He learned the eye chart by heart at the recruiting
+    office, the whole thing, top to bottom, the night before, so they'd pass him. He tells you this
+    in a whisper in the dugout, holding the broken frames in his hand.
+
+    "If the MO knows, they'll send me back," he says. "Base, or home. Unfit. And everybody at
+    chapel will know why." He looks at you without his glasses, naked-faced. "I can't see the wire,
+    out there. I can see that there is wire."
+  choices:
+    - id: write_home
+      text: Write to his mother for his spare pair. Stay by him till they come.
+      effects: [ { set: flag.city_kept_marsh } ]
+      text_after: |
+        Ten days, and you're his eyes. On sentry you stand next to him and tell him what you see. On
+        the carrying party you walk in front and he holds your pack strap. The spare pair come in a
+        parcel with a cake and a Bible, and he puts them on and looks at you, and says, "Oh. That's
+        what you look like."
+      next: "@return"
+    - id: tell_mo
+      text: Tell the MO. He'll be killed out there blind.
+      effects: [ { set: flag.city_told_mo } ]
+      text_after: |
+        The MO tests him with a card held at the end of the dugout, and Marsh gets it wrong, and the
+        MO looks at him and sighs and writes something. He's sent to the base for a fortnight, and
+        comes back with army spectacles, steel, ugly, that pinch, and he doesn't speak to you for a
+        week. Then he does.
+      next: "@return"
+
+- id: v_city_eve_loos
+  chapter: front
+  kind: pool
+  pool: front_1915_city
+  once: true
+  weight: 100
+  requires: [ "war.tour == 6" ]
+  title: Moving up
+  text: |
+    Three nights of marching in the rain, and on the third morning you come up into the assembly
+    trenches and look over at a mining village, rows of houses, slag heaps, and over the middle of
+    it two great iron towers side by side, joined at the top.
+
+    "Tower Bridge," somebody says, and it's what everybody's calling it by dinner time. It's the
+    shape. It's the first thing that's looked like home since the boat.
+
+    Along the parapet, under sacking, the gas cylinders.
+
+    [if war.mate2]Fenton's got his football out of his pack. He's pumping it up with the bicycle pump he brought for the purpose. "When we go over," he says, "I'm kicking this across. First man to put it in their trench gets a quid." Nobody tells him he's daft. Somebody asks if it's a real quid.[/if][if war.mate1] Webb's writing in the notebook. Everything. The towers, the cylinders, the weather.[/if]
+
+    The company sergeant major comes round with pay books. If you want to write anything, now's
+    the time.
+  choices:
+    - id: last_letter
+      text: Write a letter and leave it in your pay book.
+      effects: [ { set: flag.last_letter } ]
+      text_after: |
+        You write it in your office hand, properly, as if it were going to the manager. Then you tear
+        it up and write it again the way you'd say it. That you love them. That the firm will see her
+        right. That your bat and pads are to go to the boys' club. You fold it small.
+      next: "@return"
+    - id: no_letter
+      text: Leave it. Writing one is asking for it.
+      text_after: |
+        You leave it. You eat the last of the biscuits, and look at Tower Bridge, and think of the
+        real one in the fog, and the tram going over it.
+      next: "@return"
+
+- id: v_city_roll
+  chapter: front
+  kind: pool
+  pool: front_1915_city
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 8" ]
+  on_enter: [ { set: flag.city_rolled } ]
+  title: The ledger
+  text: |
+    At the end of the year at the office, the senior clerk closes the accounts that are closed. A
+    double line ruled under the last entry, in red ink, with a ruler, and the word Closed, and the
+    date. You did it a hundred times without thinking.
+
+    They form what's left of the battalion up in a field behind the line, in the rain, and the
+    sergeant major reads the roll, and you stand there and watch him rule the lines.
+
+    [if war.mate1]"Webb." "Here, sir." Precisely, as if he were answering at the office.[else]"Webb." Nothing. "Webb, A." The rain on the caps.[/if]
+    [if war.mate2]"Fenton." "Here, sir!" Too loud. He's been too loud since Saturday.[else]"Fenton." Nothing. Somewhere out by the German wire there's a football.[/if]
+    [if war.mate3]"Marsh." "Here." Through the rain, and you can see him wipe his spectacles.[else]"Marsh." Nothing. You think of the eye chart, learned by heart.[/if]
+  choices:
+    - id: answer
+      text: Answer for the men you saw fall, when their names come.
+      effects: [ { set: flag.city_spoke_at_roll } ]
+      text_after: |
+        "Killed, sir. I saw him." The sergeant major makes his mark. A double line, in red. Closed.
+      next: "@return"
+    - id: stay_silent
+      text: Say nothing. Let somebody else tell it.
+      effects: [ { set: flag.city_silent_at_roll } ]
+      text_after: |
+        Somebody else does, or nobody does, and the names go down as missing: an account left open,
+        that nobody will ever balance.
+      next: "@return"
+
+- id: v_city_raid
+  chapter: front
+  kind: pool
+  pool: front_1915_city
+  once: true
+  requires: [ "war.tour >= 8", flag.city_rolled ]
+  title: Wood Street
+  text: |
+    The London papers come up a week late, and they're full of it. In September the Zeppelin came
+    over the City itself. Not the suburbs this time. Wood Street, Bartholomew Close, the warehouses by
+    Aldersgate. Bombs in the City, among the warehouses and the offices, fires all night, and a bus hit in the street
+    with the people still on it.
+
+    And a letter from the office. The windows on the Cornhill side are out. Nobody was hurt; the
+    building was empty, it being night. The Roll of Honour in the front hall came off the wall and
+    the glass broke, and Miss Holland swept it up herself and saved the names.
+
+    [if war.mate1]Webb reads the paper and goes white. "Wood Street," he says. "My father's warehouse is in Wood Street."[/if]
+  choices:
+    - id: find_out
+      text: Help Webb find out. Ask everybody who's had a letter.
+      visible_if: war.mate1
+      effects: [ { set: flag.city_helped_webb } ]
+      text_after: |
+        It takes four days. A man in D Company has a brother in the Fire Brigade, and a letter from
+        him says the warehouse is standing, scorched, the next one gone. Webb writes it in his
+        notebook, carefully, the date and the source, and then puts his head down on his knees.
+      next: "@return"
+    - id: read
+      text: Read the paper through and pass it on.
+      text_after: |
+        You read it twice, every street name, and every one is a place you've walked at dinner time
+        with a sandwich. Then you pass it down the bay, and watch it go from hand to hand, Londoners
+        reading about London as if it were somewhere abroad.
+      next: "@return"
+
+# ---- Loos, for the city company: Tower Bridge -----------------------------------------------
+
+- id: b_loos_city_advance
+  chapter: front
+  title: Loos
+  text: |
+    Rum at five, from a stone jar, a tot in the lid of your mess tin. It goes down burning, like the
+    brandy your mother keeps for shocks.
+
+    At ten to six the gas goes over. A hiss all down the line, like every gas main in Leyton opened
+    at once, and the cloud comes up white and greenish and leans out towards their wire. Some of it
+    hangs. Some of it comes back. Pepper and pineapple and a bite under it. You pull the hood down.
+    Wet flannel, the stink, your own breath hot against the little window.
+
+    Through the eyepiece, through the smoke, Tower Bridge.
+
+    Half past six. The guns stop.
+
+    [if war.mate2]Fenton's on the ladder above you with the football under his arm. He goes over, and drops it on the far side of the parapet, and kicks it, a long low punt into the smoke, and goes after it at a jog, the way he'd go after a ball at Walthamstow.[else]Somebody along the line goes over with a football and kicks it into the smoke, and goes after it at a jog.[/if] Beside you on the ladder is {mate}.
+
+    [if war.stalled]You get your head over the top. The first wave is lying down in the grass in rows, too straight, like the clerks' desks in the long room at the office, and in front of them their wire is standing whole.[else]You get your head over the top. The first wave is walking into the smoke with their rifles at the port, after the ball, and nobody's falling yet.[/if]
+  choices:
+    - id: push
+      text: "Over the top. Walk with the wave. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Go up with {mate}. Stay at his shoulder. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Over, and straight down into the first shell hole. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_loos_city_trench
+  chapter: front
+  title: Loos
+  text: |
+    Their trench, and then the village. Loos, under the iron towers: streets of little brick
+    houses, a church with no roof, a cemetery where the Germans have dug in among the graves. You go
+    through it street by street, house by house, and every cellar has to be bombed, and the noise in
+    the narrow streets is like the Underground when the train comes in, only it doesn't stop.
+
+    In the cemetery a German machine gun behind a family vault. Marble angels with their faces
+    shot off.
+
+    [if war.stalled]The machine gun in the cemetery has the street, and men lie down in it and don't get up, and the bombers can't get near.[else]"Through the cemetery! Bombers! Go on, go on!"[/if]
+  choices:
+    - id: push
+      text: "Into the cemetery after the bombers. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Stay with {mate}. Watch his back at the doorways. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down behind a gravestone and fire from there. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_loos_city_hold
+  chapter: front
+  title: Loos
+  text: |
+    By the afternoon you're dug in at the edge of the village, by a slag heap two heaps long that
+    the maps call the Double Crassier, and the rain's come in. Nobody's brought water. The gas has
+    left a taste like licking a penny.
+
+    Somewhere behind you in the village a piano is playing. Somebody's found a piano in a house with
+    no front wall, and is playing it, a music-hall song, badly, and men are singing along in the rain.
+
+    Then shouting on the left, and rifle fire, picking up the way rain does on the glass roof at
+    Liverpool Street.
+
+    "Stand to! They're coming back!"
+  choices:
+    - id: push
+      text: "Up on the parapet. Fire till they stop coming. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Keep {mate} fed with clips. Stay low beside him. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Stay under the parapet. Fire blind over the top. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- the first leave, December 1915 -----------------------------------------------------------
+
+- id: l_city_1915
+  chapter: front
+  title: Home on leave
+  text: |
+    The leave train comes in to Victoria at night, and you get off it in your mud, as you are, with
+    your rifle and your tin hat and France on your boots, and the women on the platform with their
+    furs step out of your way. A lady gives you a cup of tea from an urn and calls you a brave boy.
+    The station smells of steam and soot and wet umbrellas, and of a thousand men off the boat.
+
+    The streets are darker than you left them, the lamps half painted over for the Zeppelins. You
+    take the Underground and a tram and walk the last bit, and the street's the same, every house,
+    and you have to stand at the gate a minute.
+
+    Your mother opens the door before you knock. She doesn't say anything. She holds your face in
+    both hands. Then she smells you, and sends you to the scullery.
+
+    [if flag.city_wrote_home]Your letter's on the mantelpiece, behind the clock, with the rent book.[/if][if flag.city_postcard]The field postcard is on the mantelpiece. "Quite well," your father reads, in his gas-company voice, and puts it back.[/if][if !flag.city_letter]"You might have written," she says to the copper.[/if]
+
+    On the Monday you go up to the office, because you can't not. The Roll of Honour's back in the front hall in a new frame. The manager shakes your hand and calls you a credit to the firm. [if flag.city_wrote_holland]Miss Holland is at your desk. She stands up. She's smaller than you thought, with ink on her middle finger, and she shows you your pen rest, still there, and you stand by your own desk like a visitor, and neither of you can think of a thing to say, and it doesn't matter.[/if][if !flag.city_wrote_holland]There's a girl at your desk, typing, who looks up at you and doesn't know who you are.[/if]
+
+    [if war.mate1]Mrs Webb asks if Arthur is well. You tell her he keeps the books. She doesn't understand, and you don't explain.[/if][if war.mate1 && flag.city_helped_webb] Mr Webb shakes your hand for a long minute in the scorched doorway in Wood Street.[/if][if !war.mate1]The Webbs' front-room curtains are drawn in the middle of the day.[/if][if !war.mate1 && flag.city_wrote_webb] Mrs Webb has your letter, and Arthur's notebook, which came back with his things. She hasn't been able to open it. She asks you to.[/if]
+
+    [if war.mate2 && flag.city_played]Fenton's father, who never missed a Saturday, wants to hear about the match with the pitmen, every kick of it, in the front parlour, and laughs till he cries.[/if][if war.mate2 && !flag.city_played]Mr Fenton wants to know about the football at Loos. He's read about it in the papers. You tell him it was Percy's ball.[/if][if !war.mate2]The office eleven are playing on, short a man. They kept Percy Fenton's shirt in the pavilion, and nobody will wear it.[/if][if !war.mate2 && flag.city_wrote_fenton] Mr Fenton has your letter framed beside the photograph of the eleven.[/if]
+
+    [if war.mate3 && flag.city_kept_marsh]Mrs Marsh gives you a cake and a Bible to take back, and asks you to keep looking after Leonard's eyes. "He wrote that you were his eyes," she says.[/if][if war.mate3 && flag.city_told_mo]Mrs Marsh says Leonard wrote that he has army spectacles now, and that you saw to it. She doesn't know whether to thank you.[/if][if !war.mate3]At the chapel the Sunday school class has a new teacher. The children made a card for Mr Marsh, and nobody knew where to send it.[/if][if !war.mate3 && flag.city_wrote_marsh] Mrs Marsh has your letter in her Bible.[/if]
+
+    [if flag.city_spoke_at_roll]At church a woman stops you in the porch. "You were the one who told them about our Ronald," she says. "In C Company. They said it was quick." You tell her it was.[/if][if flag.city_silent_at_roll]On the tram a woman is telling the conductor that her son is only missing, that missing means a prisoner. You saw. You get off a stop early and walk.[/if]
+
+    At night the quiet keeps waking you. Then a tram, far off, and you sleep.
+
+    {offers_line}
+  choices:
+    - id: back
+      text: Go back on the tenth day. The battalion promotes the men who return.
+      effects: [ { war: back } ]
+      next: "@war"
+    - id: commission
+      text: Go before the board for a commission.
+      visible_if: war.commission
+      effects: [ { war: commission } ]
+      next: "@war"
+    - id: posting_0
+      text: "Take it: {offer0}. Your war ends here."
+      visible_if: "war.offers >= 1"
+      effects: [ { war: "posting:0" } ]
+      next: "@war"
+    - id: posting_1
+      text: "Take it: {offer1}. Your war ends here."
+      visible_if: "war.offers >= 2"
+      effects: [ { war: "posting:1" } ]
+      next: "@war"
+    - id: posting_2
+      text: "Take it: {offer2}. Your war ends here."
+      visible_if: "war.offers >= 3"
+      effects: [ { war: "posting:2" } ]
+      next: "@war"

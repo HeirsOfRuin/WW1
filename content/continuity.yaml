@@ -28,6 +28,9 @@ rules:
   - { match: "Pearce has his head up|Pearce talks to you the whole|Pearce moving through|Pearce sees you|Mrs Pearce asks if Dan|Mrs Pearce has heard", allow: war.mate2, why: Dan Pearce only acts while alive }
   - { match: "Cottle's beside you|Cottle's looking at the tree|old Mr Cottle takes you up", allow: war.mate1, why: Will Cottle only acts while alive }
   - { match: "Bert Yeo stands and looks|The ringers ask after Bert", allow: war.mate3, why: Bert Yeo only acts while alive }
+  - { match: "Webb has his little black notebook|Webb's writing in the notebook|Webb reads the paper|Mrs Webb asks if Arthur", allow: war.mate1, why: Arthur Webb only acts while alive }
+  - { match: "Fenton's got a football|Fenton's got his football|Fenton's on the ladder|Fenton's father, who never missed", allow: war.mate2, why: Percy Fenton only acts while alive }
+  - { match: "Marsh has broken his spectacles|Mrs Marsh gives you a cake|Mrs Marsh says Leonard wrote", allow: war.mate3, why: Leonard Marsh only acts while alive }
   - match: "All nine of the section"
     allow: "war.section == 9"
     why: The whole section alive only while all nine are.

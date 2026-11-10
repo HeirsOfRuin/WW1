@@ -132,3 +132,21 @@ farm_wrote_venn: { description: "Wrote to Mrs Venn about her son; she sends for 
 farm_wrote_cottle: { description: "Wrote to old Mr Cottle; a fleece for his mother at leave" }
 farm_wrote_pearce: { description: "Wrote to Mrs Pearce about the hare in the wire" }
 farm_wrote_yeo: { description: "Wrote to Mrs Yeo about the bell" }
+# The city town, 1915 (content/scenes/war/1915-city.yaml, city-friends.yaml)
+city_first_night: { description: "The city's first night (Webb counting the shells) has been played; chains the events" }
+city_diary_warned: { description: "Told Webb his diary is forbidden in the line" }
+city_diary_kept: { description: "Let Webb keep counting in his notebook" }
+city_letter: { description: "The city's 1915 letter from home has come (chains the events)" }
+city_wrote_home: { description: "Answered the city letter properly; the leave remembers" }
+city_postcard: { description: "Answered with a field postcard; his father reads it out at leave" }
+city_wrote_holland: { description: "Wrote back to Miss Holland at his desk; she shows him his pen rest at leave" }
+city_played: { description: "Played right half behind Fenton against the pit company" }
+city_kept_marsh: { description: "Wrote to Marsh's mother for his spare spectacles and was his eyes" }
+city_told_mo: { description: "Told the MO Marsh can't see; army spectacles" }
+city_rolled: { description: "The city's roll call after Loos (the ledger) has been played" }
+city_spoke_at_roll: { description: "Answered at roll call for the men he saw fall (city)" }
+city_silent_at_roll: { description: "Kept what he saw (city)" }
+city_helped_webb: { description: "Helped Webb find out about his father's warehouse after the Wood Street raid" }
+city_wrote_webb: { description: "Wrote to Mrs Webb; she asks him to open Arthur's notebook at leave" }
+city_wrote_fenton: { description: "Wrote to Fenton's father about the match" }
+city_wrote_marsh: { description: "Wrote to Mrs Marsh" }

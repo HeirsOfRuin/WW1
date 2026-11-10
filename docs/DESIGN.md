@@ -506,6 +506,10 @@ generic missions (an open question for the author).
 events, Loos at the Lone Tree, the leave, three friends' deaths, and the squire's son as a fixed
 loss. Farm 1915 story share went from 49.2% to 61.5%.
 
+**The city town, 1915 (FRAME-CITY-1915.md).** The fourth and last town written to the end of
+1915: the Guildhall queue, nine events, Loos under Tower Bridge, the leave, and three friends'
+deaths. City 1915 story share went from 49.4% to 61.6%. Every town now has a written first year.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.

@@ -89,23 +89,38 @@
 - id: c_enlist_city
   chapter: enlist
   checkpoint: true
-  title: The recruiting office
+  title: Guildhall
   text: |
-    You are {age}. The office manager shook your hand and said the firm would
-    make up your pay. The clerks are going together, a company of them, from desks all over the city.
+    The queue goes out of the Guildhall yard and down Gresham Street and round into Basinghall
+    Street, four deep, and every man in it is wearing a bowler hat. Clerks. From the insurance
+    offices and the banks and the shipping firms, from every desk in the City, come out at dinner
+    time with their sandwiches in their pockets and stood in the queue instead.
+
+    It's warm for September. The street smells of horse dung and hot stone and the river, and of
+    the City on a hundred men: ink, brilliantine, the starch in a hundred stiff collars. A man in
+    front of you is still holding a ledger.
+
+    The manager came round the office at eleven and shook every man's hand and said the Gresham
+    and Lombard would make up their salaries for as long as it lasted. Arthur Webb, from the next
+    desk, wrote it down. Percy Fenton was out of the door before the manager finished. Leonard Marsh
+    sat up half the night with a card from the optician's, learning the letters.
+
+    The sergeant writes your name. "Age?"
+
+    "Just turned {age_words}, sir."
     [break]
-    What you bring from the office is what you will have out there.
+    What you bring from the office is what you'll have out there.
   choices:
     - id: pick_0
-      text: "Bring reading and figures, and a bowler's throwing arm."
+      text: A clerk's head for reading and figures, and a bowler's arm from Saturday cricket.
       effects: [ { war_home: [lit, sport] } ]
       next: c_general
     - id: pick_1
-      text: "Bring reading and figures, and St John Ambulance first aid."
+      text: A clerk's head for reading and figures, and the St John Ambulance certificate.
       effects: [ { war_home: [lit, firstaid] } ]
       next: c_general
     - id: pick_2
-      text: "Bring a bowler's throwing arm, and St John Ambulance first aid."
+      text: A bowler's arm from Saturday cricket, and the St John Ambulance certificate.
       effects: [ { war_home: [sport, firstaid] } ]
       next: c_general
 
