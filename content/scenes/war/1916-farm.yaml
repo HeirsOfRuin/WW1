@@ -1,0 +1,373 @@
+# The farm town, 1916 (docs/FRAME-1916-FARM-CITY.md). Stage 2 is tours 10 to 19; 1 July is tour
+# 14, the October battle tour 18. The farm company's first of July is at Mametz: its own first,
+# third and fourth phases; the second (into their trench) and October are shared with the mill.
+# Written to the voice in content/style-guide.md.
+
+# ---- events -----------------------------------------------------------------------------------
+
+- id: v16f_tribunal
+  chapter: front
+  kind: pool
+  pool: front_1916_farm
+  once: true
+  weight: 100
+  requires: [ "war.tour <= 11" ]
+  title: The tribunal
+  text: |
+    February, and the papers from home are full of the new Act. Conscription. Every single man of
+    military age, unless the tribunal lets him off.
+
+    And the tribunals are letting farmers' sons off. A letter from your mother: the Vellacotts' two
+    boys at Higher Barton went before the tribunal at South Molton, and their father stood up and
+    said they were needed for the harvest, and the magistrate, who hunts with Mr Vellacott, gave
+    them both exemption. Two great lads, twenty and twenty-two, at home on the farm. And you out
+    here, with the Dunsworthy lads.
+
+    [if war.mate2]Pearce reads it over your shoulder. "Vellacotts," he says. "I'd have their pheasants, when I get home. Every one." He means it as a comfort, and it is, a bit.[/if]
+  choices:
+    - id: angry
+      text: Write home and say what you think of the Vellacotts.
+      effects: [ { set: flag.f16_wrote_vellacott } ]
+      text_after: |
+        You write it in one go and post it before you can change your mind. Your mother will read it
+        to your father in the kitchen. Your father will say nothing, and agree with every word, and
+        go on buying his seed from Vellacott at market.
+      next: "@return"
+    - id: let_it
+      text: Let it be. Somebody has to get the harvest in.
+      text_after: |
+        Somebody has to. You know it. You think of the Long Field, and your father on his own with
+        the old mare, and you wish, for a minute, that you'd had a magistrate who hunted.
+      next: "@return"
+
+- id: v16f_new_officer
+  chapter: front
+  kind: pool
+  pool: front_1916_farm
+  once: true
+  requires: [ "war.tour >= 10" ]
+  title: Mr Rudd
+  text: |
+    The new platoon officer is Mr Rudd, from Birmingham, who was a clerk in a brass foundry and
+    went to the grammar school on a scholarship. Temporary gentlemen, the old officers call them,
+    behind their backs. He's twenty and he talks too much and he doesn't know a ewe from a wether.
+
+    The men from Dunsworthy don't take to him. He isn't Mr Venn. He doesn't know their mothers.[if war.mate1] He calls Will Cottle "Cottle" in the voice Mr Venn used for his dogs.[/if]
+
+    [if flag.farm_servant]He asks if you'll be his servant, as you were Mr Venn's.[else]He asks the sergeant who knows the ground, and the sergeant points at you.[/if]
+  choices:
+    - id: help
+      text: Help him. He's trying, and he's as frightened as you were.
+      effects: [ { set: flag.f16_helped_rudd } ]
+      text_after: |
+        You show him where to stand, and when not to talk, and that a man from Exmoor will do
+        anything for an officer who says please. He learns. By May the Dunsworthy men have stopped
+        calling him the brass button behind his back. Mostly.
+      next: "@return"
+    - id: no
+      text: Do your duty. Nothing more.
+      text_after: |
+        You do your duty, nothing more. He notices. He doesn't say anything. You see him alone in the
+        dugout at night writing letters, a lot of them, and you don't know who to.
+      next: "@return"
+
+- id: v16f_dog
+  chapter: front
+  kind: pool
+  pool: front_1916_farm
+  once: true
+  requires: [ "war.tour >= 11", war.mate1 ]
+  title: The dog
+  text: |
+    A dog turns up in the support line, a black and white French farm dog, thin as a rake, from
+    some farm that isn't there any more. She goes from man to man along the trench, sniffing, not
+    begging, the way a working dog looks for its master.
+
+    She stops at Cottle. Of course she does. He puts his hand down without looking and she puts her
+    nose in it, and that's that.
+
+    "She'm a sheepdog," he says. "Look at her eye. She's been working ewes." He gives a whistle, low,
+    two notes, the one he uses for Fly at home, and the dog drops flat in the mud as if she'd been
+    shot, and looks at him, waiting.
+  choices:
+    - id: keep
+      text: Help him keep her. Share your rations.
+      effects: [ { set: flag.f16_kept_dog } ]
+      text_after: |
+        She stays. She sleeps on Cottle's feet in the dugout and kills rats, a dozen a night, quick
+        and clean, a shake and a drop, and the whole platoon feeds her, and the officer pretends he
+        hasn't seen her. Cottle calls her Fly, the same as the dog at home, because he says he can't
+        be doing with learning a new name.
+      next: "@return"
+    - id: send_away
+      text: Tell him she'll be shot as a stray. Send her back.
+      text_after: |
+        He knows. He takes her back down the communication trench himself, and the next morning she's
+        there again, at his feet. In the end the transport sergeant takes her for the horse lines.
+        Cottle goes down to see her every time you're at rest.
+      next: "@return"
+
+- id: v16f_bert_peal
+  chapter: front
+  kind: pool
+  pool: front_1916_farm
+  once: true
+  requires: [ "war.tour >= 12", war.mate3 ]
+  title: A quarter peal
+  text: |
+    Bert has a letter from the tower captain at Dunsworthy, old Mr Squance, who taught him to ring
+    when he was twelve. Bert reads it out, because he can't keep it in.
+
+    The ringers are short, with the young men gone, so the old men and two of the girls from the
+    school have learned, and on Easter Sunday they rang a quarter peal of Grandsire Doubles for the
+    Dunsworthy men at the front. Twelve hundred and sixty changes. The first the girls ever rang.
+    They put all your names in the peal book.
+
+    Bert folds the letter up, and turns away, and his shoulders are going.
+  choices:
+    - id: sit
+      text: Sit with him. Don't say anything.
+      effects: [ { set: flag.f16_bert_peal } ]
+      text_after: |
+        You sit with him on the firestep. After a while he starts to say the changes under his breath,
+        the order of the bells, one, two, three, four, five, the way he learned them, and you can
+        hear the tower at home in it.
+      next: "@return"
+    - id: names
+      text: Ask him to read out the names in the peal book.
+      text_after: |
+        He reads them out: who rang, and who it was rung for. Your name's there. He reads it twice.
+      next: "@return"
+
+- id: v16f_mametz
+  chapter: front
+  kind: pool
+  pool: front_1916_farm
+  once: true
+  weight: 100
+  requires: [ "war.tour == 13" ]
+  title: The model
+  text: |
+    A week of bombardment, our guns day and night, and the company up in a little wood the maps call
+    Mansel Copse, looking out across a dip at the village of Mametz on the far slope.
+
+    An officer in the next company has made a model of the ground, in clay, on a table in a dugout,
+    every fold of it, and he shows it to anybody who'll look. There's a crucifix on the road by
+    Mametz, a shrine, and he puts his finger on it. "There's a machine gun there," he says. "And it
+    can see the whole of this slope. When we go over, it'll have us."
+
+    Everybody's been told the wire's cut and the Germans are dead in their dugouts. Everybody
+    looks at the clay.
+  choices:
+    - id: letter
+      text: Write a letter and leave it in your pay book.
+      effects: [ { set: flag.last_letter } ]
+      text_after: |
+        Shorter than the one before Loos. Tell Father to rest the mare. Tell Mother I'm not to be
+        fretted over. My best boots to whoever needs them. Love to all. You fold it small.
+      next: "@return"
+    - id: look
+      text: Look at the model a long time. Learn the ground.
+      effects: [ { set: flag.f16_learned_ground } ]
+      text_after: |
+        You learn it the way you'd learn a new farm: where the dip is, where the bank is, which side
+        of the copse has cover and which hasn't. When you go back to the trench and look over, the
+        ground fits the clay exactly, and the crucifix is just where he said.
+      next: "@return"
+
+- id: v16f_held
+  chapter: front
+  kind: pool
+  pool: front_1916_farm
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 15" ]
+  title: The Devonshires
+  text: |
+    Three days after, the battalion buries its dead from the slope below Mansel Copse. There are so
+    many that they don't carry them back. They put them in our old front-line trench, where they
+    went over from, side by side, a hundred and sixty of them, and fill it in.
+
+    Somebody makes a board for the end of it, and paints it, and nails it to a post:
+    THE DEVONSHIRES HELD THIS TRENCH. THE DEVONSHIRES HOLD IT STILL.
+
+    The padre reads the service. The guns are still going, further off. Larks over the slope.
+  choices:
+    - id: dig
+      text: Take a shovel. Fill it in with the burial party.
+      effects: [ { set: flag.f16_buried } ]
+      text_after: |
+        It's work you know: earth, a shovel, a rhythm. You fill it in the way you'd close a drain, and
+        you know some of the faces before the earth goes over them, and you keep the rhythm. Your
+        back aches like harvest. Afterwards you can't eat.
+      next: "@return"
+    - id: stand
+      text: Stand by the board. Read it till you have it by heart.
+      text_after: |
+        You don't need to read it twice. You'll have it by heart the rest of your life.
+      next: "@return"
+
+- id: v16f_letter
+  chapter: front
+  kind: pool
+  pool: front_1916_farm
+  once: true
+  requires: [ "war.tour >= 16" ]
+  title: A letter from home
+  text: |
+    "Dear Son, the harvest is in, and I do not know how. Your father and old Tucker and me and two
+    schoolboys from the village and the Squance girl that rings the bells. Your father was in the
+    field from four in the morning to dark every day for three weeks and he is not the man he was.
+
+    The blinds were down all along the street in July. Mrs Venn came down from the big house and
+    went in every house that had a letter and sat in the kitchen. She sat in ours an hour, in case,
+    she said, and drank her tea out of the cracked cup and did not seem to mind.
+
+    Keep your feet dry. Your loving Mother."
+  choices:
+    - id: write
+      text: Write to your father. Tell him to rest.
+      effects: [ { set: flag.f16_wrote_father } ]
+      text_after: |
+        He won't rest. You know it. But you tell him anyway, and you tell him about the French farms,
+        and the stooks you saw standing out in no man's land, never carted, gone black in the rain,
+        because he'll understand that better than anything.
+      next: "@return"
+    - id: keep
+      text: Keep it with the others.
+      text_after: |
+        It goes in your breast pocket. You read the bit about Mrs Venn and the cracked cup again, by
+        the brazier, and can see her, in your mother's kitchen, with her gloves in her lap.
+      next: "@return"
+
+# ---- the first of July, Mametz: the farm's first, third and fourth phases --------------------
+
+- id: b_somme_farm_1
+  chapter: front
+  title: The first of July
+  text: |
+    The first of July comes up hot, mist in the dip, burning off, and by seven the sun's on your
+    neck. Larks going up over the slope. You're in the trench at the edge of Mansel Copse, sixty
+    pounds on your back.
+
+    Half past seven. The guns stop. The whistles.
+
+    [if war.path == rifleman]You go up the ladder with {mate} on the rung below you, and out of the trees into the open.[/if][if war.path == nco]Seven men behind you on the ladder, watching your back.[/if][if war.path == lewis]You go in the second line with the gun on your shoulder and your No. 2 behind with the drums.[/if][if war.path == signals]You go with the company officer, a reel of wire paying out behind you.[/if][if war.path == bomb]You go with the bombers, a bucket of Mills bombs in each hand.[/if][if war.path == snipe]You go behind the second line with the scoped rifle, looking for the shrine.[/if][if flag.f16_learned_ground] You know the ground. You know where the bank is.[/if]
+
+    The machine gun by the crucifix opens up before the first wave is twenty yards out of the copse.
+    It's exactly where the officer said. It sweeps the slope like a man scything, left to right, and
+    the line goes down in front of it the way the corn goes down.
+
+    [if war.stalled]Nobody gets past the dip. The slope's full of men lying down, and the gun goes on.[else]Some of them get up and go on. Down into the dip, where it can't reach.[/if]
+  choices:
+    - id: push
+      text: "[if war.path == lewis]Get the gun into a shell hole and fire on the shrine.[/if][if war.path == signals]Keep going, paying out the wire.[/if][if war.path == bomb]Run for the dip with the buckets.[/if][if war.path == snipe]Find a fire position and hunt the gun at the shrine.[/if][if war.path == nco]Take the section on at a run for the dip.[/if][if war.path == rifleman]Run for the dip.[/if] ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "[if war.path == nco]Get your wounded back into the copse.[/if][if war.path == lewis]Get the drums forward to the men who need them.[/if][if war.path == rifleman]Drag {mate} into a shell hole. He's hit in the leg.[/if][if war.path == signals]Stay with the officer. He's down.[/if][if war.path == bomb]Get a wounded bomber back into the trees.[/if][if war.path == snipe]Spot for the Lewis gun beside you.[/if] ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down. Wait for the gun to turn away. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_somme_farm_3
+  chapter: front
+  title: Mametz
+  text: |
+    In the afternoon, Mametz. What's left of it: a village of rubble and cellars on the slope, brick
+    dust and the smell of old cider from a smashed press, and Germans in every cellar.
+
+    It goes on all afternoon. Cellar by cellar. A bomb down the steps, wait, then down after it. A
+    German officer comes up out of one with his hands up and his hat on straight, and asks for a
+    receipt for his men. Out of the next one comes a machine gun.
+
+    [if war.stalled]The village won't go. Every time the bombers get to a cellar, the next one opens up.[else]By evening the village is ours, or what's left of it is.[/if]
+  choices:
+    - id: push
+      text: "Down the cellar steps after the bombs. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Get the prisoners and the wounded out into the street. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get behind a wall and cover the cellar doors. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+- id: b_somme_farm_4
+  chapter: front
+  title: The slope
+  text: |
+    Night. Back down the slope below the copse, where the gun at the shrine caught the first wave,
+    to bring in the wounded.
+
+    It's full of men. They're lying in rows where they went down, the way a field lies after the
+    binder. Some of them are calling. You know the voices. That's the worst of it, at Dunsworthy you
+    knew everybody's voice from across a field, and you still do.
+  choices:
+    - id: push
+      text: "Run for the copse with a man on your back. ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Crawl to the voices you know and bring them in. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Crawl, shell hole to shell hole, as slow as it takes. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- the 1916 leave ---------------------------------------------------------------------------
+
+- id: l_farm_1916
+  chapter: front
+  title: Home on leave
+  text: |
+    December, and the lane up from the carrier's cart is ice in the ruts. The farm's there. The
+    smoke's going up straight from the chimney. Your father's in the yard with a lantern, though it's
+    not milking time, because your mother told him which train.
+
+    He's smaller. He shakes your hand, and then he doesn't let go of it.[if flag.f16_wrote_father] "I had your letter," he says. "About the stooks in no man's land." He shakes his head. "Black in the rain. Never carted." It's the thing that's stayed with him, out of the whole war.[/if]
+
+    The street has its blinds down in a row. Every third house. [if flag.f16_buried]You helped fill in the trench below Mansel Copse. You know which houses before anybody tells you.[/if]
+
+    [if war.mate1 && flag.f16_kept_dog]Old Mr Cottle has had a letter from Will about a French dog called Fly. He reads it out to the real Fly, on the hearth, and she bangs her tail on the stones.[/if][if war.mate1 && !flag.f16_kept_dog]Old Mr Cottle asks after Will, and you tell him he's well.[/if][if !war.mate1]Up at Cottle's they've stopped drawing the blinds. Fly's still at the gate. She'll be there till she dies, everybody says.[/if]
+
+    [if war.mate2]Pearce's mother asks if it's true Dan's a sniper now, and whether that means he's poaching for the King, and laughs at her own joke till she has to sit down.[/if][if !war.mate2]The keeper at the big house has let the rabbits go. Nobody to set against them, he says.[/if]
+
+    [if war.mate3 && flag.f16_bert_peal]On Sunday the ringers ring for your leave. The two girls from the school are on the treble and the second, and old Mr Squance on the tenor, Bert's bell. You stand in the tower and listen, and it's like being let out of something.[/if][if war.mate3 && !flag.f16_bert_peal]On Sunday the bells ring, short-handed, for the men home on leave. They keep the tenor rope looped up for Bert.[/if][if !war.mate3]The tenor's rung half-muffled on Sundays now, for the Dunsworthy dead, and the girl who rings it was taught by Bert's old tower captain.[/if]
+
+    [if flag.f16_wrote_vellacott]At market your father sells two heifers to Mr Vellacott and doesn't speak to him, and Mr Vellacott doesn't look at you.[/if][if flag.f16_helped_rudd] A letter comes for you at the farm from Mr Rudd, in Birmingham on leave too, to wish you a happy Christmas. Your mother puts it on the dresser with the others.[/if]
+
+    {offers_line}
+  choices:
+    - id: back
+      text: Go back on the tenth day. The battalion promotes the men who return.
+      effects: [ { war: back } ]
+      next: "@war"
+    - id: commission
+      text: Go before the board for a commission.
+      visible_if: war.commission
+      effects: [ { war: commission } ]
+      next: "@war"
+    - id: posting_0
+      text: "Take it: {offer0}. Your war ends here."
+      visible_if: "war.offers >= 1"
+      effects: [ { war: "posting:0" } ]
+      next: "@war"
+    - id: posting_1
+      text: "Take it: {offer1}. Your war ends here."
+      visible_if: "war.offers >= 2"
+      effects: [ { war: "posting:1" } ]
+      next: "@war"
+    - id: posting_2
+      text: "Take it: {offer2}. Your war ends here."
+      visible_if: "war.offers >= 3"
+      effects: [ { war: "posting:2" } ]
+      next: "@war"

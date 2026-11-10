@@ -38,6 +38,7 @@ answers (`docs/KILLGATE.md`, 2026-11-09). Design: `docs/DESIGN.md`, draft for ap
 | 2026-11-09 | The pit town's 1918 on two roads, with the mill's battles shared, and the pit's own Armistice (FRAME-PIT-1918.md); the pit is written through | "Go ahead" |
 | 2026-11-09 | The farm town's opening and 1915: Dunsworthy on Exmoor, Cottle, Pearce and Yeo, young Mr Venn, Loos at the Lone Tree; the tunneller's 1918 left story-heavy as recommended (FRAME-FARM-1915.md) | "Contine" |
 | 2026-11-10 | The city town's opening and 1915 (the last town without one): London insurance clerks, Webb, Fenton and Marsh, Loos under Tower Bridge (FRAME-CITY-1915.md) | "Go with any opening to the end of 1915 not yet completed" |
+| 2026-11-10 | The farm and city towns through 1916: Mametz and Gommecourt as their first of July, the rest shared with the mill (FRAME-1916-FARM-CITY.md) | "Continue" |
 
 ## Pitch
 

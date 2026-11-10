@@ -294,7 +294,7 @@
     guns open up on no man's land again, and no man's land is full of men who aren't moving, and
     some who are.
 
-    [if war.path == lewis]You're on your last drum. You've been counting rounds in your head the way you'd count picks on a loom.[/if][if war.path == nco]You've four men, and a lance corporal who won't stop talking about his allotment.[/if][if war.path == signals]You let the live pigeon go with a message on its leg: cut off, need bombs and water. It goes round twice and then off the right way, and you watch it till it's gone.[/if][if war.path == bomb]You've six bombs left, and their bombers have the whole of their own trench to fetch more from.[/if][if war.path == snipe || war.path == rifleman]You've ninety rounds and a bayonet and your own two hands.[/if]
+    [if war.path == lewis]You're on your last drum. You've been counting rounds in your head the way you'd [if start == mill]count picks on a loom[/if][if start == city]add a column of figures[/if][if start == farm]count sheep through a gate[/if].[/if][if war.path == nco]You've four men, and a lance corporal who won't stop talking about his allotment.[/if][if war.path == signals]You let the live pigeon go with a message on its leg: cut off, need bombs and water. It goes round twice and then off the right way, and you watch it till it's gone.[/if][if war.path == bomb]You've six bombs left, and their bombers have the whole of their own trench to fetch more from.[/if][if war.path == snipe || war.path == rifleman]You've ninety rounds and a bayonet and your own two hands.[/if]
 
     They come at you from both ends of the trench at once, about four o'clock. Bombs first.
   choices:

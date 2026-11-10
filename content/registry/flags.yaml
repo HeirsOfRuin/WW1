@@ -150,3 +150,19 @@ city_helped_webb: { description: "Helped Webb find out about his father's wareho
 city_wrote_webb: { description: "Wrote to Mrs Webb; she asks him to open Arthur's notebook at leave" }
 city_wrote_fenton: { description: "Wrote to Fenton's father about the match" }
 city_wrote_marsh: { description: "Wrote to Mrs Marsh" }
+# The farm town, 1916 (content/scenes/war/1916-farm.yaml)
+f16_wrote_vellacott: { description: "Wrote home what he thought of the Vellacott boys' exemption" }
+f16_helped_rudd: { description: "Helped the new officer, Mr Rudd; a Christmas letter at leave" }
+f16_kept_dog: { description: "Helped Cottle keep the French sheepdog he called Fly" }
+f16_bert_peal: { description: "Sat with Bert over the quarter peal rung at home" }
+f16_learned_ground: { description: "Learned the ground from the clay model before Mametz" }
+f16_buried: { description: "Filled in the Devonshires' trench below Mansel Copse" }
+f16_wrote_father: { description: "Wrote to his father about the stooks in no man's land" }
+# The city town, 1916 (content/scenes/war/1916-city.yaml)
+c16_florence: { description: "Wrote to Miss Holland as Florence; they meet at the Lyons at leave" }
+c16_kept_notebook: { description: "Kept Webb's first notebook sewn in his pack lining" }
+c16_after_the_ball: { description: "Promised Fenton to go after his ball on the first of July" }
+c16_marsh_truth: { description: "Told Marsh to tell the Sunday school children the truth" }
+c16_counted_smoke: { description: "Counted the smoke candles before Gommecourt" }
+c16_read_lists: { description: "Read the London casualty lists after Gommecourt" }
+c16_wrote_mother: { description: "Told his mother she was not too soft about the airship" }

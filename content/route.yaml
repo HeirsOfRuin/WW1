@@ -118,15 +118,24 @@ switch:
   - { if: ["war.battle == loos", "war.phase == 2", "war.path == rifleman"], go: b_loos_trench }
   - { if: ["war.battle == loos", "war.phase == 3", "war.path == rifleman"], go: b_loos_hold }
   - { if: ["war.pending == leave", "war.stage == 1", "start == mill"], go: l_mill_1915 }
+  # the farm and city towns, 1916 (docs/FRAME-1916-FARM-CITY.md): their own first of July; the rest shared with the mill
+  - { if: ["war.pending == tour", "war.stage == 2", "start == farm"], go: { pool: front_1916_farm, count: 1, then: w_tour } }
+  - { if: ["war.battle == somme_1_july", "war.phase == 1", "start == farm"], go: b_somme_farm_1 }
+  - { if: ["war.battle == somme_1_july", "war.phase == 3", "start == farm"], go: b_somme_farm_3 }
+  - { if: ["war.battle == somme_1_july", "war.phase == 4", "start == farm"], go: b_somme_farm_4 }
+  - { if: ["war.pending == leave", "war.stage == 2", "start == farm"], go: l_farm_1916 }
+  - { if: ["war.pending == tour", "war.stage == 2", "start == city"], go: { pool: front_1916_city, count: 1, then: w_tour } }
+  - { if: ["war.battle == somme_1_july", "war.phase == 1", "start == city"], go: b_somme_city_1 }
+  - { if: ["war.pending == leave", "war.stage == 2", "start == city"], go: l_city_1916 }
   # the mill town, 1916 (docs/FRAME-1916.md)
   - { if: ["war.pending == tour", "war.stage == 2", "start == mill"], go: { pool: front_1916_mill, count: 1, then: w_tour } }
   - { if: ["war.battle == somme_1_july", "war.phase == 1", "start == mill"], go: b_somme_1 }
-  - { if: ["war.battle == somme_1_july", "war.phase == 2", "start == mill"], go: b_somme_2 }
-  - { if: ["war.battle == somme_1_july", "war.phase == 3", "start == mill"], go: b_somme_3 }
-  - { if: ["war.battle == somme_1_july", "war.phase == 4", "start == mill"], go: b_somme_4 }
-  - { if: ["war.battle == somme_autumn", "war.phase == 1", "start == mill"], go: b_somme_autumn_1 }
-  - { if: ["war.battle == somme_autumn", "war.phase == 2", "start == mill"], go: b_somme_autumn_2 }
-  - { if: ["war.battle == somme_autumn", "war.phase == 3", "start == mill"], go: b_somme_autumn_3 }
+  - { if: ["war.battle == somme_1_july", "war.phase == 2", { any: ["start == mill", "start == city", "start == farm"] }], go: b_somme_2 }
+  - { if: ["war.battle == somme_1_july", "war.phase == 3", { any: ["start == mill", "start == city"] }], go: b_somme_3 }
+  - { if: ["war.battle == somme_1_july", "war.phase == 4", { any: ["start == mill", "start == city"] }], go: b_somme_4 }
+  - { if: ["war.battle == somme_autumn", "war.phase == 1", { any: ["start == mill", "start == city", "start == farm"] }], go: b_somme_autumn_1 }
+  - { if: ["war.battle == somme_autumn", "war.phase == 2", { any: ["start == mill", "start == city", "start == farm"] }], go: b_somme_autumn_2 }
+  - { if: ["war.battle == somme_autumn", "war.phase == 3", { any: ["start == mill", "start == city", "start == farm"] }], go: b_somme_autumn_3 }
   - { if: ["war.pending == leave", "war.stage == 2", "start == mill"], go: l_mill_1916 }
   # the mill town, 1917 (content/scenes/war/1917-mill.yaml)
   - { if: ["war.pending == tour", "war.stage == 3", "start == mill"], go: { pool: front_1917_mill, count: 1, then: w_tour } }

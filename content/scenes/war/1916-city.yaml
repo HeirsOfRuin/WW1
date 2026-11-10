@@ -1,0 +1,323 @@
+# The city town, 1916 (docs/FRAME-1916-FARM-CITY.md). Stage 2 is tours 10 to 19; 1 July is tour
+# 14, the October battle tour 18. The city company's first of July is at Gommecourt, the
+# diversion: its own first phase; the rest of the day (into their trench, cut off, back at dark)
+# and October are shared with the mill. Written to the voice in content/style-guide.md.
+
+# ---- events -----------------------------------------------------------------------------------
+
+- id: v16c_holland
+  chapter: front
+  kind: pool
+  pool: front_1916_city
+  once: true
+  weight: 100
+  requires: [ "war.tour <= 11", flag.city_wrote_holland ]
+  title: F. Holland
+  text: |
+    A letter from Miss Holland, the fourth since Christmas. They come every fortnight now, on the
+    firm's paper, which she says she's not supposed to use, and she uses it anyway.
+
+    The F is for Florence. She's learned the Marine ledgers and Mr Gedge has stopped checking her
+    sums. She went to the Coliseum with her sister and saw a sketch about a Tommy on leave that
+    made her laugh and then made her cry, and she doesn't know why she's telling you that.
+
+    At the bottom, after her name, small, squeezed in: Do you think you might call me Florence, when you
+    write? Only if you'd like to.
+  choices:
+    - id: florence
+      text: Write back. Dear Florence.
+      effects: [ { set: flag.c16_florence } ]
+      text_after: |
+        Dear Florence. You write it, and look at it, and it looks like somebody else's letter. You
+        tell her about the farm women and the oxen, and the nightingale, and that you'd like to go to
+        the Coliseum, after. You write "after" and look at that too.
+      next: "@return"
+    - id: miss
+      text: Write back as before. Dear Miss Holland.
+      text_after: |
+        Dear Miss Holland. You can't, yet. It feels like tempting something. You tell her about the
+        weather and the food and sign it with your initial, and she writes back just the same, and
+        doesn't mention it again.
+      next: "@return"
+
+- id: v16c_notebook
+  chapter: front
+  kind: pool
+  pool: front_1916_city
+  once: true
+  requires: [ "war.tour >= 10", war.mate1 ]
+  title: The second notebook
+  text: |
+    Webb's filled his first notebook. Every shell, every tour, every man killed in the company with
+    the date and the place and how. The totals at the bottom of every page, in a column, carried
+    forward.
+
+    He shows you the last page by a candle. The total for 1915, for the company. It's a number. It's
+    only a number, in his neat office hand, and you look at it a long time.
+
+    Now he's started a second. And the new company officer has said that the next man found with a
+    diary will be on a charge.
+  choices:
+    - id: hide
+      text: Keep the first notebook for him, sewn into your pack lining.
+      effects: [ { set: flag.c16_kept_notebook } ]
+      text_after: |
+        You sew it in that night with your housewife needle, flat against the canvas, where nobody
+        will look. It's there every time you put your pack on. You can feel the corners of it.
+      next: "@return"
+    - id: home
+      text: Tell him to post it home to his mother, sealed.
+      text_after: |
+        He does, in a parcel with a pair of socks to darn, so the censor won't look inside. Two weeks
+        later his mother writes that she's had the socks. She doesn't say anything about the book.
+        He's not sure what that means. Neither are you.
+      next: "@return"
+
+- id: v16c_fenton_ball
+  chapter: front
+  kind: pool
+  pool: front_1916_city
+  once: true
+  requires: [ "war.tour >= 11", war.mate2 ]
+  title: A new ball
+  text: |
+    A parcel for Fenton from his father: a new football, leather, laced, the best you can buy at
+    Gamages, and painted on it in white, in his father's careful sign-writer's hand: LOOS, 1915.
+    And under it, smaller: AND NEXT TIME.
+
+    Fenton turns it round and round in his hands. The Loos ball is out there somewhere on the
+    Double Crassier, gone flat in the rain.
+
+    "He's proud," he says. "He's put it up in the shop window, the newspaper bit about the football.
+    Everybody comes in to look." He holds the new ball against his chest. "There's going to be a big
+    push this summer, they're saying. I'm going to kick this one across too."
+  choices:
+    - id: yes
+      text: Tell him you'll go after it with him.
+      effects: [ { set: flag.c16_after_the_ball } ]
+      text_after: |
+        "Right half," he says, and grins, and you shake on it like a contract at the office.
+      next: "@return"
+    - id: dont
+      text: Tell him to leave it. Once was enough.
+      text_after: |
+        He looks at you, and at the ball, and puts it back in its paper. "You're right," he says.
+        Then, after a minute: "It's not for them, you know. The Germans. It's for us. So we're not
+        just walking."
+      next: "@return"
+
+- id: v16c_marsh_school
+  chapter: front
+  kind: pool
+  pool: front_1916_city
+  once: true
+  requires: [ "war.tour >= 12", war.mate3 ]
+  title: The Sunday school
+  text: |
+    Marsh has a parcel from the Sunday school at the chapel in Leyton: letters from the children,
+    a dozen of them, in pencil, with drawings. A soldier with a rifle bigger than he is. A ship. A
+    German with horns. Teacher, are you brave. Teacher, have you killed a German. Teacher, when are
+    you coming home.
+
+    He reads every one twice, with his steel spectacles pushed up on his forehead and the letter
+    held close. Then he sits with a pencil and the back of a field postcard, trying to answer.
+
+    "What do I tell them?" he says. "Have you killed a German. What do I tell them?"
+  choices:
+    - id: truth
+      text: Tell him to tell them the truth, gently.
+      effects: [ { set: flag.c16_marsh_truth } ]
+      text_after: |
+        He writes it the way he'd teach a Bible story: that soldiers are frightened, and that's all
+        right, and that the Germans are men like their fathers, and that he hopes none of them ever
+        has to come here. It takes him all night. In the morning he reads it to you and asks if it's
+        too much. It isn't.
+      next: "@return"
+    - id: easy
+      text: Tell him to tell them about the birds and the poppies.
+      text_after: |
+        He writes them about the larks over the trenches, and the poppies, and the French farm dog
+        that kills rats. He draws a rat. They'll love the rat. He doesn't answer the question, and
+        neither do you.
+      next: "@return"
+
+- id: v16c_gommecourt
+  chapter: front
+  kind: pool
+  pool: front_1916_city
+  once: true
+  weight: 100
+  requires: [ "war.tour == 13" ]
+  title: The new trench
+  text: |
+    June, and the whole division has dug a new trench out in no man's land, at night, three
+    hundred yards nearer the Germans, in a week. Clerks with picks. Three thousand of you out in the
+    open in the dark, digging, with the moon behind cloud and the Germans watching, and for some reason
+    they didn't fire.
+
+    Now there's a week of bombardment, and the rumour that runs along the trench is that you're not
+    the real attack. You're the feint. The real push is down south, and the Londoners at Gommecourt
+    are here to make the Germans look the wrong way. The smoke candles are stacked in the bays.
+
+    Nobody knows if it's true. It doesn't help either way.
+  choices:
+    - id: letter
+      text: Write a letter and leave it in your pay book.
+      effects: [ { set: flag.last_letter } ]
+      text_after: |
+        Shorter than the one before Loos. The firm will see Mother right. My bat to the boys' club.
+        [if flag.c16_florence]A line to Florence that you write and cross out and write again.[/if] Love to all. You fold it small.
+      next: "@return"
+    - id: smoke
+      text: Count the smoke candles. Work out whose bay they're for.
+      effects: [ { set: flag.c16_counted_smoke } ]
+      text_after: |
+        You count them like stock in a warehouse. Forty to a bay. Enough to hide a company for ten
+        minutes, if the wind holds. You don't know what the wind's going to do. Neither does anybody.
+      next: "@return"
+
+- id: v16c_after
+  chapter: front
+  kind: pool
+  pool: front_1916_city
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 15" ]
+  title: The lists
+  text: |
+    The London papers come up a week late with the lists. Columns of them. The London Scottish, the
+    Rangers, the Queen Victoria's, the Kensingtons, the Rifle Brigade, the whole of the division, and
+    under each name the regiment and the parish. Your own battalion goes on for half a page.
+
+    It was the feint. It was true. The real push was down south, and they needed the Germans to look
+    at Gommecourt, and they looked.
+
+    A letter comes from the manager at the Gresham and Lombard. The Roll of Honour in the front hall
+    is to have a second panel. They've ordered it from the same gilder.
+  choices:
+    - id: read
+      text: Read every name in the lists.
+      effects: [ { set: flag.c16_read_lists } ]
+      text_after: |
+        Clerks from Lloyd's, from the Pru, from the banks in Lombard Street. Men you passed in the
+        street at dinner time. A man you sat next to at evening classes in book-keeping. You read
+        them all and fold the paper and put it in your pack, and you don't know why you keep it.
+      next: "@return"
+    - id: no
+      text: Don't. You were there.
+      text_after: |
+        You give the paper away to a man from Hull who wants it to light the brazier. You watch the
+        names go brown and curl and go.
+      next: "@return"
+
+- id: v16c_cuffley
+  chapter: front
+  kind: pool
+  pool: front_1916_city
+  once: true
+  requires: [ "war.tour >= 16" ]
+  title: A letter from home
+  text: |
+    "Dear Son, you will have read about the airship. Your father woke me at two in the morning and
+    we went out in the street in our coats, the whole street did, and there it was over to the north,
+    caught in the searchlights, and then a little light underneath it, and then it was all on fire,
+    the whole length of it, red, and it came down slowly, burning, over towards Enfield. And the
+    whole of London cheered. You could hear it all round, miles of it, people cheering in the streets
+    in their night things, and the church bells, and the trains blowing their whistles.
+
+    I cheered too. Then I thought of the men in it, and I went in and sat in the kitchen. Your father
+    says I am too soft. Your loving Mother."
+  choices:
+    - id: write
+      text: Write back. Tell her she's not too soft.
+      effects: [ { set: flag.c16_wrote_mother } ]
+      text_after: |
+        You tell her she's not. You tell her that out here the men think of the men in the other
+        trench the same, some nights, and that nobody would ever say it in a pub at home. You don't
+        know if that's the kind of thing you can write. The censor lets it through.
+      next: "@return"
+    - id: keep
+      text: Keep it with the others.
+      text_after: |
+        It goes in your breast pocket. You read the bit about the whole of London cheering again, and
+        try to imagine the sound of it, and can't, and can imagine the kitchen exactly.
+      next: "@return"
+
+# ---- the first of July, Gommecourt: the city's first phase ------------------------------------
+
+- id: b_somme_city_1
+  chapter: front
+  title: The first of July
+  text: |
+    The first of July comes up hot, mist in the hollows, and at twenty past seven the smoke goes
+    over: the candles lit all down the line, thick white smoke rolling out across no man's land,
+    tasting of sulphur and paraffin, hiding everything.[if flag.c16_counted_smoke] Forty to a bay. You counted.[/if]
+
+    Half past seven. The whistles. You go up out of the new trench into the smoke.
+
+    [if war.path == rifleman]{mate} is beside you in the smoke, a shape, then a man, then a shape again.[/if][if war.path == nco]Seven men behind you, and in the smoke you can't see any of them.[/if][if war.path == lewis]You go in the second line with the gun on your shoulder and your No. 2 behind with the drums.[/if][if war.path == signals]You go with the company officer, the wire paying out behind you into the smoke.[/if][if war.path == bomb]You go with the bombers, a bucket of Mills bombs in each hand.[/if][if war.path == snipe]You go behind the second line with the scoped rifle, and in the smoke it's no use at all.[/if][if war.mate2 && flag.c16_after_the_ball] Somewhere to your left, in the smoke, you hear the thump of a boot on a ball, and Fenton shouting.[/if]
+
+    [if war.stalled]The smoke thins too early. Out of it, their wire, standing, and the machine guns open up from the park at Gommecourt behind it, and men are going down all along the line before they're halfway.[else]Out of the smoke, their wire, cut, and their front trench, and nobody in it yet, because they're still down their dugouts. You're in.[/if]
+  choices:
+    - id: push
+      text: "[if war.path == lewis]Get the gun up into their trench.[/if][if war.path == signals]Keep going, paying out the wire.[/if][if war.path == bomb]Run for their trench with the buckets.[/if][if war.path == snipe]Get into their trench and find a loophole.[/if][if war.path == nco]Take the section in at a run.[/if][if war.path == rifleman]Run for their trench.[/if] ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "[if war.path == nco]Get your wounded into a shell hole first.[/if][if war.path == lewis]Get the drums forward to the men who need them.[/if][if war.path == rifleman]Drag {mate} into a shell hole. He's hit in the leg.[/if][if war.path == signals]Stay with the officer. He's down.[/if][if war.path == bomb]Get a wounded bomber back to the new trench.[/if][if war.path == snipe]Spot for the Lewis gun beside you.[/if] ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Get down in the smoke. Wait for it to clear. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- the 1916 leave ---------------------------------------------------------------------------
+
+- id: l_city_1916
+  chapter: front
+  title: Home on leave
+  text: |
+    Victoria again, in your mud, at night. London's darker than last year. The lamps are painted
+    blue on top and there are women conductors on the buses, and girls on the Underground in
+    trousers from the munitions, and everybody looks tired.
+
+    Your mother's at the door. Your father shakes your hand and says, "Well, then," and goes to put
+    the kettle on himself, which he has never done in his life.[if flag.c16_wrote_mother] "You told her she wasn't soft," he says, from the scullery, when she's gone up. "Thank you for that."[/if]
+
+    [if flag.c16_read_lists]You know which houses in the street. You read the lists. There are three with a card in the front window now, a printed card with a name and a regiment, and a little flag.[/if][if !flag.c16_read_lists]There are three houses in the street with a card in the front window now, a name and a regiment, and a little flag. You didn't read the lists. You read them now, on the way up the street.[/if]
+
+    On the Monday, the office. The Roll of Honour has its second panel. [if flag.c16_florence]Florence meets you on the steps at one o'clock, because she said she would, and you go to the Lyons on the corner, and she has a poached egg and you have a pork pie, and you sit there in your uniform with the steam on the windows and the waitresses going past, and talk for an hour about nothing at all, and it's the best hour of the war.[/if][if flag.city_wrote_holland && !flag.c16_florence]Miss Holland is at your desk. She stands up and shakes your hand, and calls you by your surname, and so do you.[/if]
+
+    [if war.mate1 && flag.c16_kept_notebook]Mrs Webb asks if Arthur's still writing in that book. You say he is. You don't tell her the first one is in your pack, sewn into the lining.[/if][if war.mate1 && !flag.c16_kept_notebook]Mrs Webb has had a parcel of socks from Arthur, to darn, with something else inside. She hasn't opened it. She asks you if she ought.[/if][if !war.mate1]The Webbs have Arthur's card in the window.[/if][if !war.mate1 && flag.c16_kept_notebook] His first notebook is still sewn in your pack. You take it round, and put it in his mother's hands, and she holds it the way you'd hold a bird.[/if]
+
+    [if war.mate2]Fenton's father has the newspaper cutting about the football at Loos in his shop window, and a new one beside it, about the first of July, though it was a different football and a different battalion.[/if][if !war.mate2]Fenton's father has taken the football out of the shop window. The cutting's still there, gone yellow.[/if]
+
+    [if war.mate3 && flag.c16_marsh_truth]At chapel the Sunday school children have pinned Marsh's letter on the wall. The superintendent read it out to them, and some of the parents complained, and he left it up.[/if][if war.mate3 && !flag.c16_marsh_truth]At chapel the children have drawn a hundred rats, after Mr Marsh's letter.[/if][if !war.mate3]At chapel the Sunday school has a new teacher, and Leonard Marsh's spectacles case on the windowsill, which nobody will move.[/if]
+
+    {offers_line}
+  choices:
+    - id: back
+      text: Go back on the tenth day. The battalion promotes the men who return.
+      effects: [ { war: back } ]
+      next: "@war"
+    - id: commission
+      text: Go before the board for a commission.
+      visible_if: war.commission
+      effects: [ { war: commission } ]
+      next: "@war"
+    - id: posting_0
+      text: "Take it: {offer0}. Your war ends here."
+      visible_if: "war.offers >= 1"
+      effects: [ { war: "posting:0" } ]
+      next: "@war"
+    - id: posting_1
+      text: "Take it: {offer1}. Your war ends here."
+      visible_if: "war.offers >= 2"
+      effects: [ { war: "posting:1" } ]
+      next: "@war"
+    - id: posting_2
+      text: "Take it: {offer2}. Your war ends here."
+      visible_if: "war.offers >= 3"
+      effects: [ { war: "posting:2" } ]
+      next: "@war"

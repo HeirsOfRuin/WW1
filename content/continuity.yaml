@@ -31,6 +31,12 @@ rules:
   - { match: "Webb has his little black notebook|Webb's writing in the notebook|Webb reads the paper|Mrs Webb asks if Arthur", allow: war.mate1, why: Arthur Webb only acts while alive }
   - { match: "Fenton's got a football|Fenton's got his football|Fenton's on the ladder|Fenton's father, who never missed", allow: war.mate2, why: Percy Fenton only acts while alive }
   - { match: "Marsh has broken his spectacles|Mrs Marsh gives you a cake|Mrs Marsh says Leonard wrote", allow: war.mate3, why: Leonard Marsh only acts while alive }
+  - { match: "Pearce reads it over|Pearce's mother asks if it's true", allow: war.mate2, why: Dan Pearce only acts while alive (1916) }
+  - { match: "She stops at Cottle|Old Mr Cottle has had a letter from Will|calls Will Cottle", allow: war.mate1, why: Will Cottle only acts while alive (1916) }
+  - { match: "Bert has a letter from the tower", allow: war.mate3, why: Bert Yeo only acts while alive (1916) }
+  - { match: "Webb's filled his first|Mrs Webb asks if Arthur's still", allow: war.mate1, why: Arthur Webb only acts while alive (1916) }
+  - { match: "A parcel for Fenton|Fenton's father has the newspaper cutting", allow: war.mate2, why: Percy Fenton only acts while alive (1916) }
+  - { match: "Marsh has a parcel from the Sunday|pinned Marsh's letter", allow: war.mate3, why: Leonard Marsh only acts while alive (1916) }
   - match: "All nine of the section"
     allow: "war.section == 9"
     why: The whole section alive only while all nine are.

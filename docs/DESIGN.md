@@ -510,6 +510,10 @@ loss. Farm 1915 story share went from 49.2% to 61.5%.
 1915: the Guildhall queue, nine events, Loos under Tower Bridge, the leave, and three friends'
 deaths. City 1915 story share went from 49.4% to 61.6%. Every town now has a written first year.
 
+**The farm and city towns, 1916 (FRAME-1916-FARM-CITY.md).** Each has its own first of July
+(Mametz, Gommecourt), sharing the mill's later phases and October where they fit. Farm 1916
+story share went from 27.4% to 50.6%, and city from 26.4% to 49.1%.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.
