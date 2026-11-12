@@ -336,7 +336,7 @@
   text: |
     Ten days at home. The town has its own war now: the casualty lists in the paper, the women in
     the works, the houses with the blinds down.
-    {section_line} {offers_line}
+    {section_line} {money_line} {offers_line}
   choices:
     - id: back
       text: "Go back. A stripe is waiting: the battalion promotes the men who return."

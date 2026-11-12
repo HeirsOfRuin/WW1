@@ -250,6 +250,8 @@
 
     [if war.mate3 && flag.c17_learned_morse]At chapel the Sunday school children have learned Morse from Mr Marsh's letters, and tap ALL WELL to you on the pew in front.[/if][if war.mate3 && !flag.c17_learned_morse]Mrs Marsh says Leonard is a signaller now, and asks what that means, and you tell her it means he's the cleverest man in the company.[/if][if !war.mate3]At the chapel there's a brass plate for Leonard Marsh by the Sunday school door.[/if]
 
+    {money_line}
+
     {offers_line}
   choices:
     - id: back

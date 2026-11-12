@@ -244,6 +244,8 @@
 
     [if war.mate3 && flag.f17_bert_bearer]Mrs Yeo has heard Bert's a stretcher-bearer now. She's proud and frightened in equal parts and can't say which. The ringers rang for the bearers on All Souls' Day.[/if][if war.mate3 && !flag.f17_bert_bearer]Mrs Yeo asks you to look after Bert. You say you will. You don't know how.[/if][if !war.mate3]The tenor bell is rung half-muffled every Sunday now.[/if]
 
+    {money_line}
+
     {offers_line}
   choices:
     - id: back

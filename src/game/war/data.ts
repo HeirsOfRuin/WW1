@@ -17,6 +17,22 @@ export interface Role { mission: string; chance: number; hit: number; nerve: num
 
 export const RANKS = ['Private', 'Lance corporal', 'Corporal', 'Sergeant', 'Company sergeant major', 'Second lieutenant'];
 export const SUBALTERN = 5;
+
+// Pay sent home (the author, 2026-11-09: "pay becomes money sent home that changes the family's
+// circumstances on leave"). Daily pay in pence by rank; a specialist's proficiency pay on top;
+// a tunneller's rate replaces it. He allots a share home each tour (about a month). Tuned, not
+// sourced: the private's shilling a day and the tunneller's six shillings are the figures the
+// prose uses; the rest are to be checked (KILLGATE open issue 6). Nothing in the war reads it.
+export const PAY = {
+  rankPence: [12, 15, 20, 28, 60, 90], // private, lance corporal, corporal, sergeant, CSM, second lieutenant
+  rolePence: 2, tunnelPence: 72,
+  daysPerTour: 30, allot: 0.5, officerAllot: 0.3,
+  // the family's circumstances at leave, by pence sent home so far: under £7, £21, £50, and over.
+  // Set so that each leave splits two ways by rank and role (measured 2026-11-12: a private has
+  // about £6 15s home by the first leave, £19 by the second, £38 by the third; a tunneller £51
+  // by the second), so the sum shown changes what the leave says.
+  tiers: [1680, 5040, 12000],
+};
 export const TOP_OR = 4; // highest rank an other rank can reach
 
 // Hometown skills. Each town offers three; the player picks two, plus one general.

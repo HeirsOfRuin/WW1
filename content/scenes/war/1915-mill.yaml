@@ -439,6 +439,8 @@
 
     At night the quiet keeps waking you up.
 
+    {money_line}
+
     {offers_line}
   choices:
     - id: back

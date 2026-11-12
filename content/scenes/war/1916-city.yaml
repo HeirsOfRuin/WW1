@@ -295,6 +295,8 @@
 
     [if war.mate3 && flag.c16_marsh_truth]At chapel the Sunday school children have pinned Marsh's letter on the wall. The superintendent read it out to them, and some of the parents complained, and he left it up.[/if][if war.mate3 && !flag.c16_marsh_truth]At chapel the children have drawn a hundred rats, after Mr Marsh's letter.[/if][if !war.mate3]At chapel the Sunday school has a new teacher, and Leonard Marsh's spectacles case on the windowsill, which nobody will move.[/if]
 
+    {money_line}
+
     {offers_line}
   choices:
     - id: back

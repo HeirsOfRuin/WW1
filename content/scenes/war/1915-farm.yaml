@@ -449,6 +449,8 @@
 
     At night the quiet keeps waking you. Then an owl, and you sleep.
 
+    {money_line}
+
     {offers_line}
   choices:
     - id: back

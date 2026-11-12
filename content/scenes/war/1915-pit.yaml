@@ -433,6 +433,8 @@
 
     At night you lie in your own bed and listen for the roof.
 
+    {money_line}
+
     {offers_line}
   choices:
     - id: back

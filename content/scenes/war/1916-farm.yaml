@@ -345,6 +345,8 @@
 
     [if flag.f16_wrote_vellacott]At market your father sells two heifers to Mr Vellacott and doesn't speak to him, and Mr Vellacott doesn't look at you.[/if][if flag.f16_helped_rudd] A letter comes for you at the farm from Mr Rudd, in Birmingham on leave too, to wish you a happy Christmas. Your mother puts it on the dresser with the others.[/if]
 
+    {money_line}
+
     {offers_line}
   choices:
     - id: back

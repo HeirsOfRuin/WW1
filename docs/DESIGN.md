@@ -523,12 +523,23 @@ enlistment to the Armistice, each with its own ending. The 1918 battles are shar
 towns. Farm 1918 story share went from 23.7% to 47.9%, and city from 26.8% to 52.5%. Whole game:
 mill 54.8%, pit 60.0%, farm 54.0%, city 54.9%.
 
+**Pay sent home (2026-11-12).** The author's decision of 2026-11-09 ("pay becomes money sent
+home that changes the family's circumstances on leave"), built.
+- Each tour he allots half a month's pay home (`PAY` in `data.ts`): a private's shilling a day,
+  more by rank, proficiency pay for a specialist, six shillings for a tunneller, and a smaller
+  share for an officer, who keeps his own mess.
+- The running sum is on the Soldier tab ("Sent home").
+- Every leave reads it (`{money_line}`, a line per town in four tiers: under £7, £21, £50, and
+  over). The tiers were set from a measurement so that each leave splits two ways by rank and
+  role. A tunneller is always in the top tier: that is what six shillings a day buys.
+- It draws nothing, so the gate is identical. A test holds the sum rising every tour, and each
+  leave showing at least two tiers.
+- The rates are tuned, not sourced, apart from the shilling and the six shillings.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.
-2. **Pay:** keep it as displayed flavour that buys nerve at rest (as now), or make it a
-   small currency sent home that changes the family's circumstances on leave? (Recommended:
-   the second, after the slice; rule 2 says a shown number must change something.)
+2. **Pay:** decided 2026-11-09 (money sent home) and built 2026-11-12 (above).
 3. **The slice town:** the mill town (recommended, for the reason above) or another?
 4. **The name.** A working title is needed for the save key and the page. Candidates:
    *The Line*, *Kitchener's Man*, *Pals*, *Over the Top*. Or your own.

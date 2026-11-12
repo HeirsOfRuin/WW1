@@ -7,7 +7,7 @@ import { playGame } from '../tools/war-bot';
 import { newGame, view, choose, type GameState } from '../src/game/index';
 import { toSave, fromSave, encodeSaveCode, decodeSaveCode } from '../src/game/save';
 import { warMonth, seasonOf, monthName, ARMISTICE } from '../src/game/war/calendar';
-import { phaseHit, battleOf } from '../src/game/war/index';
+import { phaseHit, battleOf, newWar, run, decide, decideFor, homeTier, sentHomeOf, POLICIES as WAR_POLICIES } from '../src/game/war/index';
 import { riskWord, whereOf, endingLine } from '../src/game/module';
 import { share } from '../tools/story-share';
 
@@ -143,6 +143,28 @@ describe('the farm and city towns', () => {
       expect(p, `farm ${1914 + y}: story ${(100 * p).toFixed(1)}%`).toBeLessThan(0.7);
     }
   }, 120_000);
+});
+
+describe('pay sent home', () => {
+  // The author, 2026-11-09: "pay becomes money sent home that changes the family's circumstances
+  // on leave". A shown number must change something: it grows every tour, it is in the soldier's
+  // record, and at each leave it splits men by rank and role into different home circumstances.
+  it('grows every tour and splits each leave by what was sent', () => {
+    const tiersAt: Record<number, Set<number>> = { 1: new Set(), 2: new Set(), 3: new Set() };
+    for (let i = 0; i < 300; i++) {
+      const w = newWar({ seed: 9100 + i, town: TOWNS[i % 4]! });
+      let last = 0;
+      for (let g = 0; g < 3000 && !w.ending; g++) {
+        run(w);
+        if (!w.pending) break;
+        expect(sentHomeOf(w)).toBeGreaterThanOrEqual(last);
+        last = sentHomeOf(w);
+        if (w.pending.kind === 'leave' && !w.transferred) tiersAt[w.stage]!.add(homeTier(w));
+        decide(w, decideFor(WAR_POLICIES.half!, w, w.pending, battleOf) as never);
+      }
+    }
+    for (const st of [1, 2, 3]) expect(tiersAt[st]!.size, `leave ${st} tiers`).toBeGreaterThanOrEqual(2);
+  }, 60_000);
 });
 
 describe('saves', () => {

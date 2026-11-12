@@ -10,7 +10,7 @@
 import { chance, float, pick, raw, seedStreams, type Streams, type StreamName } from './rng';
 import {
   TOWNS, DEFAULT_GENERAL, WAR_SKILLS, SPECIALIST, APTITUDE, TOWN_COURSE, WAR_WORK, STAGES, DUTIES, WOUND, PATHS,
-  CHOICES, GRADE, SECTION_SIZE, SUBALTERN, TOP_OR, RANKS, REST, FRIEND_BATTLE, PHASE_HIT, STALL, ROLES, ROLE,
+  CHOICES, GRADE, SECTION_SIZE, SUBALTERN, TOP_OR, RANKS, REST, FRIEND_BATTLE, PHASE_HIT, STALL, ROLES, ROLE, PAY,
   COMMISSION_BOARD, SORTIES, SORTIE_CHOICE, type SortieChoice, type Town, type Ending, type BattleChoice, type Battle, type Stage,
 } from './data';
 
@@ -88,6 +88,8 @@ export interface War {
    *  Recorded only; nothing in the war reads it, so the war's numbers do not depend on it. */
   news: { wound: { kind: 'light' | 'severe'; cause: string } | null; fallen: { i: number; why: string; present: boolean }[]; sortie?: { key: string; ok: boolean; vol: boolean; turned: boolean } | null };
   stats: WarStats;
+  /** pence sent home so far (absent in saves before pay was sent home: read with sentHomeOf) */
+  sentHome?: number;
   log: string[];
   rng: Streams;
   cursor: Cursor;
@@ -133,6 +135,20 @@ const stageOf = (w: War): Stage => STAGES[w.stage - 1]!;
 export const isRole = (w: War) => w.path in ROLES;
 
 /** The news record, created for a save made before it existed (2026-11-09). */
+/** Pence he sends home this tour: a share of a month's pay by rank and role. Draws nothing. */
+export function payHome(w: War): number {
+  const daily = w.transferred ? PAY.tunnelPence : PAY.rankPence[w.rank]! + (ROLES[w.path] ? PAY.rolePence : 0);
+  return Math.round(daily * PAY.daysPerTour * (w.rank === SUBALTERN ? PAY.officerAllot : PAY.allot));
+}
+export const sentHomeOf = (w: War) => w.sentHome ?? 0;
+/** The family's circumstances at leave, 0 to 3, by what he has sent home. */
+export const homeTier = (w: War) => PAY.tiers.filter((t) => sentHomeOf(w) >= t).length;
+/** Pence as a period sum: £4 7s 6d. */
+export function lsd(pence: number): string {
+  const l = Math.floor(pence / 240), sh = Math.floor((pence % 240) / 12), d = pence % 12;
+  return [l ? `£${l}` : '', sh ? `${sh}s` : '', d ? `${d}d` : ''].filter(Boolean).join(' ') || 'nothing';
+}
+
 export function newsOf(w: War): War['news'] {
   return (w.news ??= { wound: null, fallen: [] });
 }
@@ -291,6 +307,7 @@ function step(w: War): void {
     }
     case 'rotation': {
       w.clock += 1; w.clockInStage = w.r + 1;
+      w.sentHome = sentHomeOf(w) + payHome(w);
       const b = st.battles[w.r];
       if (b && w.out === 0) {
         w.stats.battles++; w.battleNow = true;

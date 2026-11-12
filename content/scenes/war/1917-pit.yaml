@@ -419,6 +419,8 @@
 
     [if war.mate3 && flag.p17_sat_with_charlton]Mrs Charlton says George wrote about a grey horse. Just that, a page about a grey horse. She doesn't understand why he'd write a whole page about a horse, and you don't explain.[/if][if !war.mate3]Down at the pit stables somebody's tied a black ribbon on Captain's stall, and nobody's taken it off.[/if]
 
+    {money_line}
+
     {offers_line}
   choices:
     - id: back

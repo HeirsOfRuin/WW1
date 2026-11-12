@@ -471,6 +471,8 @@
 
     [if war.commission]A letter has come for you, buff, official: you're to go before a board for a commission. An officer. You. Your mother reads it four times and puts it behind the clock with the rent book, and then she takes it out and reads it again.[/if]
 
+    {money_line}
+
     {offers_line}
   choices:
     - id: back

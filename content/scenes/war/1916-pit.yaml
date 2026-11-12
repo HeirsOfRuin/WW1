@@ -664,6 +664,8 @@
 
     [if war.mate3 && flag.p16_saved_mule]Mrs Charlton has a letter from George, all about a mule called Bella who fell in a shell hole and came out again. "You were there," she says. "He says you were on the rope."[/if][if war.mate3 && flag.p16_shot_mule]Mrs Charlton says George's letters have gone short. She doesn't know why. You do, and don't tell her.[/if][if !war.mate3]In the pit stables, the old horse-keeper has put George's photograph up on a nail by Captain's stall.[/if]
 
+    {money_line}
+
     {offers_line}
   choices:
     - id: back

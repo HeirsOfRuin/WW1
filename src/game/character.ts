@@ -6,7 +6,7 @@
 import type { ContentBundle } from '../content/schema';
 import type { GameState } from './state';
 import { heroOf } from '@engine/character';
-import { RANKS, STAGES, ROLES, home, skill, aliveFriends, type War } from './war/index';
+import { RANKS, STAGES, ROLES, home, skill, aliveFriends, sentHomeOf, lsd, type War } from './war/index';
 import { ROTATION_MONTHS, monthName, monthOfClock, TRAINING } from './war/calendar';
 import { SECTION_NAMES, PATH_NAMES, nerveWord, standingWord, whereOf, offerWords } from './module';
 
@@ -146,6 +146,7 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
       { label: 'Role missions', note: w.stats.missions ? `${w.stats.missions} (${w.stats.missionsWon} went well)` : 'None yet' },
       { label: 'Wounds', note: String(log.filter((e) => /wound \(/.test(e.msg)).length) },
       { label: 'The section from home', note: `${aliveFriends(w)} of 9 alive` },
+      { label: 'Sent home', note: lsd(sentHomeOf(w)) },
     ],
   };
 }

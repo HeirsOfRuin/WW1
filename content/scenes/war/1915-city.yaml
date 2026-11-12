@@ -424,6 +424,8 @@
 
     At night the quiet keeps waking you. Then a tram, far off, and you sleep.
 
+    {money_line}
+
     {offers_line}
   choices:
     - id: back

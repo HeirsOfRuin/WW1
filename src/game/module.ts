@@ -14,6 +14,7 @@ import type { GameState } from './state';
 import {
   run, decide, setHome, newsOf, aliveFriends, grade, dutyHit, missionHit, phaseHit, battleOf,
   RANKS, ROLES, DUTIES, STAGES, SORTIES, sortieHit, type Decision, type War, type SortieChoice,
+  homeTier, sentHomeOf, lsd,
 } from './war/index';
 import { warMonth, seasonOf, monthName, monthOfClock } from './war/calendar';
 
@@ -85,6 +86,36 @@ export function offerWords(o: string): string {
 }
 
 /** Where a wound or a death happened, in words, from the cause the resolver recorded. */
+// What the money sent home has done for the family, by town and tier (war.ts homeTier): read at
+// every leave (the author, 2026-11-09: "pay becomes money sent home that changes the family's
+// circumstances on leave").
+const MONEY_LINES: Record<string, string[]> = {
+  mill: [
+    "What you've sent home has gone on the rent and the coal. Your mother says it's been a godsend, and it hasn't been much.",
+    'Your allotment has paid the rent ahead to Easter. Your mother keeps the rent book in the tea caddy and shows you the stamps, every one.',
+    "The money you've sent home has bought your father new boots and our Jack a suit for chapel, and there's still something in the Co-op book with your name on it.",
+    "There's money in the Post Office in your name now, more than your father made in a year at the mill. Your mother doesn't know what to do with it. She's frightened of it.",
+  ],
+  pit: [
+    "Your allotment goes on the rent and the doctor. It isn't much, and your mother says it's been a godsend.",
+    "Your money has paid the doctor for your father's chest, twice, and he grumbles at the waste.",
+    'Your money has bought a new range for the kitchen, black-leaded, with an oven, and your mother bakes in it every day you are home.',
+    "There's money in the Store in your name, more than your father ever saw at once. Your mother says it's your start, after. Your father says it's blood money, and then says he didn't mean it.",
+  ],
+  farm: [
+    "What you've sent home went to the squire's agent with the Lady Day rent.",
+    "Your money paid the farrier and the seed bill. Your father hasn't said thank you, and keeps the receipts.",
+    'Your money has bought a young cob to work beside old Blossom. Your father calls him Corporal, to annoy you.',
+    "There's money in the bank at South Molton in your name, enough to take a farm of your own, one day, if you came home to it. Your father has been to look at one. He doesn't say so.",
+  ],
+  city: [
+    'The firm makes up your salary, and your allotment goes on top of it, and your mother says how good the firm is, every time.',
+    "With the firm making up your salary the house is better off than when you were at your desk. Your mother's ashamed of it, and buys the Sunday joint anyway.",
+    'There is new linoleum in the hall and a gas fire in the front room, and your mother keeps saying the firm, the firm, as if it were the firm that went to France.',
+    "There's money in the Post Office Savings in your name, a proper sum. Your father, a clerk thirty years, looks at the book a long time and gives it back without a word.",
+  ],
+};
+
 // battle names in a sentence: "Killed at Spring Offensive" read like a form
 const BATTLE_WHERE: Record<string, string> = {
   'Somme, 1 July': 'on the Somme, on the first of July', 'Somme, autumn': 'on the Somme, in the autumn',
@@ -201,7 +232,7 @@ export function statusOf(s: CoreState): { rank: string; role: string; nerve: str
 
 // ---- paths -------------------------------------------------------------------------------------
 
-const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key', 'month', 'stake', 'back_from_wound', 'lost_last', 'promoted_last', 'award_last', 'first_tour', 'back_from_leave', 'detailed_last', 'detailed_ok'] as const;
+const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key', 'month', 'home_tier', 'stake', 'back_from_wound', 'lost_last', 'promoted_last', 'award_last', 'first_tour', 'back_from_leave', 'detailed_last', 'detailed_ok'] as const;
 const PENDING = ['none', 'tunnel', 'duty', 'mission', 'sick', 'course', 'battle', 'leave', 'step', 'tour'];
 const ENDINGS = ['none', 'armistice', 'posting', 'captured', 'invalided', 'killed', 'broken', 'court_martial'];
 /** content ids are lower_snake_case; the war layer's ending names are its own */
@@ -224,6 +255,7 @@ function value(s: CoreState, field: string): number | string | boolean | undefin
     case 'section': return aliveFriends(w);
     case 'path': return w.path;
     case 'transferred': return w.transferred;
+    case 'home_tier': return homeTier(w);
     case 'battle': return p?.kind === 'battle' ? battleSlug(p.battle) : 'none';
     case 'phase': return p?.kind === 'battle' ? p.phase + 1 : 0;
     case 'tour': return w.clock;
@@ -393,6 +425,8 @@ export const module: GameModule = {
         return riskWord(phaseHit(w, b, b.phases[p.phase]![0], p.type, choice));
       }
       case 'offer0': case 'offer1': case 'offer2': return p?.kind === 'leave' ? offerWords(p.offers[Number(name.slice(5))] ?? '') : '';
+      case 'money_line': return MONEY_LINES[w.town]![homeTier(w)]!;
+      case 'sent_home': return lsd(sentHomeOf(w));
       case 'offers_line': {
         if (p?.kind !== 'leave') return '';
         if (!p.offers.length) return 'Nothing is on offer that would keep you at home.';
@@ -405,7 +439,7 @@ export const module: GameModule = {
     }
     return undefined;
   },
-  checkTextVar: (name) => (['rank_a', 'lost_last_name', 'award_last_name', 'risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line'].includes(name) ? [] : undefined),
+  checkTextVar: (name) => (['rank_a', 'lost_last_name', 'award_last_name', 'risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line', 'money_line', 'sent_home'].includes(name) ? [] : undefined),
   // the year's title page: where he stands, and who of the nine has died since the last page
   cardRows: (_c, s) => {
     const w = war(s);
