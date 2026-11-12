@@ -518,6 +518,11 @@ story share went from 27.4% to 50.6%, and city from 26.4% to 49.1%.
 Arras and Passchendaele shared by all four towns. Farm and city 1917 story share both went from
 25% to 47.7%.
 
+**The farm and city towns, 1918 (FRAME-1918-FARM-CITY.md).** Every town is now written from
+enlistment to the Armistice, each with its own ending. The 1918 battles are shared by all four
+towns. Farm 1918 story share went from 23.7% to 47.9%, and city from 26.8% to 52.5%. Whole game:
+mill 54.8%, pit 60.0%, farm 54.0%, city 54.9%.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.

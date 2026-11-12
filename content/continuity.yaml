@@ -43,6 +43,12 @@ rules:
   - { match: "Somebody's told him about Webb|Webb's done the totals|Mrs Webb says Arthur writes that", allow: war.mate1, why: Arthur Webb only acts while alive (1917) }
   - { match: "Fenton's captain of the battalion|Mr Fenton's shop window has gone|Mr Fenton wants to hear about the brigade", allow: war.mate2, why: Percy Fenton only acts while alive (1917) }
   - { match: "Marsh has been to the signals|learned Morse from Mr Marsh|Mrs Marsh says Leonard is a signaller", allow: war.mate3, why: Leonard Marsh only acts while alive (1917) }
+  - { match: "Cottle's French Fly lies|Cottle stands with you|Cottle goes after her|Cottle sits down on the bank", allow: war.mate1, why: Will Cottle only acts while alive (1918) }
+  - { match: "Pearce has noticed too|Pearce lying in the grass|Pearce takes off his cap|Dan Pearce is the keeper", allow: war.mate2, why: Dan Pearce only acts while alive (1918) }
+  - { match: "Bert carried|Bert says the names|Bert stands with his hands|Bert rings the tenor", allow: war.mate3, why: Bert Yeo only acts while alive (1918) }
+  - { match: "Webb, in the orderly room|Webb has the numbers|Webb stands at the end|Webb gets out his notebook", allow: war.mate1, why: Arthur Webb only acts while alive (1918) }
+  - { match: "Fenton's found a football", allow: war.mate2, why: Percy Fenton only acts while alive (1918) }
+  - { match: "Marsh signals with a lamp|Marsh takes it down", allow: war.mate3, why: Leonard Marsh only acts while alive (1918) }
   - match: "All nine of the section"
     allow: "war.section == 9"
     why: The whole section alive only while all nine are.

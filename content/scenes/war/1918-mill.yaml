@@ -358,7 +358,7 @@
     When it gets light, it doesn't get light. Fog. Thick as a wet blanket on a line. You can't see
     the next post, forty yards off. You can hear it.
 
-    [if flag.p18_reported]The officer had you all stood to since four. He'd listened.[/if][if flag.p18_reported && flag.dug_deep] [/if][if flag.dug_deep]The dugout you dug in January holds. The timbers groan and drop chalk down your neck, but they hold.[/if][if flag.french_stove]The French stove goes over in the first minute and you stamp out the coals in the dark with your mask on, and the post fills with the stink of hot iron and scorched wool.[/if][if flag.sweep_21 && war.mate2] Duckworth gets his mouth right up against your ear in the din. "You've won," he shouts. "You jammy beggar. You've won the sweep."[/if]
+    [if flag.p18_reported]The officer had you all stood to since four. He'd listened.[/if][if flag.f18_rooks]The officer had you all stood to since four. Brigade laughed at the rooks. He didn't.[/if][if flag.p18_reported && flag.dug_deep] [/if][if flag.f18_rooks && flag.dug_deep] [/if][if flag.dug_deep]The dugout you dug in January holds. The timbers groan and drop chalk down your neck, but they hold.[/if][if flag.french_stove]The French stove goes over in the first minute and you stamp out the coals in the dark with your mask on, and the post fills with the stink of hot iron and scorched wool.[/if][if flag.sweep_21 && war.mate2] Duckworth gets his mouth right up against your ear in the din. "You've won," he shouts. "You jammy beggar. You've won the sweep."[/if]
 
     [if war.path == rifleman]Beside you {mate} is counting the shells under his breath, and gives up.[/if][if war.path == nco]Your section is spread over two posts you can't see from each other. You have to choose which one you're in.[/if][if war.path == lewis]The gun's on the parapet under a groundsheet, the drums stacked in the recess, and there's nothing in the fog to fire at.[/if][if war.path == signals]The buried cable goes in the first ten minutes. A lamp's no use in fog. You've two pigeons in a basket, and a runner, and the runner's gone.[/if][if war.path == bomb]You've two boxes of Mills bombs and a fog you can't see ten yards into.[/if][if war.path == snipe]A sniper in fog is a man with a rifle. You wrap the telescope in a sock and put it in your pack.[/if][if war.path == tunnel]You're with the tunnellers in the battle zone, behind, with charges laid under the bridges and the dumps, and orders to blow them when the infantry are back through.[/if][if war.path == subaltern]Your platoon is in four posts and you can see none of them. The last order from company, an hour old, was to hold the forward zone at all costs. You've a revolver, a whistle and a map of a country you can't see.[/if]
 
@@ -422,7 +422,7 @@
     in the fire, so the whole night smells of burnt sugar and petrol.
 
     And the names on the signposts. You know the names. You're going back over the old Somme ground,
-    the ground that took a summer and a half to win, and you're giving it up in a day.[if start == pit] Somewhere out there on your left is the great crater at La Boisselle.[/if][if flag.brought_discs]
+    the ground that took a summer and a half to win, and you're giving it up in a day.[if start == pit] Somewhere out there on your left is the great crater at La Boisselle.[/if][if start == farm] Somewhere out there is Mansel Copse, and the trench the Devonshires hold.[/if][if start == city] Somewhere out there to the north is Gommecourt, and the trench you dug in no man's land.[/if][if flag.brought_discs]
     Somewhere out there is where you crawled for the discs.[/if]
 
     [if war.path == tunnel]Your charge is under a bridge over a canal. You wait in the reeds for the last of the infantry, counting them over. Behind them, the first grey helmets.[/if][if war.path == signals]No wire, no lamps, no pigeons. You carry messages on foot, and half the time the battalion headquarters has moved before you find it.[/if][if war.path == subaltern]You've nineteen men left of thirty-eight, and a map that ran out yesterday.[/if]
@@ -563,7 +563,7 @@
   text: |
     A river, in October, in the dark. The sappers have been out all night putting footbridges over
     it, planks on floats, and you go over in single file with the water black and quick under the
-    boards and the smell of it cold and green, like [if start == pit]the burn below the pit heap[/if][if start != pit]the canal under the mill[/if] in winter.
+    boards and the smell of it cold and green, like [if start == pit]the burn below the pit heap[/if][if start == mill]the canal under the mill[/if][if start == farm]the river below the farm in flood[/if][if start == city]the river at Wapping on a winter night[/if] in winter.
 
     Gas in the valley, lying in the low places. Fog over it.
 

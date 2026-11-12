@@ -181,3 +181,17 @@ c17_learned_morse: { description: "Learned Morse from Marsh on sentry" }
 c17_wrote_gothas: { description: "Told his mother to shelter every time after the daylight raid" }
 c17_cup_played: { description: "Played right half in the brigade cup" }
 c17_florence_waac: { description: "Florence's letter that she joined the WAAC has come" }
+# The farm town, 1918 (content/scenes/war/1918-farm.yaml); dug_deep is shared
+f18_rooks: { description: "Told the officer the rooks had left the German wood" }
+f18_proud_of_bert: { description: "Told Bert he was proud of his carrying in the retreat" }
+f18_pearce_keeper: { description: "Backed Pearce's plan to be the keeper at the big house" }
+f18_names: { description: "Sent his mother the dead men's names for Mrs Venn's memorial" }
+f18_stood_at_trench: { description: "Stood at the Devonshires' trench in August 1918" }
+f18_fly_stays: { description: "Helped Cottle bring the French Fly on from her old farm" }
+f18_fly_home: { description: "Told Cottle to leave the French Fly at her old farm" }
+# The city town, 1918 (content/scenes/war/1918-city.yaml); dug_deep is shared
+c18_wrote_dont_worry: { description: "Wrote home not to worry before 21 March" }
+c18_proposed: { description: "Asked Florence to marry him after the raid on the WAAC camp" }
+c18_read_the_lamp: { description: "Read Marsh's signal lamp with him; Marsh takes the Armistice message" }
+c18_walked_trench: { description: "Walked along the 1916 trench at Gommecourt in August 1918" }
+c18_wrote_flu: { description: "Told his mother to keep in during the influenza" }

@@ -1,0 +1,226 @@
+# The city town, 1918 (docs/FRAME-1918-FARM-CITY.md). Stage 4 is tours 30 to 39; the Spring
+# Offensive is tour 32, Amiens 36, October 39, then the Armistice. The battles are the mill's.
+# Written to the voice in content/style-guide.md.
+
+- id: v18c_posts
+  chapter: front
+  kind: pool
+  pool: front_1918_city
+  once: true
+  weight: 100
+  requires: [ "war.tour == 30" ]
+  title: Posts
+  text: |
+    January, south, in the old French line. The new idea is posts, little islands of men a hundred
+    yards apart in the chalk, with wire round them, and the redoubts behind. On the map they look
+    tidy as a ledger. On the ground they look like what they are: a few men, alone, in the frost.
+
+    The officer wants the post deepened.
+  choices:
+    - id: deep
+      text: Dig it deep. Twenty steps.
+      effects: [ { set: flag.dug_deep } ]
+      text_after: |
+        Three weeks with a pick. Clerks' hands, four years hard now, but still clerks' hands, and the
+        blisters come up and break and come up. By February there's a dugout twenty steps down, and
+        you're prouder of it than of anything you ever did at the office.
+      next: "@return"
+    - id: enough
+      text: Dig to the book and no more.
+      text_after: |
+        To the book. You finish early and spend the evening playing whist on an ammunition box with a
+        candle in a bottle, and win fourpence.
+      next: "@return"
+
+- id: v18c_waiting
+  chapter: front
+  kind: pool
+  pool: front_1918_city
+  once: true
+  weight: 200
+  requires: [ "war.tour == 31" ]
+  title: The returns
+  text: |
+    February. They're coming. Everybody knows it.
+
+    [if war.mate1 && flag.c17_webb_clerk]Webb, in the orderly room, has seen the intelligence summaries, the returns from brigade. He can't tell you what's in them. He tells you anyway, in the dark, in a whisper, the way he'd tell you a figure that didn't balance. "Forty divisions," he says. "Opposite us. They've moved forty divisions." He's not writing it in his notebook. That frightens you more than the number.[/if][if war.mate1 && !flag.c17_webb_clerk]Webb has the numbers anyway. The prisoners, the deserters, the airmen, every rumour, entered in his notebook with the date and the source, and added up. "It's coming," he says. "It doesn't balance any other way."[/if][if !war.mate1]You find yourself counting, the way Webb used to: the carts at night, the guns registering, the deserters. It doesn't balance any other way. It's coming.[/if]
+  choices:
+    - id: write
+      text: Write home. Tell them not to worry.
+      effects: [ { set: flag.c18_wrote_dont_worry } ]
+      text_after: |
+        You tell them not to worry. You tell them it's quiet. It is quiet. It's the quietest it's ever
+        been, and that's the thing you don't tell them.
+      next: "@return"
+    - id: sleep
+      text: Sleep while you can.
+      text_after: |
+        You sleep in your boots, every night, with your rifle across your knees. Everybody does.
+      next: "@return"
+
+- id: v18c_abbeville
+  chapter: front
+  kind: pool
+  pool: front_1918_city
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 34", flag.c17_florence_waac ]
+  title: The camp
+  text: |
+    The news comes round the battalion the way bad news does, from a man who heard it from a man. The
+    German aeroplanes have bombed a camp at the base, on the coast, at night. A women's camp. The
+    WAACs. Some of them killed, in their huts, in their beds.
+
+    It's four days before a letter comes. Her hand. Shaky, but her hand.
+
+    "I am all right. I was in the trench. They made us dig trenches by the huts after the first raid
+    and we laughed about it and I am not laughing now. Two of the girls from my hut. One of them was
+    from Glasgow and was teaching me to dance the Gay Gordons.
+
+    I am all right. Please write and tell me you are."
+  choices:
+    - id: propose
+      text: Write back and ask her to marry you, when it's over.
+      effects: [ { set: flag.c18_proposed } ]
+      text_after: |
+        You write it four times. In the end it's two lines, in your best office hand, the way you'd
+        write a cheque you meant: Dear Florence. When it is over, will you marry me. You post it before
+        you can do it a fifth time. Her answer comes in nine days. It's one word, and a blot where she
+        pressed too hard.
+      next: "@return"
+    - id: write
+      text: Write back that you're all right. That's what she asked.
+      text_after: |
+        You tell her you're all right. You tell her to keep digging trenches by the huts, and to get in
+        them. You tell her you'll dance the Gay Gordons with her, after, badly. She writes back that she
+        will hold you to that.
+      next: "@return"
+
+- id: v18c_marsh
+  chapter: front
+  kind: pool
+  pool: front_1918_city
+  once: true
+  requires: [ "war.tour >= 34", war.mate3 ]
+  title: The lamp
+  text: |
+    Open country now, after the summer. No trenches, no wire to lay, the line moving every day.
+    Marsh signals with a lamp now, at night, from a hilltop, a box with a shutter, flashing Morse to
+    another hill a mile back where somebody's watching for him.
+
+    You lie beside him in the dark and watch him work: the shutter clicking, the light going out
+    across the fields, dots and dashes, and far off the answering light, small as a match.
+
+    "I used to think nobody was listening," he says, between messages. "At chapel. When I prayed. And
+    now look." He nods at the far light. "Somebody always is."
+  choices:
+    - id: read
+      text: Read the far light for him. You know the Morse.
+      visible_if: flag.c17_learned_morse
+      effects: [ { set: flag.c18_read_the_lamp } ]
+      text_after: |
+        You read it off for him as it comes, letter by letter, and he writes it down. R-E-C-E-I-V-E-D.
+        A-L-L W-E-L-L. "That's all anybody ever needs to send," you say, and he laughs, and sends the
+        next one.
+      next: "@return"
+    - id: watch
+      text: Lie and watch the lights.
+      text_after: |
+        You lie and watch the two lights talking across the dark, like two people in windows across a
+        street, and you think of Leyton at night, all the lit windows, before the war.
+      next: "@return"
+
+- id: v18c_gommecourt
+  chapter: front
+  kind: pool
+  pool: front_1918_city
+  once: true
+  weight: 200
+  requires: [ "war.tour == 37" ]
+  title: The new trench
+  text: |
+    The end of August, going forward, and the road goes past Gommecourt. The park with its broken
+    trees. The German wire, still there, rusted brown.
+
+    And out in front of where our line was, a ditch running across the grass, fallen in, grown over.
+    The new trench. The one the whole division dug in no man's land in a week in 1916, three thousand
+    clerks with picks, at night, under the moon. You can follow it with your eye the whole way across.
+
+    [if flag.c16_counted_smoke]You counted the smoke candles in that trench. Forty to a bay.[/if]
+  choices:
+    - id: walk
+      text: Walk along it a little way.
+      effects: [ { set: flag.c18_walked_trench } ]
+      text_after: |
+        A few yards. It's shallow now, a dip in the grass with poppies in it. You find a rusted
+        entrenching tool in it, the blade gone thin as paper. You leave it where it is.
+        [if war.mate1]Webb stands at the end of it and doesn't say anything, and then takes out his notebook and writes something, the first time in months.[/if]
+      next: "@return"
+    - id: march
+      text: Keep marching.
+      text_after: |
+        You keep marching. You can feel it there on your left, the whole way past, the way you'd feel
+        your old desk in the office if you walked through the long room with your eyes shut.
+      next: "@return"
+
+- id: v18c_flu
+  chapter: front
+  kind: pool
+  pool: front_1918_city
+  once: true
+  requires: [ "war.tour >= 38" ]
+  title: A letter from home
+  text: |
+    "Dear Son, the influenza is cruel bad in London. They say it is in every street. The schools are
+    shut and the theatres and the man next door to the Webbs died on Tuesday and was well on the
+    Sunday. They spray the trams with something that makes your eyes water. Your father wears a
+    mask to the office, a bit of gauze, and looks a fool, and says he does not care.
+
+    I am keeping in. Do not worry. Your loving Mother."
+  choices:
+    - id: write
+      text: Write back. Tell her to keep in.
+      effects: [ { set: flag.c18_wrote_flu } ]
+      text_after: |
+        You tell her to keep in, and your father to keep the mask on, and not to go to the crypt or the
+        Underground or anywhere there's a crowd. You read your own letter back and laugh at it, a man
+        in France telling his mother to keep out of danger, and then you don't laugh.
+      next: "@return"
+    - id: keep
+      text: Keep it with the others.
+      text_after: |
+        It goes in your breast pocket. The man next door to the Webbs. You knew him. He used to give you
+        a ha'penny for running his betting slips.
+      next: "@return"
+
+# ---- the Armistice, for the city town ---------------------------------------------------------
+
+- id: e_armistice_city
+  chapter: end
+  kind: ending
+  ending: armistice
+  title: The Armistice
+  text: |
+    {ending_line}
+
+    [if war.mate3 && flag.c18_read_the_lamp]Marsh takes it down. At ten to seven in the morning, on the buzzer, in the signals dugout: Hostilities will cease at 1100 hours today. He reads it twice, and takes his spectacles off, and cleans them, and reads it again, and then he puts his head out of the dugout and says it to you, quite quietly, like a man reading out a hymn number.[/if][if !war.mate3 || !flag.c18_read_the_lamp]It comes up in the morning on a message form. Hostilities will cease at 1100 hours today. Nobody believes it, and then everybody does.[/if]
+
+    The guns go on to the last minute. Then eleven, and the quiet, so sudden you can hear your own
+    watch.
+
+    [if war.mate1]Webb gets out his notebook, and writes the time and the date, and rules a double line under it, in pencil, with the edge of his pay book, and writes Closed. Then he closes the book and puts it away and doesn't take it out again.[/if][if !war.mate1]You think of Webb, who would have ruled the line.[/if][if war.mate2] Fenton's found a football somewhere, a French one, half flat, and he kicks it high up into the quiet, and nobody shoots at it.[/if][if !war.mate2] Somewhere on the Double Crassier there's a football, gone to leather and grass.[/if][if !war.mate3] You think of Marsh, who learned the eye chart by heart.[/if]
+
+    In London, they tell you after, the maroons went off at eleven, the warning guns, and everybody
+    ran for shelter, and then understood, and came out again, and the whole City came out of its
+    offices into the street. The clerks threw their ledgers out of the windows. Big Ben rang for the
+    first time in four years. And then the influenza took thousands of them in the next few weeks, and nobody threw anything.
+
+    You don't get home till the spring. Victoria, and this time you're clean.[if flag.c18_wrote_dont_worry] Your mother has your letter from February in the tea caddy, the one that said it was quiet. "You liar," she says, and holds on to you.[/if][if flag.c18_wrote_flu] Your father kept the mask on, the way you told him. He shows it you, the bit of gauze, folded in his waistcoat pocket.[/if][if flag.c18_walked_trench] Some nights you're back in the shallow trench at Gommecourt, among the poppies, following it across.[/if]
+
+    [if flag.c18_proposed]Florence is on the platform. She's in her WAAC coat still, demobbed the week before, and she doesn't wave, she just stands there, and you walk down the whole length of the train to her, and it's the longest walk in the war.[/if][if !flag.c18_proposed && flag.c16_florence]Florence is at the office, at your old desk, back from France. She stands up when you come in. Neither of you says anything for a long while, and then she says, "The Gay Gordons," and you say, "Badly," and that's that settled.[/if][if !flag.c16_florence]There's a girl at your old desk, typing, who looks up at you and doesn't know who you are, and you find you don't mind.[/if]
+
+    The Roll of Honour in the front hall at the Gresham and Lombard has four panels now. You stand in front of it on your first morning back and read every name, and then you go up to the third floor, and sit down at a desk, and look out at the fog on the river.
+
+    You are {age} years old and {rank_a}.
+
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.

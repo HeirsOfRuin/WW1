@@ -1,0 +1,262 @@
+# The farm town, 1918 (docs/FRAME-1918-FARM-CITY.md). Stage 4 is tours 30 to 39; the Spring
+# Offensive is tour 32, Amiens 36, October 39, then the Armistice. The battles are the mill's.
+# Written to the voice in content/style-guide.md.
+
+- id: v18f_posts
+  chapter: front
+  kind: pool
+  pool: front_1918_farm
+  once: true
+  weight: 100
+  requires: [ "war.tour == 30" ]
+  title: Hard ground
+  text: |
+    January, south, in a quiet stretch the French have handed over. The new idea is posts, little
+    islands of men in the chalk with nothing between them but frost. The ground's iron. Your
+    father would say it's no use to man or beast till March.
+
+    The officer wants the post deepened, frost or no frost.
+
+    [if war.mate1 && flag.f16_kept_dog]Cottle's French Fly lies on the parapet with her nose on her paws, looking out at the wire the way she'd watch a gate for a fox.[/if]
+  choices:
+    - id: deep
+      text: Get the pick into it. Dig it deep.
+      effects: [ { set: flag.dug_deep } ]
+      text_after: |
+        Three weeks, in shifts, the pick ringing on the frost like on a flint. By February there's a
+        dugout under the post, twenty steps down. It's the deepest hole you've ever dug, and you've
+        dug wells.
+      next: "@return"
+    - id: enough
+      text: Dig to the book and no more. Save your back.
+      text_after: |
+        You dig it to the book. Your back thanks you. At night you sit round the French stove the last
+        lot left behind and roast potatoes you've found in a field clamp, and they taste of home.
+      next: "@return"
+
+- id: v18f_rooks
+  chapter: front
+  kind: pool
+  pool: front_1918_farm
+  once: true
+  weight: 200
+  requires: [ "war.tour == 31" ]
+  title: The rooks
+  text: |
+    February. They're coming. Everybody knows it.
+
+    There was a rookery in the wood behind the German line, the last trees standing for miles, and
+    the rooks have gone. All of them, in a week. Nobody else has noticed. You've noticed. At home the
+    rooks leave a wood before it's felled; they know before the men come with the saws.
+
+    [if war.mate2]Pearce has noticed too. "Rooks've gone," he says, low, at stand-to, not looking at you. "Something's coming through that wood. Guns, I'd say."[/if]
+  choices:
+    - id: tell
+      text: Tell the officer about the rooks.
+      effects: [ { set: flag.f18_rooks } ]
+      text_after: |
+        He listens. He doesn't laugh, which surprises you. "My father kept a rookery," he says. He
+        writes it in his notebook: rooks gone from wood at map reference so-and-so. "It'll go to
+        brigade," he says, "and they'll laugh. But it's going."
+      next: "@return"
+    - id: keep
+      text: Keep it. Who'd listen to a farm lad about rooks?
+      text_after: |
+        You keep it. Every morning at stand-to you look at the wood, empty, quiet, and know what it
+        means, and can't say.
+      next: "@return"
+
+- id: v18f_bert
+  chapter: front
+  kind: pool
+  pool: front_1918_farm
+  once: true
+  weight: 100
+  requires: [ "war.tour == 33", war.mate3 ]
+  title: Carrying
+  text: |
+    April, after the retreat. The battalion's a third of what it was, and the rest is boys from the
+    depot.
+
+    [if flag.f17_bert_bearer]Bert carried for eleven days without sleeping, they say. Back across the whole of the old Somme ground with the wounded, while the Germans came on behind, and never left a man he could lift. They've put him in for a medal. He doesn't want it. He says the man who should have it is the one who carried the other end.[else]Bert carried in the retreat, though he's not a bearer. Picked up a wounded boy from the depot on the second day and carried him on his back for nine miles. He won't talk about it.[/if]
+  choices:
+    - id: tell_him
+      text: Tell him you're proud of him.
+      effects: [ { set: flag.f18_proud_of_bert } ]
+      text_after: |
+        He goes red, the way he did as a boy at the harvest supper when Mr Venn's mother gave him a
+        sixpence for the bells. "I just kept going," he says. "You do."
+      next: "@return"
+    - id: leave
+      text: Say nothing. He doesn't want it said.
+      text_after: |
+        You say nothing. You sit with him on the step in the sun, and he falls asleep sitting up, and
+        you let him.
+      next: "@return"
+
+- id: v18f_pearce
+  chapter: front
+  kind: pool
+  pool: front_1918_farm
+  once: true
+  requires: [ "war.tour >= 34", war.mate2 ]
+  title: After
+  text: |
+    A warm evening behind the line, and Pearce lying in the grass with his hands behind his head,
+    chewing a stalk.
+
+    "When it's over," he says, "I'm going to ask the squire for the keeper's job."
+
+    You laugh. He doesn't. "I mean it. Old Dawe's past it. And who knows the poachers better than me?
+    I know every wire on Exmoor. I set most of them." He turns the stalk round. "Mrs Venn'd give it
+    me. She's not the squire, but she runs him now, since Mr Venn."
+  choices:
+    - id: back_him
+      text: Tell him he'd be the best keeper Exmoor ever had.
+      effects: [ { set: flag.f18_pearce_keeper } ]
+      text_after: |
+        "I would," he says. "Every poacher in three parishes'll curse the day." He's grinning at the
+        sky. "Write and tell your mother. Get it round the village. Then it's half done."
+      next: "@return"
+    - id: laugh
+      text: Tell him he'd last a week before he was poaching his own birds.
+      text_after: |
+        "A week," he says. "I'd give it a fortnight." And he laughs, and you laugh, and a lark goes up
+        out of the grass by your feet, and you both lie and watch it go.
+      next: "@return"
+
+- id: v18f_letter
+  chapter: front
+  kind: pool
+  pool: front_1918_farm
+  once: true
+  weight: 200
+  requires: [ "war.tour == 35" ]
+  title: A letter from home
+  text: |
+    "Dear Son, the wheat on the Long Field is the best your father ever grew. The government pays a
+    fixed price now and wants every acre ploughed, even the old pasture on the hill that has not seen a
+    plough since your grandfather, and your father has ploughed it, with the tractor and Miss Pugsley,
+    and says nothing about it at all, which means he is pleased.
+
+    Mrs Venn has started a committee for a memorial, a cross on the green, with the names. She came
+    to ask me about the spelling of some of them. I said I would ask you, as you would know the men.
+
+    Your loving Mother."
+  choices:
+    - id: names
+      text: Write back with the names, and the right spellings.
+      effects: [ { set: flag.f18_names } ]
+      text_after: |
+        You write them out, every Dunsworthy man you know is dead, with his full name and his age and
+        where. It takes a whole evening and two pages. You check them twice. You stop at the end and
+        look at the space under the last one, and fold the letter.
+      next: "@return"
+    - id: keep
+      text: Keep it. You can't write the names yet.
+      text_after: |
+        You can't, yet. You put it in your breast pocket. The names go round in your head on sentry
+        instead, in order, like the changes Bert says under his breath.
+      next: "@return"
+
+- id: v18f_trench
+  chapter: front
+  kind: pool
+  pool: front_1918_farm
+  once: true
+  weight: 200
+  requires: [ "war.tour == 37" ]
+  title: Mansel Copse
+  text: |
+    The end of August, going forward, and the road goes up past Mametz. Past Mansel Copse, what's
+    left of it, and the slope where the gun at the shrine had the first wave.
+
+    And the trench. Our old front line, where you went over from, filled in. The board's still
+    there, weathered grey, the paint faded but you can read it. THE DEVONSHIRES HELD THIS TRENCH.
+    THE DEVONSHIRES HOLD IT STILL. Somebody has put a little wooden cross at each end, and there are
+    poppies all along the top of it, the length of the trench, as if they'd been sown.
+
+    [if flag.f16_buried]You filled it in. You know where every man in it lies.[/if]
+  choices:
+    - id: stop
+      text: Fall out for a minute. Stand by the board.
+      effects: [ { set: flag.f18_stood_at_trench } ]
+      text_after: |
+        The sergeant lets you. [if war.mate1]Cottle stands with you, and takes his cap off, and doesn't say anything.[/if][if war.mate3] Bert says the names he knows, under his breath, like changes.[/if] Then you go after the column, up the road, past the shrine, which is still standing, with the crucifix on it and not a mark.
+      next: "@return"
+    - id: march
+      text: Keep marching. They'd want you to keep going.
+      text_after: |
+        You keep marching. You can feel it there on your right all the way past, the way you can feel
+        a gateway in the dark without seeing it.
+      next: "@return"
+
+- id: v18f_fly
+  chapter: front
+  kind: pool
+  pool: front_1918_farm
+  once: true
+  requires: [ "war.tour >= 37", war.mate1, flag.f16_kept_dog ]
+  title: Home
+  text: |
+    Going forward through villages the Germans have held for four years, and in one of them the
+    French Fly stops dead in the street, and whines, and runs.
+
+    Down a lane, into a farmyard, a burnt-out farm with the walls standing. Cottle goes after her. She's
+    sitting in the yard by the ruin of the dairy, looking at the door. It's where she came from. You
+    know it the minute you see it. It's her home, and there's nobody in it.
+  choices:
+    - id: take
+      text: Help Cottle coax her on. She's coming with you.
+      effects: [ { set: flag.f18_fly_stays } ]
+      text_after: |
+        It takes Cottle half an hour, sitting in the yard with her, talking low. In the end she comes,
+        with her head down, and walks at his heel out of the yard, and looks back once from the lane,
+        and doesn't look back again.
+      next: "@return"
+    - id: leave
+      text: Tell him to leave her. She's home.
+      effects: [ { set: flag.f18_fly_home } ]
+      text_after: |
+        He knows. He sits with her a while and then stands up, and she doesn't follow him, and he
+        doesn't call. Two days later, an old woman comes back to that farm from wherever she's been for
+        four years, and finds a black and white dog waiting at the dairy door. You never know that. But
+        it's what happens.
+      next: "@return"
+
+# ---- the Armistice, for the farm town ---------------------------------------------------------
+
+- id: e_armistice_farm
+  chapter: end
+  kind: ending
+  ending: armistice
+  title: The Armistice
+  text: |
+    {ending_line}
+
+    It comes up in the morning on a message form. Hostilities will cease at 1100 hours today.
+    Nobody believes it, and then everybody does.
+
+    The guns go on to the last minute. Then eleven. And the quiet comes down like snow on the moor,
+    so you can hear a long way: a dog, a cart, a cockerel in a farm behind the line that doesn't know
+    anything has happened.
+
+    [if war.mate1 && flag.f18_fly_stays]Cottle sits down on the bank and whistles, the two low notes, and the French Fly comes and lies across his feet.[/if][if war.mate1 && flag.f16_kept_dog && !flag.f18_fly_stays]Cottle sits down on the bank and whistles, the two low notes, and nothing comes, and he whistles again anyway.[/if][if war.mate1 && !flag.f16_kept_dog]Cottle sits down on the bank and whistles the two low notes for Fly at home, out of habit, and laughs at himself.[/if][if !war.mate1]Somewhere at home a black and white dog is lying by a gate, looking up a lane.[/if][if war.mate2] Pearce takes off his cap and throws it in the air and catches it.[/if][if war.mate2 && flag.f18_pearce_keeper] "Keeper," he says. "You watch."[/if][if !war.mate2] Dan Pearce would have been out in no man's land by now, looking for hares.[/if][if war.mate3] Bert stands with his hands curled, the way they curl round the sally, and his lips are moving, and you know it's the changes.[/if][if !war.mate3] You think of Bert, who was going to ring the whole peal, after.[/if]
+
+    [if war.mate3 && flag.f18_proud_of_bert]Bert's medal comes through in the new year. He keeps it in a drawer and won't wear it to church.[/if][if flag.f18_stood_at_trench] Some nights you're back by the board on the Devonshires' trench, reading it.[/if][if flag.f18_fly_home] Somewhere in France an old woman has a black and white dog at her dairy door.[/if]
+
+    You don't get home till the spring. When you do, the hedges are coming into leaf, and the lane's
+    deep in mud, and the smoke goes up straight from the chimney.
+
+    They rang the bells at Dunsworthy on the day, your mother says. The old men and the schoolgirls,
+    all afternoon, every bell they had, till the ropes were wet with their hands. [if war.mate3]On your first Sunday home, Bert rings the tenor, in the whole peal, the way he said he would. You stand in the churchyard among the graves and listen to it go out over the fields, and it's the end of the war.[/if][if !war.mate3]On your first Sunday home they ring the tenor half-muffled, once, for Bert, and then the peal open, for the rest of you.[/if]
+
+    [if flag.f18_names]Mrs Venn's cross is on the green, with the names you sent, spelt right.[/if][if !flag.f18_names]Mrs Venn's cross is on the green, with the names. Two of them are spelt wrong. You go and look every day for a week.[/if][if war.mate2 && flag.f18_pearce_keeper] Dan Pearce is the keeper at the big house by Lady Day. Every poacher on Exmoor curses the day.[/if]
+
+    Your father walks you round the farm the first morning: the Long Field, the hill pasture ploughed
+    for the first time in eighty years, the stable with the tractor in it where Prince and Duke used
+    to stand. At the gate he stops, and puts his hand on your shoulder, and leaves it there.
+
+    You are {age} years old and {rank_a}.
+
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
