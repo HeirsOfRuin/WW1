@@ -536,6 +536,11 @@ home that changes the family's circumstances on leave"), built.
   leave showing at least two tiers.
 - The rates are tuned, not sourced, apart from the shilling and the six shillings.
 
+**The history checked (docs/SOURCES.md, 2026-11-12).** About seventy claims checked by web
+research; fourteen corrected in the text, and the deliberate liberties recorded (one battalion
+from four regions stands on four stretches of the Loos front). The war's own numbers stay tuned,
+not sourced (KILLGATE open issue 6). Next is the author's playtest (docs/PLAYTEST2-GUIDE.md).
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.

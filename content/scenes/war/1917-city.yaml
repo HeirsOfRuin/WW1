@@ -81,8 +81,7 @@
 
     She's joined the Women's Army Auxiliary Corps. They want women for clerks in France, to free the
     men in the base offices for the line, and she can do a ledger as well as any man in Cornhill,
-    and better than some. She's at a base camp on the coast. She doesn't say where; she can't. She
-    has a khaki coat and a hat like a pudding basin and she shares a hut with eleven girls from
+    and better than some. She's at a base camp on the coast. She doesn't say where; she can't. She has a khaki coat-frock to her ankles and a little cap and she shares a hut with eleven girls from
     Glasgow.
 
     "So I am in France too," she writes. "Fifty miles from you, perhaps less. It is a funny thing to
@@ -146,13 +145,12 @@
   title: A letter from home
   text: |
     "Dear Son, you will have read that they came in the day this time. Aeroplanes, not airships. A
-    whole flight of them at half past eleven in the morning, in the sun, and everybody in the street
+    whole flight of them at twenty to twelve in the morning, in the sun, and everybody in the street
     stood looking up, they looked like silver birds, and then the bombs came down on the City and the
     East End. Liverpool Street station. And a school in Poplar, a council school, the infants'
     class. Eighteen of them, the paper says. Little ones.
 
-    Your father was at work and I did not know till three o'clock if he was all right. Now when the warning goes the people in town take their blankets down the Underground and sleep on the
-    platforms, and here we go down in the crypt at St Mary's. I have been twice. It is like a Sunday school treat that has gone wrong.
+    Your father was at work and I did not know till three o'clock if he was all right. Now when the warning goes we go down in the crypt at St Mary's. I have been twice. It is like a Sunday school treat that has gone wrong.
 
     [if war.mate2]Mr Fenton's shop window has gone again. He has put the football cutting back up behind a board with a hole cut in it.[/if]
 
@@ -240,7 +238,7 @@
     the flagstones among the tombs with your head on your kitbag, and it's the first time you've slept
     underground with nobody shooting.[if flag.c17_wrote_gothas] Your mother takes the good blanket.[/if]
 
-    [if flag.c17_florence_waac && flag.c17_proud_of_florence]Florence isn't here. She's in France, at the base, in her pudding-basin hat. At the office there's a new girl at your desk, and on the desk, in a frame, a postcard from Florence of the sea at Boulogne, addressed to you, care of the Gresham and Lombard.[/if][if flag.c17_florence_waac && !flag.c17_proud_of_florence]Florence isn't at the office. She's in France. You go to the Lyons on the corner on your own and sit where she sat.[/if][if flag.c16_florence && !flag.c17_florence_waac]Florence meets you at the Lyons on the corner again. She's thinking of joining the women's army, she says, they want clerks in France. You don't know what to say. You say she'd be good at it.[/if]
+    [if flag.c17_florence_waac && flag.c17_proud_of_florence]Florence isn't here. She's in France, at the base, in her khaki and her little cap. At the office there's a new girl at your desk, and on the desk, in a frame, a postcard from Florence of the sea at Boulogne, addressed to you, care of the Gresham and Lombard.[/if][if flag.c17_florence_waac && !flag.c17_proud_of_florence]Florence isn't at the office. She's in France. You go to the Lyons on the corner on your own and sit where she sat.[/if][if flag.c16_florence && !flag.c17_florence_waac]Florence meets you at the Lyons on the corner again. She's thinking of joining the women's army, she says, they want clerks in France. You don't know what to say. You say she'd be good at it.[/if]
 
     [if flag.c17_pickwick]You find a copy of Pickwick at the second-hand stall in Leyton market and buy it for fourpence, and read the cricket match on the tram, and laugh out loud, and the woman opposite moves seats.[/if]
 

@@ -398,7 +398,7 @@
 
     [if !war.transferred && flag.p18_showed_todd]Joe Todd from the bottom row finds you in the road and shakes your hand, and doesn't say why, and doesn't need to.[/if][if war.transferred && flag.p18_traced_wire]Some nights for years you'll hear a scratched waltz going round under the ground.[/if][if flag.p18_walked_crater] Some nights you're on the rim of the crater again, reading the crosses.[/if]
 
-    You don't get home till the spring. When you do, the heap's still burning on the skyline, and at
+    They let the miners go first, for the coal, and you're home by the new year. The heap's still burning on the skyline, and at
     eleven on the day, your mother says, the pit buzzer went and didn't stop, five minutes of it, and
     the whole village came out into the rows, and nobody knew what to do, so they went to chapel.
 

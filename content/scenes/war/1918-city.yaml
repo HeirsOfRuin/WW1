@@ -171,9 +171,7 @@
   requires: [ "war.tour >= 38" ]
   title: A letter from home
   text: |
-    "Dear Son, the influenza is cruel bad in London. They say it is in every street. The schools are
-    shut and the theatres and the man next door to the Webbs died on Tuesday and was well on the
-    Sunday. They spray the trams with something that makes your eyes water. Your father wears a
+    "Dear Son, the influenza is cruel bad in London. They say it is in every street. The schools in the borough are shut, and the man next door to the Webbs died on Tuesday and was well on the Sunday. Your father wears a
     mask to the office, a bit of gauze, and looks a fool, and says he does not care.
 
     I am keeping in. Do not worry. Your loving Mother."
@@ -212,8 +210,7 @@
 
     In London, they tell you after, the maroons went off at eleven, the warning guns, and everybody
     ran for shelter, and then understood, and came out again, and the whole City came out of its
-    offices into the street. The clerks threw their ledgers out of the windows. Big Ben rang for the
-    first time in four years. And then the influenza took thousands of them in the next few weeks, and nobody threw anything.
+    offices into the street. The clerks threw their ledgers out of the windows. Big Ben rang for the first time in years. And then the influenza took thousands of them in the next few weeks, and nobody threw anything.
 
     You don't get home till the spring. Victoria, and this time you're clean.[if flag.c18_wrote_dont_worry] Your mother has your letter from February in the tea caddy, the one that said it was quiet. "You liar," she says, and holds on to you.[/if][if flag.c18_wrote_flu] Your father kept the mask on, the way you told him. He shows it you, the bit of gauze, folded in his waistcoat pocket.[/if][if flag.c18_walked_trench] Some nights you're back in the shallow trench at Gommecourt, among the poppies, following it across.[/if]
 
