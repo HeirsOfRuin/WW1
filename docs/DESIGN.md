@@ -514,6 +514,10 @@ deaths. City 1915 story share went from 49.4% to 61.6%. Every town now has a wri
 (Mametz, Gommecourt), sharing the mill's later phases and October where they fit. Farm 1916
 story share went from 27.4% to 50.6%, and city from 26.4% to 49.1%.
 
+**The farm and city towns, 1917 (FRAME-1917-FARM-CITY.md).** Seven events and a leave each;
+Arras and Passchendaele shared by all four towns. Farm and city 1917 story share both went from
+25% to 47.7%.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.

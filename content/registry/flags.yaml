@@ -166,3 +166,18 @@ c16_marsh_truth: { description: "Told Marsh to tell the Sunday school children t
 c16_counted_smoke: { description: "Counted the smoke candles before Gommecourt" }
 c16_read_lists: { description: "Read the London casualty lists after Gommecourt" }
 c16_wrote_mother: { description: "Told his mother she was not too soft about the airship" }
+# The farm town, 1917 (content/scenes/war/1917-farm.yaml)
+f17_fed_the_bay: { description: "Fed a cavalry horse his bread in the snow before Arras" }
+f17_tractor: { description: "Told his father to learn the tractor" }
+f17_fly_runs: { description: "Cottle let the French Fly run messages for signals" }
+f17_covered_pearce: { description: "Lied to cover Pearce's hunt for the German sniper" }
+f17_bert_bearer: { description: "Backed Bert going to the stretcher-bearers" }
+f17_ploughed: { description: "Ploughed a straight furrow behind a French farmer's cow" }
+# The city town, 1917 (content/scenes/war/1917-city.yaml)
+c17_webb_clerk: { description: "Told Webb to take the orderly-room clerk's job" }
+c17_pickwick: { description: "Listened to Pickwick read aloud in the Arras caves" }
+c17_proud_of_florence: { description: "Wrote Florence he was proud she joined the WAAC" }
+c17_learned_morse: { description: "Learned Morse from Marsh on sentry" }
+c17_wrote_gothas: { description: "Told his mother to shelter every time after the daylight raid" }
+c17_cup_played: { description: "Played right half in the brigade cup" }
+c17_florence_waac: { description: "Florence's letter that she joined the WAAC has come" }

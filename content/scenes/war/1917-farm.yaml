@@ -1,0 +1,272 @@
+# The farm town, 1917 (docs/FRAME-1917-FARM-CITY.md). Stage 3 is tours 20 to 29; Arras is tour 23,
+# Passchendaele tour 27. The battles are the mill's (one battalion, one battle). Written to the
+# voice in content/style-guide.md.
+
+- id: v17f_horses
+  chapter: front
+  kind: pool
+  pool: front_1917_farm
+  once: true
+  weight: 100
+  requires: [ "war.tour == 22" ]
+  title: The horse lines
+  text: |
+    April, and snow, and the whole army waiting in and under Arras. On the road out of the town the
+    cavalry are waiting too, a whole division of them in the fields, the horses standing in the snow
+    under their rugs with their heads down and their backs white, steaming, stamping, waiting for a
+    gap that the infantry are meant to make in the morning.
+
+    You go down to look. You can't help it. It's the smell: horse and hay and wet leather, the
+    stable on a winter morning before your father lights the lantern. A big bay hunter turns its
+    head and looks at you over the rope, the way old Blossom does over the door.
+
+    The trooper who has him is a farm lad from Lincolnshire. He's been in France two years and never
+    once been in a charge. "Tomorrow," he says. "They keep saying tomorrow."
+  choices:
+    - id: bread
+      text: Give the bay your bread ration. Stand with him a bit.
+      effects: [ { set: flag.f17_fed_the_bay } ]
+      text_after: |
+        He takes it off your palm with his lips, soft as anything, and then pushes his nose into your
+        chest for more, and you stand there with your face against his neck in the snow, breathing
+        him in, for longer than you'd like anybody to know about.
+      next: "@return"
+    - id: letter
+      text: Go back and write a letter for the pay book.
+      effects: [ { set: flag.last_letter } ]
+      text_after: |
+        The third one. Shorter again. Rest the mare. Don't fret. Love to all. You write it in the
+        caves by the electric light, with the smell of the horses still on your hands.
+      next: "@return"
+
+- id: v17f_land_girl
+  chapter: front
+  kind: pool
+  pool: front_1917_farm
+  once: true
+  requires: [ "war.tour >= 24" ]
+  title: A letter from home
+  text: |
+    "Dear Son, we have a land girl. The War Agricultural Committee sent her. Her name is Miss
+    Pugsley and she is from Exeter and she wears breeches, in the yard, in front of everybody, and
+    your father did not know where to look the first week. She cannot milk. She can drive the
+    tractor the committee lent us, which your father cannot, and will not learn, and they argue
+    about it across the yard all day like an old married couple.
+
+    And there are German prisoners working on the Vellacotts' land. Six of them, with a guard. They are quiet and polite as chapel and one of them was a farmer and knows sheep, and Mr Vellacott says he
+    is the best shepherd he ever had and will not hear a word against him.
+
+    Keep your feet dry. Your loving Mother."
+  choices:
+    - id: laugh
+      text: Write back. Tell your father to learn the tractor.
+      effects: [ { set: flag.f17_tractor } ]
+      text_after: |
+        You tell him to learn the tractor, and that you've seen what they can do out here, and that
+        the horse is finished whether he likes it or not. You know he won't like it. You put it gently.
+      next: "@return"
+    - id: prisoners
+      text: Keep it. Read the bit about the prisoners again.
+      text_after: |
+        A German prisoner shepherding on Vellacott's land, up on the hill with the ewes, and the moor behind him.
+        You read it three times. You don't know what you feel about it. You look over the parapet at
+        their line, a field away, and think of him.
+      next: "@return"
+
+- id: v17f_fly
+  chapter: front
+  kind: pool
+  pool: front_1917_farm
+  once: true
+  requires: [ "war.tour >= 21", war.mate1, flag.f16_kept_dog ]
+  title: Fly
+  text: |
+    The signals officer has been watching Cottle's dog. Fly, the French one, who sleeps on his feet
+    and kills rats and comes to two notes of a whistle from anywhere in the line.
+
+    They're trying dogs for messages, he says. Running back with a tube on the collar when the wires
+    are cut and the runners are dead. He's seen her. He'd like to try her.
+
+    Cottle looks at the dog. The dog looks at Cottle.
+  choices:
+    - id: let_her
+      text: Tell Cottle to let her. She'll save lives.
+      effects: [ { set: flag.f17_fly_runs } ]
+      text_after: |
+        Cottle trains her himself, behind the line, every rest day: he walks her up to the front line
+        and gives her to a stranger and goes back to battalion headquarters, a mile, and whistles, and
+        she comes. Every time, through anything. By the summer she's running messages in the line, through shellfire, with a tube on her collar.
+      next: "@return"
+    - id: keep_her
+      text: Tell him to keep her. She's all he's got.
+      text_after: |
+        He tells the officer she's too much of a pet, she'd only come to him. It's a lie and the
+        officer knows it. He lets it go. Cottle puts his hand on her head and leaves it there.
+      next: "@return"
+
+- id: v17f_pearce
+  chapter: front
+  kind: pool
+  pool: front_1917_farm
+  once: true
+  requires: [ "war.tour >= 24", war.mate2 ]
+  title: Gone
+  text: |
+    Pearce is missing at morning stand-to. Rifle gone, cap gone, nobody saw him go. The sergeant's
+    face goes still. If he's not back by dark, he's a deserter, and you know what they do to those.
+
+    You know where he is. He's out there. He said last night there was a German sniper in the
+    ruined farm across the way who'd killed two men in a week, and nobody was doing anything about
+    it, and he'd had about enough.
+  choices:
+    - id: cover
+      text: Cover for him. Tell the sergeant he's on a carrying party.
+      effects: [ { set: flag.f17_covered_pearce } ]
+      text_after: |
+        You lie. The sergeant looks at you and lets you. Pearce comes back at dusk, over the parapet,
+        filthy, grinning, with a German sniper's rifle with a telescope on it and a hare by the
+        back legs. "Carrying party," the sergeant says, loud enough for the whole bay, looking at the hare. "Was it."
+        The hare goes in the pot. Nobody's shot in that bay again.
+      next: "@return"
+    - id: tell
+      text: Tell the sergeant where he's gone. Before it's desertion.
+      text_after: |
+        The sergeant sends an officer's patrol out after dark. They meet Pearce coming back with a
+        German sniper's rifle and a hare. He gets seven days' pay stopped and a mention in the
+        colonel's report in the same week. He doesn't speak to you for a fortnight. Then he gives you
+        half the hare.
+      next: "@return"
+
+- id: v17f_bert
+  chapter: front
+  kind: pool
+  pool: front_1917_farm
+  once: true
+  requires: [ "war.tour >= 24", war.mate3 ]
+  title: Stretcher-bearer
+  text: |
+    Bert's asked to go to the stretcher-bearers. He's been to the sergeant major. He says he can't
+    keep shooting at men. He's not a conchie, he says, he'll go anywhere, he'll go in front of
+    everybody, only let him carry instead of shoot. The bearers have lost so many at Arras they'll
+    take anybody.
+
+    "I rang the bells for the funerals at home," he says. "Every one. I can carry them out of here."
+  choices:
+    - id: back_him
+      text: Tell him you think he's right.
+      effects: [ { set: flag.f17_bert_bearer } ]
+      text_after: |
+        He goes to the bearers the next week, with a red cross on his arm and no rifle. You see him in
+        the line after, at the end of every bad night, with his hands and his sleeves black, carrying,
+        and he looks more like himself than he has since the boat.
+      next: "@return"
+    - id: talk
+      text: Tell him the bearers die faster than anyone.
+      text_after: |
+        "I know," he says. "I've counted." He goes anyway. You see him on every bad night after, at the
+        end of a stretcher, and you can't look at him without your stomach turning over.
+      next: "@return"
+
+- id: v17f_plough
+  chapter: front
+  kind: pool
+  pool: front_1917_farm
+  once: true
+  requires: [ "war.tour >= 24" ]
+  title: The plough
+  text: |
+    May, behind the line, and a French farmer's ploughing the field next to the billet, right up to
+    the edge of the shell holes, with a cow in the shafts because his horses went to the army the
+    same as yours. An old man. The cow won't go straight and the furrows wander like a drunk going
+    home.
+
+    The farm lads stand at the hedge and watch him. You can feel every one of them wanting to go and
+    take the handles.
+  choices:
+    - id: plough
+      text: Go and ask him for the handles. Show him a straight furrow.
+      effects: [ { set: flag.f17_ploughed } ]
+      text_after: |
+        He doesn't understand a word you say, and he understands everything. He gives you the
+        handles. The cow's a cow, but you talk to her, low, the way you'd talk to Blossom, and the
+        furrow goes straight to the hedge. The old man walks it and kicks the soil and nods. Then he
+        takes the handles back, and does the next one straight himself.
+      next: "@return"
+    - id: watch
+      text: Watch from the hedge. It's his field.
+      text_after: |
+        It's his field and his cow and his crooked furrows. By evening the field's turned, and the
+        smell of it comes in through the billet window all night, turned earth, and you sleep like
+        you haven't since the boat.
+      next: "@return"
+
+- id: v17f_mud
+  chapter: front
+  kind: pool
+  pool: front_1917_farm
+  once: true
+  requires: [ "war.tour >= 28" ]
+  title: The gateway
+  text: |
+    October in Flanders. You know this mud. It's the mud in the gateway to the Long Field in
+    February, where the cattle have trodden it to soup, the mud that takes your boot and keeps it.
+    Only here it's every field, and it goes on to the sky, and there are horses in it.
+
+    Pack animals, carrying shells up the plank roads, and when one slips off the planks it goes in to
+    the girth and can't get out, and the drivers shoot it where it stands and push it aside, and the
+    next one comes on. Along the plank road they lie every few yards, half under.
+
+    [if flag.f17_fed_the_bay]You think of the big bay at Arras, in the snow, taking bread off your hand.[/if]
+  choices:
+    - id: on
+      text: Keep your eyes on the planks.
+      next: "@return"
+
+# ---- the 1917 leave ---------------------------------------------------------------------------
+
+- id: l_farm_1917
+  chapter: front
+  title: Home on leave
+  text: |
+    December. The carrier's cart from South Molton, and the lane, and the farm in the dusk. There's a
+    noise in the yard you don't know, an engine, a clattering, and it's a tractor, a grey American thing, with a girl in breeches on it and your father walking beside it shouting.
+
+    [if flag.f17_tractor]"Your letter," your father says, before he's even said hello. "You and your tractor." But he's learned it. He shows you, the next morning, grim as a funeral, and drives it into the gatepost.[else]Your father won't touch it. Miss Pugsley drives it, and he follows behind on foot telling her she's doing it wrong, and she's not.[/if]
+
+    The prisoners on Vellacott's land wave to you from the hill. One of them's got Vellacott's dog at
+    his heel.
+
+    [if flag.f17_ploughed]You tell your father about the French farmer and his cow and the straight furrow. He laughs till he coughs. "A cow," he says. "In the shafts. Well, I've seen it all now." He tells it to everybody at market.[/if]
+
+    [if war.mate1 && flag.f17_fly_runs]Old Mr Cottle has heard about the French Fly running messages. He sits at the fire with Will's letter, and the real Fly at his feet, and reads it to her, and she listens.[/if][if war.mate1 && !flag.f17_fly_runs && flag.f16_kept_dog]Old Mr Cottle asks after Will and the French dog, and laughs that there's two of them called Fly now.[/if][if war.mate1 && !flag.f16_kept_dog]Old Mr Cottle asks after Will, and you tell him he's well.[/if][if !war.mate1]Old Mr Cottle has stopped going to market. The sheep go on. Fly still goes to the gate.[/if]
+
+    [if war.mate2 && flag.f17_covered_pearce]Mrs Pearce has heard about the German sniper and the hare. Everybody has. Dan wrote to the keeper at the big house about it, of all people, and the keeper's had it read out in the Royal Oak.[/if][if war.mate2 && !flag.f17_covered_pearce]Mrs Pearce asks if Dan's in trouble again. You say no. She doesn't believe you.[/if][if !war.mate2]At the Royal Oak they've stopped telling the stories about Dan Pearce. Nobody can tell them right.[/if]
+
+    [if war.mate3 && flag.f17_bert_bearer]Mrs Yeo has heard Bert's a stretcher-bearer now. She's proud and frightened in equal parts and can't say which. The ringers rang for the bearers on All Souls' Day.[/if][if war.mate3 && !flag.f17_bert_bearer]Mrs Yeo asks you to look after Bert. You say you will. You don't know how.[/if][if !war.mate3]The tenor bell is rung half-muffled every Sunday now.[/if]
+
+    {offers_line}
+  choices:
+    - id: back
+      text: Go back on the tenth day. The battalion promotes the men who return.
+      effects: [ { war: back } ]
+      next: "@war"
+    - id: commission
+      text: Go before the board for a commission.
+      visible_if: war.commission
+      effects: [ { war: commission } ]
+      next: "@war"
+    - id: posting_0
+      text: "Take it: {offer0}. Your war ends here."
+      visible_if: "war.offers >= 1"
+      effects: [ { war: "posting:0" } ]
+      next: "@war"
+    - id: posting_1
+      text: "Take it: {offer1}. Your war ends here."
+      visible_if: "war.offers >= 2"
+      effects: [ { war: "posting:1" } ]
+      next: "@war"
+    - id: posting_2
+      text: "Take it: {offer2}. Your war ends here."
+      visible_if: "war.offers >= 3"
+      effects: [ { war: "posting:2" } ]
+      next: "@war"

@@ -37,6 +37,12 @@ rules:
   - { match: "Webb's filled his first|Mrs Webb asks if Arthur's still", allow: war.mate1, why: Arthur Webb only acts while alive (1916) }
   - { match: "A parcel for Fenton|Fenton's father has the newspaper cutting", allow: war.mate2, why: Percy Fenton only acts while alive (1916) }
   - { match: "Marsh has a parcel from the Sunday|pinned Marsh's letter", allow: war.mate3, why: Leonard Marsh only acts while alive (1916) }
+  - { match: "Cottle looks at the dog|Cottle trains her himself|Old Mr Cottle has heard about the French|Old Mr Cottle asks after Will and the French", allow: war.mate1, why: Will Cottle only acts while alive (1917) }
+  - { match: "Pearce is missing at morning|Pearce comes back at dusk|Mrs Pearce has heard about the German|Mrs Pearce asks if Dan's in trouble", allow: war.mate2, why: Dan Pearce only acts while alive (1917) }
+  - { match: "Bert's asked to go|Mrs Yeo has heard Bert|Mrs Yeo asks you to look after", allow: war.mate3, why: Bert Yeo only acts while alive (1917) }
+  - { match: "Somebody's told him about Webb|Webb's done the totals|Mrs Webb says Arthur writes that", allow: war.mate1, why: Arthur Webb only acts while alive (1917) }
+  - { match: "Fenton's captain of the battalion|Mr Fenton's shop window has gone|Mr Fenton wants to hear about the brigade", allow: war.mate2, why: Percy Fenton only acts while alive (1917) }
+  - { match: "Marsh has been to the signals|learned Morse from Mr Marsh|Mrs Marsh says Leonard is a signaller", allow: war.mate3, why: Leonard Marsh only acts while alive (1917) }
   - match: "All nine of the section"
     allow: "war.section == 9"
     why: The whole section alive only while all nine are.

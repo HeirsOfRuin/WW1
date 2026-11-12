@@ -93,6 +93,11 @@ switch:
   - { if: ["war.battle == somme_autumn", "war.phase == 2", "start == pit"], go: b_butte_2 }
   - { if: ["war.battle == somme_autumn", "war.phase == 3", "start == pit"], go: b_butte_3 }
   - { if: ["war.pending == leave", "war.stage == 2", "start == pit"], go: l_pit_1916 }
+  # the farm and city towns, 1917 (docs/FRAME-1917-FARM-CITY.md); their battles are the mill's
+  - { if: ["war.pending == tour", "war.stage == 3", "start == farm"], go: { pool: front_1917_farm, count: 1, then: w_tour } }
+  - { if: ["war.pending == leave", "war.stage == 3", "start == farm"], go: l_farm_1917 }
+  - { if: ["war.pending == tour", "war.stage == 3", "start == city"], go: { pool: front_1917_city, count: 1, then: w_tour } }
+  - { if: ["war.pending == leave", "war.stage == 3", "start == city"], go: l_city_1917 }
   # the pit town, 1917 (content/scenes/war/1917-pit.yaml; docs/FRAME-PIT-1917.md); its battles are the mill's
   - { if: ["war.pending == tour", "war.stage == 3", "start == pit"], go: { pool: front_1917_pit, count: 1, then: w_tour } }
   - { if: ["war.pending == leave", "war.stage == 3", "start == pit"], go: l_pit_1917 }
@@ -139,13 +144,13 @@ switch:
   - { if: ["war.pending == leave", "war.stage == 2", "start == mill"], go: l_mill_1916 }
   # the mill town, 1917 (content/scenes/war/1917-mill.yaml)
   - { if: ["war.pending == tour", "war.stage == 3", "start == mill"], go: { pool: front_1917_mill, count: 1, then: w_tour } }
-  - { if: ["war.battle == arras", "war.phase == 1", { any: ["start == mill", "start == pit"] }], go: b_arras_1 }
-  - { if: ["war.battle == arras", "war.phase == 2", { any: ["start == mill", "start == pit"] }], go: b_arras_2 }
-  - { if: ["war.battle == arras", "war.phase == 3", { any: ["start == mill", "start == pit"] }], go: b_arras_3 }
-  - { if: ["war.battle == passchendaele", "war.phase == 1", { any: ["start == mill", "start == pit"] }], go: b_pass_1 }
-  - { if: ["war.battle == passchendaele", "war.phase == 2", { any: ["start == mill", "start == pit"] }], go: b_pass_2 }
-  - { if: ["war.battle == passchendaele", "war.phase == 3", { any: ["start == mill", "start == pit"] }], go: b_pass_3 }
-  - { if: ["war.battle == passchendaele", "war.phase == 4", { any: ["start == mill", "start == pit"] }], go: b_pass_4 }
+  - { if: ["war.battle == arras", "war.phase == 1", { any: ["start == mill", "start == pit", "start == farm", "start == city"] }], go: b_arras_1 }
+  - { if: ["war.battle == arras", "war.phase == 2", { any: ["start == mill", "start == pit", "start == farm", "start == city"] }], go: b_arras_2 }
+  - { if: ["war.battle == arras", "war.phase == 3", { any: ["start == mill", "start == pit", "start == farm", "start == city"] }], go: b_arras_3 }
+  - { if: ["war.battle == passchendaele", "war.phase == 1", { any: ["start == mill", "start == pit", "start == farm", "start == city"] }], go: b_pass_1 }
+  - { if: ["war.battle == passchendaele", "war.phase == 2", { any: ["start == mill", "start == pit", "start == farm", "start == city"] }], go: b_pass_2 }
+  - { if: ["war.battle == passchendaele", "war.phase == 3", { any: ["start == mill", "start == pit", "start == farm", "start == city"] }], go: b_pass_3 }
+  - { if: ["war.battle == passchendaele", "war.phase == 4", { any: ["start == mill", "start == pit", "start == farm", "start == city"] }], go: b_pass_4 }
   - { if: ["war.pending == leave", "war.stage == 3", "start == mill"], go: l_mill_1917 }
   # the mill town, 1918 (content/scenes/war/1918-mill.yaml; docs/FRAME-1918.md)
   - { if: ["war.pending == tour", "war.stage == 4", "start == mill"], go: { pool: front_1918_mill, count: 1, then: w_tour } }

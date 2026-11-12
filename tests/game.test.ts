@@ -125,18 +125,18 @@ describe('the story leads', () => {
 });
 
 describe('the farm and city towns', () => {
-  it('the city town\'s written years (1915-1916) are about half story', () => {
+  it('the city town\'s written years (1915-1917) are about half story', () => {
     const r = share(40, 'city');
-    for (const y of [1, 2]) {
+    for (const y of [1, 2, 3]) {
       const c = r.byYear[y]!;
       const p = c.story / (c.story + c.generic);
       expect(p, `city ${1914 + y}: story ${(100 * p).toFixed(1)}%`).toBeGreaterThan(0.44);
       expect(p, `city ${1914 + y}: story ${(100 * p).toFixed(1)}%`).toBeLessThan(0.7);
     }
   }, 120_000);
-  it('the farm town\'s written years (1915-1916) are about half story', () => {
+  it('the farm town\'s written years (1915-1917) are about half story', () => {
     const r = share(40, 'farm');
-    for (const y of [1, 2]) {
+    for (const y of [1, 2, 3]) {
       const c = r.byYear[y]!;
       const p = c.story / (c.story + c.generic);
       expect(p, `farm ${1914 + y}: story ${(100 * p).toFixed(1)}%`).toBeGreaterThan(0.44);

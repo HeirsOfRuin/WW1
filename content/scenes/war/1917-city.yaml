@@ -1,0 +1,278 @@
+# The city town, 1917 (docs/FRAME-1917-FARM-CITY.md). Stage 3 is tours 20 to 29; Arras is tour 23,
+# Passchendaele tour 27. The battles are the mill's (one battalion, one battle). Written to the
+# voice in content/style-guide.md.
+
+- id: v17c_orderly_room
+  chapter: front
+  kind: pool
+  pool: front_1917_city
+  once: true
+  requires: [ "war.tour >= 20", war.mate1 ]
+  title: The orderly room
+  text: |
+    The adjutant wants a clerk. The orderly-room sergeant has gone sick and battalion headquarters
+    is drowning in returns: ration strengths, casualty returns, indents for boots, the whole army
+    run on paper, and nobody in the battalion who can keep a ledger straight.
+
+    Somebody's told him about Webb.
+
+    It's a dugout three hundred yards behind the front line, with a table and a lamp and a typewriter.
+    It's still the line. But it's not a firestep. Webb looks at you. He's asking.
+  choices:
+    - id: take_it
+      text: Tell him to take it. Somebody should keep the real books.
+      effects: [ { set: flag.c17_webb_clerk } ]
+      text_after: |
+        He takes it. You see him after in the orderly-room dugout with his sleeves rolled and his pen
+        going, and the returns in neat piles, and the battalion's losses in red in the casualty column.
+        "It's the same as my notebook," he says. "Only now it's official." It doesn't seem to help.
+      next: "@return"
+    - id: stay
+      text: Tell him the section needs him. It does.
+      text_after: |
+        He stays. He tells the adjutant he'd rather stop with the men from the office. The adjutant
+        looks at him as if he were mad. Webb goes back to the firestep and gets out his notebook.
+      next: "@return"
+
+- id: v17c_caves
+  chapter: front
+  kind: pool
+  pool: front_1917_city
+  once: true
+  weight: 100
+  requires: [ "war.tour == 22" ]
+  title: Under Arras
+  text: |
+    The night before Arras, under the town, in the old chalk quarries, with electric light strung
+    along the walls and thousands of men waiting. It's like the Underground on a Bank Holiday: the
+    same damp, the same press of bodies, the same smell of wet wool and pipe smoke and too many
+    people breathing.
+
+    Somebody in the next bay has a copy of Pickwick, and he's reading it aloud, the bit about the
+    cricket match, doing all the voices, and a whole chamber of men is listening and laughing in the
+    wrong places and the right ones.
+  choices:
+    - id: listen
+      text: Sit and listen to Pickwick.
+      effects: [ { set: flag.c17_pickwick } ]
+      text_after: |
+        You sit on the chalk with your back against a sandbag and listen to Mr Pickwick and Mr Jingle
+        and Dingley Dell, and for an hour there isn't a war. When the reader's voice gives out, a man
+        from Bermondsey takes the book and carries on, worse, and nobody minds.
+      next: "@return"
+    - id: letter
+      text: Write a letter for the pay book.
+      effects: [ { set: flag.last_letter } ]
+      text_after: |
+        The third. The firm will see Mother right. My bat to the boys' club. [if flag.c16_florence]A line to Florence, crossed out, written again, left in.[/if] You fold it small.
+      next: "@return"
+
+- id: v17c_waac
+  chapter: front
+  kind: pool
+  pool: front_1917_city
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 24", flag.c16_florence ]
+  on_enter: [ { set: flag.c17_florence_waac } ]
+  title: Florence
+  text: |
+    A letter from Florence, and it isn't on the firm's paper. It's on Army paper.
+
+    She's joined the Women's Army Auxiliary Corps. They want women for clerks in France, to free the
+    men in the base offices for the line, and she can do a ledger as well as any man in Cornhill,
+    and better than some. She's at a base camp on the coast. She doesn't say where; she can't. She
+    has a khaki coat and a hat like a pudding basin and she shares a hut with eleven girls from
+    Glasgow.
+
+    "So I am in France too," she writes. "Fifty miles from you, perhaps less. It is a funny thing to
+    be so close and no nearer."
+  choices:
+    - id: proud
+      text: Write back and tell her you're proud of her.
+      effects: [ { set: flag.c17_proud_of_florence } ]
+      text_after: |
+        You tell her. You tell her you're proud, and that the base offices are lucky, and that if
+        they ever send you down the line wounded you'll ask at every office on the coast for a girl
+        who knows the Marine ledgers. You don't know if that's a proper thing to write. You post it.
+      next: "@return"
+    - id: worry
+      text: Write back and ask her to be careful.
+      text_after: |
+        You ask her to be careful. She writes back that she's three days' march behind the line at a
+        base full of clerks and cooks, and the worst danger she's met is a sergeant from Leith, and
+        that you are to be careful, and that she means it.
+      next: "@return"
+
+- id: v17c_marsh
+  chapter: front
+  kind: pool
+  pool: front_1917_city
+  once: true
+  requires: [ "war.tour >= 21", war.mate3 ]
+  title: Signals
+  text: |
+    Marsh has been to the signals course. He came back with crossed flags on his sleeve and a head
+    full of Morse, and now he's the company's signaller, with a buzzer and a field telephone and a
+    reel of wire and two pigeons in a basket.
+
+    He's good at it. Better than good. It turns out a man who learned the eye chart by heart in a
+    night can learn anything by heart. He taps out Morse on his knee in his sleep. "It's like the
+    books of the Bible," he says. "You learn the order, and then it's yours."
+
+    But signallers go out to mend the wire when it's cut, and it's always cut.
+  choices:
+    - id: help
+      text: Learn the Morse with him. You might be needed.
+      effects: [ { set: flag.c17_learned_morse } ]
+      text_after: |
+        He teaches you on sentry, tapping on your arm in the dark, letter by letter, the whole
+        alphabet in a week. By the end you can send your name and HELP and WATER and ALL WELL. "That's
+        all anybody ever needs to send," Marsh says.
+      next: "@return"
+    - id: no
+      text: Leave him to it.
+      text_after: |
+        You leave him to it. On bad nights you hear the buzzer going in the signals dugout, short,
+        long, short, and you know it's him, and you lie and try to read it, and can't.
+      next: "@return"
+
+- id: v17c_gothas
+  chapter: front
+  kind: pool
+  pool: front_1917_city
+  once: true
+  requires: [ "war.tour >= 25" ]
+  title: A letter from home
+  text: |
+    "Dear Son, you will have read that they came in the day this time. Aeroplanes, not airships. A
+    whole flight of them at half past eleven in the morning, in the sun, and everybody in the street
+    stood looking up, they looked like silver birds, and then the bombs came down on the City and the
+    East End. Liverpool Street station. And a school in Poplar, a council school, the infants'
+    class. Eighteen of them, the paper says. Little ones.
+
+    Your father was at work and I did not know till three o'clock if he was all right. Now when the warning goes the people in town take their blankets down the Underground and sleep on the
+    platforms, and here we go down in the crypt at St Mary's. I have been twice. It is like a Sunday school treat that has gone wrong.
+
+    [if war.mate2]Mr Fenton's shop window has gone again. He has put the football cutting back up behind a board with a hole cut in it.[/if]
+
+    Your loving Mother."
+  choices:
+    - id: write
+      text: Write back. Tell her to go down the Underground every time.
+      effects: [ { set: flag.c17_wrote_gothas } ]
+      text_after: |
+        You tell her to go down every time, whatever your father says, and to take the good blanket. You
+        don't tell her that out here it's the same, the warning and the going down, only underground
+        is a dugout and the blankets are wet.
+      next: "@return"
+    - id: keep
+      text: Keep it with the others.
+      text_after: |
+        It goes in your breast pocket. You read the bit about the infants' class again, and put it away,
+        and stand your sentry looking at the German line, and don't think anything at all for two hours.
+      next: "@return"
+
+- id: v17c_fenton
+  chapter: front
+  kind: pool
+  pool: front_1917_city
+  once: true
+  requires: [ "war.tour >= 26", war.mate2 ]
+  title: The battalion cup
+  text: |
+    At rest, in July, before Flanders, the brigade has a football cup. Twelve teams, a pitch marked
+    out in a field with lime from the sanitary men, a real cup that the brigadier bought in
+    Amiens.
+
+    Fenton's captain of the battalion side. He picks a team from every company: two pitmen in the
+    defence, a farm lad from Exmoor in goal who can't kick but won't let anything past him, a weaver
+    from Lancashire on the left wing. Half the battalion's on the touchline.
+  choices:
+    - id: play
+      text: Ask Fenton for a place. Right half, the way you played before.
+      effects: [ { set: flag.c17_cup_played } ]
+      text_after: |
+        You play. You lose in the semi-final to a Welsh battalion, three goals to one, and Fenton
+        scores the one, and the whole battalion sings on the way back to the billets, all the towns
+        together, pitmen and weavers and farm lads and clerks, the same songs. For a night you're one
+        thing.
+      next: "@return"
+    - id: cheer
+      text: Cheer from the touchline.
+      text_after: |
+        You shout yourself hoarse. They lose in the semi-final to a Welsh battalion, three goals to one, and Fenton scores
+        the one, and the battalion sings all the way back to the billets, every town together, the
+        same songs.
+      next: "@return"
+
+- id: v17c_mud
+  chapter: front
+  kind: pool
+  pool: front_1917_city
+  once: true
+  requires: [ "war.tour >= 28" ]
+  title: The totals
+  text: |
+    October in Flanders. Rain, and mud, and the duckboard tracks going out across it to nowhere.
+
+    [if war.mate1]Webb's done the totals for Passchendaele. He shows you in the candlelight, the column, carried forward. He doesn't say anything. He doesn't need to. He closes the notebook and puts it away and sits with his hands round his mug and doesn't drink it.[/if][if !war.mate1]You find yourself doing what Webb did: counting. The shells, the men, the days. You don't write it down. You can't stop counting.[/if]
+  choices:
+    - id: on
+      text: Go back up the line.
+      next: "@return"
+
+# ---- the 1917 leave ---------------------------------------------------------------------------
+
+- id: l_city_1917
+  chapter: front
+  title: Home on leave
+  text: |
+    Victoria again. London's grey and tired and hungry. There are queues outside every grocer's in
+    Leyton for margarine and tea and sugar, women standing two hours in the cold with their baskets,
+    and the bread's grey and tastes of potato.
+
+    Your mother's thinner. She's given you her sugar for a week without saying. Your father's grown
+    a moustache and it's gone white.
+
+    When the warning goes, on your third night, the whole street goes down into the crypt at St Mary's
+    with their blankets and their Thermos flasks and their children, and you go with them, and sleep on
+    the flagstones among the tombs with your head on your kitbag, and it's the first time you've slept
+    underground with nobody shooting.[if flag.c17_wrote_gothas] Your mother takes the good blanket.[/if]
+
+    [if flag.c17_florence_waac && flag.c17_proud_of_florence]Florence isn't here. She's in France, at the base, in her pudding-basin hat. At the office there's a new girl at your desk, and on the desk, in a frame, a postcard from Florence of the sea at Boulogne, addressed to you, care of the Gresham and Lombard.[/if][if flag.c17_florence_waac && !flag.c17_proud_of_florence]Florence isn't at the office. She's in France. You go to the Lyons on the corner on your own and sit where she sat.[/if][if flag.c16_florence && !flag.c17_florence_waac]Florence meets you at the Lyons on the corner again. She's thinking of joining the women's army, she says, they want clerks in France. You don't know what to say. You say she'd be good at it.[/if]
+
+    [if flag.c17_pickwick]You find a copy of Pickwick at the second-hand stall in Leyton market and buy it for fourpence, and read the cricket match on the tram, and laugh out loud, and the woman opposite moves seats.[/if]
+
+    [if war.mate1 && flag.c17_webb_clerk]Mrs Webb says Arthur writes that he's in an office now, at the front, doing the returns. "An office," she says. "In the trenches. Is that safe?" You tell her it's safer.[/if][if war.mate1 && !flag.c17_webb_clerk]Mrs Webb asks if Arthur's still writing in his book. You say he is.[/if][if !war.mate1]Mrs Webb gives you Arthur's pen, the one from the office, with his initials. "He'd want it used," she says.[/if]
+
+    [if war.mate2 && flag.c17_cup_played]Mr Fenton wants to hear about the brigade cup, every kick, and the Welsh, and the one goal. He has it written up on a card in the shop window by the end of the week.[/if][if war.mate2 && !flag.c17_cup_played]Mr Fenton wants to hear about Percy, every bit of him, and you tell him what you can, and leave out what you can't.[/if][if !war.mate2]Mr Fenton has given Percy's football to the boys' club. They play with it on the marshes every Saturday.[/if]
+
+    [if war.mate3 && flag.c17_learned_morse]At chapel the Sunday school children have learned Morse from Mr Marsh's letters, and tap ALL WELL to you on the pew in front.[/if][if war.mate3 && !flag.c17_learned_morse]Mrs Marsh says Leonard is a signaller now, and asks what that means, and you tell her it means he's the cleverest man in the company.[/if][if !war.mate3]At the chapel there's a brass plate for Leonard Marsh by the Sunday school door.[/if]
+
+    {offers_line}
+  choices:
+    - id: back
+      text: Go back on the tenth day. The battalion promotes the men who return.
+      effects: [ { war: back } ]
+      next: "@war"
+    - id: commission
+      text: Go before the board for a commission.
+      visible_if: war.commission
+      effects: [ { war: commission } ]
+      next: "@war"
+    - id: posting_0
+      text: "Take it: {offer0}. Your war ends here."
+      visible_if: "war.offers >= 1"
+      effects: [ { war: "posting:0" } ]
+      next: "@war"
+    - id: posting_1
+      text: "Take it: {offer1}. Your war ends here."
+      visible_if: "war.offers >= 2"
+      effects: [ { war: "posting:1" } ]
+      next: "@war"
+    - id: posting_2
+      text: "Take it: {offer2}. Your war ends here."
+      visible_if: "war.offers >= 3"
+      effects: [ { war: "posting:2" } ]
+      next: "@war"
