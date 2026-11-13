@@ -27,7 +27,7 @@
   choices:
     - id: dig_deep
       text: Get the Ashington men on the picks with you. Dig the post deep.
-      effects: [ { set: flag.dug_deep } ]
+      effects: [ { set: flag.dug_deep }, { war_mood: { standing: 1 } } ]
       text_after: |
         You put them on the picks beside the Blackhaugh lads and by the end of the first shift
         they're talking, about seams, about managers, about whose pit has the worst roof. By
@@ -36,6 +36,7 @@
       next: "@return"
     - id: leave_them
       text: Leave them be. Let them grieve their own battalion.
+      effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         You leave them be. They keep to themselves in the next post, and sing at night, low, their
         own songs, and after a week one of them comes over for a light and stays an hour.
@@ -61,7 +62,7 @@
   choices:
     - id: rib
       text: Call him Corporal, and salute.
-      effects: [ { set: flag.p18_ribbed_bell } ]
+      effects: [ { set: flag.p18_ribbed_bell }, { war_mood: { nerve: 1 } } ]
       text_after: |
         He tells you exactly where to put your salute, in words the Herald wouldn't print. Then he
         laughs, properly, the first time since the spring. "Corporal," he says, trying it. "Me da'll
@@ -69,7 +70,7 @@
       next: "@return"
     - id: help
       text: Help him with the new lads. Say nothing about the stripe.
-      effects: [ { set: flag.p18_helped_bell } ]
+      effects: [ { set: flag.p18_helped_bell }, { war_mood: { standing: 1 } } ]
       text_after: |
         You do the feet with him, the two of you going along the posts in the dark with a tin of
         whale oil and a sack of dry socks. He talks the whole time, about the war, about the owners,
@@ -98,7 +99,7 @@
   choices:
     - id: show
       text: Show him the ropes. All of it.
-      effects: [ { set: flag.p18_showed_todd } ]
+      effects: [ { set: flag.p18_showed_todd }, { war_mood: { standing: 1 } } ]
       text_after: |
         You show him where to stand, when to duck, how to keep his feet, the sound of the shells
         that matter. He listens the way he'd listen to a deputy. At the end of it he says, "You've
@@ -132,7 +133,7 @@
   choices:
     - id: not_me_either
       text: Tell him you're not going back down either.
-      effects: [ { set: flag.p18_not_going_down } ]
+      effects: [ { set: flag.p18_not_going_down }, { war_mood: { nerve: 2 } } ]
       text_after: |
         "Good," Robson says. "Good." He goes back to pulling at the grass. After a while: "You'll
         have to come and help with the hens, then. You're no use for owt else." It's the nearest
@@ -164,7 +165,7 @@
   choices:
     - id: give
       text: Help Charlton leave the mule in the old man's yard.
-      effects: [ { set: flag.p18_gave_mule } ]
+      effects: [ { set: flag.p18_gave_mule }, { war_mood: { nerve: 2, standing: -1 } } ]
       text_after: |
         Charlton leads her in and ties her in an empty stall and shows the old man the bad foot,
         in signs, and how to poultice it, and the old man takes hold of Charlton's face in both his
@@ -173,6 +174,7 @@
       next: "@return"
     - id: no
       text: Tell him he'll be on a charge. Keep going.
+      effects: [ { war_mood: { nerve: -1, standing: 1 } } ]
       text_after: |
         Charlton keeps going. He looks back once at the old man in his empty yard, and the mule
         limps along behind the limber, and that night the farrier shoots her, and Charlton doesn't
@@ -201,7 +203,7 @@
   choices:
     - id: deep
       text: Sink it deep. Twenty steps at least.
-      effects: [ { set: flag.dug_deep } ]
+      effects: [ { set: flag.dug_deep }, { war_mood: { standing: 1 } } ]
       text_after: |
         Twenty steps, timbered like a shaft, the way your father taught you to set a prop. You put
         the last frame in on the first of February and stand at the bottom looking up at the square
@@ -209,6 +211,7 @@
       next: "@return"
     - id: enough
       text: Dig it to the book and no more.
+      effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         To the book, and the book's not bad. You finish a week early and get three days in a barn
         with straw and a stove, and Mott teaches the crew a card game from the docks that nobody
@@ -232,7 +235,7 @@
   choices:
     - id: carry
       text: Carry him down to the aid post yourself.
-      effects: [ { set: flag.p18_carried_mott } ]
+      effects: [ { set: flag.p18_carried_mott }, { war_mood: { nerve: 2 } } ]
       text_after: |
         Two miles on your back, him talking the whole way, about the Tube, about his mum's pie shop
         in Bermondsey, about a girl. At the aid post he shakes your hand like a man at a station.
@@ -240,6 +243,7 @@
       next: "@return"
     - id: stretcher
       text: Get him onto a stretcher and get back to the shaft.
+      effects: [ { war_mood: { standing: 1 } } ]
       text_after: |
         The bearers take him. He waves from the stretcher like a lad on a charabanc. You go back
         down, and Evans is at the face on his own, not singing, and you take Mott's place beside
@@ -268,7 +272,7 @@
   choices:
     - id: trace
       text: Leave it. Trace the wire first, however long it takes.
-      effects: [ { set: flag.p18_traced_wire } ]
+      effects: [ { set: flag.p18_traced_wire }, { war_mood: { nerve: -1, standing: 1 } } ]
       text_after: |
         An hour on your knees with the candle. There's a wire, fine as cotton, from under the
         gramophone down into the floor, to enough explosive to bring down the dugout and everybody
@@ -300,13 +304,14 @@
   choices:
     - id: report
       text: Tell the officer what the ground's saying.
-      effects: [ { set: flag.p18_reported } ]
+      effects: [ { set: flag.p18_reported }, { war_mood: { standing: 1 } } ]
       text_after: |
         He listens. He writes it down. "Everybody's hearing it," he says. "Everybody knows." He looks
         at you. "Still. Thank you. [if flag.pit_reported]You're the one who heard them in 1915, aren't you? Somebody told me.[/if][if !flag.pit_reported]Pitmen hear things.[/if]"
       next: "@return"
     - id: sleep
       text: Lie and listen. There's nothing anybody can do.
+      effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         You lie and listen till you can't tell it from your own heart. Then you sleep, and dream of
         the cage going down, and the roof talking, and your father saying it's only the roof.
@@ -334,7 +339,7 @@
   choices:
     - id: write
       text: Write back. Tell her about after.
-      effects: [ { set: flag.p18_wrote_after } ]
+      effects: [ { set: flag.p18_wrote_after }, { war_mood: { nerve: 2 } } ]
       text_after: |
         You tell her about after: [if flag.p18_not_going_down]that you'll not go back down, that you'll find something in the light, that Tommy Robson's going to keep hens and you'll help[/if][if flag.p18_going_down]that you'll go back down, to the face, your father's seam[/if][if !flag.p18_not_going_down && !flag.p18_going_down]that you don't know yet, that you'll know when you're home, that there'll be time[/if]. You tell her to keep sitting in the chair.
       next: "@return"
@@ -364,7 +369,7 @@
   choices:
     - id: walk
       text: Fall out for a minute. Walk round the rim.
-      effects: [ { set: flag.p18_walked_crater } ]
+      effects: [ { set: flag.p18_walked_crater }, { war_mood: { nerve: -1 } } ]
       text_after: |
         The sergeant lets you. You walk round the lip slowly, reading the crosses. [if !war.mate1]You look for Robson's name, and don't know if you want to find it.[/if][if war.mate1]Robson walks round with you, and doesn't say anything, and stops at one cross, and stays there till the sergeant shouts.[/if] At the far side there's a lark going up, and you stand and listen to it, and then you go after the column.
       next: "@return"

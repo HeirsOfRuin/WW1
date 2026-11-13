@@ -32,7 +32,7 @@
   choices:
     - id: report
       text: Go and tell the officer. Now, tonight.
-      effects: [ { set: flag.pit_reported } ]
+      effects: [ { set: flag.pit_reported }, { war_mood: { standing: 1 } } ]
       text_after: |
         The officer is twenty, with a moustache he's still growing, and he hears you out in the
         dugout by a candle. He doesn't laugh. He writes it down, the bay number and the time, and
@@ -68,7 +68,7 @@
   choices:
     - id: write
       text: Write back tonight, two sides, by a candle end.
-      effects: [ { set: flag.pit_wrote_home } ]
+      effects: [ { set: flag.pit_wrote_home }, { war_mood: { nerve: 2 } } ]
       text_after: |
         You tell her the cake came whole. You tell her the French have pits too, with the winding
         towers just like at home, and you can see them on a clear day from the support line. You
@@ -104,7 +104,7 @@
   choices:
     - id: stay_with_him
       text: Stay with him and talk birds with the corporal.
-      effects: [ { set: flag.pit_saw_loft } ]
+      effects: [ { set: flag.pit_saw_loft }, { war_mood: { nerve: 2 } } ]
       text_after: |
         The corporal lets Robson hold one, a blue chequer cock, and Robson turns it over in his big
         hands, gentle, opening a wing with one finger, and tells the corporal what's wrong with it,
@@ -146,7 +146,7 @@
   choices:
     - id: stand_by
       text: Stand by Bell. He's not wrong.
-      effects: [ { set: flag.stood_with_bell } ]
+      effects: [ { set: flag.stood_with_bell }, { war_mood: { nerve: 2, standing: -1 } } ]
       text_after: |
         You say it, loud enough. The sergeant looks at the pair of you, two pitmen up to your necks
         in a beer vat, and laughs, and says, "Geordie agitators," and turns his back. Bell grins at
@@ -185,7 +185,7 @@
   choices:
     - id: dig
       text: Get in the crater with a shovel. Dig for the buried men.
-      effects: [ { set: flag.pit_dug_out } ]
+      effects: [ { set: flag.pit_dug_out }, { war_mood: { nerve: -1, standing: 1 } } ]
       text_after: |
         It's a fall. That's all it is, a fall, and you know what to do in a fall: you dig with your
         hands near the face so you don't take a man's head off with the shovel, and you listen,
@@ -193,7 +193,7 @@
       next: "@return"
     - id: hold
       text: Get up on the crater lip with your rifle. Hold it.
-      effects: [ { set: flag.pit_held_lip } ]
+      effects: [ { set: flag.pit_held_lip }, { war_mood: { nerve: -2, standing: 2 } } ]
       text_after: |
         You lie on the loose earth of the lip, warm from the blast, and fire into the grey till
         your shoulder's numb. They don't get the crater. Behind you, under you, the diggers work,
@@ -226,7 +226,7 @@
   choices:
     - id: last_letter
       text: Write a letter and leave it in your pay book.
-      effects: [ { set: flag.last_letter } ]
+      effects: [ { set: flag.last_letter }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You don't know what to put. In the end you put that your father is to go to the doctor about
         his chest, and that your pit boots are to go to whoever needs them, and that you love them.
@@ -263,7 +263,7 @@
   choices:
     - id: answer
       text: Answer for the men you saw fall, when their names come.
-      effects: [ { set: flag.pit_spoke_at_roll } ]
+      effects: [ { set: flag.pit_spoke_at_roll }, { war_mood: { nerve: -2, standing: 1 } } ]
       text_after: |
         "Killed, sir. I saw him." The sergeant major makes his mark. You think of the women at the
         lamp cabin, and that this is the same, only the board is in France and the women don't
@@ -271,7 +271,7 @@
       next: "@return"
     - id: stay_silent
       text: Say nothing. Let somebody else tell it.
-      effects: [ { set: flag.pit_silent_at_roll } ]
+      effects: [ { set: flag.pit_silent_at_roll }, { war_mood: { nerve: -1 } } ]
       text_after: |
         Somebody else does, or nobody does, and the names go down as missing. You keep what you
         saw. It sits in you like stone dust.
@@ -296,7 +296,7 @@
   choices:
     - id: go
       text: Tell him to go. Put a word in with the sergeant.
-      effects: [ { set: flag.pit_helped_charlton } ]
+      effects: [ { set: flag.pit_helped_charlton }, { war_mood: { nerve: 2 } } ]
       text_after: |
         The transport sergeant looks Charlton over and says he'll ask. Charlton walks back up the
         road beside you with his hands in his pockets, whistling, and stops twice to look back at

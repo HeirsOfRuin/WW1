@@ -27,6 +27,7 @@
   choices:
     - id: watch
       text: Stand with Robson and watch the shift go down.
+      effects: [ { war_mood: { nerve: 1 } } ]
       visible_if: war.mate1
       text_after: |
         Neither of you says anything. The last man down turns on the ladder, a pitman from the
@@ -64,7 +65,7 @@
   choices:
     - id: back_him
       text: Tell Bell his brother has more nerve than most of the company.
-      effects: [ { set: flag.p16_backed_matty } ]
+      effects: [ { set: flag.p16_backed_matty }, { war_mood: { nerve: 1 } } ]
       text_after: |
         Bell looks at you a long time in the dark. "Aye," he says. "Aye. He has." And then, because
         he's Bell: "Daft little beggar." He laughs, and it cracks in the middle.
@@ -97,7 +98,7 @@
   choices:
     - id: help
       text: Help him look after them. Learn the message tubes.
-      effects: [ { set: flag.p16_birds } ]
+      effects: [ { set: flag.p16_birds }, { war_mood: { standing: 1 } } ]
       text_after: |
         He shows you how to roll the flimsy and slide it into the tube, and how to hold a bird so
         it doesn't panic: firm round the wings, its feet between your fingers. It's warm, and its
@@ -136,7 +137,7 @@
   choices:
     - id: letter
       text: Write a letter and leave it in your pay book.
-      effects: [ { set: flag.last_letter } ]
+      effects: [ { set: flag.last_letter }, { war_mood: { nerve: 1 } } ]
       text_after: |
         It's shorter than the one before Loos. Look after Father. Make him go to the doctor. The
         pit boots to whoever needs them. Love to all. You fold it small and it sits against your
@@ -175,7 +176,7 @@
   choices:
     - id: read
       text: Read the lists. Every name.
-      effects: [ { set: flag.p16_read_lists } ]
+      effects: [ { set: flag.p16_read_lists }, { war_mood: { nerve: -1 } } ]
       text_after: |
         It takes you an hour, in small print, by the light from the dugout door. Men you went to
         school with. Men you stood beside at the face. Two from your own row. You read every name
@@ -183,6 +184,7 @@
       next: "@return"
     - id: dont
       text: Don't. You were there.
+      effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         You use the paper to light the brazier. It catches slowly, the lists curling and going
         brown and then black, and you hold your hands over it till the warmth comes.
@@ -211,7 +213,7 @@
   choices:
     - id: rope
       text: Get the party on a rope. Pull.
-      effects: [ { set: flag.p16_saved_mule } ]
+      effects: [ { set: flag.p16_saved_mule }, { war_mood: { nerve: 2, standing: -1 } } ]
       text_after: |
         Eight of you on the rope, up to your knees in the porridge, heaving, and Charlton in the
         water pushing from behind, and she comes out of it at last with a great sucking noise,
@@ -220,7 +222,7 @@
       next: "@return"
     - id: shoot
       text: Tell Charlton the corporal's right. Get him out of the water.
-      effects: [ { set: flag.p16_shot_mule } ]
+      effects: [ { set: flag.p16_shot_mule }, { war_mood: { nerve: -1, standing: 1 } } ]
       text_after: |
         You get him out. He comes, in the end, because he knows. He turns his back while the
         corporal does it, and you stand with him on the track, and he's shaking, and it isn't the
@@ -284,7 +286,7 @@
     - id: bell
       text: Tell Evans about Jim Bell in the beer vat.
       visible_if: flag.stood_with_bell
-      effects: [ { set: flag.p16_told_evans } ]
+      effects: [ { set: flag.p16_told_evans }, { war_mood: { nerve: 1 } } ]
       text_after: |
         Evans laughs so loud Pascoe has to put a hand over his mouth. "Your Bell," he says, in a
         whisper, delighted. "I'd buy your Bell a pint. I'd buy him a barrel."
@@ -361,7 +363,7 @@
   choices:
     - id: report
       text: Go back and report it. Now.
-      effects: [ { set: flag.p16_blew_camouflet } ]
+      effects: [ { set: flag.p16_blew_camouflet }, { war_mood: { nerve: -1, standing: 1 } } ]
       text_after: |
         The officer listens himself, then nods. The charge goes in that night, a small one, tamped
         hard, meant to crush their gallery without breaking the surface. When it goes, the ground
@@ -370,7 +372,7 @@
       next: "@return"
     - id: wait
       text: Wait. Let them finish their song.
-      effects: [ { set: flag.p16_heard_the_song } ]
+      effects: [ { set: flag.p16_heard_the_song }, { war_mood: { nerve: 1, standing: -1 } } ]
       text_after: |
         You lie there till they finish. It's a long song. Then you go back and report it, and the
         officer blows a camouflet that night, and it's the same in the end, and it isn't. You find
@@ -395,7 +397,7 @@
   choices:
     - id: stay
       text: Stay till dark. Share what you've got.
-      effects: [ { set: flag.p16_visited } ]
+      effects: [ { set: flag.p16_visited }, { war_mood: { nerve: 2 } } ]
       text_after: |
         You've a tin of pineapple chunks and twenty cigarettes, six shillings a day buys a lot,
         and they go round. When you leave in the dark, walking back to your hole in the chalk, you
@@ -430,7 +432,7 @@
   choices:
     - id: write_father
       text: Write to your father. Just to him.
-      effects: [ { set: flag.p16_wrote_father } ]
+      effects: [ { set: flag.p16_wrote_father }, { war_mood: { nerve: 2 } } ]
       text_after: |
         It's the first letter you've ever written him. You don't know what to say, so you tell him
         about the face, [if war.transferred]the chalk and the socks and the canary, the timbering,[/if][if !war.transferred]the timbering in the German dugouts, the depth of them,[/if] the things he'd want to know.

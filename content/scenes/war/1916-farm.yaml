@@ -27,7 +27,7 @@
   choices:
     - id: angry
       text: Write home and say what you think of the Vellacotts.
-      effects: [ { set: flag.f16_wrote_vellacott } ]
+      effects: [ { set: flag.f16_wrote_vellacott }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You write it in one go and post it before you can change your mind. Your mother will read it
         to your father in the kitchen. Your father will say nothing, and agree with every word, and
@@ -58,7 +58,7 @@
   choices:
     - id: help
       text: Help him. He's trying, and he's as frightened as you were.
-      effects: [ { set: flag.f16_helped_rudd } ]
+      effects: [ { set: flag.f16_helped_rudd }, { war_mood: { standing: 2 } } ]
       text_after: |
         You show him where to stand, and when not to talk, and that a man from Exmoor will do
         anything for an officer who says please. He learns. By May the Dunsworthy men have stopped
@@ -66,6 +66,7 @@
       next: "@return"
     - id: no
       text: Do your duty. Nothing more.
+      effects: [ { war_mood: { nerve: 1, standing: -1 } } ]
       text_after: |
         You do your duty, nothing more. He notices. He doesn't say anything. You see him alone in the
         dugout at night writing letters, a lot of them, and you don't know who to.
@@ -92,7 +93,7 @@
   choices:
     - id: keep
       text: Help him keep her. Share your rations.
-      effects: [ { set: flag.f16_kept_dog } ]
+      effects: [ { set: flag.f16_kept_dog }, { war_mood: { nerve: 2 } } ]
       text_after: |
         She stays. She sleeps on Cottle's feet in the dugout and kills rats, a dozen a night, quick
         and clean, a shake and a drop, and the whole platoon feeds her, and the officer pretends he
@@ -127,7 +128,7 @@
   choices:
     - id: sit
       text: Sit with him. Don't say anything.
-      effects: [ { set: flag.f16_bert_peal } ]
+      effects: [ { set: flag.f16_bert_peal }, { war_mood: { nerve: 2 } } ]
       text_after: |
         You sit with him on the firestep. After a while he starts to say the changes under his breath,
         the order of the bells, one, two, three, four, five, the way he learned them, and you can
@@ -161,14 +162,14 @@
   choices:
     - id: letter
       text: Write a letter and leave it in your pay book.
-      effects: [ { set: flag.last_letter } ]
+      effects: [ { set: flag.last_letter }, { war_mood: { nerve: 1 } } ]
       text_after: |
         Shorter than the one before Loos. Tell Father to rest the mare. Tell Mother I'm not to be
         fretted over. My best boots to whoever needs them. Love to all. You fold it small.
       next: "@return"
     - id: look
       text: Look at the model a long time. Learn the ground.
-      effects: [ { set: flag.f16_learned_ground } ]
+      effects: [ { set: flag.f16_learned_ground }, { war_mood: { nerve: -1, standing: 1 } } ]
       text_after: |
         You learn it the way you'd learn a new farm: where the dip is, where the bank is, which side
         of the copse has cover and which hasn't. When you go back to the trench and look over, the
@@ -195,7 +196,7 @@
   choices:
     - id: dig
       text: Take a shovel. Fill it in with the burial party.
-      effects: [ { set: flag.f16_buried } ]
+      effects: [ { set: flag.f16_buried }, { war_mood: { nerve: -2, standing: 1 } } ]
       text_after: |
         It's work you know: earth, a shovel, a rhythm. You fill it in the way you'd close a drain, and
         you know some of the faces before the earth goes over them, and you keep the rhythm. Your
@@ -227,7 +228,7 @@
   choices:
     - id: write
       text: Write to your father. Tell him to rest.
-      effects: [ { set: flag.f16_wrote_father } ]
+      effects: [ { set: flag.f16_wrote_father }, { war_mood: { nerve: 2 } } ]
       text_after: |
         He won't rest. You know it. But you tell him anyway, and you tell him about the French farms,
         and the stooks you saw standing out in no man's land, never carted, gone black in the rain,

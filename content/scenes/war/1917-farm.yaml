@@ -25,7 +25,7 @@
   choices:
     - id: bread
       text: Give the bay your bread ration. Stand with him a bit.
-      effects: [ { set: flag.f17_fed_the_bay } ]
+      effects: [ { set: flag.f17_fed_the_bay }, { war_mood: { nerve: 2 } } ]
       text_after: |
         He takes it off your palm with his lips, soft as anything, and then pushes his nose into your
         chest for more, and you stand there with your face against his neck in the snow, breathing
@@ -33,7 +33,7 @@
       next: "@return"
     - id: letter
       text: Go back and write a letter for the pay book.
-      effects: [ { set: flag.last_letter } ]
+      effects: [ { set: flag.last_letter }, { war_mood: { nerve: 1 } } ]
       text_after: |
         The third one. Shorter again. Rest the mare. Don't fret. Love to all. You write it in the
         caves by the electric light, with the smell of the horses still on your hands.
@@ -60,7 +60,7 @@
   choices:
     - id: laugh
       text: Write back. Tell your father to learn the tractor.
-      effects: [ { set: flag.f17_tractor } ]
+      effects: [ { set: flag.f17_tractor }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You tell him to learn the tractor, and that you've seen what they can do out here, and that
         the horse is finished whether he likes it or not. You know he won't like it. You put it gently.
@@ -91,7 +91,7 @@
   choices:
     - id: let_her
       text: Tell Cottle to let her. She'll save lives.
-      effects: [ { set: flag.f17_fly_runs } ]
+      effects: [ { set: flag.f17_fly_runs }, { war_mood: { standing: 1 } } ]
       text_after: |
         Cottle trains her himself, behind the line, every rest day: he walks her up to the front line
         and gives her to a stranger and goes back to battalion headquarters, a mile, and whistles, and
@@ -99,6 +99,7 @@
       next: "@return"
     - id: keep_her
       text: Tell him to keep her. She's all he's got.
+      effects: [ { war_mood: { nerve: 1, standing: -1 } } ]
       text_after: |
         He tells the officer she's too much of a pet, she'd only come to him. It's a lie and the
         officer knows it. He lets it go. Cottle puts his hand on her head and leaves it there.
@@ -121,7 +122,7 @@
   choices:
     - id: cover
       text: Cover for him. Tell the sergeant he's on a carrying party.
-      effects: [ { set: flag.f17_covered_pearce } ]
+      effects: [ { set: flag.f17_covered_pearce }, { war_mood: { nerve: 2, standing: -1 } } ]
       text_after: |
         You lie. The sergeant looks at you and lets you. Pearce comes back at dusk, over the parapet,
         filthy, grinning, with a German sniper's rifle with a telescope on it and a hare by the
@@ -130,6 +131,7 @@
       next: "@return"
     - id: tell
       text: Tell the sergeant where he's gone. Before it's desertion.
+      effects: [ { war_mood: { nerve: -1, standing: 2 } } ]
       text_after: |
         The sergeant sends an officer's patrol out after dark. They meet Pearce coming back with a
         German sniper's rifle and a hare. He gets seven days' pay stopped and a mention in the
@@ -154,7 +156,7 @@
   choices:
     - id: back_him
       text: Tell him you think he's right.
-      effects: [ { set: flag.f17_bert_bearer } ]
+      effects: [ { set: flag.f17_bert_bearer }, { war_mood: { nerve: 1 } } ]
       text_after: |
         He goes to the bearers the next week, with a red cross on his arm and no rifle. You see him in
         the line after, at the end of every bad night, with his hands and his sleeves black, carrying,
@@ -162,6 +164,7 @@
       next: "@return"
     - id: talk
       text: Tell him the bearers die faster than anyone.
+      effects: [ { war_mood: { nerve: -1 } } ]
       text_after: |
         "I know," he says. "I've counted." He goes anyway. You see him on every bad night after, at the
         end of a stretcher, and you can't look at him without your stomach turning over.
@@ -185,7 +188,7 @@
   choices:
     - id: plough
       text: Go and ask him for the handles. Show him a straight furrow.
-      effects: [ { set: flag.f17_ploughed } ]
+      effects: [ { set: flag.f17_ploughed }, { war_mood: { nerve: 1 } } ]
       text_after: |
         He doesn't understand a word you say, and he understands everything. He gives you the
         handles. The cow's a cow, but you talk to her, low, the way you'd talk to Blossom, and the
@@ -194,6 +197,7 @@
       next: "@return"
     - id: watch
       text: Watch from the hedge. It's his field.
+      effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         It's his field and his cow and his crooked furrows. By evening the field's turned, and the
         smell of it comes in through the billet window all night, turned earth, and you sleep like

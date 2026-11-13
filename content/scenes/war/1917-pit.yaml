@@ -27,7 +27,7 @@
   choices:
     - id: dig
       text: Get stuck in. Show them how it's done.
-      effects: [ { set: flag.p17_dug_frost } ]
+      effects: [ { set: flag.p17_dug_frost }, { war_mood: { standing: 1 } } ]
       text_after: |
         You get the rum first. Then you dig, all night, in shifts, the way you'd work a hard seam,
         short and steady, nobody racing, the picks ringing on the frozen clay like on stone. By
@@ -36,6 +36,7 @@
       next: "@return"
     - id: pace
       text: Dig at the pit's pace. No faster than you're paid for.
+      effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         Steady, and not a stroke more. The officer comes by at two in the morning and watches you
         a while and says nothing, because it's the right pace, and he can see it is.
@@ -72,7 +73,7 @@
       next: "@return"
     - id: letter
       text: Write a letter for the pay book.
-      effects: [ { set: flag.last_letter } ]
+      effects: [ { set: flag.last_letter }, { war_mood: { nerve: 1 } } ]
       text_after: |
         The third one now. They get shorter. This one says: Look after Father. Make him rest. Tell
         him the timbering here is the best I ever saw, he'd like it.
@@ -99,7 +100,7 @@
   choices:
     - id: drink
       text: Drink to it with him, in tea.
-      effects: [ { set: flag.p17_toasted_russia } ]
+      effects: [ { set: flag.p17_toasted_russia }, { war_mood: { nerve: 1, standing: -1 } } ]
       text_after: |
         Two mess tins of cold tea, clinked. "To the soldiers and the workmen," Bell says, and drinks.
         You drink. You don't know what you're drinking to, quite. Neither does he.
@@ -131,7 +132,7 @@
   choices:
     - id: proud
       text: Tell him his da's done a fine thing.
-      effects: [ { set: flag.p17_blue_hen } ]
+      effects: [ { set: flag.p17_blue_hen }, { war_mood: { nerve: 1 } } ]
       text_after: |
         "Aye," Robson says. "Aye, he has." After a while: "Might be her carries the next one out of
         a crater. Might be she knows the way better than the army's birds." He nearly smiles.
@@ -159,7 +160,7 @@
   choices:
     - id: stay
       text: Sit in the mud with him till the farrier comes.
-      effects: [ { set: flag.p17_sat_with_charlton } ]
+      effects: [ { set: flag.p17_sat_with_charlton }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You sit with him. The grey's breath comes slower, warm on your hands. When the farrier
         comes Charlton nods, and stands, and turns his back, and you turn with him.
@@ -195,7 +196,7 @@
   choices:
     - id: good
       text: Do the job right. Every exit true.
-      effects: [ { set: flag.p17_exits } ]
+      effects: [ { set: flag.p17_exits }, { war_mood: { standing: 1 } } ]
       text_after: |
         You set the props in your exit as if your father were coming up through it. Evans laughs at
         you for it. Then he goes back and redoes his own.
@@ -228,7 +229,7 @@
   choices:
     - id: go_in
       text: Get the Proto on and go in for him.
-      effects: [ { set: flag.p17_saved_pascoe } ]
+      effects: [ { set: flag.p17_saved_pascoe }, { war_mood: { nerve: -1, standing: 2 } } ]
       text_after: |
         The mask, the nose clip, the bag on your chest, oxygen hissing, and the gallery in the light
         of your lamp, quiet, and Pascoe on his face at the end of it like a man asleep. You get him
@@ -238,7 +239,7 @@
       next: "@return"
     - id: wait
       text: Wait for the rescue men. That's the rule.
-      effects: [ { set: flag.p17_lost_pascoe } ]
+      effects: [ { set: flag.p17_lost_pascoe }, { war_mood: { nerve: -2 } } ]
       text_after: |
         That's the rule, because men who go in without the training die beside the men they went
         for. You know it. You wait the ten minutes. They bring him out on a stretcher, and the
@@ -270,7 +271,7 @@
   choices:
     - id: learn
       text: Get Mott to teach you to kick.
-      effects: [ { set: flag.p17_learned_kick } ]
+      effects: [ { set: flag.p17_learned_kick }, { war_mood: { nerve: 1 } } ]
       text_after: |
         It takes a week, and your back aches in places it never ached at the face. "Like riding a
         bike," Mott says. "Backwards. Lying down. Underground." By the end of the week you can do
@@ -278,6 +279,7 @@
       next: "@return"
     - id: pumps
       text: Stay on the pumps. You know pumps.
+      effects: [ { war_mood: { standing: 1 } } ]
       text_after: |
         The pumps go day and night, and you nurse them like the engine-man at Blackhaugh nursed his,
         by the sound. When one starts to labour you hear it before anyone, and that's worth
@@ -346,6 +348,7 @@
   choices:
     - id: join
       text: Join in. You know the tune from chapel, if not the words.
+      effects: [ { war_mood: { nerve: 2 } } ]
       text_after: |
         You know the tune. Half of Blackhaugh chapel sings it in English. You come in on the second
         verse in English, and Evans doesn't stop, and the two languages go on together in the dark
@@ -385,12 +388,13 @@
   choices:
     - id: ask_leave
       text: Ask for compassionate leave.
-      effects: [ { set: flag.p17_asked_leave } ]
+      effects: [ { set: flag.p17_asked_leave }, { war_mood: { nerve: -1 } } ]
       text_after: |
         [if war.transferred]Your officer hears you out, and he's sorry, and he means it. There's no leave. There's no leave for anybody this summer.[else]The company officer hears you out in his dugout, and he's sorry, and he means it. There's no leave. Not this summer. Not for anybody.[/if] You knew. You had to ask.
       next: "@return"
     - id: write
       text: Write to your mother tonight.
+      effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         You write it three times. In the end you put that you're proud of him, and that he was the
         best man at the face in Blackhaugh, and that you'll be home at Christmas, and you'll go up

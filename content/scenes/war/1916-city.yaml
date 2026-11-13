@@ -26,7 +26,7 @@
   choices:
     - id: florence
       text: Write back. Dear Florence.
-      effects: [ { set: flag.c16_florence } ]
+      effects: [ { set: flag.c16_florence }, { war_mood: { nerve: 2 } } ]
       text_after: |
         Dear Florence. You write it, and look at it, and it looks like somebody else's letter. You
         tell her about the farm women and the oxen, and the nightingale, and that you'd like to go to
@@ -60,7 +60,7 @@
   choices:
     - id: hide
       text: Keep the first notebook for him, sewn into your pack lining.
-      effects: [ { set: flag.c16_kept_notebook } ]
+      effects: [ { set: flag.c16_kept_notebook }, { war_mood: { nerve: 1, standing: -1 } } ]
       text_after: |
         You sew it in that night with your housewife needle, flat against the canvas, where nobody
         will look. It's there every time you put your pack on. You can feel the corners of it.
@@ -94,7 +94,7 @@
   choices:
     - id: yes
       text: Tell him you'll go after it with him.
-      effects: [ { set: flag.c16_after_the_ball } ]
+      effects: [ { set: flag.c16_after_the_ball }, { war_mood: { nerve: 1 } } ]
       text_after: |
         "Right half," he says, and grins, and you shake on it like a contract at the office.
       next: "@return"
@@ -126,7 +126,7 @@
   choices:
     - id: truth
       text: Tell him to tell them the truth, gently.
-      effects: [ { set: flag.c16_marsh_truth } ]
+      effects: [ { set: flag.c16_marsh_truth }, { war_mood: { nerve: 1 } } ]
       text_after: |
         He writes it the way he'd teach a Bible story: that soldiers are frightened, and that's all
         right, and that the Germans are men like their fathers, and that he hopes none of them ever
@@ -161,14 +161,14 @@
   choices:
     - id: letter
       text: Write a letter and leave it in your pay book.
-      effects: [ { set: flag.last_letter } ]
+      effects: [ { set: flag.last_letter }, { war_mood: { nerve: 1 } } ]
       text_after: |
         Shorter than the one before Loos. The firm will see Mother right. My bat to the boys' club.
         [if flag.c16_florence]A line to Florence that you write and cross out and write again.[/if] Love to all. You fold it small.
       next: "@return"
     - id: smoke
       text: Count the smoke candles. Work out whose bay they're for.
-      effects: [ { set: flag.c16_counted_smoke } ]
+      effects: [ { set: flag.c16_counted_smoke }, { war_mood: { nerve: -1 } } ]
       text_after: |
         You count them like stock in a warehouse. Forty to a bay. Enough to hide a company for ten
         minutes, if the wind holds. You don't know what the wind's going to do. Neither does anybody.
@@ -195,7 +195,7 @@
   choices:
     - id: read
       text: Read every name in the lists.
-      effects: [ { set: flag.c16_read_lists } ]
+      effects: [ { set: flag.c16_read_lists }, { war_mood: { nerve: -2 } } ]
       text_after: |
         Clerks from Lloyd's, from the Pru, from the banks in Lombard Street. Men you passed in the
         street at dinner time. A man you sat next to at evening classes in book-keeping. You read
@@ -228,7 +228,7 @@
   choices:
     - id: write
       text: Write back. Tell her she's not too soft.
-      effects: [ { set: flag.c16_wrote_mother } ]
+      effects: [ { set: flag.c16_wrote_mother }, { war_mood: { nerve: 2 } } ]
       text_after: |
         You tell her she's not. You tell her that out here the men think of the men in the other
         trench the same, some nights, and that nobody would ever say it in a pub at home. You don't

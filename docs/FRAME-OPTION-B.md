@@ -44,3 +44,31 @@ near 0%, competent play surviving 1915 in 60-75%.
   event moved a number, this left the gate identical (2026-11-13), so the gate measures an average
   player's events.
 - `npm run gate` before and after, with ± error, in the commit.
+
+## As built (2026-11-13)
+
+- 122 story events, 170 choices, carry `war_mood`, across all four towns and four years; none
+  outside a story event (checked). Nerve summed over every choice is +101.
+- Events average about +0.3 to +0.5 nerve per event by town: the mill and pit lower, because
+  their events are grimmer and the effects follow what the prose says happened.
+- After review, three mill choices that turned away were set to 0 as the rubric says; the
+  sweep on the date got +1; and one pit event where both choices steadied him lost the free
+  gain.
+- Battles, duties, leaves, endings and death scenes move nothing new.
+
+**Measured** (`npm run gate`, 2,000 runs per policy, % ± 1 SE; before = the same bots, events
+moving nothing).
+
+| | Before | After | Target |
+|---|---|---|---|
+| adaptive: Armistice | 5.5 ±0.5 | 5.8 ±0.5 | 5-10 |
+| adaptive: survives 1915 | 75.6 ±1.0 | 75.7 ±1.0 | 60-75 (on the edge, as before) |
+| adaptive: broken | 14.9 ±0.8 | 12.9 ±0.8 | |
+| reckless: Armistice | 1.8 ±0.3 | 2.0 ±0.3 | near 0 |
+| careful: Armistice | 4.2 ±0.4 | 4.8 ±0.5 | |
+| half: Armistice | 4.4 ±0.5 | 4.0 ±0.4 | |
+| Leave 1, go back vs take (grade) | 39.6 vs 26.1 | 39.1 vs 26.6 | |
+
+The change the design wanted shows where it should: fewer men break (adaptive 14.9% to 12.9%),
+because the letters and the friends now steady them. Every target holds, and no rule was re-tuned
+back.

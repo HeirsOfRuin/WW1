@@ -541,6 +541,10 @@ research; fourteen corrected in the text, and the deliberate liberties recorded 
 from four regions stands on four stretches of the Loos front). The war's own numbers stay tuned,
 not sourced (KILLGATE open issue 6). Next is the author's playtest (docs/PLAYTEST2-GUIDE.md).
 
+**Option B (FRAME-OPTION-B.md, 2026-11-13).** Story events now move nerve and standing a little
+(`war_mood`), shown after the choice. Across 122 events the gate's targets hold. Fewer men break
+(adaptive 14.9% to 12.9%), because the letters and the friends steady them.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.

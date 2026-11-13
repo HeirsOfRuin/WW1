@@ -32,6 +32,7 @@
       next: "@return"
     - id: leave_him
       text: Leave him be. He's a man now; it's his war.
+      effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         You share your rum with him, without saying it's a birthday present, and he knows, and
         doesn't say thank you, and drinks it.
@@ -59,7 +60,7 @@
   choices:
     - id: letter
       text: Write a letter for the pay book.
-      effects: [ { set: flag.last_letter } ]
+      effects: [ { set: flag.last_letter }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You write it on your knee by the electric light. It's the third one now. They get shorter
         each time. This one says: Look after Mother. Tell Jack he's not to join up, whatever they
@@ -91,7 +92,7 @@
   choices:
     - id: go_to_it
       text: Run to the wreck with the others.
-      effects: [ { set: flag.went_to_airman } ]
+      effects: [ { set: flag.went_to_airman }, { war_mood: { nerve: -1, standing: 1 } } ]
       text_after: |
         There's nothing to do when you get there. The smell of the burning dope on the wings is
         sweet and chemical, like pear drops, and under it the other smell. One of the lads takes
@@ -124,7 +125,7 @@
   choices:
     - id: hunt
       text: Go with him. Find the man at the crater.
-      effects: [ { set: flag.hunted_fritz } ]
+      effects: [ { set: flag.hunted_fritz }, { war_mood: { nerve: -1, standing: 3 } } ]
       text_after: |
         Three days in a hide in the old crater lip, lying in the stink of it, watching a heap of
         bricks through a telescope until your eye waters. On the third morning, the flash. The
@@ -136,7 +137,7 @@
       next: "@return"
     - id: leave_him
       text: Let somebody else go. You've had enough of that bay.
-      effects: [ { set: flag.left_fritz } ]
+      effects: [ { set: flag.left_fritz }, { war_mood: { nerve: 1, standing: -1 } } ]
       text_after: |
         The officer goes with somebody else. Three days later there's a single shot from the old
         crater lip, early, and then nothing, and nobody tells you anything, and you never find out
@@ -160,7 +161,7 @@
   choices:
     - id: wet_head
       text: Wet the baby's head with the section's rum.
-      effects: [ { set: flag.wet_babys_head } ]
+      effects: [ { set: flag.wet_babys_head }, { war_mood: { nerve: 2, standing: -1 } } ]
       text_after: |
         The corporal looks the other way. The rum goes round the section in a mess tin lid, each man
         saying something, to the lad, to Albert, to Edith, to home. Somebody sings. Shaw keeps the
@@ -168,7 +169,7 @@
       next: "@return"
     - id: take_his_watch
       text: Take his turn on sentry so he can write back.
-      effects: [ { set: flag.stood_shaws_watch } ]
+      effects: [ { set: flag.stood_shaws_watch }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You stand his two hours on the firestep in the cold. Behind you in the dugout you can hear
         him writing, the pencil going slow and careful, the way you taught him or the way he taught
@@ -194,7 +195,7 @@
   choices:
     - id: stay_with_him
       text: Stay on the firestep with him till his turn's done.
-      effects: [ { set: flag.sat_with_shaw } ]
+      effects: [ { set: flag.sat_with_shaw }, { war_mood: { nerve: 2 } } ]
       text_after: |
         Neither of you says anything else. Towards dawn he gives you half his cigarette without
         being asked, and you smoke it, and the sky gets light over the German wire.
@@ -226,13 +227,14 @@
   choices:
     - id: lead_them
       text: Lead the line of blinded men down to the aid post.
-      effects: [ { set: flag.led_the_gassed } ]
+      effects: [ { set: flag.led_the_gassed }, { war_mood: { nerve: -2, standing: 2 } } ]
       text_after: |
         The first man's hand is on your shoulder all the way, light, trusting, and he keeps asking
         whether it's dark yet, because he can't tell.
       next: "@return"
     - id: stay_at_post
       text: Stay at your post. Somebody has to.
+      effects: [ { war_mood: { standing: 1 } } ]
       text_after: |
         You watch them go past you, one hand on each shoulder, and the line goes round the traverse,
         and the last man's hand is reaching for a shoulder that's already gone round the corner.

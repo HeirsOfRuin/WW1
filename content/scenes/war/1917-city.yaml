@@ -21,7 +21,7 @@
   choices:
     - id: take_it
       text: Tell him to take it. Somebody should keep the real books.
-      effects: [ { set: flag.c17_webb_clerk } ]
+      effects: [ { set: flag.c17_webb_clerk }, { war_mood: { standing: 1 } } ]
       text_after: |
         He takes it. You see him after in the orderly-room dugout with his sleeves rolled and his pen
         going, and the returns in neat piles, and the battalion's losses in red in the casualty column.
@@ -29,6 +29,7 @@
       next: "@return"
     - id: stay
       text: Tell him the section needs him. It does.
+      effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         He stays. He tells the adjutant he'd rather stop with the men from the office. The adjutant
         looks at him as if he were mad. Webb goes back to the firestep and gets out his notebook.
@@ -54,7 +55,7 @@
   choices:
     - id: listen
       text: Sit and listen to Pickwick.
-      effects: [ { set: flag.c17_pickwick } ]
+      effects: [ { set: flag.c17_pickwick }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You sit on the chalk with your back against a sandbag and listen to Mr Pickwick and Mr Jingle
         and Dingley Dell, and for an hour there isn't a war. When the reader's voice gives out, a man
@@ -62,7 +63,7 @@
       next: "@return"
     - id: letter
       text: Write a letter for the pay book.
-      effects: [ { set: flag.last_letter } ]
+      effects: [ { set: flag.last_letter }, { war_mood: { nerve: 1 } } ]
       text_after: |
         The third. The firm will see Mother right. My bat to the boys' club. [if flag.c16_florence]A line to Florence, crossed out, written again, left in.[/if] You fold it small.
       next: "@return"
@@ -89,7 +90,7 @@
   choices:
     - id: proud
       text: Write back and tell her you're proud of her.
-      effects: [ { set: flag.c17_proud_of_florence } ]
+      effects: [ { set: flag.c17_proud_of_florence }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You tell her. You tell her you're proud, and that the base offices are lucky, and that if
         they ever send you down the line wounded you'll ask at every office on the coast for a girl
@@ -123,7 +124,7 @@
   choices:
     - id: help
       text: Learn the Morse with him. You might be needed.
-      effects: [ { set: flag.c17_learned_morse } ]
+      effects: [ { set: flag.c17_learned_morse }, { war_mood: { nerve: 1 } } ]
       text_after: |
         He teaches you on sentry, tapping on your arm in the dark, letter by letter, the whole
         alphabet in a week. By the end you can send your name and HELP and WATER and ALL WELL. "That's
@@ -158,7 +159,7 @@
   choices:
     - id: write
       text: Write back. Tell her to go down the Underground every time.
-      effects: [ { set: flag.c17_wrote_gothas } ]
+      effects: [ { set: flag.c17_wrote_gothas }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You tell her to go down every time, whatever your father says, and to take the good blanket. You
         don't tell her that out here it's the same, the warning and the going down, only underground
@@ -189,7 +190,7 @@
   choices:
     - id: play
       text: Ask Fenton for a place. Right half, the way you played before.
-      effects: [ { set: flag.c17_cup_played } ]
+      effects: [ { set: flag.c17_cup_played }, { war_mood: { nerve: 2 } } ]
       text_after: |
         You play. You lose in the semi-final to a Welsh battalion, three goals to one, and Fenton
         scores the one, and the whole battalion sings on the way back to the billets, all the towns

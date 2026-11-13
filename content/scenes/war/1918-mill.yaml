@@ -31,7 +31,7 @@
   choices:
     - id: dig
       text: Dig the post deeper while there's time.
-      effects: [ { set: flag.dug_deep } ]
+      effects: [ { set: flag.dug_deep }, { war_mood: { standing: 1 } } ]
       text_after: |
         Three weeks of it, in shifts, through the frost and then the thaw. Chalk under your nails,
         chalk in your tea, chalk in the cracks of your hands till they look like your gran's. By
@@ -40,7 +40,7 @@
       next: "@return"
     - id: stove
       text: Get the French stove going. Make the post fit to live in.
-      effects: [ { set: flag.french_stove } ]
+      effects: [ { set: flag.french_stove }, { war_mood: { nerve: 2 } } ]
       text_after: |
         It roars like the boiler house and you sit round it in your shirtsleeves for the first time
         since October, toasting bread on bayonets, the cat on somebody's knee.[if war.mate2]
@@ -73,7 +73,7 @@
   choices:
     - id: sweep
       text: Put a franc on the twenty-first.
-      effects: [ { set: flag.sweep_21 } ]
+      effects: [ { set: flag.sweep_21 }, { war_mood: { nerve: 1 } } ]
       text_after: |
         [if war.mate2]"The twenty-first," Duckworth says, licking the pencil. "That's a Thursday. Nowt ever happens of a Thursday."[else]He writes your name against the twenty-first. "Thursday," he says. "Nowt ever happens of a Thursday."[/if]
       next: "@return"
@@ -108,7 +108,7 @@
   choices:
     - id: take_one
       text: Take one of the boys on. Show him how to stay alive.
-      effects: [ { set: flag.took_a_lad } ]
+      effects: [ { set: flag.took_a_lad }, { war_mood: { nerve: 1, standing: 1 } } ]
       text_after: |
         His name's Clegg and he's from Rochdale and he's frightened of everything except what he
         ought to be frightened of. You show him how to keep his feet dry, how to tell their shells
@@ -145,7 +145,7 @@
   choices:
     - id: go_sick
       text: Go sick. Lie down before you fall down.
-      effects: [ { set: flag.had_the_flu } ]
+      effects: [ { set: flag.had_the_flu }, { war_mood: { nerve: 1 } } ]
       text_after: |
         Three days in a barn on straw with forty other men, sweating and shivering and coughing in
         the dark, an orderly coming round with a bucket of tea and a tin of Number Nines. You dream
@@ -153,7 +153,7 @@
       next: "@return"
     - id: stay
       text: Stay at duty. Everybody's got it.
-      effects: [ { set: flag.had_the_flu } ]
+      effects: [ { set: flag.had_the_flu }, { war_mood: { nerve: -1, standing: 1 } } ]
       text_after: |
         You stand your sentry with your teeth going and the wire swimming in front of you. At dawn
         the sergeant takes one look and sends you down anyway, and you cry all the way to the aid
@@ -180,7 +180,7 @@
   choices:
     - id: peaches
       text: Trade him your spare cap badge for a tin of peaches.
-      effects: [ { set: flag.peaches } ]
+      effects: [ { set: flag.peaches }, { war_mood: { nerve: 2, standing: -1 } } ]
       text_after: |
         He gives you two tins, and a packet of cigarettes, and shakes your hand as if you'd given
         him a medal. You and Duckworth eat the peaches in the bottom of the trench off a jack-knife,
@@ -189,7 +189,7 @@
       next: "@return"
     - id: joke
       text: Get Duckworth to tell him a tackler's tale.
-      effects: [ { set: flag.tackler_tale } ]
+      effects: [ { set: flag.tackler_tale }, { war_mood: { nerve: 1 } } ]
       text_after: |
         It's the one about the tackler who took his pigeon to the doctor's. It has never once been
         funny, not in the shed, not in the drill hall, not at Loos. The American laughs till he has
@@ -217,12 +217,14 @@
   choices:
     - id: pass
       text: Pass them all as they are. Sign the corners.
+      effects: [ { war_mood: { nerve: 1, standing: -1 } } ]
       text_after: |
         You sign them and seal them and they go down the line in the sack with the rest. You don't
         strike a word. Let somebody at home know where we are, you think. Let somebody know.
       next: "@return"
     - id: book
       text: Do it by the book. Strike out the places.
+      effects: [ { war_mood: { standing: 1 } } ]
       text_after: |
         Blue pencil through every village and every wood. That's the rule, and men have died for
         less than a careless letter.[if war.mate3] You leave Pilling's crossed-out line alone.
@@ -255,7 +257,7 @@
   choices:
     - id: truth
       text: Write to Jack and tell him what it's like.
-      effects: [ { set: flag.told_jack_truth } ]
+      effects: [ { set: flag.told_jack_truth }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You write it in a barn by a candle stuck in a bully tin, and it takes two nights. You can't
         tell him the worst of it. You tell him enough. Keep your feet dry. Keep your head down. Don't
@@ -294,7 +296,7 @@
   choices:
     - id: walk_out
       text: Walk out to where you think it was.
-      effects: [ { set: flag.walked_old_ground } ]
+      effects: [ { set: flag.walked_old_ground }, { war_mood: { nerve: -1 } } ]
       text_after: |
         You can't find it. Everything's where it was and nothing is. [if flag.brought_discs]You stand where you think you crawled out for the discs, that night, and there's only grass, and a lark going up.[else]You stand in the long grass where you think it was, and a lark goes up, and keeps going up, singing, till you lose it in the sun.[/if]
       next: "@return"
@@ -334,6 +336,7 @@
       next: "@return"
     - id: look
       text: Ask to see it properly.
+      effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         He hands it over as if it's an egg. The lad's got Shaw's ears, sticking out, and Edith's
         mouth. On the back, in pencil, in Edith's hand: For his Dad.[if flag.wet_babys_head] "He's

@@ -1,7 +1,7 @@
 # FRAME: 1916, the mill town
 
 Status: **built under option A** (2026-11-09). Option B (events that move nerve and standing)
-waits for the author's decision after playing 1915; option C (the German track) waits for 1918.
+was built on 2026-11-13 (FRAME-OPTION-B.md); option C (the German track) waits for 1918.
 
 The feature loop (game-building workflow, Stage 7): the request, the problem, the design rule,
 the options with a recommendation, a worked example, and what will be measured.

@@ -29,7 +29,7 @@
     - id: go_with
       text: Go over with Pearce. Somebody has to watch his back.
       visible_if: war.mate2
-      effects: [ { set: flag.farm_went_out } ]
+      effects: [ { set: flag.farm_went_out }, { war_mood: { nerve: 2, standing: -1 } } ]
       text_after: |
         Over the parapet on your belly, through our wire by the gap the wiring party left, out into
         the long grass, and Pearce moving through it like water, not a sound. He sets his wire in
@@ -39,7 +39,7 @@
       next: "@return"
     - id: stop
       text: Pull him down. You'll both be shot.
-      effects: [ { set: flag.farm_stopped_pearce } ]
+      effects: [ { set: flag.farm_stopped_pearce }, { war_mood: { standing: 1 } } ]
       text_after: |
         [if war.mate2]You get him by the belt and haul him down off the step. He swears at you, low. Then he grins. "You'm right," he says. "Not tonight. They don't know me yet." The nightingale goes on.[else]Somebody pulls the lad down. The nightingale goes on, and you stand and listen to it till stand-to.[/if]
       next: "@return"
@@ -68,7 +68,7 @@
   choices:
     - id: write
       text: Write back tonight, two sides, by a candle end.
-      effects: [ { set: flag.farm_wrote_home } ]
+      effects: [ { set: flag.farm_wrote_home }, { war_mood: { nerve: 2 } } ]
       text_after: |
         You tell her the French farm the same as us, only worse, with oxen and their women at the
         plough. You tell your father to rest the mare. You tell her the cream came sour and you ate
@@ -103,7 +103,7 @@
   choices:
     - id: accept
       text: Say yes. He's from home.
-      effects: [ { set: flag.farm_servant } ]
+      effects: [ { set: flag.farm_servant }, { war_mood: { standing: 2 } } ]
       text_after: |
         You clean his boots in the dugout by candlelight, and he sits writing to his mother, and
         sometimes reads you a line, about the dogs, about the house, as if you were at home together
@@ -111,6 +111,7 @@
       next: "@return"
     - id: decline
       text: Say no, sir. You'd sooner stop with the lads.
+      effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         "Of course," he says. "Of course." He takes a lad from Taunton instead. When he passes you in
         the trench after, he nods, and it's as if you'd both been caught at something.
@@ -136,7 +137,7 @@
   choices:
     - id: one
       text: Let him ring it once. Say it was you, if anybody asks.
-      effects: [ { set: flag.farm_bert_rang } ]
+      effects: [ { set: flag.farm_bert_rang }, { war_mood: { nerve: 2, standing: -2 } } ]
       text_after: |
         He pulls, once, the way you'd ring a tenor down, and the bell speaks, one deep note that goes
         out over the broken roofs and the orchards. Somewhere a dog starts barking. Men come out of
@@ -174,7 +175,7 @@
   choices:
     - id: share
       text: Say one of the hares was for you. Share it.
-      effects: [ { set: flag.farm_shared_pearce } ]
+      effects: [ { set: flag.farm_shared_pearce }, { war_mood: { nerve: 2, standing: -2 } } ]
       text_after: |
         You both get fourteen days. Two hours a day on the wheel by the Béthune road, side by side,
         arms out, in the August sun, with the columns going past and the lads from home calling out.
@@ -207,7 +208,7 @@
   choices:
     - id: help
       text: Go in and help. Find a scythe.
-      effects: [ { set: flag.farm_harvested } ]
+      effects: [ { set: flag.farm_harvested }, { war_mood: { nerve: 2 } } ]
       text_after: |
         The farmer's wife finds you two scythes in the barn, rusty, and you stone them up, and go
         into the oats in a line, swinging. You haven't forgotten. The body never does. By evening
@@ -246,7 +247,7 @@
   choices:
     - id: last_letter
       text: Write a letter and leave it in your pay book.
-      effects: [ { set: flag.last_letter } ]
+      effects: [ { set: flag.last_letter }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You don't know what to put. In the end you put that your father's to rest the mare, and that
         your mother's to have your best boots for whoever needs them, and that you love them. You've
@@ -285,14 +286,14 @@
   choices:
     - id: answer
       text: Answer for the men you saw fall, when their names come.
-      effects: [ { set: flag.farm_spoke_at_roll } ]
+      effects: [ { set: flag.farm_spoke_at_roll }, { war_mood: { nerve: -2, standing: 2 } } ]
       text_after: |
         "Killed, sir. I saw him." The sergeant major makes his mark. You think of old Cottle at the
         gate, counting, and the number he didn't say.
       next: "@return"
     - id: stay_silent
       text: Say nothing. Let somebody else tell it.
-      effects: [ { set: flag.farm_silent_at_roll } ]
+      effects: [ { set: flag.farm_silent_at_roll }, { war_mood: { nerve: -1 } } ]
       text_after: |
         Somebody else does, or nobody does, and the names go down as missing. You stand in the rain
         and keep what you saw, like a ewe under the snow nobody's found.
@@ -316,12 +317,13 @@
   choices:
     - id: tell
       text: Write and tell her the truth, as gently as you can.
-      effects: [ { set: flag.farm_wrote_venn } ]
+      effects: [ { set: flag.farm_wrote_venn }, { war_mood: { nerve: 1 } } ]
       text_after: |
         It takes you three nights. [if flag.farm_servant]You were his servant. You ask the men who were near him at the end, and tell her he was in front, and that he was laughing at something just before, which is true, and that it was quick, which you don't know. You tell her about the hunting flask, and the letter he had on the firestep for her.[else]You weren't near him, but you ask the men who were, and you put down what they tell you, and leave out what they don't say.[/if] You sign it with your full name, the way she wrote hers.
       next: "@return"
     - id: leave
       text: Leave it. You don't know how to write to the big house.
+      effects: [ { war_mood: { nerve: -1 } } ]
       text_after: |
         You carry the letter about in your tunic for a month, meaning to. You never do. The paper goes
         soft at the folds, and the crest wears off.

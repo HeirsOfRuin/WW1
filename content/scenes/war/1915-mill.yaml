@@ -35,7 +35,7 @@
   choices:
     - id: give
       text: Give him one of your last two Woodbines.
-      effects: [ { set: flag.gave_fags } ]
+      effects: [ { set: flag.gave_fags }, { war_mood: { nerve: 1 } } ]
       text_after: |
         He cups the match in both hands under the parapet. In the glow his face is grey and
         about twelve years old. "You're a pal," he says, and coughs, and laughs at himself for
@@ -75,14 +75,14 @@
   choices:
     - id: keep_quiet
       text: Keep it to yourself.
-      effects: [ { set: flag.kept_pilling_secret } ]
+      effects: [ { set: flag.kept_pilling_secret }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You throw him your candle stub. He catches it and doesn't say thank you, and then he
         starts on his seams, and after a while he's counting under his breath.
       next: "@return"
     - id: tell
       text: Tell the sergeant. He's a child.
-      effects: [ { set: flag.told_on_pilling } ]
+      effects: [ { set: flag.told_on_pilling }, { war_mood: { standing: 1 } } ]
       text_after: |
         Sarge hears you out with his pipe in his teeth. "Pilling is nineteen," he says. "It says so
         on his attestation, and I'm not paid to read minds." He looks at you a bit longer. "Nor
@@ -118,7 +118,7 @@
   choices:
     - id: write
       text: Write back tonight, two sides, by a candle end.
-      effects: [ { set: flag.wrote_home } ]
+      effects: [ { set: flag.wrote_home }, { war_mood: { nerve: 2 } } ]
       text_after: |
         You tell her the food is good. You tell her about the farm woman at the billet who
         laughs at the way you say eggs. You don't tell her about the boot in the wire. By the time
@@ -156,7 +156,7 @@
   choices:
     - id: write_for_him
       text: Write it for him. Every word he says.
-      effects: [ { set: flag.wrote_for_shaw } ]
+      effects: [ { set: flag.wrote_for_shaw }, { war_mood: { nerve: 1 } } ]
       text_after: |
         He tells it to you slowly, looking at the stove. That he is well. That the French have
         funny bread. That she's to tell his dad the allotment wants turning before the frost. Then
@@ -196,7 +196,7 @@
   choices:
     - id: build_up
       text: Build the low place up tonight, under the flares.
-      effects: [ { set: flag.built_up_crater } ]
+      effects: [ { set: flag.built_up_crater }, { war_mood: { standing: 1 } } ]
       text_after: |
         Three hours of it, filling sandbags on your knees, passing them up, the chalk cold and
         wet under your nails. Every time a flare goes up you freeze with a bag in your arms like a
@@ -237,7 +237,7 @@
   choices:
     - id: last_letter
       text: Write a letter and leave it in your pay book.
-      effects: [ { set: flag.last_letter } ]
+      effects: [ { set: flag.last_letter }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You don't know what to put. In the end you put that you love them, which you have never
         said out loud in that house, and that your mother is to have your Sunday boots mended and
@@ -276,7 +276,7 @@
   choices:
     - id: answer
       text: Answer for the men you saw fall, when their names come.
-      effects: [ { set: flag.spoke_at_roll } ]
+      effects: [ { set: flag.spoke_at_roll }, { war_mood: { nerve: -1, standing: 1 } } ]
       text_after: |
         "Killed, sir. I saw him." Your own voice sounds like somebody else's. The sergeant major
         nods and makes his mark, and that's the man written down, and you think: his mother will

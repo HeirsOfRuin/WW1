@@ -29,7 +29,7 @@
     - id: warn
       text: Tell Webb diaries are forbidden. If he's taken, they read it.
       visible_if: war.mate1
-      effects: [ { set: flag.city_diary_warned } ]
+      effects: [ { set: flag.city_diary_warned }, { war_mood: { standing: 1 } } ]
       text_after: |
         "I know," Webb says. "I know what the order says." He closes the notebook and holds it. "But
         somebody ought to keep the books. Properly. Or afterwards nobody will know what happened."
@@ -37,7 +37,7 @@
       next: "@return"
     - id: let_him
       text: Let him count. It's keeping his hands steady.
-      effects: [ { set: flag.city_diary_kept } ]
+      effects: [ { set: flag.city_diary_kept }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You let him. His pencil goes all night. By stand-to his hand's stopped shaking and yours
         hasn't, and you think he may have the right idea.
@@ -68,7 +68,7 @@
   choices:
     - id: write
       text: Write back tonight, two sides, in ink.
-      effects: [ { set: flag.city_wrote_home } ]
+      effects: [ { set: flag.city_wrote_home }, { war_mood: { nerve: 2 } } ]
       text_after: |
         You tell her the French have Pears soap too, which isn't true. You tell her to stay in the
         house when the Zeppelins come. You don't tell her that half the men in the section have
@@ -104,7 +104,7 @@
   choices:
     - id: write_her
       text: Write back to Miss Holland.
-      effects: [ { set: flag.city_wrote_holland } ]
+      effects: [ { set: flag.city_wrote_holland }, { war_mood: { nerve: 2 } } ]
       text_after: |
         You tell her where the key to the bottom drawer is, and which of the old ledgers lie, and that
         Mr Gedge in Marine likes his tea without sugar but won't say so. You tell her to keep the pen
@@ -139,7 +139,7 @@
   choices:
     - id: play
       text: Play. Right half, behind Fenton.
-      effects: [ { set: flag.city_played } ]
+      effects: [ { set: flag.city_played }, { war_mood: { nerve: 2 } } ]
       text_after: |
         You lose four goals to two. One of their half-backs puts you on your back in the stubble so
         hard you see stars, then picks you up and dusts you off and says "Howay, man, you're all
@@ -175,7 +175,7 @@
   choices:
     - id: write_home
       text: Write to his mother for his spare pair. Stay by him till they come.
-      effects: [ { set: flag.city_kept_marsh } ]
+      effects: [ { set: flag.city_kept_marsh }, { war_mood: { nerve: 1, standing: -1 } } ]
       text_after: |
         Ten days, and you're his eyes. On sentry you stand next to him and tell him what you see. On
         the carrying party you walk in front and he holds your pack strap. The spare pair come in a
@@ -184,7 +184,7 @@
       next: "@return"
     - id: tell_mo
       text: Tell the MO. He'll be killed out there blind.
-      effects: [ { set: flag.city_told_mo } ]
+      effects: [ { set: flag.city_told_mo }, { war_mood: { nerve: -1, standing: 1 } } ]
       text_after: |
         The MO tests him with a card held at the end of the dugout, and Marsh gets it wrong, and the
         MO looks at him and sighs and writes something. He's sent to the base for a fortnight, and
@@ -217,7 +217,7 @@
   choices:
     - id: last_letter
       text: Write a letter and leave it in your pay book.
-      effects: [ { set: flag.last_letter } ]
+      effects: [ { set: flag.last_letter }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You write it in your office hand, properly, as if it were going to the manager. Then you tear
         it up and write it again the way you'd say it. That you love them. That the firm will see her
@@ -253,13 +253,13 @@
   choices:
     - id: answer
       text: Answer for the men you saw fall, when their names come.
-      effects: [ { set: flag.city_spoke_at_roll } ]
+      effects: [ { set: flag.city_spoke_at_roll }, { war_mood: { nerve: -2, standing: 1 } } ]
       text_after: |
         "Killed, sir. I saw him." The sergeant major makes his mark. A double line, in red. Closed.
       next: "@return"
     - id: stay_silent
       text: Say nothing. Let somebody else tell it.
-      effects: [ { set: flag.city_silent_at_roll } ]
+      effects: [ { set: flag.city_silent_at_roll }, { war_mood: { standing: -1 } } ]
       text_after: |
         Somebody else does, or nobody does, and the names go down as missing: an account left open,
         that nobody will ever balance.
@@ -286,7 +286,7 @@
     - id: find_out
       text: Help Webb find out. Ask everybody who's had a letter.
       visible_if: war.mate1
-      effects: [ { set: flag.city_helped_webb } ]
+      effects: [ { set: flag.city_helped_webb }, { war_mood: { nerve: 1 } } ]
       text_after: |
         It takes four days. A man in D Company has a brother in the Fire Brigade, and a letter from
         him says the warehouse is standing, scorched, the next one gone. Webb writes it in his

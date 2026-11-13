@@ -53,7 +53,7 @@
   choices:
     - id: best_man
       text: Say yes. Shake his hand on it.
-      effects: [ { set: flag.best_man } ]
+      effects: [ { set: flag.best_man }, { war_mood: { nerve: 2 } } ]
       text_after: |
         His grip's like a vice. "Right," he says. "Right, then." And then, because he can't think
         of anything else: "She does a lovely meat-and-potato pie." It's the most words in a row
@@ -97,7 +97,7 @@
       next: "@return"
     - id: let_him_stay
       text: Tell him it's his choice to make, not yours.
-      effects: [ { set: flag.let_pilling_stay } ]
+      effects: [ { set: flag.let_pilling_stay }, { war_mood: { nerve: 1, standing: -1 } } ]
       text_after: |
         He tears the paper up small and puts the bits in the brazier, one at a time, and
         watches each one catch. Then he cuts the cake with his bayonet, eight ways.
@@ -126,7 +126,7 @@
   choices:
     - id: letter
       text: Write a letter for the pay book. A new one.
-      effects: [ { set: flag.last_letter } ]
+      effects: [ { set: flag.last_letter }, { war_mood: { nerve: 1 } } ]
       text_after: |
         It comes out different this time. Shorter. You tell them you're not frightened, which they
         won't believe, and that if it comes to it, it'll have been quick, which nobody can promise.
@@ -162,7 +162,7 @@
   choices:
     - id: discs
       text: Go out for the discs.
-      effects: [ { set: flag.brought_discs } ]
+      effects: [ { set: flag.brought_discs }, { war_mood: { nerve: -2, standing: 2 } } ]
       text_after: |
         Two hours on your belly in the dark, with a pair of scissors and a sandbag. You cut the
         cords by feel. Some of the faces you know by feel too. You bring back nineteen. Your hands
@@ -170,6 +170,7 @@
       next: "@return"
     - id: stay_in
       text: Stay in. You haven't got it in you tonight.
+      effects: [ { war_mood: { nerve: 1, standing: -1 } } ]
       text_after: |
         You lie in the dugout and listen to the others go out, and come in, one at a time, quiet.
         Nobody says anything to you about it, then or after.

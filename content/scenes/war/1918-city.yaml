@@ -19,7 +19,7 @@
   choices:
     - id: deep
       text: Dig it deep. Twenty steps.
-      effects: [ { set: flag.dug_deep } ]
+      effects: [ { set: flag.dug_deep }, { war_mood: { standing: 2 } } ]
       text_after: |
         Three weeks with a pick. Clerks' hands, four years hard now, but still clerks' hands, and the
         blisters come up and break and come up. By February there's a dugout twenty steps down, and
@@ -27,6 +27,7 @@
       next: "@return"
     - id: enough
       text: Dig to the book and no more.
+      effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         To the book. You finish early and spend the evening playing whist on an ammunition box with a
         candle in a bottle, and win fourpence.
@@ -47,7 +48,7 @@
   choices:
     - id: write
       text: Write home. Tell them not to worry.
-      effects: [ { set: flag.c18_wrote_dont_worry } ]
+      effects: [ { set: flag.c18_wrote_dont_worry }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You tell them not to worry. You tell them it's quiet. It is quiet. It's the quietest it's ever
         been, and that's the thing you don't tell them.
@@ -81,7 +82,7 @@
   choices:
     - id: propose
       text: Write back and ask her to marry you, when it's over.
-      effects: [ { set: flag.c18_proposed } ]
+      effects: [ { set: flag.c18_proposed }, { war_mood: { nerve: 3 } } ]
       text_after: |
         You write it four times. In the end it's two lines, in your best office hand, the way you'd
         write a cheque you meant: Dear Florence. When it is over, will you marry me. You post it before
@@ -90,6 +91,7 @@
       next: "@return"
     - id: write
       text: Write back that you're all right. That's what she asked.
+      effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         You tell her you're all right. You tell her to keep digging trenches by the huts, and to get in
         them. You tell her you'll dance the Gay Gordons with her, after, badly. She writes back that she
@@ -117,7 +119,7 @@
     - id: read
       text: Read the far light for him. You know the Morse.
       visible_if: flag.c17_learned_morse
-      effects: [ { set: flag.c18_read_the_lamp } ]
+      effects: [ { set: flag.c18_read_the_lamp }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You read it off for him as it comes, letter by letter, and he writes it down. R-E-C-E-I-V-E-D.
         A-L-L W-E-L-L. "That's all anybody ever needs to send," you say, and he laughs, and sends the
@@ -150,7 +152,7 @@
   choices:
     - id: walk
       text: Walk along it a little way.
-      effects: [ { set: flag.c18_walked_trench } ]
+      effects: [ { set: flag.c18_walked_trench }, { war_mood: { nerve: -1 } } ]
       text_after: |
         A few yards. It's shallow now, a dip in the grass with poppies in it. You find a rusted
         entrenching tool in it, the blade gone thin as paper. You leave it where it is.
@@ -178,7 +180,7 @@
   choices:
     - id: write
       text: Write back. Tell her to keep in.
-      effects: [ { set: flag.c18_wrote_flu } ]
+      effects: [ { set: flag.c18_wrote_flu }, { war_mood: { nerve: 1 } } ]
       text_after: |
         You tell her to keep in, and your father to keep the mask on, and not to go to the crypt or the
         Underground or anywhere there's a crowd. You read your own letter back and laugh at it, a man
