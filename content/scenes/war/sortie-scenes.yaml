@@ -48,12 +48,18 @@
   chapter: front
   title: The raid
   text: |
-    Their wire. Close up it's not a fence, it's a thicket, rusty, taller than you, with tins hung in
+    [if war.stake == 0]Their wire. Close up it's not a fence, it's a thicket, rusty, taller than you, with tins hung in
     it to rattle. The gap the guns made is narrower than the officer said. Somebody's cutting with
     the long-handled cutters, each snip like a gunshot in your head.
 
     Ten yards beyond it, their parapet. You can hear a man coughing on the other side, and smell
-    pipe tobacco, and something frying.
+    pipe tobacco, and something frying.[/if][if war.stake == 1]The wire again, and this time the guns have done their job: it lies in heaps and tangles, with
+    gaps you could drive a cart through, which means they'll know exactly where you're coming. A last
+    few strands are left across the gap, and the cutters are at them. A flare goes up to the left and
+    the whole party lies still in the long grass with the wire an arm's length off.
+
+    You can smell their trench from here: wet sandbags, cabbage, the latrine. Somebody beyond the
+    parapet is whistling a tune you nearly know.[/if]
   choices:
     - id: bold
       text: "Through the gap and straight over their parapet. ({risk_bold})"
@@ -75,11 +81,15 @@
   chapter: front
   title: The raid
   text: |
-    In their trench. It's cleaner than ours, and deeper, and for one second it's empty. Then a man
+    [if war.stake == 0]In their trench. It's cleaner than ours, and deeper, and for one second it's empty. Then a man
     comes round the traverse with a mess tin in each hand and stops dead, and looks at you, and
     opens his mouth.
 
-    There's a dugout entrance two yards on, steps going down, a blanket over the door, light under it.
+    There's a dugout entrance two yards on, steps going down, a blanket over the door, light under it.[/if][if war.stake == 1]Down into their trench, and you land on duckboards that rock under you like a punt. A dugout
+    entrance, a gas curtain across it, and down below a gramophone going, a waltz, tinny and slow.
+
+    And coming up the steps, bent under the curtain, a man with two mess tins of coffee, steaming. He
+    straightens up and sees you, and doesn't drop them.[/if]
   choices:
     - id: bold
       text: "Grab the man with the mess tins. He's your prisoner. ({risk_bold})"
@@ -149,11 +159,15 @@
   chapter: front
   title: Patrol
   text: |
-    The sunken road. And there's somebody in it.
+    [if war.stake == 0]The sunken road. And there's somebody in it.
 
     A German patrol, six or seven, lying up along the bank thirty yards from you, the same as you, in
     the dark, listening. You can see a helmet against the sky. You can hear one of them breathing
-    through his mouth. A hand closes on your arm: {mate}.
+    through his mouth. A hand closes on your arm: {mate}.[/if][if war.stake == 1]The sunken road, and at the far end of it there are men. Not ours. A working party, five or six,
+    putting out wire of their own, and one standing over them with his rifle slung, smoking, the
+    cigarette cupped in his hand so it shows only when he draws on it.
+
+    Thirty yards. {mate} has seen them too. You can feel him not breathing beside you.[/if]
   choices:
     - id: bold
       text: "Bomb them, now, while they don't know you're there. ({risk_bold})"
@@ -180,9 +194,13 @@
   chapter: front
   title: Patrol
   text: |
-    Coming back is the dangerous bit, everybody says, and everybody's right. Our own sentries are
+    [if war.stake == 0]Coming back is the dangerous bit, everybody says, and everybody's right. Our own sentries are
     jumpy. The password this week is Blackpool. The gap in our wire is somewhere ahead, and in the
-    dark one stretch of wire looks like every other.
+    dark one stretch of wire looks like every other.[/if][if war.stake == 1]Coming in, and the fog has come up off the low ground while you were out, white and thick, and
+    now there's no parapet anywhere, ours or theirs. You've lost the line of the road. Somewhere ahead
+    is our wire and the gap in it, and somewhere behind is theirs, and in this they're the same.
+
+    A sentry coughs, close. You don't know whose. The password this week is Blackpool.[/if]
   choices:
     - id: bold
       text: "Stand up at the wire and call the password. ({risk_bold})"
@@ -244,9 +262,11 @@
   chapter: front
   title: Wiring
   text: |
-    A flare goes up right over you. It hangs, and hangs, and you're stood in the open with a coil of
+    [if war.stake == 0]A flare goes up right over you. It hangs, and hangs, and you're stood in the open with a coil of
     wire in your arms and every bit of you lit up white, and you can see your own shadow on the
-    ground going round slowly as the flare swings.
+    ground going round slowly as the flare swings.[/if][if war.stake == 1]A machine gun starts up from their side, traversing, low, the rounds cracking past just over the
+    grass in a long sweep from left to right, like a man watering a garden. It isn't aimed at you. It
+    isn't aimed at anything. It's coming your way, and you're stood up with a coil of wire in your arms.[/if]
   choices:
     - id: bold
       text: "Keep working. Moving men are harder to see than you'd think. ({risk_bold})"
@@ -268,8 +288,10 @@
   chapter: front
   title: Wiring
   text: |
-    One more length and it's done, the corporal says. It's nearly light. You can see the shape of
-    their parapet now, which means they can see the shape of you.
+    [if war.stake == 0]One more length and it's done, the corporal says. It's nearly light. You can see the shape of
+    their parapet now, which means they can see the shape of you.[/if][if war.stake == 1]The rain's come on, and the wire's slick in your hands, and the pickets won't go in: the mallet
+    skids off the wet heads with a noise you'd swear they can hear in Berlin. One more length, the
+    corporal says. There's a grey line in the east. The rain's no cover once it's light.[/if]
   choices:
     - id: bold
       text: "Finish the length. Whatever it takes. ({risk_bold})"
@@ -340,9 +362,12 @@
   chapter: front
   title: Listening post
   text: |
-    A sound. Out in front, to the right, the wire rattling, or a rat at it. Then nothing. Then again:
+    [if war.stake == 0]A sound. Out in front, to the right, the wire rattling, or a rat at it. Then nothing. Then again:
     a click, metal on metal, and a whisper you can't make out. It might be a German patrol. It might
-    be a loose picket in the wind. It's two in the morning and every sound is a man.
+    be a loose picket in the wind. It's two in the morning and every sound is a man.[/if][if war.stake == 1]Voices. Close. Two men talking low in German, out in front, and the smell of their tobacco
+    comes to you on the wind. One of them laughs, quietly, the way men laugh on sentry at three in the
+    morning. A match flares and goes out. They're in a shell hole twenty yards off, doing what you're
+    doing.[/if]
   choices:
     - id: bold
       text: "Throw a bomb at the sound. ({risk_bold})"
@@ -364,8 +389,10 @@
   chapter: front
   title: Listening post
   text: |
-    The relief's late. The sky's going grey in the east. If they don't come soon you'll have to get
-    back across in daylight, and their snipers will be up.
+    [if war.stake == 0]The relief's late. The sky's going grey in the east. If they don't come soon you'll have to get
+    back across in daylight, and their snipers will be up.[/if][if war.stake == 1]Your relief comes crawling out on time, for once, and then a flare goes up and catches him
+    halfway, and he lies flat in the open twenty yards off with the light hanging over him. He can't
+    come on and you can't go back past him till it dies, and the sky behind their line is going grey.[/if]
   choices:
     - id: bold
       text: "Go back now, before it's any lighter. ({risk_bold})"
@@ -427,9 +454,12 @@
   chapter: front
   title: Carrying party
   text: |
-    Halfway up, the battery starts. Whizz-bangs, you hear them after they arrive: a crack and a
+    [if war.stake == 0]Halfway up, the battery starts. Whizz-bangs, you hear them after they arrive: a crack and a
     flash and earth coming down on your helmet like rain on a slate roof. The trench is knee-deep in
-    places and the duckboards float. Somebody ahead is shouting to keep moving.
+    places and the duckboards float. Somebody ahead is shouting to keep moving.[/if][if war.stake == 1]Gas. Somebody's banging a shell case up ahead, and the shout comes back down the line, and you're
+    getting your mask on with a box of bombs on your shoulder, one-handed, the rubber stinking, the
+    eyepieces steaming up so the trench goes to fog. Then the shells start, behind the gas. You can't
+    see the duckboards and you can't see the man in front.[/if]
   choices:
     - id: bold
       text: "Keep moving. Get through the shelled stretch fast. ({risk_bold})"
@@ -451,8 +481,10 @@
   chapter: front
   title: Carrying party
   text: |
-    The last stretch. There's a man down in the trench in front of you, one of the party, sitting in
-    the water holding his leg and swearing, quietly, in a steady stream, like a man reading a list.
+    [if war.stake == 0]The last stretch. There's a man down in the trench in front of you, one of the party, sitting in
+    the water holding his leg and swearing, quietly, in a steady stream, like a man reading a list.[/if][if war.stake == 1]The last stretch, and a man of the party is down in front of you. Not hit: just down, sat in the
+    water with his back to the trench wall and his load beside him, saying he can't, he can't do another
+    yard, he's not hurt, he just can't. His eyes are fixed on nothing at all.[/if]
   choices:
     - id: bold
       text: "Take his load too, and leave him for the bearers. ({risk_bold})"
@@ -516,9 +548,12 @@
   chapter: front
   title: Bombing raid
   text: |
-    In their trench. This is the work: along it a bay at a time. Pin, throw over the traverse, count,
+    [if war.stake == 0]In their trench. This is the work: along it a bay at a time. Pin, throw over the traverse, count,
     down, the bang, then round the corner fast before they can throw back. Their bombs come over
-    too, the stick ones, turning end over end in the light of the last explosion.
+    too, the stick ones, turning end over end in the light of the last explosion.[/if][if war.stake == 1]Their trench, and it's a maze: a turn every few yards, a sap going off, a dugout, another turn,
+    and you can't tell which way their bombers are coming from. A stick bomb comes over the traverse
+    turning end over end and somebody kicks it on into the next bay, where it goes off. Your ears have
+    gone. You're working by the light of the bangs.[/if]
   choices:
     - id: bold
       text: "Lead round each traverse. ({risk_bold})"
@@ -540,8 +575,10 @@
   chapter: front
   title: Bombing raid
   text: |
-    The sergeant blows his whistle. Out. Their machine gun has started from somewhere further along
-    and the gap in the wire is behind you and getting further away.
+    [if war.stake == 0]The sergeant blows his whistle. Out. Their machine gun has started from somewhere further along
+    and the gap in the wire is behind you and getting further away.[/if][if war.stake == 1]The whistle. Out. Their bombers are coming down the trench at you from both ends now, and their
+    machine gun has opened up on the wire behind, sweeping the gap you came in by. There's a wounded man
+    of yours at the foot of the parapet, and the gap is fifty yards off.[/if]
   choices:
     - id: bold
       text: "Bomb the machine gun before you go. ({risk_bold})"
@@ -600,10 +637,13 @@
   chapter: front
   title: The gun
   text: |
-    You open up. The gun shakes against your shoulder and the cooling fins go hot and the empty cases
+    [if war.stake == 0]You open up. The gun shakes against your shoulder and the cooling fins go hot and the empty cases
     spill out of the side and ring off the sandbags. Forty-seven rounds, and you're changing the drum
     by feel. Then it stops. A stoppage. The cocking handle's forward. You know what that is. Your
-    hands know before you do.
+    hands know before you do.[/if][if war.stake == 1]The gun's going well, short bursts, the way you were taught, the barrel casing too hot to touch,
+    the smell of hot oil and cordite. Then it stops dead in the middle of a burst. A separated case, by
+    the feel of it, the worst kind, the front half of the brass stuck in the chamber. Across the way
+    their machine gun has stopped too, which means they're looking for you.[/if]
   choices:
     - id: bold
       text: "Clear it fast and keep firing. ({risk_bold})"
@@ -625,8 +665,10 @@
   chapter: front
   title: The gun
   text: |
-    It's done. Now the gun has to come back in, and their machine gunners know exactly where it's
-    been. The first shells are already coming down behind you.
+    [if war.stake == 0]It's done. Now the gun has to come back in, and their machine gunners know exactly where it's
+    been. The first shells are already coming down behind you.[/if][if war.stake == 1]Done. You get the gun off the parapet and the barrel's so hot it scorches through your sleeve.
+    Twenty-eight pounds of it, and the drums, and three hundred yards of trench back, and their
+    gunners have the range of the place you fired from to a yard. The first shell lands where you were.[/if]
   choices:
     - id: bold
       text: "Carry the gun back yourself, fast. ({risk_bold})"
@@ -685,8 +727,10 @@
   chapter: front
   title: The line
   text: |
-    The break, at last, in the worst place: where the communication trench has been blown in, and
-    the two ends of the wire are fifteen yards apart across open ground that's under fire.
+    [if war.stake == 0]The break, at last, in the worst place: where the communication trench has been blown in, and
+    the two ends of the wire are fifteen yards apart across open ground that's under fire.[/if][if war.stake == 1]The break is out on top, where the line crosses a strip of the old no man's land between two
+    trenches. A shell has gone clean through it, and the two ends are lying in the mud twenty yards
+    apart, and their machine gun sweeps that stretch every few minutes, as regular as a clock.[/if]
   choices:
     - id: bold
       text: "Run the new wire across the open in one go. ({risk_bold})"
@@ -708,7 +752,9 @@
   chapter: front
   title: The line
   text: |
-    You splice it, fingers numb, by feel, the rubber tape in your teeth. Now to test it.
+    [if war.stake == 0]You splice it, fingers numb, by feel, the rubber tape in your teeth. Now to test it.[/if][if war.stake == 1]You make the joint by feel in the dark, the copper twisted and the tape held in your teeth,
+    lying in a puddle, the cold coming up through your tunic. The buzzer's on your hip. Battalion will
+    want to know it's through.[/if]
   choices:
     - id: bold
       text: "Test it there, in the open. ({risk_bold})"
@@ -767,9 +813,12 @@
   chapter: front
   title: The hide
   text: |
-    Mid-morning. Your observer touches your arm. At a loophole in their parapet, a piece of mirror,
+    [if war.stake == 0]Mid-morning. Your observer touches your arm. At a loophole in their parapet, a piece of mirror,
     and behind it a man shaving, his braces down, the lather white on his face. He puts you in mind
-    of your father at the scullery sink. He has no idea.
+    of your father at the scullery sink. He has no idea.[/if][if war.stake == 1]Mid-morning, the sun on their parapet. At a loophole someone's left the steel plate open, and
+    behind it a man has propped a bit of mirror on a sandbag and is shaving with a cut-throat razor,
+    taking his time over his chin. A boy, by the look of him. You'd swear he was whistling, though
+    you can't hear it from here.[/if]
   choices:
     - id: bold
       text: "Take the shot. ({risk_bold})"
@@ -796,8 +845,10 @@
   chapter: front
   title: The hide
   text: |
-    Afternoon. A rifle bullet hits your steel plate with a sound like a bell, and the whole hide
-    rings. They've found you. Their sniper is out there somewhere, and he's looking at your slit.
+    [if war.stake == 0]Afternoon. A rifle bullet hits your steel plate with a sound like a bell, and the whole hide
+    rings. They've found you. Their sniper is out there somewhere, and he's looking at your slit.[/if][if war.stake == 1]A puff of earth jumps off the sandbag an inch from your slit, and the crack comes after it, flat
+    and close. Then another, the other side. He's bracketing you, the way a gunner would. He knows where
+    you are to a yard.[/if]
   choices:
     - id: bold
       text: "Find him. He fired; he's shown himself. ({risk_bold})"
@@ -856,9 +907,11 @@
   chapter: front
   title: The gallery
   text: |
-    You put your ear to the listening stick against the clay. You can hear them. The Germans, digging
+    [if war.stake == 0]You put your ear to the listening stick against the clay. You can hear them. The Germans, digging
     their own gallery, close: the scrape, the thud, a voice. Then the digging stops. They're
-    listening too.
+    listening too.[/if][if war.stake == 1]Through the listening stick, nothing. Then, so faint you might be imagining it, a ticking. Not
+    digging. Something steady, like a clock in an empty house. You've heard the old hands talk about it.
+    It might be their pump. It might be something else.[/if]
   choices:
     - id: bold
       text: "Keep digging, quietly. Get to them first. ({risk_bold})"
@@ -885,8 +938,10 @@
   chapter: front
   title: The gallery
   text: |
-    The officer decides: a camouflet, a small charge, to blow in their gallery before they blow in
-    yours. The ammonal comes down the line in bags. Somebody has to tamp it and lay the leads.
+    [if war.stake == 0]The officer decides: a camouflet, a small charge, to blow in their gallery before they blow in
+    yours. The ammonal comes down the line in bags. Somebody has to tamp it and lay the leads.[/if][if war.stake == 1]The order comes down: blow them, now, before they blow you. The charge comes along the gallery in
+    sandbags passed hand to hand, and the leads after it, and nobody talks above a breath. The candle
+    flame has gone small and blue at the tip. The air's going bad.[/if]
   choices:
     - id: bold
       text: "Lay the charge yourself. ({risk_bold})"

@@ -72,3 +72,10 @@ moving nothing).
 The change the design wanted shows where it should: fewer men break (adaptive 14.9% to 12.9%),
 because the letters and the friends now steady them. Every target holds, and no rule was re-tuned
 back.
+
+## Also built: second takes for the duty steps (2026-11-13)
+
+Steps 2 and 3 of every duty and role mission (twenty passages) now have a second take, as step 1
+already had, alternating by sortie (`war.stake`). A man on his fourth wiring party no longer reads
+the same flare word for word. Each take fits that step's existing choices (the sniper's "Let him
+shave" still has a man shaving). Text only: the gate is identical.
