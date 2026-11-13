@@ -22,6 +22,8 @@ export const GAME_EFFECTS = [
   z.object({ war_run: z.literal(true) }).strict(), // the war begins: run to its first question
   z.object({ war: DECISION }).strict(), // the answer to the war's pending question (src/game/war/war.ts decide)
   z.object({ war_ack: z.enum(['wound', 'fallen', 'sortie']) }).strict(), // a wound or a friend's death has been shown
+  // Option B (docs/FRAME-OPTION-B.md): an event's choice moves nerve or standing a little, shown in the changes
+  z.object({ war_mood: z.object({ nerve: z.number().int().min(-5).max(5).optional(), standing: z.number().int().min(-5).max(5).optional() }).strict() }).strict(),
 ] as const;
 const BaseEffectSchema = z.union([...CORE_EFFECTS, ...GAME_EFFECTS]);
 export type BaseEffect = z.infer<typeof BaseEffectSchema>;

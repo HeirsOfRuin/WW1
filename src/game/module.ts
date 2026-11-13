@@ -342,6 +342,20 @@ export const module: GameModule = {
       else if (what === 'wound') newsOf(w).wound = null;
       else { const f = writtenFallen(w); if (f) newsOf(w).fallen.splice(newsOf(w).fallen.indexOf(f), 1); }
     },
+    /** Option B: an event's choice moves nerve or standing a little (docs/FRAME-OPTION-B.md) */
+    war_mood(s, _c, e, ctx) {
+      const w = war(s);
+      const m = (e as { war_mood: { nerve?: number; standing?: number } }).war_mood;
+      const clampN = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+      if (m.nerve) {
+        const before = w.nerve; w.nerve = clampN(w.nerve + m.nerve, -10, 100);
+        const dn = w.nerve - before; if (dn) ctx.changes.push(`Nerve ${dn > 0 ? '+' : '−'}${Math.abs(dn)}`);
+      }
+      if (m.standing) {
+        const before = w.standing; w.standing = clampN(w.standing + m.standing, 0, 100);
+        const ds = w.standing - before; if (ds) ctx.changes.push(`Standing ${ds > 0 ? '+' : '−'}${Math.abs(ds)}`);
+      }
+    },
     /** the player's answer to the war's question */
     war(s, c, e, ctx) {
       const d = (e as { war: string }).war;

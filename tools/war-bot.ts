@@ -23,7 +23,12 @@ export function playGame(content: ContentBundle, o: BotOptions): GameState {
     if (v.sceneId.startsWith('c_enlist_')) id = `pick_${o.pick ?? 0}`;
     else if (v.sceneId === 'c_general') id = o.general ?? 'firstaid';
     else if (v.sceneId === 'c_training') id = 'embark';
-    else if (content.scenes[v.sceneId]?.kind === 'pool' || v.sceneId.startsWith('x_') || v.sceneId.startsWith('y_')) id = v.choices.find((x) => x.available)!.id; // an event or news: no war question
+    else if (content.scenes[v.sceneId]?.kind === 'pool' || v.sceneId.startsWith('x_') || v.sceneId.startsWith('y_')) { // an event or news: no war question. Choices spread by seed and scene, so the gate measures an
+      // average player's events, not always the first choice (Option B: event choices move nerve).
+      const open = v.choices.filter((x) => x.available);
+      let h = o.seed; for (const ch of v.sceneId) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+      id = open[h % open.length]!.id;
+    }
     else {
       const q = s.war.pending;
       if (!q) throw new Error(`${v.sceneId}: no question pending`);
