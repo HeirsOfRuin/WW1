@@ -1,13 +1,13 @@
 // The war layer's public face: the step machine, its bot policies and a headless runner.
 import { STAGES } from './data';
-import { newWar, run, decide, done, type War, type NewWarOptions } from './war';
+import { newWar, run, decide, done, battleAt, type War, type NewWarOptions } from './war';
 import { POLICIES, withForce, decideFor, type Force } from './policies';
 
 export * from './war';
 export * from './data';
 export { POLICIES, withForce, decideFor, type Force } from './policies';
 
-export const battleOf = (w: War) => STAGES[w.stage - 1]!.battles[w.r]!;
+export const battleOf = (w: War) => battleAt(w, STAGES[w.stage - 1]!, w.r)!;
 
 /** A whole war played by a policy, without the story engine (the engine path is tools/war-bot). */
 export function playWar(o: NewWarOptions & { policy: string; force?: Force }): War {

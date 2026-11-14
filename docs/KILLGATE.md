@@ -154,6 +154,57 @@ home. About a third of men who fight in 1916-17 do it in a role.
 A real trade now: the tunneller is killed less and comes home more; the man who stays with
 his section brings more of them home and grades higher.
 
+### The tank and air transfers (2026-11-14; eligible men, paired seeds)
+
+Each man offered the corps plays his war twice on the same seed: once taking it, once refusing.
+Adaptive soldier, war layer alone (`tools/_corps.mts`, scratch), 16,000 wars per corps; only the
+wars where the offer came and was taken are counted. ± is 1 SE.
+
+**The tank** (offered January 1917 to machinery or Lewis gun 2; taken in 1,810 wars: mill 1,645,
+city 79, farm 86, pit 0):
+
+| | Armistice | Killed | Captured | Home alive | Broken or court-martialled | Friends home | Medal | Grade |
+|---|---|---|---|---|---|---|---|---|
+| Takes it | 19.2% ±0.9 | 41.1% ±1.2 | **8.7% ±0.7** | 58.9% | 18.8% | 4.30 | **55.2% ±1.2** | 66.8 |
+| Refuses it | 19.6% ±0.9 | 41.3% ±1.2 | 4.5% ±0.5 | 58.7% | 20.5% | **4.77** | 44.9% ±1.2 | 67.9 |
+
+The framework's shape: the infantry's killed rate (equal), more awards (+10), fewer friends home
+(-0.47), more captures (+4.2: the tank ditched beyond their line). Grade is level within noise.
+A real trade: medals for friends and the risk of capture. No pit man is offered it: the pit
+has no machinery and its Lewis gunners mostly went to the tunnellers.
+
+**The air gunner** (offered May 1917 to a Lewis gunner at 2; taken in 589 wars: mill 436, city
+79, farm 74):
+
+| | Armistice | Killed | Captured | Posting | Home alive | Broken or court-martialled | Friends home | Medal | Grade |
+|---|---|---|---|---|---|---|---|---|---|
+| Takes it | 17.5% ±1.6 | 33.6% ±1.9 | **12.2% ±1.3** | **16.8% ±1.5** | 66.4% | **13.8%** | 4.57 | **61.5% ±2.0** | 72.1 |
+| Refuses it | **22.4% ±1.7** | 33.3% ±1.9 | 5.6% ±0.9 | 0 | 66.7% | 29.0% | **4.94** | 47.2% ±2.1 | 72.7 |
+
+The framework's shape: killed equal and captured double (together 45.8% vs 38.9%); more men sent
+home (the medical officer sends a worn-out gunner home); more medals (+14); an Armistice rate no
+higher than refusing. Fewer break (a bed, a mess). Grade is level. A real trade: the Armistice and
+the friends home for medals, nerve and a way out. **The posting check** (FRAME-AIR.md): for the
+man who takes a home posting at the 1917 leave (quit3), the air road is not a better way home:
+81.7% home alive against 82.0%.
+
+**Departures from the frameworks' proposed numbers**, all found by this table:
+- A bug: a role mission's risk read the man's skill under the role's name. There is no `air` or
+  `tank` skill, so the risk was NaN and no flying or tank mission could hit him. Both now read
+  the Lewis gun (`tests/game.test.ts` holds every role's mission risk finite).
+- Tank, as proposed, was worse on everything (Armistice 6.5% vs 20.1%; breakdowns +7, captures
+  +6). Tuned: battle hit 1.3 to 1.0; the killed share of a hit 0.40 to the infantry's 0.32;
+  capture on an advance 0.03 to 0.01; battle nerve 1.2 to 1.0; line nerve 0.6 to 0.5; shellfire
+  in the tank park 0.35 to 0.25; mission hit 0.05 to 0.04 and nerve 5 to 4; awards 1.3 to 1.6;
+  Cambrai's phases from 0.20/0.18/0.22 to 0.14/0.12/0.15.
+- Air, as proposed, lost on grade by 10 with survival level. Tuned: battle hit 1.0 to 0.7 (he is
+  hit less often; 60% of hits still end his war, killed or shot down, against the infantry's
+  32%); awards 1.4 to 2.0 (path and mission); one joining tour with no flying (the first screen
+  after the transfer was a mission, before he had seen the aerodrome).
+- Neither corps man is offered a commission: it would have put him back in the infantry as a
+  subaltern (an air run ended as a lieutenant still flying). A shell in support no longer counts
+  as shot down.
+
 ### Skills: nothing is decoration
 
 All 15 skills change end states when switched off (1,920 runs each, every policy, town and

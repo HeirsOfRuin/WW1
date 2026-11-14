@@ -195,3 +195,52 @@ c18_proposed: { description: "Asked Florence to marry him after the raid on the 
 c18_read_the_lamp: { description: "Read Marsh's signal lamp with him; Marsh takes the Armistice message" }
 c18_walked_trench: { description: "Walked along the 1916 trench at Gommecourt in August 1918" }
 c18_wrote_flu: { description: "Told his mother to keep in during the influenza" }
+
+# The Tank Corps (content/scenes/war/corps-tank.yaml; docs/FRAME-TANK.md)
+tk17_gears: { description: "Learned the gears and the hammer knocks with Tonks at Erin" }
+tk17_cards: { description: "Sat in on Kearney's card game at Erin" }
+tk17_found_section: { description: "Walked over to find the section in the Arras quarries the night before the attack" }
+tk17_stayed_with_her: { description: "Stayed with Lodestar the night before Arras, checking the guns" }
+tk17_aussies: { description: "Went into the Australians' estaminet after Bullecourt and stood his round" }
+tk17_murray_tin: { description: "Left Murray's spare petrol tin aboard: Murray burned at Cambrai" }
+tk17_told_mother: { description: "Wrote to his mother that he was in a tank" }
+tk17_kept_quiet: { description: "Wrote to his mother that he was in the motor transport" }
+tk17_lacey_praised: { description: "Told Lacey he was doing fine: Lacey killed walking ahead at Flesquieres" }
+tk18_wrote_lacey: { description: "Wrote to Lacey, or to his mother, in January 1918" }
+tk18_whippet: { description: "Went to the Whippets with Pring as his gunner, spring 1918" }
+tk18_said_no: { description: "Pring went to the Whippets without him: Pring killed at Amiens" }
+tk18_kept_pring: { description: "As Lodestar's officer, refused to let Pring go to the Whippets" }
+tk18_kept_plate: { description: "Kept the steel strip with Lodestar's name, after she was burned in March 1918" }
+tk18_gave_plate: { description: "Gave Lodestar's name strip back to Kearney" }
+tk18_murray_rivets: { description: "Went over the new tank's rivets with Murray, May 1918" }
+tk18_whippet_guns: { description: "Learned the Whippet's guns blind" }
+tk18_wrote_home: { description: "Wrote home the night before Amiens" }
+tk_kearney_taken: { description: "Let Kearney go as a spare gunner: his tank ditched beyond the line and he was taken prisoner" }
+tk18_tonks_told: { description: "Reported Tonks's deaf ear: Tonks sent to the workshops at Erin" }
+tk18_tonks_kept: { description: "Kept Tonks's deaf ear secret and stood on his good side" }
+tk18_pring_hit: { description: "Told Pring to drive the Whippet at the gun: Pring wounded and sent home" }
+# TANK_FLAGS_END
+
+# The Flying Corps (content/scenes/war/corps-air.yaml; docs/FRAME-AIR.md)
+af17_sallis_engine: { description: "Went out to the hangar with Sallis on the first night" }
+af17_kept_print: { description: "Kept a spoiled aerial print of the battalion's line in his pay book" }
+af17_bare_hands: { description: "Cleared the frozen Lewis gun bare-handed at six thousand feet" }
+af17_watched_burn: { description: "Watched a burning two-seater all the way down" }
+af17_ferrier_farm: { description: "Promised Ferrier to come to the farm in Manitoba at harvest" }
+af18_hollis: { description: "Sergeant Hollis, a sergeant pilot, has joined the flight (1918)" }
+af18_engine: { description: "Helped Hollis and Sallis take an engine down" }
+af18_ferrier_home: { description: "Told the flight commander about Ferrier's hands; Ferrier went home to teach" }
+af18_ferrier_stays: { description: "Kept Ferrier's secret; he flew on" }
+af18_ferrier_killed: { description: "Ferrier was killed after the retreat; Hollis became his pilot" }
+af18_wrote_manitoba: { description: "Wrote to Ferrier's mother in Manitoba himself" }
+af18_fired_gunner: { description: "Fired on the German two-seater's gunner seen close" }
+af18_held_fire: { description: "Held his fire at the German gunner, who lifted a hand" }
+af18_sat_sallis: { description: "Sat on the field with Sallis instead of the sergeants' mess" }
+af18_note_home: { description: "Sent a note back to the section by the battery's wireless operator" }
+af18_bridges: { description: "Hollis brought the machine home from the Somme bridges" }
+af18_hollis_killed: { description: "Hollis was killed at the Somme bridges; Mr Lyle is his pilot" }
+af18_told_sallis: { description: "Told Sallis what the dying Hollis said about the engine" }
+af18_stood_with_sallis: { description: "Stood on the field with Sallis counting a missing machine" }
+af18_strafed_column: { description: "Went down on a German column on the roads in October 1918" }
+af18_spared_column: { description: "Fired on the guns and let the walking column go in October 1918" }
+# AIR_FLAGS_END

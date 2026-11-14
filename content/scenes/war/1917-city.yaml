@@ -231,6 +231,8 @@
     Leyton for margarine and tea and sugar, women standing two hours in the cold with their baskets,
     and the bread's grey and tastes of potato.
 
+    [if war.corps == tank]They rang the bells in London for Cambrai, your father says, and he stood in the street to listen; and a fortnight later the papers went quiet and the ground was gone again. At the office the whole of the third floor wants to know what it's like inside one, and the chief clerk takes you to lunch to ask, and pays. Hot, you tell him, and loud, and you can't hear yourself think, and he writes it down. There's a tank coming to Leyton town hall in the new year for the War Bonds, a real one, and your mother means to buy a certificate off it with her savings.[if flag.tk17_told_mother] She's shown your letter to half the street. The picture's still pinned up in the scullery.[/if][if flag.tk17_kept_quiet] She had you in the motor transport, till your father showed her the picture in the scullery and the badge in your photograph. She doesn't mention your letter.[/if][/if][if war.corps == air]In Leyton nobody thinks aeroplanes are wonderful, not since the German ones came over in the summer. The boys in the street still want to know if you've seen Richthofen, the red one, and how many you've got, until their mothers call them in. Your father wants to know the pay. He works out the flying pay on the back of an envelope in pounds a year, like a clerk, and tells you how much you could put by if you were careful, and then he puts the envelope in the fire. Your mother has heard the fliers get sent home after a while, to teach. She asks if it's true. You say sometimes. A boy from two doors down asks why you don't learn to fly them yourself, and you say it'd mean months at a school in England, and your mother says she'll write to the King.[/if]
+
     Your mother's thinner. She's given you her sugar for a week without saying. Your father's grown
     a moustache and it's gone white.
 
@@ -254,7 +256,7 @@
     {offers_line}
   choices:
     - id: back
-      text: Go back on the tenth day. The battalion promotes the men who return.
+      text: "Go back on the tenth day. [if war.corps == air]The squadron[else][if war.transferred]Your company[else]The battalion[/if][/if] promotes the men who return."
       effects: [ { war: back } ]
       next: "@war"
     - id: commission

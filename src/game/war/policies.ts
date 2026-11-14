@@ -12,6 +12,8 @@ interface Policy {
   sick(w: War): boolean;
   course(w: War, k: string): boolean;
   tunnel(w: War): boolean;
+  /** take the tanks or the Flying Corps when offered (FRAME-TANK.md, FRAME-AIR.md) */
+  corps?(w: War, corps: 'tank' | 'air'): boolean;
   /** take a special assignment, or try to get out of it (default: take all but the firing party when shaky) */
   assign?(w: War, key: string): boolean;
   battle(w: War, i: number, type: PhaseType, stalled: boolean): BattleChoice;
@@ -24,15 +26,15 @@ const anyFriend = (w: War) => w.friends.some(Boolean);
 const always = { sick: () => false, course: () => true, tunnel: () => false, mission: () => true };
 const steady = (): SortieChoice => 'steady';
 
-const reckless: Policy = { ...always, step: () => 'bold', volunteer: () => true, battle: () => 'push', leave: (_w, _o, c) => (c ? 'commission' : 'back') };
-const careful: Policy = { step: () => 'careful', volunteer: () => false, mission: () => false, battle: () => 'ground', sick: (w) => w.nerve < 40, course: () => true, tunnel: () => true, leave: () => 'back' };
+const reckless: Policy = { ...always, corps: () => true, step: () => 'bold', volunteer: () => true, battle: () => 'push', leave: (_w, _o, c) => (c ? 'commission' : 'back') };
+const careful: Policy = { corps: () => false, step: () => 'careful', volunteer: () => false, mission: () => false, battle: () => 'ground', sick: (w) => w.nerve < 40, course: () => true, tunnel: () => true, leave: () => 'back' };
 const mates: Policy = {
-  step: steady,
+  corps: () => false, step: steady,
   volunteer: (_w, _k, _d, f) => f, mission: (w) => w.nerve > 60,
   battle: (w) => (anyFriend(w) ? 'help' : 'push'), sick: (w) => w.nerve < 20, course: () => false, tunnel: () => false, leave: () => 'back',
 };
 const climber: Policy = {
-  ...always, step: () => 'bold', volunteer: (_w, _k, d) => d.standing >= 3, battle: (w) => (w.nerve > 25 ? 'push' : 'ground'),
+  ...always, corps: () => true, step: () => 'bold', volunteer: (_w, _k, d) => d.standing >= 3, battle: (w) => (w.nerve > 25 ? 'push' : 'ground'),
   leave: (w, o, c) => (c ? 'commission' : !w.promotedThisStage && o.length ? 'posting' : 'back'),
 };
 const PHASE_RULE: Record<PhaseType, (w: War) => BattleChoice> = {
@@ -40,8 +42,10 @@ const PHASE_RULE: Record<PhaseType, (w: War) => BattleChoice> = {
   trench: (w) => (w.nerve > 60 ? 'push' : anyFriend(w) ? 'help' : 'ground'),
   hold: (w) => (anyFriend(w) ? 'help' : 'ground'),
   defence: (w) => (w.nerve > 50 ? 'push' : 'help'),
+  air: (w) => (w.nerve > 50 ? 'push' : 'help'),
 };
 const adaptive: Policy = {
+  corps: (w, c) => w.nerve > (c === 'tank' ? 50 : 55),
   step: (w) => (w.nerve > 55 ? 'steady' : 'careful'),
   volunteer: (w, _k, d) => (d.hit <= 0.04 ? w.nerve > 55 : w.nerve > 75), mission: (w) => w.nerve > 50,
   battle: (w, _i, type, stalled) => (stalled ? 'ground' : PHASE_RULE[type](w)),
@@ -63,7 +67,7 @@ export const POLICIES: Record<string, Policy> = {
 };
 
 /** Measurement hooks: force one decision while the policy plays the rest as written. */
-export interface Force { battle?: 'blind' | 'groundInTrench' | 'ignoreStall' | BattleChoice; volunteer?: boolean; noRoles?: boolean; tunnel?: boolean; step?: SortieChoice }
+export interface Force { battle?: 'blind' | 'groundInTrench' | 'ignoreStall' | BattleChoice; volunteer?: boolean; noRoles?: boolean; tunnel?: boolean; step?: SortieChoice; corps?: boolean }
 
 export function withForce(base: Policy, f: Force = {}): Policy {
   const p = { ...base };
@@ -74,6 +78,7 @@ export function withForce(base: Policy, f: Force = {}): Policy {
   if (f.volunteer !== undefined) { const v = f.volunteer; p.volunteer = () => v; }
   if (f.noRoles) p.course = (w, k) => k === 'lead' && base.course(w, k);
   if (f.tunnel !== undefined) { const t = f.tunnel; p.tunnel = () => t; }
+  if (f.corps !== undefined) { const t = f.corps; p.corps = () => t; }
   // a step that cannot be turned back from is played careful when 'back' is forced
   if (f.step) { const st = f.step; p.step = (_w, key, i) => (st === 'back' && !SORTIES[key]!.back[i] ? 'careful' : st); }
   return p;
@@ -91,6 +96,7 @@ export function decideFor(p: Policy, w: War, q: Pending, battleOf: (w: War) => B
     case 'sick': return p.sick(w) ? 'report' : 'carry_on';
     case 'course': return p.course(w, q.skill) ? 'take' : 'decline';
     case 'assign': return (p.assign ?? defaultAssign)(w, q.key) ? 'take' : 'decline';
+    case 'corps': return (p.corps ?? (() => false))(w, q.corps) ? 'transfer' : 'stay';
     case 'battle': {
       const ptype = battleOf(w).phases[q.phase]![2];
       return p.battle(w, q.phase, ptype, q.stalled);

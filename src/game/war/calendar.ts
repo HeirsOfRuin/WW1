@@ -36,7 +36,10 @@ export function warMonth(w: War): [number, number] {
   if (w.ending === 'armistice') return ARMISTICE;
   const t = ROTATION_MONTHS[w.stage]!;
   if (w.cursor.at === 'leave' || (w.ending === 'posting')) return t.leave;
-  return t.rotations[Math.min(Math.max(w.clockInStage - 1, 0), t.rotations.length - 1)]!;
+  const i = Math.min(Math.max(w.clockInStage - 1, 0), t.rotations.length - 1);
+  // the tank man's last tour of 1917 is Cambrai, 20 November (CORPS_BATTLES)
+  if (w.stage === 3 && i === 9 && w.corps === 'tank') return [1917, 11];
+  return t.rotations[i]!;
 }
 
 /** The engine's season index (0 = spring 1914) for a month; January and February are last year's winter. */

@@ -8,9 +8,9 @@
   text: |
     [if war.fallen_present]It happens {fallen_where}. Webb's beside you, and then he's sitting in the bottom of the trench with his back against the wall, upright, the way he sat at his desk, and his hand goes to his inside pocket, to the notebook, and stays there.
 
-    "Put it down," he says. "The time. Somebody put the time down." And then he doesn't say anything else.[else]You hear it at the ration dump, in the dark. Arthur Webb. Killed {fallen_where}.
+    "Put it down," he says. "The time. Somebody put the time down." And then he doesn't say anything else.[else][if war.transferred]Word comes over from the battalion, a week late. Arthur Webb. Killed {fallen_where}.[else]You hear it at the ration dump, in the dark. Arthur Webb. Killed {fallen_where}.
 
-    You sat next to him for three years. You knew the sound of his pen. You'd know it anywhere.[/if][if flag.city_diary_warned] You told him diaries were forbidden. You hope somebody of ours finds the notebook first.[/if][if flag.city_diary_kept] Somewhere there's a little black notebook with every shell in it, and the totals.[/if]
+    You sat next to him for three years. You knew the sound of his pen. You'd know it anywhere.[/if][/if][if flag.city_diary_warned] You told him diaries were forbidden. You hope somebody of ours finds the notebook first.[/if][if flag.city_diary_kept] Somewhere there's a little black notebook with every shell in it, and the totals.[/if]
   choices:
     - id: write
       text: Write to Mrs Webb yourself, tonight.
@@ -30,9 +30,9 @@
   text: |
     [if war.fallen_present]It happens {fallen_where}. Fenton's running, the way he always runs, as if there's a ball in front of him, and then he goes down, sliding, the way a centre-forward goes down in a tackle on a wet pitch, and lies there, and you wait for him to get up, because he always gets up.
 
-    He doesn't get up.[else]Somebody tells you at the water cart. Percy Fenton. Killed {fallen_where}.
+    He doesn't get up.[else][if war.transferred]Word comes over from the battalion, a week late. Percy Fenton. Killed {fallen_where}.[else]Somebody tells you at the water cart. Percy Fenton. Killed {fallen_where}.
 
-    You think of him on the wing at Walthamstow on a Saturday, in the mud, with the whole office shouting.[/if][if flag.city_played] You played behind him once, against the pitmen, in a stubble field in France.[/if]
+    You think of him on the wing at Walthamstow on a Saturday, in the mud, with the whole office shouting.[/if][/if][if flag.city_played] You played behind him once, against the pitmen, in a stubble field in France.[/if]
   choices:
     - id: write
       text: Write to his father. Tell him about the match.
@@ -52,9 +52,9 @@
   text: |
     [if war.fallen_present]It happens {fallen_where}. Marsh goes down on his hands and knees, and his spectacles come off, and he feels about in the mud for them, quite calm, the way he'd feel for them on the bedside table in the morning.
 
-    You find them and put them in his hand. He holds them. He doesn't put them on. "It's all right," he says. "I can see."[else]You hear it from a stretcher-bearer who knew him from chapel. Leonard Marsh. Killed {fallen_where}.
+    You find them and put them in his hand. He holds them. He doesn't put them on. "It's all right," he says. "I can see."[else][if war.transferred]Word comes over from the battalion, a week late. Leonard Marsh. Killed {fallen_where}.[else]You hear it from a stretcher-bearer who knew him from chapel. Leonard Marsh. Killed {fallen_where}.
 
-    He learned the eye chart by heart, the night before the recruiting office, the whole thing, so they'd let him come.[/if]
+    He learned the eye chart by heart, the night before the recruiting office, the whole thing, so they'd let him come.[/if][/if]
   choices:
     - id: write
       text: Write to Mrs Marsh yourself.

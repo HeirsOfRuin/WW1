@@ -2,19 +2,21 @@
 // story more so than just playing generic missions. Have a general play through (only volunteering
 // half the time) to split between story and generic missions 50/50").
 // Plays whole mill-town games with the 'half' policy and counts every screen by kind.
-//   npx tsx tools/story-share.ts [runs=200] [start=mill]
+//   npx tsx tools/story-share.ts [runs=200] [start=mill] [corps]
+// With a corps (tank, air), the player takes that offer and only his screens after it are counted.
 import { loadContent } from './content-loader';
 import { view, choose, newGame } from '../src/game/index';
 import { POLICIES, decideFor, battleOf } from '../src/game/war/index';
 
 /** Generic: the war's own questions and missions. Everything else is story. */
 export function kindOf(id: string): 'story' | 'generic' {
-  if (id === 'w_tour' || id === 'w_tunnel_pit') return 'story'; // the tour's passage of the year; the pit's written offer
-  if (/^(w_|s_)/.test(id) || /^x_(raid|patrol|wiring|listening|carrying|bomb|lewis|snipe|signals|tunnel)_done$/.test(id) || id === 'x_sortie') return 'generic';
+  if (id === 'w_tour' || id === 'w_tunnel_pit' || id === 'w_corps_tank' || id === 'w_corps_air') return 'story'; // the tour's passage of the year; the pit's written offer
+  if (/^(w_|s_)/.test(id) || /^x_(raid|patrol|wiring|listening|carrying|bomb|lewis|snipe|signals|tunnel|bearer|tank|air)_done$/.test(id) || id === 'x_sortie') return 'generic';
   return 'story';
 }
 
-export function share(runs: number, start = 'mill') {
+export function share(runs: number, start = 'mill', corps?: 'tank' | 'air') {
+  const pol = corps ? { ...POLICIES.half!, corps: (_w: unknown, c: string) => c === corps } : POLICIES.half!;
   const content = loadContent();
   let story = 0, generic = 0;
   const byScene: Record<string, number> = {};
@@ -24,14 +26,17 @@ export function share(runs: number, start = 'mill') {
     for (let k = 0; k < 5000 && !s.ended; k++) {
       const v = view(content, s);
       const kind = kindOf(v.sceneId);
-      if (kind === 'story') story++; else generic++;
-      const y = s.war.stage; (byYear[y] ??= { story: 0, generic: 0 })[kind]++;
-      const key = v.sceneId.replace(/_\d$/, '_*');
-      byScene[key] = (byScene[key] ?? 0) + 1;
+      const counted = !corps || s.war.corps === corps;
+      if (!counted) { /* before the transfer, or never offered */ } else if (kind === 'story') story++; else generic++;
+      if (counted) {
+        const y = s.war.stage; (byYear[y] ??= { story: 0, generic: 0 })[kind]++;
+        const key = v.sceneId.replace(/_\d$/, '_*');
+        byScene[key] = (byScene[key] ?? 0) + 1;
+      }
       let id: string;
       if (v.sceneId.startsWith('c_enlist')) id = 'pick_0'; else if (v.sceneId === 'c_general') id = 'firstaid'; else if (v.sceneId === 'c_training') id = 'embark';
       else if (content.scenes[v.sceneId]?.kind === 'pool' || v.sceneId.startsWith('x_') || v.sceneId.startsWith('y_')) id = v.choices.filter((c) => c.available)[(k % 2) % v.choices.filter((c) => c.available).length]!.id;
-      else id = decideFor(POLICIES.half!, s.war, s.war.pending!, battleOf).replace(':', '_');
+      else id = decideFor(pol as never, s.war, s.war.pending!, battleOf).replace(':', '_');
       s = choose(content, s, id).state;
     }
   }
@@ -40,7 +45,7 @@ export function share(runs: number, start = 'mill') {
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const runs = Number(process.argv[2] || 200);
-  const r = share(runs, process.argv[3] || 'mill');
+  const r = share(runs, process.argv[3] || 'mill', process.argv[4] as 'tank' | 'air' | undefined);
   const pct = (a: number, b: number) => `${((100 * a) / (a + b)).toFixed(1)}%`;
   console.log(`story ${pct(r.story, r.generic)} of ${r.story + r.generic} screens over ${runs} games (${((r.story + r.generic) / runs).toFixed(0)} a game)`);
   for (const [y, c] of Object.entries(r.byYear)) console.log(`  year ${Number(y) + 1914}: story ${pct(c.story, c.generic)} (${((c.story + c.generic) / runs).toFixed(0)} screens a game)`);

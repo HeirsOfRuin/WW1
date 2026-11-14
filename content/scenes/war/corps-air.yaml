@@ -1,0 +1,818 @@
+# The Flying Corps: an aerial gunner from the ranks (docs/FRAME-AIR.md). Offered once, in May 1917
+# (tour 24), to a Lewis gunner. His first tour at the aerodrome is 25; Passchendaele is tour 27, the
+# Spring Offensive 32, Amiens 36, October 39. The Flying Corps becomes the Royal Air Force on
+# 1 April 1918: before it the text says the Flying Corps, after it the Air Force.
+# The pilot and the pair: Lt Neil Ferrier (1917; home in February 1918 or killed after the
+# retreat, by the player's choice), Sgt Len Hollis (from January 1918; through the bridges, or
+# killed there, by the pool's draw), AM1 Bert Sallis (the fitter, on the field every evening).
+# Who flies the machine, by flag: Ferrier while !af18_ferrier_home && !af18_ferrier_killed;
+# Hollis once Ferrier is gone, until af18_hollis_killed; then Mr Lyle.
+# Written to the voice in content/style-guide.md.
+
+# ---- the offer, May 1917 ------------------------------------------------------------------------
+
+- id: w_corps_air
+  chapter: front
+  title: The Flying Corps
+  text: |
+    May, and the battalion's out at rest after Arras, in a village with the blossom just going over.
+    A Flying Corps officer comes round the billets in a motor car, with a list. He's young, younger
+    than you, with wings on his tunic and a cough he turns away to finish.
+
+    Everybody knows what April cost the Flying Corps. You watched it, every afternoon, from the
+    trench. Now the squadrons want gunners. Not officers: men from the ranks, to fly in the back
+    seat of a two-seater with a Lewis gun on a ring. Lewis gunners first. A man who can clear a
+    stoppage by feel, he says, with gloves on, two miles up, in the cold.
+
+    "Better pay," he says. "Flying pay, on top of your own. A bed with sheets, miles behind the
+    line. Hot food. No trenches." He looks along the row of you. "I won't tell you it's safe. It
+    isn't. We've no parachutes. Men are killed every week, and you'd be up every week." He coughs.
+    "And it's for good. You'll not come back to this battalion."
+
+    [if flag.went_to_airman]You think of the goggles lying in the grass without a mark on them.[/if]
+
+    [if start == mill]In the barn after, the mill lads have it out over the stew.[if war.mate2] Duckworth says it's like being made a tackler: more money, and everybody hates you.[/if][if war.mate1] Shaw says your mother'll have a fit, and then he says he would, in your place, and then he says he wouldn't.[/if][/if][if start == pit]In the billet after, the Blackhaugh lads have it out.[if war.mate2] Bell says flying's for the gentry, and you'd be the gentry's servant, cleaning their gun for them.[/if][if war.mate1] Robson says he'd sooner be at the face than up there with nowt under him but air.[/if][/if][if start == farm]In the barn after, the Dunsworthy lads have it out.[if war.mate2] Pearce says if they'd give him a gun up there he'd have every pheasant in Picardy.[/if][if war.mate1] Cottle looks up at the sky over the orchard as if he's pricing it at market.[/if][/if][if start == city]In the billet after, the City lads have it out.[if war.mate1] Webb works out the flying pay on the back of a field postcard and shows you the sum, and under it, in pencil, he's put down how many airmen the paper said were lost in April.[/if][if war.mate2] Fenton says it's like being sold to another club in the middle of the season.[/if][/if]
+
+    You'd leave them. All of them, the whole section from home, and not come back.
+  choices:
+    - id: transfer
+      text: Put your name down for the Flying Corps. Leave the section for good.
+      effects: [ { war: transfer } ]
+      next: "@war"
+    - id: stay
+      text: Stay with the men from home.
+      effects: [ { war: stay } ]
+      next: "@war"
+
+# ---- his battles: one scene, a paragraph for each phase ---------------------------------------
+
+- id: bt_air
+  chapter: front
+  title: "{battle_name}"
+  text: |
+    {phase_count}
+
+    [if war.battle == passchendaele && war.phase == 1]The thirty-first of July. Up at four, in the dark, to a sky like a wet slate. You're the contact patrol for the attack: under the cloud, below a thousand feet, over the battalion, to find out where the front line's got to so the guns and the generals know. Beneath you the barrage is a strip of flashes as far as you can see, and the machine jumps and drops in the air the shells push up, and the smoke comes up past you smelling of cordite. Ferrier sounds the Klaxon over the place where the battalion should be, a short blare and a long one, the Morse for A: where are you? You lean out over the side with the map on your knee, the wind tearing at it, and look for the flares.[if war.section >= 1] Somewhere down there are the men from home.[/if][/if][if war.battle == passchendaele && war.phase == 2]Days of rain, and the machines in the hangars. When the cloud lifts you go up to find the pillboxes for the guns: grey lumps of concrete in the brown, and round them the shell holes full of water that flash like tin when the sun gets on them. One of them is holding up the battalion's front. The heavies fire at it one round at a time, slow, and each burst throws up a brown fountain, and Ferrier sends the correction, and you watch the sky behind the tail and the burst both, with your neck aching from turning.[/if][if war.battle == passchendaele && war.phase == 3]From the air you see it before the battalion can. Grey men in the low ground behind the German line, a few at a time, running from shell hole to shell hole, gathering behind a farm that's only a heap of bricks now. A counter-attack, forming, and the men in the water-filled holes in front of it can't see a thing. If the guns know in time, it never starts. Ferrier puts the nose down to make sure, and something from the bricks starts firing up at you, and holes walk across the lower wing.[/if][if war.battle == passchendaele && war.phase == 4]Evening, and rain coming in from the west in grey curtains. You fly over the relief: lines of little figures on the duckboard tracks, all going one way, slow, bent, and the stretcher parties, six to a stretcher, putting it down and picking it up. You can see from up here what they can't. How far it is. How many tracks are broken. The petrol smell of the engine and the wet in your face, and down there, men you might know, walking out of it.[/if][if war.battle == spring_offensive && war.phase == 1]The twenty-first of March. You wake to the guns, before five, a noise from the east like the whole sky being shaken out, and the hut window rattling in its frame. Fog on the aerodrome, thick as wet flannel. Nobody can fly. You stand by the hangars with [if !flag.af18_ferrier_home && !flag.af18_ferrier_killed]Ferrier[/if][if flag.af18_ferrier_home && !flag.af18_hollis_killed || flag.af18_ferrier_killed && !flag.af18_hollis_killed]Hollis[/if][if flag.af18_hollis_killed]Lyle[/if] and Sallis, listening, and nobody says what everybody's thinking about the battalions in the forward posts. When it thins, near noon, you go up, and the line isn't where it was. There's smoke, and on the roads behind it, columns. Grey ones, coming.[/if][if war.battle == spring_offensive && war.phase == 2]The aerodrome's moved back. Twice in three days: the hangars struck by lamplight and folded onto lorries, the machines flown off at dawn, Sallis riding on the tailboard of a tender with his toolbox on his knees. Now you fly from a field with cows still in it. Every machine's out over the roads, low, after the columns: men marching, wagons, a gun team, packed between the poplars. You can see their faces turn up when you come over. You can see them run for the ditches.[/if][if war.battle == spring_offensive && war.phase == 3]Under you the old Somme ground, the ground the battalion took a summer and a half to win, going back to them in days. From here the old trenches of 1916 are still there in the grass, pale lines like old scars, with the new war running over the top of them. Dumps burning, black smoke lying along the valleys. Somewhere in it the battalion's falling back, and you can't tell which of the little khaki groups on the roads is them.[/if][if war.battle == spring_offensive && war.phase == 4]The end of March, and a railway embankment in front of a town, and the line's there, the word is, and holding. Contact patrol at dusk. [if !flag.af18_ferrier_home && !flag.af18_ferrier_killed]Ferrier[/if][if flag.af18_ferrier_home && !flag.af18_hollis_killed || flag.af18_ferrier_killed && !flag.af18_hollis_killed]Hollis[/if][if flag.af18_hollis_killed]Lyle[/if] sounds the Klaxon over the embankment, and this time the flares come up, a string of them along the rails, sputtering, and you mark them on the map with frozen fingers, and below you a man in a shell hole is waving his tin hat.[/if][if war.battle == hundred_days_august && war.phase == 1]The eighth of August. Fog again at dawn, but this time it's ours. You take off into it, and come up into sunlight, and when it thins you see the tanks, dozens of them, grinding through the standing corn, and behind them the infantry in little worms of men. Contact patrol over the battalion. [if !flag.af18_ferrier_home && !flag.af18_ferrier_killed]Ferrier[/if][if flag.af18_ferrier_home && !flag.af18_hollis_killed || flag.af18_ferrier_killed && !flag.af18_hollis_killed]Hollis[/if][if flag.af18_hollis_killed]Lyle[/if] takes you down to five hundred feet, and the corn's so green it hurts, and the smoke from a burning tank lies across it flat and black.[/if][if war.battle == hundred_days_august && war.phase == 2]The bridges. The order is to break the bridges over the Somme, so their men can't get away and their help can't get across, and every machine that can fly goes. Over the river at fifty feet, with every gun on the far bank firing up and the water flashing under you, and the stink of the river and the hot engine. A machine ahead of you goes straight into the water and doesn't come up. [if !flag.af18_ferrier_home && !flag.af18_ferrier_killed]Ferrier[/if][if flag.af18_ferrier_home && !flag.af18_hollis_killed || flag.af18_ferrier_killed && !flag.af18_hollis_killed]Hollis[/if][if flag.af18_hollis_killed]Lyle[/if] doesn't turn his head.[/if][if war.battle == hundred_days_august && war.phase == 3]Open country, the third day. Low over the advance: cavalry going through the oats at a trot, real cavalry, and their guns behind a hedge firing over open sights at the tanks. From up here the hedge is a green line with flashes along it. The battalion's in the field in front of it, lying down. If the guns behind them knew where that hedge was, they'd be up and on in an hour.[/if][if war.battle == hundred_days_october && war.phase == 1]A river in October, with fog lying on it. You fly the contact patrol at first light along the bank, and the footbridges are black threads on the water with men on them, single file, and one of the threads breaks while you watch. [if !flag.af18_ferrier_home && !flag.af18_ferrier_killed]Ferrier[/if][if flag.af18_ferrier_home && !flag.af18_hollis_killed || flag.af18_ferrier_killed && !flag.af18_hollis_killed]Hollis[/if][if flag.af18_hollis_killed]Lyle[/if] sounds the Klaxon, and you look for the flares on the far bank, and the gas in the low places is lying yellow in the fog.[/if][if war.battle == hundred_days_october && war.phase == 2]A village with roofs on, and people in it. They come up out of the cellars when you go over low, and wave anything white at you, sheets, shirts, a tablecloth, a baby's napkin on a stick. And from the church tower a machine gun fires up at you, and down the street at the battalion.[/if][if war.battle == hundred_days_october && war.phase == 3]The last of it. Every road east is full of their columns going back, slow, guns and carts and men walking, and a few still turn and fight in the orchards, enough to kill. The battalion's down there in the apples. From the air you can see where the next machine gun is, behind a wall, before they walk onto it.[/if]
+  choices:
+    - id: push
+      text: "[if war.battle == passchendaele]Go down low and find the battalion's flares. Their line is what the guns need.[/if][if war.battle == spring_offensive]Go down on the columns coming at the battalion.[/if][if war.battle == hundred_days_august]Stay low over the battalion and mark what's holding them up.[/if][if war.battle == hundred_days_october]Go down low over the men from home and find what's stopping them.[/if] ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "Watch the pilot's tail. Keep the scouts off the machine. ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "Stay high. Tap his shoulder and point for home. ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- his own work: flying over the line (three steps, two takes) -----------------------------
+
+- id: s_air_1
+  chapter: front
+  title: Over the line
+  text: |
+    [if war.stake == 0]An artillery shoot. You climb over the aerodrome in wide circles to get your height, and the cold
+    comes up through the floor of the cockpit into your boots, and the wind finds the gap between
+    your helmet and your scarf. Whale oil on your face against the frost; you can smell it over the
+    hot oil and the exhaust. Then the line, a brown smear across the green, and the first Archie: a
+    black puff ahead, a cough you hear over the engine, another, closer, and the machine lifting
+    under you like a cart going over a stone. For the shoot the pilot has to fly the same beat up
+    and down, straight and level, for an hour. The German gunners know it as well as you.[/if][if war.stake == 1]A photographic job, the line opposite the corps, in strips. The camera's a box as big as a bread
+    bin on the side of the fuselage, and the pilot has to fly dead straight over the line so the
+    plates join up, and dead straight is what the Archie gunners want. The cold at five thousand
+    feet goes through the leather coat and the jersey and the shirt as if they were wet paper. Your
+    breath is ice on your scarf. Out to the east there's sun on the cloud, bright enough to hurt,
+    and that's where they'll come from, if they come.[/if]
+  choices:
+    - id: bold
+      text: "Stand up in the ring and watch everything, the whole sky. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You stand with the wind trying to tear you out of the cockpit, turning, turning, and your eyes stream behind the goggles.
+      next: "@war"
+    - id: steady
+      text: "Watch your own quarter of the sky, and the sun. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: The tail and the sun, the tail and the sun, the way you'd watch a loophole. Nothing yet.
+      next: "@war"
+    - id: careful
+      text: "Keep down out of the wind, and look out over the side. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You crouch behind the edge of the cockpit with your face in your scarf and look out when you can bear it.
+      next: "@war"
+
+- id: s_air_2
+  chapter: front
+  title: Over the line
+  text: |
+    [if war.stake == 0]The battery's strips are out on the grass behind their guns, white cloth laid in a shape that
+    means ready. The pilot taps out the call in Morse, and far below a gun flashes, and you count,
+    and the burst comes up near the German battery in the wood, short and left. The clock code: the
+    target's the middle of a clock face, twelve is north, and the rings round it have letters. He
+    sends the burst, and the strips change, and the next one comes. Then the engine coughs, and
+    picks up, and coughs again. And out of the sun, high, you see a speck that wasn't there.[/if][if war.stake == 1]Halfway along the line, and the speck comes out of the sun the way they always do: a German
+    scout, fast, coming down on your tail. You swing the Lewis round on the Scarff ring, and the ring
+    is stiff with cold, and the drum is the big one, ninety-seven rounds, twice what you carried in
+    the battalion. You fire, and after a dozen rounds the gun stops. A stoppage. Your fingers have
+    gone dead in the gauntlets. You know this gun. You learned it in a barn behind the line with your
+    eyes shut.[if flag.af17_bare_hands] The two fingers you skinned in July ache before you've touched it.[/if] The engine's missing, too: you can feel it in the floor.[/if]
+  choices:
+    - id: bold
+      text: "Clear it bare-handed and give him the rest of the drum. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You pull the gauntlet off with your teeth. The metal takes the skin off two fingers. The cocking handle goes back, and the gun's firing before you've thought about it.
+      next: "@war"
+    - id: steady
+      text: "Short bursts. Make him keep his distance. Let the pilot finish. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Short bursts, the way you'd fire across a wire gap, and he sheers off and circles, and the pilot holds his line.
+      next: "@war"
+    - id: careful
+      text: "Bang on the pilot's shoulder. Get down low, out of his way. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: The pilot puts the nose down hard and your stomach stays behind, and the ground comes up brown and broken.
+      next: "@war"
+    - id: back
+      text: "The engine's missing. Point him home, now. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: He nods, and turns west, the engine coughing all the way, and you watch the speck behind you until it gives up.
+      next: "@war"
+
+- id: s_air_3
+  chapter: front
+  title: Over the line
+  text: |
+    [if war.stake == 0]The job's done, or done enough, and you turn for home, and the scout comes down on you out of
+    the sun with his guns going. You hear him before you see him: a dry rattle, and the wires
+    singing, and splinters off the edge of the cockpit. Then he's there, under the tail, where the
+    pilot can't see him and you can, close enough to see his goggles and the paint on his cowling.[/if][if war.stake == 1]Home across the line, low, with the plates in the box and the engine running rough, and the
+    Archie has your height again. Black bursts in front, in a row, walking towards you. The
+    machine's shot about: a wire hanging loose and flapping, a long tear in the fabric of the
+    upper wing that opens and shuts in the wind like a mouth. The aerodrome's twenty miles off.
+    The pilot looks round at you, and you look at him.[/if]
+  choices:
+    - id: bold
+      text: "Swing the gun round on him and hold it on. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You hold it on him, and the tracer goes into him, or near him, and the gun bucks and the empty cases rattle round your feet.
+      next: "@war"
+    - id: steady
+      text: "Keep watching. Let the pilot fly it home. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You keep your eyes on the sky and your hands on the gun and let him fly, and the miles go by under you slow as a Sunday.
+      next: "@war"
+    - id: careful
+      text: "Get down in the cockpit and hold on. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You get down on the floor of the cockpit with your arms round the gun post, and the sky goes round and round over the top of you.
+      next: "@war"
+
+- id: x_air_done
+  chapter: front
+  title: Down again
+  text: |
+    [if war.result == ok]The wheels touch, and bounce, and touch, and the noise of the engine stops, and you can hear a lark. Sallis is at the edge of the field with his cap pushed back, counting the machines in. He walks round yours and puts his finger in the holes, one after the other, and says the pilot can thank him for the wires. In the hut there's tea with sugar in it, and in the evening the battery's officer telephones to say the shoot was the best they've had, or the photographs come out of the dark room joined up like a map.[/if][if war.result == failed]It went wrong. The shoot was called off half done, or the plates came out fogged, or the scout drove you off it, and the job will have to be flown again by somebody, maybe you. The pilot climbs down without a word and walks off to the office. Sallis counts the holes, and doesn't say a thing about the wires.[/if][if war.result == turned]You came home with the job not done. Sallis takes the cowling off before the propeller's stopped and puts his ear to the engine, and you stand on the grass in your coat waiting to hear him say it was all right after all. He doesn't say anything. He gets his spanners out.[/if]
+  choices:
+    - id: on
+      text: Get out of your coat. Go and get warm.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"
+
+# ---- 1917: the aerodrome (tours 25 to 29) -------------------------------------------------------
+
+- id: v17air_aerodrome
+  chapter: front
+  kind: pool
+  pool: front_1917_air
+  once: true
+  weight: 300
+  requires: [ "war.tour >= 25" ]
+  title: The aerodrome
+  text: |
+    The aerodrome's a big field of grass with a wood at one end and a row of canvas hangars along
+    the road, their sides flapping, like a fair that's put up in the wrong town. The first thing is
+    the smell: petrol, hot oil, and the dope they paint on the wings, sweet as pear drops, that gets
+    into your clothes and your bread. Across the field a squadron of scouts is running up its
+    engines, and the wind brings the castor oil off them thick enough to taste.
+
+    You've a bed. An iron bed, in a hut, with a mattress and two sheets and a pillow with a slip on
+    it. You stand and look at it with your kit still on your back. Nobody here is lousy. Your boots
+    are the only muddy thing in the hut, and the corporal looks at them.
+
+    The machine is an RE8, a big khaki two-seater the men call the Harry Tate, with a ring in the back
+    cockpit for the gun. Its fitter is Air Mechanic Sallis, a Coventry man with grey in his moustache
+    who built bicycles before the war. He wipes his hand on a rag before he shakes yours.
+
+    The pilot comes over in the evening: Lieutenant Ferrier, a Canadian, twenty, with big red hands
+    and a sunburnt neck. "You're my gunner," he says. "Good. Do you know what a binder is?" You don't.
+    "It cuts the wheat and ties it," he says. "I drove one at eleven, back home in Manitoba. This is
+    the same, only it goes up." He shakes your hand. Officers don't.
+  choices:
+    - id: hangar
+      text: Go out to the hangar with Sallis and look her over.
+      effects: [ { set: flag.af17_sallis_engine } ]
+      text_after: |
+        He shows you the machine by the light of a hurricane lamp, every wire, every turnbuckle,
+        the way a man shows you round his allotment. "She's sound," he says. "I see to that. You see
+        to the gun. Then we both get our tea." He's got a little book where he writes down every
+        machine that goes out and every one that comes back.
+      next: "@return"
+    - id: bed
+      text: Lie down on the bed and sleep.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You mean to take your boots off first. You wake at six with them on, and the sheets
+        haven't a mark on them, because you never got under them.
+      next: "@return"
+
+- id: v17air_photographs
+  chapter: front
+  kind: pool
+  pool: front_1917_air
+  once: true
+  weight: 50
+  requires: [ "war.tour == 26" ]
+  title: From above
+  text: |
+    July. A photographic job over the battalion's own sector; the officer in the flight office
+    says the map square, and you know the name. In the evening the photographic sergeant pins the
+    prints up to dry on a line in his hut, like washing, and the place smells of vinegar and wet
+    paper.
+
+    You find it. You know it by the shape: the bend where the communication trench goes in, the
+    sap, the wood that's only stumps. From two miles up it's thin and grey, a crooked line across
+    the fields like a scar on a man's arm. Every shell hole's a little white ring. The wire's a
+    grey fuzz, like mould on a crust. You can't see a single man in it. You know there are
+    hundreds, and that some of them are men from your street.
+  choices:
+    - id: keep
+      text: Ask the sergeant for a spoiled print, to keep.
+      effects: [ { set: flag.af17_kept_print } ]
+      text_after: |
+        He gives you one with a fogged corner. You can't send it home; the censor would have you.
+        You keep it folded in your pay book, and some nights you take it out and look for the bay.
+      next: "@return"
+    - id: tea
+      text: Leave it. Go and get your tea.
+      text_after: |
+        You go and get your tea. On the way you look north, to where the line is, and there's
+        nothing to see but a lark going up, and the heat shaking over the grass.
+      next: "@return"
+
+- id: v17air_jam
+  chapter: front
+  kind: pool
+  pool: front_1917_air
+  once: true
+  weight: 50
+  requires: [ "war.tour == 26" ]
+  title: Six thousand feet
+  text: |
+    July, and at six thousand feet it's winter. Your fingers have gone inside two pairs of gloves.
+    The wind has its hand flat on your face and pushes.
+
+    A German two-seater comes up under the tail, and you get half a drum into it, and the gun stops.
+    You can't feel the cocking handle. You can't feel anything. Ferrier's turning to give you a shot,
+    and the German's gunner is firing, and you can hear the bullets going through the fabric behind
+    you like somebody tearing a sheet.
+
+    It was a barn behind the line, the Lewis course, with a sergeant who made you strip the gun
+    blindfold and timed you on his watch. You remember his voice better than his face.
+  choices:
+    - id: bare
+      text: Take the glove off and clear it by feel, like on the course.
+      effects: [ { set: flag.af17_bare_hands }, { war_mood: { standing: 1 } } ]
+      text_after: |
+        The metal burns like a stove lid. You find the handle, and pull it back, and feel the round
+        that's stuck, and get it out with your nail, and the gun's going again. The German goes away
+        east, low, with smoke coming off him or not; you can't tell. That night Sallis puts goose
+        grease on your fingers and tells you about a man at Coventry who lost three to a lathe.
+      next: "@return"
+    - id: drum
+      text: Change the drum and pray it was the drum.
+      effects: [ { war_mood: { nerve: -1 } } ]
+      text_after: |
+        It wasn't the drum. By the time you've got it cleared the German's gone and Ferrier's put
+        the machine into a dive for home. On the ground he looks at the gun, and at you, and goes off to the office.
+      next: "@return"
+
+- id: v17air_archie
+  chapter: front
+  kind: pool
+  pool: front_1917_air
+  once: true
+  weight: 100
+  requires: [ "war.tour == 28" ]
+  title: Archie
+  text: |
+    September. The men call the German anti-aircraft fire Archie, and nobody can tell you why. Black
+    puffs, all round, and a cough you hear over the engine, and the machine jumping. Bits come
+    through the wings and leave little ragged holes that Sallis will patch tonight with dope and
+    linen, whistling.[if flag.af17_sallis_engine] You'll hold the lamp for him, the way you did the first night.[/if]
+
+    On the way home you see one of ours go down. It's a mile off and far below, a two-seater from
+    another squadron, and it's burning. Not fast. A little flame at the engine and a long thread of
+    smoke, and it goes down in big slow turns, like a leaf off a sycamore. A man climbs out of the
+    back cockpit onto the wing.
+
+    There are no parachutes for the aeroplanes. The balloon men have them; you've seen them come
+    down under silk when a balloon goes, swinging, slow. Not for you.
+  choices:
+    - id: watch
+      text: Watch it all the way down.
+      effects: [ { set: flag.af17_watched_burn }, { war_mood: { nerve: -1 } } ]
+      text_after: |
+        You watch till it's a smudge of smoke on the ground. The talk in the hut that night is of
+        revolvers, who carries one and who doesn't. You don't ask what for.
+      next: "@return"
+    - id: look_away
+      text: Turn your back on it. Watch your own sky.
+      effects: [ { war_mood: { standing: 1 } } ]
+      text_after: |
+        You watch your bit of sky, the bit behind the tail that nobody else is watching, all the way
+        home. Ferrier lands, and sits in the cockpit after the engine's stopped, a good minute, before
+        he climbs down.
+      next: "@return"
+
+- id: v17air_letters
+  chapter: front
+  kind: pool
+  pool: front_1917_air
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 29" ]
+  title: Letters
+  text: |
+    October, and the weather closes in, and there are days on end when nothing flies. The post
+    comes up. Ferrier gets a fat letter from Manitoba every week, from his mother, with a wheat ear
+    in it, or a pressed flower that falls out in bits, and he reads them out to you in the back of
+    the hangar where nobody can see an officer reading his letters to a ranker. A major has told him
+    he's too familiar with his gunner. He tells you so himself, laughing, then not laughing.
+
+    [if start == pit]There's nothing for you. There's been nothing from home since you left the battalion. The post's lost you somewhere between the two.[else]Your own is from your mother, in pencil.
+
+    "Dear Son, just a few lines hoping this finds you well as it leaves us. We had your letter about the Flying Corps. I have read about the airmen in the paper and I am more frightened than I was before, they put their photographs in, young lads, and how many Germans they have brought down, and then a week after, there they are again in the column with the others.[if start == mill] Our Jack has cut an aeroplane out of the paper and pinned it over his bed, I have told him it is not a game.[/if][if start == farm] Your father says it is no place for a farm lad, up in the air where nothing grows.[/if][if start == city] After the German aeroplanes and the poor children at Poplar I cannot look up at one of ours without feeling sick.[/if] Do not do anything daring. Your loving Mother."[/if]
+  choices:
+    - id: farm
+      text: Tell Ferrier you'll come and see the farm, after.
+      effects: [ { set: flag.af17_ferrier_farm } ]
+      text_after: |
+        "You'll come at harvest," he says. "I'll put you on the binder." He writes the address on
+        the back of a cigarette packet, a township and a section number, and you put it in your pay
+        book.
+      next: "@return"
+    - id: write
+      text: Write home tonight. Tell them about the bed with sheets.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        [if start == pit]You write to your mother about the bed and the sheets and the hot dinners, and at the end you ask why nobody's written. You lick the envelope. It tastes of dope.[else]You write about the bed and the sheets and the hot dinners, and that you're miles behind the line. You don't write the rest. You lick the envelope, and it tastes of dope.[/if]
+      next: "@return"
+
+# ---- 1918: the pilots, the retreat, the Air Force, the bridges (tours 30 to 39) -----------------
+
+- id: v18air_hollis
+  chapter: front
+  kind: pool
+  pool: front_1918_air
+  once: true
+  weight: 200
+  requires: [ "war.tour >= 30" ]
+  on_enter: [ { set: flag.af18_hollis } ]
+  title: A sergeant pilot
+  text: |
+    [if war.month <= 2]Snow on the aerodrome, and the oil like treacle in the mornings; the mechanics warm it before they'll start an engine. [/if]A new pilot comes to the flight: Sergeant Hollis. He was a fitter in the Flying Corps, a
+    mechanic, and he put in to learn to fly, and they let him. He's thirty, short, with oil worked
+    so far into the lines of his hands that no soap will shift it.
+
+    He walks round every machine on the line before he'll look at you twice. He listens to the
+    engines with his head on one side, like a thrush on a lawn, and tells Sallis that one of
+    his cylinders is firing late. Sallis says it isn't. It is.
+
+    "The officers fly," Hollis says, in the hut, filling his pipe. "I just drive the thing. Anybody
+    can drive it. It's knowing why it stops."
+  choices:
+    - id: engine
+      text: Help him and Sallis take the engine down.
+      effects: [ { set: flag.af18_engine }, { war_mood: { standing: 1 } } ]
+      text_after: |
+        All afternoon in the cold hangar with your hands in the paraffin, passing spanners, Hollis
+        and Sallis arguing over it the way two old men argue over a pigeon. When it runs, it runs
+        sweeter. They both say it was their idea.
+      next: "@return"
+    - id: distance
+      text: Keep your distance. You've a pilot.
+      text_after: |
+        You leave him to the engines. He doesn't seem to notice. Some evenings, though, you hear him
+        out on the field after dark, running one up, listening, and you find you're listening with him.
+      next: "@return"
+
+- id: v18air_ferrier
+  chapter: front
+  kind: pool
+  pool: front_1918_air
+  once: true
+  weight: 200
+  requires: [ "war.tour >= 31", flag.af18_hollis ]
+  title: Ferrier's hands
+  text: |
+    [if war.month == 2]February. [/if]Ferrier's been flying since the spring, and it's got into his hands. He
+    can't light a cigarette. He holds the match in one hand and the box in the other and they won't
+    meet, and you light it for him, and neither of you mentions it.
+
+    He doesn't sleep. You hear him at night on the cinder path by the officers' huts, walking.
+    Last week he landed and sat in the cockpit with the engine still running, looking at the dials,
+    till Sallis climbed up on the wing and switched it off for him.
+
+    "Don't tell them," he says to you on the field, in the morning, not looking at you. "They'll
+    send me home. I've a few months more to do and I'll do them."
+
+    The flight commander has been asking. He's asked Sallis. He'll ask you.
+  choices:
+    - id: tell
+      text: Tell the flight commander. He needs to go home.
+      effects: [ { set: flag.af18_ferrier_home } ]
+      text_after: |
+        You stand to attention in the flight office and say his hands shake, and that's all you
+        say, and it's enough. Ferrier goes to England at the end of the month, to teach young
+        officers to fly. He doesn't look at you for a week. On the last morning he comes to the
+        hangar with his kit on a tender and shakes your hand, hard, and doesn't let go, and then
+        he does. You fly with Hollis after that.
+      next: "@return"
+    - id: keep
+      text: Keep it to yourself. It's his to tell.
+      effects: [ { set: flag.af18_ferrier_stays } ]
+      text_after: |
+        When the flight commander asks, you say Mr Ferrier's the best pilot in the flight, which
+        is true. A packet of cigarettes turns up on your bed that night by way of Sallis[if war.rank < 6], because
+        an officer can't be seen to[/if]. You go on flying with Ferrier.
+      next: "@return"
+
+- id: v18air_ferrier_down
+  chapter: front
+  kind: pool
+  pool: front_1918_air
+  once: true
+  weight: 300
+  requires: [ "war.tour >= 33", flag.af18_ferrier_stays ]
+  on_enter: [ { set: flag.af18_ferrier_killed } ]
+  title: Ferrier
+  text: |
+    [if war.month <= 4]The worst of the retreat's over, and the squadron's on its third field in a fortnight.[else]Summer, and the roads behind their line are busy.[/if]
+    Every day you're out low over the roads. On a road below a wood something fires up at you, one
+    burst, and the machine gives a jerk as if somebody's kicked it.
+
+    Ferrier doesn't turn round. He flies it home, low, all the way, slow and level and careful, the
+    way you'd drive a binder down a hill, across our line and over a field of beet, and he puts it
+    down on the rows, and it runs, and stops.
+
+    You climb out and go round to him. He's sat up straight with his hands still on the controls.
+    The bullet came up through the floor. The doctor says after that he should have been dead a
+    mile before the line.
+
+    Hollis is your pilot from the next morning. He walks round the machine twice before he gets in.
+  choices:
+    - id: write
+      text: Write to his mother in Manitoba yourself.
+      effects: [ { set: flag.af18_wrote_manitoba }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You write it in the hut by the stove with Sallis reading over your shoulder for the
+        spelling. You put that he got you home. You put about the binder.[if flag.af17_ferrier_farm] The address is on the back of the cigarette packet in your pay book, a township and a section number, and it takes you three goes to copy it out.[/if]
+      next: "@return"
+    - id: leave
+      text: Leave it to the squadron. An officer's mother gets an officer's letter.
+      effects: [ { war_mood: { nerve: -1 } } ]
+      text_after: |
+        The major writes it. You see the envelope on the office table, addressed to Manitoba in a
+        neat hand, and it looks a long way to go for a letter like that.
+      next: "@return"
+
+- id: v18air_raf
+  chapter: front
+  kind: pool
+  pool: front_1918_air
+  once: true
+  weight: 100
+  requires: [ "war.tour >= 33", "war.tour <= 35", "!flag.af18_ferrier_stays || flag.af18_ferrier_killed" ]
+  title: The Air Force
+  text: |
+    On the first of April the Flying Corps stopped being the army's. It's the Royal Air Force now,
+    a new service, its own thing, with its own ranks on paper and a uniform in light blue that
+    somebody's seen a picture of. Nobody here has one. The sergeant major says he'll believe in it
+    when he's issued it.
+
+    Nothing changes. Same machine, same field, same khaki on your back and the same mud on the
+    wheels, and the Germans over the line don't seem to have heard. Sallis paints nothing out and
+    nothing in. "They can call me what they like," he says, "so long as they pay me Friday."
+  choices:
+    - id: cocoa
+      text: Drink the new service's health in cocoa.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        A tin of cocoa round the hut, sweet and scalding, and somebody does a speech in a voice like
+        the major's, and everybody laughs, and in the morning you fly.
+      next: "@return"
+    - id: work
+      text: Get on with it. The machine wants seeing to.
+      effects: [ { war_mood: { standing: 1 } } ]
+      text_after: |
+        You spend the afternoon on the gun and the ring, cleaning and oiling, till the ring goes
+        round under your hand without a sound. Sallis watches you from the wing root and nods.
+      next: "@return"
+
+- id: v18air_gunner
+  chapter: front
+  kind: pool
+  pool: front_1918_air
+  once: true
+  weight: 60
+  requires: [ "war.tour == 35", "!flag.af18_ferrier_stays || flag.af18_ferrier_killed" ]
+  title: The other gunner
+  text: |
+    On a line patrol, coming out of a cloud, a German two-seater, close, closer than you've
+    ever been to one. You can see the gunner in the back
+    cockpit plain as a man in the street.
+
+    He's got a scarf on, striped, knitted, the ends flying. He's got goggles pushed up on his
+    forehead and a face that needs a shave. He's got his gun on you, the way you've got yours on
+    him. He's watching his pilot's tail. He's doing his job.
+
+    Neither of you fires. The two machines slide past each other in the wet grey.
+  choices:
+    - id: fire
+      text: Fire. It's what you're for.
+      effects: [ { set: flag.af18_fired_gunner } ]
+      text_after: |
+        You fire a burst, and he fires one, and both of you miss, and then the cloud has him. [if !flag.af18_ferrier_home && !flag.af18_ferrier_killed]Ferrier[/if][if flag.af18_ferrier_home && !flag.af18_hollis_killed || flag.af18_ferrier_killed && !flag.af18_hollis_killed]Hollis[/if][if flag.af18_hollis_killed]Lyle[/if]
+        looks round, and you shake your head. You can smell his exhaust in the cloud, after, sour,
+        different from ours.
+      next: "@return"
+    - id: hold
+      text: Hold your fire. See what he does.
+      effects: [ { set: flag.af18_held_fire }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        He doesn't fire either. Then he lifts one hand off his gun, a small lift, the way one
+        carter lifts his whip to another on a narrow lane. Then the cloud.
+      next: "@return"
+
+- id: v18air_mess
+  chapter: front
+  kind: pool
+  pool: front_1918_air
+  once: true
+  weight: 50
+  requires: [ "war.tour == 35", "war.rank >= 3", "war.rank <= 4", "!flag.af18_ferrier_stays || flag.af18_ferrier_killed" ]
+  title: The sergeants' mess
+  text: |
+    You've a sergeant's stripes now, and you eat in the sergeants' mess: a hut with a piano that one man can
+    play, and a cloth on the table on Sundays, and pilots and gunners at the same table, and
+    nobody asking how you got your stripes. [if flag.af18_hollis && !flag.af18_hollis_killed]Hollis sits at the end with his pipe and talks engines to anyone who'll stand it.[/if]
+
+    In orders there's a new medal, for flying men in the ranks: the Distinguished Flying Medal.
+    The man who reads it out says it's about time. Somebody says it'll be in the post with the
+    blue uniforms.
+
+    It's July, and warm, and through the open door you can see Sallis on his own on the field,
+    going round the machines on the line with a lamp.
+  choices:
+    - id: sing
+      text: Stand your round and sing with them.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        The piano man plays everything he knows, which is five songs, three times each. You know
+        all the words by the third time. You walk back to the hut under the stars, and you're happy,
+        and it frightens you.
+      next: "@return"
+    - id: sallis
+      text: Go out and sit on the field with Sallis.
+      effects: [ { set: flag.af18_sat_sallis } ]
+      text_after: |
+        Sallis doesn't drink. He has a can of cocoa and two mugs, as if he knew. He tells you about
+        Coventry, the cycle works, the smell of the enamel ovens, his wife, who keeps chickens in the
+        yard and names them after the foremen. You sit on an upturned petrol tin till the lamp goes out.
+      next: "@return"
+
+- id: v18air_wireless
+  chapter: front
+  kind: pool
+  pool: front_1918_air
+  once: true
+  weight: 50
+  requires: [ "war.tour == 35", "!flag.af18_ferrier_stays || flag.af18_ferrier_killed" ]
+  title: Word from the battalion
+  text: |
+    The battery the squadron shoots for has a wireless operator called Platt, a little man with a
+    cold that never goes, and his cousin is in your old battalion. He comes up to the aerodrome with
+    the battery officer to talk about the strips, and finds you behind the hangar, and gives you
+    what he's got, which is a cousin's letter, read twice and remembered.
+
+    {section_line}[if war.mate1] {mate1} is all right, last he heard.[/if][if !war.mate1] He's heard about {mate1}. You tell him you know.[/if][if war.mate2] {mate2} is all right.[/if][if war.mate3] {mate3} is all right.[/if] The battalion's out of the line, then in again, the same as ever. He doesn't know more than that. He doesn't know any of them, only the names.
+  choices:
+    - id: note
+      text: Give him a note to take back for the lads.
+      effects: [ { set: flag.af18_note_home } ]
+      text_after: |
+        You write it on a page out of your notebook, leaning on the hangar wall: you're well, the
+        grub's good, keep your heads down, look up when you hear the Klaxon. You don't know if it
+        will ever get there.
+      next: "@return"
+    - id: ask
+      text: Ask him what the line's like now.
+      text_after: |
+        "Same," he says. "Wet." He wipes his nose on his sleeve. "They say your lot always know
+        your machine. They look up and say, there's our gunner." You don't know if he's made it up.
+      next: "@return"
+
+- id: v18air_bridges
+  chapter: front
+  kind: pool
+  pool: front_1918_air
+  once: true
+  weight: 60
+  requires: [ "war.tour >= 37", "war.tour <= 38", flag.af18_hollis, "flag.af18_ferrier_home || flag.af18_ferrier_killed", { not: flag.af18_hollis_killed } ]
+  on_enter: [ { set: flag.af18_bridges } ]
+  title: The bridges
+  text: |
+    Since the eighth it's been the river crossings, day after day, and the squadrons lose machines
+    over the water faster than the lorries can bring new ones up.
+
+    One morning a burst from the far bank goes through the engine. Oil comes back over the
+    windscreen in a black sheet, and over Hollis, and over you, hot, so you can taste it, and the
+    engine starts to knock, and then to scream.[if flag.af18_engine] You know every part of it that's screaming; you passed him the spanners for them in the winter.[/if]
+
+    Hollis gets it home. He flies it with his goggles pushed up and oil running off his chin, low,
+    nursing it, talking to it, and it lasts to the aerodrome, and he puts it down, and the
+    propeller stops before the wheels do.
+  choices:
+    - id: count
+      text: Count the holes with Sallis.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        Forty-one, not counting the engine. Sallis writes it in his little book. Hollis is under
+        the cowling before you've finished, oil to the elbows, saying a word he learned at the works.
+      next: "@return"
+    - id: walk
+      text: Walk off across the field on your own.
+      text_after: |
+        You walk to the far hedge and stand there with your back to the hangars, and your legs won't
+        stop. When you come back Hollis has a mug of tea for you and doesn't ask.
+      next: "@return"
+
+- id: v18air_hollis_down
+  chapter: front
+  kind: pool
+  pool: front_1918_air
+  once: true
+  weight: 40
+  requires: [ "war.tour >= 37", "war.tour <= 38", flag.af18_hollis, "flag.af18_ferrier_home || flag.af18_ferrier_killed", { not: flag.af18_bridges } ]
+  on_enter: [ { set: flag.af18_hollis_killed } ]
+  title: Hollis
+  text: |
+    Since the eighth it's been the river crossings, day after day, and the squadrons lose machines
+    over the water faster than the lorries can bring new ones up.
+
+    One morning a burst comes up from the far bank, and Hollis jerks in his seat, once. He
+    gets the machine back over the river. He gets it over our line. He puts it down in a field of
+    stubble with a bounce you feel in your teeth, and switches off, and then he leans forward on the
+    edge of the cockpit as if he's tired.
+
+    He's alive at the dressing station, for an hour. He talks about the engine. He says it was
+    running sweet, right to the end, and you're to tell Sallis so.
+  choices:
+    - id: tell_sallis
+      text: Go back and tell Sallis what he said.
+      effects: [ { set: flag.af18_told_sallis } ]
+      text_after: |
+        Sallis listens with his cap in his hands, and nods, and goes out to the lorry that's
+        brought the machine back, and starts taking the engine out of it, on his own, in the dark.
+        A new pilot comes to the flight the next week, Mr Lyle, nineteen, from Kent, who says please to the mechanics.
+      next: "@return"
+    - id: stay
+      text: Stay at the dressing station till they bury him.
+      effects: [ { war_mood: { nerve: -1 } } ]
+      text_after: |
+        They bury him in the morning in a row with the others, infantry mostly. The padre gets his
+        rank wrong, and you tell him, and he puts it right. A new pilot comes to the flight the next
+        week, Mr Lyle, nineteen, from Kent, who says please to the mechanics.
+      next: "@return"
+
+- id: v18air_counting
+  chapter: front
+  kind: pool
+  pool: front_1918_air
+  once: true
+  weight: 100
+  requires: [ "war.tour == 38" ]
+  title: Counting
+  text: |
+    September. Every evening, when the machines come in, Sallis is at the hangar door with his cap
+    pushed back and his little book, counting. He counts them in over the trees while they're still
+    specks. He counts them on the grass. He counts them again on the line.
+
+    This evening the count's one short. One of the flight's, the other crew, a young officer and a
+    gunner from Bootle you played cards with on Sunday.[if flag.af18_hollis_killed] He counted Hollis home too, in the end, on the back of a lorry.[/if][if flag.af18_told_sallis] Hollis's engine is on a trestle in the hangar behind him, built up again, and he runs it every Sunday for no reason anybody can see.[/if]
+
+    The light goes. The other mechanics go in. Sallis stays out on the field, looking east.
+  choices:
+    - id: stand
+      text: Stand out on the field with him till it's dark.
+      effects: [ { set: flag.af18_stood_with_sallis }, { war_mood: { nerve: -1 } } ]
+      text_after: |
+        You stand with him. The field smells of cut grass and petrol. At ten he shuts his book,
+        and you walk back together, and at the hangar door he stops, and turns round, and counts
+        again.
+      next: "@return"
+    - id: mess
+      text: Go in. Counting won't bring them.
+      text_after: |
+        You go in. Through the hut window you can see him, a dark shape by the hangar door, until
+        you can't, and then you can still see his pipe.
+      next: "@return"
+
+- id: v18air_roads
+  chapter: front
+  kind: pool
+  pool: front_1918_air
+  once: true
+  weight: 100
+  requires: [ "war.tour == 39" ]
+  title: The roads
+  text: |
+    October. Low, over country nobody's flown over since 1914: villages with roofs on, cows in the
+    fields, a woman at a pump who flaps a tea towel at you. And every road east is full of Germans
+    going back. Guns, carts, a field kitchen with its chimney smoking, and men walking, grey, slow,
+    a column a mile long.
+
+    The order is to go down on them.
+  choices:
+    - id: column
+      text: Go down on the column. It's the order.
+      effects: [ { set: flag.af18_strafed_column }, { war_mood: { standing: 1 } } ]
+      text_after: |
+        The gun bucks against your shoulder. Horses go down in the shafts. Men run for the ditches
+        and some don't reach them. [if !flag.af18_ferrier_home && !flag.af18_ferrier_killed]Ferrier[/if][if flag.af18_ferrier_home && !flag.af18_hollis_killed || flag.af18_ferrier_killed && !flag.af18_hollis_killed]Hollis[/if][if flag.af18_hollis_killed]Lyle[/if] pulls up and goes round and comes back, and you fire again, and again, until the drum's empty and the road's still.
+      next: "@return"
+    - id: guns
+      text: Save the drum for the guns at the crossroads.
+      effects: [ { set: flag.af18_spared_column } ]
+      text_after: |
+        You fire on the guns limbering up at the crossroads, and the teams bolt, and you let the
+        walking men go by under you. One of them looks up. He's carrying a clock under his arm,
+        a kitchen clock, as if he means to have it on his own wall at home.
+      next: "@return"
+
+# ---- the endings --------------------------------------------------------------------------------
+
+- id: e_armistice_air
+  chapter: end
+  kind: ending
+  ending: armistice
+  title: The Armistice
+  text: |
+    {ending_line}
+
+    It comes to the aerodrome by telephone at breakfast, and the adjutant reads it out from the
+    steps of the office with a piece of toast in his other hand. Hostilities will cease at 1100
+    hours today. Nothing is to fly.
+
+    At eleven the whole squadron is out on the field, officers and men together for once, and
+    somebody fires a Very light into the grey morning, a green one. Then everybody with a pistol
+    fires everything they've got, red and green and white, till the sky over the hangars is full of
+    slow coloured stars coming down, and the smoke of them drifts across the grass smelling of
+    bonfire night. The cows in the next field run to the far hedge and stand there staring.
+
+    [if flag.af18_hollis && !flag.af18_hollis_killed]Hollis fires his last cartridge and goes into the hangar, and you find him there ten minutes later with his head inside an engine, listening to it not running.[/if][if flag.af18_hollis_killed]You think of Hollis, who'd have gone to look at an engine.[/if] Sallis stands at the hangar door the way he does every evening, with his cap pushed back, and counts the machines on the line. They're all there. He counts them again.[if flag.af18_stood_with_sallis] Then he shuts his little book and gives it to you to keep.[/if][if flag.af18_sat_sallis] That night he brings out the cocoa can and the two mugs.[/if]
+
+    [if flag.af18_ferrier_home]At Christmas there's a letter from Ferrier, from a school in England where he's still teaching boys to fly. He's going home to Manitoba in the spring.[if flag.af17_ferrier_farm] "You're still coming at harvest," he writes. "I've not forgotten. The binder hasn't either."[/if][/if][if flag.af18_ferrier_killed]You think of Ferrier, sat up straight in a field of beet.[if flag.af18_wrote_manitoba] His mother wrote back to you in the summer, a page and a half, with a wheat ear in it.[/if][if flag.af17_ferrier_farm] The cigarette packet's still in your pay book, a township and a section number in Manitoba.[/if][/if]
+
+    Somewhere east, under the place the coloured lights are coming down, the battalion's in a field.[if war.mate1] {mate1_first} {mate1} is in it, alive.[/if][if war.mate2] {mate2_first} {mate2} is in it.[/if][if war.mate3] {mate3_first} {mate3} is in it.[/if][if !war.mate1 && !war.mate2 && !war.mate3] None of the three you grew up with is in it.[/if] You'd give a good deal to be in that field too, just for the morning, and you couldn't say why.[if flag.af18_note_home] You never found out if your note got there.[/if][if flag.af18_strafed_column] Some nights, for years, you're back over the road in October with the horses going down in the shafts.[/if][if flag.af18_spared_column] Some nights you think of a German with a kitchen clock under his arm, and hope he got it home.[/if]
+
+    [if start == mill]At home, your mother writes, every mill buzzer in the town went off at eleven, all at once, and the weavers came out into the street in their clogs and their aprons and didn't know what to do, so they stood there.[/if][if start == pit]At home, your mother writes, the pit buzzer went at eleven and didn't stop, and the whole village came out into the rows, and in the end they went to chapel because nobody could think of anywhere else.[/if][if start == farm]At home, your mother writes, they rang the bells at Dunsworthy all afternoon, the old men and the schoolgirls, every bell they had, till the ropes were wet from their hands.[/if][if start == city]At home, your father writes, the City came out of its offices at eleven and the clerks threw paper from the windows, ledgers and all, so it came down into the street like snow, and he stood in it in his good coat and let it.[/if]
+
+    You are {age} years old and {rank_a}.
+
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
+
+- id: e_captured_air
+  chapter: end
+  kind: ending
+  ending: captured
+  title: Taken
+  text: |
+    {ending_line}
+
+    You come down on the wrong side of the line, in a field of turnips, too fast. The wheels dig
+    in and the machine goes over onto its back, and you're hanging upside down in your straps with
+    petrol running into your hair, and the quiet afterwards is the loudest thing you've ever heard.[if flag.af17_watched_burn] You think of a little flame going down in slow turns, and you get your straps undone faster than you've ever done anything.[/if]
+
+    [if war.take == 0][if !flag.af18_ferrier_home && !flag.af18_ferrier_killed]Ferrier[/if][if flag.af18_ferrier_home && !flag.af18_hollis_killed || flag.af18_ferrier_killed && !flag.af18_hollis_killed]Hollis[/if][if flag.af18_hollis_killed]Mr Lyle[/if] is alive. He gets you down, and you sit together on the turnips, both of you shaking, and wait for them to come across the field. They come at a run, with rifles, and stop when they see you're not going anywhere.[/if][if war.take == 1][if !flag.af18_ferrier_home && !flag.af18_ferrier_killed]Ferrier[/if][if flag.af18_ferrier_home && !flag.af18_hollis_killed || flag.af18_ferrier_killed && !flag.af18_hollis_killed]Hollis[/if][if flag.af18_hollis_killed]Mr Lyle[/if] is dead. You get him out and lay him on the turnips, and you're sitting by him when they come across the field with rifles, and one of them takes his cap off.[/if]
+
+    They take you to their aerodrome. They're curious, more than anything. Their [if war.rank >= 6]officers[else]sergeants[/if] give you a meal in their own mess, black bread and sausage and coffee made of something that isn't coffee, and a glass of schnapps, and they look at your boots and your coat, and one of them, who speaks a little English, asks how many of them you've shot down. You say you don't know.[if flag.af18_held_fire] You look along the table for a striped scarf. You don't see one.[/if][if flag.af18_fired_gunner] You think of a striped scarf in a cloud, and keep your eyes on your plate.[/if][if flag.af17_kept_print] An officer goes through your pay book and finds the fogged photograph of the battalion's old line, and looks at it a long while, and puts it in his own pocket.[/if]
+
+    Then you're a prisoner like any other. Walking east with a column of infantry taken in the
+    line, then a cattle truck, then a camp behind wire: black bread, turnip soup, letters that
+    take months. Your mother gets a card in your handwriting from a camp with a name she can't say,
+    and she takes it round to every house in the street.
+
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.

@@ -56,7 +56,7 @@
   text: |
     {fallen_name} is killed {fallen_where}.
 
-    [if war.fallen_present]You're near enough to see it, and far enough that there's nothing to do. Afterwards you can never get the order right in your head: the noise, or him going down, or the noise again.[else]You hear it at the ration dump, in the dark, from a man who says it quickly to get it said.[/if]
+    [if war.fallen_present]You're near enough to see it, and far enough that there's nothing to do. Afterwards you can never get the order right in your head: the noise, or him going down, or the noise again.[else][if war.transferred]Word comes over from the battalion, a week late, from a man who says it quickly to get it said.[else]You hear it at the ration dump, in the dark, from a man who says it quickly to get it said.[/if][/if]
 
     You knew him before any of this. You knew his mother's kitchen.
   choices:

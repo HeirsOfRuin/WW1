@@ -6,7 +6,7 @@
 import type { ContentBundle } from '../content/schema';
 import type { GameState } from './state';
 import { heroOf } from '@engine/character';
-import { RANKS, STAGES, ROLES, home, skill, aliveFriends, sentHomeOf, lsd, type War } from './war/index';
+import { RANKS, STAGES, ROLES, home, skill, aliveFriends, sentHomeOf, lsd, corpsOf, rankFull, type War } from './war/index';
 import { ROTATION_MONTHS, monthName, monthOfClock, TRAINING } from './war/calendar';
 import { SECTION_NAMES, PATH_NAMES, roleName, nerveWord, standingWord, whereOf, offerWords } from './module';
 
@@ -48,10 +48,11 @@ const WAR: Record<string, [string, string]> = {
   signals: ['Signals', 'At 2, the signaller\'s role.'],
   lead: ['Leadership', 'The section is killed less often when you lead it; counts for a commission.'],
   tunnel: ['Tunnelling', 'Underground, the gallery is less likely to come in on you.'],
+  // the tank and air gunner learn the Lewis gun: his trade in both (FRAME-TANK.md, FRAME-AIR.md)
   bearer: ['Stretcher-bearing', 'At 2, the stretcher-bearer\'s role; the men around you are brought in.'],
 };
 const AWARD_NAMES: Record<string, string> = {
-  MiD: 'Mentioned in Despatches', MM: 'Military Medal', MC: 'Military Cross', DCM: 'Distinguished Conduct Medal', VC: 'Victoria Cross',
+  MiD: 'Mentioned in Despatches', MM: 'Military Medal', MC: 'Military Cross', DCM: 'Distinguished Conduct Medal', VC: 'Victoria Cross', DFM: 'Distinguished Flying Medal',
 };
 /** Traits are what he has done that the story remembers (flags), in a few words each. */
 const TRAITS: [string, string, string][] = [
@@ -107,6 +108,8 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
     else if ((m = /^(light|severe) wound \((.*)\)/.exec(e.msg))) career.push({ label: `Wounded, ${when(e)}`, note: `${m[1] === 'severe' ? 'Badly, ' : 'Lightly, '}${whereOf(m[2]!)}` });
     else if ((m = /^awarded (\w+)$/.exec(e.msg))) { awards.push({ label: AWARD_NAMES[m[1]!] ?? m[1]!, note: when(e) }); career.push({ label: `${AWARD_NAMES[m[1]!] ?? m[1]}, ${when(e)}` }); }
     else if (/^transferred to a tunnelling company/.test(e.msg)) career.push({ label: `To the tunnellers, ${when(e)}`, note: 'Royal Engineers' });
+    else if (/^transferred to the Tank Corps/.test(e.msg)) career.push({ label: `To the tanks, ${when(e)}`, note: 'Heavy Branch, Machine Gun Corps; the Tank Corps from July 1917' });
+    else if (/^transferred to the Royal Flying Corps/.test(e.msg)) career.push({ label: `To the Flying Corps, ${when(e)}`, note: 'Aerial gunner, a two-seater squadron' });
     else if ((m = /^leave after stage (\d)/.exec(e.msg))) career.push({ label: `Home on leave, ${monthName(ROTATION_MONTHS[Number(m[1])]!.leave)}` });
     else if ((m = /^friend (\d+) killed \((.*)\)$/.exec(e.msg))) deaths.set(Number(m[1]) - 1, `Killed ${whereOf(m[2]!)}, ${when(e)}`);
     else if (/^froze/.test(e.msg)) career.push({ label: `Froze under fire, ${when(e)}`, note: 'The sergeant covered for him' });
@@ -123,19 +126,20 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
 
   const friends = names.map((n, i) => {
     const alive = !!w.friends[i];
-    const status = alive ? (w.transferred ? 'Alive. You are with the tunnellers now.' : 'Alive') : deaths.get(i) ?? 'Killed';
+    const away = { tunnel: 'with the tunnellers', tank: 'in the tanks', air: 'in the Flying Corps' }[corpsOf(w) ?? 'tunnel'];
+    const status = alive ? (w.transferred ? `Alive. You are ${away} now.` : 'Alive') : deaths.get(i) ?? 'Killed';
     return { name: n, status, written: i < 3, alive };
   });
 
   const war = Object.entries(WAR)
-    .filter(([k]) => k !== 'tunnel' || w.transferred)
+    .filter(([k]) => k !== 'tunnel' || corpsOf(w) === 'tunnel')
     .map(([k, [label, note]]) => ({ label, level: Math.round(skill(w, k) * 10) / 10, note }));
 
   return {
     name: hero.name,
     town: content.starts[s.start]?.label ?? s.start,
     age: Math.floor((s.time - hero.born) / 4),
-    rank: RANKS[w.rank]!,
+    rank: rankFull(w),
     role: ((n) => n[0]!.toUpperCase() + n.slice(1))(roleName(w)),
     nerve: { value: Math.max(0, Math.round(w.nerve)), word: nerveWord(w.nerve) },
     standing: standingWord(w.standing),

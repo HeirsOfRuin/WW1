@@ -1,0 +1,950 @@
+# The Tank Corps transfer (docs/FRAME-TANK.md). Offered once, on the first tour of 1917, to a man
+# with machinery from home or the Lewis gun at 2 or more; he leaves the section for good. The war
+# layer runs his road (src/game/war/data.ts PATHS.tank, CORPS.tank); this file is its words.
+# Tours: 1917 is 20-29 (20-21 training at Wool and Bermicourt; Arras 23, Passchendaele 27, Cambrai
+# 29), 1918 is 30-39 (Spring Offensive 32, Amiens 36, October 39). A battle tour has no tour page,
+# so no pool event can fall on it. Written to the voice in content/style-guide.md.
+#
+# The crew of Lodestar, and how each one's thread ends (every later mention is guarded):
+#   2/Lt Edward Lacey   killed walking ahead of her at Flesquières if tk17_lacey_praised; otherwise
+#                       wounded on the ridge and sent home. Gone from the crew after Cambrai either way.
+#   Cpl Walter Pring    goes to the Whippets without him in the spring of 1918 if tk18_said_no, and
+#                       is killed at Amiens; with him if tk18_whippet (wounded at tour 38 if
+#                       tk18_pring_hit); otherwise stays with Lodestar.
+#   Pte Alf Tonks       deaf in one ear by 1918; sent to the workshops at Erin if tk18_tonks_told.
+#   Pte Duggie Murray   burned at Cambrai if tk17_murray_tin (his spare petrol tin left aboard).
+#   Pte Mick Kearney    taken prisoner when another tank ditches beyond the line if tk_kearney_taken.
+# On the Whippet road (tk18_whippet) he leaves Lodestar's crew in April 1918; from then on Tonks,
+# Murray and Kearney are mentioned only where !flag.tk18_whippet, and their threads stay open.
+# If he was commissioned at the 1917 leave (war.path == subaltern in 1918) he commands her himself;
+# otherwise the new officer, Mr Fane, nineteen, does.
+
+# ---- the offer ---------------------------------------------------------------------------------
+
+- id: w_corps_tank
+  chapter: front
+  title: The Heavy Branch
+  text: |
+    January, and a frost that has got into everything, the bread, the boots, the water in the
+    bottles. An officer you've never seen comes round the billets with the adjutant: a captain with
+    a cough, a list, and a badge on his cap you don't know. He wants men for the Heavy Branch of the
+    Machine Gun Corps. He doesn't say tanks. He doesn't have to.
+
+    [if start == mill]He's been told the battalion's full of mill lads who can strip a loom and put it back with their eyes shut, and he wants to know if it's true. Engines are only looms that move, he says.[/if][if start == pit]He's been told there are pitmen in the battalion who've worked the winding engines and the pumps, and it's engine men he wants.[/if][if start == farm]He's been told there are farm lads in the battalion who've kept a threshing engine going through a wet harvest, and he wants men who aren't frightened of an engine.[/if][if start == city]He's been told there are clerks in the battalion who took to the Lewis gun as if it were a ledger, and he wants gunners who can keep count under fire.[/if][if war.path == lewis] He's had your name from the Lewis gun officer. Gunners, he says, are what he's shortest of.[/if]
+
+    Everybody's heard about the tanks on the Somme. Half the stories are about the ones that never
+    got to the start, or got stuck in a shell hole with their tails in the air and burned. In the
+    billet that night somebody calls them tin coffins, and somebody else says you'd want your head
+    looking at.
+
+    If you go, you go for good. A new corps, a crew of strangers, a camp in Dorset. The section
+    from home stays here, and goes on without you.
+  choices:
+    - id: transfer
+      text: Give him your name. Leave the section for good.
+      effects: [ { war: transfer } ]
+      next: "@war"
+    - id: stay
+      text: Stay with the men from home.
+      effects: [ { war: stay } ]
+      next: "@war"
+
+# ---- his battles: one scene, a paragraph for each phase ----------------------------------------
+# "Out" phases (Arras 3, Passchendaele 3-4, Cambrai 3, every Spring phase) have the crew out of
+# her, fighting with the guns; the choice words follow.
+
+- id: bt_tank
+  chapter: front
+  title: "{battle_name}"
+  text: |
+    {phase_count}
+
+    [if war.battle == arras && war.phase == 1]Half past five, and sleet. You've been inside her since three, eight of you packed round the engine, hot on one side and frozen on the other, and Mr Lacey has been sick twice into a bucket. Then the guns open behind you, all at once, and the steel round you rings with it like a struck pan. Pring lets in the clutch. She lurches, and goes, at a walk, the tracks squealing.
+
+    Through the slit, in the grey, the infantry come past on either side of her, bent into the sleet. It's the battalion. You'd know the walk anywhere.[if war.mate1 || war.mate2 || war.mate3] A face turns to look at her, close enough to touch, and it's {mate}. He sees the name on her nose and grins, and is gone into the snow.[if flag.tk17_found_section] He's keeping behind her, the way you told him.[/if][/if]
+
+    [if war.stalled]On the left the barrage has got away from them. A machine gun has opened up from the wire and the battalion's down in the snow, and the bullets are hitting her front plates like gravel thrown at a window. Splash comes in round the edges of the slits in little hot flecks that sting your face.[else]Their front line comes up out of the sleet, smashed, the wire in heaps. She goes over the wire as if it were a hedge, and the infantry come through behind her in the gap she's made.[/if][/if][if war.battle == arras && war.phase == 2]Their trench. Pring swings her along it with one track on the parados, and she lies over at a tilt so that your gun looks straight down into it, along its length. Grey figures run along the bottom and round the traverses, and some come up with their hands up, and you have to stop firing for them.
+
+    The battalion's bombers are working along behind her a bay at a time.[if war.mate1 || war.mate2 || war.mate3] Through the slit you see {mate} go round a traverse with a bomb in his hand. He doesn't look up at her this time.[/if] [if flag.tk17_stayed_with_her] The guns you stripped twice in the night haven't jammed once.[/if] Then a dugout entrance, and a machine gun firing up out of it at the bombers, and they're down.[/if][if war.battle == arras && war.phase == 3]By the afternoon she's finished. She's in a shell hole on the far slope with a track off and the snow settling on her, and the guns can't get forward over the broken ground. You get the guns out of her and lie with the battalion in the shell holes, in the snow, with no wire and no water. Mr Lacey is with you, and he isn't sick now.
+
+    In the dusk they come back at you out of the village on the hill, in long grey lines.[/if][if war.battle == passchendaele && war.phase == 1]It has rained since the end of July, and it's raining now. The ground was always low here, and the shelling has smashed every ditch that used to drain it, and now it isn't ground. You bring her up the last mile in the dark behind a guide who keeps going in to his knees. At zero the barrage goes over and she goes forward into it, and the mud comes up over the tracks at once, thick as porridge, and the whole of her shudders as the engine labours.
+
+    [if war.stalled]Ten minutes out, she's slowing. The tracks are turning and she isn't moving with them. The infantry go past her into the rain and leave her behind.[else]She's moving. Slower than a man walks, but moving, and the infantry keep close behind her in a little crowd, as if she were a wall.[/if][/if][if war.battle == passchendaele && war.phase == 2]A pillbox, half sunk in the mud on a little rise: concrete, with a slit at the height of your knees and a machine gun firing out of it across everything. The infantry are flat in the shell holes in front of it, and the water's over their backs.
+
+    Pring turns her nose towards it. The bullets come off her plates in sheets and the splash comes in at every crack, and Kearney has one hand over his eyes and is firing with the other.[if war.stalled] Halfway there she slews in the mud and sticks, broadside on, thirty yards short, and the slit in the concrete turns towards her.[/if][/if][if war.battle == passchendaele && war.phase == 3]She's stopped. She's gone down in the mud to her sponsons, and the tracks go round and throw up mud and do nothing else, and the engine screams. Tonks and Murray climb out and chain the unditching beam to the tracks[if flag.tk17_gears], and you take Tonks's levers while he's gone[/if], and it goes under the mud, and she sinks a little more.
+
+    Mr Lacey gives the order. You get the guns out of her and climb into the rain and lie in a shell hole with the infantry, up to your waist in water, while their counter-attack comes on across the mud.[/if][if war.battle == passchendaele && war.phase == 4]Night, and you walk back. Four miles of it, carrying the guns, twenty-eight pounds of Lewis gun on your shoulder and a pannier of drums on the other, along a duckboard track that's been shelled into pieces. Behind you she's sitting out there in the dark with her nose up and the water coming in at her doors.
+
+    Every shell hole has somebody in it. Some of them are calling.[/if][if war.battle == cambrai && war.phase == 1]Twenty past six, the twentieth of November, in a mist. Hundreds of tanks in a line across downland that hasn't been shelled to mud, grass and stubble, and in front the German wire in belts so deep you can't see the end of them.
+
+    They issued the masks for this, steel eye plates and a chain-mail veil. Kearney wore his last night to deal cards in, to make Murray laugh, and then packed it with the spare kit like everybody else.[if flag.tk17_cards] You lost two francs to him in it.[/if]
+
+    Then the guns, a thousand of them at once, and she goes forward at a walk with a great bundle of brushwood chained on her roof, and the wire goes down under her like standing corn.
+
+    [if war.stalled]On the left a tank has stopped in the wire, smoking, and the infantry behind it are bunched in the gap, and a machine gun has found them.[else]Behind you the infantry come through in files along the lanes she's crushed, and nobody in their front line is shooting any more.[/if][/if][if war.battle == cambrai && war.phase == 2]The Hindenburg Line: a trench so wide no tank can cross it. Pring brings her to the lip and the bundle goes off her roof into it with a crash, and she goes down on to it nose first and claws up the far side, the whole crew thrown forward on to the engine in a heap, and on.
+
+    [if war.stalled]Beyond it the next tank has dropped its bundle in the wrong place and is stuck across the trench like a bridge with its tail in the air, and the infantry can't get round it under the guns.[else]They're coming up out of their dugouts with their hands up, more of them than you've ever seen give up at once, and the infantry wave them back without looking at them.[/if][/if][if war.battle == cambrai && war.phase == 3]The ridge at Flesquières. She comes up over the crest into the open, slow, and there are field guns behind the village, and the gunners have been trained for tanks. The tank on your right stops dead and starts to burn. Then the one beyond it.
+
+    [if flag.tk17_lacey_praised]Mr Lacey gets out. He gets down on to the grass in front of her to guide Pring on foot, the way he's seen others do it, so the crew can see him do it, and he's walking ahead of her with his stick, pointing, when the guns find her. When you look for him through the smoke there's only the stick, lying in the grass.[else]Then the guns find her. The noise is everything, and the inside of her is full of smoke and flying bits of her own steel, and Mr Lacey is down on the floor plates with his shoulder laid open, and Pring has hold of him.[/if][if flag.tk17_murray_tin] The tin behind the engine goes up. Fire runs along the floor, and over Murray, and you're all out through the doors in a heap, rolling him on the grass, beating at him with your hands, and she's burning behind you.[else] You're all out through the doors in a heap, and Murray's the last, dragging Tonks by the collar.[/if]
+
+    You lie in a shell hole on the ridge with the guns you got out of her, and the infantry beside you, and wait for whatever comes over the crest next.[/if][if war.battle == spring_offensive && war.phase == 1]You wake because the hut is shaking. Before five, dark, and the whole of the east lit up from underneath, flickering, and then the noise, with no gaps in it to count. Gas with it. You're out of the hut in your mask and running for the tanks under their nets in the wood, and the fog's down so thick you find her by touch, her side cold and wet under your hand.
+
+    [if war.path == subaltern]The crew are looking at you for an order. Nobody has given you one, so you give one.[else]The orders are to go forward and fight her from wherever she can get to. Nobody knows where the line is any more.[/if] Out in the fog the infantry posts are going out, one at a time. You can hear them go.[/if][if war.battle == spring_offensive && war.phase == 2]She runs out of petrol at noon on the second day, at a crossroads, with the Germans coming through the fog behind. There's no more petrol anywhere. Pring and Tonks pour the last of the oil over her engine, and Kearney puts a match to it, and you walk away with the Lewis guns on your shoulders and the smoke going up behind you, and nobody looks round.
+
+    You're a Lewis-gun team now, like the infantry, in a ditch by a road.[if !flag.tk17_murray_tin] Murray's feeding the drums.[/if] The grey figures come out of the fog in little groups, quick, with light machine guns, slipping round the ends of everything.[/if][if war.battle == spring_offensive && war.phase == 3]After that it's back. Days of it, and you lose count. March by night, a hedge bank by day, the gun on its bipod and a drum on, firing till they're close, then up and back to the next hedge. You know the names on the signposts. You marched through these villages going up to the Somme in 1916, and you're giving them back in an afternoon.
+
+    Behind you the dumps burn, and the tank parks, and the workshops, and the whole night smells of burning rubber and petrol.[/if][if war.battle == spring_offensive && war.phase == 4]The end of March, a railway embankment in front of a town you've never heard of, and somebody says that's it, no further. You believe it because you can't walk any further.
+
+    You set the gun up on the rails between two sleepers, and the barrel's still hot from the morning.[if war.path == subaltern] What's left of your crew is along the embankment with the infantry, and you walk behind them, which is where an officer walks.[/if] [if flag.tk17_aussies] Australians come up on your right at dark, and one of them sees your badge and hands you his water bottle without a word.[/if] At dusk the grey lines come up the slope at you one more time.[/if][if war.battle == hundred_days_august && war.phase == 1]Twenty past four, the eighth of August, and fog, and this time it's on your side. There's been no bombardment, no warning: the guns open all at once, and more than five hundred tanks go forward into the fog together, and you're in one of them. The ground's green. Standing corn, uncut, up to a man's waist, and poppies in it.
+
+    [if flag.tk18_whippet]The Whippets wait behind the heavies for the first hour with their engines running. Then Pring takes her through a gap at a pace the heavies can't touch, past the infantry in the corn. It's the battalion. You see them go by under the cab, in little worms of men behind the tanks the way they've practised.[else]The battalion's behind her. You see them through the slit, in little worms of men behind the tanks, the way they've practised, the corn up to their waists.[if flag.tk18_said_no] Somewhere back in the fog Pring is waiting in his Whippet with his engine running.[/if][/if][if war.mate1 || war.mate2 || war.mate3] {mate} is at the front of one, wading, his rifle held up out of the corn.[/if]
+
+    [if war.stalled]On the left the fog lifts too soon. A tank's burning by a copse, black smoke rolling off it low over the corn, and a machine gun in the copse has the battalion down.[else]Their front line comes up out of the fog, half empty, and the men in it have their hands up before you get there.[/if][/if][if war.battle == hundred_days_august && war.phase == 2]A wood, with a road running into it, and machine guns at the edge, and behind it a battery of field guns firing over open sights at anything that moves in the corn.
+
+    [if flag.tk18_whippet]Pring runs her along the edge of the wood at a gallop, and you go from gun to gun on your knees as she turns[if flag.tk18_whippet_guns], without looking, the way you learned[/if], firing into the trees, and the splash rattles on the cab like hail on a shed roof.[else]She goes at the wood's edge firing, and the infantry come up behind her a rush at a time. The splash comes in at the slits so thick you fire with your eyes shut.[if flag.tk18_murray_rivets] Not one of Murray's rivets gives.[/if][/if][if war.stalled] A tank on the right stops in the open with smoke coming out of her, and her crew climb out and lie under her, and the machine guns at the wood's edge turn on them.[/if][/if][if war.battle == hundred_days_august && war.phase == 3]By the afternoon you're further than anybody has been since 1914. Fields and hedges and no trenches, and a farmhouse with the washing still on the line.
+
+    [if flag.tk18_whippet]Pring doesn't stop. Past the infantry, past everything, out on your own, with their transport running in front of you and a camp of tents emptying as you come. Nobody behind you. Nobody in front but them. Your guns are hot and the water's nearly gone and the cab stinks of cordite.[else]You dig in behind her at dusk, in a field of oats.[if flag.tk18_said_no] Far out ahead, beyond everything, a Whippet is running on its own, small as a beetle, firing into a camp of tents. You know whose it is. You watch it till a fold of the ground takes it.[/if] Their field guns are still firing from behind a hedge, at the tanks, and at you.[/if][/if][if war.battle == hundred_days_october && war.phase == 1]October, and a valley in mist, and there are hardly any tanks left. A handful from the whole battalion go in at dawn with the infantry, and the infantry are glad of you, and don't expect much.
+
+    [if flag.tk18_whippet && !flag.tk18_pring_hit]Pring has her at a walking pace for once, feeling the ground.[/if][if flag.tk18_whippet && flag.tk18_pring_hit]The new driver has her at a walking pace, feeling the ground, the way Pring showed him.[/if][if !flag.tk18_whippet && !flag.tk_kearney_taken]Kearney sits at his gun with a card stuck in his helmet band for luck, the ace of spades.[/if][if !flag.tk18_whippet && flag.tk_kearney_taken]Kearney's gun has a lad on it from the reserve who flinches every time she lurches.[/if]
+
+    [if war.stalled]The mist lifts on the far slope too early, and a field gun in a farmyard has her before she's halfway up.[else]The far slope comes up out of the mist, and the wire on it is thin and old, and she walks through it.[/if][/if][if war.battle == hundred_days_october && war.phase == 2]Their old trench, and the deep dugouts in it, thirty steps down. The infantry go down them slowly now. There are wires across the steps, a helmet left on a table that's tied to something underneath, a stove with a bomb under the grate. A sapper comes up out of one with a box in his arms, carrying it like eggs.
+
+    She stands at the trench's edge with her guns on the far side while they search it.[if war.stalled] A machine gun opens up from a dugout entrance further along, and the infantry go flat, and the sapper with the box goes flat with it.[/if][/if][if war.battle == hundred_days_october && war.phase == 3]An orchard at evening, apples on the ground everywhere gone soft, wasps in them, the smell of cider. They come back once more out of the trees, half-hearted, and it's still enough to kill men.
+
+    [if !flag.tk18_whippet && !flag.tk18_tonks_told]Tonks hammers the engine cover and she stops, and he grins at you across the engine, because he heard that one.[/if][if !flag.tk18_whippet && flag.tk18_tonks_told]The new gearsman misses a knock and she slews, and you think of Tonks at a bench at Erin.[/if] There's a rumour, the way there always is. This time the officers are saying it too.[/if]
+  choices:
+    - id: push
+      text: "[if war.battle == spring_offensive || war.battle == arras && war.phase == 3 || war.battle == passchendaele && war.phase >= 3 || war.battle == cambrai && war.phase == 3]Up with the guns and go at them.[else]Keep her going forward, ahead of the infantry.[/if] ({risk_push})"
+      effects: [ { war: push } ]
+      next: "@war"
+    - id: help
+      text: "[if war.battle == arras || war.battle == hundred_days_august]Stay by the battalion. Cover the section from home.[else][if war.battle == spring_offensive]Cover the men falling back beside you.[else]Stay with the infantry. Keep the crew together.[/if][/if] ({risk_help})"
+      effects: [ { war: help } ]
+      next: "@war"
+    - id: ground
+      text: "[if war.battle == spring_offensive || war.battle == arras && war.phase == 3 || war.battle == passchendaele && war.phase >= 3 || war.battle == cambrai && war.phase == 3]Get down in cover and keep down.[else]Pull her into dead ground, hull-down, and wait.[/if] ({risk_ground})"
+      effects: [ { war: ground } ]
+      next: "@war"
+
+# ---- his mission: bringing the tank up (three steps; turning back only on the first) ------------
+
+- id: s_tank_1
+  chapter: front
+  title: Bringing her up
+  text: |
+    [if war.stake == 0]Dusk, and the nets come off. The engine catches with a roar you'd swear they can hear in the German line, and she shakes herself and crawls out of the wood on to the road. The guide's waiting at the crossroads, an officer from the company with a lamp held behind his back so it only shows to you, and he starts to walk, and she follows his lamp at a man's pace along a white tape laid on the ground.[if war.stage == 3] Mr Lacey is leaning out of the door, being sick.[/if] Four miles of this.[/if][if war.stake == 1]Night, and the tape. Somebody laid it this afternoon from the tank park to the start line, a white strip on the grass that shows grey in the dark, and the guide walks it ahead of her with his lamp. A mile on a shell has come down near the tape, and the glow of it hangs there. Inside her the engine's so loud you won't hear the next one coming, only feel it.[/if]
+  choices:
+    - id: bold
+      text: "Close up on the guide's lamp and keep her moving. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: She goes along the tape at her best pace, which is a fast walk, and the guide has to trot.
+      next: "@war"
+    - id: steady
+      text: "Keep her to the tape at a walk. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: At a walk, the lamp swinging ahead, every yard of the tape going under her.
+      next: "@war"
+    - id: careful
+      text: "Get out and walk with the guide, feeling for the ground. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You walk beside the guide with the tape running through your fingers where it's broken, and she comes on behind you like a cow after a bucket.
+      next: "@war"
+    - id: back
+      text: "Say she isn't fit tonight. Turn back for the park. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: You turn her in the road with the guide swearing at you, and go back to the wood the way you came, and the nets go back on.
+      next: "@war"
+
+- id: s_tank_2
+  chapter: front
+  title: Bringing her up
+  text: |
+    [if war.stake == 0]Halfway, and the shelling starts. Not at you, you tell yourself: at the road, at the battery behind the hill. Then near. A burst throws earth against her side like a spadeful of gravel, and the guide's lamp goes out, and when it shows again it's twenty yards off to the left, and the tape has gone under a new shell hole that's still smoking.[/if][if war.stake == 1]She ditches. An old trench, fallen in, that nobody marked: her nose goes down and her tail comes up and the whole crew's thrown forward on to the engine. The tracks spin. She doesn't move. Outside, the shelling is walking along the road towards you, a burst at a time, and the air inside her is blue with exhaust.[/if]
+  choices:
+    - id: bold
+      text: "[if war.stake == 0]Drive on through it. Find the tape after.[else]Full throttle. Drive her out of it.[/if] ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The engine howls and she heaves and goes, and nobody inside can hear anything but her.
+      next: "@war"
+    - id: steady
+      text: "[if war.stake == 0]Stop, find the tape, then go on.[else][if war.tour <= 26]Get out and pack brushwood under the tracks.[else]Get out and chain the unditching beam on.[/if][/if] ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You're out in the open with the shells coming, doing it by feel in the dark with your fingers numb, and then it's done.
+      next: "@war"
+    - id: careful
+      text: "[if war.stake == 0]Pull her off the road and wait for it to lift.[else]Wait for the shelling to pass, then dig her out.[/if] ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait, flat against her side, while it goes over. The steel shakes against your back at every burst.
+      next: "@war"
+    - id: back
+      text: "Leave her and get the crew back. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: You get the crew out and back along the road, and leave her there with her engine ticking.
+      next: "@war"
+
+- id: s_tank_3
+  chapter: front
+  title: Bringing her up
+  text: |
+    [if war.stake == 0]The last mile. The sky's going grey in the east, and she has to be on the start line and under her net before it's light enough for their observers to see her. The engine's running hot. You can smell it, hot oil and something scorching, and the gearsmen at the back are streaming with sweat.[/if][if war.stake == 1]Nearly there. The tape ends at a sunken road, and the infantry are waiting in it, and they turn their faces up at her as she comes, and in the half dark you can see what they think of the noise she's making. Somewhere overhead an aeroplane drones, theirs or ours.[/if]
+  choices:
+    - id: bold
+      text: "Push her the last of it flat out, before the light. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: She roars up the last slope with the infantry flattening themselves against the bank, and slews into place.
+      next: "@war"
+    - id: steady
+      text: "Bring her in at a walk and get the net on her. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: In at a walk, the engine off, and all of you up on her in the half light dragging the net over, the poles, the pegs.
+      next: "@war"
+    - id: careful
+      text: "Stop short in the dead ground and net her there. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You stop her in a hollow two hundred yards short and get the net on her, and she lies there like a haystack.
+      next: "@war"
+    - id: back
+      text: "Turn her round. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: You turn her round in the grey light and go back.
+      next: "@war"
+
+- id: x_tank_done
+  chapter: front
+  title: First light
+  text: |
+    [if war.result == ok]She's on the start line by first light, under her net, the engine ticking as it cools. An infantry officer comes along the sunken road and puts his hand flat on her side as if she were a horse. You sit with your back against the track and eat bully beef out of the tin with your fingers, and your hands shake so you drop half of it.[/if][if war.result == failed]She didn't get there. She's in a shell hole a mile short with a track off, and the fitters will go out to her tonight if the shelling lets them. One of the crew went back on a stretcher with his hand crushed in a track. The show goes on in the morning without her.[/if][if war.result == turned]You turned back. Another crew took theirs up in her place, and in the morning the infantry went over without you, and in the tank park men find other things to talk about when you come in.[/if]
+  choices:
+    - id: on
+      text: Get under the net and sleep.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"
+
+# ---- 1917: Wool, Bermicourt, Arras, Flanders, Cambrai (pool front_1917_tank) ------------------
+
+- id: v17tk_wool
+  chapter: front
+  kind: pool
+  pool: front_1917_tank
+  once: true
+  weight: 100
+  requires: [ "war.tour == 20" ]
+  title: Wool
+  text: |
+    The train puts you down at Wool in the dark: a little station in the middle of a heath in
+    Dorset, and a lorry out to the camp through the gorse. Huts, mud, and a wind off the sea that
+    tastes of salt.
+
+    In the morning they march you to a shed with a sentry on the door. Inside there's a tarpaulin
+    over something the size of a cottage. The sergeant tells you the story they put about at the
+    start, that these things were water carriers, which is why everybody calls them tanks. Then he
+    pulls the sheet off.
+
+    She's grey, and bigger than you thought, and the shape's all wrong: a lozenge, the way a child
+    would draw a boat, with the tracks running right round her and a steel bay on each side with
+    guns poking out of it. She smells of oil and new paint and cold iron.
+
+    "Slower than a bus," says the corporal next to you, a big quiet Londoner called Pring, who
+    drove a General omnibus for fourteen years. He says it as if he's sorry for her.
+
+    Behind you a young officer, fair-haired, his boots still shining from the depot, is looking at her with his hand over his
+    mouth. That's Mr Lacey, twenty, from a motor works in Coventry. You'll learn he's sick every
+    time she moves. He's sick now, and she hasn't.
+  choices:
+    - id: climb_in
+      text: Climb in through the little door in the side.
+      text_after: |
+        You go in head first and crack your shin on something. Inside it's dark and low, and it's
+        all engine: a great block of it in the middle like a boiler in a cellar, and the eight of
+        you are to fit round it. You can't stand up straight anywhere. Your hand comes away from
+        the wall black with oil.
+      next: "@return"
+    - id: walk_round
+      text: Walk all the way round her first.
+      text_after: |
+        You walk round her twice. The tracks are higher than your head. Close to, the plates are
+        riveted like the side of a ship, and there's rust already in the seams. Mr Lacey walks
+        round her too, the other way, and you meet at the back, and he says good morning as if
+        you'd met in the street.
+      next: "@return"
+
+- id: v17tk_erin
+  chapter: front
+  kind: pool
+  pool: front_1917_tank
+  once: true
+  weight: 100
+  requires: [ "war.tour == 21" ]
+  title: Erin
+  text: |
+    February, and France again, but not the France you know. Bermicourt is a village with a
+    chateau full of staff officers and their motor cars, and two miles down the road at Erin
+    there's a town of sheds where they mend the tanks, with engines hung on chains and a din like
+    the inside of a boiler.
+
+    Here's the crew. Eight to a tank, and four of them you'll come to know best.
+
+    Tonks, from Cradley Heath, a foundry man, with forearms like hams and old burns up both of
+    them from the ladles. He's a gearsman, at the back. Inside her nobody can hear a word once
+    she's going, so it's all done with a hammer on the engine cover, so many knocks for this and
+    so many for that, and Tonks makes you learn the knocks till you knock them in your sleep.
+
+    Murray, the other gearsman, a riveter from the yards at Govan. He goes along her plates
+    tapping every rivet with his knuckle, listening, and shakes his head. "Badly riveted," he
+    says. "Ah'd have been sacked."
+
+    Kearney, off the Liverpool docks, a gunner like you, with a pack of cards gone soft as cloth.
+    He'll play anybody for anything.
+
+    At the end of the week Mr Lacey gets her from the workshops, and kneels on the track and
+    paints the name on her nose himself with a little brush. LODESTAR. "The star they steer by,"
+    he says, when Pring asks. "At sea." Pring says she'll want something to steer her.
+  choices:
+    - id: gears
+      text: Learn the gears and the knocks with Tonks.
+      effects: [ { set: flag.tk17_gears } ]
+      text_after: |
+        By the end of the month you can work the gears blind. Tonks hits the cover once, twice,
+        and your hand's on the lever before you've thought. "Yow'll do," he says, which is more
+        than he says to most.
+      next: "@return"
+    - id: cards
+      text: Sit in on Kearney's game.
+      effects: [ { set: flag.tk17_cards }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        Kearney takes eleven francs off you in a night, and gives you two back so you can buy a
+        drink, and teaches you a game from the docks that nobody else in the company knows the
+        rules of, so you never win it.
+      next: "@return"
+
+- id: v17tk_battalion
+  chapter: front
+  kind: pool
+  pool: front_1917_tank
+  once: true
+  weight: 100
+  requires: [ "war.tour == 22" ]
+  title: The battalion
+  text: |
+    April, and Lodestar is lying up in the ruins on the edge of Arras under a net, with the snow
+    coming and going. The orders came last night. Mr Lacey read them out by a candle, and you had
+    to ask him to read one line again.
+
+    She's to go in with a battalion of the line. Your battalion. The section from home is under
+    the town, in the old quarries, waiting for the morning, a mile from where you're sitting on
+    her track.
+  choices:
+    - id: go_find
+      text: Walk over in the dark and find the section.
+      effects: [ { set: flag.tk17_found_section } ]
+      text_after: |
+        [if war.mate1 || war.mate2 || war.mate3]It takes you an hour in the dark and the tunnels to find them, under an electric light strung on a wire. {mate} sees you first. He looks at the badge on your cap and laughs, and then stops laughing and shakes your hand. "In one of them," he says. "God help you." You tell them to look out for her in the morning, the one with the name on her nose, and to keep behind her and not in front.[else]It takes you an hour in the dark and the tunnels to find the company. There's nobody left in it you know well enough to talk to. A lance-corporal you half remember tells you who's gone. {section_line} You go back to her before anybody asks what you came for.[/if]
+      next: "@return"
+    - id: stay
+      text: Stay with her. Check every gun again.
+      effects: [ { set: flag.tk17_stayed_with_her } ]
+      text_after: |
+        You strip the guns and put them back and strip them again, by a torch under the net, till
+        Kearney tells you to give over or he'll strip you. Somewhere under the town the battalion
+        is waiting, and in the morning you'll see it through a slit the width of your hand.
+      next: "@return"
+
+- id: v17tk_bullecourt
+  chapter: front
+  kind: pool
+  pool: front_1917_tank
+  once: true
+  weight: 100
+  requires: [ "war.tour == 24" ]
+  title: Bullecourt
+  text: |
+    May, and the company's back in camp, and when you go down to the village of an evening the
+    Australians won't drink with you.
+
+    It was two days after the battalion's attack. Lodestar and a few others were sent south to
+    Bullecourt, to go in front of the Australians at the wire, in the snow, before it was light.
+    Their whole plan hung on the tanks. She broke down a quarter of a mile short. Pring and Tonks
+    worked on the engine with the shells coming down round her, and you sat at your gun with
+    nothing to fire at and watched the Australians go past her into the wire.
+
+    You saw them come back in the afternoon, the ones that came back. You saw their faces as they
+    went by her.
+  choices:
+    - id: go_in
+      text: Go into the estaminet anyway, and stand your round.
+      effects: [ { set: flag.tk17_aussies }, { war_mood: { nerve: -1 } } ]
+      text_after: |
+        Nobody moves up for you at the bar. Then a sergeant with his arm in a sling takes the
+        glass off you without a word, and drinks it, and puts it down. It wasn't you, he supposes.
+        It was them that sent you. Then he turns his back.
+      next: "@return"
+    - id: keep_away
+      text: Keep away from them. Drink in the hut.
+      text_after: |
+        You drink in the hut with the crew, out of mess tins, and Kearney deals, and nobody
+        mentions Australians. Every time the door opens you look up.
+      next: "@return"
+
+- id: v17tk_railhead
+  chapter: front
+  kind: pool
+  pool: front_1917_tank
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 26", "war.tour <= 28" ]
+  title: Tin can
+  text: |
+    A railhead, and a train of flat trucks with the tanks chained on them under sheets, and a
+    battalion going up past you on the road. The infantry look at the tanks the way you'd look at
+    a horse that bit you once.
+
+    One of them stops. He's from your battalion: you know him by the shoulder title, and then by
+    his face, a lad you used to see at [if start == mill]the Co-op on a Saturday[/if][if start == pit]the Store on pay Friday[/if][if start == farm]the market at South Molton[/if][if start == city]the tram stop in Leyton every morning[/if].
+
+    "Tin can," he says to you, and spits. Then, in the same breath: "Who's got the rum, then? You
+    lot always have the rum."
+  choices:
+    - id: rum
+      text: Give him a drop out of your bottle.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        He drinks it standing in the road, and tells you the battalion's news while it lasts.
+        {section_line} He says the names of the ones who aren't, quickly, to get them said, and
+        hands the bottle back, and runs to catch his platoon.
+      next: "@return"
+    - id: send_off
+      text: Tell him to find his own.
+      text_after: |
+        He grins as if that's what he wanted, and goes. You're sorry before he's out of sight. You'd
+        have liked to ask him about home.
+      next: "@return"
+
+- id: v17tk_fumes
+  chapter: front
+  kind: pool
+  pool: front_1917_tank
+  once: true
+  weight: 40
+  requires: [ "war.tour == 26" ]
+  title: The heat
+  text: |
+    High summer, and a practice attack with the infantry, a mile across country in the sun with
+    the doors shut. Inside her it's past anything you've known. The engine's in the middle of you,
+    bare, and the heat comes off it like a range with the oven door open. The air's blue with
+    petrol and hot oil, and when the guns fire the cordite smoke stays in. Your head starts to
+    pound in the first ten minutes.
+
+    Half an hour in, the gunner across from you, a new lad from Bristol called Hendy, slides off
+    his seat on to the floor plates and lies there with his eyes open.
+
+    In the basket by the door the two pigeons you carry for messages are panting with their beaks
+    open, the same as you.
+  choices:
+    - id: door
+      text: Get the door open and get him out into the air.
+      text_after: |
+        Pring stops her, and you and Kearney get Hendy out through the side door on to the grass
+        and lie him there, and he comes round and is sick. An infantry officer comes over to ask
+        why the tank has stopped in the middle of his attack. Mr Lacey tells him, white to the lips,
+        and that evening he writes a chit about the air in the tanks, three pages.
+      next: "@return"
+    - id: carry_on
+      text: Prop him by the crack of the door and keep going.
+      effects: [ { war_mood: { nerve: -1 } } ]
+      text_after: |
+        You prop him with his face to the crack round the door, where there's a thread of air, and
+        keep firing. He comes round on his own at the end, grey, and can't remember his own name
+        for an hour. Nobody else goes down. You all have the same headache for two days.
+      next: "@return"
+
+- id: v17tk_tin
+  chapter: front
+  kind: pool
+  pool: front_1917_tank
+  once: true
+  weight: 60
+  requires: [ "war.tour == 26" ]
+  title: The spare tin
+  text: |
+    July. They're getting the tanks ready for Flanders, and you're loading her, and behind the
+    engine, wedged where an officer won't see it, there's a two-gallon tin of petrol that isn't on
+    any list.
+
+    Murray's. "The feed pipe," he says. "She's badly riveted. The pipe'll shake loose, and then
+    where are you, in the middle of nowhere, dry." In the yards he always kept the spare where he
+    could reach it.
+
+    Petrol inside her, by the engine, in a fight. You know what the instructor at Wool said about
+    that, and so does Murray.
+  choices:
+    - id: out
+      text: Make him take it out.
+      text_after: |
+        He takes it out, swearing, and stows it on the back with the rest of the stores, and
+        doesn't speak to you for a day. On the second day he brings you a mug of tea and says
+        you're as bad as a foreman.
+      next: "@return"
+    - id: leave
+      text: Leave it. He knows his engine.
+      effects: [ { set: flag.tk17_murray_tin } ]
+      text_after: |
+        You say nothing about it. Murray pats the tin like a dog and packs a bit of sacking round
+        it so it won't rattle.
+      next: "@return"
+
+- id: v17tk_letter
+  chapter: front
+  kind: pool
+  pool: front_1917_tank
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 26", "war.tour <= 28" ]
+  title: A letter from home
+  text: |
+    "Dear Son, just a few lines hoping this finds you well as it leaves us.
+
+    [if start == mill]Mrs Ormerod says her cousin's lad says you are in one of those tanks. They had one at the pictures, going over a trench as if it was nothing and knocking a tree down. Your father says it is all nonsense and you are in the motor transport. Are you in one of those.[/if][if start == pit]At the Store they are saying you are in one of those tanks, Mrs Dodds had it from somebody's letter. Mary says they are the safest place to be because they are made of iron. Are you in one of those.[/if][if start == farm]Mr Vellacott says you are in one of those tanks, he had it from the carrier. Your father says if it is anything like a traction engine you will be all right, you were always good with the engine. Are you in one of those.[/if][if start == city]Your father has cut a picture of one of those tanks out of the paper and pinned it up in the scullery, and he says that is where you are, because of the badge. Are you in one of those.[/if] If you are I would rather know than not know.
+
+    Look after yourself and do not go volunteering. Your loving Mother."
+  choices:
+    - id: tell
+      text: Write and tell her yes.
+      effects: [ { set: flag.tk17_told_mother } ]
+      text_after: |
+        You tell her yes, and that it's safer than the trenches, which you believe on a good day.
+        You don't tell her about the heat, or the splash, or the noise. You tell her the name.
+      next: "@return"
+    - id: transport
+      text: Write that you're in the motor transport. It's near enough.
+      effects: [ { set: flag.tk17_kept_quiet } ]
+      text_after: |
+        You write that you're on motor transport behind the lines, which is true of most days. You
+        can see her reading it out at the kitchen table. You seal it quickly.
+      next: "@return"
+
+- id: v17tk_lacey
+  chapter: front
+  kind: pool
+  pool: front_1917_tank
+  once: true
+  weight: 100
+  requires: [ "war.tour == 28" ]
+  title: Mr Lacey
+  text: |
+    September. What's left of the company is out of the salient, and Lodestar is at Erin with a
+    new engine and the Flanders mud still caked in her tracks.
+
+    Mr Lacey has been sick in every action, and before every action, and on the way up to every
+    action, and the crew have stopped pretending not to see. He doesn't drink and he doesn't play
+    cards. He writes to his mother in Coventry every night.
+
+    One evening he finds you on your own cleaning the guns, and sits down on an ammunition box,
+    and asks you straight out whether the crew would rather have another officer.
+
+    "I'm no good in her," he says. "I can't think when she's moving. Pring knows more than I do.
+    You all do."
+  choices:
+    - id: truth
+      text: Tell him straight. Pring knows more. Listen to him.
+      text_after: |
+        He hears you out, white. Then he nods. The next time she moves he crouches by Pring and
+        asks him, and Pring tells him, and you hear him say right, right, good, and the crew look
+        at each other. He's still sick. It doesn't seem to matter so much now.
+      next: "@return"
+    - id: praise
+      text: Tell him he's doing fine. The crew think the world of him.
+      effects: [ { set: flag.tk17_lacey_praised }, { war_mood: { standing: 1 } } ]
+      text_after: |
+        He looks at you as if he wants to believe it, and then he does. "Right," he says, and
+        stands up, and straightens his tunic. "Right. Thank you." From then on he wants to do
+        everything himself, and to do it where the crew can see him.
+      next: "@return"
+
+# ---- 1918: after Cambrai, the Whippet, the retreat, Amiens, the last of it (front_1918_tank) ----
+
+- id: v18tk_after_cambrai
+  chapter: front
+  kind: pool
+  pool: front_1918_tank
+  once: true
+  weight: 100
+  requires: [ "war.tour == 30" ]
+  title: After Cambrai
+  text: |
+    January, and the tankodrome's frozen. The tanks are lined up in the snow being painted for the
+    spring, in blotches over the grey, and the paint goes thick on the brush in the
+    cold. They say the Mark V is coming, and nobody has seen one.
+
+    The old Lodestar stayed on the ridge at Flesquières. The new one has the name on her nose in
+    the same white letters, done by Pring, who copied it off a photograph.
+
+    [if flag.tk17_lacey_praised]Mr Lacey is buried behind the ridge with the others the guns got there. You never saw it done.[else]Mr Lacey is in a hospital in England with a hole in his shoulder the size of your fist, and he won't be coming back to tanks. He wrote to the crew, one letter to all of you, and Pring read it out in the hut. It said thank you, and not much else, and it was the right length.[/if]
+
+    [if flag.tk17_murray_tin]Murray is in a burns ward at home. His hands, and one side of his face. He's written once, in somebody else's writing: the tin was his own fault, and he knows it, and they're badly riveted, the lot of them.[else]Murray's still here, going over the new tank's rivets with his knuckle and shaking his head.[/if]
+
+    [if war.path == subaltern]And the new officer is you. One pip on your cuff, and a crew who knew you when you had none. Pring calls you sir the first morning and can't keep his face straight, and the second morning he can.[else]The new officer is Mr Fane, nineteen, out from school by way of Wool, with a moustache that won't come. He's younger than any man in the crew, and he has the sense to know it.[/if]
+  choices:
+    - id: write
+      text: "[if flag.tk17_lacey_praised]Write to Mr Lacey's mother in Coventry.[else]Write to Mr Lacey in hospital.[/if]"
+      effects: [ { set: flag.tk18_wrote_lacey } ]
+      text_after: |
+        [if flag.tk17_lacey_praised]You write that he was a brave officer, and that he walked in front of his tank, and that the crew thought the world of him. You read it over. Every word of it is true, and you sit with the pen in your hand for an hour before you can sign it.[else]You tell him about the new tank, and Mr Fane's moustache, and that Pring still drives like a bus with the brakes on. He writes back in a fortnight. He's going back to the motor works. He says he still dreams about the knocks.[/if]
+      next: "@return"
+    - id: concert
+      text: Go to the camp concert and forget it for a night.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        A sergeant from the workshops sings in a frock and a wig made out of rope, and a Welshman
+        sings something that stops the hut dead, and Kearney does a card trick with the major's
+        watch and gives it back, mostly. You laugh till your sides hurt. On the way back through
+        the snow you're all quiet, the breath going up from you in the frost.
+      next: "@return"
+
+- id: v18tk_whippet
+  chapter: front
+  kind: pool
+  pool: front_1918_tank
+  once: true
+  weight: 100
+  requires: [ "war.tour == 31" ]
+  title: The Whippet
+  text: |
+    February. Pring comes to find you in the hut with his cap in his hand, and he never takes his
+    cap off.
+
+    The Whippets, he says. The new light tanks: three men to a crew, an officer, a driver and a
+    gunner, in a thing you could almost park in a street. They want drivers for them when the new
+    machines come in the spring. He's put in for one.
+
+    [if war.path == subaltern]He's asking you, as his officer, to let him go. He'll take whatever gunner they give him.[else]"And I want a gunner I know," he says. "I want you." Three of you, and none of them Kearney or Tonks[if !flag.tk17_murray_tin] or Murray[/if]. Just Pring, and an officer you've never met, and you.[/if]
+  choices:
+    - id: whippet
+      text: Go with Pring when the Whippets come.
+      visible_if: "war.path != subaltern"
+      effects: [ { set: flag.tk18_whippet } ]
+      text_after: |
+        Pring shakes your hand as if you'd sold him a horse. Kearney says you're both mad, and
+        deals you out of the game on the spot, and then deals you back in.
+      next: "@return"
+    - id: stay
+      text: "[if war.path == subaltern]Let him go.[else]Stay with Lodestar and the crew.[/if]"
+      effects: [ { set: flag.tk18_said_no } ]
+      text_after: |
+        [if war.path == subaltern]You sign the paper. He thanks you properly, standing up. He'll go to the Whippets in the spring with a quiet lad from the reserve crew called Dobbs.[else]Pring nods as if he'd known. "Fair enough," he says. He gets a gunner from the reserve crew instead, a quiet lad called Dobbs, and when the Whippets come in the spring he'll go to them.[/if]
+      next: "@return"
+    - id: keep
+      text: Keep him. Lodestar needs her driver.
+      visible_if: "war.path == subaltern"
+      effects: [ { set: flag.tk18_kept_pring } ]
+      text_after: |
+        You tell him no. He takes it like a man told the last bus has gone, and goes back to the
+        hut, and the next morning he's under her with a spanner as if nothing had been said.
+      next: "@return"
+
+- id: v18tk_burned
+  chapter: front
+  kind: pool
+  pool: front_1918_tank
+  once: true
+  weight: 70
+  requires: [ "war.tour == 33" ]
+  title: April
+  text: |
+    April, and a camp of tents in a wet field, with no tanks in it.
+
+    You burned her yourselves, in March, at a crossroads, on the second day of going back. You've
+    been a Lewis-gun team since, like half the corps, in the line with the infantry, and for once
+    the infantry are glad to see you.
+
+    Before the match went in, Kearney prised the strip of steel with her name on it off her nose
+    with a bayonet. It's lying on your blanket now. New tanks are coming, they say. You're to wait
+    for them here, in the rain.
+
+    [if flag.tk18_whippet]Pring's had his orders for the Whippets. You go with him at the end of the month.[/if][if flag.tk18_said_no]Pring's had his orders for the Whippets. He goes at the end of the month, with Dobbs, and shakes every hand in the tent.[/if]
+  choices:
+    - id: keep_plate
+      text: Keep it. Carry it in your pack.
+      effects: [ { set: flag.tk18_kept_plate } ]
+      text_after: |
+        It's heavy for what it is, and it rattles against your mess tin when you march, and you
+        never take it out to look at it.
+      next: "@return"
+    - id: give_plate
+      text: Give it back to Kearney. He took it.
+      effects: [ { set: flag.tk18_gave_plate } ]
+      text_after: |
+        Kearney weighs it in his hand and puts it in his kit without a word. A week later you see
+        him using it to keep his cards flat in the wind.
+      next: "@return"
+
+- id: v18tk_new_tank
+  chapter: front
+  kind: pool
+  pool: front_1918_tank
+  once: true
+  weight: 30
+  requires: [ "war.tour == 33", { not: flag.tk18_whippet } ]
+  title: The new tank
+  text: |
+    April. The new tanks come up on the train, clean and grey, the paint still tacky in the seams.
+    The crew walk round theirs like men at a cattle sale, and nobody has to ask what she's to be
+    called.
+
+    [if war.path == subaltern]You paint the name on her nose yourself, kneeling on the track, the way Mr Lacey did. LODESTAR.[else][if flag.tk18_said_no]Kearney paints the name, because Pring's off to the Whippets, and Kearney's letters lean.[else]Pring paints the name on her nose, in the same white letters.[/if][/if]
+
+    [if !flag.tk17_murray_tin]Murray goes along her plates with his knuckle, the whole length of her, and comes back shaking his head, and you'd be frightened if he didn't.[else]A letter comes from Murray the same week, in the same stranger's hand. He wants to know if the new ones are any better riveted.[/if]
+  choices:
+    - id: rivets
+      text: Go round her with Murray, rivet by rivet.
+      visible_if: "!flag.tk17_murray_tin"
+      effects: [ { set: flag.tk18_murray_rivets } ]
+      text_after: |
+        It takes all afternoon. He finds eleven he doesn't like and makes the fitters do four of
+        them again, and they hate him, and he's happier than you've seen him since Govan came up.
+      next: "@return"
+    - id: write_murray
+      text: Write back to Murray about the rivets.
+      visible_if: flag.tk17_murray_tin
+      text_after: |
+        You tell him they're worse. It isn't true, but it's what he'd want to hear. The answer
+        comes in a month, in the stranger's hand: Told you.
+      next: "@return"
+    - id: fitters
+      text: Leave her to the fitters. A tank's a tank.
+      text_after: |
+        You sit on the grass in the sun with your back against her track and let the fitters get
+        on with it, your eyes shut and the steel warm through your shirt.
+      next: "@return"
+
+- id: v18tk_three
+  chapter: front
+  kind: pool
+  pool: front_1918_tank
+  once: true
+  weight: 30
+  requires: [ "war.tour == 33", flag.tk18_whippet ]
+  title: Three of you
+  text: |
+    April, and the Whippet. She's low and long, with the cab at the back like a box on a cart, and
+    there are three of you in her: Pring, and you, and an officer called Mr Yarrow who used to sell
+    motor cars in Leeds and talks about her as if she were for sale.
+
+    After the heavies she's like a pony after a carthorse. The first time Pring opens her up on
+    the practice ground he laughs out loud, and you've never heard him laugh before. The guns are
+    yours, and you go from one to the next on your knees as she turns, and the brass comes off
+    them hot down your collar.
+  choices:
+    - id: faster
+      text: Tell Pring to open her up again.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        He does. The cab bangs and rattles and the practice ground goes past in a blur of grass,
+        and Mr Yarrow holds on to his cap and shouts that she'll do twice that downhill.
+      next: "@return"
+    - id: guns
+      text: Learn the guns in her till you could work them blind.
+      effects: [ { set: flag.tk18_whippet_guns } ]
+      text_after: |
+        A week of it, in the cab, in the heat, with your eyes shut and Pring timing you with his
+        watch. By the end of it you can change a gun and a belt in the dark with your hands alone.
+      next: "@return"
+
+- id: v18tk_moving_up
+  chapter: front
+  kind: pool
+  pool: front_1918_tank
+  once: true
+  weight: 100
+  requires: [ "war.tour == 35" ]
+  title: Moving up
+  text: |
+    July, and they move you at night, only at night. The tanks go up the roads in the dark with
+    their engines throttled right down, so they sound like a threshing engine three fields off and
+    not like tanks. In the day you lie up in woods under the nets, and nobody's allowed to light a
+    fire, and the officers walk about looking at the sky.
+
+    Something big. Nobody says it.
+
+    The post comes up with the rations, and there's one from home.
+
+    "Dear Son, just a few lines. [if start == mill]Our Jack has had his papers, he went Tuesday. Your father walked him to the station. Jack says to tell you he wants to go in the tanks like his brother, and your father told him he will go where he is put.[/if][if start == pit]Mary has finished at the munitions, the yellow was getting on her chest. The lodge is talking about after, they talk about nothing else, and about the men coming home to the pits.[/if][if start == farm]The hay is in. The girls and the prisoners got it in between them and your father says it is the best stack he has seen on the farm, and then he says it is not as good as yours.[/if][if start == city]There were no raids this month and your father has his allotment on the marshes going, the beans are a picture. He takes them round the street in a basket.[/if] Look after yourself. Your loving Mother."
+  choices:
+    - id: write
+      text: Write back tonight, by a torch under the net.
+      effects: [ { set: flag.tk18_wrote_home }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You can't say where you are or what's coming. You write about the weather and the food
+        and Kearney's cards. At the end, after you've signed it, you write: I'll be home. You look
+        at that a while, and leave it in.
+      next: "@return"
+    - id: keep
+      text: Keep it, to read again on the night.
+      text_after: |
+        You put it inside your shirt. On the night, waiting for zero, you'll read it again by the
+        light of a torch, and you'll know it by heart already.
+      next: "@return"
+
+- id: v18tk_kearney
+  chapter: front
+  kind: pool
+  pool: front_1918_tank
+  once: true
+  weight: 100
+  requires: [ "war.tour == 37", { not: flag.tk18_whippet } ]
+  title: Kearney
+  text: |
+    The end of August. You're going forward every day, and every day there are fewer tanks: a
+    battle every few mornings, a few tanks to each, whatever can still run.
+
+    [if flag.tk18_said_no]Pring didn't come back from the eighth. His Whippet was seen in the afternoon far out beyond the line, on its own, firing into a camp, and then it was seen stopped, and burning. A man from his battalion says Pring was killed getting out. Nobody knows anything about Dobbs.[/if]
+
+    A tank in the company has its gunner down with the fever, and there's a show in the morning,
+    and the section officer wants a man off Lodestar to make up her crew. Kearney says he'll go.
+    "They owe me eleven francs over there," he says. "I'm not having them killed before they pay."
+  choices:
+    - id: let_go
+      text: Let him go. He's asked.
+      effects: [ { set: flag.tk_kearney_taken } ]
+      text_after: |
+        He goes over with his kit in the dark. In the morning the other tank goes into a sunken
+        road beyond their line and ditches there, nose down, and doesn't come out. An infantry
+        officer says he saw the crew climb out with their hands up, all of them, and walk away east
+        with a German behind them. Kearney's cards are still in your pack. He left them with you
+        for safe keeping, so nobody could cheat with them.
+      next: "@return"
+    - id: stop_him
+      text: Tell him not to go. Let them find somebody else.
+      text_after: |
+        Kearney argues, and then he doesn't. The section officer sends a lad from the reserve
+        instead, one whose name you never learn. In the morning the other tank goes into a sunken
+        road beyond their line and ditches there, and doesn't come out, and the infantry say the
+        crew walked away east with their hands up. That night Kearney deals hand after hand on the
+        floor plates and doesn't win one.
+      next: "@return"
+
+- id: v18tk_heavies
+  chapter: front
+  kind: pool
+  pool: front_1918_tank
+  once: true
+  weight: 100
+  requires: [ "war.tour == 37", flag.tk18_whippet ]
+  title: The heavies
+  text: |
+    The end of August. The Whippets go forward every day, and the heavies behind, fewer each
+    morning. At a crossroads you pass Lodestar going up, with the name on her nose, and Kearney's
+    sitting on her roof dealing cards to Tonks[if !flag.tk18_kept_plate], the pack held flat with a strip of steel[/if].
+
+    Tonks is shouting. He shouts everything now.
+  choices:
+    - id: stop
+      text: Get Pring to stop. Go and see them.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        Kearney deals you in on her roof without asking, and Tonks shouts that you're putting on
+        weight in that toy, and [if !flag.tk17_murray_tin]Murray puts his head out of the door and tells you the Whippet's badly riveted, and [/if]for ten minutes at the crossroads it's the old crew, till a military policeman moves you all on.
+      next: "@return"
+    - id: wave
+      text: Wave, and go on.
+      text_after: |
+        You wave from the cab. Kearney holds up a card, the ace of spades, and Tonks waves his
+        hammer, and then the dust from the road comes up between you.
+      next: "@return"
+
+- id: v18tk_tonks
+  chapter: front
+  kind: pool
+  pool: front_1918_tank
+  once: true
+  weight: 100
+  requires: [ "war.tour == 38", { not: flag.tk18_whippet } ]
+  title: Tonks
+  text: |
+    September. Tonks has stopped answering when you speak to him on his left side. He thinks
+    nobody's noticed. In the drill he watches the driver's hand instead of listening for the
+    knocks, and twice now he's missed one, and the track's gone on when it should have stopped,
+    and she's slewed round with the whole crew thrown against the engine.
+
+    [if war.path == subaltern]He's your gearsman, and it's for you to say.[else]Mr Fane is nineteen and hasn't noticed. If anybody tells him, it'll be you.[/if]
+  choices:
+    - id: tell
+      text: "[if war.path == subaltern]Send him down to the workshops at Erin.[else]Tell Mr Fane. Tonks will go to the workshops.[/if]"
+      effects: [ { set: flag.tk18_tonks_told } ]
+      text_after: |
+        Tonks goes down the line to Erin, to work on engines at a bench where nobody shoots at
+        him. He won't shake your hand. At the lorry he turns round and calls something back, and
+        you don't catch it, and he grins as if that's the joke.
+      next: "@return"
+    - id: keep
+      text: "[if war.path == subaltern]Keep him. Put him where he can see the driver's hand.[else]Keep his secret. Stand on his good side and knock twice as hard.[/if]"
+      effects: [ { set: flag.tk18_tonks_kept } ]
+      text_after: |
+        [if war.path == subaltern]You move him to where he can see the driver's hand, and tell the driver to knock hard enough to dent the cover. Tonks knows what you're doing. That night a bottle of vin blanc turns up on your blanket, and nobody knows where from.[else]You change places with him in the drill so you're on his good side, and you knock hard enough to dent the cover. He knows what you're doing. When you're both off duty he buys the vin blanc, and keeps buying it.[/if]
+      next: "@return"
+
+- id: v18tk_pring
+  chapter: front
+  kind: pool
+  pool: front_1918_tank
+  once: true
+  weight: 100
+  requires: [ "war.tour == 38", flag.tk18_whippet ]
+  title: Pring
+  text: |
+    September, and a village, and the infantry held up at the end of the street by a field gun
+    behind a garden wall, firing over open sights. The Whippet's in a farmyard round the corner.
+
+    Pring wants to go straight down the street at it. "Like Holborn," he says. "In the rush hour.
+    They'll get out of the way." Mr Yarrow, the Whippet's officer, looks at you. He's asking.
+  choices:
+    - id: go
+      text: Tell him go on, then.
+      effects: [ { set: flag.tk18_pring_hit } ]
+      text_after: |
+        Pring puts her at the street like a bus at a hill. The gun fires once, and the shell goes
+        past the cab so close you feel the wind of it, and then she's on the wall, and the gunners
+        run. When you climb out after, Pring's sitting on the cobbles with his arm in his lap and
+        the sleeve all blood. "Splinter," he says. "Off the wall." They send him home. He shakes
+        your hand with the left one.
+      next: "@return"
+    - id: wait
+      text: Wait for the infantry to work round through the gardens.
+      text_after: |
+        You wait. It takes an hour, and the infantry do it the slow way, through the back gardens
+        and over the walls, and Pring sits at the controls with his jaw going, saying nothing. When
+        the gun's taken he drives down the street at a walk, to look at it.
+      next: "@return"
+
+# ---- the Armistice ------------------------------------------------------------------------------
+
+- id: e_armistice_tank
+  chapter: end
+  kind: ending
+  ending: armistice
+  title: The Armistice
+  text: |
+    {ending_line}
+
+    It comes to the tankodrome on a message form, in the morning, and the sergeant major reads it
+    out standing on a tank. Hostilities will cease at eleven. Nobody believes it, and then
+    everybody does.
+
+    There's nothing left to drive. The tanks stand in rows behind the huts with their tracks off
+    and their engines out, waiting for parts that won't come now, and the crews have been playing
+    football all week with a ball made of rags. At eleven you're standing in the mud by the
+    workshop sheds. Somewhere east the guns go on to the last minute, and then stop, and a fitter
+    on a shed roof lets go of his spanner, and you hear it slide all the way down the corrugated
+    iron and drop.
+
+    [if !flag.tk18_whippet && !flag.tk_kearney_taken]Kearney deals a hand on an upturned petrol tin, and nobody wants to play, and he deals it anyway.[if flag.tk18_gave_plate] He keeps the cards flat with her name.[/if][/if][if flag.tk_kearney_taken]Somewhere in Germany Kearney is in a camp, and you'd lay money he's dealing.[/if][if !flag.tk18_whippet && !flag.tk18_tonks_told] Tonks says what, what, when you tell him, and then laughs, and can't stop.[if flag.tk18_tonks_kept] He leans his good ear to you, and you say it again.[/if][/if][if flag.tk18_tonks_told] Tonks is at Erin, at his bench, hearing it a minute after everybody else.[/if][if !flag.tk18_whippet && !flag.tk17_murray_tin] Murray goes and pats the nearest tank on her plates, and says badly riveted, the lot of them, and walks off with his hands in his pockets.[/if][if flag.tk17_murray_tin] You think of Murray, and his hands.[/if][if flag.tk18_whippet && !flag.tk18_pring_hit] Pring rolls a cigarette and says he'll be back on the buses by Easter, and he'll never go over four miles an hour again as long as he lives.[/if][if flag.tk18_pring_hit] Pring's at home already, driving again, he wrote, with one hand.[/if][if !flag.tk18_whippet && !flag.tk18_said_no] Pring sits on the step of the hut and looks at his hands on his knees, a bus driver's hands, and turns them over.[if flag.tk18_kept_pring] "You did me a good turn in February, sir," he says, and doesn't say what it was.[/if][/if][if flag.tk18_said_no] You think of Pring, out on his own beyond everything, in August.[/if][if flag.tk18_whippet] Lodestar's crew are at another tankodrome down the line, and you can see it as if you were there: Kearney dealing, Tonks saying what, what.[/if][if flag.tk17_lacey_praised] And Mr Lacey, who was sick every time she moved, and went up the ridge on foot in front of her.[/if][if flag.tk17_lacey_praised && flag.tk18_wrote_lacey] His mother has written back to you twice, from Coventry.[/if][if !flag.tk17_lacey_praised] Mr Lacey writes from Coventry the week after, a page to every man of the crew.[/if][if flag.tk18_kept_plate] In your pack the strip of steel with her name on it rattles against your mess tin.[/if]
+
+    [if war.mate1 || war.mate2 || war.mate3]The battalion's somewhere east, in the line. You think of the men from home who are in it still:[if war.mate1] {mate1_first},[/if][if war.mate2] {mate2_first},[/if][if war.mate3] {mate3_first},[/if] and the rest, hearing the guns stop.[else]You think of the section from home, and how few of them are left to hear the guns stop.[/if]
+
+    [if start == mill]At home, your mother writes, every mill buzzer in the town went off at eleven, and the weavers came out into the street in their clogs and shawls and stood there, and then went back in, because the looms were still running and nobody had told them to stop.[/if][if start == pit]At home, your mother writes, the pit buzzer went at eleven and didn't stop, and the fore shift came up early, black as they were, and stood in the rows with the women.[/if][if start == farm]At Dunsworthy, your mother writes, they rang the bells all the afternoon, and your father left the horses in the furrow and stood in the churchyard with his cap in his hand until it was too dark to plough.[/if][if start == city]In the City, they tell you, the clerks threw paper out of every window, ledgers and forms and blotting paper, till Lombard Street was white with it, like snow.[/if][if flag.tk18_wrote_home] Your letter from July, the one that says you'll be home, is behind the clock.[/if]
+
+    You are {age} years old and {rank_a}.
+
+    Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.

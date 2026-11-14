@@ -1,5 +1,9 @@
 # FRAME: an aerial gunner in the Flying Corps (2026-11-14)
 
+> **Built 2026-11-14.** The numbers below are the proposal; the gate tuned them. The numbers the
+> game uses, and why each changed, are in `docs/KILLGATE.md`, "The tank and air transfers".
+> Not built: the Soldier tab still lists the section from home, not the crew.
+
 Status: **framework, for the author's approval.** Nothing is built. Every number below is a
 starting point for the gate, not a decision.
 

@@ -4,6 +4,6 @@
 export default {
   runs: 500, by: ['town'], pool: [], fixed: { policy: 'adaptive' },
   base: {},
-  variants: { noRoles: { noRoles: true }, tunnelRefused: { tunnel: false } },
+  variants: { noRoles: { noRoles: true }, tunnelRefused: { tunnel: false }, corpsRefused: { corps: false }, corpsTaken: { corps: true } },
   metrics: ['armistice', 'homeAlive', 'killed', 'grade', 'medal', 'rank', 'friendsAlive'],
 };

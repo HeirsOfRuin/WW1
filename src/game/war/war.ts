@@ -11,7 +11,7 @@ import { chance, float, pick, raw, seedStreams, type Streams, type StreamName } 
 import {
   TOWNS, DEFAULT_GENERAL, WAR_SKILLS, SPECIALIST, APTITUDE, TOWN_COURSE, WAR_WORK, STAGES, DUTIES, WOUND, PATHS,
   CHOICES, GRADE, SECTION_SIZE, SUBALTERN, TOP_OR, RANKS, REST, FRIEND_BATTLE, PHASE_HIT, STALL, ROLES, ROLE, PAY,
-  PROMO, SERGEANT, CSM, LIEUTENANT, CAPTAIN, ASSIGN, ASSIGNMENTS,
+  PROMO, SERGEANT, CSM, LIEUTENANT, CAPTAIN, ASSIGN, ASSIGNMENTS, CORPS, CORPS_BATTLES, AIR_RANKS, type Corps,
   COMMISSION_BOARD, SORTIES, SORTIE_CHOICE, type SortieChoice, type Town, type Ending, type BattleChoice, type Battle, type Stage,
 } from './data';
 
@@ -26,6 +26,8 @@ export type Pending =
   | { kind: 'mission'; role: string }
   | { kind: 'sick' }
   | { kind: 'course'; skill: string }
+  /** the offer of the tanks or the Flying Corps (CORPS): 'transfer' or 'stay' */
+  | { kind: 'corps'; corps: 'tank' | 'air' }
   /** a special assignment: a job he is detailed for that is not fighting (ASSIGNMENTS) */
   | { kind: 'assign'; key: string }
   | { kind: 'battle'; battle: string; phase: number; type: string; stalled: boolean }
@@ -34,7 +36,7 @@ export type Pending =
   | { kind: 'step'; key: string; role: boolean; step: number; of: number; vol: boolean; canBack: boolean };
 
 export type Decision =
-  | 'transfer' | 'stay'                 // tunnel
+  | 'transfer' | 'stay'                 // tunnel, corps
   | 'volunteer' | 'stay_back'           // duty
   | 'go' | 'decline'                    // mission, course
   | 'report' | 'carry_on'               // sick
@@ -91,6 +93,9 @@ export interface War {
    *  Recorded only; nothing in the war reads it, so the war's numbers do not depend on it. */
   news: { wound: { kind: 'light' | 'severe'; cause: string } | null; fallen: { i: number; why: string; present: boolean }[]; sortie?: { key: string; ok: boolean; vol: boolean; turned: boolean } | null };
   stats: WarStats;
+  /** which corps he transferred to, if any (absent in saves before the tanks: a transferred man
+   *  there is a tunneller; read with corpsOf); training tours left; air missions that went well */
+  corps?: Corps; corpsTraining?: number; corpsOk?: number;
   /** pence sent home so far (absent in saves before pay was sent home: read with sentHomeOf) */
   sentHome?: number;
   log: string[];
@@ -136,11 +141,28 @@ const SEVERE_OUT = 4;
 const ch = (w: War, l: StreamName, p: number) => chance(w.rng, l, p);
 const stageOf = (w: War): Stage => STAGES[w.stage - 1]!;
 export const isRole = (w: War) => w.path in ROLES;
+/** His corps, if he has left the battalion: a save from before the tanks had only tunnellers. */
+export const corpsOf = (w: War): Corps | null => w.corps ?? (w.transferred ? 'tunnel' : null);
+/** Who is offered the tanks (FRAME-TANK.md): any town, machinery from home or the Lewis gun at 2;
+ *  still in the battalion, not an officer, sergeant or below. One function: the offer and the bot. */
+export const tankEligible = (w: War) => !w.transferred && !w.commissioned && w.rank <= SERGEANT && (!!home(w, 'mech') || skill(w, 'lewis') >= 2);
+/** Who is offered the Flying Corps (FRAME-AIR.md): a Lewis gunner at 2, in the line that tour. */
+export const airEligible = (w: War) => !w.transferred && !w.commissioned && w.rank <= SERGEANT && w.out === 0 && skill(w, 'lewis') >= 2;
+/** His rank in his own corps' words: an air gunner's is the Flying Corps'. */
+export const rankName = (w: War) => (corpsOf(w) === 'air' && AIR_RANKS[w.rank] ? AIR_RANKS[w.rank]! : RANKS[w.rank]!);
+/** The same, with the army's rank beside it where the words differ (FRAME-AIR.md). */
+export const rankFull = (w: War) => (rankName(w) === RANKS[w.rank] ? RANKS[w.rank]! : `${rankName(w)} (army: ${RANKS[w.rank]!.toLowerCase()})`);
+/** The battle this rotation, if any: the battalion's, or one his corps alone fights (Cambrai). */
+export function battleAt(w: War, st: Stage, r: number): Battle | undefined {
+  const c = corpsOf(w);
+  return st.battles[r] ?? (c ? CORPS_BATTLES[c]?.[st.n]?.[r] : undefined);
+}
 
 /** The news record, created for a save made before it existed (2026-11-09). */
 /** Pence he sends home this tour: a share of a month's pay by rank and role. Draws nothing. */
 export function payHome(w: War): number {
-  const daily = w.transferred ? PAY.tunnelPence : PAY.rankPence[w.rank]! + (ROLES[w.path] ? PAY.rolePence : 0);
+  const c = corpsOf(w);
+  const daily = c === 'tunnel' ? PAY.tunnelPence : PAY.rankPence[w.rank]! + (c ? CORPS[c].payPence : ROLES[w.path] ? PAY.rolePence : 0);
   return Math.round(daily * PAY.daysPerTour * (w.commissioned ? PAY.officerAllot : PAY.allot));
 }
 export const sentHomeOf = (w: War) => w.sentHome ?? 0;
@@ -206,8 +228,12 @@ function spendNerve(w: War, amt: number): void { w.nerve = clamp(w.nerve - amt *
 
 function hit(w: War, cause: string): void {
   const r = raw(w.rng, 'fire');
-  if (r < WOUND.killed) { w.inBattle = w.battleNow; return end(w, 'killed', cause); }
-  if (r < WOUND.killed + WOUND.severe) {
+  const path = PATHS[w.path];
+  const killed = path?.killed ?? WOUND.killed, captured = path?.captured ?? 0;
+  if (r < killed) { w.inBattle = w.battleNow; return end(w, 'killed', cause); }
+  // shot down only when he is flying: a shell on the aerodrome is a shell
+  if (cause !== 'shelled in support' && r < killed + captured) return end(w, 'captured', `${cause}: shot down`);
+  if (r < killed + captured + WOUND.severe) {
     w.severe += 1;
     if (ch(w, 'fire', WOUND.downgrade) || w.severe >= 3) return end(w, 'invalided', `${cause}, severe wound, downgraded`);
     w.out = SEVERE_OUT; w.blightyThisStage = true;
@@ -254,7 +280,7 @@ function award(w: War, pts: number): void {
   let a = 'MiD';
   if (pts >= 14 && ch(w, 'career', 0.06)) a = 'VC';
   else if (pts >= 9 && ch(w, 'career', 0.3)) a = 'DCM';
-  else if (w.stage >= 2) a = w.commissioned ? 'MC' : 'MM';
+  else if (w.stage >= 2) a = w.commissioned ? 'MC' : corpsOf(w) === 'air' && w.stage === 4 && w.r >= 5 ? 'DFM' : 'MM'; // the DFM from June 1918
   w.awards.push(a);
   w.standing = clamp(w.standing + 8, 0, 100);
   w.nerve = clamp(w.nerve + 4, 0, 100);
@@ -262,8 +288,8 @@ function award(w: War, pts: number): void {
 }
 
 function rest(w: War): void {
-  const present = withSection(w) ? aliveFriends(w) : w.transferred && w.out === 0 ? ROLE.crew : 0;
-  const pay = isRole(w) ? ROLE.restBonus : 0;
+  const present = withSection(w) ? aliveFriends(w) : w.transferred && w.out === 0 ? CORPS[corpsOf(w)!].crew : 0;
+  const pay = (isRole(w) ? ROLE.restBonus : 0) + (corpsOf(w) === 'air' ? CORPS.air.restBonus : 0);
   w.nerve = clamp(w.nerve + REST.base + REST.voice * home(w, 'voice') + REST.perFriend * present + pay, -10, 100);
   if (home(w, 'voice') && withSection(w)) w.standing = clamp(w.standing + 1, 0, 100);
 }
@@ -278,18 +304,21 @@ export function postingOffers(w: War): string[] {
   if (home(w, ww.skill) && w.stage >= ww.from && ch(w, 'leave', 0.15 * w.stage + w.standing / 300)) out.push(`war work (${w.town})`);
   const best = Math.max(...SPECIALIST.map((k) => skill(w, k)), skill(w, 'lead'), skill(w, 'tunnel'));
   if (w.stage >= 2 && w.rank >= 2 && best >= 3 && ch(w, 'leave', 0.55)) out.push('instructor');
+  if (corpsOf(w) === 'air' && w.stage === 3 && ch(w, 'leave', CORPS.air.homeOffer)) out.push('home establishment (air)');
   return out;
 }
 
 function commissionOffer(w: War): boolean {
-  return w.stage === 3 && !w.commissioned && w.rank >= 3 && w.standing >= 70
+  // not for a tank or air man: a commission would put him back in the infantry as a subaltern
+  // (an air run ended as a lieutenant flying with the squadron, 2026-11-14)
+  return w.stage === 3 && !w.commissioned && (corpsOf(w) ?? 'tunnel') === 'tunnel' && w.rank >= 3 && w.standing >= 70
     && (!!home(w, 'lit') || w.awards.some((a) => a !== 'MiD') || skill(w, 'lead') >= 3.5)
     && ch(w, 'leave', COMMISSION_BOARD);
 }
 
 function pathFor(w: War): string {
   if (w.commissioned) return 'subaltern';
-  if (w.transferred) return 'tunnel';
+  if (w.transferred) return corpsOf(w)!;
   let best: string | null = null;
   for (const k of SPECIALIST) if (skill(w, k) >= 2 && (!best || skill(w, k) > skill(w, best))) best = k;
   if (w.rank >= 2 && !(best && skill(w, best) >= ROLE.keepRole)) return 'nco';
@@ -318,6 +347,7 @@ function step(w: War): void {
       w.clockInStage = 0; // the date reads the stage's first month until its first rotation
       w.cursor = { at: 'path' };
       if (st.n === 2 && w.town === 'pit' && home(w, 'dig') && !w.transferred) w.pending = { kind: 'tunnel' };
+      if (st.n === CORPS.tank.stage && tankEligible(w)) w.pending = { kind: 'corps', corps: 'tank' };
       return;
     }
     case 'path': {
@@ -328,7 +358,7 @@ function step(w: War): void {
     case 'rotation': {
       w.clock += 1; w.clockInStage = w.r + 1;
       w.sentHome = sentHomeOf(w) + payHome(w);
-      const b = st.battles[w.r];
+      const b = battleAt(w, st, w.r);
       if (b && w.out === 0) {
         w.stats.battles++; w.battleNow = true;
         say(w, `battle: ${b.name} as ${w.path}`);
@@ -339,6 +369,7 @@ function step(w: War): void {
       if (b) w.stats.missedBattles++;
       // a story stop at the start of every tour he is in the line for (the author, 2026-11-09:
       // "follow a story more"); it draws nothing, so it changes no numbers
+      if (w.out === 0 && st.n === CORPS.air.stage && w.r === CORPS.air.atRotation && airEligible(w)) { w.cursor = { at: 'tour' }; w.pending = { kind: 'corps', corps: 'air' }; return; }
       if (w.out === 0) { w.cursor = { at: 'tour' }; w.pending = { kind: 'tour' }; return; }
       rotationStart(w, st);
       return;
@@ -355,7 +386,7 @@ function step(w: War): void {
       return;
     }
     case 'support': {
-      if (w.out === 0 && ch(w, 'fire', st.fire * 0.25 * trenchMod(w))) hit(w, 'shelled in support');
+      if (w.out === 0 && ch(w, 'fire', st.fire * 0.25 * trenchMod(w) * (PATHS[w.path]!.fire || 1))) hit(w, 'shelled in support');
       if (w.ending) { w.cursor = { at: 'tally' }; return; }
       friendLosses(w, c.sectionP * c.cover, 'in the line');
       if (w.out >= SEVERE_OUT) { w.cursor = { at: 'tally' }; return; }
@@ -409,11 +440,17 @@ function rotationStart(w: War, st: Stage): void {
     w.cursor = { at: 'tally' };
     return;
   }
+  if ((w.corpsTraining ?? 0) > 0) { // the tank man's first tours, training at Wool and Bermicourt; the air gunner's joining tour
+    w.corpsTraining! -= 1; rest(w);
+    friendLosses(w, sectionP, 'in the line');
+    w.cursor = { at: 'tally' };
+    return;
+  }
   const path = PATHS[w.path]!;
-  if (ch(w, 'fire', st.fire * trenchMod(w) * (path.fire || 1))) hit(w, 'shellfire');
+  if (ch(w, 'fire', st.fire * trenchMod(w) * (path.fire || 1))) hit(w, w.path === 'air' ? 'anti-aircraft fire' : w.path === 'tank' ? 'shelled in the tank park' : 'shellfire');
   if (w.ending) { w.cursor = { at: 'tally' }; return; }
   if (path.collapse && ch(w, 'fire', path.collapse * (1 - 0.12 * skill(w, 'tunnel')))) { end(w, 'killed', 'mine collapse or camouflet'); w.cursor = { at: 'tally' }; return; }
-  spendNerve(w, st.nerve);
+  spendNerve(w, st.nerve * (path.lineNerve ?? 1));
   learn(w, 'trench', 0.25);
   const keys = Object.keys(DUTIES);
   // one duty, on some tours: two every tour made the war a list of missions (the author,
@@ -457,11 +494,12 @@ function afterCourse(w: War): void {
 
 function askPhase(w: War, b: Battle, i: number): void {
   const [, , ptype] = b.phases[i]!;
+  if (w.path === 'air') { w.pending = { kind: 'battle', battle: b.name, phase: i, type: 'air', stalled: false }; return; }
   const stalled = (ptype === 'advance' || ptype === 'trench') && ch(w, 'battle', STALL);
   w.pending = { kind: 'battle', battle: b.name, phase: i, type: stalled ? 'stalled' : ptype, stalled };
 }
 
-function battleOf(w: War): Battle { return stageOf(w).battles[w.r]!; }
+function battleOf(w: War): Battle { return battleAt(w, stageOf(w), w.r)!; }
 
 function finishBattle(w: War, pts: number): void {
   award(w, pts);
@@ -488,7 +526,9 @@ export function dutyHit(w: War, key: string): number {
 
 /** Chance of being hit on a role mission, as resolved. */
 export function missionHit(w: War, role: string): number {
-  return ROLES[role]!.hit * trenchMod(w) * (1 - ROLE.hitPerSkill * skill(w, role));
+  // the role's own skill: the tank and air gunner's is the Lewis gun (SORTIES); there is no 'air' skill,
+  // and reading one gave NaN, so no flying mission could ever hit him (found by the trade table, 2026-11-14)
+  return ROLES[role]!.hit * trenchMod(w) * (1 - ROLE.hitPerSkill * skill(w, SORTIES[role]?.skill ?? role));
 }
 
 /** Chance of being hit in a battle phase for a choice, as resolved (freezing aside). */
@@ -555,9 +595,13 @@ function endSortie(w: War, c: Extract<Cursor, { at: 'sortie' }>, turned: boolean
   newsOf(w).sortie = { key: c.key, ok, vol: c.vol, turned };
   w.stats.sorties = (w.stats.sorties ?? 0) + 1; if (ok) w.stats.sortiesOk = (w.stats.sortiesOk ?? 0) + 1;
   if (c.role) {
-    learn(w, c.key, 0.3);
+    learn(w, SORTIES[c.key]!.skill, 0.3);
     if (ok) {
       const m = ROLES[c.key]!;
+      if (c.key === 'air') {
+        w.corpsOk = (w.corpsOk ?? 0) + 1;
+        if (w.corpsOk >= CORPS.air.qualifyAfter && w.rank < SERGEANT) { w.rank = SERGEANT; w.promotedThisStage = true; say(w, `promoted to ${RANKS[w.rank]} (qualified as an aerial gunner)`); }
+      }
       w.stats.missionsWon++; w.merit += 1;
       w.standing = clamp(w.standing + 4, 0, 100);
       award(w, m.award * float(w.rng, 'career', 0.4, 1.4));
@@ -585,7 +629,15 @@ export function decide(w: War, d: Decision): War {
   const st = stageOf(w);
   switch (p.kind) {
     case 'tunnel': {
-      if (d === 'transfer') { w.transferred = true; w.war.tunnel = 2; say(w, 'transferred to a tunnelling company'); }
+      if (d === 'transfer') { w.transferred = true; w.corps = 'tunnel'; w.war.tunnel = 2; say(w, 'transferred to a tunnelling company'); }
+      break;
+    }
+    case 'corps': {
+      if (d === 'transfer') {
+        w.transferred = true; w.corps = p.corps; w.corpsOk = 0;
+        if (p.corps === 'tank') { w.corpsTraining = CORPS.tank.training; say(w, 'transferred to the Tank Corps'); }
+        else { w.path = 'air'; w.corpsTraining = CORPS.air.training; say(w, 'transferred to the Royal Flying Corps as an aerial gunner'); }
+      } else say(w, `refused the ${p.corps === 'tank' ? 'Tank Corps' : 'Flying Corps'}`);
       break;
     }
     case 'duty': {
@@ -614,6 +666,11 @@ export function decide(w: War, d: Decision): War {
       return w;
     }
     case 'sick': {
+      if (d === 'report' && corpsOf(w) === 'air' && w.nerve < CORPS.air.moNerve && ch(w, 'career', CORPS.air.moHome)) {
+        w.posting = 'home establishment (air)';
+        end(w, 'posting', 'sent home by the medical officer, worn out: Home Establishment');
+        break;
+      }
       if (d === 'report' && ch(w, 'career', 0.5)) {
         w.out = Math.max(w.out, 1); w.standing = clamp(w.standing - 4, 0, 100);
         say(w, 'reported sick: excused one tour');
@@ -659,8 +716,9 @@ export function decide(w: War, d: Decision): War {
       const path = PATHS[w.path]!;
       if (ch(w, 'battle', phaseHit(w, b, base, p.type, choice))) hit(w, b.name);
       if (w.ending) { w.cursor = { at: 'tally' }; break; }
-      if (b.capture && ch(w, 'battle', b.capture * (choice === 'ground' ? 2 : 1))) { end(w, 'captured', `${b.name}: overrun`); w.cursor = { at: 'tally' }; break; }
-      spendNerve(w, ncost);
+      if (b.capture && w.path !== 'air' && ch(w, 'battle', b.capture * (choice === 'ground' ? 2 : 1))) { end(w, 'captured', `${b.name}: overrun`); w.cursor = { at: 'tally' }; break; }
+      if (path.advanceCapture && (p.type === 'advance' || p.type === 'stalled') && ch(w, 'battle', path.advanceCapture)) { end(w, 'captured', `${b.name}: ditched beyond the line`); w.cursor = { at: 'tally' }; break; }
+      spendNerve(w, ncost * (path.battleNerve ?? 1));
       w.nerve = clamp(w.nerve + cm.nerve, -10, 100);
       w.standing = clamp(w.standing + (p.stalled && choice === 'ground' ? 0 : cm.standing), 0, 100);
       c.pts += cm.award * path.award * float(w.rng, 'battle', 0.5, 1.5);
@@ -669,9 +727,13 @@ export function decide(w: War, d: Decision): War {
         if (w.rank < 2 && ch(w, 'career', 0.3)) promote(w, `took charge at ${b.name}`);
       }
       if (w.path === 'nco' || w.path === 'subaltern') learn(w, 'lead', 0.3);
-      if (w.path in { bomb: 1, lewis: 1, snipe: 1, signals: 1 }) learn(w, w.path, 0.2);
+      if (w.path in { bomb: 1, lewis: 1, snipe: 1, signals: 1, bearer: 1 }) learn(w, w.path, 0.2);
+      if (w.path === 'tank' || w.path === 'air') learn(w, 'lewis', 0.2);
       let fp = base * FRIEND_BATTLE * cm.friends * (withSection(w) ? path.section : 1) * sectionMod(w);
       if (choice === 'help' && home(w, 'firstaid')) fp *= 0.8;
+      // from inside a tank allotted to the battalion, or over it on contact patrol, he can still save them
+      if (corpsOf(w) === 'tank' && (CORPS.tank.supportBattles as readonly string[]).includes(b.name) && choice === CORPS.tank.supportChoice) fp *= CORPS.tank.supportMult;
+      if (corpsOf(w) === 'air' && choice === CORPS.air.supportChoice) fp *= CORPS.air.supportMult;
       friendLosses(w, fp, b.name);
       if (w.out > 0) { finishBattle(w, c.pts); break; }
       if (w.nerve <= 0) { end(w, 'broken', `${b.name}: shell shock`); w.cursor = { at: 'tally' }; break; }

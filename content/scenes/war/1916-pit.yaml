@@ -671,7 +671,7 @@
     {offers_line}
   choices:
     - id: back
-      text: Go back on the tenth day. The battalion promotes the men who return.
+      text: "Go back on the tenth day. [if war.corps == air]The squadron[else][if war.transferred]Your company[else]The battalion[/if][/if] promotes the men who return."
       effects: [ { war: back } ]
       next: "@war"
     - id: commission

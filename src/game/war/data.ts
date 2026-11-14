@@ -4,17 +4,25 @@
 /* eslint-disable */
 
 export type Town = 'pit' | 'mill' | 'city' | 'farm';
-export type PhaseType = 'advance' | 'trench' | 'hold' | 'defence';
+export type PhaseType = 'advance' | 'trench' | 'hold' | 'defence' | 'air';
 export type BattleChoice = 'push' | 'help' | 'ground';
 export type Ending = 'armistice' | 'posting' | 'captured' | 'invalided' | 'killed' | 'broken' | 'courtMartial';
 export type Phase = [number, number, PhaseType];
 export interface Battle { name: string; phases: Phase[]; defence?: boolean; capture?: number }
 export interface Stage { n: number; year: number; rotations: number; fire: number; sectionLoss: number; nerve: number; battles: Record<number, Battle> }
 export interface Duty { hit: number; nerve: number; standing: number; skill: string; award: number; night: boolean; field?: boolean; dig?: boolean }
-export interface PathMods { hit: number; award: number; section: number; defence?: number; fire?: number; collapse?: number }
+export interface PathMods {
+  hit: number; award: number; section: number; defence?: number; fire?: number; collapse?: number;
+  /** the tank and air paths (FRAME-TANK.md, FRAME-AIR.md): nerve drained in the line and in battle,
+   *  the killed and captured shares of a hit, and a capture chance on an advance (a ditched tank) */
+  lineNerve?: number; battleNerve?: number; killed?: number; captured?: number; advanceCapture?: number;
+}
 export interface ChoiceMods { standing: number; award: number; friends: number; nerve: number; lead: number }
 export interface Role { mission: string; chance: number; hit: number; nerve: number; award: number; success: number }
 
+// The Flying Corps' other ranks (FRAME-AIR.md): an air gunner's rank in his own corps' words, shown
+// with the army's beside it. The same ladder; the RFC had no lance corporal (an AM1 stands in).
+export const AIR_RANKS = ['Air mechanic 2nd class', 'Air mechanic 1st class', 'Corporal', 'Sergeant', 'Flight sergeant'];
 export const RANKS = ['Private', 'Lance corporal', 'Corporal', 'Sergeant', 'Company sergeant major', 'Second lieutenant', 'Lieutenant', 'Acting captain'];
 export const SERGEANT = 3, CSM = 4, LIEUTENANT = 6, CAPTAIN = 7;
 // Promotions (the author, 2026-11-14: "Yes to all three"): the guaranteed step at each leave and
@@ -139,6 +147,13 @@ export const PATHS: Record<string, PathMods> = {
   rifleman: { hit: 1.0, award: 1.0, section: 1.0 },
   bomb: { hit: 1.5, award: 1.6, section: 1.0 },
   lewis: { hit: 1.4, award: 1.3, section: 0.95, defence: 0.85 },
+  // The transfers (the author, 2026-11-14: "build both transfers"). Tuned, not sourced: the
+  // frameworks' proposed numbers, for the gate to judge (FRAME-TANK.md, FRAME-AIR.md).
+  // tank: the tank draws every gun on the field; camps behind the line between battles; a hit tank
+  // burns; a ditched tank beyond the line is taken
+  tank: { hit: 1.0, award: 1.6, section: 1.0, fire: 0.25, lineNerve: 0.5, battleNerve: 1.0, advanceCapture: 0.01 },
+  // air: the aerodrome is miles back; no parachute; down on the wrong side of the line
+  air: { hit: 0.7, award: 2.0, section: 1.0, fire: 0.1, lineNerve: 0.5, killed: 0.45, captured: 0.15 },
   // out in the open for the wounded, unarmed; the men around him are brought in, and bearers were
   // decorated often (tuned, not sourced)
   bearer: { hit: 1.25, award: 1.4, section: 0.85 },
@@ -168,18 +183,21 @@ export const PHASE_HIT: Record<PhaseType | 'stalled', Record<BattleChoice, numbe
   // An attack that has stalled (uncut wire, the barrage gone ahead): pushing on is suicide,
   // the whole line goes to ground, and going down costs no standing. The player is told.
   stalled: { push: 2.3, help: 1.3, ground: 0.5 },
+  // the air gunner over a battle: stay on the job (the shoot, the photographs, the low pass), watch
+  // the pilot's tail, or tell him to turn for home (FRAME-AIR.md)
+  air: { push: 1.2, help: 0.9, ground: 0.6 },
 };
 // Chance an advance or trench phase has stalled.
 export const STALL = 0.25;
 
 // Awards: points needed (drawn per battle), ladder by stage. MM exists from 1916.
-export const AWARDS: Record<string, number> = { MiD: 3, MM: 7, MC: 7, DCM: 12, VC: 22 };
+export const AWARDS: Record<string, number> = { MiD: 3, MM: 7, MC: 7, DCM: 12, VC: 22, DFM: 7 };
 
 // The grade: record times the ending's multiplier. Prototype weights, the author's call later.
 export const GRADE = {
   // Cumulative credit for stages completed (0..4): later years are worth more.
   stages: [0, 8, 24, 48, 90], perRank: 6, subalternBonus: 8, perFriend: 2, nervePer10: 1,
-  award: { MiD: 3, MM: 8, MC: 8, DCM: 14, VC: 30 } as Record<string, number>,
+  award: { MiD: 3, MM: 8, MC: 8, DCM: 14, VC: 30, DFM: 8 } as Record<string, number>,
   mult: { armistice: 1.4, posting: 1.0, captured: 0.8, invalided: 0.8, killed: 0.4, broken: 0.6, courtMartial: 0.1 } as Record<Ending, number>,
 };
 
@@ -194,9 +212,26 @@ export const ROLES: Record<string, Role> = {
   lewis: { mission: 'covering a raid with the Lewis gun', chance: 0.6, hit: 0.08, nerve: 5, award: 1.4, success: 0.6 },
   snipe: { mission: 'sniping from a hide', chance: 0.6, hit: 0.065, nerve: 4, award: 1.2, success: 0.5 },
   signals: { mission: 'running a message under fire', chance: 0.6, hit: 0.08, nerve: 5, award: 1.2, success: 0.65 },
+  tank: { mission: 'bringing the tank up', chance: 0.7, hit: 0.04, nerve: 4, award: 1.2, success: 0.55 },
+  air: { mission: 'flying over the line', chance: 0.85, hit: 0.08, nerve: 7, award: 2.0, success: 0.6 },
   bearer: { mission: 'carrying the wounded in under fire', chance: 0.6, hit: 0.07, nerve: 6, award: 1.6, success: 0.6 },
   tunnel: { mission: 'listening for enemy miners; blowing a camouflet', chance: 0.6, hit: 0.045, nerve: 6, award: 1.2, success: 0.55 },
 };
+// The corps a man can transfer to, leaving the section for good (the tunnellers since 2026-11-09;
+// the tanks and the Flying Corps since 2026-11-14). When each is offered, who to, what stands in for
+// the section at rest, the corps pay, and how he still helps the battalion in its battles.
+export type Corps = 'tunnel' | 'tank' | 'air';
+export const CORPS = {
+  tank: { stage: 3, atRotation: 0, crew: 4, payPence: 4, training: 2, supportBattles: ['Arras', 'Hundred Days, August'], supportChoice: 'help', supportMult: 0.8 },
+  air: { stage: 3, atRotation: 4, training: 1, crew: 2, payPence: 24, restBonus: 2, supportChoice: 'push', supportMult: 0.85, qualifyAfter: 2, homeOffer: 0.7, moHome: 0.5, moNerve: 25 },
+  tunnel: { crew: 4 },
+} as const;
+// Battles fought by one corps only: Cambrai, 20 November 1917, for the tank man (FRAME-TANK.md). On
+// the last tour of 1917, which the calendar reads as November for him.
+export const CORPS_BATTLES: Partial<Record<Corps, Record<number, Record<number, Battle>>>> = {
+  tank: { 3: { 9: { name: 'Cambrai', phases: [[0.14, 11, 'advance'], [0.12, 10, 'trench'], [0.15, 11, 'hold']] } } },
+};
+
 export const ROLE = {
   detail: 0.6, // chance a specialist who declines is sent anyway
   successPerSkill: 0.06, hitPerSkill: 0.06,
@@ -246,4 +281,6 @@ export const SORTIES: Record<string, Sortie> = {
   signals: { shares: [0.3, 0.45, 0.25], back: [false, false, false], skill: 'signals', need: 3.5 },
   tunnel: { shares: [0.25, 0.5, 0.25], back: [false, true, false], skill: 'tunnel', need: 3.5 },
   bearer: { shares: [0.3, 0.45, 0.25], back: [false, true, false], skill: 'bearer', need: 3 },
+  tank: { shares: [0.3, 0.4, 0.3], back: [true, false, false], skill: 'lewis', need: 3.5 },
+  air: { shares: [0.3, 0.45, 0.25], back: [false, true, false], skill: 'lewis', need: 3.5 },
 };

@@ -14,7 +14,7 @@ import type { GameState } from './state';
 import {
   run, decide, setHome, newsOf, aliveFriends, grade, dutyHit, missionHit, phaseHit, battleOf,
   RANKS, ROLES, DUTIES, STAGES, SORTIES, sortieHit, type Decision, type War, type SortieChoice,
-  homeTier, sentHomeOf, lsd, ASSIGNMENTS,
+  homeTier, sentHomeOf, lsd, ASSIGNMENTS, CORPS_BATTLES, corpsOf, rankName, rankFull,
 } from './war/index';
 import { warMonth, seasonOf, monthName, monthOfClock } from './war/calendar';
 
@@ -53,7 +53,7 @@ const SKILL_NAMES: Record<string, string> = {
   trench: 'trench sense', bearer: 'stretcher-bearing', bomb: 'bombing', lewis: 'the Lewis gun', snipe: 'sniping', signals: 'signals', lead: 'leadership', tunnel: 'tunnelling',
 };
 export const PATH_NAMES: Record<string, string> = {
-  rifleman: 'rifleman', bomb: 'bomber', lewis: 'Lewis gunner', bearer: 'stretcher-bearer', snipe: 'sniper', signals: 'signaller', tunnel: 'tunneller', nco: 'section leader', subaltern: 'platoon officer',
+  rifleman: 'rifleman', bomb: 'bomber', lewis: 'Lewis gunner', bearer: 'stretcher-bearer', snipe: 'sniper', signals: 'signaller', tunnel: 'tunneller', tank: 'tank gunner', air: 'aerial gunner', nco: 'section leader', subaltern: 'platoon officer',
 };
 /** His job in a word: an acting captain commands a company, not a platoon. */
 export const roleName = (w: War) => (w.rank === 7 ? 'company commander' : PATH_NAMES[w.path] ?? w.path);
@@ -73,8 +73,11 @@ const ROLE_WHERE: Record<string, string> = {
   'running a message under fire': 'running a message under fire',
   'listening for enemy miners; blowing a camouflet': 'underground, listening for the enemy\'s miners',
   'carrying the wounded in under fire': 'carrying a wounded man in under fire',
+  'bringing the tank up': 'bringing the tank up to the line',
+  'flying over the line': 'in the air over the line',
 };
-const BATTLES = new Set(STAGES.flatMap((st) => Object.values(st.battles).map((b) => b.name)));
+const ALL_BATTLES = [...STAGES.flatMap((st) => Object.values(st.battles)), ...Object.values(CORPS_BATTLES).flatMap((by) => Object.values(by!).flatMap((r) => Object.values(r)))];
+const BATTLES = new Set(ALL_BATTLES.map((b) => b.name));
 
 /** A home posting in words. The war layer's names stay as they are (they are in its saves). */
 export function offerWords(o: string): string {
@@ -85,6 +88,7 @@ export function offerWords(o: string): string {
     'war work (city)': 'a clerk\'s post at the depot',
     'war work (farm)': 'a release to the land, for the harvest',
     instructor: 'instructor at the training depot',
+    'home establishment (air)': 'Home Establishment: an aerial gunnery school in England, teaching the new men',
   };
   return words[o] ?? o;
 }
@@ -124,7 +128,7 @@ const MONEY_LINES: Record<string, string[]> = {
 const BATTLE_WHERE: Record<string, string> = {
   'Somme, 1 July': 'on the Somme, on the first of July', 'Somme, autumn': 'on the Somme, in the autumn',
   'Spring Offensive': 'in the German offensive, in March', 'Hundred Days, August': 'at Amiens, in August',
-  'Hundred Days, October': 'in the advance, in October',
+  'Hundred Days, October': 'in the advance, in October', Cambrai: 'at Cambrai, in November',
 };
 export function whereOf(cause: string): string {
   // the resolver appends what happened (", severe wound, downgraded", ": shell shock"); battle names keep their commas
@@ -132,6 +136,8 @@ export function whereOf(cause: string): string {
   if (c === 'shellfire') return 'by a shell in the front line';
   if (c === 'in the line') return 'in the line';
   if (c === 'shelled in support') return 'by a shell in the support trenches';
+  if (c === 'anti-aircraft fire') return 'by anti-aircraft fire over the line';
+  if (c === 'shelled in the tank park') return 'by a shell in the tank park';
   if (c === 'escorting prisoners') return 'on the road, escorting prisoners back to the cage';
   if (c === 'guiding the relief') return 'guiding the relief in';
   if (c === 'mine collapse or camouflet') return 'underground, when a gallery came in';
@@ -149,8 +155,11 @@ export function endingLine(w: War): string {
     case 'invalided': return `Wounded ${whereOf(why)}, badly enough that the army will not have you back.`;
     case 'broken': return why.includes(':') ? `Your nerve went ${whereOf(why)}.` : 'Your nerve went in the line.';
     case 'courtMartial': return `You froze ${whereOf(why)} and were charged with cowardice.`;
-    case 'captured': return `Overrun ${whereOf(why)} and taken prisoner.`;
-    case 'posting': return `You took the posting: ${offerWords(w.posting ?? '')}.`;
+    case 'captured':
+      if (why.endsWith('shot down')) return `Shot down ${whereOf(why)}, and taken prisoner where you came down.`;
+      if (why.endsWith('ditched beyond the line')) return `Your tank ditched beyond their line ${whereOf(why)}, and the crew were taken.`;
+      return `Overrun ${whereOf(why)} and taken prisoner.`;
+    case 'posting': return why.startsWith('sent home by the medical officer') ? 'The medical officer sent you home, worn out: Home Establishment, teaching gunnery in England.' : `You took the posting: ${offerWords(w.posting ?? '')}.`;
     case 'armistice': return 'Monday, 11 November 1918. Eleven o\'clock in the morning.';
   }
   return '';
@@ -198,7 +207,7 @@ const writtenFallen = (w: War) => newsOf(w).fallen.find((f) => f.i < 3);
 
 /** A battle's name as a content id: "Somme, 1 July" -> somme_1_july. */
 export const battleSlug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
-const BATTLE_SLUGS = ['none', ...STAGES.flatMap((st) => Object.values(st.battles).map((b) => battleSlug(b.name)))];
+const BATTLE_SLUGS = ['none', ...ALL_BATTLES.map((b) => battleSlug(b.name))];
 
 /** The section from home, by town. The first three are the written friends (their arcs are
  *  authored); the war layer's friends[i] is the i-th name. Surnames among the men. */
@@ -228,7 +237,7 @@ export function artOf(s: CoreState): string | undefined {
 export function statusOf(s: CoreState): { rank: string; role: string; nerve: string; standing: string; section: string } {
   const w = war(s);
   return {
-    rank: RANKS[w.rank]!,
+    rank: rankFull(w),
     role: roleName(w),
     nerve: `Nerve: ${nerveWord(w.nerve)}`,
     standing: standingWord(w.standing),
@@ -238,8 +247,8 @@ export function statusOf(s: CoreState): { rank: string; role: string; nerve: str
 
 // ---- paths -------------------------------------------------------------------------------------
 
-const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key', 'month', 'home_tier', 'assign', 'stake', 'back_from_wound', 'lost_last', 'promoted_last', 'award_last', 'first_tour', 'back_from_leave', 'detailed_last', 'detailed_ok'] as const;
-const PENDING = ['none', 'tunnel', 'duty', 'mission', 'sick', 'course', 'battle', 'leave', 'step', 'tour', 'assign'];
+const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key', 'month', 'home_tier', 'assign', 'stake', 'back_from_wound', 'lost_last', 'promoted_last', 'award_last', 'first_tour', 'back_from_leave', 'detailed_last', 'detailed_ok', 'corps', 'corps_offer', 'shot_down'] as const;
+const PENDING = ['none', 'tunnel', 'corps', 'duty', 'mission', 'sick', 'course', 'battle', 'leave', 'step', 'tour', 'assign'];
 const ENDINGS = ['none', 'armistice', 'posting', 'captured', 'invalided', 'killed', 'broken', 'court_martial'];
 /** content ids are lower_snake_case; the war layer's ending names are its own */
 const endingId = (e: string) => (e === 'courtMartial' ? 'court_martial' : e);
@@ -261,6 +270,9 @@ function value(s: CoreState, field: string): number | string | boolean | undefin
     case 'section': return aliveFriends(w);
     case 'path': return w.path;
     case 'transferred': return w.transferred;
+    case 'corps': return corpsOf(w) ?? 'none';
+    case 'corps_offer': return p?.kind === 'corps' ? p.corps : 'none';
+    case 'shot_down': return w.cursor.at === 'done' && w.ending === 'captured' && w.endWhy.endsWith('shot down');
     case 'assign': return p?.kind === 'assign' ? p.key : 'none';
     case 'home_tier': return homeTier(w);
     case 'battle': return p?.kind === 'battle' ? battleSlug(p.battle) : 'none';
@@ -322,7 +334,7 @@ export const module: GameModule = {
     return (FIELDS as readonly string[]).includes(field ?? '') ? null : `unknown war field in "${path}" (${FIELDS.join(', ')})`;
   },
   labelFor: (_c, path) => ({ 'war.nerve': 'Nerve', 'war.standing': 'Standing', 'war.section': 'The section', 'war.rank': 'Rank' })[path],
-  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.duty' ? ['none', ...Object.keys(DUTIES)] : path === 'war.wound' ? ['none', 'light', 'severe'] : path === 'war.sortie' || path === 'war.result_key' || path === 'war.detailed_last' ? ['none', ...Object.keys(SORTIES)] : path === 'war.result' ? ['none', 'ok', 'failed', 'turned'] : path === 'war.course' ? ['none', 'bomb', 'lewis', 'snipe', 'signals', 'bearer', 'lead'] : path === 'war.assign' ? ['none', ...Object.keys(ASSIGNMENTS)] : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
+  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.duty' ? ['none', ...Object.keys(DUTIES)] : path === 'war.wound' ? ['none', 'light', 'severe'] : path === 'war.sortie' || path === 'war.result_key' || path === 'war.detailed_last' ? ['none', ...Object.keys(SORTIES)] : path === 'war.result' ? ['none', 'ok', 'failed', 'turned'] : path === 'war.course' ? ['none', 'bomb', 'lewis', 'snipe', 'signals', 'bearer', 'lead'] : path === 'war.assign' ? ['none', ...Object.keys(ASSIGNMENTS)] : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.corps' ? ['none', 'tunnel', 'tank', 'air'] : path === 'war.corps_offer' ? ['none', 'tank', 'air'] : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
   effects: {
     /** character creation: the two hometown skills from the town's list */
     war_home(s, _c, e) {
@@ -377,7 +389,7 @@ export const module: GameModule = {
       if (dn) ctx.changes.push(`Nerve ${dn > 0 ? '+' : '−'}${Math.abs(dn)}`);
       const ds = Math.round(w.standing - before.standing);
       if (ds) ctx.changes.push(`Standing ${ds > 0 ? '+' : '−'}${Math.abs(ds)}`);
-      if (w.rank > before.rank) ctx.changes.push(`Promoted: ${RANKS[w.rank]}`);
+      if (w.rank > before.rank) ctx.changes.push(`Promoted: ${rankName(w)}`);
       if (w.awards.length > before.awards) ctx.changes.push(`Awarded: ${w.awards.slice(before.awards).join(', ')}`);
       const lost = before.section - aliveFriends(w);
       if (lost > 0) ctx.changes.push(lost === 1 ? 'A man of the section killed' : `${lost} men of the section killed`);
@@ -399,9 +411,9 @@ export const module: GameModule = {
     switch (name) {
       case 'nerve_word': return nerveWord(w.nerve);
       case 'standing_word': return standingWord(w.standing);
-      case 'rank_name': return RANKS[w.rank]!;
+      case 'rank_name': return rankName(w);
       // the rank in running prose: 'You're a corporal now'
-      case 'rank_a': { const r = RANKS[w.rank]!.toLowerCase(); return w.rank === 4 ? `company sergeant major` : `${/^[aeiou]/.test(r) ? 'an' : 'a'} ${r}`; }
+      case 'rank_a': { const r = rankName(w).toLowerCase(); return w.rank === 4 && rankName(w) === RANKS[4] ? `company sergeant major` : `${/^[aeiou]/.test(r) ? 'an' : 'a'} ${r}`; }
       case 'path_name': return roleName(w);
       case 'section_line': {
         const n = aliveFriends(w);
@@ -424,7 +436,7 @@ export const module: GameModule = {
         const named = r.lost.find((i) => i < 3);
         return named !== undefined ? SECTION_NAMES[w.town]![named]!.split(' ')[0]! : r.lost.length > 1 ? `${r.lost.length} of the section` : SECTION_NAMES[w.town]![r.lost[0] ?? 3]!.split(' ')[0]!;
       }
-      case 'award_last_name': { const a = recent(w).award; return a === 'MM' ? 'Military Medal' : a === 'DCM' ? 'Distinguished Conduct Medal' : a === 'MC' ? 'Military Cross' : a === 'VC' ? 'Victoria Cross' : 'mention in despatches'; }
+      case 'award_last_name': { const a = recent(w).award; return a === 'MM' ? 'Military Medal' : a === 'DCM' ? 'Distinguished Conduct Medal' : a === 'MC' ? 'Military Cross' : a === 'VC' ? 'Victoria Cross' : a === 'DFM' ? 'Distinguished Flying Medal' : 'mention in despatches'; }
       case 'tour_line': {
         const i = w.cursor.at === 'duty' ? (w.cursor as { i: number }).i : 0;
         return `Tour ${w.clock} in the line. ${i === 0 ? 'The first' : 'A second'} call for men this tour.`;
@@ -464,7 +476,7 @@ export const module: GameModule = {
   // the year's title page: where he stands, and who of the nine has died since the last page
   cardRows: (_c, s) => {
     const w = war(s);
-    return [['Rank', `${RANKS[w.rank]}, ${roleName(w)}`], ['The section from home', `${aliveFriends(w)} of 9`], ['Battles', String(w.stats.battles)]];
+    return [['Rank', `${rankFull(w)}, ${roleName(w)}`], ['The section from home', `${aliveFriends(w)} of 9`], ['Battles', String(w.stats.battles)]];
   },
   cardDead: (_c, s, from) => {
     const w = war(s); const names = SECTION_NAMES[w.town]!;

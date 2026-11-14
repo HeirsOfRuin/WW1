@@ -3,6 +3,10 @@
 # the generic scene for that question; endings come first.
 switch:
   - { if: "war.ending == killed", go: e_killed }
+  # the tanks and the Flying Corps (content/scenes/war/corps-*.yaml; docs/FRAME-TANK.md, FRAME-AIR.md)
+  - { if: ["war.ending == armistice", "war.corps == tank"], go: e_armistice_tank }
+  - { if: ["war.ending == armistice", "war.corps == air"], go: e_armistice_air }
+  - { if: ["war.ending == captured", "war.shot_down"], go: e_captured_air }
   - { if: ["war.ending == armistice", "start == mill"], go: e_armistice_mill }
   - { if: ["war.ending == armistice", "start == pit"], go: e_armistice_pit }
   - { if: ["war.ending == armistice", "start == farm"], go: e_armistice_farm }
@@ -41,6 +45,8 @@ switch:
   - { if: ["war.result != none", "war.result_key == signals"], go: x_signals_done }
   - { if: ["war.result != none", "war.result_key == tunnel"], go: x_tunnel_done }
   - { if: ["war.result != none", "war.result_key == bearer"], go: x_bearer_done }
+  - { if: ["war.result != none", "war.result_key == tank"], go: x_tank_done }
+  - { if: ["war.result != none", "war.result_key == air"], go: x_air_done }
   - { if: "war.result != none", go: x_sortie }
   - { if: ["war.sortie == raid", "war.step == 1"], go: s_raid_1 }
   - { if: ["war.sortie == raid", "war.step == 2"], go: s_raid_2 }
@@ -75,12 +81,28 @@ switch:
   - { if: ["war.sortie == bearer", "war.step == 1"], go: s_bearer_1 }
   - { if: ["war.sortie == bearer", "war.step == 2"], go: s_bearer_2 }
   - { if: ["war.sortie == bearer", "war.step == 3"], go: s_bearer_3 }
+  - { if: ["war.sortie == tank", "war.step == 1"], go: s_tank_1 }
+  - { if: ["war.sortie == tank", "war.step == 2"], go: s_tank_2 }
+  - { if: ["war.sortie == tank", "war.step == 3"], go: s_tank_3 }
+  - { if: ["war.sortie == air", "war.step == 1"], go: s_air_1 }
+  - { if: ["war.sortie == air", "war.step == 2"], go: s_air_2 }
+  - { if: ["war.sortie == air", "war.step == 3"], go: s_air_3 }
   - { if: "war.pending == step", go: w_step }
   # a title page for each year, at the first tour of the year (content/scenes/war/years.yaml)
   - { if: ["war.pending == tour", "war.stage == 1", { not: flag.year_1915 }], go: y_1915 }
   - { if: ["war.pending == tour", "war.stage == 2", { not: flag.year_1916 }], go: y_1916 }
   - { if: ["war.pending == tour", "war.stage == 3", { not: flag.year_1917 }], go: y_1917 }
   - { if: ["war.pending == tour", "war.stage == 4", { not: flag.year_1918 }], go: y_1918 }
+  # the tanks and the Flying Corps: the offer, his battles, his own year (above the towns' routes)
+  - { if: ["war.pending == corps", "war.stage == 3", { not: flag.year_1917 }], go: y_1917 } # the year's page before the January offer
+  - { if: ["war.pending == corps", "war.corps_offer == tank"], go: w_corps_tank }
+  - { if: ["war.pending == corps", "war.corps_offer == air"], go: w_corps_air }
+  - { if: ["war.pending == battle", "war.corps == tank"], go: bt_tank }
+  - { if: ["war.pending == battle", "war.corps == air"], go: bt_air }
+  - { if: ["war.pending == tour", "war.stage == 3", "war.corps == tank"], go: { pool: front_1917_tank, count: 1, then: w_tour } }
+  - { if: ["war.pending == tour", "war.stage == 4", "war.corps == tank"], go: { pool: front_1918_tank, count: 1, then: w_tour } }
+  - { if: ["war.pending == tour", "war.stage == 3", "war.corps == air"], go: { pool: front_1917_air, count: 1, then: w_tour } }
+  - { if: ["war.pending == tour", "war.stage == 4", "war.corps == air"], go: { pool: front_1918_air, count: 1, then: w_tour } }
   # the pit town, 1915 (content/scenes/war/1915-pit.yaml; docs/FRAME-PIT-1915.md): above the mill's
   # Loos, which is routed by path only
   - { if: ["war.pending == tour", "war.stage == 1", "start == pit"], go: { pool: front_1915_pit, count: 1, then: w_tour } }

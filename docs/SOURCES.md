@@ -92,3 +92,62 @@ So a "confirmed" below means confirmed across search sources, not read in full.
 - Paper thrown from City windows on 11 November (plausible, not found).
 - German gramophones in dugouts (plausible).
 - **The war's numbers** (KILLGATE open issue 6): the hazards and the rates in `data.ts`, including the pay table beyond the private's shilling and the tunneller's six shillings, are tuned to the SPEC targets, not sourced. Changing them is a rule change for the author.
+
+## The tank and air roads (2026-11-14): not yet checked
+
+The content writers used these beyond docs/FRAME-TANK.md and docs/FRAME-AIR.md. No source was
+opened for them; each is unchecked until it is.
+
+### The tank road
+
+Everything else in content/scenes/war/corps-tank.yaml, the tank lines in war.yaml (w_tour,
+w_mission) and the four 1917 leave paragraphs uses only FRAME-TANK.md's facts. The FRAME's own
+"not checked, but likely" items used in the text: the bells for Cambrai and the ground lost after
+30 November; tank banks at town halls (in the leave scenes the visit is said as talk, "they say");
+crews fighting as Lewis-gun teams in March 1918; Lulworth as the gunnery range; pigeons carried.
+No source was opened this session (no network check was made): every row below is unchecked.
+
+#### New facts in the tank story
+
+| Detail | Where | Status |
+|---|---|---|
+| The approach march by night along a white tape laid to the start line, a guide walking ahead with a lamp shown backwards | s_tank_1-3, w_mission | unchecked (given in the brief; widely described in tank memoirs, e.g. Browne, *The Tank in Action*) |
+| An unditching beam carried on the tank and chained to the tracks to get out of a ditch | s_tank_2, bt_tank (Passchendaele 3) | unchecked (a Mark IV fitting, mid-1917; the Arras-time tanks may not have had it, so it appears only from August 1917: the Passchendaele battle, and the mission step from tour 27 on; before that the crew packs brushwood under the tracks) |
+| A tank officer getting out to guide his tank on foot under fire | bt_tank (Cambrai 3, Lacey's death) | unchecked |
+| Tanks seen "at the pictures" by people at home in 1917 | v17tk_letter (mill) | unchecked (the film *The Battle of the Ancre and the Advance of the Tanks*, early 1917) |
+| Bermicourt headquarters in a chateau | v17tk_erin, w_tour month 2 | unchecked (FRAME has Bermicourt as headquarters, not the building) |
+| The Whippet's crew of three as officer, driver and gunner | v18tk_whippet, v18tk_three | unchecked (FRAME gives three; the roles follow *Musical Box*) |
+| At Amiens the Whippets went in behind the heavy tanks and then passed through | bt_tank (Amiens 1, Whippet road) | unchecked |
+| Booby traps in the dugouts in October 1918 (wires on the steps, a stove with a bomb) | bt_tank (October 2) | FRAME gives "booby traps in the Hindenburg dugouts"; the particular devices are unchecked |
+| A Lewis gun weighs twenty-eight pounds | bt_tank (Passchendaele 4) | as already used in 1917-mill.yaml (b_pass_1) |
+
+#### Fiction, on purpose
+
+- *Lodestar* (still to be checked against real tank names, per FRAME), Mr Fane, Mr Yarrow, Hendy,
+  Dobbs: invented. The crew repainting the same name on each new tank is a story choice, not a
+  claimed practice.
+- The breakdown at Bullecourt "two days after the battalion's attack" (9 and 11 April 1917) puts
+  *Lodestar* at both; the FRAME's event list asks for both.
+- The offer in January 1917 does not mention Bullecourt (April 1917), though the FRAME's "pressure"
+  note suggests it: that would be an anachronism. The officer's pressure is the Somme stories.
+
+
+### The air road
+
+None of these was checked this session (no web research was done). "Unchecked" throughout.
+
+| Detail | Where | Status |
+|---|---|---|
+| Castor oil smell comes from rotary-engined scouts sharing the aerodrome; the RE8 (an inline/V engine) is given "hot oil and petrol" instead | v17air_aerodrome | unchecked; a deliberate hedge, since castor oil belongs to rotaries |
+| The clock code: target at the centre, twelve o'clock north, lettered distance rings | s_air_2 | unchecked (FRAME names "the clock code" only) |
+| With no officer observer, the pilot taps the Morse to the battery | s_air_2, bt_air Passchendaele 2 | unchecked; who held the key in an RE8 with a gunner is not known here |
+| Aircrew talk of carrying revolvers against burning (implied, not stated) | v17air_archie | unchecked; widely told, not sourced |
+| Engine oil and gun oil thicken in the cold; oil warmed before a winter start | w_tour air January lines, v18air_hollis | unchecked |
+| The RAF's light-blue uniform talked of in April 1918, not yet issued | v18air_raf | unchecked (FRAME: "nobody has the new uniform") |
+| The DFM read out in orders, July 1918 | v18air_mess | FRAME lists the DFM (June 1918) as "likely, not checked" |
+| Manitoba farms named by township and section number (Dominion Land Survey) | v17air_letters, e_armistice_air | unchecked |
+| Very lights fired at an aerodrome on 11 November 1918 | e_armistice_air | requested by the brief; unchecked for any particular squadron |
+| German airmen gave captured fliers a meal in their mess | e_captured_air | requested by the brief ("sometimes"); kept modest; unchecked |
+| Low-level attacks on the Somme crossings went on for days after 8 August | v18air_bridges, v18air_hollis_down | FRAME confirms 8 August; the following days are unchecked |
+| The Gotha raids on London in summer 1917 colour the City's view of aeroplanes | l_city_1917 air line, v17air_letters | the 13 June raid and Poplar are confirmed in SOURCES.md |
+

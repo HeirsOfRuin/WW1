@@ -7,7 +7,7 @@ import { playGame } from '../tools/war-bot';
 import { newGame, view, choose, type GameState } from '../src/game/index';
 import { toSave, fromSave, encodeSaveCode, decodeSaveCode } from '../src/game/save';
 import { warMonth, seasonOf, monthName, ARMISTICE } from '../src/game/war/calendar';
-import { phaseHit, battleOf, newWar, run, decide, decideFor, homeTier, sentHomeOf, POLICIES as WAR_POLICIES } from '../src/game/war/index';
+import { phaseHit, battleOf, newWar, run, decide, decideFor, homeTier, sentHomeOf, missionHit, rankFull, ROLES as WAR_ROLES, POLICIES as WAR_POLICIES } from '../src/game/war/index';
 import { riskWord, whereOf, endingLine } from '../src/game/module';
 import { share } from '../tools/story-share';
 
@@ -149,7 +149,7 @@ describe('every role has words', () => {
   // A choice whose text is built role by role ("[if war.path == lewis]...[/if]...") shows a blank
   // button to any role it forgets. The stretcher-bearer (2026-11-14) was the first role added after
   // the battles were written; this holds every role to every battle and mission choice.
-  const ROLES_1916 = ['rifleman', 'nco', 'lewis', 'signals', 'bomb', 'snipe', 'bearer', 'tunnel', 'subaltern'];
+  const ROLES_1916 = ['rifleman', 'nco', 'lewis', 'signals', 'bomb', 'snipe', 'bearer', 'tunnel', 'subaltern', 'tank', 'air'];
   const render = (t: string, path: string) => t.replace(/\[if ([^\]]*war\.path[^\]]*)\](.*?)\[\/if\]/g, (_m, cond: string, body: string) => {
     const ok = cond.split('||').some((c) => { const m = /war\.path (==|!=) (\w+)/.exec(c.trim()); return !!m && (m[1] === '==' ? m[2] === path : m[2] !== path); });
     return ok ? body : '';
@@ -161,6 +161,7 @@ describe('every role has words', () => {
       for (const ch of sc.choices ?? []) {
         if (!ch.text.includes('war.path')) continue;
         for (const path of ROLES_1916) {
+          if ((path === 'tank' || path === 'air') && sc.id !== 'w_mission') continue; // their battles are bt_tank and bt_air
           const words = render(ch.text, path).replace(/\(\{[a-z_]+\}\)/g, '').trim();
           if (!words) blank.push(`${sc.id}/${ch.id} as ${path}`);
         }
@@ -169,6 +170,43 @@ describe('every role has words', () => {
     // a tunneller's and an officer's choices on the first of July are only for the towns that have them
     expect(blank.filter((b) => !/(w_mission\/go as (rifleman|nco|subaltern))|( as (tunnel|subaltern)$)/.test(b))).toEqual([]);
   });
+});
+
+describe('the tanks and the Flying Corps', () => {
+  // FRAME-TANK.md, FRAME-AIR.md (2026-11-14). A war-layer man who takes each offer, played to the end.
+  const play = (corps: 'tank' | 'air', seed: number, town: (typeof TOWNS)[number]) => {
+    const p = { ...WAR_POLICIES.adaptive!, corps: (_w: unknown, c: string) => c === corps };
+    const w = newWar({ seed, town });
+    const months: Record<string, string> = {};
+    for (let g = 0; g < 5000 && !w.ending; g++) {
+      run(w);
+      if (!w.pending) break;
+      if (w.pending.kind === 'battle') months[w.pending.battle] = monthName(warMonth(w));
+      decide(w, decideFor(p as never, w, w.pending, battleOf) as never);
+    }
+    return { w, months };
+  };
+  it('every mission has a real risk (an unknown skill read as NaN made flying missions harmless)', () => {
+    const w = newWar({ seed: 1, town: 'mill' });
+    for (const k of Object.keys(WAR_ROLES)) { expect(Number.isFinite(missionHit(w, k)), k).toBe(true); expect(missionHit(w, k), k).toBeGreaterThan(0); }
+  });
+  it('the tank man fights Cambrai in November 1917; the air gunner flies, under RFC ranks', () => {
+    let tanks = 0, cambrai = 0, airs = 0;
+    for (let i = 0; i < 400; i++) {
+      const t = play('tank', 7000 + i, 'mill');
+      if (t.w.corps === 'tank') {
+        tanks++; expect(t.w.log.join('\n')).toMatch(/S3 r19 \| transferred to the Tank Corps/);
+        if (t.months.Cambrai) { cambrai++; expect(t.months.Cambrai).toBe('November 1917'); }
+      }
+      const a = play('air', 7000 + i, TOWNS[i % 4]!);
+      if (a.w.corps === 'air') {
+        airs++; expect(a.w.log.join('\n')).toMatch(/S3 r2[34] \| transferred to the Royal Flying Corps/);
+        expect(rankFull(a.w)).not.toMatch(/^(Private|Lance corporal)/);
+        if (a.w.ending === 'captured' && a.w.endWhy.endsWith('shot down')) expect(endingLine(a.w)).toMatch(/^Shot down/);
+      }
+    }
+    expect(tanks).toBeGreaterThan(20); expect(cambrai).toBeGreaterThan(5); expect(airs).toBeGreaterThan(10);
+  }, 60_000);
 });
 
 describe('pay sent home', () => {
