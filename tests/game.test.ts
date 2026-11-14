@@ -10,6 +10,7 @@ import { warMonth, seasonOf, monthName, ARMISTICE } from '../src/game/war/calend
 import { phaseHit, battleOf, newWar, run, decide, decideFor, homeTier, sentHomeOf, missionHit, rankFull, ROLES as WAR_ROLES, POLICIES as WAR_POLICIES } from '../src/game/war/index';
 import { riskWord, whereOf, endingLine } from '../src/game/module';
 import { share } from '../tools/story-share';
+import { recordOf } from '../src/game/character';
 
 const content = loadContent();
 const TOWNS = ['pit', 'mill', 'city', 'farm'] as const;
@@ -206,6 +207,31 @@ describe('the tanks and the Flying Corps', () => {
       }
     }
     expect(tanks).toBeGreaterThan(20); expect(cambrai).toBeGreaterThan(5); expect(airs).toBeGreaterThan(10);
+  }, 60_000);
+});
+
+describe('the crew on the Soldier tab', () => {
+  // A crewman's fate is a story choice that comes true later: the record must not show it early.
+  it('shows Lodestar\'s crew, and Lacey dead only after Cambrai', () => {
+    let seen = 0;
+    for (let i = 0; i < 300 && seen < 3; i++) {
+      let s = newGame(content, { start: 'mill', seed: 3000 + i * 13, name: 'Tom' });
+      const pol = { ...WAR_POLICIES.adaptive!, corps: (_w: unknown, c: string) => c === 'tank' };
+      for (let k = 0; k < 5000 && !s.ended; k++) {
+        const v = view(content, s);
+        if (s.war.corps === 'tank') {
+          const lacey = recordOf(content, { ...s, flags: { ...s.flags, tk17_lacey_praised: true } } as GameState).crew!.men[0]!;
+          const fought = s.war.log.some((l) => l.includes('battle: Cambrai as')) || s.war.clock > 29;
+          expect(lacey.alive, `tour ${s.war.clock}`).toBe(!fought);
+          if (fought) seen++;
+        }
+        const ok = v.choices.filter((c) => c.available);
+        const id = s.war.pending && !v.sceneId.startsWith('v1') && !v.sceneId.startsWith('x_') && !v.sceneId.startsWith('y_') && !v.sceneId.startsWith('c_') ? decideFor(pol as never, s.war, s.war.pending, battleOf).replace(':', '_') : ok[0]?.id;
+        if (!id || !ok.some((c) => c.id === id)) { if (!ok[0]) break; s = choose(content, s, ok[0].id).state; continue; }
+        s = choose(content, s, id).state;
+      }
+    }
+    expect(seen).toBeGreaterThan(0);
   }, 60_000);
 });
 

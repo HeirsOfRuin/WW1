@@ -46,6 +46,7 @@ answers (`docs/KILLGATE.md`, 2026-11-09). Design: `docs/DESIGN.md`, draft for ap
 | 2026-11-14 | The tunneller's 1918 stays story-heavy (about 70%), and the war's numbers stay tuned, not sourced, unless play shows the feel is wrong | "Yes and yes." |
 | 2026-11-14 | Promotions capped: the guaranteed step at leave only up to sergeant; above it earned, company sergeant major rare; the officer path gains lieutenant and acting captain. Special assignments (firing party, escort, guide, burial, instructor, concert party). A stretcher-bearer specialty. Begin the frameworks for a Tank Corps transfer and an air gunner in the Flying Corps | "Yes to all three, and begin the framework for the tank transfer, also one for a gunner position in the air corps" |
 | 2026-11-14 | Build both transfers on the frameworks' recommendations. Tank: offered to any town with machinery or Lewis gun 2; Cambrai a third 1917 battle for him; one offer only; the Whippet a story choice. Air gunner: offered May 1917 to a Lewis gunner; no pilot path (pilot training a home posting); Home Establishment as an exit; RFC/RAF titles shown with the army equivalent (FRAME-TANK.md, FRAME-AIR.md) | "Go with the recommendations and build both transfers" |
+| 2026-11-14 | The tank road's 1917 stays story-heavy (67% against the 45-60% target: Cambrai's extra battle screens count as story). The facts the tank and air writers added, unchecked, are checked now; then build as Claude sees fit | "1. Yes 2. Check now. Then build as you see fit" |
 
 ## Pitch
 

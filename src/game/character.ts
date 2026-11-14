@@ -17,6 +17,8 @@ export interface SoldierRecord {
   nerve: { value: number; word: string }; standing: string;
   home: Line[]; war: SkillLine[]; traits: Line[]; awards: Line[]; career: Line[];
   friends: { name: string; status: string; written: boolean; alive: boolean }[];
+  /** the tank's crew or the air gunner's pilot and fitter, once he has transferred (FRAME-TANK, FRAME-AIR) */
+  crew: { title: string; men: { name: string; status: string; alive: boolean }[] } | null;
   rivals: Line[];
   totals: Line[];
 }
@@ -131,6 +133,8 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
     return { name: n, status, written: i < 3, alive };
   });
 
+  const crew = crewOf(w, flags);
+
   const war = Object.entries(WAR)
     .filter(([k]) => k !== 'tunnel' || corpsOf(w) === 'tunnel')
     .map(([k, [label, note]]) => ({ label, level: Math.round(skill(w, k) * 10) / 10, note }));
@@ -149,6 +153,7 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
     awards,
     career,
     friends,
+    crew,
     rivals,
     totals: [
       { label: 'Tours in the line', note: String(w.stats.rotations) },
@@ -160,6 +165,42 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
       { label: 'Sent home', note: lsd(sentHomeOf(w)) },
     ],
   };
+}
+
+type Man = { name: string; status: string; alive: boolean };
+/** The men he serves with after a transfer, and what has become of them so far. Their fates are
+ *  story choices (flags) that come true on a later tour, so each is shown only once its tour has
+ *  passed: the record must not tell the player that Lacey dies at Cambrai in September. */
+function crewOf(w: War, flags: Record<string, unknown>): SoldierRecord['crew'] {
+  const f = (k: string) => !!flags[k];
+  // a battle's fates come true when it is fought (or its tour has gone by, if he was out of it)
+  const after = (tour: number, battle: string) => w.clock > tour || w.log.some((l) => l.includes(`battle: ${battle} as`));
+  if (corpsOf(w) === 'tank') {
+    const men: Man[] = [];
+    const lacey: Man = !after(29, 'Cambrai') ? { name: '2/Lt Edward Lacey', status: 'Commands Lodestar. Sick every time she moves.', alive: true }
+      : f('tk17_lacey_praised') ? { name: '2/Lt Edward Lacey', status: 'Killed at Flesquières, Cambrai, November 1917, walking ahead of her.', alive: false }
+      : { name: '2/Lt Edward Lacey', status: 'Wounded at Cambrai, November 1917, and sent home.', alive: true };
+    men.push(lacey);
+    men.push(f('tk18_said_no') ? (after(36, 'Hundred Days, August') ? { name: 'Cpl Walter Pring', status: 'Went to the Whippets without you. Killed at Amiens, August 1918.', alive: false } : { name: 'Cpl Walter Pring', status: 'Driving a Whippet now, with somebody else on his gun.', alive: true })
+      : f('tk18_pring_hit') ? { name: 'Cpl Walter Pring', status: 'Wounded in the Whippet, September 1918, and sent home.', alive: true }
+      : f('tk18_whippet') ? { name: 'Cpl Walter Pring', status: 'Drives the Whippet. You are his gunner.', alive: true }
+      : { name: 'Cpl Walter Pring', status: 'The driver. Drives like a bus with the brakes on.', alive: true });
+    men.push(f('tk18_tonks_told') ? { name: 'Pte Alf Tonks', status: 'Deaf in one ear. Sent to the workshops at Erin.', alive: true } : { name: 'Pte Alf Tonks', status: 'Gearsman. Signals with a hammer on the engine cover.', alive: true });
+    men.push(f('tk17_murray_tin') && after(29, 'Cambrai') ? { name: 'Pte Duggie Murray', status: 'Burned at Cambrai, November 1917.', alive: false } : { name: 'Pte Duggie Murray', status: 'Gearsman. Says she is badly riveted.', alive: true });
+    men.push(f('tk_kearney_taken') ? { name: 'Pte Mick Kearney', status: 'Taken prisoner when his tank ditched beyond their line, August 1918.', alive: true } : { name: 'Pte Mick Kearney', status: 'Gunner. Deals the cards.', alive: true });
+    return { title: 'The crew of Lodestar', men };
+  }
+  if (corpsOf(w) === 'air') {
+    const men: Man[] = [];
+    men.push(f('af18_ferrier_home') ? { name: 'Lt Neil Ferrier', status: 'Your pilot in 1917. Sent home to teach, February 1918.', alive: true }
+      : f('af18_ferrier_killed') ? { name: 'Lt Neil Ferrier', status: 'Your pilot in 1917. Killed after the retreat, spring 1918.', alive: false }
+      : { name: 'Lt Neil Ferrier', status: 'Your pilot. Flies the RE8 like a binder.', alive: true });
+    if (f('af18_hollis')) men.push(f('af18_hollis_killed') ? { name: 'Sgt Len Hollis', status: 'A sergeant pilot. Killed at the Somme bridges, August 1918.', alive: false } : { name: 'Sgt Len Hollis', status: 'A sergeant pilot. Knows engines, and says so.', alive: true });
+    if (f('af18_hollis_killed')) men.push({ name: 'Mr Lyle', status: 'Your pilot since the bridges.', alive: true });
+    men.push({ name: 'AM1 Bert Sallis', status: 'The fitter. Waits on the field every evening, counting the machines home.', alive: true });
+    return { title: 'Your pilot and fitter', men };
+  }
+  return null;
 }
 
 export { ROLES };

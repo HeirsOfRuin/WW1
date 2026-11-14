@@ -131,6 +131,11 @@ function Soldier({ r }: { r: SoldierRecord }) {
       <h3>The section from home</h3>
       <ul class="section">{r.friends.map((f) => <li class={f.alive ? '' : 'dead'}><strong>{f.name}</strong>{f.written ? '' : ''}<br /><small>{f.status}</small></li>)}</ul>
 
+      {r.crew && <>
+        <h3>{r.crew.title}</h3>
+        <ul class="section">{r.crew.men.map((m) => <li class={m.alive ? '' : 'dead'}><strong>{m.name}</strong><br /><small>{m.status}</small></li>)}</ul>
+      </>}
+
       <h3>Rivals</h3>
       {lines(r.rivals, 'None yet.')}
 
