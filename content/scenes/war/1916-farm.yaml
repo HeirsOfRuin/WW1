@@ -253,7 +253,7 @@
 
     Half past seven. The guns stop. The whistles.
 
-    [if war.path == rifleman]You go up the ladder with {mate} on the rung below you, and out of the trees into the open.[/if][if war.path == nco]Seven men behind you on the ladder, watching your back.[/if][if war.path == lewis]You go in the second line with the gun on your shoulder and your No. 2 behind with the drums.[/if][if war.path == signals]You go with the company officer, a reel of wire paying out behind you.[/if][if war.path == bomb]You go with the bombers, a bucket of Mills bombs in each hand.[/if][if war.path == snipe]You go behind the second line with the scoped rifle, looking for the shrine.[/if][if flag.f16_learned_ground] You know the ground. You know where the bank is.[/if]
+    [if war.path == rifleman]You go up the ladder with {mate} on the rung below you, and out of the trees into the open.[/if][if war.path == nco]Seven men behind you on the ladder, watching your back.[/if][if war.path == lewis]You go in the second line with the gun on your shoulder and your No. 2 behind with the drums.[/if][if war.path == signals]You go with the company officer, a reel of wire paying out behind you.[/if][if war.path == bomb]You go with the bombers, a bucket of Mills bombs in each hand.[/if][if war.path == snipe]You go behind the second line with the scoped rifle, looking for the shrine.[/if][if war.path == bearer]You go out of the copse behind the first wave with the stretcher, and the slope fills with your work before you're ten yards out.[/if][if flag.f16_learned_ground] You know the ground. You know where the bank is.[/if]
 
     The machine gun by the crucifix opens up before the first wave is twenty yards out of the copse.
     It's exactly where the officer said. It sweeps the slope like a man scything, left to right, and
@@ -262,11 +262,11 @@
     [if war.stalled]Nobody gets past the dip. The slope's full of men lying down, and the gun goes on.[else]Some of them get up and go on. Down into the dip, where it can't reach.[/if]
   choices:
     - id: push
-      text: "[if war.path == lewis]Get the gun into a shell hole and fire on the shrine.[/if][if war.path == signals]Keep going, paying out the wire.[/if][if war.path == bomb]Run for the dip with the buckets.[/if][if war.path == snipe]Find a fire position and hunt the gun at the shrine.[/if][if war.path == nco]Take the section on at a run for the dip.[/if][if war.path == rifleman]Run for the dip.[/if] ({risk_push})"
+      text: "[if war.path == lewis]Get the gun into a shell hole and fire on the shrine.[/if][if war.path == signals]Keep going, paying out the wire.[/if][if war.path == bomb]Run for the dip with the buckets.[/if][if war.path == snipe]Find a fire position and hunt the gun at the shrine.[/if][if war.path == nco]Take the section on at a run for the dip.[/if][if war.path == rifleman]Run for the dip.[/if][if war.path == bearer]Go down the slope to the men the gun has had.[/if] ({risk_push})"
       effects: [ { war: push } ]
       next: "@war"
     - id: help
-      text: "[if war.path == nco]Get your wounded back into the copse.[/if][if war.path == lewis]Get the drums forward to the men who need them.[/if][if war.path == rifleman]Drag {mate} into a shell hole. He's hit in the leg.[/if][if war.path == signals]Stay with the officer. He's down.[/if][if war.path == bomb]Get a wounded bomber back into the trees.[/if][if war.path == snipe]Spot for the Lewis gun beside you.[/if] ({risk_help})"
+      text: "[if war.path == nco]Get your wounded back into the copse.[/if][if war.path == lewis]Get the drums forward to the men who need them.[/if][if war.path == rifleman]Drag {mate} into a shell hole. He's hit in the leg.[/if][if war.path == signals]Stay with the officer. He's down.[/if][if war.path == bomb]Get a wounded bomber back into the trees.[/if][if war.path == snipe]Spot for the Lewis gun beside you.[/if][if war.path == bearer]Carry the nearest man back into the copse.[/if] ({risk_help})"
       effects: [ { war: help } ]
       next: "@war"
     - id: ground

@@ -40,6 +40,7 @@ switch:
   - { if: ["war.result != none", "war.result_key == snipe"], go: x_snipe_done }
   - { if: ["war.result != none", "war.result_key == signals"], go: x_signals_done }
   - { if: ["war.result != none", "war.result_key == tunnel"], go: x_tunnel_done }
+  - { if: ["war.result != none", "war.result_key == bearer"], go: x_bearer_done }
   - { if: "war.result != none", go: x_sortie }
   - { if: ["war.sortie == raid", "war.step == 1"], go: s_raid_1 }
   - { if: ["war.sortie == raid", "war.step == 2"], go: s_raid_2 }
@@ -71,6 +72,9 @@ switch:
   - { if: ["war.sortie == tunnel", "war.step == 1"], go: s_tunnel_1 }
   - { if: ["war.sortie == tunnel", "war.step == 2"], go: s_tunnel_2 }
   - { if: ["war.sortie == tunnel", "war.step == 3"], go: s_tunnel_3 }
+  - { if: ["war.sortie == bearer", "war.step == 1"], go: s_bearer_1 }
+  - { if: ["war.sortie == bearer", "war.step == 2"], go: s_bearer_2 }
+  - { if: ["war.sortie == bearer", "war.step == 3"], go: s_bearer_3 }
   - { if: "war.pending == step", go: w_step }
   # a title page for each year, at the first tour of the year (content/scenes/war/years.yaml)
   - { if: ["war.pending == tour", "war.stage == 1", { not: flag.year_1915 }], go: y_1915 }

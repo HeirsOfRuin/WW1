@@ -48,6 +48,7 @@ const WAR: Record<string, [string, string]> = {
   signals: ['Signals', 'At 2, the signaller\'s role.'],
   lead: ['Leadership', 'The section is killed less often when you lead it; counts for a commission.'],
   tunnel: ['Tunnelling', 'Underground, the gallery is less likely to come in on you.'],
+  bearer: ['Stretcher-bearing', 'At 2, the stretcher-bearer\'s role; the men around you are brought in.'],
 };
 const AWARD_NAMES: Record<string, string> = {
   MiD: 'Mentioned in Despatches', MM: 'Military Medal', MC: 'Military Cross', DCM: 'Distinguished Conduct Medal', VC: 'Victoria Cross',

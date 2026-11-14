@@ -50,10 +50,10 @@ const DUTY_NAMES: Record<string, string> = {
 const SKILL_NAMES: Record<string, string> = {
   dig: 'digging and timbering', mech: 'machinery', lit: 'reading and figures', field: 'fieldcraft and shooting',
   stamina: 'stamina', firstaid: 'first aid', sport: 'a throwing arm', voice: 'a chapel voice',
-  trench: 'trench sense', bomb: 'bombing', lewis: 'the Lewis gun', snipe: 'sniping', signals: 'signals', lead: 'leadership', tunnel: 'tunnelling',
+  trench: 'trench sense', bearer: 'stretcher-bearing', bomb: 'bombing', lewis: 'the Lewis gun', snipe: 'sniping', signals: 'signals', lead: 'leadership', tunnel: 'tunnelling',
 };
 export const PATH_NAMES: Record<string, string> = {
-  rifleman: 'rifleman', bomb: 'bomber', lewis: 'Lewis gunner', snipe: 'sniper', signals: 'signaller', tunnel: 'tunneller', nco: 'section leader', subaltern: 'platoon officer',
+  rifleman: 'rifleman', bomb: 'bomber', lewis: 'Lewis gunner', bearer: 'stretcher-bearer', snipe: 'sniper', signals: 'signaller', tunnel: 'tunneller', nco: 'section leader', subaltern: 'platoon officer',
 };
 /** His job in a word: an acting captain commands a company, not a platoon. */
 export const roleName = (w: War) => (w.rank === 7 ? 'company commander' : PATH_NAMES[w.path] ?? w.path);
@@ -72,6 +72,7 @@ const ROLE_WHERE: Record<string, string> = {
   'sniping from a hide': 'in a sniper\'s hide',
   'running a message under fire': 'running a message under fire',
   'listening for enemy miners; blowing a camouflet': 'underground, listening for the enemy\'s miners',
+  'carrying the wounded in under fire': 'carrying a wounded man in under fire',
 };
 const BATTLES = new Set(STAGES.flatMap((st) => Object.values(st.battles).map((b) => b.name)));
 
@@ -321,7 +322,7 @@ export const module: GameModule = {
     return (FIELDS as readonly string[]).includes(field ?? '') ? null : `unknown war field in "${path}" (${FIELDS.join(', ')})`;
   },
   labelFor: (_c, path) => ({ 'war.nerve': 'Nerve', 'war.standing': 'Standing', 'war.section': 'The section', 'war.rank': 'Rank' })[path],
-  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.duty' ? ['none', ...Object.keys(DUTIES)] : path === 'war.wound' ? ['none', 'light', 'severe'] : path === 'war.sortie' || path === 'war.result_key' || path === 'war.detailed_last' ? ['none', ...Object.keys(SORTIES)] : path === 'war.result' ? ['none', 'ok', 'failed', 'turned'] : path === 'war.course' ? ['none', 'bomb', 'lewis', 'snipe', 'signals', 'lead'] : path === 'war.assign' ? ['none', ...Object.keys(ASSIGNMENTS)] : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
+  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.duty' ? ['none', ...Object.keys(DUTIES)] : path === 'war.wound' ? ['none', 'light', 'severe'] : path === 'war.sortie' || path === 'war.result_key' || path === 'war.detailed_last' ? ['none', ...Object.keys(SORTIES)] : path === 'war.result' ? ['none', 'ok', 'failed', 'turned'] : path === 'war.course' ? ['none', 'bomb', 'lewis', 'snipe', 'signals', 'bearer', 'lead'] : path === 'war.assign' ? ['none', ...Object.keys(ASSIGNMENTS)] : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
   effects: {
     /** character creation: the two hometown skills from the town's list */
     war_home(s, _c, e) {

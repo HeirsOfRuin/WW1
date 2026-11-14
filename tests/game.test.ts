@@ -145,6 +145,32 @@ describe('the farm and city towns', () => {
   }, 120_000);
 });
 
+describe('every role has words', () => {
+  // A choice whose text is built role by role ("[if war.path == lewis]...[/if]...") shows a blank
+  // button to any role it forgets. The stretcher-bearer (2026-11-14) was the first role added after
+  // the battles were written; this holds every role to every battle and mission choice.
+  const ROLES_1916 = ['rifleman', 'nco', 'lewis', 'signals', 'bomb', 'snipe', 'bearer', 'tunnel', 'subaltern'];
+  const render = (t: string, path: string) => t.replace(/\[if ([^\]]*war\.path[^\]]*)\](.*?)\[\/if\]/g, (_m, cond: string, body: string) => {
+    const ok = cond.split('||').some((c) => { const m = /war\.path (==|!=) (\w+)/.exec(c.trim()); return !!m && (m[1] === '==' ? m[2] === path : m[2] !== path); });
+    return ok ? body : '';
+  });
+  it('no battle or mission choice is blank for any role', () => {
+    const blank: string[] = [];
+    for (const sc of Object.values(content.scenes)) {
+      if (!/^(b_|w_mission)/.test(sc.id)) continue;
+      for (const ch of sc.choices ?? []) {
+        if (!ch.text.includes('war.path')) continue;
+        for (const path of ROLES_1916) {
+          const words = render(ch.text, path).replace(/\(\{[a-z_]+\}\)/g, '').trim();
+          if (!words) blank.push(`${sc.id}/${ch.id} as ${path}`);
+        }
+      }
+    }
+    // a tunneller's and an officer's choices on the first of July are only for the towns that have them
+    expect(blank.filter((b) => !/(w_mission\/go as (rifleman|nco|subaltern))|( as (tunnel|subaltern)$)/.test(b))).toEqual([]);
+  });
+});
+
 describe('pay sent home', () => {
   // The author, 2026-11-09: "pay becomes money sent home that changes the family's circumstances
   // on leave". A shown number must change something: it grows every tour, it is in the soldier's

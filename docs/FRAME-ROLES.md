@@ -83,3 +83,35 @@ The instructor's tour away and the concert party's steadying help everyone, the 
 **Test change.** The farm and city story-share tests now play 120 games, not 40. Their 1917 has
 10-15 screens a game, so 40 games was about 500 screens, and the reshuffled wars put them under
 44% by noise (41.7% and 43.8%). Over 200 games the shares are 46.7% and 47.7%.
+
+## 3. The stretcher-bearer (built)
+
+**What was missing.** Every battalion had stretcher-bearers. It is the one job in the line that
+saves men instead of killing them, and bearers won many of the Military Medals. The farm already
+writes Bert becoming one, but the game had no such role.
+
+**The rule** (`data.ts`).
+- **The skill and the course.** A new war skill, `bearer`, and the course to it. It joins the
+  specialists the course offer can draw, and a man with first aid from home is twice as likely to
+  be offered it (APTITUDE: first aid speeds it).
+- **The role.** At skill 2 he is the stretcher-bearer.
+  - In battle: hit ×1.25 (out in the open, unarmed); the section killed ×0.85 (the men around him
+    are brought in); awards ×1.4.
+  - His mission, on 60% of tours: carrying the wounded in under fire (hit 0.07, nerve 6, award
+    1.6), played out in three steps.
+- **Content.**
+  - His mission in two takes, and the course line.
+  - Three sortie steps with two takes each, and the result scene.
+  - A line in every battle phase that has role lines, from the Somme to October 1918.
+  - Bearer wording in every choice that is built role by role.
+- **A new test.** "Every role has words" renders every battle and mission choice for every role,
+  and fails on a blank button.
+
+**Measured** (scratch run, 2,000 wars). Bearers are about 6% of the men alive in 1916 and 1917, and
+5% in 1918: a little more than bombers, a little fewer than Lewis gunners.
+
+**Gate** (2,000 per policy, % ± 1 SE, before → after).
+- adaptive Armistice 6.0 ±0.5 → 6.0 ±0.5; survives 1915 75.2 ±1.0 → 75.2 ±1.0.
+- reckless 2.4 ±0.3 → 2.0 ±0.3; careful 4.3 → 4.3; half 5.3 → 5.1 ±0.5.
+
+Every target holds.

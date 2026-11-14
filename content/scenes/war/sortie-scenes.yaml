@@ -969,3 +969,96 @@
       text: Wash the clay off, if you can.
       effects: [ { war_ack: sortie } ]
       next: "@war"
+
+# ---- the stretcher-bearer's mission (FRAME-ROLES.md) -----------------------------------------------
+
+- id: s_bearer_1
+  chapter: front
+  title: The wounded
+  text: |
+    [if war.stake == 0]Over the parapet with the stretcher, four of you, into the dark. The man you're going for is
+    calling, somewhere ahead and to the left, and every time he calls, their sentry sends a flare up
+    towards the sound. The grass is wet and smells of cordite and something else.[/if][if war.stake == 1]The wounded man is in a shell hole thirty yards out, and it's daylight, and the Germans can see
+    the hole. Their sniper has already hit the first man who tried for him. You can hear him in there,
+    talking to himself, saying the same thing over and over.[/if]
+  choices:
+    - id: bold
+      text: "Go straight out to him, upright, the red cross showing. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You walk out as if you were crossing a street. Nobody fires. Then somebody does.
+      next: "@war"
+    - id: steady
+      text: "Crawl out to him by the shell holes. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Hole to hole, on your elbows, dragging the stretcher, the canvas catching on everything.
+      next: "@war"
+    - id: careful
+      text: "Wait for the flares to die, then go in the dark. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait, flat, while he calls. It's the longest ten minutes of the war.
+      next: "@war"
+
+- id: s_bearer_2
+  chapter: front
+  title: The wounded
+  text: |
+    [if war.stake == 0]You've got him. A big man, a sergeant, hit in the thigh, the blood black on the grass. When you
+    lift him onto the stretcher he screams, and the whole German line must hear it.[/if][if war.stake == 1]He's hit in the belly, and he begs you not to move him. He holds your wrist and won't let go.
+    If you don't move him, he'll die where he is. If you do, he may die on the way.[/if]
+  choices:
+    - id: bold
+      text: "Lift him and go, now, whatever the noise. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Four of you lift together and run, bent double, the stretcher bucking.
+      next: "@war"
+    - id: steady
+      text: "Dress the wound first, then lift him. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: A field dressing, then another, tied tight, your hands steady because they have to be.
+      next: "@war"
+    - id: careful
+      text: "Drag him into the shell hole and wait. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You get him down into the hole and lie across him while the machine gun goes over.
+      next: "@war"
+    - id: back
+      text: "Leave him for the next party. Get yourself back. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You tell him somebody's coming. You go. You hear him behind you, the whole way.
+      next: "@war"
+
+- id: s_bearer_3
+  chapter: front
+  title: The wounded
+  text: |
+    [if war.stake == 0]The last thirty yards with the stretcher, towards our wire. The gap is narrow, one of the four of
+    you is stumbling, and a machine gun has started from their side, low, feeling for you.[/if][if war.stake == 1]Back at our parapet, and he has to go over it: a man on a stretcher, lifted up and over a wall of
+    sandbags under fire, with hands reaching up out of the trench to take him.[/if]
+  choices:
+    - id: bold
+      text: "Run for it with him. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run, and the stretcher runs with you, and then you're over and down.
+      next: "@war"
+    - id: steady
+      text: "Keep the pace even. Don't jolt him. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Even, even, the way you'd carry a full bucket, all the way in.
+      next: "@war"
+    - id: careful
+      text: "Lie up in front of our wire till it's quiet. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie out in front of our own wire with him for an hour, talking to him so he stays awake.
+      next: "@war"
+
+- id: x_bearer_done
+  chapter: front
+  title: After
+  text: |
+    [if war.result == ok]You got him in. At the aid post the doctor looks at him, and then at you, and says he'll live, probably, and you go outside and sit on the sandbags and your hands start shaking and don't stop for an hour. Somebody brings you tea.[/if][if war.result == failed]He was dead when you got him to the aid post. Maybe before. The doctor doesn't say which, and you don't ask. You wash his blood off your hands in a shell hole full of rainwater, and it doesn't come off.[/if][if war.result == turned]You didn't go out. Somebody else did, or nobody did, and in the morning the calling has stopped.[/if]
+  choices:
+    - id: on
+      text: Wash your hands.
+      effects: [ { war_ack: sortie } ]
+      next: "@war"
+

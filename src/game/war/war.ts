@@ -366,7 +366,8 @@ function step(w: War): void {
     }
     case 'course': {
       if (!w.courseThisStage && !w.transferred && w.standing >= 45 && ch(w, 'career', 0.22 + 0.1 * home(w, 'lit'))) {
-        const k = w.rank >= 1 && skill(w, 'lead') < 2 ? 'lead' : ch(w, 'career', 0.5) ? TOWN_COURSE[w.town] : pick(w.rng, 'career', SPECIALIST);
+        // a man with first aid from home is twice as likely to be sent on the stretcher-bearers' course
+        const k = w.rank >= 1 && skill(w, 'lead') < 2 ? 'lead' : ch(w, 'career', 0.5) ? TOWN_COURSE[w.town] : pick(w.rng, 'career', home(w, 'firstaid') ? [...SPECIALIST, 'bearer'] : SPECIALIST);
         w.cursor = { at: 'tally' }; // afterCourse() runs when the decision is made
         w.pending = { kind: 'course', skill: k };
         return;

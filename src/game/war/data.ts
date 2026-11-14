@@ -75,10 +75,11 @@ export const DEFAULT_GENERAL = 'firstaid';
 export const HOME_SKILLS = ['dig', 'mech', 'lit', 'field', 'stamina', 'firstaid', 'sport', 'voice'];
 
 // War skills, learned only at the front. Specialist skills open the specialist path.
-export const WAR_SKILLS = ['trench', 'bomb', 'lewis', 'snipe', 'signals', 'lead', 'tunnel'];
-export const SPECIALIST = ['bomb', 'lewis', 'snipe', 'signals'];
+export const WAR_SKILLS = ['trench', 'bomb', 'lewis', 'snipe', 'signals', 'lead', 'tunnel', 'bearer'];
+// the stretcher-bearer joined the specialists on 2026-11-14 (FRAME-ROLES.md)
+export const SPECIALIST = ['bomb', 'lewis', 'snipe', 'signals', 'bearer'];
 // Which hometown skill speeds which war skill (x1.6 learning).
-export const APTITUDE: Record<string, string> = { bomb: 'sport', lewis: 'mech', snipe: 'field', signals: 'lit', trench: 'dig' };
+export const APTITUDE: Record<string, string> = { bomb: 'sport', lewis: 'mech', snipe: 'field', signals: 'lit', trench: 'dig', bearer: 'firstaid' };
 // The specialty a town's man is steered to when offered a course.
 export const TOWN_COURSE: Record<Town, string> = { pit: 'bomb', mill: 'lewis', city: 'signals', farm: 'snipe' };
 
@@ -138,6 +139,9 @@ export const PATHS: Record<string, PathMods> = {
   rifleman: { hit: 1.0, award: 1.0, section: 1.0 },
   bomb: { hit: 1.5, award: 1.6, section: 1.0 },
   lewis: { hit: 1.4, award: 1.3, section: 0.95, defence: 0.85 },
+  // out in the open for the wounded, unarmed; the men around him are brought in, and bearers were
+  // decorated often (tuned, not sourced)
+  bearer: { hit: 1.25, award: 1.4, section: 0.85 },
   snipe: { hit: 1.2, award: 1.1, section: 1.0 },
   signals: { hit: 1.45, award: 1.2, section: 1.0 },
   tunnel: { hit: 0.7, award: 0.9, section: 1.0, fire: 0.9, collapse: 0.007 },
@@ -190,6 +194,7 @@ export const ROLES: Record<string, Role> = {
   lewis: { mission: 'covering a raid with the Lewis gun', chance: 0.6, hit: 0.08, nerve: 5, award: 1.4, success: 0.6 },
   snipe: { mission: 'sniping from a hide', chance: 0.6, hit: 0.065, nerve: 4, award: 1.2, success: 0.5 },
   signals: { mission: 'running a message under fire', chance: 0.6, hit: 0.08, nerve: 5, award: 1.2, success: 0.65 },
+  bearer: { mission: 'carrying the wounded in under fire', chance: 0.6, hit: 0.07, nerve: 6, award: 1.6, success: 0.6 },
   tunnel: { mission: 'listening for enemy miners; blowing a camouflet', chance: 0.6, hit: 0.045, nerve: 6, award: 1.2, success: 0.55 },
 };
 export const ROLE = {
@@ -240,4 +245,5 @@ export const SORTIES: Record<string, Sortie> = {
   snipe: { shares: [0.2, 0.55, 0.25], back: [false, true, false], skill: 'snipe', need: 3.5 },
   signals: { shares: [0.3, 0.45, 0.25], back: [false, false, false], skill: 'signals', need: 3.5 },
   tunnel: { shares: [0.25, 0.5, 0.25], back: [false, true, false], skill: 'tunnel', need: 3.5 },
+  bearer: { shares: [0.3, 0.45, 0.25], back: [false, true, false], skill: 'bearer', need: 3 },
 };
