@@ -11,6 +11,7 @@ import { chance, float, pick, raw, seedStreams, type Streams, type StreamName } 
 import {
   TOWNS, DEFAULT_GENERAL, WAR_SKILLS, SPECIALIST, APTITUDE, TOWN_COURSE, WAR_WORK, STAGES, DUTIES, WOUND, PATHS,
   CHOICES, GRADE, SECTION_SIZE, SUBALTERN, TOP_OR, RANKS, REST, FRIEND_BATTLE, PHASE_HIT, STALL, ROLES, ROLE, PAY,
+  PROMO, SERGEANT, CSM, LIEUTENANT, CAPTAIN,
   COMMISSION_BOARD, SORTIES, SORTIE_CHOICE, type SortieChoice, type Town, type Ending, type BattleChoice, type Battle, type Stage,
 } from './data';
 
@@ -138,9 +139,25 @@ export const isRole = (w: War) => w.path in ROLES;
 /** Pence he sends home this tour: a share of a month's pay by rank and role. Draws nothing. */
 export function payHome(w: War): number {
   const daily = w.transferred ? PAY.tunnelPence : PAY.rankPence[w.rank]! + (ROLES[w.path] ? PAY.rolePence : 0);
-  return Math.round(daily * PAY.daysPerTour * (w.rank === SUBALTERN ? PAY.officerAllot : PAY.allot));
+  return Math.round(daily * PAY.daysPerTour * (w.commissioned ? PAY.officerAllot : PAY.allot));
 }
 export const sentHomeOf = (w: War) => w.sentHome ?? 0;
+
+/** Company sergeant major: one to a company, so only by a vacancy, for a sergeant rated highly. */
+function csmVacancy(w: War, chance: number, why: string): void {
+  if (w.commissioned || w.rank !== SERGEANT || w.standing < PROMO.csmStanding || !ch(w, 'career', chance)) return;
+  w.rank = CSM; w.promotedThisStage = true;
+  say(w, `promoted to ${RANKS[w.rank]} (${why})`);
+}
+
+/** An officer rises by vacancies after battles: lieutenant, then acting captain. */
+function officerVacancy(w: War, battle: string): void {
+  if (w.rank === SUBALTERN && w.standing >= PROMO.ltStanding && ch(w, 'career', PROMO.ltChance)) w.rank = LIEUTENANT;
+  else if (w.rank === LIEUTENANT && w.standing >= PROMO.captStanding && ch(w, 'career', PROMO.captChance)) w.rank = CAPTAIN;
+  else return;
+  w.promotedThisStage = true;
+  say(w, `promoted to ${RANKS[w.rank]} (vacancy after ${battle})`);
+}
 /** The family's circumstances at leave, 0 to 3, by what he has sent home. */
 export const homeTier = (w: War) => PAY.tiers.filter((t) => sentHomeOf(w) >= t).length;
 /** Pence as a period sum: £4 7s 6d. */
@@ -223,8 +240,9 @@ function sectionMod(w: War): number {
   return m;
 }
 
+/** A stripe: earned or at leave, it stops at sergeant (PROMO). Officers rise by officerVacancy. */
 function promote(w: War, why: string): void {
-  if (w.commissioned || w.rank >= TOP_OR) return;
+  if (w.commissioned || w.rank >= SERGEANT) return;
   w.rank += 1; w.promotedThisStage = true;
   say(w, `promoted to ${RANKS[w.rank]} (${why})`);
 }
@@ -427,6 +445,8 @@ function battleOf(w: War): Battle { return stageOf(w).battles[w.r]!; }
 function finishBattle(w: War, pts: number): void {
   award(w, pts);
   if (w.rank < 3 && w.standing >= 45 + 10 * w.rank && ch(w, 'career', 0.35)) promote(w, `vacancy after ${battleOf(w).name}`);
+  else if (w.rank === SERGEANT) csmVacancy(w, PROMO.csmAfterBattle, `vacancy after ${battleOf(w).name}`);
+  else if (w.commissioned) officerVacancy(w, battleOf(w).name);
   w.battleNow = false;
   if (w.out === 0) rest(w);
   w.cursor = { at: 'tally' };
@@ -641,7 +661,8 @@ export function decide(w: War, d: Decision): War {
         return w;
       }
       if (d === 'commission' && p.commission) { w.commissioned = true; w.rank = SUBALTERN; }
-      else if (w.rank < TOP_OR && !w.commissioned) promote(w, 'returned to the front');
+      else if (!w.commissioned && w.rank < SERGEANT) promote(w, 'returned to the front');
+      else if (!w.commissioned && w.rank === SERGEANT) csmVacancy(w, PROMO.csmAtLeave, 'a vacancy at leave');
       else w.standing = clamp(w.standing + 10, 0, 100);
       w.stage += 1;
       w.cursor = { at: 'stage' };

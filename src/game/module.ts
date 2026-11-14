@@ -55,6 +55,9 @@ const SKILL_NAMES: Record<string, string> = {
 export const PATH_NAMES: Record<string, string> = {
   rifleman: 'rifleman', bomb: 'bomber', lewis: 'Lewis gunner', snipe: 'sniper', signals: 'signaller', tunnel: 'tunneller', nco: 'section leader', subaltern: 'platoon officer',
 };
+/** His job in a word: an acting captain commands a company, not a platoon. */
+export const roleName = (w: War) => (w.rank === 7 ? 'company commander' : PATH_NAMES[w.path] ?? w.path);
+
 const PHASE_LINES: Record<string, string> = {
   advance: 'Crossing no man\'s land. Men who go to ground out here are caught in the open.',
   trench: 'In the enemy trench. Bombing along it is the most dangerous work there is.',
@@ -223,7 +226,7 @@ export function statusOf(s: CoreState): { rank: string; role: string; nerve: str
   const w = war(s);
   return {
     rank: RANKS[w.rank]!,
-    role: PATH_NAMES[w.path] ?? w.path,
+    role: roleName(w),
     nerve: `Nerve: ${nerveWord(w.nerve)}`,
     standing: standingWord(w.standing),
     section: `${aliveFriends(w)} of 9 from home`,
@@ -394,8 +397,8 @@ export const module: GameModule = {
       case 'standing_word': return standingWord(w.standing);
       case 'rank_name': return RANKS[w.rank]!;
       // the rank in running prose: 'You're a corporal now'
-      case 'rank_a': { const r = RANKS[w.rank]!.toLowerCase(); return w.rank === 4 ? `company sergeant major` : `a ${r}`; }
-      case 'path_name': return PATH_NAMES[w.path] ?? w.path;
+      case 'rank_a': { const r = RANKS[w.rank]!.toLowerCase(); return w.rank === 4 ? `company sergeant major` : `${/^[aeiou]/.test(r) ? 'an' : 'a'} ${r}`; }
+      case 'path_name': return roleName(w);
       case 'section_line': {
         const n = aliveFriends(w);
         return n === 9 ? 'All nine of the section from home are alive.' : n === 0 ? 'None of the section from home is left.' : `${n} of the nine from home are alive.`;
@@ -457,7 +460,7 @@ export const module: GameModule = {
   // the year's title page: where he stands, and who of the nine has died since the last page
   cardRows: (_c, s) => {
     const w = war(s);
-    return [['Rank', `${RANKS[w.rank]}, ${PATH_NAMES[w.path] ?? w.path}`], ['The section from home', `${aliveFriends(w)} of 9`], ['Battles', String(w.stats.battles)]];
+    return [['Rank', `${RANKS[w.rank]}, ${roleName(w)}`], ['The section from home', `${aliveFriends(w)} of 9`], ['Battles', String(w.stats.battles)]];
   },
   cardDead: (_c, s, from) => {
     const w = war(s); const names = SECTION_NAMES[w.town]!;

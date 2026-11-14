@@ -8,7 +8,7 @@ import type { GameState } from './state';
 import { heroOf } from '@engine/character';
 import { RANKS, STAGES, ROLES, home, skill, aliveFriends, sentHomeOf, lsd, type War } from './war/index';
 import { ROTATION_MONTHS, monthName, monthOfClock, TRAINING } from './war/calendar';
-import { SECTION_NAMES, PATH_NAMES, nerveWord, standingWord, whereOf, offerWords } from './module';
+import { SECTION_NAMES, PATH_NAMES, roleName, nerveWord, standingWord, whereOf, offerWords } from './module';
 
 export interface Line { label: string; note?: string }
 export interface SkillLine { label: string; level: number; note: string }
@@ -129,7 +129,7 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
     town: content.starts[s.start]?.label ?? s.start,
     age: Math.floor((s.time - hero.born) / 4),
     rank: RANKS[w.rank]!,
-    role: ((n) => n[0]!.toUpperCase() + n.slice(1))(PATH_NAMES[w.path] ?? w.path),
+    role: ((n) => n[0]!.toUpperCase() + n.slice(1))(roleName(w)),
     nerve: { value: Math.max(0, Math.round(w.nerve)), word: nerveWord(w.nerve) },
     standing: standingWord(w.standing),
     home: Object.keys(w.homeSet).map((k) => ({ label: HOME_NAMES[k] ?? k, note: HOME[k] })),

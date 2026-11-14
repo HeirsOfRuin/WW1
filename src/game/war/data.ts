@@ -15,7 +15,16 @@ export interface PathMods { hit: number; award: number; section: number; defence
 export interface ChoiceMods { standing: number; award: number; friends: number; nerve: number; lead: number }
 export interface Role { mission: string; chance: number; hit: number; nerve: number; award: number; success: number }
 
-export const RANKS = ['Private', 'Lance corporal', 'Corporal', 'Sergeant', 'Company sergeant major', 'Second lieutenant'];
+export const RANKS = ['Private', 'Lance corporal', 'Corporal', 'Sergeant', 'Company sergeant major', 'Second lieutenant', 'Lieutenant', 'Acting captain'];
+export const SERGEANT = 3, CSM = 4, LIEUTENANT = 6, CAPTAIN = 7;
+// Promotions (the author, 2026-11-14: "Yes to all three"): the guaranteed step at each leave and
+// every earned stripe stop at sergeant. Company sergeant major (one to a company) comes only by a
+// vacancy, to a sergeant the officers rate highly. An officer rises by vacancies after 1918's
+// battles: lieutenant, then acting captain. Before this, 60% of the men alive in 1918 were CSMs.
+export const PROMO = {
+  csmStanding: 80, csmAtLeave: 0.12, csmAfterBattle: 0.04,
+  ltStanding: 55, ltChance: 0.35, captStanding: 70, captChance: 0.25,
+};
 export const SUBALTERN = 5;
 
 // Pay sent home (the author, 2026-11-09: "pay becomes money sent home that changes the family's
@@ -24,14 +33,15 @@ export const SUBALTERN = 5;
 // sourced: the private's shilling a day and the tunneller's six shillings are the figures the
 // prose uses; the rest are to be checked (KILLGATE open issue 6). Nothing in the war reads it.
 export const PAY = {
-  rankPence: [12, 15, 20, 28, 60, 90], // private, lance corporal, corporal, sergeant, CSM, second lieutenant
+  rankPence: [12, 15, 20, 28, 60, 90, 120, 150], // private, lance corporal, corporal, sergeant, CSM, second lieutenant, lieutenant, acting captain
   rolePence: 2, tunnelPence: 72,
   daysPerTour: 30, allot: 0.5, officerAllot: 0.3,
-  // the family's circumstances at leave, by pence sent home so far: under £7, £21, £50, and over.
+  // the family's circumstances at leave, by pence sent home so far: under £7, £21, £38, and over (the top lowered from £50 on 2026-11-14,
+  // when the promotion cap left most men a sergeant at the third leave).
   // Set so that each leave splits two ways by rank and role (measured 2026-11-12: a private has
   // about £6 15s home by the first leave, £19 by the second, £38 by the third; a tunneller £51
   // by the second), so the sum shown changes what the leave says.
-  tiers: [1680, 5040, 12000],
+  tiers: [1680, 5040, 9120],
 };
 export const TOP_OR = 4; // highest rank an other rank can reach
 
