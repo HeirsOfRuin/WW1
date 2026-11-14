@@ -21,6 +21,24 @@ export const SERGEANT = 3, CSM = 4, LIEUTENANT = 6, CAPTAIN = 7;
 // every earned stripe stop at sergeant. Company sergeant major (one to a company) comes only by a
 // vacancy, to a sergeant the officers rate highly. An officer rises by vacancies after 1918's
 // battles: lieutenant, then acting captain. Before this, 60% of the men alive in 1918 were CSMs.
+// Special assignments (the author, 2026-11-14): jobs a man was detailed for that were not fighting.
+// Offered on a tour when no course is. Each is taken or got out of; each moves nerve and standing,
+// and some carry a small risk or a tour out of the line. Tuned, not sourced (FRAME-ROLES.md).
+export interface Assignment {
+  from: number; weight: number;
+  take: { nerve: number; standing: number; hit?: number; out?: number };
+  decline: { nerve: number; standing: number };
+}
+export const ASSIGN = { chance: 0.12 };
+export const ASSIGNMENTS: Record<string, Assignment> = {
+  firing: { from: 2, weight: 1, take: { nerve: -8, standing: 3 }, decline: { nerve: -2, standing: -4 } },
+  escort: { from: 1, weight: 3, take: { nerve: 2, standing: 1, hit: 0.01 }, decline: { nerve: 0, standing: -1 } },
+  guide: { from: 1, weight: 1, take: { nerve: -1, standing: 2, hit: 0.02 }, decline: { nerve: 0, standing: -1 } },
+  burial: { from: 1, weight: 3, take: { nerve: -5, standing: 2 }, decline: { nerve: 0, standing: -2 } },
+  instructor: { from: 2, weight: 2, take: { nerve: 6, standing: 2, out: 1 }, decline: { nerve: 0, standing: -1 } },
+  concert: { from: 1, weight: 2, take: { nerve: 6, standing: 0 }, decline: { nerve: 0, standing: 0 } },
+};
+
 export const PROMO = {
   csmStanding: 80, csmAtLeave: 0.12, csmAfterBattle: 0.04,
   ltStanding: 55, ltChance: 0.35, captStanding: 70, captChance: 0.25,

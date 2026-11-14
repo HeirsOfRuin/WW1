@@ -126,7 +126,7 @@ describe('the story leads', () => {
 
 describe('the farm and city towns', () => {
   it('the city town\'s written years (1915-1917) are about half story', () => {
-    const r = share(40, 'city');
+    const r = share(120, 'city'); // 120: 1917 has 10-15 screens a game, and 40 games was too few to hold the band
     for (const y of [1, 2, 3]) {
       const c = r.byYear[y]!;
       const p = c.story / (c.story + c.generic);
@@ -135,7 +135,7 @@ describe('the farm and city towns', () => {
     }
   }, 120_000);
   it('the farm town\'s written years (1915-1917) are about half story', () => {
-    const r = share(40, 'farm');
+    const r = share(120, 'farm'); // 120: 1917 has 10-15 screens a game, and 40 games was too few to hold the band
     for (const y of [1, 2, 3]) {
       const c = r.byYear[y]!;
       const p = c.story / (c.story + c.generic);

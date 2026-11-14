@@ -1,0 +1,193 @@
+# Special assignments (docs/FRAME-ROLES.md; ASSIGNMENTS in src/game/war/data.ts): jobs a man was
+# detailed for that were not fighting. The war asks one on some tours when no course is offered.
+# Each is taken or got out of; what each costs is the war's (nerve, standing, a small risk, a tour
+# out of the line), shown in the changes after the choice. Shared by every town.
+
+- id: a_firing
+  chapter: front
+  title: The firing party
+  text: |
+    The sergeant major takes you aside behind the cookhouse, where nobody else can hear, and doesn't
+    look at you while he says it.
+
+    A man from another battalion of the brigade has been court-martialled. Desertion. He walked away
+    from the line in the spring and was picked up at a railway station forty miles back, asleep on a
+    bench, and the sentence has been confirmed. It's to be carried out at first light tomorrow, in a
+    quarry behind the village, and the party is to be found from this battalion. Twelve men.
+
+    "You've been picked," the sergeant major says. "It's not a punishment. It's a duty." He's
+    looking at the cookhouse chimney. "One rifle will have a blank in it. Nobody knows which. That's
+    so every man can think it was his."
+
+    [if war.rank >= 5]As the officer, you would command it. You'd give the orders. And if it isn't clean, the rule says the officer finishes it, with his revolver.[/if]
+  choices:
+    - id: take
+      text: Do it. It's a duty, and somebody has to.
+      effects: [ { war: take } ]
+      text_after: |
+        First light, in a chalk quarry, cold, with a mist on the ground. A post, and a man brought out
+        tied to it, with a white square of cloth pinned over his heart, and a hood. He's smaller than you
+        thought. He's shaking so hard the post moves. The order. Twelve rifles, one sound. You don't
+        know if yours had the blank. You'll never know. You walk back to the billets and nobody in the
+        party speaks, and at breakfast you can't hold the mug.
+      next: "@war"
+    - id: decline
+      text: Ask to be excused. Say you can't.
+      effects: [ { war: decline } ]
+      text_after: |
+        The sergeant major looks at you then, properly, for a long moment. "Right," he says. "Right." He
+        finds another man. He doesn't say anything else to you about it, and he doesn't need to: it's in
+        how he says your name for the rest of the month. At first light you hear it from the billet, far
+        off, one sound, and you lie there.
+      next: "@war"
+
+- id: a_escort
+  chapter: front
+  title: Prisoners
+  text: |
+    Thirty German prisoners from the last show, to be marched back to the cage at the railhead, eight
+    miles, and you're one of the four escorts.
+
+    They're sat in a field in their grey, filthy, some of them bandaged, some of them boys and some of
+    them older than your father, and they're eating the bully beef somebody's given them as if they
+    hadn't eaten in a week, which they haven't. One of them has a photograph out, a woman and two
+    children in front of a painted garden, and he's showing it to the man next to him.
+
+    It's eight miles out of the line, along roads the German guns still reach now and then.
+  choices:
+    - id: take
+      text: Take them back to the cage.
+      effects: [ { war: take } ]
+      text_after: |
+        Eight miles in the sun. They march better than you do. Halfway, at a crossroads, one of them
+        asks for water in careful English and you give him your bottle and he gives it back half full,
+        which you didn't expect. At the cage a corporal counts them in like sheep through a gate, and
+        you walk back alone with an empty road and your rifle on your shoulder and feel, for an hour,
+        like a man going home from work.
+      next: "@war"
+    - id: decline
+      text: Get somebody else to go. You're needed here.
+      effects: [ { war: decline } ]
+      text_after: |
+        The corporal finds someone. You watch them go off down the road, thirty grey and four khaki,
+        getting smaller, the photograph man still talking to his neighbour, and you go back to cleaning
+        your rifle.
+      next: "@war"
+
+- id: a_guide
+  chapter: front
+  title: The relief
+  text: |
+    A battalion fresh out from England is taking over the line tonight, and they don't know it. Every
+    company needs a guide to bring them in: up the communication trench in the dark, through the
+    junctions where the boards are gone and the trench is blown in, to the right bays, without losing
+    anybody.
+
+    You know this line the way you know your own street at home. The sergeant knows you know it.
+  choices:
+    - id: take
+      text: Go back down and bring them in.
+      effects: [ { war: take } ]
+      text_after: |
+        They're green as grass. They clank, they talk, they light matches. You bring them up a hundred
+        men in single file, whispering back over your shoulder at every junction: mind the hole, keep
+        left, duck here, he's got a gun on this bit. One of their officers, younger than you, thanks you
+        at the end as if you'd shown him round a cathedral. Then you go back down the trench alone
+        in the dark, and it's your line no more.
+      next: "@war"
+    - id: decline
+      text: Tell the sergeant somebody else knows it better.
+      effects: [ { war: decline } ]
+      text_after: |
+        He sends somebody else. In the morning the word is that one of the new companies lost its way at
+        the junction by the old mine shaft and walked along the top in the dark for twenty minutes. Nobody
+        was hit. Nobody says anything to you about it. You think about it anyway.
+      next: "@war"
+
+- id: a_burial
+  chapter: front
+  title: Burial party
+  text: |
+    After the battle there are the dead. Theirs and ours, out on the ground they fought over, where
+    they've lain for days now in the sun or the rain, and the smell comes in over the parapet when the
+    wind's that way.
+
+    A burial party is wanted, tonight and every night this week. Picks and shovels, sandbags, a
+    sergeant with a notebook for the identity discs and the pay books, and a padre who'll come out to
+    say the words if it's quiet.
+  choices:
+    - id: take
+      text: Take a shovel and go out with them.
+      effects: [ { war: take } ]
+      text_after: |
+        Four nights. You learn to work with your mouth shut and breathe through your teeth. You learn
+        to take a disc off a cord without looking at the face, and then you look at the face anyway.
+        You put them in shell holes, mostly, two or three together, and a rifle upside down for a
+        marker, and the sergeant writes it in his book. One of them, on the third night, you knew.
+        You don't tell anybody which.
+      next: "@war"
+    - id: decline
+      text: Get out of it. You've seen enough of the dead.
+      effects: [ { war: decline } ]
+      text_after: |
+        You get out of it. The sergeant puts your name down anyway, for next time, and doesn't look up
+        from his notebook. From the firestep at night you can see them out there with their shovels,
+        dark shapes stooping, and hear the picks.
+      next: "@war"
+
+- id: a_instructor
+  chapter: front
+  title: The school
+  text: |
+    A letter from brigade: a man is wanted as an instructor at the divisional school, behind the
+    lines, for a fortnight. Teaching drafts the work you know, on a range, in a field, with a hut and a
+    stove and a bed with sheets.
+
+    The company officer says your name's been sent up. It's a fortnight out of the line. Nobody would
+    blame you.
+  choices:
+    - id: take
+      text: Go to the school.
+      effects: [ { war: take } ]
+      text_after: |
+        Two weeks of it. A bed. Eggs. Lads straight off the boat, keen and stupid and frightened, and
+        you tell them what you wish somebody had told you, and some of them listen. At night you lie in
+        the sheets and can't sleep for the quiet, and think about the section in the line without you,
+        and what's happening to them while you're eating eggs.
+      next: "@war"
+    - id: decline
+      text: Turn it down. Stay with the section.
+      effects: [ { war: decline } ]
+      text_after: |
+        The company officer looks at you as if you'd turned down a fortune, which you have. Somebody from
+        another company takes it. You stay, and the section doesn't say anything, and that night your
+        share of the rum is a bit more than your share.
+      next: "@war"
+
+- id: a_concert
+  chapter: front
+  title: The concert party
+  text: |
+    The division has a concert party: a barn behind the lines with a stage made of ammunition boxes,
+    a piano with half the keys gone, and a curtain made of sandbags sewn together. They've heard you
+    sing. Somebody always hears you sing.
+
+    They want you for a turn on Saturday night. A song. In front of five hundred men.
+  choices:
+    - id: take
+      text: Go up and sing.
+      effects: [ { war: take } ]
+      text_after: |
+        You sing what your mother used to sing at the copper on washdays, and five hundred men go so
+        quiet you can hear the lamps hiss. Then the second verse, and they're singing it with you, the
+        whole barn, low, and some of them aren't singing at all, just sitting with their caps in their
+        hands. You walk back to the billet in the dark with it still going round your head.
+      next: "@war"
+    - id: decline
+      text: Not this time. You don't feel like singing.
+      effects: [ { war: decline } ]
+      text_after: |
+        You don't go. On Saturday night you can hear the barn from the billet, the piano, the laughing,
+        a man singing a comic song about a sergeant major, and the cheers, and you lie on the straw and
+        listen to it through the wall.
+      next: "@war"

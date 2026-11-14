@@ -14,7 +14,7 @@ import type { GameState } from './state';
 import {
   run, decide, setHome, newsOf, aliveFriends, grade, dutyHit, missionHit, phaseHit, battleOf,
   RANKS, ROLES, DUTIES, STAGES, SORTIES, sortieHit, type Decision, type War, type SortieChoice,
-  homeTier, sentHomeOf, lsd,
+  homeTier, sentHomeOf, lsd, ASSIGNMENTS,
 } from './war/index';
 import { warMonth, seasonOf, monthName, monthOfClock } from './war/calendar';
 
@@ -131,6 +131,8 @@ export function whereOf(cause: string): string {
   if (c === 'shellfire') return 'by a shell in the front line';
   if (c === 'in the line') return 'in the line';
   if (c === 'shelled in support') return 'by a shell in the support trenches';
+  if (c === 'escorting prisoners') return 'on the road, escorting prisoners back to the cage';
+  if (c === 'guiding the relief') return 'guiding the relief in';
   if (c === 'mine collapse or camouflet') return 'underground, when a gallery came in';
   if (DUTY_NAMES[c]) return `on ${DUTY_NAMES[c]}`;
   if (ROLE_WHERE[c]) return ROLE_WHERE[c]!;
@@ -235,8 +237,8 @@ export function statusOf(s: CoreState): { rank: string; role: string; nerve: str
 
 // ---- paths -------------------------------------------------------------------------------------
 
-const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key', 'month', 'home_tier', 'stake', 'back_from_wound', 'lost_last', 'promoted_last', 'award_last', 'first_tour', 'back_from_leave', 'detailed_last', 'detailed_ok'] as const;
-const PENDING = ['none', 'tunnel', 'duty', 'mission', 'sick', 'course', 'battle', 'leave', 'step', 'tour'];
+const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key', 'month', 'home_tier', 'assign', 'stake', 'back_from_wound', 'lost_last', 'promoted_last', 'award_last', 'first_tour', 'back_from_leave', 'detailed_last', 'detailed_ok'] as const;
+const PENDING = ['none', 'tunnel', 'duty', 'mission', 'sick', 'course', 'battle', 'leave', 'step', 'tour', 'assign'];
 const ENDINGS = ['none', 'armistice', 'posting', 'captured', 'invalided', 'killed', 'broken', 'court_martial'];
 /** content ids are lower_snake_case; the war layer's ending names are its own */
 const endingId = (e: string) => (e === 'courtMartial' ? 'court_martial' : e);
@@ -258,6 +260,7 @@ function value(s: CoreState, field: string): number | string | boolean | undefin
     case 'section': return aliveFriends(w);
     case 'path': return w.path;
     case 'transferred': return w.transferred;
+    case 'assign': return p?.kind === 'assign' ? p.key : 'none';
     case 'home_tier': return homeTier(w);
     case 'battle': return p?.kind === 'battle' ? battleSlug(p.battle) : 'none';
     case 'phase': return p?.kind === 'battle' ? p.phase + 1 : 0;
@@ -318,7 +321,7 @@ export const module: GameModule = {
     return (FIELDS as readonly string[]).includes(field ?? '') ? null : `unknown war field in "${path}" (${FIELDS.join(', ')})`;
   },
   labelFor: (_c, path) => ({ 'war.nerve': 'Nerve', 'war.standing': 'Standing', 'war.section': 'The section', 'war.rank': 'Rank' })[path],
-  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.duty' ? ['none', ...Object.keys(DUTIES)] : path === 'war.wound' ? ['none', 'light', 'severe'] : path === 'war.sortie' || path === 'war.result_key' || path === 'war.detailed_last' ? ['none', ...Object.keys(SORTIES)] : path === 'war.result' ? ['none', 'ok', 'failed', 'turned'] : path === 'war.course' ? ['none', 'bomb', 'lewis', 'snipe', 'signals', 'lead'] : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
+  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.duty' ? ['none', ...Object.keys(DUTIES)] : path === 'war.wound' ? ['none', 'light', 'severe'] : path === 'war.sortie' || path === 'war.result_key' || path === 'war.detailed_last' ? ['none', ...Object.keys(SORTIES)] : path === 'war.result' ? ['none', 'ok', 'failed', 'turned'] : path === 'war.course' ? ['none', 'bomb', 'lewis', 'snipe', 'signals', 'lead'] : path === 'war.assign' ? ['none', ...Object.keys(ASSIGNMENTS)] : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
   effects: {
     /** character creation: the two hometown skills from the town's list */
     war_home(s, _c, e) {

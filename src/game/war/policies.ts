@@ -12,6 +12,8 @@ interface Policy {
   sick(w: War): boolean;
   course(w: War, k: string): boolean;
   tunnel(w: War): boolean;
+  /** take a special assignment, or try to get out of it (default: take all but the firing party when shaky) */
+  assign?(w: War, key: string): boolean;
   battle(w: War, i: number, type: PhaseType, stalled: boolean): BattleChoice;
   leave(w: War, offers: string[], commission: boolean): 'back' | 'posting' | 'commission';
   /** how to play a step of a duty or mission */
@@ -78,6 +80,8 @@ export function withForce(base: Policy, f: Force = {}): Policy {
 }
 
 /** The decision a policy makes on the war's pending question. */
+const defaultAssign = (w: War, key: string) => !(key === 'firing' && w.nerve < 40);
+
 export function decideFor(p: Policy, w: War, q: Pending, battleOf: (w: War) => Battle): Decision {
   switch (q.kind) {
     case 'tour': return 'on';
@@ -86,6 +90,7 @@ export function decideFor(p: Policy, w: War, q: Pending, battleOf: (w: War) => B
     case 'mission': return p.mission(w) ? 'go' : 'decline';
     case 'sick': return p.sick(w) ? 'report' : 'carry_on';
     case 'course': return p.course(w, q.skill) ? 'take' : 'decline';
+    case 'assign': return (p.assign ?? defaultAssign)(w, q.key) ? 'take' : 'decline';
     case 'battle': {
       const ptype = battleOf(w).phases[q.phase]![2];
       return p.battle(w, q.phase, ptype, q.stalled);

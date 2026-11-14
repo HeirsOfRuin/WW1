@@ -176,6 +176,13 @@ switch:
   - { if: "war.pending == mission", go: w_mission }
   - { if: "war.pending == sick", go: w_sick }
   - { if: "war.pending == course", go: w_course }
+  # special assignments (content/scenes/war/assignments.yaml; docs/FRAME-ROLES.md)
+  - { if: ["war.pending == assign", "war.assign == firing"], go: a_firing }
+  - { if: ["war.pending == assign", "war.assign == escort"], go: a_escort }
+  - { if: ["war.pending == assign", "war.assign == guide"], go: a_guide }
+  - { if: ["war.pending == assign", "war.assign == burial"], go: a_burial }
+  - { if: ["war.pending == assign", "war.assign == instructor"], go: a_instructor }
+  - { if: ["war.pending == assign", "war.assign == concert"], go: a_concert }
   - { if: "war.pending == battle", go: w_battle }
   - { if: "war.pending == leave", go: w_leave }
 default: e_error

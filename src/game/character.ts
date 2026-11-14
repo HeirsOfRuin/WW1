@@ -21,6 +21,11 @@ export interface SoldierRecord {
   totals: Line[];
 }
 
+const ASSIGN_NAMES: Record<string, string> = {
+  firing: 'Firing party', escort: 'Prisoner escort', guide: 'Guide for the relief', burial: 'Burial party',
+  instructor: 'Instructor at the divisional school', concert: 'The concert party',
+};
+
 const HOME: Record<string, string> = {
   dig: 'Digging and timbering. Wiring and carrying parties are safer; trench sense comes faster.',
   mech: 'A hand with machinery. The Lewis gun comes faster.',
@@ -97,6 +102,7 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
     if ((m = /^promoted to (.*) \((.*)\)$/.exec(e.msg))) career.push({ label: `${m[1]}, ${when(e)}`, note: m[2] === 'returned to the front' ? 'On going back after leave' : m[2]!.replace(/^vacancy after/, 'A vacancy after').replace(/^standing$/, 'The sergeant\'s word') });
     else if ((m = /^battle: (.*) as (\w+)$/.exec(e.msg))) career.push({ label: m[1]!, note: `${when(e)}, as ${PATH_NAMES[m[2]!] ?? m[2]}` });
     else if ((m = /^course: (\w+)$/.exec(e.msg))) career.push({ label: `Course, ${when(e)}`, note: WAR[m[1]!]?.[0] });
+    else if ((m = /^assignment: (\w+) (taken|got out of)$/.exec(e.msg))) career.push({ label: `${ASSIGN_NAMES[m[1]!] ?? m[1]}, ${when(e)}`, note: m[2] === 'taken' ? 'Did it' : 'Got out of it' });
     else if ((m = /^(light|severe) wound \((.*)\)/.exec(e.msg))) career.push({ label: `Wounded, ${when(e)}`, note: `${m[1] === 'severe' ? 'Badly, ' : 'Lightly, '}${whereOf(m[2]!)}` });
     else if ((m = /^awarded (\w+)$/.exec(e.msg))) { awards.push({ label: AWARD_NAMES[m[1]!] ?? m[1]!, note: when(e) }); career.push({ label: `${AWARD_NAMES[m[1]!] ?? m[1]}, ${when(e)}` }); }
     else if (/^transferred to a tunnelling company/.test(e.msg)) career.push({ label: `To the tunnellers, ${when(e)}`, note: 'Royal Engineers' });

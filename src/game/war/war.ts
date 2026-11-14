@@ -11,7 +11,7 @@ import { chance, float, pick, raw, seedStreams, type Streams, type StreamName } 
 import {
   TOWNS, DEFAULT_GENERAL, WAR_SKILLS, SPECIALIST, APTITUDE, TOWN_COURSE, WAR_WORK, STAGES, DUTIES, WOUND, PATHS,
   CHOICES, GRADE, SECTION_SIZE, SUBALTERN, TOP_OR, RANKS, REST, FRIEND_BATTLE, PHASE_HIT, STALL, ROLES, ROLE, PAY,
-  PROMO, SERGEANT, CSM, LIEUTENANT, CAPTAIN,
+  PROMO, SERGEANT, CSM, LIEUTENANT, CAPTAIN, ASSIGN, ASSIGNMENTS,
   COMMISSION_BOARD, SORTIES, SORTIE_CHOICE, type SortieChoice, type Town, type Ending, type BattleChoice, type Battle, type Stage,
 } from './data';
 
@@ -26,6 +26,8 @@ export type Pending =
   | { kind: 'mission'; role: string }
   | { kind: 'sick' }
   | { kind: 'course'; skill: string }
+  /** a special assignment: a job he is detailed for that is not fighting (ASSIGNMENTS) */
+  | { kind: 'assign'; key: string }
   | { kind: 'battle'; battle: string; phase: number; type: string; stalled: boolean }
   | { kind: 'leave'; offers: string[]; commission: boolean }
   /** a step of a duty or role mission being played out (SORTIES) */
@@ -36,7 +38,7 @@ export type Decision =
   | 'volunteer' | 'stay_back'           // duty
   | 'go' | 'decline'                    // mission, course
   | 'report' | 'carry_on'               // sick
-  | 'take'                              // course
+  | 'take'                              // course, assignment ('decline' gets out of it)
   | BattleChoice                        // battle
   | 'back' | 'commission' | `posting:${number}` // leave
   | SortieChoice // a sortie step ('back' turns back)
@@ -369,6 +371,8 @@ function step(w: War): void {
         w.pending = { kind: 'course', skill: k };
         return;
       }
+      const a = assignmentFor(w);
+      if (a) { w.cursor = { at: 'tally' }; w.pending = { kind: 'assign', key: a }; return; }
       afterCourse(w);
       return;
     }
@@ -427,6 +431,22 @@ function nextDuty(w: War, c: Extract<Cursor, { at: 'duty' }>): void {
   const friendAtRisk = ch(w, 'duty', 0.4) && aliveFriends(w) > 0;
   w.pending = { kind: 'duty', duty: key, friendAtRisk };
 }
+
+/** A special assignment this tour, if one comes (ASSIGNMENTS): which jobs he can be given, by weight. */
+function assignmentFor(w: War): string | null {
+  if (w.transferred || w.out > 0 || w.ending || !ch(w, 'career', ASSIGN.chance)) return null;
+  const best = Math.max(...SPECIALIST.map((k) => skill(w, k)), skill(w, 'lead'));
+  const open = Object.entries(ASSIGNMENTS).filter(([k, a]) => w.stage >= a.from
+    && (k !== 'burial' && k !== 'escort' || w.stats.battles > 0)
+    && (k !== 'instructor' || (w.rank >= 2 && best >= 2.5))
+    && (k !== 'concert' || !!home(w, 'voice')));
+  if (!open.length) return null;
+  let r = float(w.rng, 'career', 0, 1) * open.reduce((t, [, a]) => t + a.weight, 0);
+  for (const [k, a] of open) { r -= a.weight; if (r <= 0) return k; }
+  return open[open.length - 1]![0];
+}
+
+const ASSIGN_WHERE: Record<string, string> = { escort: 'escorting prisoners', guide: 'guiding the relief' };
 
 function afterCourse(w: War): void {
   if (w.rank < 3 && w.standing >= 55 + 10 * w.rank && ch(w, 'career', 0.1)) promote(w, 'standing');
@@ -598,6 +618,20 @@ export function decide(w: War, d: Decision): War {
         say(w, 'reported sick: excused one tour');
       }
       break; // cursor already at 'course'
+    }
+    case 'assign': {
+      const a = ASSIGNMENTS[p.key]!;
+      const e = d === 'take' ? a.take : a.decline;
+      w.standing = clamp(w.standing + e.standing, 0, 100);
+      if (e.nerve < 0) spendNerve(w, -e.nerve); else w.nerve = clamp(w.nerve + e.nerve, -10, 100);
+      say(w, `assignment: ${p.key} ${d === 'take' ? 'taken' : 'got out of'}`);
+      if (d === 'take') {
+        const t = a.take;
+        if (t.out) w.out = Math.max(w.out, t.out);
+        if (t.hit && ch(w, 'fire', t.hit)) hit(w, ASSIGN_WHERE[p.key]!);
+      }
+      if (!w.ending) afterCourse(w);
+      break;
     }
     case 'course': {
       if (d === 'take') {
