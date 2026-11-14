@@ -43,6 +43,7 @@ answers (`docs/KILLGATE.md`, 2026-11-09). Design: `docs/DESIGN.md`, draft for ap
 | 2026-11-12 | The farm and city towns' 1918 and their own Armistice endings; every town written from enlistment to 11 November 1918 (FRAME-1918-FARM-CITY.md) | "Continue" |
 | 2026-11-12 | Pay becomes money sent home (decided 2026-11-09, built now): an allotment each tour by rank and role, shown on the Soldier tab, changing the family's circumstances at every leave; the history fact-checked and corrected | "Go with your recommendations and finish what you need to finish" |
 | 2026-11-13 | Option B: story events move nerve and standing a little (the standing recommendation since FRAME-1916, made now the writing is done); second takes for the duty steps (FRAME-OPTION-B.md) | "Go with your recommendations and continue" |
+| 2026-11-14 | The tunneller's 1918 stays story-heavy (about 70%), and the war's numbers stay tuned, not sourced, unless play shows the feel is wrong | "Yes and yes." |
 
 ## Pitch
 
