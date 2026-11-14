@@ -200,7 +200,7 @@ c18_wrote_flu: { description: "Told his mother to keep in during the influenza" 
 tk17_gears: { description: "Learned the gears and the hammer knocks with Tonks at Erin" }
 tk17_cards: { description: "Sat in on Kearney's card game at Erin" }
 tk17_found_section: { description: "Walked over to find the section in the Arras quarries the night before the attack" }
-tk17_stayed_with_her: { description: "Stayed with Lodestar the night before Arras, checking the guns" }
+tk17_stayed_with_her: { description: "Stayed with Polaris the night before Arras, checking the guns" }
 tk17_aussies: { description: "Went into the Australians' estaminet after Bullecourt and stood his round" }
 tk17_murray_tin: { description: "Left Murray's spare petrol tin aboard: Murray burned at Cambrai" }
 tk17_told_mother: { description: "Wrote to his mother that he was in a tank" }
@@ -209,9 +209,9 @@ tk17_lacey_praised: { description: "Told Lacey he was doing fine: Lacey killed w
 tk18_wrote_lacey: { description: "Wrote to Lacey, or to his mother, in January 1918" }
 tk18_whippet: { description: "Went to the Whippets with Pring as his gunner, spring 1918" }
 tk18_said_no: { description: "Pring went to the Whippets without him: Pring killed at Amiens" }
-tk18_kept_pring: { description: "As Lodestar's officer, refused to let Pring go to the Whippets" }
-tk18_kept_plate: { description: "Kept the steel strip with Lodestar's name, after she was burned in March 1918" }
-tk18_gave_plate: { description: "Gave Lodestar's name strip back to Kearney" }
+tk18_kept_pring: { description: "As Polaris's officer, refused to let Pring go to the Whippets" }
+tk18_kept_plate: { description: "Kept the steel strip with Polaris's name, after she was burned in March 1918" }
+tk18_gave_plate: { description: "Gave Polaris's name strip back to Kearney" }
 tk18_murray_rivets: { description: "Went over the new tank's rivets with Murray, May 1918" }
 tk18_whippet_guns: { description: "Learned the Whippet's guns blind" }
 tk18_wrote_home: { description: "Wrote home the night before Amiens" }

@@ -177,7 +177,7 @@ function crewOf(w: War, flags: Record<string, unknown>): SoldierRecord['crew'] {
   const after = (tour: number, battle: string) => w.clock > tour || w.log.some((l) => l.includes(`battle: ${battle} as`));
   if (corpsOf(w) === 'tank') {
     const men: Man[] = [];
-    const lacey: Man = !after(29, 'Cambrai') ? { name: '2/Lt Edward Lacey', status: 'Commands Lodestar. Sick every time she moves.', alive: true }
+    const lacey: Man = !after(29, 'Cambrai') ? { name: '2/Lt Edward Lacey', status: 'Commands Polaris. Sick every time she moves.', alive: true }
       : f('tk17_lacey_praised') ? { name: '2/Lt Edward Lacey', status: 'Killed at Flesquières, Cambrai, November 1917, walking ahead of her.', alive: false }
       : { name: '2/Lt Edward Lacey', status: 'Wounded at Cambrai, November 1917, and sent home.', alive: true };
     men.push(lacey);
@@ -188,7 +188,7 @@ function crewOf(w: War, flags: Record<string, unknown>): SoldierRecord['crew'] {
     men.push(f('tk18_tonks_told') ? { name: 'Pte Alf Tonks', status: 'Deaf in one ear. Sent to the workshops at Erin.', alive: true } : { name: 'Pte Alf Tonks', status: 'Gearsman. Signals with a hammer on the engine cover.', alive: true });
     men.push(f('tk17_murray_tin') && after(29, 'Cambrai') ? { name: 'Pte Duggie Murray', status: 'Burned at Cambrai, November 1917.', alive: false } : { name: 'Pte Duggie Murray', status: 'Gearsman. Says she is badly riveted.', alive: true });
     men.push(f('tk_kearney_taken') ? { name: 'Pte Mick Kearney', status: 'Taken prisoner when his tank ditched beyond their line, August 1918.', alive: true } : { name: 'Pte Mick Kearney', status: 'Gunner. Deals the cards.', alive: true });
-    return { title: 'The crew of Lodestar', men };
+    return { title: 'The crew of Polaris', men };
   }
   if (corpsOf(w) === 'air') {
     const men: Man[] = [];

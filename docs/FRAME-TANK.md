@@ -82,8 +82,9 @@ so **no rate is confirmed**. Treat pay as tuned.
 **Not checked this session, but likely, and wanted by the story.** Church bells rang in Britain
 for Cambrai, and the German counter-attack of 30 November took most of the ground back. From
 November 1917, "tank banks" toured British towns selling War Bonds. In the March 1918 retreat,
-crews whose tanks were lost fought on as Lewis-gun teams. Hotchkiss guns replaced Lewis guns in
-tanks from 1917. Lulworth was the gunnery range. Pigeons were carried for messages.
+crews whose tanks were lost fought on as Lewis-gun teams. The Mark IV kept Lewis guns, some
+battalions to the end of the war; the Hotchkiss came back on the Mark V and the Whippet in 1918
+(corrected 2026-11-14: this line said Hotchkiss replaced Lewis from 1917). Lulworth was the gunnery range. Pigeons were carried for messages.
 
 ### Sources to check
 
@@ -180,9 +181,13 @@ second lieutenant commanding a tank.
 
 ## The story
 
-### The crew (fiction; the tank's name to be checked against real tank names)
+### The crew (fiction)
 
-The tank is *Lodestar*. The crew come from elsewhere, as the tunneller's did (Evans, Pascoe, Mott):
+The tank was first called *Lodestar*; real tanks had that name (*Lodestar III*, a Mark IV of the
+12th Battalion, 1918, is in the Brussels army museum), so she is *Polaris* (2026-11-14). Three
+searches found no WW1 tank called *Polaris*; that is not proof there was none.
+
+The tank is *Polaris*. The crew come from elsewhere, as the tunneller's did (Evans, Pascoe, Mott):
 
 | | Who | Thread |
 |---|---|---|
@@ -212,7 +217,7 @@ as the pit friends do.
 ### 1918 (tours 30-39)
 
 - January: the Mark V promised; a camp concert; tanks being painted for the spring.
-- February: Pring asks for him on a Whippet (a choice: the Whippet's crew of three, or *Lodestar*).
+- February: Pring asks for him on a Whippet (a choice: the Whippet's crew of three, or *Polaris*).
 - March: the tanks lost in the retreat, burned so the enemy cannot have them; the crew as a
   Lewis-gun team.
 - April: a draft of infantrymen from a disbanded battalion joins the corps (to check).

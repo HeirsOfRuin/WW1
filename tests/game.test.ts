@@ -212,7 +212,7 @@ describe('the tanks and the Flying Corps', () => {
 
 describe('the crew on the Soldier tab', () => {
   // A crewman's fate is a story choice that comes true later: the record must not show it early.
-  it('shows Lodestar\'s crew, and Lacey dead only after Cambrai', () => {
+  it('shows Polaris\'s crew, and Lacey dead only after Cambrai', () => {
     let seen = 0;
     for (let i = 0; i < 300 && seen < 3; i++) {
       let s = newGame(content, { start: 'mill', seed: 3000 + i * 13, name: 'Tom' });
