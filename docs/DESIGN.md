@@ -545,6 +545,14 @@ not sourced (KILLGATE open issue 6). Next is the author's playtest (docs/PLAYTES
 (`war_mood`), shown after the choice. Across 122 events the gate's targets hold. Fewer men break
 (adaptive 14.9% to 12.9%), because the letters and the friends steady them.
 
+**Roles and careers (FRAME-ROLES.md, 2026-11-14).**
+- Promotions capped: stripes stop at sergeant; company sergeant major by vacancy only; officers
+  rise to lieutenant and acting captain.
+- Six special assignments: firing party, escort, guide, burial, instructor, concert party.
+- The stretcher-bearer specialty.
+- Frameworks, not built: a Tank Corps transfer (FRAME-TANK.md) and an air gunner in the Flying
+  Corps (FRAME-AIR.md), each with four open questions for the author.
+
 ## 14. Open questions for the author
 
 1. **Approve this design** (stack, architecture, build plan). This opens Phase 1.

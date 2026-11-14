@@ -15,6 +15,10 @@ about 70 screens; most men die before 1918, so a full run is 20 to 40 minutes.
   a proper letter home steadies him, digging out buried men costs him, covering for a mate costs
   standing (Option B, docs/FRAME-OPTION-B.md). Tell me if any of them feels wrong for what happened.
 - Repeated duties have a second written take at every step, so they read less alike.
+- Promotions stop at sergeant unless earned; a sergeant major is rare; officers can reach captain.
+- Special assignments: you may be detailed for a firing party, an escort, guiding the relief, a
+  burial party, a school, or the concert party (if you sing).
+- A new specialty: the stretcher-bearer (more likely if you took first aid).
 
 ## Suggested runs (pick two)
 
