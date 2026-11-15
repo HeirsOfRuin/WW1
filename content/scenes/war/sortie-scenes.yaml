@@ -613,24 +613,28 @@
   chapter: front
   title: The gun
   text: |
-    Getting the gun into position: twenty-eight pounds of it, the drums in their canvas panniers, your
+    [if war.stake == 0]Getting the gun into position: twenty-eight pounds of it, the drums in their canvas panniers, your
     No. 2 behind you with the spares, out along a sap to a shell hole with a view. You've cleaned it
-    twice since dark. You can feel every grain of grit in it.
+    twice since dark. You can feel every grain of grit in it.[/if][if war.stake == 1]The two-seater is still there, slow and grey against the cloud, turning over the support line the
+    way a kestrel turns over a field. Each time it comes round, a gun behind their line fires, and the
+    shell lands a little nearer the cookhouse. He's ranging their battery on you. The gun has to go up
+    on the post at the end of the bay, on its swivel, pointing at the sky, with you standing under it in
+    the open.[/if]
   choices:
     - id: bold
-      text: "Set up in the forward hole with the best field of fire. ({risk_bold})"
+      text: "[if war.stake == 0]Set up in the forward hole with the best field of fire.[else]Get the gun up on the post now, while he's low.[/if] ({risk_bold})"
       effects: [ { war: bold } ]
-      text_after: The forward hole. You can see the whole of their parapet from here, which means it can see you.
+      text_after: "[if war.stake == 0]The forward hole. You can see the whole of their parapet from here, which means it can see you.[else]You get it up on the swivel and the butt into your shoulder, standing on the firestep in full view of both armies.[/if]"
       next: "@war"
     - id: steady
-      text: "Set up where you were told. ({risk_steady})"
+      text: "[if war.stake == 0]Set up where you were told.[else]Wait for him to come round again, then get it up.[/if] ({risk_steady})"
       effects: [ { war: steady } ]
-      text_after: The bipod legs bed into the sandbags. The butt goes into your shoulder like it lives there.
+      text_after: "[if war.stake == 0]The bipod legs bed into the sandbags. The butt goes into your shoulder like it lives there.[else]He comes round. You have the gun up and a drum on before he's straightened out.[/if]"
       next: "@war"
     - id: careful
-      text: "Set up back in the sap, under cover. ({risk_careful})"
+      text: "[if war.stake == 0]Set up back in the sap, under cover.[else]Fire from the bay, with the gun propped on the parados.[/if] ({risk_careful})"
       effects: [ { war: careful } ]
-      text_after: You set up in the sap. You can see half as much from here. You're twice as safe.
+      text_after: "[if war.stake == 0]You set up in the sap. You can see half as much from here. You're twice as safe.[else]Propped on the back wall of the trench the gun can't swing far, and you can only fire at him when he's nearly overhead.[/if]"
       next: "@war"
 
 - id: s_lewis_2
@@ -640,25 +644,25 @@
     [if war.stake == 0]You open up. The gun shakes against your shoulder and the cooling fins go hot and the empty cases
     spill out of the side and ring off the sandbags. Forty-seven rounds, and you're changing the drum
     by feel. Then it stops. A stoppage. The cocking handle's forward. You know what that is. Your
-    hands know before you do.[/if][if war.stake == 1]The gun's going well, short bursts, the way you were taught, the barrel casing too hot to touch,
-    the smell of hot oil and cordite. Then it stops dead in the middle of a burst. A separated case, by
-    the feel of it, the worst kind, the front half of the brass stuck in the chamber. Across the way
-    their machine gun has stopped too, which means they're looking for you.[/if]
+    hands know before you do.[/if][if war.stake == 1]You've never fired at anything that moves this fast. You were told to aim in front of him, the length
+    of his machine, and then some, and you can't tell where the bullets go once they leave the muzzle.
+    He sees you. The machine tilts and the observer in the back swings his gun round and fires down at
+    the trench, and you hear his bullets go into the sandbags beside your feet.[/if]
   choices:
     - id: bold
-      text: "Clear it fast and keep firing. ({risk_bold})"
+      text: "[if war.stake == 0]Clear it fast and keep firing.[else]Stand and keep firing at him, whatever he fires back.[/if] ({risk_bold})"
       effects: [ { war: bold } ]
-      text_after: Pull, pull, a new drum, and it's going again, and the muzzle flash lights up the whole hole.
+      text_after: "[if war.stake == 0]Pull, pull, a new drum, and it's going again, and the muzzle flash lights up the whole hole.[else]You stand there and fire up at him, a whole drum, with his bullets kicking the earth off the parados behind you.[/if]"
       next: "@war"
     - id: steady
-      text: "Clear it properly, by the drill. ({risk_steady})"
+      text: "[if war.stake == 0]Clear it properly, by the drill.[else]Short bursts, the way you were taught, and lead him.[/if] ({risk_steady})"
       effects: [ { war: steady } ]
-      text_after: First position, second position. Your No. 2 hands you the drum without being asked.
+      text_after: "[if war.stake == 0]First position, second position. Your No. 2 hands you the drum without being asked.[else]Short bursts. Lead him. Short bursts. Your No. 2 has a drum ready before you call for it.[/if]"
       next: "@war"
     - id: careful
-      text: "Get the gun down out of sight while you clear it. ({risk_careful})"
+      text: "[if war.stake == 0]Get the gun down out of sight while you clear it.[else]Duck under the parapet while he passes, and fire when he's going away.[/if] ({risk_careful})"
       effects: [ { war: careful } ]
-      text_after: You get it down into the bottom of the hole and work on it blind, and the firing stops for a minute too long.
+      text_after: "[if war.stake == 0]You get it down into the bottom of the hole and work on it blind, and the firing stops for a minute too long.[else]You crouch while he passes, then come up and fire at his tail as he goes. A going-away shot. You'll never know.[/if]"
       next: "@war"
 
 - id: s_lewis_3
@@ -666,31 +670,31 @@
   title: The gun
   text: |
     [if war.stake == 0]It's done. Now the gun has to come back in, and their machine gunners know exactly where it's
-    been. The first shells are already coming down behind you.[/if][if war.stake == 1]Done. You get the gun off the parapet and the barrel's so hot it scorches through your sleeve.
-    Twenty-eight pounds of it, and the drums, and three hundred yards of trench back, and their
-    gunners have the range of the place you fired from to a yard. The first shell lands where you were.[/if]
+    been. The first shells are already coming down behind you.[/if][if war.stake == 1]He's turned away east, low, and you can't tell if it's because of you. But their battery has stopped
+    ranging on the cookhouse. Now it's ranging on the post, on the place it saw the gun fire from, and the
+    first shell lands thirty yards short.[/if]
   choices:
     - id: bold
-      text: "Carry the gun back yourself, fast. ({risk_bold})"
+      text: "[if war.stake == 0]Carry the gun back yourself, fast.[else]Fire one more drum after him before you take it down.[/if] ({risk_bold})"
       effects: [ { war: bold } ]
-      text_after: You run with the gun across your shoulders, and it gets heavier with every yard.
+      text_after: "[if war.stake == 0]You run with the gun across your shoulders, and it gets heavier with every yard.[else]One more drum at a dot over their lines. Then the next shell lands twenty yards short, and you get it down.[/if]"
       next: "@war"
     - id: steady
-      text: "Take it back in turns with your No. 2. ({risk_steady})"
+      text: "[if war.stake == 0]Take it back in turns with your No. 2.[else]Get the gun off the post and move it along the trench.[/if] ({risk_steady})"
       effects: [ { war: steady } ]
-      text_after: Gun, then drums, then gun. The sap's longer than it was.
+      text_after: "[if war.stake == 0]Gun, then drums, then gun. The sap's longer than it was.[else]Off the swivel, along three bays, and down. The next shell lands on the empty post.[/if]"
       next: "@war"
     - id: careful
-      text: "Wait in the hole for the shelling to ease. ({risk_careful})"
+      text: "[if war.stake == 0]Wait in the hole for the shelling to ease.[else]Leave the gun on the post and get into the dugout.[/if] ({risk_careful})"
       effects: [ { war: careful } ]
-      text_after: You wait with the gun in your lap like a sleeping child, until it eases.
+      text_after: "[if war.stake == 0]You wait with the gun in your lap like a sleeping child, until it eases.[else]You sit in the dugout and listen to them shell the post, and wonder what will be left of the gun.[/if]"
       next: "@war"
 
 - id: x_lewis_done
   chapter: front
   title: After the gun
   text: |
-    [if war.result == ok]The raid came back in under your fire, every man of it, and the raid officer comes along the trench afterwards to find the gunner. You're cleaning the gun. You keep cleaning it while he talks. Your hands won't stop otherwise.[/if][if war.result == failed]The gun was quiet when it was needed. Somebody out there paid for it. Nobody blames you to your face.[/if][if war.result == turned]You didn't take the gun up. Somebody else's team did.[/if]
+    [if war.stake == 0 && war.result == ok]The raid came back in under your fire, every man of it, and the raid officer comes along the trench afterwards to find the gunner. You're cleaning the gun. You keep cleaning it while he talks. Your hands won't stop otherwise.[/if][if war.stake == 0 && war.result == failed]The gun was quiet when it was needed. Somebody out there paid for it. Nobody blames you to your face.[/if][if war.stake == 0 && war.result == turned]You didn't take the gun up. Somebody else's team did.[/if][if war.stake == 1 && war.result == ok]He didn't come back. Whether you hit him nobody can say, and the artillery observer two bays down says it was his rifle, but their battery never got its range, and the cookhouse is still standing at tea time. The company sergeant major gives you an extra tot.[/if][if war.stake == 1 && war.result == failed]He came back an hour later and finished his shoot. At four o'clock their heavies came down on the support line exactly where he'd marked it, and the stretcher-bearers were busy till dark.[/if][if war.stake == 1 && war.result == turned]You didn't put the gun up. He finished his shoot, and at four o'clock their heavies came down on the support line.[/if]
   choices:
     - id: on
       text: Clean the gun.

@@ -1,0 +1,20 @@
+# The overview after every battle, fought or missed (docs/FRAME-PLAYTEST2.md; the author, playtest 2:
+# "Some of the battles ended without me realizing properly. I think we need to have battle overviews").
+# What the battle did, in history; what he did in it, or where he was; who from home it killed; and
+# what came of it for him. One scene for every battle and road, routed by war.after.
+- id: x_battle_after
+  chapter: front
+  title: "After {after_name}"
+  text: |
+    [if war.after == loos]Loos, 25 September 1915: the first great British attack of the war, behind a cloud of gas. The first German line was taken that morning. The second never was. The reserves came up a day late and walked into the machine guns.[/if][if war.after == somme_1_july]The first of July 1916. A week of bombardment had not cut the wire or reached the deep dugouts, and the British Army lost more men that day than on any day before or since: nearly sixty thousand, about twenty thousand of them killed.[/if][if war.after == somme_autumn]The Somme went on into November, a few hundred yards at a time, until the rain and the mud stopped it. In four and a half months the line moved about six miles.[/if][if war.after == arras]Arras, from 9 April 1917. The first day was the best the British Army had yet had: over three miles in places, and the Canadians took Vimy Ridge. Then the German reserves came up, and for the rest of April it cost more men a day than any British battle of the war.[/if][if war.after == passchendaele]Third Ypres, from 31 July 1917. The rain came in the first days of August and hardly stopped. The Canadians took what was left of Passchendaele village on 6 November, about five miles from where it began.[/if][if war.after == cambrai]Cambrai, 20 November 1917. The tanks went through the Hindenburg Line on the first morning, and the church bells rang in England. On 30 November the Germans counter-attacked and took most of it back.[/if][if war.after == spring_offensive]The German offensive, from 21 March 1918, out of the fog behind the heaviest bombardment of the war. In a fortnight the line went back as much as forty miles. It bent. It did not break.[/if][if war.after == hundred_days_august]Amiens, 8 August 1918, in fog, with hundreds of tanks. Seven miles in a day. Ludendorff called it the black day of the German Army.[/if][if war.after == hundred_days_october]October 1918. The Hindenburg Line is behind you, and the advance goes on village by village, into towns the fighting passed over in 1914, where the people come out to meet you.[/if]
+
+    [if war.after_fought && war.after_hit == none]You came through it on your feet.[/if][if war.after_hit == light]You were hit, lightly, and walked back to the aid post with your field dressing on.[/if][if war.after_hit == severe]You were hit badly, and carried back, and most of it you only know from what you were told.[/if][if !war.after_fought && war.after_why == course]You missed it. You were away on a course when the battalion went over, and you heard it from the men who came back, the ones who would talk.[/if][if !war.after_fought && war.after_why == wound]You missed it. You were in hospital with your wound, and read about it in the paper, and then in a letter, and the letter was worse.[/if]
+
+    [if war.after != cambrai && war.after_lost == 0]Of the men from home, none was killed in it.[/if][if war.after_lost == 1]Of the men from home, {after_lost_names} was killed in it.[/if][if war.after_lost >= 2]Of the men from home, {after_lost_names} were killed in it.[/if] [if war.after != cambrai]{section_line}[/if]
+
+    [if war.after_award]Your name is in orders: {after_award_name}.[/if][if war.after_near]Your name went in for a medal. Nothing came of it. Most recommendations come to nothing, the company commander says, and he says he put it in anyway.[/if][if war.after_promoted] There's a stripe in it too: you're {rank_a} now.[/if]
+  choices:
+    - id: on
+      text: "[if war.after_lost >= 1]Write their names down.[else]Go on.[/if]"
+      effects: [ { war_ack: battle } ]
+      next: "@war"

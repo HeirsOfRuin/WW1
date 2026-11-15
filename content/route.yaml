@@ -33,6 +33,8 @@ switch:
   - { if: ["war.fallen == 2", "start == city"], go: x_fallen_fenton }
   - { if: ["war.fallen == 3", "start == city"], go: x_fallen_marsh }
   - { if: "war.fallen >= 1", go: x_fallen }
+  # the overview after a battle, fought or missed (content/scenes/war/battle-after.yaml; playtest 2)
+  - { if: "war.after != none", go: x_battle_after }
   # how a sortie went, then its next step (content/scenes/war/sorties.yaml)
   - { if: ["war.result != none", "war.result_key == raid"], go: x_raid_done }
   - { if: ["war.result != none", "war.result_key == patrol"], go: x_patrol_done }

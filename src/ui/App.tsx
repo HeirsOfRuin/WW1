@@ -64,7 +64,7 @@ export function App({ content }: { content: ContentBundle }) {
             {v.card.since.map((l) => <p class="hint">{l}</p>)}</section>}
           {(v.outcome?.text || (v.outcome?.changes.length ?? 0) > 0) && page === 0 && <section class="outcome">{v.outcome!.text && paras(v.outcome!.text)}{v.outcome!.changes.length > 0 && <p class="hint">{v.outcome!.changes.join(' · ')}</p>}</section>}
           {v.cause && <p class="hint">Because: {v.cause.text}</p>}
-          {page === 0 && artUrl(artOf(state)) && <img class="band" src={artUrl(artOf(state))} alt="" width={400} height={200} />}
+          {page === 0 && artUrl(artOf(state, v.sceneId)) && <img class="band" src={artUrl(artOf(state, v.sceneId))} alt="" width={400} height={200} />}
           <h2>{v.title}</h2>
           {paras(pages[Math.min(page, pages.length - 1)] ?? '')}
           {v.ended

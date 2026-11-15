@@ -91,11 +91,19 @@ export interface War {
   endWhy: string;
   /** what happened that the player has not yet been shown as a scene: a wound, friends killed.
    *  Recorded only; nothing in the war reads it, so the war's numbers do not depend on it. */
-  news: { wound: { kind: 'light' | 'severe'; cause: string } | null; fallen: { i: number; why: string; present: boolean }[]; sortie?: { key: string; ok: boolean; vol: boolean; turned: boolean } | null };
+  news: { wound: { kind: 'light' | 'severe'; cause: string } | null; fallen: { i: number; why: string; present: boolean }[]; sortie?: { key: string; ok: boolean; vol: boolean; turned: boolean } | null;
+    /** nerve won back at rest and on leave since the last question: the screen shows it apart from what
+     *  the choice cost (playtest 2: "Nerve +7" after a raid read as if the raid had steadied him) */
+    restored?: { rest: number; leave: number };
+    /** the last battle, fought or missed, for the overview screen after it (playtest 2: "some of the
+     *  battles ended without me realizing"; a course had taken him away on 1 July without a word) */
+    battle?: BattleNews | null };
   stats: WarStats;
   /** which corps he transferred to, if any (absent in saves before the tanks: a transferred man
    *  there is a tunneller; read with corpsOf); training tours left; air missions that went well */
   corps?: Corps; corpsTraining?: number; corpsOk?: number;
+  /** why he is out of the line, for the missed-battle overview */
+  outWhy?: 'course' | 'wound';
   /** pence sent home so far (absent in saves before pay was sent home: read with sentHomeOf) */
   sentHome?: number;
   log: string[];
@@ -140,6 +148,7 @@ const withSection = (w: War) => !w.transferred && w.out === 0;
 const SEVERE_OUT = 4;
 const ch = (w: War, l: StreamName, p: number) => chance(w.rng, l, p);
 const stageOf = (w: War): Stage => STAGES[w.stage - 1]!;
+export interface BattleNews { name: string; fought: boolean; why: 'course' | 'wound' | null; lost: number[]; hit: 'light' | 'severe' | null; award: string | null; promoted: boolean; near: boolean; done: boolean; rank: number }
 export const isRole = (w: War) => w.path in ROLES;
 /** His corps, if he has left the battalion: a save from before the tanks had only tunnellers. */
 export const corpsOf = (w: War): Corps | null => w.corps ?? (w.transferred ? 'tunnel' : null);
@@ -236,12 +245,12 @@ function hit(w: War, cause: string): void {
   if (r < killed + captured + WOUND.severe) {
     w.severe += 1;
     if (ch(w, 'fire', WOUND.downgrade) || w.severe >= 3) return end(w, 'invalided', `${cause}, severe wound, downgraded`);
-    w.out = SEVERE_OUT; w.blightyThisStage = true;
+    w.out = SEVERE_OUT; w.outWhy = 'wound'; w.blightyThisStage = true;
     w.nerve = clamp(w.nerve + 10, 0, 100);
     newsOf(w).wound = { kind: 'severe', cause };
     return say(w, `severe wound (${cause}): hospital in England, out ${SEVERE_OUT} rotations`);
   }
-  w.out = home(w, 'stamina') ? 1 : 2;
+  w.out = home(w, 'stamina') ? 1 : 2; w.outWhy = 'wound';
   spendNerve(w, 4);
   newsOf(w).wound = { kind: 'light', cause };
   say(w, `light wound (${cause}): out ${w.out} rotation(s)`);
@@ -254,6 +263,7 @@ function friendLosses(w: War, p: number, why: string): void {
     if (ch(w, 'section', p)) {
       w.friends[i] = false;
       newsOf(w).fallen.push({ i, why, present });
+      const bn = newsOf(w).battle; if (bn && !bn.done && bn.name === why) bn.lost.push(i);
       spendNerve(w, present ? 7 : 3);
       if (present) w.stats.friendsLostWithYou++;
       say(w, `friend ${i + 1} killed (${why})`);
@@ -290,7 +300,9 @@ function award(w: War, pts: number): void {
 function rest(w: War): void {
   const present = withSection(w) ? aliveFriends(w) : w.transferred && w.out === 0 ? CORPS[corpsOf(w)!].crew : 0;
   const pay = (isRole(w) ? ROLE.restBonus : 0) + (corpsOf(w) === 'air' ? CORPS.air.restBonus : 0);
+  const before = w.nerve;
   w.nerve = clamp(w.nerve + REST.base + REST.voice * home(w, 'voice') + REST.perFriend * present + pay, -10, 100);
+  const r = (newsOf(w).restored ??= { rest: 0, leave: 0 }); r.rest += w.nerve - before;
   if (home(w, 'voice') && withSection(w)) w.standing = clamp(w.standing + 1, 0, 100);
 }
 
@@ -361,12 +373,22 @@ function step(w: War): void {
       const b = battleAt(w, st, w.r);
       if (b && w.out === 0) {
         w.stats.battles++; w.battleNow = true;
+        newsOf(w).battle = { name: b.name, fought: true, why: null, lost: [], hit: null, award: null, promoted: false, near: false, done: false, rank: w.rank };
         say(w, `battle: ${b.name} as ${w.path}`);
         w.cursor = { at: 'battle', i: 0, pts: 0 };
         askPhase(w, b, 0);
         return;
       }
-      if (b) w.stats.missedBattles++;
+      if (b) {
+        // the battalion goes over without him: his section fights it all the same (a missed battle
+        // used to cost the section only a quiet tour's losses), and he hears of it after
+        w.stats.missedBattles++;
+        const nb: BattleNews = { name: b.name, fought: false, why: w.outWhy ?? 'wound', lost: [], hit: null, award: null, promoted: false, near: false, done: false, rank: w.rank };
+        newsOf(w).battle = nb;
+        if (!w.transferred) friendLosses(w, 1 - b.phases.reduce((a, [base]) => a * (1 - base * FRIEND_BATTLE), 1), b.name);
+        nb.done = true;
+        say(w, `missed: ${b.name} (${nb.why})`);
+      }
       // a story stop at the start of every tour he is in the line for (the author, 2026-11-09:
       // "follow a story more"); it draws nothing, so it changes no numbers
       if (w.out === 0 && st.n === CORPS.air.stage && w.r === CORPS.air.atRotation && airEligible(w)) { w.cursor = { at: 'tour' }; w.pending = { kind: 'corps', corps: 'air' }; return; }
@@ -396,7 +418,9 @@ function step(w: War): void {
       return;
     }
     case 'course': {
-      if (!w.courseThisStage && !w.transferred && w.standing >= 45 && ch(w, 'career', 0.22 + 0.1 * home(w, 'lit'))) {
+      // never on the tour before a battle: the course takes him away for a tour, and in playtest 2 it
+      // took him away on the first of July without a word
+      if (!w.courseThisStage && !w.transferred && w.standing >= 45 && !battleAt(w, st, w.r + 1) && ch(w, 'career', 0.22 + 0.1 * home(w, 'lit'))) {
         // a man with first aid from home is twice as likely to be sent on the stretcher-bearers' course
         const k = w.rank >= 1 && skill(w, 'lead') < 2 ? 'lead' : ch(w, 'career', 0.5) ? TOWN_COURSE[w.town] : pick(w.rng, 'career', home(w, 'firstaid') ? [...SPECIALIST, 'bearer'] : SPECIALIST);
         w.cursor = { at: 'tally' }; // afterCourse() runs when the decision is made
@@ -419,7 +443,9 @@ function step(w: War): void {
       w.stagesDone = st.n;
       if (st.n === STAGES.length) { end(w, 'armistice', 'alive on 11 November 1918'); w.cursor = { at: 'done' }; return; }
       w.clockInStage = st.rotations;
+      const beforeLeave = w.nerve;
       w.nerve = clamp(w.nerve + REST.leave, -10, 100);
+      (newsOf(w).restored ??= { rest: 0, leave: 0 }).leave += w.nerve - beforeLeave;
       const offers = postingOffers(w);
       const commission = commissionOffer(w);
       w.stats.offersAtLeave[w.stage] = offers.length;
@@ -502,13 +528,17 @@ function askPhase(w: War, b: Battle, i: number): void {
 function battleOf(w: War): Battle { return battleAt(w, stageOf(w), w.r)!; }
 
 function finishBattle(w: War, pts: number): void {
+  const n = w.awards.length;
   award(w, pts);
+  const bn = newsOf(w).battle;
+  if (bn && !bn.done) { bn.award = w.awards.length > n ? w.awards[w.awards.length - 1]! : null; bn.near = !bn.award && pts >= 5; }
   if (w.rank < 3 && w.standing >= 45 + 10 * w.rank && ch(w, 'career', 0.35)) promote(w, `vacancy after ${battleOf(w).name}`);
   else if (w.rank === SERGEANT) csmVacancy(w, PROMO.csmAfterBattle, `vacancy after ${battleOf(w).name}`);
   else if (w.commissioned) officerVacancy(w, battleOf(w).name);
   w.battleNow = false;
   if (w.out === 0) rest(w);
   w.cursor = { at: 'tally' };
+  if (bn && !bn.done) { bn.promoted = w.rank > bn.rank; bn.done = true; }
 }
 
 // ---- risk: one derivation for what is shown under a choice and what is resolved -----------------
@@ -694,7 +724,7 @@ export function decide(w: War, d: Decision): War {
     case 'course': {
       if (d === 'take') {
         w.courseThisStage = true; w.stats.courses++;
-        w.out = Math.max(w.out, 1); learn(w, p.skill, 2); w.standing = clamp(w.standing + 2, 0, 100);
+        w.out = Math.max(w.out, 1); w.outWhy = 'course'; learn(w, p.skill, 2); w.standing = clamp(w.standing + 2, 0, 100);
         say(w, `course: ${p.skill}`);
       }
       afterCourse(w);
@@ -714,7 +744,7 @@ export function decide(w: War, d: Decision): War {
       }
       const cm = CHOICES[choice];
       const path = PATHS[w.path]!;
-      if (ch(w, 'battle', phaseHit(w, b, base, p.type, choice))) hit(w, b.name);
+      if (ch(w, 'battle', phaseHit(w, b, base, p.type, choice))) { hit(w, b.name); const bn = newsOf(w).battle; if (bn && newsOf(w).wound) bn.hit = newsOf(w).wound!.kind; }
       if (w.ending) { w.cursor = { at: 'tally' }; break; }
       if (b.capture && w.path !== 'air' && ch(w, 'battle', b.capture * (choice === 'ground' ? 2 : 1))) { end(w, 'captured', `${b.name}: overrun`); w.cursor = { at: 'tally' }; break; }
       if (path.advanceCapture && (p.type === 'advance' || p.type === 'stalled') && ch(w, 'battle', path.advanceCapture)) { end(w, 'captured', `${b.name}: ditched beyond the line`); w.cursor = { at: 'tally' }; break; }
@@ -734,7 +764,8 @@ export function decide(w: War, d: Decision): War {
       // from inside a tank allotted to the battalion, or over it on contact patrol, he can still save them
       if (corpsOf(w) === 'tank' && (CORPS.tank.supportBattles as readonly string[]).includes(b.name) && choice === CORPS.tank.supportChoice) fp *= CORPS.tank.supportMult;
       if (corpsOf(w) === 'air' && choice === CORPS.air.supportChoice) fp *= CORPS.air.supportMult;
-      friendLosses(w, fp, b.name);
+      // the battalion is not at a corps-only battle (Cambrai): his friends are not killed in it
+      if (stageOf(w).battles[w.r]) friendLosses(w, fp, b.name);
       if (w.out > 0) { finishBattle(w, c.pts); break; }
       if (w.nerve <= 0) { end(w, 'broken', `${b.name}: shell shock`); w.cursor = { at: 'tally' }; break; }
       c.i += 1;

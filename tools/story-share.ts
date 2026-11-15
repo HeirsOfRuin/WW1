@@ -11,7 +11,7 @@ import { POLICIES, decideFor, battleOf } from '../src/game/war/index';
 /** Generic: the war's own questions and missions. Everything else is story. */
 export function kindOf(id: string): 'story' | 'generic' {
   if (id === 'w_tour' || id === 'w_tunnel_pit' || id === 'w_corps_tank' || id === 'w_corps_air') return 'story'; // the tour's passage of the year; the pit's written offer
-  if (/^(w_|s_)/.test(id) || /^x_(raid|patrol|wiring|listening|carrying|bomb|lewis|snipe|signals|tunnel|bearer|tank|air)_done$/.test(id) || id === 'x_sortie') return 'generic';
+  if (/^(w_|s_)/.test(id) || /^x_(raid|patrol|wiring|listening|carrying|bomb|lewis|snipe|signals|tunnel|bearer|tank|air)_done$/.test(id) || id === 'x_sortie' || id === 'x_battle_after') return 'generic'; // the overview is the war's own report, the same on every road
   return 'story';
 }
 

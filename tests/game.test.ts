@@ -235,6 +235,41 @@ describe('the crew on the Soldier tab', () => {
   }, 60_000);
 });
 
+describe('playtest 2', () => {
+  // The author's save: a course on the tour before 1 July took him away from the battle without a word.
+  it('no course comes on the tour before a battle, and a missed battle is told', () => {
+    let missed = 0;
+    for (let i = 0; i < 300; i++) {
+      const w = newWar({ seed: 5100 + i, town: TOWNS[i % 4]! });
+      for (let g = 0; g < 5000 && !w.ending; g++) {
+        run(w); if (!w.pending) break;
+        if (w.pending.kind === 'course') expect(battleOf({ ...w, r: w.r + 1 } as never), `course at S${w.stage} r${w.r}`).toBeUndefined();
+        decide(w, decideFor(WAR_POLICIES.adaptive!, w, w.pending, battleOf) as never);
+        const b = w.news?.battle; if (b?.done && !b.fought) { missed++; expect(['course', 'wound']).toContain(b.why); }
+      }
+    }
+    expect(missed).toBeGreaterThan(10);
+  }, 60_000);
+  // "Nerve +7" after a raid: the rest that followed was counted as the raid's.
+  it('nerve won back at rest is shown apart from what the choice cost', () => {
+    let seen = 0;
+    for (let i = 0; i < 40 && seen < 20; i++) {
+      let s = newGame(content, { start: TOWNS[i % 4]!, seed: 700 + i, name: 'Tom' });
+      for (let k = 0; k < 3000 && !s.ended; k++) {
+        const v = view(content, s);
+        const ok = v.choices.filter((c) => c.available);
+        const id = s.war.pending && v.choices.some((c) => c.id === decideFor(WAR_POLICIES.half!, s.war, s.war.pending!, battleOf).replace(':', '_')) ? decideFor(WAR_POLICIES.half!, s.war, s.war.pending!, battleOf).replace(':', '_') : ok[0]?.id;
+        if (!id) break;
+        const r = choose(content, s, id); s = r.state;
+        const ch = view(content, s).outcome?.changes ?? [];
+        if (ch.some((c) => c.startsWith('Out at rest'))) seen++;
+        expect(ch.filter((c) => /^Nerve [+−]/.test(c)).length).toBeLessThanOrEqual(1);
+      }
+    }
+    expect(seen).toBeGreaterThan(0);
+  }, 60_000);
+});
+
 describe('pay sent home', () => {
   // The author, 2026-11-09: "pay becomes money sent home that changes the family's circumstances
   // on leave". A shown number must change something: it grows every tour, it is in the soldier's
