@@ -5,7 +5,7 @@
 
 export type Town = 'pit' | 'mill' | 'city' | 'farm';
 export type PhaseType = 'advance' | 'trench' | 'hold' | 'defence' | 'air';
-export type BattleChoice = 'push' | 'help' | 'ground';
+export type BattleChoice = 'push' | 'help' | 'ground' | 'lead';
 export type Ending = 'armistice' | 'posting' | 'captured' | 'invalided' | 'killed' | 'broken' | 'courtMartial';
 export type Phase = [number, number, PhaseType];
 export interface Battle { name: string; phases: Phase[]; defence?: boolean; capture?: number }
@@ -169,6 +169,9 @@ export const CHOICES: Record<BattleChoice, ChoiceMods> = {
   push: { standing: 5, award: 1.6, friends: 0.95, nerve: 0, lead: 0.4 },
   help: { standing: 1, award: 0.3, friends: 0.4, nerve: -1, lead: 0.15 },
   ground: { standing: -5, award: 0, friends: 1.05, nerve: 0, lead: 0 },
+  // a sergeant's or an officer's order (FRAME-PLAYTEST2 B): out in front, taking the section with him.
+  // The section is lost less than pushing or going down, he is hit more; medals and standing in it
+  lead: { standing: 4, award: 1.2, friends: 0.6, nerve: -2, lead: 1.0 },
 };
 
 // Hit multiplier by phase type and choice. Advance: going to ground in no man's land leaves
@@ -176,16 +179,16 @@ export const CHOICES: Record<BattleChoice, ChoiceMods> = {
 // trench is the most dangerous work, keeping down the safest. Hold: the counter-attack comes
 // to you. Defence: going to ground risks being overrun (capture doubles, model.js).
 export const PHASE_HIT: Record<PhaseType | 'stalled', Record<BattleChoice, number>> = {
-  advance: { push: 0.85, help: 1.35, ground: 1.35 },
-  trench: { push: 1.55, help: 1.1, ground: 0.5 },
-  hold: { push: 1.4, help: 0.85, ground: 0.7 },
-  defence: { push: 1.35, help: 0.95, ground: 0.75 },
+  advance: { push: 0.85, help: 1.35, ground: 1.35, lead: 1.2 },
+  trench: { push: 1.55, help: 1.1, ground: 0.5, lead: 1.3 },
+  hold: { push: 1.4, help: 0.85, ground: 0.7, lead: 1.1 },
+  defence: { push: 1.35, help: 0.95, ground: 0.75, lead: 1.15 },
   // An attack that has stalled (uncut wire, the barrage gone ahead): pushing on is suicide,
   // the whole line goes to ground, and going down costs no standing. The player is told.
-  stalled: { push: 2.3, help: 1.3, ground: 0.5 },
+  stalled: { push: 2.3, help: 1.3, ground: 0.5, lead: 1.8 },
   // the air gunner over a battle: stay on the job (the shoot, the photographs, the low pass), watch
   // the pilot's tail, or tell him to turn for home (FRAME-AIR.md)
-  air: { push: 1.2, help: 0.9, ground: 0.6 },
+  air: { push: 1.2, help: 0.9, ground: 0.6, lead: 1.2 },
 };
 // Chance an advance or trench phase has stalled.
 export const STALL = 0.25;
@@ -283,4 +286,20 @@ export const SORTIES: Record<string, Sortie> = {
   bearer: { shares: [0.3, 0.45, 0.25], back: [false, true, false], skill: 'bearer', need: 3 },
   tank: { shares: [0.3, 0.4, 0.3], back: [true, false, false], skill: 'lewis', need: 3.5 },
   air: { shares: [0.3, 0.45, 0.25], back: [false, true, false], skill: 'lewis', need: 3.5 },
+};
+
+// A man in front of you (FRAME-PLAYTEST2 A; the author, playtest 2: "It never feels like I am killing
+// anyone, or fighting really"). Before about half the advance and trench phases of a battle, and in
+// the middle of some raids, a German is in front of him. pts: award points toward a medal (battle
+// scale; a raid takes 0.4 of it toward its success); standing; nerve it costs (negative: it steadies
+// him); hit: the chance he is hit doing it. Tuned, not sourced.
+export type CloseChoice = 'shoot' | 'bayonet' | 'prisoner' | 'spare';
+export const CLOSE = {
+  battleChance: 0.5, raidChance: 0.6,
+  choices: {
+    shoot: { pts: 1.5, standing: 1, nerve: 1, hit: 0, kill: true },
+    bayonet: { pts: 4, standing: 3, nerve: 5, hit: 0.05, kill: true },
+    prisoner: { pts: 2, standing: 3, nerve: 0, hit: 0.03, kill: false },
+    spare: { pts: 0, standing: -1, nerve: -1, hit: 0.03, kill: false },
+  } as Record<CloseChoice, { pts: number; standing: number; nerve: number; hit: number; kill: boolean }>,
 };

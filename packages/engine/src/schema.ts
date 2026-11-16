@@ -138,7 +138,9 @@ export function makeSceneSchemas<E, X extends z.ZodRawShape = {}>(EffectSchema: 
   const SceneSchema = z.object({
     id: Id,
     chapter: z.string(), // a config.chapters id, or test
-    kind: z.enum(['spine', 'pool', 'queued', 'ending']).default('spine'),
+    // pass: never shown; arriving at it resolves its first choice's next at once (a return point that
+    // re-runs a route after a pool draw: In the Trenches' tour page, then the event, then the war)
+    kind: z.enum(['spine', 'pool', 'queued', 'ending', 'pass']).default('spine'),
     title: z.string().optional(),
     tags: z.array(Id).default([]),
     pool: Id.optional(), // pool group for kind: pool

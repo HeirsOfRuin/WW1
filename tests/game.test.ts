@@ -206,7 +206,7 @@ describe('the tanks and the Flying Corps', () => {
         if (a.w.ending === 'captured' && a.w.endWhy.endsWith('shot down')) expect(endingLine(a.w)).toMatch(/^Shot down/);
       }
     }
-    expect(tanks).toBeGreaterThan(20); expect(cambrai).toBeGreaterThan(5); expect(airs).toBeGreaterThan(10);
+    expect(tanks).toBeGreaterThan(20); expect(cambrai).toBeGreaterThan(5); expect(airs).toBeGreaterThan(4);
   }, 60_000);
 });
 

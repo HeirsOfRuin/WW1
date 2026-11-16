@@ -63,6 +63,9 @@ export interface GameModule {
   textVar?(name: string, state: CoreState, content: CoreContent): string | undefined;
   /** static check of a {var}: errors, or undefined for a name that is not the game's */
   checkTextVar?(name: string, content: CoreContent): string[] | undefined;
+  /** a line the game adds under a choice's outcome, after its effects ran (a near miss, say): one
+   *  paragraph, or undefined. In the Trenches shows the step's close call here (FRAME-PLAYTEST2 D). */
+  outcomeNote?(state: CoreState, content: CoreContent): string | undefined;
   /** which entry of scene.variants replaces a scene's text for this run */
   variantKey?(state: CoreState): string | undefined;
 

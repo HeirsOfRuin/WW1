@@ -3,8 +3,8 @@
 // question, so a bot war through the real engine equals the prototype's war on the same seed.
 // Also the ablation hooks the measurement configs use (one decision forced, the rest as written).
 
-import { DUTIES, ROLES, SORTIES, type Battle, type BattleChoice, type PhaseType, type SortieChoice } from './data';
-import type { Decision, Pending, War } from './war';
+import { DUTIES, ROLES, SORTIES, type CloseChoice, type Battle, type BattleChoice, type PhaseType, type SortieChoice } from './data';
+import { canLead, type Decision, type Pending, type War } from './war';
 
 interface Policy {
   volunteer(w: War, key: string, d: { hit: number; standing: number }, friendAtRisk: boolean): boolean;
@@ -14,6 +14,10 @@ interface Policy {
   tunnel(w: War): boolean;
   /** take the tanks or the Flying Corps when offered (FRAME-TANK.md, FRAME-AIR.md) */
   corps?(w: War, corps: 'tank' | 'air'): boolean;
+  /** as an NCO not going himself: send a man from home or a new man (default: a new man, to spare the section) */
+  send?(w: War, key: string): 'send_friend' | 'send_draft';
+  /** a man in front of him (default: shoot while he has nerve, else take him prisoner) */
+  close?(w: War): CloseChoice;
   /** take a special assignment, or try to get out of it (default: take all but the firing party when shaky) */
   assign?(w: War, key: string): boolean;
   battle(w: War, i: number, type: PhaseType, stalled: boolean): BattleChoice;
@@ -26,21 +30,22 @@ const anyFriend = (w: War) => w.friends.some(Boolean);
 const always = { sick: () => false, course: () => true, tunnel: () => false, mission: () => true };
 const steady = (): SortieChoice => 'steady';
 
-const reckless: Policy = { ...always, corps: () => true, step: () => 'bold', volunteer: () => true, battle: () => 'push', leave: (_w, _o, c) => (c ? 'commission' : 'back') };
-const careful: Policy = { corps: () => false, step: () => 'careful', volunteer: () => false, mission: () => false, battle: () => 'ground', sick: (w) => w.nerve < 40, course: () => true, tunnel: () => true, leave: () => 'back' };
+const reckless: Policy = { ...always, close: () => 'bayonet', send: () => 'send_friend', corps: () => true, step: () => 'bold', volunteer: () => true, battle: () => 'push', leave: (_w, _o, c) => (c ? 'commission' : 'back') };
+const careful: Policy = { close: () => 'spare', corps: () => false, step: () => 'careful', volunteer: () => false, mission: () => false, battle: () => 'ground', sick: (w) => w.nerve < 40, course: () => true, tunnel: () => true, leave: () => 'back' };
 const mates: Policy = {
-  corps: () => false, step: steady,
+  close: () => 'prisoner', corps: () => false, step: steady,
   volunteer: (_w, _k, _d, f) => f, mission: (w) => w.nerve > 60,
   battle: (w) => (anyFriend(w) ? 'help' : 'push'), sick: (w) => w.nerve < 20, course: () => false, tunnel: () => false, leave: () => 'back',
 };
 const climber: Policy = {
-  ...always, corps: () => true, step: () => 'bold', volunteer: (_w, _k, d) => d.standing >= 3, battle: (w) => (w.nerve > 25 ? 'push' : 'ground'),
+  ...always, close: () => 'bayonet', send: () => 'send_friend', corps: () => true, step: () => 'bold', volunteer: (_w, _k, d) => d.standing >= 3, battle: (w) => (w.nerve > 25 ? (canLead(w) ? 'lead' : 'push') : 'ground'),
   leave: (w, o, c) => (c ? 'commission' : !w.promotedThisStage && o.length ? 'posting' : 'back'),
 };
 const PHASE_RULE: Record<PhaseType, (w: War) => BattleChoice> = {
   advance: () => 'push',
   trench: (w) => (w.nerve > 60 ? 'push' : anyFriend(w) ? 'help' : 'ground'),
-  hold: (w) => (anyFriend(w) ? 'help' : 'ground'),
+  // a sergeant with nerve in hand takes the section through the counter-attack himself
+  hold: (w) => (canLead(w) && w.nerve > 50 && anyFriend(w) ? 'lead' : anyFriend(w) ? 'help' : 'ground'),
   defence: (w) => (w.nerve > 50 ? 'push' : 'help'),
   air: (w) => (w.nerve > 50 ? 'push' : 'help'),
 };
@@ -59,6 +64,7 @@ const half: Policy = {
   volunteer: (w) => (w.stats.volunteered + w.stats.detailed + w.clock) % 2 === 0,
   mission: (w) => (w.stats.missions + w.clock) % 2 === 0,
   step: () => 'steady',
+  close: (w) => ((w.stats.killed ?? 0) + (w.stats.prisoners ?? 0) + w.clock) % 2 === 0 ? 'shoot' : 'prisoner',
 };
 const quitter = (n: number): Policy => ({ ...adaptive, leave: (w, o, c) => (w.stage >= n && o.length ? 'posting' : c ? 'commission' : 'back') });
 
@@ -87,11 +93,13 @@ export function withForce(base: Policy, f: Force = {}): Policy {
 /** The decision a policy makes on the war's pending question. */
 const defaultAssign = (w: War, key: string) => !(key === 'firing' && w.nerve < 40);
 
+const defaultSend = (): 'send_friend' | 'send_draft' => 'send_draft';
+const defaultClose = (w: War): CloseChoice => (w.nerve > 40 ? 'shoot' : 'prisoner');
 export function decideFor(p: Policy, w: War, q: Pending, battleOf: (w: War) => Battle): Decision {
   switch (q.kind) {
     case 'tour': return 'on';
     case 'tunnel': return p.tunnel(w) ? 'transfer' : 'stay';
-    case 'duty': return p.volunteer(w, q.duty, DUTIES[q.duty]!, q.friendAtRisk) ? 'volunteer' : 'stay_back';
+    case 'duty': return p.volunteer(w, q.duty, DUTIES[q.duty]!, q.friendAtRisk) ? 'volunteer' : q.nco ? (p.send ?? defaultSend)(w, q.duty) : 'stay_back';
     case 'mission': return p.mission(w) ? 'go' : 'decline';
     case 'sick': return p.sick(w) ? 'report' : 'carry_on';
     case 'course': return p.course(w, q.skill) ? 'take' : 'decline';
@@ -102,6 +110,7 @@ export function decideFor(p: Policy, w: War, q: Pending, battleOf: (w: War) => B
       return p.battle(w, q.phase, ptype, q.stalled);
     }
     case 'step': return p.step(w, q.key, q.step);
+    case 'close': return (p.close ?? defaultClose)(w);
     case 'leave': {
       const c = p.leave(w, q.offers, q.commission);
       return c === 'posting' ? 'posting:0' : c;

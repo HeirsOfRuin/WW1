@@ -363,6 +363,11 @@
       text: "Over, and straight down into the first shell hole. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_loos_farm_trench
   chapter: front
@@ -389,6 +394,11 @@
     - id: ground
       text: "Get down in the bottom of the trench and stay there. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 - id: b_loos_farm_hold
@@ -417,6 +427,11 @@
     - id: ground
       text: "Stay under the parapet. Fire blind over the top. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 # ---- the first leave, December 1915 -----------------------------------------------------------
@@ -448,6 +463,8 @@
     The big house has its blinds down for Mr Venn.[if flag.farm_wrote_venn] Mrs Venn sends the groom down for you. You sit in her drawing room in your uniform on a chair too good to sit on, and she asks you everything, and you tell her, and she holds her teacup without drinking it the whole time.[/if][if !flag.farm_wrote_venn] You walk past the lodge gates and don't go in.[/if]
 
     [if flag.farm_spoke_at_roll]At church a woman from Brendon takes your hand at the lych-gate. "You were the one who told them about our Sid," she says. "They wrote it was quick." You tell her it was.[/if][if flag.farm_silent_at_roll]At market a woman is telling everybody her lad's only missing, missing means taken, he'll turn up. You saw. You buy your father's tobacco and go without your change.[/if]
+
+    [if flag.ro_sw_truth]On the Sunday Rose Huxtable waits by the lych-gate after church in her good coat, with flour still in the creases of her hands where it never comes out. You walk the lane down to the mill and along the river, loud with the rain, and she has your letters by heart and asks after the rats by name. At the footbridge she takes your hand, as if it was nothing, and keeps it to the mill door.[/if][if flag.ro_sw_cheer]Rose Huxtable walks the lane down to the mill with you on the Sunday, and halfway she stops and says, "Cider," and you're quarrelling before you know it: the lists in the Western Times, the Brendon boys, the letters full of French farms. By the river she cries, cross, into her sleeve, and you stand there like a gatepost. Going back up she takes your arm, hard, as if you'd bolt.[/if][if flag.ro_sw_little]Rose Huxtable sees you at market and comes across between the pens, and stops a yard off. "I had your card," she says. "Quite well." She looks at you. "I'm glad you're quite well." Her father calls her from the cart, and she goes, and looks back once.[/if]
 
     At night the quiet keeps waking you. Then an owl, and you sleep.
 

@@ -244,3 +244,52 @@ af18_stood_with_sallis: { description: "Stood on the field with Sallis counting 
 af18_strafed_column: { description: "Went down on a German column on the roads in October 1918" }
 af18_spared_column: { description: "Fired on the guns and let the walking column go in October 1918" }
 # AIR_FLAGS_END
+
+# Wounds and death told (content/scenes/war/news.yaml, death.yaml; FRAME-PLAYTEST2 E)
+wd_light_truth: { description: "Light wound: told his mother straight where it was and that it wasn't bad; read in the Blighty wound and e_killed" }
+wd_light_joke: { description: "Light wound: wrote home that it was a scratch and a fortnight's holiday; read in the Blighty wound and e_killed" }
+wd_light_quiet: { description: "Light wound: wrote home about the weather and said nothing of it; read in the Blighty wound and e_killed" }
+wd_blighty_section: { description: "Blighty wound: wrote to the section (crew, fitters) from hospital to make them laugh; the letter comes home with his things in e_killed" }
+wd_blighty_home: { description: "Blighty wound: wrote home from hospital, uncensored, what it is like; read in e_killed" }
+wd_blighty_quiet: { description: "Blighty wound: said nothing to anybody in hospital; read in e_killed" }
+# WD_FLAGS_END
+
+# The sweetheart and the girl in France (content/scenes/war/romance.yaml; FRAME-PLAYTEST2 F)
+ro_sw_first: { description: "The sweetheart's first letter has come (1915); her road begins" }
+ro_sw_truth: { description: "Wrote the sweetheart the truth in 1915; the first leave is a walk" }
+ro_sw_cheer: { description: "Wrote the sweetheart cheerful lies in 1915; a quarrel at the first leave; if she waits, she leaves him in 1918" }
+ro_sw_little: { description: "Sent the sweetheart a field postcard in 1915; she is cool at leave, and ends it in 1917 unless he commits" }
+ro_sw_16: { description: "The sweetheart's 1916 letter has come" }
+ro_sw_wed16: { description: "Asked her to marry him at the 1916 leave; the leave is the wedding and sets ro_sw_married" }
+ro_sw_after: { description: "Asked her to wait till it is over; engaged at the 1916 leave" }
+ro_sw_let_go: { description: "Told her not to wait (1916); she lets him go, kindly" }
+ro_sw_silent: { description: "Sent her another field postcard in 1916; she ends it in 1917" }
+ro_sw_ended: { description: "The sweetheart's road is over (let go, her letter ending it, or Florence in the city)" }
+ro_sw_florence: { description: "The city: wrote Dear Florence, and Ivy let him go (1916)" }
+ro_sw_17: { description: "The sweetheart's 1917 letter has come (once, whichever pool he is in)" }
+ro_sw_wed17: { description: "Asked her again in 1917; the 1917 leave is the wedding and sets ro_sw_married" }
+ro_sw_wait2: { description: "Asked her in 1917 to hold on till it is over" }
+ro_sw_named: { description: "Wrote his wife pages about the baby (1917); the baby has the name he chose" }
+ro_sw_married: { description: "Married to the sweetheart: set by the 1916 or 1917 leave on which the wedding happened" }
+ro_sw_jilted: { description: "She wrote to end it and married another man (1917 or 1918)" }
+ro_sw_blessed: { description: "Wished her happy when she ended it (or told Ivy the truth about Florence)" }
+ro_sw_18: { description: "The sweetheart's 1918 letter has come" }
+ro_sw_told18: { description: "Told her the truth about the spring of 1918" }
+ro_fr_met: { description: "Has eaten at the estaminet at Ternecourt and seen Marthe Delattre (1916)" }
+ro_fr_spoke: { description: "Tried his French on Marthe; her road begins" }
+ro_fr_walked: { description: "Walked out with Marthe by the stream on Sundays (1916)" }
+ro_fr_friend: { description: "Lifted the beet with Marthe's father and left it there (1916)" }
+ro_fr_writes: { description: "Took Marthe's address when the battalion moved north and writes to her (1917)" }
+ro_fr_parted: { description: "Said goodbye to Marthe when the battalion moved north (1917)" }
+ro_fr_cart: { description: "Met the Delattres' cart on the road west in the March retreat (1918)" }
+ro_fr_address: { description: "Gave Marthe his address at home on the road west (1918)" }
+ro_fr_promise: { description: "Told Marthe he would come back for her after the war (1918)" }
+ro_fr_let_go: { description: "Told Marthe to marry Gaston, who stays (1918)" }
+# RO_FLAGS_END
+
+# Dated missions and the Whippet (FRAME-PLAYTEST2 G, H)
+# DM_FLAGS_END
+
+# A man in front of you (content/scenes/war/close.yaml; docs/FRAME-PLAYTEST2.md item A)
+cl_close_kill: { description: "Killed a German at arm's length in a close moment (bayonet, cosh, bomb, revolver or rifle butt)" }
+cl_let_go: { description: "Let a German go in a close moment" }

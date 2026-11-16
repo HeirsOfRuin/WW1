@@ -483,6 +483,11 @@
       text: "Get down. Wait for the fire to slacken. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_somme_pit_2
   chapter: front
@@ -511,6 +516,11 @@
       text: "Get down on the crater's inside slope and stay there. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_somme_pit_3
   chapter: front
@@ -538,6 +548,11 @@
       text: "Keep down inside the crater. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_somme_pit_4
   chapter: front
@@ -564,6 +579,11 @@
     - id: ground
       text: "Stay in the crater till you're relieved. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 # ---- the autumn: the Butte ----------------------------------------------------------------------
@@ -594,6 +614,11 @@
       text: "Get into a shell hole and wait for the fire to slacken. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_butte_2
   chapter: front
@@ -616,6 +641,11 @@
     - id: ground
       text: "Get down in the water and fire at the slits. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 - id: b_butte_3
@@ -641,11 +671,17 @@
       text: "Keep down below the lip of the ditch. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 # ---- the 1916 leave ---------------------------------------------------------------------------------
 
 - id: l_pit_1916
   chapter: front
+  on_enter: [ { if: flag.ro_sw_wed16, then: [ { set: flag.ro_sw_married } ] } ]
   title: Home on leave
   text: |
     December, and the village is quiet the way it's never quiet. The buzzer still goes, the cage
@@ -659,6 +695,10 @@
     [if war.transferred]Your mother's got a new mangle in the wash-house, and she shows it to you twice. "Six shillings a day," your father says, and coughs. "Down a hole. In France." He laughs till the coughing stops him. "I could have told you that was where you'd end."[/if][if war.transferred && flag.p16_chalked_tin] You don't tell anybody about the tins, and your name on the last one.[/if][if war.transferred && flag.p16_blew_camouflet] Some nights in your own bed you feel the ground thump under you, like a door slamming in an empty house, and you're awake before you know why.[/if][if war.transferred && flag.p16_visited] You carry the lads' messages round the rows, from the afternoon you walked over to the battalion, and the mothers make you say them twice.[/if][if war.transferred && flag.p16_heard_the_song] At chapel on Sunday they sing a hymn you don't know, and for a moment, in the second verse, you think it's the one. It isn't.[/if]
 
     [if !war.transferred && flag.p16_read_lists]You know every house with the blinds down. You read them all, in France, in small print. You go round them, one a day, and sit in their kitchens, and tell the mothers what you can.[/if][if !war.transferred && !flag.p16_read_lists]You didn't read the lists. You learn them now, walking up the rows, a blind at a time.[/if]
+
+    [if flag.ro_sw_wed16]You and Lizzie are wed at the chapel on the Wednesday, by licence, in a week. She's in a borrowed costume with her tram cap on top, because the girls from the depot dared her and she never could refuse a dare, and the back pews are full of conductresses. The tea's in the schoolroom: ham, pease pudding, a cake her mother saved the sugar for since October. You have one night at Whitley Bay in a boarding house that smells of mothballs and the sea, and walk the empty front in the morning with the waves coming up grey over the rocks.[/if][if flag.ro_sw_after]On the Sunday you walk Lizzie to the end of the waggonway, where it looks over the sea, and give her the ring from the jeweller's in Grainger Street. She puts it on herself before you can. "After," she says. "You said after. I'll hold you to it, mind."[/if][if flag.ro_sw_let_go]Lizzie Milburn is in chapel with your mother, the way she said she'd be every Sunday. At the door she shakes your hand, kind, and asks after your feet.[/if][if flag.ro_sw_silent]Lizzie Milburn passes you in the rows and says good morning, the way she'd say it to the insurance man.[/if][if flag.ro_sw_first && !flag.ro_sw_16 && !flag.ro_sw_ended]Lizzie walks the waggonway with you on the Sunday, and you talk about the trams and the pit and nothing at all, and neither of you says the thing. At her mother's gate she says, "Well, then," and goes in.[/if]
+
+    [if flag.ro_fr_met]Your mother wants to know what the French eat. Egg and chips, you tell her, and she doesn't believe a word of it.[/if]
 
     [if war.mate2 && flag.p16_backed_matty]Mrs Bell takes you aside at the Store. Matty's in prison, in Durham. Jim wrote that you stuck up for him. She doesn't say thank you. She gives you a quarter of black bullets and goes.[/if][if !war.mate2]Bell's father doesn't come to the Miners' Hall any more. Matty's in prison. Jim's in France, under it.[/if]
 

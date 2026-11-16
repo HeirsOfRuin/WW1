@@ -273,6 +273,11 @@
       text: "Get down. Wait for the gun to turn away. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_somme_farm_3
   chapter: front
@@ -299,6 +304,11 @@
       text: "Get behind a wall and cover the cellar doors. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_somme_farm_4
   chapter: front
@@ -323,11 +333,17 @@
       text: "Crawl, shell hole to shell hole, as slow as it takes. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 # ---- the 1916 leave ---------------------------------------------------------------------------
 
 - id: l_farm_1916
   chapter: front
+  on_enter: [ { if: flag.ro_sw_wed16, then: [ { set: flag.ro_sw_married } ] } ]
   title: Home on leave
   text: |
     December, and the lane up from the carrier's cart is ice in the ruts. The farm's there. The
@@ -343,6 +359,10 @@
     [if war.mate2]Pearce's mother asks if it's true Dan's a sniper now, and whether that means he's poaching for the King, and laughs at her own joke till she has to sit down.[/if][if !war.mate2]The keeper at the big house has let the rabbits go. Nobody to set against them, he says.[/if]
 
     [if war.mate3 && flag.f16_bert_peal]On Sunday the ringers ring for your leave. The two girls from the school are on the treble and the second, and old Mr Squance on the tenor, Bert's bell. You stand in the tower and listen, and it's like being let out of something.[/if][if war.mate3 && !flag.f16_bert_peal]On Sunday the bells ring, short-handed, for the men home on leave. They keep the tenor rope looped up for Bert.[/if][if !war.mate3]The tenor's rung half-muffled on Sundays now, for the Dunsworthy dead, and the girl who rings it was taught by Bert's old tower captain.[/if]
+
+    [if flag.ro_sw_wed16]You and Rose are married at Dunsworthy church on the Wednesday, the banns read three Sundays while you were still in France. The ringers ring what bells they have. She's in her mother's dress let out, with a sprig of holly because there's nothing else in December, and her father gives her away with flour on his good black coat. The breakfast's at the mill: ham, cider, and a cake her mother saved the sugar for since Michaelmas. One night at the inn in South Molton, with the market under the window at five in the morning, cattle and dogs and men shouting prices, and Rose laughing into the pillow.[/if][if flag.ro_sw_after]On the Sunday you walk Rose down to the mill, and on the footbridge, with the river going under brown and loud, you give her the ring from the jeweller's in Barnstaple. She puts it on herself before you can. "After," she says. "You said after. I'll hold you to it."[/if][if flag.ro_sw_let_go]Rose Huxtable is three pews ahead in church. At the lych-gate she shakes your hand and asks after your feet, kind, the way she'd ask any of the boys home.[/if][if flag.ro_sw_silent]Rose Huxtable says good morning at market the way she'd say it to the corn merchant.[/if][if flag.ro_sw_first && !flag.ro_sw_16 && !flag.ro_sw_ended]Rose walks the lane to the mill with you on the Sunday, and back, and you talk about the hoist and the tribunal and nothing at all, and neither of you says the thing. At the mill door she says, "Well," and goes in.[/if]
+
+    [if flag.ro_fr_met]Your mother wants to know what the French eat. Egg and chips, you tell her, and she doesn't believe a word of it.[/if]
 
     [if flag.f16_wrote_vellacott]At market your father sells two heifers to Mr Vellacott and doesn't speak to him, and Mr Vellacott doesn't look at you.[/if][if flag.f16_helped_rudd] A letter comes for you at the farm from Mr Rudd, in Birmingham on leave too, to wish you a happy Christmas. Your mother puts it on the dresser with the others.[/if]
 

@@ -230,6 +230,7 @@
 
 - id: l_farm_1917
   chapter: front
+  on_enter: [ { if: flag.ro_sw_wed17, then: [ { set: flag.ro_sw_married } ] } ]
   title: Home on leave
   text: |
     December. The carrier's cart from South Molton, and the lane, and the farm in the dusk. There's a
@@ -243,6 +244,10 @@
     his heel.
 
     [if flag.f17_ploughed]You tell your father about the French farmer and his cow and the straight furrow. He laughs till he coughs. "A cow," he says. "In the shafts. Well, I've seen it all now." He tells it to everybody at market.[/if]
+
+    [if flag.ro_sw_wed16]Rose is living in at the farm with the baby, the way you settled it, and your mother's given her the best room and the warming pan. [if flag.ro_sw_named]The baby has the name you wrote. Your father says it's a name for the big house, and says it to the cows.[else]She's called after Rose's mother, and you find you don't mind.[/if] At night you lie and listen to her breathing in the drawer by the bed, the way you used to listen for the next shell.[/if][if flag.ro_sw_wed17]You and Rose are married at Dunsworthy church on the Thursday, the banns read while you were in France. There's no icing on the cake; there's no sugar for icing in the whole of Devon. The girls ring the trebles, and you have one night at the inn in South Molton, with the market under the window at five.[/if][if flag.ro_sw_after && !flag.ro_sw_wed17]Rose wears the ring on a string at the mill, for the machinery, and on her finger on Sundays. You walk down to the footbridge in sleet. [if flag.ro_sw_wait2]"After," she says. "You said it again." She laughs, and it isn't much of a laugh.[else]She doesn't ask you anything, and you could kiss her for that, and do.[/if][/if][if flag.ro_sw_jilted]You see Rose Huxtable at market with Harry Moule, the carrier's son, and she sees you see her. She comes across on her own. "I'm sorry," she says. "I am." [if flag.ro_sw_blessed]"I kept your letter." You tell her Harry's a good sort, and he is.[else]You tell her it doesn't matter, and she knows it does, and lets you say it.[/if][/if][if flag.ro_sw_let_go]Rose Huxtable is walking out with the young carter at Vellacott's, your mother says, and seems happy.[/if]
+
+    [if flag.ro_fr_writes]In your pack there are three letters from Ternecourt, in French, that you can read about half of. You don't take them out in this house.[/if]
 
     [if war.mate1 && flag.f17_fly_runs]Old Mr Cottle has heard about the French Fly running messages. He sits at the fire with Will's letter, and the real Fly at his feet, and reads it to her, and she listens.[/if][if war.mate1 && !flag.f17_fly_runs && flag.f16_kept_dog]Old Mr Cottle asks after Will and the French dog, and laughs that there's two of them called Fly now.[/if][if war.mate1 && !flag.f16_kept_dog]Old Mr Cottle asks after Will, and you tell him he's well.[/if][if !war.mate1]Old Mr Cottle has stopped going to market. The sheep go on. Fly still goes to the gate.[/if]
 

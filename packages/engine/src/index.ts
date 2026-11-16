@@ -166,7 +166,9 @@ export function choose<S extends GameState>(content: ContentBundle, prev: S, cho
   let died = applyEffects(state, content, choice.effects, ctx);
   if (!died) died = applyEffects(state, content, outcome.effects, ctx);
   if (died && state.ended?.cause) state.ended.cause = narrator.renderPassage(state.ended.cause, state, content);
-  const outcomeText = outcome.text ? narrator.renderPassage(outcome.text, state, content) : undefined;
+  const note = died ? undefined : gameOf(content).outcomeNote?.(state, content);
+  const rendered = outcome.text ? narrator.renderPassage(outcome.text, state, content) : undefined;
+  const outcomeText = note ? (rendered ? `${rendered}\n\n${note}` : note) : rendered;
 
   const entry: JournalEntry = {
     at: prev.time,

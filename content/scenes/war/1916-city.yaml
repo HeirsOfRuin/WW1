@@ -269,11 +269,17 @@
       text: "Get down in the smoke. Wait for it to clear. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 # ---- the 1916 leave ---------------------------------------------------------------------------
 
 - id: l_city_1916
   chapter: front
+  on_enter: [ { if: flag.ro_sw_wed16, then: [ { set: flag.ro_sw_married } ] } ]
   title: Home on leave
   text: |
     Victoria again, in your mud, at night. London's darker than last year. The lamps are painted
@@ -286,6 +292,10 @@
     [if flag.c16_read_lists]You know which houses in the street. You read the lists. There are three with a card in the front window now, a printed card with a name and a regiment, and a little flag.[/if][if !flag.c16_read_lists]There are three houses in the street with a card in the front window now, a name and a regiment, and a little flag. You didn't read the lists. You read them now, on the way up the street.[/if]
 
     On the Monday, the office. The Roll of Honour has its second panel. [if flag.c16_florence]Florence meets you on the steps at one o'clock, because she said she would, and you go to the Lyons on the corner, and she has a poached egg and you have a pork pie, and you sit there in your uniform with the steam on the windows and the waitresses going past, and talk for an hour about nothing at all, and it's the best hour of the war.[/if][if flag.city_wrote_holland && !flag.c16_florence]Miss Holland is at your desk. She stands up and shakes your hand, and calls you by your surname, and so do you.[/if]
+
+    [if flag.ro_sw_wed16]You and Ivy are married at St Mary's on the Wednesday, by licence, with the girls from the exchange whispering in the front pews. She's in a costume her sister made over, with violets off a barrow. The breakfast's in your mother's front room: ham, and a cake her mother saved the sugar for since the summer. You have two nights at Southend, out of season, the pier empty and the wind coming off the estuary, and the mud going out for miles under the moon.[/if][if flag.ro_sw_after]On the Saturday you take Ivy to the Hollow Ponds, and by the boathouse you give her the ring from the jeweller's in the High Road. She puts it on herself before you can. "After," she says. "You said after. I'll hold you to it."[/if][if flag.ro_sw_let_go]Ivy Lambert sings the alto in the anthem at St Mary's and shakes your hand in the porch after, kind, the way she would any of the boys home.[/if][if flag.ro_sw_silent]Ivy Lambert says good evening on the church steps the way she'd say Number please.[/if][if flag.ro_sw_florence && flag.ro_sw_blessed]Ivy Lambert is in the choir at St Mary's. In the porch after she says, "Mind you don't catch a crab," and smiles, and goes off with her sister.[/if][if flag.ro_sw_florence && !flag.ro_sw_blessed]Ivy Lambert is in the choir at St Mary's. She nods to you in the porch and goes off with her sister, arm in arm.[/if][if flag.ro_sw_first && !flag.ro_sw_16 && !flag.ro_sw_ended]You take Ivy to the Forest on the Saturday, and talk about the exchange and the Zeppelins and nothing at all, and neither of you says the thing. At her gate she says, "Well," and goes in.[/if]
+
+    [if flag.ro_fr_met]Your mother wants to know what the French eat. Egg and chips, you tell her, and she doesn't believe a word of it.[/if]
 
     [if war.mate1 && flag.c16_kept_notebook]Mrs Webb asks if Arthur's still writing in that book. You say he is. You don't tell her the first one is in your pack, sewn into the lining.[/if][if war.mate1 && !flag.c16_kept_notebook]Mrs Webb has had a parcel of socks from Arthur, to darn, with something else inside. She hasn't opened it. She asks you if she ought.[/if][if !war.mate1]The Webbs have Arthur's card in the window.[/if][if !war.mate1 && flag.c16_kept_notebook] His first notebook is still sewn in your pack. You take it round, and put it in his mother's hands, and she holds it the way you'd hold a bird.[/if]
 

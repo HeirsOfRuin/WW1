@@ -346,6 +346,11 @@
       text: "Over, and straight down into the first shell hole. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_loos_pit_trench
   chapter: front
@@ -373,6 +378,11 @@
       text: "Get down in a yard behind the wash-house wall. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_loos_pit_hold
   chapter: front
@@ -398,6 +408,11 @@
     - id: ground
       text: "Get down in the slag and fire from cover. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 # ---- the first leave, December 1915 ---------------------------------------------------------------
@@ -430,6 +445,8 @@
     [if flag.pit_dug_out]At the club a man from the next row stands you a pint and won't say why. Later somebody tells you: his cousin was the one you dug out of the crater, and wrote home about it.[/if][if flag.pit_held_lip]In the club they've heard about the mine. Everybody wants to know about the mine, and they're pitmen, and they all know what a fall is, so you don't have to tell them much.[/if]
 
     [if flag.pit_spoke_at_roll]On the Sunday a woman from the far end of the rows stops you on the chapel steps. "You were the one who said about our Ned," she says. "They wrote that he never knew." She holds your hand in both of hers. You don't remember if he knew. You say he didn't.[/if][if flag.pit_silent_at_roll]In the Store a woman is saying that her lad's only missing, that missing means taken, he'll turn up. You saw. You buy your father's baccy and go out without your change.[/if]
+
+    [if flag.ro_sw_truth]On her afternoon off Lizzie Milburn walks out along the waggonway with you towards the sea, and her sister doesn't come. She's read your letters till they've gone soft, and she asks after the rats by name. At the dunes, with the wind full of sand and the smoke of the sea-coal fires on the beach, she takes your hand and puts it in her coat pocket with hers.[/if][if flag.ro_sw_cheer]Lizzie Milburn walks the waggonway with you on her afternoon off, and at the first gate she turns round and says, "Football," and you're having a row before you know it: the lists in the Journal, the Blackhaugh lads, the letters full of eggs. She cries, cross, into her glove, and you stand there with the wind off the sea in your face. Coming back she takes your arm, tight, as if you might get away.[/if][if flag.ro_sw_little]Lizzie Milburn is coming out of the Store as you go in. She stops. "I had your card," she says. "Quite well." She looks at you a minute. "I'm glad you're quite well." She goes up the rows with her basket and doesn't look back, and then, at the top, she does.[/if]
 
     At night you lie in your own bed and listen for the roof.
 

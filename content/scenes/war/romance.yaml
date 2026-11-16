@@ -1,0 +1,1179 @@
+# The sweetheart at home and the girl in France (docs/FRAME-PLAYTEST2.md item F). The author,
+# playtest 2: "There are no points of being able to write back to a sweetheart or meeting some
+# French girl you fancy." The author's decision: one named sweetheart for each town, none of them
+# a woman already written into the town.
+#
+# The sweethearts: Nellie Whittaker (the mill, a four-loom weaver in his shed), Lizzie Milburn
+# (the pit, in service at the manager's house, then a tram conductress in Newcastle), Rose
+# Huxtable (the farm, the miller's daughter at Dunsworthy), Ivy Lambert (the city, a telephonist
+# at the exchange in Leyton). The girl in France: Marthe Delattre, the daughter of the estaminet
+# at Ternecourt (a fictional village behind Albert), where the battalion rests in 1916; her
+# brother Lucien is at Verdun.
+#
+# The sweetheart's road (flags ro_sw_*): 1915 her first letter (the truth, a cheerful one, or a
+# field postcard); 1916 her second (marry her at the next leave, ask her to wait till it's over,
+# tell her not to wait, or another postcard); 1917 and 1918 one letter each, by the state the
+# road is in. A man who keeps sending postcards gets her letter ending it in 1917; a man who
+# asked her to wait and wrote her nothing but cheerful lies gets it in 1918. The leaves (1915,
+# 1916, 1917) and the town's Armistice ending read the flags: the walk, the quarrel, the ring,
+# the wedding by licence on leave (ro_sw_married is set by the 1916 or 1917 leave itself, so no
+# man is called married before the leave he was married on). In the city, Florence Holland
+# (1916-city.yaml) comes first: a man who writes "Dear Florence" gets Ivy's kind letter instead.
+#
+# The girl in France (flags ro_fr_*): five meetings in each town's pool, the same text, guarded
+# { not: war.transferred } (a tunneller, a tank man and an air man are not in the billets):
+# 1916 the estaminet and the farm; 1917 the battalion marches north; 1918 her family's cart on the
+# road in the March retreat, and the village again in the advance. A man who went to the tanks or
+# the Flying Corps gets her card in his 1917 letter from home.
+#
+# Shared events are written once and repeated in each pool with YAML anchors (&name / *name).
+# Weights are modest (25-40) so they compete with the towns' own events; npm run story and the
+# story-share tests in tests/game.test.ts measured the years after they went in.
+
+# ==== 1915: her first letter (one for each town) ================================================
+
+- id: ro_mill_nellie_1
+  chapter: front
+  kind: pool
+  pool: front_1915_mill
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 3", flag.letter_mill ]
+  on_enter: [ { set: flag.ro_sw_first } ]
+  title: Nellie
+  text: |
+    The post corporal comes along the bay with the bag over his shoulder like a coalman, calling
+    names. Yours, and then yours again. The second is a square envelope, the hand round and careful
+    and leaning backwards, and you know whose it is before you've got it open.
+
+    Nellie Whittaker. She has the four looms under the window, two alleys down from yours. The last
+    summer before you went you walked her home from chapel on Sunday nights, up the moor road as far
+    as the tower and back by the reservoir, and never once held her hand, because her brothers were
+    twenty yards behind the whole way, whistling.
+
+    "I hope you dont mind me writing, your mother gave me the number. The shed is not the same. They
+    have put a girl on your looms who is fifteen and cries when a shuttle flies out. I mee-maw to her
+    across the alley like I did to you and she cant read it yet. Is it bad out there. Our Fred says
+    you will not tell me if it is, so I am not to ask. I am asking. Yours sincerely, Nellie
+    Whittaker."
+
+    Under it, smaller, squeezed in: I still go up to the tower of a Sunday.
+
+    The paper smells of the shed, size and warm oil, and you hold it under your nose on the firestep
+    like a lad with a bag of chips.
+  choices:
+    - id: truth
+      text: Write back and tell her the truth, as much as the officer will pass.
+      effects: [ { set: flag.ro_sw_truth }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You tell her about the rats, as big as the shed cats and worse mannered, and the cold at
+        stand-to, and the mud that pulls your boots off. The platoon officer reads every letter
+        before it goes, and you write it knowing he will, so it comes out stiff as a notice on the
+        mill gate. At the end you put: I am asking too. Are you well. She'll know what you mean.
+      next: "@return"
+    - id: cheer
+      text: "Write her a cheerful one: football, French eggs, nothing to worry her."
+      effects: [ { set: flag.ro_sw_cheer }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        Two sides. The football behind the lines, the French eggs, the farm dog that follows the
+        company about. You make the sergeant into a comic turn at the Hippodrome. Reading it over by
+        the candle, you can't find yourself anywhere in it, and you post it anyway.
+      next: "@return"
+    - id: little
+      text: Send her a field postcard. You don't know what to say.
+      effects: [ { set: flag.ro_sw_little } ]
+      text_after: |
+        I am quite well. Letter follows at first opportunity. You strike out the rest and sign it.
+        It's the card every man sends his mother, and you know it, and so will she.
+      next: "@return"
+
+- id: ro_pit_lizzie_1
+  chapter: front
+  kind: pool
+  pool: front_1915_pit
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 3", flag.pit_letter ]
+  on_enter: [ { set: flag.ro_sw_first } ]
+  title: Lizzie
+  text: |
+    A letter comes up with the rations in a hand you don't know, small and upright, the way they
+    teach it at the board school. You turn it over three times before you open it.
+
+    Lizzie Milburn. She's in service at the manager's house at the top of the rows, and you used to
+    see her on her afternoon off, walking out along the waggonway towards the sea with her sister.
+    Twice you walked with them. Once, the last Sunday before you went, her sister went on ahead and
+    didn't look back.
+
+    "I hope you will not think me forward. I had your number off your Mary. The mistress says I am
+    not to have followers but she never said anything about writing. The master has been round the
+    rows again saying coal is war work and the lads should stop at home, and your father told him
+    where he could put it, in front of the whole row. Are you warm. Are they feeding you. Mary says
+    you will tell me nowt, so tell me something. Yours, Lizzie Milburn."
+
+    The paper smells of the manager's kitchen, blacklead and baking, and there's a smear of flour
+    on the back where she leaned on it to write.
+  choices:
+    - id: truth
+      text: Tell her how it is, as near as the officer will pass.
+      effects: [ { set: flag.ro_sw_truth }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You tell her it's like the face with the roof off: wet, dark at the wrong times, every man
+        listening. You tell her about the rats. The platoon officer reads every letter before it
+        goes, so you write it for him as well, and it comes out like a report to the deputy. At the
+        bottom, small, the way she did, you put that you think about the waggonway.
+      next: "@return"
+    - id: cheer
+      text: "Tell her it's grand: football, eggs, French beer like dishwater."
+      effects: [ { set: flag.ro_sw_cheer }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You make it a trip to Whitley Bay. Football behind the lines, the French beer like
+        dishwater, a farm dog that follows the company about. Two sides, and none of it's what you'd
+        tell a marra, and you feel better for writing it, and then you don't.
+      next: "@return"
+    - id: little
+      text: Send a field postcard. You can't think what to put.
+      effects: [ { set: flag.ro_sw_little } ]
+      text_after: |
+        I am quite well. You strike out the rest. You hold it a minute before it goes in the bag, the
+        card every man sends his mother, and then you let it go.
+      next: "@return"
+
+- id: ro_farm_rose_1
+  chapter: front
+  kind: pool
+  pool: front_1915_farm
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 3", flag.farm_letter ]
+  on_enter: [ { set: flag.ro_sw_first } ]
+  title: Rose
+  text: |
+    In with your mother's letter is a second one, folded small with no envelope, as if it was put
+    in at the last minute on the kitchen table. You know the hand from the hymn numbers at church.
+
+    Rose Huxtable. Her father has the mill at the bottom of the village, and she's been flour to the
+    elbows since she could walk. The last harvest before you went she brought the cider out to the
+    Long Field and stopped to talk, and came again the next day, and the next, and your father
+    pretended not to see.
+
+    "Your mother said I might put in a line. Father has had to take on a boy for the sacks since our
+    Jim went, and the boy is no good, so it is me on the hoist. I am stronger than you would think.
+    The wheel is going as I write this, I can feel it through the table. They read out the Roll of
+    Honour in church, the ones serving, and your name was on it, and I went hot and cold as if it was
+    the other sort. Write and tell me it isn't. Rose."
+
+    There's flour in the fold of the paper. It comes off on your fingers, soft as chalk dust and
+    smelling of the mill.
+  choices:
+    - id: truth
+      text: Tell her straight how it is. The wet, the rats, the noise.
+      effects: [ { set: flag.ro_sw_truth }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You tell her the trench is like a ditch in a wet February with the hedge grubbed out, and the
+        rats are the size of her father's cats, and the noise never stops long enough to be missed.
+        The platoon officer reads every letter before it goes, so it comes out like a parish
+        notice. At the end you put that you can hear the mill wheel if you think about it. You can.
+      next: "@return"
+    - id: cheer
+      text: Tell her it's not so bad. French farms, French cider, nothing to fret on.
+      effects: [ { set: flag.ro_sw_cheer }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        French farms, and how badly they plough. French cider, which is thin. A dog that follows the
+        company about. You make it sound like a long harvest with some noise in it. You read it over,
+        and it's a cheerful man's letter, a man you don't know, and you post it.
+      next: "@return"
+    - id: little
+      text: Send a field postcard. You've no words for it.
+      effects: [ { set: flag.ro_sw_little } ]
+      text_after: |
+        I am quite well. You strike out the rest. She'll read it on the mill steps, the card every
+        man sends his mother, and turn it over to see if there's more.
+      next: "@return"
+
+- id: ro_city_ivy_1
+  chapter: front
+  kind: pool
+  pool: front_1915_city
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 3", flag.city_letter ]
+  on_enter: [ { set: flag.ro_sw_first } ]
+  title: Ivy
+  text: |
+    A letter in a lilac envelope, which the post corporal holds up by one corner for the whole bay
+    to see. It smells, faintly, of the violet cachous she buys at the station kiosk.
+
+    Ivy Lambert. She's a telephonist at the exchange in the High Road and sings alto at St Mary's.
+    Last summer you took her on the tram to the Forest, twice, and once to the Hollow Ponds, where
+    you rowed her round the island and caught a crab and soaked her shoes, and she laughed till the
+    boatman came out of his hut to see.
+
+    "I hope you do not mind me writing, I had your number from your mother after church. At the
+    exchange we say Number please four hundred times a day in a voice like the Queen's, and my sister
+    says I have started saying it in my sleep. The Zeppelins came again. Everybody went out in the
+    street to look, and so did I, and I was ashamed after. Are you warm enough. Do they let you
+    sleep. Please write properly and not only that you are well. Your friend, Ivy Lambert."
+  choices:
+    - id: truth
+      text: Write properly, the way she asked. Rats, mud, the noise.
+      effects: [ { set: flag.ro_sw_truth }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You tell her the mud, and the rats, and that you sleep standing up and sitting down and
+        hardly ever lying. The platoon officer reads every letter before it goes and signs the
+        envelope, so it comes out like a memorandum to the chief clerk. At the end you put: Number
+        please. She'll laugh. You can hear her.
+      next: "@return"
+    - id: cheer
+      text: Write her a cheerful one. Football, French bread, nothing to frighten her.
+      effects: [ { set: flag.ro_sw_cheer }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        The football behind the lines. The French bread, as long as your arm. The sergeant, made into
+        a comic at the music hall. Two sides in your best office hand, and you're not in it anywhere.
+        You post it.
+      next: "@return"
+    - id: little
+      text: Send a field postcard. Strike out what doesn't apply.
+      effects: [ { set: flag.ro_sw_little } ]
+      text_after: |
+        I am quite well. You strike out the rest, neatly, with a ruler made of your pay book. It's the
+        card every man sends his mother, and you know it, and so will she.
+      next: "@return"
+
+# ==== 1916: her second letter (one for each town) ===============================================
+
+- id: ro_mill_nellie_2
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 11", flag.ro_sw_first ]
+  on_enter: [ { set: flag.ro_sw_16 } ]
+  title: Nellie
+  text: |
+    [if flag.ro_sw_truth]Nellie writes every Sunday now, after chapel, and you can tell from the blots which bits she wrote fast.[/if][if flag.ro_sw_cheer]Nellie's letter is shorter than the last. "I read the lists in the Evening News," it starts, "every name, every night. You need not write me about football. I would rather know."[/if][if flag.ro_sw_little]It's a while since Nellie wrote. This one is a single side. "I had your card. It is on the mantelpiece with our Fred's, the silk ones with the flowers. I don't know what I am to you. I would like to know."[/if]
+
+    "The shed is on short time for want of cotton, and half the girls have gone to the munitions,
+    where the money is. Two from our alley were wed on their lads' leave at Whitsun, by licence, all
+    done in a week, and everybody said it was daft, and everybody went. I am not asking you
+    anything. I am only telling you what other girls have done."
+
+    You read it in the YMCA hut, on a bench, with a mug of cocoa going cold, and the man next to you
+    is playing the piano with one finger, the same four notes of a hymn, over and over.
+  choices:
+    - id: marry
+      text: Write and ask her to marry you, on your next leave.
+      effects: [ { set: flag.ro_sw_wed16 }, { war_mood: { nerve: 2 } } ]
+      text_after: |
+        You write it four times on the hut's paper, with the red triangle at the top, and tear up
+        three. The fourth goes in a green envelope, so the officer won't read it, and you sign the
+        line on the flap that says it holds nothing but private and family matters. Her answer comes
+        in nine days. One word and her name, and the ink's run where something fell on it.
+      next: "@return"
+    - id: wait
+      text: Ask her to wait for you, till it's over.
+      effects: [ { set: flag.ro_sw_after }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You put it carefully. That you'll not have her a wife for ten days and then a widow on a buff
+        form. That you'd like to come home to her, after, if she'll have you then. She writes back that
+        she will, and that she'll hold you to it, and you're to bring the ring yourself at Christmas
+        and not send one in a parcel like a pair of socks.
+      next: "@return"
+    - id: let_go
+      text: Tell her not to wait. You can't promise her anything.
+      effects: [ { set: flag.ro_sw_let_go }, { set: flag.ro_sw_ended } ]
+      text_after: |
+        You write that she's to please herself, and not wait on a man who can't say where he'll be in
+        a month, or whether. You mean it kindly. In pencil it looks hard. She writes back once, short,
+        to say she understands, and she'll pray for you, and the letters stop.
+      next: "@return"
+    - id: card_again
+      text: Send another field postcard. You'll write properly after this tour.
+      visible_if: flag.ro_sw_little
+      effects: [ { set: flag.ro_sw_silent } ]
+      text_after: |
+        I am quite well. You strike out the rest. You mean to write properly after this tour, and
+        then after the next.
+      next: "@return"
+
+- id: ro_pit_lizzie_2
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 11", flag.ro_sw_first ]
+  on_enter: [ { set: flag.ro_sw_16 } ]
+  title: Lizzie
+  text: |
+    [if flag.ro_sw_truth]Lizzie's letters come every week now, and they've a tram ticket in them for a bookmark, punched.[/if][if flag.ro_sw_cheer]Lizzie's letter is short. "Your Mary reads me the casualty lists out of the Journal," it starts. "I know what it's like. You needn't write me about football, hinny. I'd rather have the truth off you than off the paper."[/if][if flag.ro_sw_little]It's a long while since Lizzie wrote. One side. "I had your card. I don't know what I am to you. I'd like to know, that's all."[/if]
+
+    "I have left the manager's house. I am on the trams in Newcastle now, a conductress, with a
+    peaked cap and a leather bag of pennies, and the men on the Scotswood Road route are worse than
+    any mistress. Two lasses from the rows were wed at chapel on their lads' leave, by licence, in a
+    week. Everybody said it was daft and the whole row went. I am not asking you owt. I am only
+    telling you."
+
+    [if war.transferred]You read it at the head of the shaft, waiting for the shift, with the chalk drying white on your hands and the pump thudding below like a heart.[else]You read it in the YMCA hut with a mug of cocoa going cold, and somebody at the piano picking out a hymn with one finger.[/if]
+  choices:
+    - id: marry
+      text: Write and ask her to marry you, on your next leave.
+      effects: [ { set: flag.ro_sw_wed16 }, { war_mood: { nerve: 2 } } ]
+      text_after: |
+        You write it four times and tear up three. The fourth goes in a green envelope, so no officer
+        reads it first, and you sign the flap to say it's private and family matters, and it is.
+        Her answer comes in nine days, on the back of a tram timetable. One word, and her name, and
+        three crosses, and then, squeezed in: You took your time.
+      next: "@return"
+    - id: wait
+      text: Ask her to wait for you, till it's over.
+      effects: [ { set: flag.ro_sw_after }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You put it carefully. That you'll not have her wed for ten days and widowed by a buff form.
+        That you'd like to come home to her, after. She writes back that she'll wait, and she'll hold
+        you to it, and you can bring the ring yourself at Christmas and not post it like a pit check.
+      next: "@return"
+    - id: let_go
+      text: Tell her not to wait. You can't promise her anything.
+      effects: [ { set: flag.ro_sw_let_go }, { set: flag.ro_sw_ended } ]
+      text_after: |
+        You tell her to please herself, and not to wait on a man who can't say where he'll be in a
+        month. You mean it kindly. She writes once more, to say she understands, and that she'll look
+        in on your mother, and she does, every Sunday. The letters to you stop.
+      next: "@return"
+    - id: card_again
+      text: Send another field postcard. You'll write properly after this.
+      visible_if: flag.ro_sw_little
+      effects: [ { set: flag.ro_sw_silent } ]
+      text_after: |
+        I am quite well. You strike out the rest. You'll write properly when you've something to say.
+      next: "@return"
+
+- id: ro_farm_rose_2
+  chapter: front
+  kind: pool
+  pool: front_1916_farm
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 11", flag.ro_sw_first ]
+  on_enter: [ { set: flag.ro_sw_16 } ]
+  title: Rose
+  text: |
+    [if flag.ro_sw_truth]Rose writes every week now, and there's always flour in the fold.[/if][if flag.ro_sw_cheer]Rose's letter is short. "Father takes the Western Times for the lists," it starts. "I read every name. You needn't write me about French cider. I would sooner know."[/if][if flag.ro_sw_little]It's a long time since Rose wrote. Half a side. "I had your card. I don't know what I am to you. I should like to know."[/if]
+
+    "The mill is grinding for the army now and Father has had the tribunal say the boy can stay.
+    Dolly Thorne from Brendon was married on her young man's leave, banns read while he was still
+    in France, and the ringers rang what bells they could, and everybody said she was a fool and
+    everybody went. I am not asking anything. I am only telling you what's done."
+
+    You read it in a barn behind the line, on the straw, by the light coming through the slats. The
+    barn smells of cows and wet oats, so like home you have to put the letter down.
+  choices:
+    - id: marry
+      text: Write and ask her to marry you, on your next leave.
+      effects: [ { set: flag.ro_sw_wed16 }, { war_mood: { nerve: 2 } } ]
+      text_after: |
+        You write it four times and tear up three. The fourth goes in a green envelope, so no officer
+        reads it before she does, and you sign the flap: private and family matters. Her answer comes
+        in nine days, and it says Yes, you great fool, and that she'll speak to the vicar about the
+        banns on Sunday.
+      next: "@return"
+    - id: wait
+      text: Ask her to wait for you, till it's over.
+      effects: [ { set: flag.ro_sw_after }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You put it carefully. That you'll not have her married for ten days and then a widow. That
+        you'd like to come home to her, after, if she'll have you. She writes back that she will, and
+        she'll hold you to it, and you're to bring the ring yourself at Christmas and not send it by
+        the carrier.
+      next: "@return"
+    - id: let_go
+      text: Tell her not to wait. You can't promise her anything.
+      effects: [ { set: flag.ro_sw_let_go }, { set: flag.ro_sw_ended } ]
+      text_after: |
+        You tell her to please herself, and not wait on a man who can't say where he'll be by the
+        spring. You mean it kindly. She writes once more, to say she understands, and she'll put
+        flowers by your mother's door on a Sunday, and the letters to you stop.
+      next: "@return"
+    - id: card_again
+      text: Send another field postcard. You'll write properly after this.
+      visible_if: flag.ro_sw_little
+      effects: [ { set: flag.ro_sw_silent } ]
+      text_after: |
+        I am quite well. You strike out the rest. You'll write properly at rest, when there's time.
+      next: "@return"
+
+- id: ro_city_ivy_2
+  chapter: front
+  kind: pool
+  pool: front_1916_city
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 12", flag.ro_sw_first, { not: flag.c16_florence } ]
+  on_enter: [ { set: flag.ro_sw_16 } ]
+  title: Ivy
+  text: |
+    [if flag.ro_sw_truth]Ivy writes every week now, on the exchange's pink message slips when she runs out of paper.[/if][if flag.ro_sw_cheer]Ivy's letter is short. "Father reads the lists in the Daily Telegraph at breakfast," it starts, "and I read them after him. You needn't write me about football. I'd rather know."[/if][if flag.ro_sw_little]It's a while since Ivy wrote. One side. "I had your card. I don't know what I am to you. I should like to know."[/if]
+
+    "They have taken on twenty more girls at the exchange, the men are all going. Two of our girls
+    were married on their boys' leave, by licence, in the same week, and the supervisor said it was
+    most irregular and gave them each a cruet. I am not asking you anything. I am only saying what
+    other girls have done."
+
+    You read it in the YMCA hut, on a bench, under a gas lamp that hisses, with a mug of cocoa going
+    cold beside you.
+  choices:
+    - id: marry
+      text: Write and ask her to marry you, on your next leave.
+      effects: [ { set: flag.ro_sw_wed16 }, { war_mood: { nerve: 2 } } ]
+      text_after: |
+        You write it four times on the hut's paper and tear up three. The fourth goes in a green
+        envelope, so the officer won't read it first, and you sign the flap: private and family
+        matters. Her answer comes in nine days. Yes, and that you're to tell your mother yourself,
+        and that she's already chosen the hymn.
+      next: "@return"
+    - id: wait
+      text: Ask her to wait for you, till it's over.
+      effects: [ { set: flag.ro_sw_after }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You put it carefully, the way you'd draft a letter to a client. That you'll not have her a
+        widow at twenty. That you'd like to come home to her, after. She writes back that she will,
+        and she'll hold you to it, and you're to bring the ring yourself at Christmas.
+      next: "@return"
+    - id: let_go
+      text: Tell her not to wait. You can't promise her anything.
+      effects: [ { set: flag.ro_sw_let_go }, { set: flag.ro_sw_ended } ]
+      text_after: |
+        You tell her to please herself, and not wait on a man who can't say where he'll be in a
+        month. You mean it kindly. She writes once more, to say she understands, and she'll sing for
+        you on Sundays, and the letters stop.
+      next: "@return"
+    - id: card_again
+      text: Send another field postcard. You'll write properly after this.
+      visible_if: flag.ro_sw_little
+      effects: [ { set: flag.ro_sw_silent } ]
+      text_after: |
+        I am quite well. You strike out the rest. You'll write properly when there's something to say.
+      next: "@return"
+
+# The city: a man who wrote "Dear Florence" (1916-city.yaml, v16c_holland) hears from Ivy instead.
+- id: ro_city_ivy_florence
+  chapter: front
+  kind: pool
+  pool: front_1916_city
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 12", flag.ro_sw_first, flag.c16_florence, { not: flag.ro_sw_ended } ]
+  on_enter: [ { set: flag.ro_sw_16 }, { set: flag.ro_sw_florence }, { set: flag.ro_sw_ended } ]
+  title: Ivy
+  text: |
+    A lilac envelope. You'd half forgotten the colour.
+
+    "Your mother tells me there is a young lady at your office who writes to you, a Miss Holland,
+    who has your desk. I am glad you have somebody to write to who knows your work. I think perhaps
+    that is more use to you out there than a girl who says Number please. I am not cross. I was, on
+    the Sunday, but the choir had the Nunc Dimittis and you cannot stay cross through that. I shan't
+    write again unless you want me to. Ivy."
+
+    The violet cachous again, faint, on the paper. You fold it along its creases and it goes in your
+    pocket with Florence's, and the two of them sit there against your chest all through stand-to.
+  choices:
+    - id: honest
+      text: Write and tell her the truth about Florence. She's owed that.
+      effects: [ { set: flag.ro_sw_blessed }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        It takes the evening. You tell her that it's true, and that you didn't mean it to be, and
+        that she's worth more than a letter like this one. She writes back a postcard of the Hollow
+        Ponds, with the boats, and on the back: Mind you don't catch a crab. Ivy.
+      next: "@return"
+    - id: leave
+      text: Let it be. Don't answer.
+      text_after: |
+        You don't answer. It sits in your pocket a week and then goes in the brazier, and the lilac
+        curls up and goes black, and the smell of violets for a second over the coke.
+      next: "@return"
+
+# ==== 1917: her letter (one text, the same in every pool a man can be in) ========================
+# Three roads: married at the 1916 leave (the baby is due in the autumn); waiting till it's over
+# (she would say yes now); postcards and no promise (she ends it, kindly). A tank or air man who
+# met Marthe gets her card here. ro_sw_17 stops an air man who transfers mid-year seeing it twice.
+
+- id: ro_17_letter_mill
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  once: true
+  weight: 25
+  requires: &ro_17_req [ "war.tour >= 23", flag.ro_sw_first, { not: flag.ro_sw_ended }, { not: flag.ro_sw_17 }, "flag.ro_sw_married || flag.ro_sw_after || flag.ro_sw_little" ]
+  on_enter: &ro_17_enter
+    - { set: flag.ro_sw_17 }
+    - { if: "flag.ro_sw_little && !flag.ro_sw_married && !flag.ro_sw_after", then: [ { set: flag.ro_sw_jilted }, { set: flag.ro_sw_ended } ] }
+  title: A letter from home
+  text: &ro_17_text |
+    [if flag.ro_sw_married]A letter from your wife. You still have to say it to yourself, your wife, and the word sits oddly, like a new cap. [if start == mill]Nellie[/if][if start == pit]Lizzie[/if][if start == farm]Rose[/if][if start == city]Ivy[/if] writes on Sundays, the way she always did, but she signs it different now, and puts a line under it.[/if][if flag.ro_sw_after && !flag.ro_sw_married][if start == mill]Nellie's[/if][if start == pit]Lizzie's[/if][if start == farm]Rose's[/if][if start == city]Ivy's[/if] letter has a ring drawn at the bottom of it in pencil, round and round, till the paper's nearly through.[/if][if flag.ro_sw_little && !flag.ro_sw_married && !flag.ro_sw_after][if start == mill]Nellie's[/if][if start == pit]Lizzie's[/if][if start == farm]Rose's[/if][if start == city]Ivy's[/if] letter is written straight across the page, as if she ruled the lines first, and you know before you've read a word of it.[/if]
+
+    [if flag.ro_sw_married && war.month <= 8]"I have been to the doctor and he says the autumn. Your mother is knitting as if it was piecework.[/if][if flag.ro_sw_married && war.month >= 9]"She came on a Tuesday, a girl, seven pounds, with your mother's chin and a voice on her you could hear in the next street. Your mother is knitting as if it was piecework.[/if][if flag.ro_sw_married && start == mill] I am still at the looms but the overlooker has put me by the door, for the air.[/if][if flag.ro_sw_married && start == pit] I have left the trams and come home to your mother's. She would not hear of anything else.[/if][if flag.ro_sw_married && start == farm] Father says I am not to go up the hoist and I go up when he is at market.[/if][if flag.ro_sw_married && start == city] I have given in my notice at the exchange. They don't keep married girls in my way, and the supervisor gave me a cruet, the same as the others.[/if][if flag.ro_sw_married] The separation allowance comes on a Monday at the post office, and your allotment with it, and I put by what I can. I keep thinking of you not knowing what is happening to me, and me not knowing what is happening to you, and the letters going backwards and forwards in between, crossing."[/if]
+
+    [if flag.ro_sw_after && !flag.ro_sw_married]"I have not changed my mind and I shan't. But they are being married every leave now, by licence, and I stand at the back of church and cry like a fool at every one of them, and I am tired of being the one at the back. If you asked me again I would say the other thing this time. I am only saying."[/if]
+
+    [if flag.ro_sw_little && !flag.ro_sw_married && !flag.ro_sw_after]"I waited to hear from you properly, and I have had cards. I don't blame you. I expect you can't, out there, and it's not for me to know why. But I have to tell you I have been walking out with[if start == mill] Jack Kenyon from the dye works, who came home from Gallipoli with his arm stiff and wears the silver badge so nobody gives him a feather[/if][if start == pit] Ned Forster, the deputy's lad, that the pit would not let go for a soldier[/if][if start == farm] Harry Moule, the carrier's son, that the doctors turned down for his chest[/if][if start == city] a Mr Pratt, a telephone engineer at the exchange, who was turned down three times for his eyes and tried a fourth[/if], and he has asked me, and I have said yes. He is kind, and he is here. I hope you won't think too hard of me. I shall pray for you every night. I always have."[/if]
+
+    [if flag.ro_fr_spoke && war.transferred]In with it, sent on by somebody in the battalion, there's a picture postcard of the church at Ternecourt, with its crooked weathercock. On the back, in pencil, in careful English: For the soldier who said erfs. We are all well. Lucien is home on permission and eats everything. Marthe. You read it twice, and put it in your pay book, and feel like a thief.[/if]
+  choices: &ro_17_choices
+    - id: wife_truth
+      text: Write back the truth. You're frightened, for her and for you.
+      visible_if: flag.ro_sw_married
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You write it in a green envelope, so it goes past the officer, and you tell her: that you're
+        frightened, and that you'd not say it to anyone else living. Her answer is two lines. So am
+        I. Come home. You keep it in your pay book, where the last letter used to be.
+      next: "@return"
+    - id: wife_names
+      text: Write about the baby, and nothing else. Pages of it.
+      visible_if: flag.ro_sw_married
+      effects: [ { set: flag.ro_sw_named }, { war_mood: { nerve: 2 } } ]
+      text_after: |
+        Four sides. Names, and which you like, and why. What you'll do with a girl, and with a boy,
+        and the cradle your father can make out of the old chest. You don't mention the war at all,
+        and for a whole evening there isn't one.
+      next: "@return"
+    - id: ask_again
+      text: Ask her again, properly. Christmas leave, by licence.
+      visible_if: "flag.ro_sw_after && !flag.ro_sw_married"
+      effects: [ { set: flag.ro_sw_wed17 }, { war_mood: { nerve: 2 } } ]
+      text_after: |
+        You write it in a green envelope, and you don't tear any up this time. Her answer comes in a
+        week: Yes, and about time, and she's put her name down for the licence, and you're to get your
+        hair cut.
+      next: "@return"
+    - id: hold_on
+      text: Ask her to hold on till it's over. You meant after.
+      visible_if: "flag.ro_sw_after && !flag.ro_sw_married"
+      effects: [ { set: flag.ro_sw_wait2 } ]
+      text_after: |
+        You tell her you meant after, and you still do, and that you'd not have her stood at the back
+        of church in black. She writes that she'll hold on, then. The ring at the bottom of the next
+        letter is drawn smaller.
+      next: "@return"
+    - id: bless
+      text: Write back and wish her happy. Mean it.
+      visible_if: "flag.ro_sw_little && !flag.ro_sw_married && !flag.ro_sw_after"
+      effects: [ { set: flag.ro_sw_blessed }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        It's the best letter you've written her, and the last. You tell her he sounds a decent man,
+        and that she's to be happy, and that the cards were your fault and nobody else's. You don't
+        put a field postcard in with it.
+      next: "@return"
+    - id: burn
+      text: Don't answer. There's nothing to say.
+      visible_if: "flag.ro_sw_little && !flag.ro_sw_married && !flag.ro_sw_after"
+      effects: [ { war_mood: { nerve: -1 } } ]
+      text_after: |
+        You read it once more, and fold it, and put it in the brazier at stand-down. The paper goes
+        brown at the edges first, and then all at once.
+      next: "@return"
+    - id: later
+      text: Put it in your pay book. Not tonight.
+      text_after: |
+        You fold it along its creases and put it in your pay book with the others. You read it again
+        at stand-to, and again in the dark with your thumb over the words you know, and you don't
+        write anything back. Not tonight.
+      next: "@return"
+
+- id: ro_17_letter_pit
+  chapter: front
+  kind: pool
+  pool: front_1917_pit
+  once: true
+  weight: 25
+  requires: *ro_17_req
+  on_enter: *ro_17_enter
+  title: A letter from home
+  text: *ro_17_text
+  choices: *ro_17_choices
+
+- id: ro_17_letter_farm
+  chapter: front
+  kind: pool
+  pool: front_1917_farm
+  once: true
+  weight: 25
+  requires: *ro_17_req
+  on_enter: *ro_17_enter
+  title: A letter from home
+  text: *ro_17_text
+  choices: *ro_17_choices
+
+- id: ro_17_letter_city
+  chapter: front
+  kind: pool
+  pool: front_1917_city
+  once: true
+  weight: 25
+  requires: *ro_17_req
+  on_enter: *ro_17_enter
+  title: A letter from home
+  text: *ro_17_text
+  choices: *ro_17_choices
+
+- id: ro_17_letter_tank
+  chapter: front
+  kind: pool
+  pool: front_1917_tank
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 23", flag.ro_sw_first, { not: flag.ro_sw_ended }, { not: flag.ro_sw_17 }, "flag.ro_sw_married || flag.ro_sw_after || flag.ro_sw_little" ]
+  on_enter: *ro_17_enter
+  title: A letter from home
+  text: *ro_17_text
+  choices: *ro_17_choices
+
+- id: ro_17_letter_air
+  chapter: front
+  kind: pool
+  pool: front_1917_air
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 26", flag.ro_sw_first, { not: flag.ro_sw_ended }, { not: flag.ro_sw_17 }, "flag.ro_sw_married || flag.ro_sw_after || flag.ro_sw_little" ]
+  on_enter: *ro_17_enter
+  title: A letter from home
+  text: *ro_17_text
+  choices: *ro_17_choices
+
+# ==== 1918: her letter, after the March offensive (the same text in every pool) =================
+# Married (the baby, or a hope of one); waiting and told the truth (she waits); waiting and told
+# nothing but cheerful lies since 1915 (she has met a man who tells her things).
+
+- id: ro_18_letter_mill
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  once: true
+  weight: 25
+  requires: &ro_18_req [ "war.tour >= 33", flag.ro_sw_first, { not: flag.ro_sw_ended }, { not: flag.ro_sw_18 }, "flag.ro_sw_married || flag.ro_sw_after" ]
+  on_enter: &ro_18_enter
+    - { set: flag.ro_sw_18 }
+    - { if: "flag.ro_sw_after && flag.ro_sw_cheer && !flag.ro_sw_married", then: [ { set: flag.ro_sw_jilted }, { set: flag.ro_sw_ended } ] }
+  title: A letter from home
+  text: &ro_18_text |
+    [if flag.ro_sw_married]Your wife's letter is three weeks old and has been to two other units first; the envelope is covered in crossings-out, like a ledger.[/if][if flag.ro_sw_after && !flag.ro_sw_married][if start == mill]Nellie's[/if][if start == pit]Lizzie's[/if][if start == farm]Rose's[/if][if start == city]Ivy's[/if] letter has been three weeks finding you. The envelope's soft from somebody's pocket.[/if]
+
+    "The papers have maps in them this spring, with arrows, and the arrows are going the wrong way.[if start == mill] Everybody in the shed reads them at dinner time and nobody says anything.[/if][if start == pit] Your mother reads them out at the Store and then goes home and sits.[/if][if start == farm] Father spreads them on the kitchen table and puts his finger on the places.[/if][if start == city] At the exchange the calls never stop, and every one is somebody asking for news.[/if][if flag.ro_sw_married && flag.ro_sw_wed16] The baby has two teeth and bites with them. She knows your photograph. I hold it up and say Dad, and she shouts at it.[/if][if flag.ro_sw_married && flag.ro_sw_wed17] I think I may be expecting. I am not to say till I'm sure, your mother says, so I haven't said.[/if][if flag.ro_sw_married] Write if it is only a card. I don't mind a card now. I mind nothing."[/if][if flag.ro_sw_after && !flag.ro_sw_married && !flag.ro_sw_cheer] I don't care what the papers say. I have read every one of your letters four times and I know you from them, and you are coming home. I've decided."[/if][if flag.ro_sw_after && !flag.ro_sw_married && flag.ro_sw_cheer]"[/if]
+
+    [if flag.ro_sw_after && !flag.ro_sw_married && flag.ro_sw_cheer]Then a gap, and the ink's different, as if she put it down and came back to it days after. "Your letters are all football and French eggs, and they have been for three years, and I don't know you from them any more. I have met somebody who tells me things.[if start == mill] He was a weaver at Cobden Street till he lost his hand at Thiepval, and he is learning the books at the Co-op.[/if][if start == pit] He is a putter from the Duke pit, sent home with his lungs.[/if][if start == farm] He came back from Salonika with the fever and is lodging at the mill to help Father.[/if][if start == city] He was at the exchange before the war and came home from Mesopotamia with a limp.[/if] I am going to marry him. I wanted you to hear it from me. I am sorry. I am. I hope you come home safe and find somebody who reads you better than I could."[/if]
+  choices: &ro_18_choices
+    - id: wife_truth
+      text: Tell her the truth about this spring. She asked.
+      visible_if: flag.ro_sw_married
+      effects: [ { set: flag.ro_sw_told18 }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You tell her some of it, in a green envelope: the running, the bridges, the days without
+        sleep. Then you tell her it's over now, the worst, which you think is true. You end with the
+        baby, or the hope of one, because you can't end with the bridges.
+      next: "@return"
+    - id: wife_quiet
+      text: Tell her it's quiet where you are. She has enough.
+      visible_if: flag.ro_sw_married
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        It's quiet where you are, you write. Lovely weather. You've seen a hare. All of it's true
+        this week and none of it was last.
+      next: "@return"
+    - id: wait_home
+      text: "Write and tell her: after, as soon as they let you go."
+      visible_if: "flag.ro_sw_after && !flag.ro_sw_married && !flag.ro_sw_cheer"
+      effects: [ { war_mood: { nerve: 2 } } ]
+      text_after: |
+        Two sides, and on both of them the same thing in different words. As soon as they let you go.
+        She writes back one line: I've heard. And a ring at the bottom, drawn big.
+      next: "@return"
+    - id: wait_truth
+      text: Write her the truth about the spring, all of it.
+      visible_if: "flag.ro_sw_after && !flag.ro_sw_married && !flag.ro_sw_cheer"
+      effects: [ { set: flag.ro_sw_told18 }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You tell her: the running, and the bridges, and the men left behind. She doesn't answer for a
+        fortnight, and then she does, and it's four sides, and she's kept all of it, and gives it back
+        to you in her own words, so you can carry it easier.
+      next: "@return"
+    - id: bless
+      text: Write and wish her happy. She's owed that.
+      visible_if: "flag.ro_sw_after && !flag.ro_sw_married && flag.ro_sw_cheer"
+      effects: [ { set: flag.ro_sw_blessed }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You write it straight, the first straight letter you've sent her. That she's right, and you
+        lied to her about the football to spare her, and to spare yourself. That he sounds a good man.
+        That you'll stand her a drink at the wedding, if you're home, and mean it.
+      next: "@return"
+    - id: burn
+      text: Put it in the brazier. You've nothing to say back.
+      visible_if: "flag.ro_sw_after && !flag.ro_sw_married && flag.ro_sw_cheer"
+      effects: [ { war_mood: { nerve: -1 } } ]
+      text_after: |
+        It burns slowly, being folded. You poke it open with your bayonet so it'll catch, and stand
+        there till it has.
+      next: "@return"
+    - id: later
+      text: Keep it till you can think what to say.
+      text_after: |
+        It goes in your breast pocket, and stays there through the next tour, getting softer. You
+        take it out at every halt and don't open it, and put it back.
+      next: "@return"
+
+- id: ro_18_letter_pit
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  weight: 25
+  requires: *ro_18_req
+  on_enter: *ro_18_enter
+  title: A letter from home
+  text: *ro_18_text
+  choices: *ro_18_choices
+
+- id: ro_18_letter_farm
+  chapter: front
+  kind: pool
+  pool: front_1918_farm
+  once: true
+  weight: 25
+  requires: *ro_18_req
+  on_enter: *ro_18_enter
+  title: A letter from home
+  text: *ro_18_text
+  choices: *ro_18_choices
+
+- id: ro_18_letter_city
+  chapter: front
+  kind: pool
+  pool: front_1918_city
+  once: true
+  weight: 25
+  requires: *ro_18_req
+  on_enter: *ro_18_enter
+  title: A letter from home
+  text: *ro_18_text
+  choices: *ro_18_choices
+
+- id: ro_18_letter_tank
+  chapter: front
+  kind: pool
+  pool: front_1918_tank
+  once: true
+  weight: 30
+  requires: *ro_18_req
+  on_enter: *ro_18_enter
+  title: A letter from home
+  text: *ro_18_text
+  choices: *ro_18_choices
+
+- id: ro_18_letter_air
+  chapter: front
+  kind: pool
+  pool: front_1918_air
+  once: true
+  weight: 30
+  requires: *ro_18_req
+  on_enter: *ro_18_enter
+  title: A letter from home
+  text: *ro_18_text
+  choices: *ro_18_choices
+
+# ==== The girl in France: Marthe Delattre at Ternecourt (the same text in each town's pool) ====
+
+# -- 1916, spring: the estaminet ---------------------------------------------------------------
+- id: ro_fr_16_mill
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  once: true
+  weight: 30
+  requires: &ro_fr1_req [ "war.tour >= 10", "war.tour <= 12", { not: war.transferred } ]
+  on_enter: [ { set: flag.ro_fr_met } ]
+  title: Ternecourt
+  text: &ro_fr1_text |
+    The battalion comes down south in the thaw and goes into billets at Ternecourt, a long street
+    of brick and whitewash behind Albert, with a pond at one end and a church whose weathercock has
+    been shot crooked. You're in a barn with forty others and a hen who lays in somebody's helmet.
+
+    The estaminet is the front room of the house by the pond. A stove going, oilcloth on the tables,
+    a crucifix, a picture of the President cut out of a paper. The mother does the frying in the back
+    in a pan the size of a cartwheel, and the smell of hot fat and onions comes through the door and
+    down the street and fetches men out of the barns like a dinner bell.
+
+    The daughter carries the plates. She's twenty, perhaps, with her sleeves pushed up and a burn on
+    one wrist from the pan, and she has the English the Tommies have taught her, some of it not fit,
+    which she doesn't know. "Egg-chip," she says, and puts it down in front of you. "Two egg. The
+    beer is no good, the English say. Drink the wine."
+
+    [if flag.ro_sw_first && !flag.ro_sw_ended]There's a letter from home in your breast pocket, half answered.[/if]
+  choices: &ro_fr1_choices
+    - id: speak
+      text: Try your French on her. Merci, mam'selle, and whatever else you've got.
+      effects: [ { set: flag.ro_fr_spoke }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You've got about six words and you use them all on the eggs. She laughs, not quite at you,
+        and puts you right: oeufs, not erfs, with her lips pushed out, and makes you say it till you
+        do. Her name's Marthe. The lads have been calling her Martha for a month and she lets them.
+        When you go she says "Bonne nuit," and then, carefully, in English, "Mind the step," and you
+        go out and miss it.
+      next: "@return"
+    - id: eat
+      text: Eat up, pay, and get back to the barn.
+      text_after: |
+        You eat it fast, with the yolk on your chin, and leave your coppers on the oilcloth. Behind
+        you the lads are trying their French on her all at once, and she's laughing at them, and the
+        stove's roaring, and you go out into the dark street and your blanket.
+      next: "@return"
+
+- id: ro_fr_16_pit
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  weight: 30
+  requires: *ro_fr1_req
+  on_enter: [ { set: flag.ro_fr_met } ]
+  title: Ternecourt
+  text: *ro_fr1_text
+  choices: *ro_fr1_choices
+
+- id: ro_fr_16_farm
+  chapter: front
+  kind: pool
+  pool: front_1916_farm
+  once: true
+  weight: 30
+  requires: *ro_fr1_req
+  on_enter: [ { set: flag.ro_fr_met } ]
+  title: Ternecourt
+  text: *ro_fr1_text
+  choices: *ro_fr1_choices
+
+- id: ro_fr_16_city
+  chapter: front
+  kind: pool
+  pool: front_1916_city
+  once: true
+  weight: 30
+  requires: *ro_fr1_req
+  on_enter: [ { set: flag.ro_fr_met } ]
+  title: Ternecourt
+  text: *ro_fr1_text
+  choices: *ro_fr1_choices
+
+# -- 1916, autumn: the farm, and her brother at Verdun --------------------------------------------
+- id: ro_fr_16b_mill
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  once: true
+  weight: 30
+  requires: &ro_fr2_req [ "war.tour >= 15", flag.ro_fr_spoke, { not: war.transferred } ]
+  title: Marthe
+  text: &ro_fr2_text |
+    Out at rest at Ternecourt again, what's left of the battalion, after the summer. The street's
+    the same. The weathercock's the same. The barn has new straw, and nobody says who slept where
+    last time.
+
+    Marthe knows you. She puts the plate down and stands there with the cloth over her arm and says,
+    "You. Erfs," and you both laugh, and it's the first time you have since July.
+
+    She has a letter from her brother, Lucien. He's at Verdun. It's six weeks old and the French
+    censor has been at it with scissors, so it's more holes than letter, and she reads you what's
+    left in French, slowly, and you understand one word in four. Il tient. He holds. She says it
+    twice, so you'll know it.
+
+    Her father is too old for the army and the farm behind the house wants the beet lifting before
+    the frost, and there's nobody to lift it. On Sunday, she says, if the English have nothing for you
+    to do. She doesn't look at you when she says it.
+
+    [if flag.ro_sw_wed16]In your pocket is the letter that says yes. You're to be married at Christmas. You haven't said.[/if][if flag.ro_sw_after]In your pocket is the letter about the ring. You haven't said.[/if]
+  choices: &ro_fr2_choices
+    - id: walk
+      text: Go on Sunday. Lift the beet, and walk back with her by the stream.
+      effects: [ { set: flag.ro_fr_walked }, { war_mood: { nerve: 2 } } ]
+      text_after: |
+        Beet all morning, in clay that holds on to your boots like a hand, the old man working beside
+        you without a word. After, she walks you back along the stream at the bottom of the village,
+        and shows you where Lucien used to catch eels, and talks, in French, and you don't follow
+        half of it and it doesn't matter. She doesn't take your arm. At the barn she says, in
+        English, "Next Sunday," the way you'd say the day the post goes.
+      next: "@return"
+    - id: field
+      text: Lift the beet with her father, and leave it at that.
+      effects: [ { set: flag.ro_fr_friend }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        Beet all day with the old man, who says nothing at all, and at the end of it gives you a
+        glass of something clear out of an unlabelled bottle that takes the skin off your throat. He
+        shakes your hand. Marthe gives you a dozen eggs in your cap to take back to the barn, and
+        thanks you, and it's enough.
+      next: "@return"
+
+- id: ro_fr_16b_pit
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  once: true
+  weight: 30
+  requires: *ro_fr2_req
+  title: Marthe
+  text: *ro_fr2_text
+  choices: *ro_fr2_choices
+
+- id: ro_fr_16b_farm
+  chapter: front
+  kind: pool
+  pool: front_1916_farm
+  once: true
+  weight: 30
+  requires: *ro_fr2_req
+  title: Marthe
+  text: *ro_fr2_text
+  choices: *ro_fr2_choices
+
+- id: ro_fr_16b_city
+  chapter: front
+  kind: pool
+  pool: front_1916_city
+  once: true
+  weight: 30
+  requires: *ro_fr2_req
+  title: Marthe
+  text: *ro_fr2_text
+  choices: *ro_fr2_choices
+
+# -- 1917, January: the battalion marches north ------------------------------------------------------
+- id: ro_fr_17_mill
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  once: true
+  weight: 25
+  requires: &ro_fr3_req [ "war.tour <= 21", flag.ro_fr_spoke, { not: war.transferred } ]
+  title: Moving north
+  text: &ro_fr3_text |
+    The battalion has come back to Ternecourt for the worst of the winter, and now there are orders:
+    north on Thursday. Nobody says where; everybody says Arras. It's snowing, the soft wet kind,
+    and the estaminet windows are steamed so thick you can't see in, only the shapes of men and the
+    red of the stove.
+
+    Marthe has your plate ready before you've sat down. When she comes back for it she has a bit of
+    paper folded small, and puts it under the salt. Delattre, Estaminet du Bon Coin, Ternecourt,
+    Somme, in a hand like a schoolmistress's.
+
+    [if flag.ro_fr_walked]Five Sundays you walked by the stream. Once, in the rain, under the willows, she took your arm, and then let go of it when her mother came to the door.[/if][if flag.ro_fr_friend]You lifted the beet, and the potatoes after, and the old man gave you the clear stuff every time, and called you something in French the lads say means son-in-law, and laughed.[/if][if flag.ro_sw_married] She knows about your wife. She asked to see the photograph, and held it near the lamp, and gave it back and said she was pretty, which she is.[/if]
+
+    "You write," she says. It isn't quite a question.
+  choices: &ro_fr3_choices
+    - id: promise
+      text: Take the address. Promise to write.
+      effects: [ { set: flag.ro_fr_writes }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You write the first one on the march, at a halt, on your knee, in English, with three words of
+        French at the end from the phrase book in the YMCA hut. The officer who censors it raises an
+        eyebrow at the French and passes it. Her answer finds you in a fortnight: two sides in French
+        you can read about half of, and one line in English. The eggs are not so good with no you.
+      next: "@return"
+    - id: part
+      text: Say goodbye properly, and leave it there.
+      effects: [ { set: flag.ro_fr_parted } ]
+      text_after: |
+        You shake her hand, and her father's, and her mother's, who kisses you on both cheeks and
+        smells of onions and lavender. Marthe stands in the door with the light behind her while the
+        company forms up in the snow. You don't look back till the bend in the road, and when you do
+        the door's shut.
+      next: "@return"
+
+- id: ro_fr_17_pit
+  chapter: front
+  kind: pool
+  pool: front_1917_pit
+  once: true
+  weight: 25
+  requires: *ro_fr3_req
+  title: Moving north
+  text: *ro_fr3_text
+  choices: *ro_fr3_choices
+
+- id: ro_fr_17_farm
+  chapter: front
+  kind: pool
+  pool: front_1917_farm
+  once: true
+  weight: 25
+  requires: *ro_fr3_req
+  title: Moving north
+  text: *ro_fr3_text
+  choices: *ro_fr3_choices
+
+- id: ro_fr_17_city
+  chapter: front
+  kind: pool
+  pool: front_1917_city
+  once: true
+  weight: 25
+  requires: *ro_fr3_req
+  title: Moving north
+  text: *ro_fr3_text
+  choices: *ro_fr3_choices
+
+# -- 1918, March: the retreat over the old Somme ground ---------------------------------------------
+- id: ro_fr_18_mill
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  once: true
+  weight: 40
+  requires: &ro_fr4_req [ "war.tour >= 33", "war.tour <= 34", flag.ro_fr_spoke, { not: war.transferred } ]
+  on_enter: [ { set: flag.ro_fr_cart } ]
+  title: The road west
+  text: &ro_fr4_text |
+    The road west is full: guns going back, lorries, walking wounded, a battalion of somebody else's
+    going the wrong way, and in among them the farm carts. The villages behind the old Somme line
+    are emptying ahead of the Germans, the way they emptied in 1914, and the people are going the
+    way they came, with everything they can lift.
+
+    The column halts. Beside the cart in front, piled with mattresses and a crate of hens, a girl in
+    clogs is walking with a bundle and a basket, and she has a burn on her wrist, and you know the
+    wrist before the face.
+
+    It's the Delattres. The old man at the horse's head. Madame up on the cart with the clock from
+    the estaminet in her lap, holding it like a baby. Marthe sees you, and stops in the road so the
+    cart behind has to pull up.
+
+    "Ternecourt," she says. "Fini." The guns behind you, going on and on. "The English will hold?"
+    [if flag.ro_fr_writes]Her last letter came a fortnight ago, about the hens.[/if]
+  choices: &ro_fr4_choices
+    - id: address
+      text: Give her your address at home, in case.
+      effects: [ { set: flag.ro_fr_address } ]
+      text_after: |
+        You write it on the back of a field postcard against the cart wheel, with a stub of pencil,
+        your mother's street and the town, and she puts it inside her coat. The column moves. The
+        last you see is the clock on the cart, swaying, and her hand up.
+      next: "@return"
+    - id: help
+      text: Give them your bread, and see them over the bridge.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You put your shoulder to the tailboard with two others, and the cart goes over the bridge
+        with the hens complaining, and you give the old man your bread and half your bully. Marthe
+        says something to you in French you don't understand, and then, in English, "You hold," and
+        goes.
+      next: "@return"
+
+- id: ro_fr_18_pit
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  weight: 40
+  requires: *ro_fr4_req
+  on_enter: [ { set: flag.ro_fr_cart } ]
+  title: The road west
+  text: *ro_fr4_text
+  choices: *ro_fr4_choices
+
+- id: ro_fr_18_farm
+  chapter: front
+  kind: pool
+  pool: front_1918_farm
+  once: true
+  weight: 40
+  requires: *ro_fr4_req
+  on_enter: [ { set: flag.ro_fr_cart } ]
+  title: The road west
+  text: *ro_fr4_text
+  choices: *ro_fr4_choices
+
+- id: ro_fr_18_city
+  chapter: front
+  kind: pool
+  pool: front_1918_city
+  once: true
+  weight: 40
+  requires: *ro_fr4_req
+  on_enter: [ { set: flag.ro_fr_cart } ]
+  title: The road west
+  text: *ro_fr4_text
+  choices: *ro_fr4_choices
+
+# -- 1918, autumn: Ternecourt again, in the advance -----------------------------------------------
+- id: ro_fr_18b_mill
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  once: true
+  weight: 40
+  requires: &ro_fr5_req [ "war.tour >= 37", flag.ro_fr_spoke, { not: war.transferred } ]
+  title: Ternecourt again
+  text: &ro_fr5_text |
+    The advance goes back over the ground, and one morning the road the battalion's marching on runs
+    into Ternecourt. You'd not have known it but for the pond. The church has no tower. The barn
+    you slept in is a heap of brick with a beam standing up out of it like a finger.
+
+    The estaminet has three walls and no roof. There's a man up on the rafters, nailing a tarpaulin,
+    one-handed, a French soldier with his left sleeve pinned up; and below him, handing up the
+    nails, is Marthe.
+
+    [if flag.ro_fr_cart]They went as far as Amiens on the cart, she says, and came back on foot with a pass from the mairie, the day after the English came through.[else]They went west in March, she says, and came back on foot with a pass from the mairie, the day after the English came through.[/if] Lucien is in hospital at Lyon with his lungs, but alive. The man on the roof is Gaston, from the next farm, who was with Lucien at Verdun and came home without his hand. He looks down at you once, and goes on nailing.
+
+    You've ten minutes while the company falls out. She brings you a cup of something hot that might
+    be coffee, and stands with her arms folded, and asks you straight, the way she says everything
+    in English, because she hasn't the words to go round. "After. You come back? Or you do not?"
+  choices: &ro_fr5_choices
+    - id: come_back
+      text: Tell her you'll come back for her, after.
+      visible_if: [ { not: flag.ro_sw_married }, { not: flag.c18_proposed } ]
+      effects: [ { set: flag.ro_fr_promise }, { war_mood: { nerve: 2 } } ]
+      text_after: |
+        You tell her. She nods, once, as if you'd told her the price of something, and then she turns
+        round and goes into the roofless room and stands there with her back to you, and Gaston on
+        the rafters stops nailing. The whistle goes. When you look back from the road she's in the
+        doorway with her hand flat on the door frame, the way your mother stands.
+      next: "@return"
+    - id: gaston
+      text: Tell her to marry Gaston. He's here, and he'll stay.
+      effects: [ { set: flag.ro_fr_let_go } ]
+      text_after: |
+        You say it badly, in English, and she understands every word. She looks up at the roof, and
+        back at you, and says "Yes. He stays," and takes the cup out of your hands though you've not
+        finished it. Gaston climbs down to shake your hand, left-handed, and you go back to the road.
+      next: "@return"
+
+- id: ro_fr_18b_pit
+  chapter: front
+  kind: pool
+  pool: front_1918_pit
+  once: true
+  weight: 40
+  requires: *ro_fr5_req
+  title: Ternecourt again
+  text: *ro_fr5_text
+  choices: *ro_fr5_choices
+
+- id: ro_fr_18b_farm
+  chapter: front
+  kind: pool
+  pool: front_1918_farm
+  once: true
+  weight: 40
+  requires: *ro_fr5_req
+  title: Ternecourt again
+  text: *ro_fr5_text
+  choices: *ro_fr5_choices
+
+- id: ro_fr_18b_city
+  chapter: front
+  kind: pool
+  pool: front_1918_city
+  once: true
+  weight: 40
+  requires: *ro_fr5_req
+  title: Ternecourt again
+  text: *ro_fr5_text
+  choices: *ro_fr5_choices

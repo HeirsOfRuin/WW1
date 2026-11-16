@@ -1,5 +1,24 @@
 # FRAME: playtest 2 (2026-11-15)
 
+> **Built 2026-11-16** (the author: "yes, then yes on number, players would like that, then your
+> recomendation"). All eight items are in. What changed from the proposals, measured:
+> - **A:** a close moment before about half the advance and trench phases (not for a stretcher-bearer,
+>   a tank man or an air gunner) and in 60% of the raids and bombing raids he chooses to go on. Each
+>   answer best somewhere (adaptive, 4,000 wars each, the answer forced): bayonet the most medals
+>   (29.9%) and home alive (41.7%); prisoner the best grade (29.9) and standing; let him go the most
+>   Armistices (5.0%) and fewest breakdowns (15.8%); shoot between them. The bayonet was a trap as first
+>   tuned (worst everywhere): its award points went from 2.5 to 4. The Soldier tab counts "men you
+>   know you killed" (close moments, and a sniper's morning that went well) and prisoners taken.
+> - **B:** an NCO picks who goes; the officer still wants an NCO on it one time in five (without this,
+>   careful play beat best play: 5.7% to 5.5%). Sergeants and officers have a fourth battle order. The
+>   commission board's leadership bar is 3, not 3.5. The Soldier tab shows the next step.
+> - **C:** named in battalion orders one time in four after a job he chose went well.
+> - **D:** a close call when a roll lands within 0.08 (a step) or 0.12 (a battle phase) of a hit: about
+>   one roll in six. The odds are untouched.
+> - **G:** an engine "pass" scene: the tour page, then the event (drawn while the war is still on that
+>   tour, so dated events keep their tour), then the war goes on.
+> - The gate after all of it: best play 5.2% +-0.5 (target 5-10), survives 1915 74.5%.
+
 The author played a mill game on the phone and sent three screenshots, the save code and these
 notes. This frame classifies each point, traces it to its cause, and proposes the fix. The bugs are
 already fixed (commit e0d40f3); the design items wait for the author's word.

@@ -334,6 +334,11 @@
       text: "Over, and straight down into the first shell hole. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_loos_city_trench
   chapter: front
@@ -358,6 +363,11 @@
     - id: ground
       text: "Get down behind a gravestone and fire from there. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 - id: b_loos_city_hold
@@ -388,6 +398,11 @@
       text: "Stay under the parapet. Fire blind over the top. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 # ---- the first leave, December 1915 -----------------------------------------------------------
 
@@ -417,6 +432,8 @@
     [if war.mate3 && flag.city_kept_marsh]Mrs Marsh gives you a cake and a Bible to take back, and asks you to keep looking after Leonard's eyes. "He wrote that you were his eyes," she says.[/if][if war.mate3 && flag.city_told_mo]Mrs Marsh says Leonard wrote that he has army spectacles now, and that you saw to it. She doesn't know whether to thank you.[/if][if !war.mate3]At the chapel the Sunday school class has a new teacher. The children made a card for Mr Marsh, and nobody knew where to send it.[/if][if !war.mate3 && flag.city_wrote_marsh] Mrs Marsh has your letter in her Bible.[/if]
 
     [if flag.city_spoke_at_roll]At church a woman stops you in the porch. "You were the one who told them about our Ronald," she says. "In C Company. They said it was quick." You tell her it was.[/if][if flag.city_silent_at_roll]On the tram a woman is telling the conductor that her son is only missing, that missing means a prisoner. You saw. You get off a stop early and walk.[/if]
+
+    [if flag.ro_sw_truth]On the Saturday you take Ivy Lambert on the tram to the Forest and walk to the Hollow Ponds in the frost. The boats are pulled up for the winter. She has your letters by heart and asks after the rats by name. On the tram back she takes your hand under her muff, where the conductor can't see.[/if][if flag.ro_sw_cheer]You take Ivy Lambert to the Hollow Ponds on the Saturday, and by the boathouse she stops and says, "Football," and you're quarrelling before you know it: the lists in the paper, the boys from Leyton, the letters full of French bread. She cries, cross, into her muff. On the tram back she takes your arm, tight, as if you'd jump off.[/if][if flag.ro_sw_little]Ivy Lambert is on the steps of St Mary's after evensong and doesn't come down them till you've seen her. "I had your card," she says. "Quite well." She pulls her gloves on, finger by finger. "I'm glad you're quite well." She goes off up the High Road, and looks back once from the corner.[/if]
 
     At night the quiet keeps waking you. Then a tram, far off, and you sleep.
 

@@ -6,7 +6,7 @@
 import type { ContentBundle } from '../content/schema';
 import type { GameState } from './state';
 import { heroOf } from '@engine/character';
-import { RANKS, STAGES, ROLES, home, skill, aliveFriends, sentHomeOf, lsd, corpsOf, rankFull, type War } from './war/index';
+import { RANKS, STAGES, ROLES, home, skill, aliveFriends, sentHomeOf, lsd, corpsOf, rankFull, PROMO, SERGEANT, CSM, SUBALTERN, LIEUTENANT, COMMISSION_LEAD, type War } from './war/index';
 import { ROTATION_MONTHS, monthName, monthOfClock, TRAINING } from './war/calendar';
 import { SECTION_NAMES, PATH_NAMES, roleName, nerveWord, standingWord, whereOf, offerWords } from './module';
 
@@ -19,6 +19,8 @@ export interface SoldierRecord {
   friends: { name: string; status: string; written: boolean; alive: boolean }[];
   /** the tank's crew or the air gunner's pilot and fitter, once he has transferred (FRAME-TANK, FRAME-AIR) */
   crew: { title: string; men: { name: string; status: string; alive: boolean }[] } | null;
+  /** what the next step up needs, and what he has (FRAME-PLAYTEST2 B: the rule nobody could see) */
+  next: Line[];
   rivals: Line[];
   totals: Line[];
 }
@@ -109,6 +111,7 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
     else if ((m = /^assignment: (\w+) (taken|got out of)$/.exec(e.msg))) career.push({ label: `${ASSIGN_NAMES[m[1]!] ?? m[1]}, ${when(e)}`, note: m[2] === 'taken' ? 'Did it' : 'Got out of it' });
     else if ((m = /^(light|severe) wound \((.*)\)/.exec(e.msg))) career.push({ label: `Wounded, ${when(e)}`, note: `${m[1] === 'severe' ? 'Badly, ' : 'Lightly, '}${whereOf(m[2]!)}` });
     else if ((m = /^awarded (\w+)$/.exec(e.msg))) { awards.push({ label: AWARD_NAMES[m[1]!] ?? m[1]!, note: when(e) }); career.push({ label: `${AWARD_NAMES[m[1]!] ?? m[1]}, ${when(e)}` }); }
+    else if ((m = /^named in orders \((\w+)\)$/.exec(e.msg))) awards.push({ label: 'Named in battalion orders', note: when(e) });
     else if (/^transferred to a tunnelling company/.test(e.msg)) career.push({ label: `To the tunnellers, ${when(e)}`, note: 'Royal Engineers' });
     else if (/^transferred to the Tank Corps/.test(e.msg)) career.push({ label: `To the tanks, ${when(e)}`, note: 'Heavy Branch, Machine Gun Corps; the Tank Corps from July 1917' });
     else if (/^transferred to the Royal Flying Corps/.test(e.msg)) career.push({ label: `To the Flying Corps, ${when(e)}`, note: 'Aerial gunner, a two-seater squadron' });
@@ -154,6 +157,7 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
     career,
     friends,
     crew,
+    next: nextStep(w),
     rivals,
     totals: [
       { label: 'Tours in the line', note: String(w.stats.rotations) },
@@ -161,10 +165,34 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
       { label: 'Duties volunteered for', note: String(w.stats.volunteered) },
       { label: 'Role missions', note: w.stats.missions ? `${w.stats.missions} (${w.stats.missionsWon} went well)` : 'None yet' },
       { label: 'Wounds', note: String(log.filter((e) => /wound \(/.test(e.msg)).length) },
+      // the author, 2026-11-16: "yes on number, players would like that"
+      { label: 'Men you know you killed', note: String(w.stats.killed ?? 0) },
+      { label: 'Prisoners taken', note: String(w.stats.prisoners ?? 0) },
       { label: 'The section from home', note: `${aliveFriends(w)} of 9 alive` },
       { label: 'Sent home', note: lsd(sentHomeOf(w)) },
     ],
   };
+}
+
+/** The next rank and what it needs, in the war layer's own numbers (war.ts promote, csmVacancy,
+ *  commissionOffer, officerVacancy): one derivation, read here. */
+function nextStep(w: War): Line[] {
+  const has = (n: number) => Math.round(n);
+  const lead = Math.round(skill(w, 'lead') * 10) / 10;
+  const out: Line[] = [];
+  if (w.ending) return out;
+  if (w.commissioned) {
+    if (w.rank === SUBALTERN) out.push({ label: 'Lieutenant', note: `A vacancy after a battle, with standing ${PROMO.ltStanding} (you have ${has(w.standing)}).` });
+    else if (w.rank === LIEUTENANT) out.push({ label: 'Acting captain', note: `A vacancy after a battle, with standing ${PROMO.captStanding} (you have ${has(w.standing)}).` });
+    return out;
+  }
+  if (w.rank < SERGEANT) out.push({ label: RANKS[w.rank + 1]!, note: `Going back after a leave; a vacancy after a battle, with standing ${45 + 10 * w.rank} (you have ${has(w.standing)}); or a role mission that goes well.` });
+  if (w.rank === SERGEANT) out.push({ label: 'Company sergeant major', note: `A vacancy, with standing ${PROMO.csmStanding} (you have ${has(w.standing)}): about one leave in eight, or one battle in twenty-five.` });
+  if (corpsOf(w) === 'tank' || corpsOf(w) === 'air') out.push({ label: 'A commission', note: 'Not from the tanks or the Flying Corps: a commission would put you back in the infantry.' });
+  else if (w.stage > 3 || (w.stage === 3 && w.cursor.at === 'done')) out.push({ label: 'A commission', note: 'The boards are past.' });
+  else out.push({ label: 'A commission', note: `The board at the leave of December 1917 takes a sergeant or above with standing 70 (you have ${has(w.standing)}) and one of: reading and figures from home${home(w, 'lit') ? ' (you have it)' : ''}, a gallantry medal${w.awards.some((a) => a !== 'MiD') ? ' (you have one)' : ''}, or leadership ${COMMISSION_LEAD} (you have ${lead}). Half of those it sees, it takes.` });
+  if (w.rank >= CSM) out.splice(0, out.length - 1);
+  return out;
 }
 
 type Man = { name: string; status: string; alive: boolean };

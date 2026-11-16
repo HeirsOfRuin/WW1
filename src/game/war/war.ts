@@ -7,11 +7,11 @@
 // Pure: plain JSON state, no DOM, no clock, no Math.random. Callers clone before calling (the
 // engine's choose() already has).
 
-import { chance, float, pick, raw, seedStreams, type Streams, type StreamName } from './rng';
+import { chance, float, pick, raw, seedStreams, hashString, type Streams, type StreamName } from './rng';
 import {
   TOWNS, DEFAULT_GENERAL, WAR_SKILLS, SPECIALIST, APTITUDE, TOWN_COURSE, WAR_WORK, STAGES, DUTIES, WOUND, PATHS,
   CHOICES, GRADE, SECTION_SIZE, SUBALTERN, TOP_OR, RANKS, REST, FRIEND_BATTLE, PHASE_HIT, STALL, ROLES, ROLE, PAY,
-  PROMO, SERGEANT, CSM, LIEUTENANT, CAPTAIN, ASSIGN, ASSIGNMENTS, CORPS, CORPS_BATTLES, AIR_RANKS, type Corps,
+  PROMO, SERGEANT, CSM, LIEUTENANT, CAPTAIN, ASSIGN, ASSIGNMENTS, CORPS, CORPS_BATTLES, AIR_RANKS, CLOSE, type CloseChoice, type Corps,
   COMMISSION_BOARD, SORTIES, SORTIE_CHOICE, type SortieChoice, type Town, type Ending, type BattleChoice, type Battle, type Stage,
 } from './data';
 
@@ -22,7 +22,10 @@ export type Pending =
   | { kind: 'tunnel' }
   /** the start of a tour in the line: a story stop, no decision (the tour's passage, the year page, an event) */
   | { kind: 'tour' }
-  | { kind: 'duty'; duty: string; friendAtRisk: boolean }
+  /** a German in front of him, before a battle phase or in a raid (FRAME-PLAYTEST2 A) */
+  | { kind: 'close'; where: 'battle' | 'sortie'; battle?: string; phase?: number; key?: string }
+  /** nco: he is an NCO with his section, so he picks who goes (FRAME-PLAYTEST2 B) */
+  | { kind: 'duty'; duty: string; friendAtRisk: boolean; nco?: boolean }
   | { kind: 'mission'; role: string }
   | { kind: 'sick' }
   | { kind: 'course'; skill: string }
@@ -38,6 +41,8 @@ export type Pending =
 export type Decision =
   | 'transfer' | 'stay'                 // tunnel, corps
   | 'volunteer' | 'stay_back'           // duty
+  | 'send_friend' | 'send_draft'        // duty, as an NCO: a man from home or a new man goes
+  | CloseChoice                         // a man in front of him
   | 'go' | 'decline'                    // mission, course
   | 'report' | 'carry_on'               // sick
   | 'take'                              // course, assignment ('decline' gets out of it)
@@ -69,6 +74,8 @@ export interface WarStats {
   missions: number; missionsWon: number;
   /** duties and missions played out, and how many went well (absent in saves before sorties) */
   sorties?: number; sortiesOk?: number;
+  /** men he knows he killed, and prisoners he took (the close moments; a sniper's mission that went well) */
+  killed?: number; prisoners?: number;
 }
 
 export interface War {
@@ -91,13 +98,19 @@ export interface War {
   endWhy: string;
   /** what happened that the player has not yet been shown as a scene: a wound, friends killed.
    *  Recorded only; nothing in the war reads it, so the war's numbers do not depend on it. */
-  news: { wound: { kind: 'light' | 'severe'; cause: string } | null; fallen: { i: number; why: string; present: boolean }[]; sortie?: { key: string; ok: boolean; vol: boolean; turned: boolean } | null;
+  news: { wound: { kind: 'light' | 'severe'; cause: string } | null; fallen: { i: number; why: string; present: boolean }[]; sortie?: { key: string; ok: boolean; vol: boolean; turned: boolean; margin?: number } | null;
     /** nerve won back at rest and on leave since the last question: the screen shows it apart from what
      *  the choice cost (playtest 2: "Nerve +7" after a raid read as if the raid had steadied him) */
     restored?: { rest: number; leave: number };
+    /** the man he sent on a duty as an NCO, and whether he came back */
+    sent?: { key: string; who: number; killed: boolean } | null;
     /** the last battle, fought or missed, for the overview screen after it (playtest 2: "some of the
      *  battles ended without me realizing"; a course had taken him away on 1 July without a word) */
-    battle?: BattleNews | null };
+    battle?: BattleNews | null;
+    /** the roll just made came near: a close call to show under the choice (FRAME-PLAYTEST2 D) */
+    close?: { kind: 'step' | 'battle'; key: string; n: number } | null;
+    /** his name read out in battalion orders after the sortie just ended */
+    named?: boolean };
   stats: WarStats;
   /** which corps he transferred to, if any (absent in saves before the tanks: a transferred man
    *  there is a tunneller; read with corpsOf); training tours left; air missions that went well */
@@ -147,9 +160,22 @@ export const aliveFriends = (w: War) => w.friends.filter(Boolean).length;
 const withSection = (w: War) => !w.transferred && w.out === 0;
 const SEVERE_OUT = 4;
 const ch = (w: War, l: StreamName, p: number) => chance(w.rng, l, p);
+/** The same draw as ch, also saying when it came near: within `band` above the chance (playtest 2:
+ *  "the risk warnings never feel real"). The odds are untouched; only what is shown changes. */
+const CLOSE_BAND = { step: 0.08, battle: 0.12 } as const;
+function riskRoll(w: War, l: StreamName, p: number, kind: 'step' | 'battle', key: string): boolean {
+  const r = raw(w.rng, l);
+  if (r < p) return true;
+  if (r < p + CLOSE_BAND[kind]) newsOf(w).close = { kind, key, n: Math.floor((r - p) * 1000) };
+  return false;
+}
 const stageOf = (w: War): Stage => STAGES[w.stage - 1]!;
 export interface BattleNews { name: string; fought: boolean; why: 'course' | 'wound' | null; lost: number[]; hit: 'light' | 'severe' | null; award: string | null; promoted: boolean; near: boolean; done: boolean; rank: number }
 export const isRole = (w: War) => w.path in ROLES;
+/** An NCO with his section picks who goes on a duty; a private waits to be picked (FRAME-PLAYTEST2 B). */
+export const ncoDuty = (w: War) => w.rank >= 1 && !w.commissioned && !w.transferred;
+/** A sergeant or an officer with his men may take them across himself: the fourth order in battle. */
+export const canLead = (w: War) => (w.rank >= SERGEANT || w.commissioned) && !w.transferred && w.path !== 'air';
 /** His corps, if he has left the battalion: a save from before the tanks had only tunnellers. */
 export const corpsOf = (w: War): Corps | null => w.corps ?? (w.transferred ? 'tunnel' : null);
 /** Who is offered the tanks (FRAME-TANK.md): any town, machinery from home or the Lewis gun at 2;
@@ -211,8 +237,9 @@ function end(w: War, kind: Ending, why: string): void {
 
 // The section fights on after he leaves it, by whatever road: "friends home" means who came
 // home in 1918, not who was alive the day he left (KILLGATE round 1, fault 4).
+// It used to set w.transferred, so every man whose war ended early read afterwards as a tunneller
+// ("Alive. You are with the tunnellers now." on the Soldier tab; the death scene's corps): not now.
 function finishWar(w: War): void {
-  w.transferred = true;
   for (const st of STAGES) {
     if (st.n < w.endedStage) continue;
     const from = st.n === w.endedStage ? w.clockInStage : 0;
@@ -320,11 +347,14 @@ export function postingOffers(w: War): string[] {
   return out;
 }
 
-function commissionOffer(w: War): boolean {
+/** The leadership a commission board accepts without reading or a medal: 3, so the NCO course (2)
+ *  and some leading in battle reach it (FRAME-PLAYTEST2 B; it was 3.5, out of reach for most). */
+export const COMMISSION_LEAD = 3;
+export function commissionOffer(w: War): boolean {
   // not for a tank or air man: a commission would put him back in the infantry as a subaltern
   // (an air run ended as a lieutenant flying with the squadron, 2026-11-14)
   return w.stage === 3 && !w.commissioned && (corpsOf(w) ?? 'tunnel') === 'tunnel' && w.rank >= 3 && w.standing >= 70
-    && (!!home(w, 'lit') || w.awards.some((a) => a !== 'MiD') || skill(w, 'lead') >= 3.5)
+    && (!!home(w, 'lit') || w.awards.some((a) => a !== 'MiD') || skill(w, 'lead') >= COMMISSION_LEAD)
     && ch(w, 'leave', COMMISSION_BOARD);
 }
 
@@ -493,7 +523,7 @@ function nextDuty(w: War, c: Extract<Cursor, { at: 'duty' }>): void {
   }
   const key = c.offered[c.i]!;
   const friendAtRisk = ch(w, 'duty', 0.4) && aliveFriends(w) > 0;
-  w.pending = { kind: 'duty', duty: key, friendAtRisk };
+  w.pending = { kind: 'duty', duty: key, friendAtRisk, nco: ncoDuty(w) };
 }
 
 /** A special assignment this tour, if one comes (ASSIGNMENTS): which jobs he can be given, by weight. */
@@ -518,7 +548,20 @@ function afterCourse(w: War): void {
   w.cursor = { at: 'tally' };
 }
 
+/** A draw on the close-moment stream, seeded for a save made before it existed. */
+function closeRoll(w: War): number {
+  if (w.rng.close === undefined) w.rng.close = (hashString(`${w.seed}|close`) >>> 0) || 1;
+  return raw(w.rng, 'close');
+}
 function askPhase(w: War, b: Battle, i: number): void {
+  const [, , ptype] = b.phases[i]!;
+  if ((ptype === 'advance' || ptype === 'trench') && w.path !== 'tank' && w.path !== 'air' && w.path !== 'bearer' && closeRoll(w) < CLOSE.battleChance) {
+    w.pending = { kind: 'close', where: 'battle', battle: b.name, phase: i };
+    return;
+  }
+  askOrder(w, b, i);
+}
+function askOrder(w: War, b: Battle, i: number): void {
   const [, , ptype] = b.phases[i]!;
   if (w.path === 'air') { w.pending = { kind: 'battle', battle: b.name, phase: i, type: 'air', stalled: false }; return; }
   const stalled = (ptype === 'advance' || ptype === 'trench') && ch(w, 'battle', STALL);
@@ -585,9 +628,14 @@ function startSortie(w: War, key: string, role: boolean, vol: boolean, friendAtR
   askStep(w);
 }
 
-function askStep(w: War): void {
+function askStep(w: War, noClose = false): void {
   const c = w.cursor as Extract<Cursor, { at: 'sortie' }>;
   const so = SORTIES[c.key]!;
+  // the middle of a raid he chose to go on: a man in front of him (not when it is played unseen)
+  if (!noClose && c.vol && c.i === 1 && (c.key === 'raid' || c.key === 'bomb') && closeRoll(w) < CLOSE.raidChance) {
+    w.pending = { kind: 'close', where: 'sortie', key: c.key };
+    return;
+  }
   w.pending = { kind: 'step', key: c.key, role: c.role, step: c.i, of: so.shares.length, vol: c.vol, canBack: so.back[c.i]! };
 }
 
@@ -595,6 +643,7 @@ function askStep(w: War): void {
  *  passage ("Last tour the sergeant put you on a wiring party; it went well"). */
 function autoSortie(w: War, key: string): void {
   for (let guard = 0; guard < 5 && w.cursor.at === 'sortie' && w.pending?.kind === 'step'; guard++) { w.pending = null; stepSortie(w, 'steady'); }
+  newsOf(w).close = null; // detailed and played out unseen: nothing to show
   const r = newsOf(w).sortie;
   if (r) say(w, `detailed: ${key} ${r.ok ? 'ok' : 'failed'}`);
   newsOf(w).sortie = null;
@@ -608,7 +657,7 @@ function stepSortie(w: War, choice: SortieChoice): void {
   const cm = SORTIE_CHOICE[eff];
   const cause = c.role ? ROLES[c.key]!.mission : c.key;
   const fullNerve = c.role ? ROLES[c.key]!.nerve : DUTIES[c.key]!.nerve;
-  if (ch(w, 'duty', sortieHit(w, c.key, c.role, c.i, eff))) hit(w, cause);
+  if (riskRoll(w, 'duty', sortieHit(w, c.key, c.role, c.i, eff), 'step', c.key)) hit(w, cause);
   if (w.ending) { w.cursor = { at: 'tally' }; return; }
   spendNerve(w, fullNerve * so.shares[c.i]! * cm.nerve);
   c.pts += cm.gain;
@@ -620,12 +669,22 @@ function stepSortie(w: War, choice: SortieChoice): void {
 
 function endSortie(w: War, c: Extract<Cursor, { at: 'sortie' }>, turned: boolean): void {
   const so = SORTIES[c.key]!;
-  const ok = !turned && w.out === 0 && c.pts + 0.5 * skill(w, so.skill) + float(w.rng, 'duty', -1, 1) >= so.need;
+  const score = c.pts + 0.5 * skill(w, so.skill) + float(w.rng, 'duty', -1, 1);
+  const ok = !turned && w.out === 0 && score >= so.need;
   if (turned) { w.standing = clamp(w.standing - ROLE.turnBackStanding, 0, 100); spendNerve(w, ROLE.turnBackNerve); }
-  newsOf(w).sortie = { key: c.key, ok, vol: c.vol, turned };
+  newsOf(w).sortie = { key: c.key, ok, vol: c.vol, turned, margin: score - so.need };
+  // smaller recognition than a medal, and seen (FRAME-PLAYTEST2 C): a job he chose that went well
+  // gets his name read out in battalion orders one time in four (drawn on the close stream, so it
+  // shifts no other draw)
+  if (ok && c.vol && closeRoll(w) < 0.25) {
+    w.standing = clamp(w.standing + 2, 0, 100);
+    newsOf(w).named = true;
+    say(w, `named in orders (${c.key})`);
+  }
   w.stats.sorties = (w.stats.sorties ?? 0) + 1; if (ok) w.stats.sortiesOk = (w.stats.sortiesOk ?? 0) + 1;
   if (c.role) {
     learn(w, SORTIES[c.key]!.skill, 0.3);
+    if (ok && c.key === 'snipe') w.stats.killed = (w.stats.killed ?? 0) + 1; // a sniper's morning that went well
     if (ok) {
       const m = ROLES[c.key]!;
       if (c.key === 'air') {
@@ -673,6 +732,37 @@ export function decide(w: War, d: Decision): War {
     case 'duty': {
       const c = w.cursor as Extract<Cursor, { at: 'duty' }>;
       const key = p.duty; const dd = DUTIES[key]!;
+      if (d === 'send_friend' || d === 'send_draft') {
+        // he stays; someone he chose goes. A man from home knows the work; a new man from the draft
+        // is more likely to be hit, and the section knows who sent him
+        c.i += 1;
+        const hp = dutyHit(w, key) * (d === 'send_draft' ? 1.4 : 1);
+        const alive = w.friends.flatMap((a, i) => (a ? [i] : []));
+        if (d === 'send_friend' && alive.length) {
+          const who = pick(w.rng, 'duty', alive);
+          const killed = ch(w, 'duty', hp);
+          if (killed) {
+            w.friends[who] = false; newsOf(w).fallen.push({ i: who, why: key, present: false });
+            spendNerve(w, 6); say(w, `friend ${who + 1} killed (${key})`);
+          } else w.standing = clamp(w.standing + 1, 0, 100);
+          newsOf(w).sent = { key, who, killed };
+          say(w, `sent friend ${who + 1} on ${key}`);
+        } else {
+          const killed = ch(w, 'duty', hp);
+          w.standing = clamp(w.standing - (killed ? 3 : 1), 0, 100);
+          if (killed) spendNerve(w, 4);
+          newsOf(w).sent = { key, who: -1, killed };
+          say(w, `sent a draft man on ${key}${killed ? ': killed' : ''}`);
+        }
+        // the officer wants an NCO on it, as often as a private who hangs back is detailed: sending a
+        // man is not a way out of the work (the gate: careful play beat best play without this)
+        if (ch(w, 'duty', 0.2 + (w.standing < 30 ? 0.25 : 0))) {
+          w.stats.detailed++;
+          startSortie(w, key, false, false, false, c);
+          autoSortie(w, key);
+        }
+        break;
+      }
       const vol = d === 'volunteer';
       const detailed = !vol && ch(w, 'duty', 0.2 + (w.standing < 30 ? 0.25 : 0));
       c.i += 1;
@@ -735,6 +825,7 @@ export function decide(w: War, d: Decision): War {
       const b = battleOf(w);
       const [base, ncost] = b.phases[c.i]!;
       let choice = d as BattleChoice;
+      if (choice === 'lead' && !canLead(w)) choice = 'push'; // the order is a sergeant's or an officer's
       const freeze = w.nerve < 12 && ch(w, 'battle', 0.35);
       if (freeze) choice = 'ground';
       if (choice === 'ground' && !p.stalled && w.nerve < 25 && (freeze || ch(w, 'battle', 0.12))) {
@@ -744,7 +835,7 @@ export function decide(w: War, d: Decision): War {
       }
       const cm = CHOICES[choice];
       const path = PATHS[w.path]!;
-      if (ch(w, 'battle', phaseHit(w, b, base, p.type, choice))) { hit(w, b.name); const bn = newsOf(w).battle; if (bn && newsOf(w).wound) bn.hit = newsOf(w).wound!.kind; }
+      if (riskRoll(w, 'battle', phaseHit(w, b, base, p.type, choice), 'battle', p.type)) { hit(w, b.name); const bn = newsOf(w).battle; if (bn && newsOf(w).wound) bn.hit = newsOf(w).wound!.kind; }
       if (w.ending) { w.cursor = { at: 'tally' }; break; }
       if (b.capture && w.path !== 'air' && ch(w, 'battle', b.capture * (choice === 'ground' ? 2 : 1))) { end(w, 'captured', `${b.name}: overrun`); w.cursor = { at: 'tally' }; break; }
       if (path.advanceCapture && (p.type === 'advance' || p.type === 'stalled') && ch(w, 'battle', path.advanceCapture)) { end(w, 'captured', `${b.name}: ditched beyond the line`); w.cursor = { at: 'tally' }; break; }
@@ -776,6 +867,29 @@ export function decide(w: War, d: Decision): War {
     case 'step': {
       stepSortie(w, d as SortieChoice);
       break;
+    }
+    case 'close': {
+      const k = d as CloseChoice; const e = CLOSE.choices[k];
+      if (e.kill) w.stats.killed = (w.stats.killed ?? 0) + 1;
+      if (k === 'prisoner') w.stats.prisoners = (w.stats.prisoners ?? 0) + 1;
+      w.standing = clamp(w.standing + e.standing, 0, 100);
+      if (e.nerve > 0) spendNerve(w, e.nerve); else w.nerve = clamp(w.nerve - e.nerve, -10, 100);
+      say(w, `close: ${k}`);
+      const cause = p.where === 'battle' ? p.battle! : p.key!;
+      if (closeRoll(w) < e.hit) hit(w, cause);
+      if (w.ending) { w.cursor = { at: 'tally' }; break; }
+      if (p.where === 'battle') {
+        const c = w.cursor as Extract<Cursor, { at: 'battle' }>;
+        c.pts += e.pts;
+        if (w.out > 0) { const bn = newsOf(w).battle; if (bn && newsOf(w).wound) bn.hit = newsOf(w).wound!.kind; finishBattle(w, c.pts); break; }
+        askOrder(w, battleOf(w), p.phase!);
+        return w;
+      }
+      const c = w.cursor as Extract<Cursor, { at: 'sortie' }>;
+      c.pts += e.pts * 0.4;
+      if (w.out > 0) { endSortie(w, c, false); break; }
+      askStep(w, true);
+      return w;
     }
     case 'tour': break; // run() goes on from the tour cursor
     case 'leave': {

@@ -15,13 +15,13 @@ export const GAME_ID = 'trenches';
 
 // ---- Effects --------------------------------------------------------------
 const HOME = z.enum(['dig', 'mech', 'lit', 'field', 'stamina', 'firstaid', 'sport', 'voice']);
-export const DECISION = z.enum(['transfer', 'stay', 'volunteer', 'stay_back', 'go', 'decline', 'report', 'carry_on', 'take', 'push', 'help', 'ground', 'back', 'commission', 'posting:0', 'posting:1', 'posting:2', 'bold', 'steady', 'careful', 'on']);
+export const DECISION = z.enum(['transfer', 'stay', 'volunteer', 'stay_back', 'go', 'decline', 'report', 'carry_on', 'take', 'push', 'help', 'ground', 'lead', 'send_friend', 'send_draft', 'shoot', 'bayonet', 'prisoner', 'spare', 'back', 'commission', 'posting:0', 'posting:1', 'posting:2', 'bold', 'steady', 'careful', 'on']);
 export const GAME_EFFECTS = [
   z.object({ war_home: z.array(HOME).length(2) }).strict(), // creation: the two town skills
   z.object({ war_general: z.enum(['firstaid', 'sport', 'voice']) }).strict(), // creation: the general skill
   z.object({ war_run: z.literal(true) }).strict(), // the war begins: run to its first question
   z.object({ war: DECISION }).strict(), // the answer to the war's pending question (src/game/war/war.ts decide)
-  z.object({ war_ack: z.enum(['wound', 'fallen', 'sortie', 'battle']) }).strict(), // a wound or a friend's death has been shown
+  z.object({ war_ack: z.enum(['wound', 'fallen', 'sortie', 'battle', 'sent']) }).strict(), // a wound or a friend's death has been shown
   // Option B (docs/FRAME-OPTION-B.md): an event's choice moves nerve or standing a little, shown in the changes
   z.object({ war_mood: z.object({ nerve: z.number().int().min(-5).max(5).optional(), standing: z.number().int().min(-5).max(5).optional() }).strict() }).strict(),
 ] as const;

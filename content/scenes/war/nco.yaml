@@ -1,0 +1,13 @@
+# Rank that changes the question (docs/FRAME-PLAYTEST2.md B; the author, playtest 2: "You never get a
+# sense of the promotions meaning anything, nor do you get a sense that you make any difference").
+# An NCO picks who goes on a duty; this is what came of the man he sent.
+- id: x_sent
+  chapter: front
+  title: The man you sent
+  text: |
+    [if war.sent_friend && !war.sent_killed]{sent_first} goes. He comes back at first light, mud to the eyebrows, and drops into the trench beside you and says nothing about it. He doesn't have to. You sent him because he'd do it right, and he did.[/if][if war.sent_friend && war.sent_killed]You sent {sent_name} on {sent_duty}. He didn't come back. The sergeant finds you on the firestep at stand-to and stands there a minute. "You'll have to live with it," he says. "That's what the stripe's for."[/if][if !war.sent_friend && !war.sent_killed]The new man goes, white as paper, and comes back at dawn and can't stop talking. The men from home look at you, and then away. Nobody says anything.[/if][if !war.sent_friend && war.sent_killed]The new man doesn't come back. You never learned his first name. The men from home don't say anything about it, and they don't have to.[/if]
+  choices:
+    - id: on
+      text: "[if war.sent_killed]Write it in the section roll.[else]Go on.[/if]"
+      effects: [ { war_ack: sent } ]
+      next: "@war"

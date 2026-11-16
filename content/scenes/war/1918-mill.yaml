@@ -380,6 +380,11 @@
       text: "Get down the dugout steps till it lifts. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_spring_2
   chapter: front
@@ -410,6 +415,11 @@
     - id: ground
       text: "Stay down in the bottom of the trench and let it go over. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 - id: b_spring_3
@@ -442,6 +452,11 @@
       text: "Lie up in a cellar and let them go by. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_spring_4
   chapter: front
@@ -472,6 +487,11 @@
     - id: ground
       text: "Keep under the embankment and let the guns do it. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 # ---- Amiens, 8 August 1918 --------------------------------------------------------------------
@@ -507,6 +527,11 @@
       text: "Get down in the corn till the fog clears. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_amiens_2
   chapter: front
@@ -532,6 +557,11 @@
       text: "Get down behind the bank and fire at the wood's edge. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_amiens_3
   chapter: front
@@ -556,6 +586,11 @@
     - id: ground
       text: "Dig in deep and keep down. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 # ---- October 1918 -----------------------------------------------------------------------------
@@ -586,6 +621,11 @@
       text: "Get down under the near bank. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_oct_2
   chapter: front
@@ -612,6 +652,11 @@
       text: "Get into a doorway and fire at the tower. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_oct_3
   chapter: front
@@ -636,6 +681,11 @@
     - id: ground
       text: "Keep down behind the wall. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 # ---- the Armistice, for the mill town ----------------------------------------------------------
@@ -669,6 +719,10 @@
     out here, and got up again. You read that part twice.[/if]
 
     [if flag.told_jack_truth]Our Jack never went out. He was at Prees Heath when it finished. He writes that he read your letter till it fell to bits, and he's glad, and he's sorry, and he doesn't know which.[/if][if flag.told_jack_easy]Our Jack never went out. He was at Prees Heath when it finished, and he writes that he's fed up, he's missed it, it isn't fair. You put the letter in the stove.[/if][if !flag.told_jack_truth && !flag.told_jack_easy]Our Jack never went out. He was at the camp when it finished. Your mother says it three times in one letter, as if she's counting.[/if][if flag.walked_old_ground] Some nights you're back in the long grass on the old ground, looking for the place.[/if][if flag.peaches] You can't look at a tin of peaches.[/if][if flag.took_a_lad] Clegg writes from Rochdale, once, to say he's back at the dye works and thank you.[/if]
+
+    [if flag.ro_sw_married && flag.ro_sw_wed16]Nellie meets the train with the baby on her hip, walking now, in a knitted bonnet, and the baby looks at you hard and then hides in Nellie's neck. It's a week before she'll come to you.[/if][if flag.ro_sw_married && flag.ro_sw_wed17]Nellie meets the train in the blue costume she was married in, with the ring on the outside of her glove so you'll see it from the carriage.[/if][if flag.ro_sw_married && flag.ro_sw_told18] She has your letter from the spring in her apron pocket. She knows. You don't have to tell it again.[/if][if flag.ro_sw_after && !flag.ro_sw_married && !flag.ro_sw_ended && !flag.ro_fr_promise]Nellie's on the platform with the ring on her finger, on a weekday, in front of everybody, and you're wed at chapel in May, and the whole alley comes, and her brothers dance.[/if][if flag.ro_sw_after && !flag.ro_sw_married && !flag.ro_sw_ended && flag.ro_fr_promise]Before you write to anybody else, you write to Nellie, about Ternecourt. It's the hardest letter of the war, and you post it before you can stop yourself. She answers it, which you don't deserve: four lines, no blots, and the ring, wrapped in a bit of cotton waste from the shed.[/if][if flag.ro_sw_jilted]Nellie's married and lives up by the cemetery. You see her in the market with a pram, and lift your cap, and she smiles at you[if flag.ro_sw_blessed] the way she used to across the alley, and mouths something you can still read: you look well[/if].[/if][if flag.ro_sw_let_go]Nellie Whittaker married her lad from the card room, your mother wrote, and has a little boy. You're glad. You find you are.[/if]
+
+    [if flag.ro_fr_promise]In the summer you go back to France on your own money, Folkestone and Boulogne and a slow train that stops at every halt, and walk the last miles from Albert with a cardboard suitcase, on roads where the shell holes are filled with broken brick. The estaminet has its roof on. Marthe is in the door before you've reached the pond.[/if][if flag.ro_fr_let_go]A card comes from Ternecourt at Easter, the church with its tower in scaffolding. Marthe and Gaston are married, and there's to be a child in the autumn, and the eggs are good again.[/if][if flag.ro_fr_writes && !flag.ro_fr_promise && !flag.ro_fr_let_go]Letters come from Ternecourt for a year, in French, and then only at Christmas, and then not.[/if][if flag.ro_fr_address && !flag.ro_fr_writes && !flag.ro_fr_promise && !flag.ro_fr_let_go]A letter comes to your mother's house with a French stamp, from Amiens, in a schoolmistress's hand, to say the Delattres are alive and going home. You answer it. You don't hear again.[/if][if flag.ro_fr_parted && !flag.ro_fr_address && !flag.ro_fr_promise && !flag.ro_fr_let_go]Sometimes, frying an egg, you think of Ternecourt, the steam on the windows and a girl making you say oeufs till you could.[/if]
 
     You are {age} years old and {rank_a}, and you went out of the shed a boy.
 

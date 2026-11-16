@@ -78,6 +78,13 @@ export function transition(state: GameState, content: ContentBundle, rawNext: Ne
     target = next;
   }
 
+  const pass = target ? content.scenes[target] : undefined;
+  if (pass?.kind === 'pass') {
+    const c = pass.choices[0]!;
+    if (c.effects?.length) applyEffects(state, content, c.effects, { scene: pass.id, choice: c.id, choiceText: '', changes, rng });
+    transition(state, content, c.next!, rng, changes);
+    return;
+  }
   // back to a scene an urgent event interrupted: it is read as it stood, without entering it again
   if (target!.startsWith(RESUME)) {
     const urgent = takeUrgent(state, content);

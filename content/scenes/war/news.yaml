@@ -3,26 +3,58 @@
 # question. Each scene ends with war_ack, which clears the news so the route moves on.
 # Shared by every town; a town's own friends have their own scenes (mill-friends.yaml).
 
+# The wounds, told (docs/FRAME-PLAYTEST2.md E; the author, playtest 2: "When I got wounded, I
+# really would have preferred more context"). The moment by what hit him (war.wound_cause) and by
+# corps, then the road back. The light wound asks what he writes home (wd_light_*); the Blighty
+# one asks what he does with the time in hospital (wd_blighty_*). Both are read again in e_killed
+# (death.yaml), and the light letter is read in the Blighty wound. A mission is told by
+# war.result_key (the sortie he was on, set when the wound ended it), not by his path: a sniper
+# also goes on wiring parties. An ordered duty played unseen leaves it 'none'.
 - id: x_wound_light
   chapter: front
   title: Hit
   text: |
     Hit {wound_where}.
 
-    It's like a cricket bat across the shoulder, hard, and you're sat down in the muck before you
-    know why. Then the heat comes, and the wet. There's a hole in your sleeve you could put your
-    thumb in.
+    [if war.corps == air][if war.wound_cause == shell]Archie, right under the tail. A black puff, a bang you feel through the seat, and the machine hops like a cart going over a stone. Something stings your calf through your flying boot, like a wasp got into your sock.[else]A German comes in behind the tail and you're both firing, and something knocks your hand off the gun. There's a neat slit in the leather of your sleeve, and blood coming out at the cuff, and it's so cold up here you hardly feel it.[/if]
+
+    Your pilot turns for home. He shouts something back over the engine that you don't catch, and you put your thumb up, and he puts his up.
+
+    He puts her down on the aerodrome and taxis right up to the hangars, and the fitters lift you out over the side like a sack of meal. The squadron's medical officer sees to you in the office, among the maps and the telephone, in a smell of oil and cigarettes. Iodine. A needle against lockjaw. A dressing, and a label on your tunic button for the clearing station down the road. They keep you three days there. Then a fortnight on the ground, walking out every morning to watch the machines go, and the fitters bringing you tea, till the medical officer passes you to fly.[elif war.corps == tank][if war.wound_cause == shell]A shell in the tank park, at night. You're asleep under the tarpaulin rigged off her side when it comes, and the next you know you're sat up in the mud with your ears singing, a hot splinter in the meat of your thigh, and the sergeant shouting names.
+
+    The orderly at the aid post in the farm picks it out with tweezers by a hurricane lamp.[else]Splash. Bullets rattle on her plates like hail on a tin roof, and the inside of the plate spits back at you, flakes of hot steel no bigger than fish scales. One finds your cheek, under the edge of your mask. Your hand comes away from your face red, and the engine roars on, and there's a gun to work, so you work it.
+
+    You stay in her till the rallying point, because there's nowhere else to go. Then the section officer looks at your face by the light of her open door and sends you back along her tracks on foot, to the first infantry aid post you can find, with petrol and cordite still in your nose.[/if] Iodine, a needle against lockjaw, a dressing, a label tied to your button. A fortnight at the rest station, sleeping. Then a lorry back to the company, and the smell of hot oil, and your place in the crew kept for you.[else][if war.wound_cause == battle]It's like a cricket bat across the shoulder, hard, and you're sat down in the muck before you know why. Then the heat comes, and the wet. There's a hole in your sleeve you could put your thumb in.[elif war.wound_cause == shell]A shell comes over and you're down before you know you've heard it. The earth slaps you flat. When you sit up there's a hot sting low in your back, and your hand comes away red. A splinter, no bigger than your fingernail.[elif war.wound_cause == sortie][if war.result_key == bearer]You're bent under the front handles of a stretcher, with a man on it who won't stop asking for water, when something goes through the meat of your forearm like a hot needle through cloth. You don't drop him. You get him in first.[elif war.result_key == signals]You're running with the message, bent double, when something plucks at your thigh like a hand at your trousers. You get the message through. Then you look.[elif war.result_key == snipe]A round comes in at your loophole and hits the plate. The plate holds, and spits splinters of itself into your face and the back of your hand, and you're blinking blood and can't see out of one eye for an hour.[elif war.result_key == tunnel || war.path == tunnel]Underground, listening. They blow first. The blast comes down the gallery like a train through a cutting and throws you against the timbers, and you lie in the dark with two ribs cracked and clay in your mouth, till the others find you by your coughing.[elif war.result_key == carrying]Up the communication trench in the dark, under a box of bombs, when the machine gun that sweeps the crossroads every night sweeps it. Something nips your calf like a dog at a gate. You don't drop the box.[elif war.result_key == raid || war.result_key == patrol || war.result_key == wiring || war.result_key == listening || war.result_key == bomb || war.result_key == lewis]Out in front, in the dark. A flare goes up, and you freeze the way you've been taught, and a machine gun on their side traverses along the wire. Something nips your hip like a dog at a gate. You lie still till the flare's out.[else]Something nips your hip like a dog at a gate, and you're sat down before you know why. You never see where it came from.[/if][elif war.wound_cause == assign]Behind the line, where you'd stopped thinking about it. A shell on the road, or a stray from nowhere: you never find out which. A burn along your ribs like a poker laid on you.[elif war.wound_cause == underground]It comes in behind you. They dig you out by the boots, coughing, with a timber across your legs and the skin off both shins.[else]A stray one, from nowhere anybody saw. A burn along your arm like a poker laid on it.[/if]
 
     "You lucky sod," somebody says, crouching over you. "That's not even a Blighty one."
 
-    The stretcher-bearers have worse to carry. You walk, down the communication trench with your
-    arm held against you like a parcel, to the aid post in a cellar. It smells of iodine and
-    paraffin and blood gone cold. The doctor looks for four seconds. Iodine that makes you shout,
-    a dressing, a label tied to your tunic button. A week behind the lines, maybe two. Then back.
+    You get your field dressing out of your tunic and he ties it on for you, too tight. The stretcher-bearers have worse to carry. You walk, down the communication trench, careful, the way you'd carry a jug of milk, to the aid post in a cellar. It smells of iodine and paraffin and blood gone cold. The doctor looks for four seconds. Iodine that makes you shout, a needle against lockjaw, a dressing, a label tied to your tunic button with your name on it and what's the matter with you, in indelible pencil.
+
+    Then the back of a motor ambulance, eight of you sat up on the benches, bumping, and a fortnight at the rest station in a school with the desks stacked out in the yard. Bread and jam. A bath, and a clean shirt somebody else wore first. Sleep, more than you've had since you came out. On the fifteenth morning the sergeant reads your name off a list, and you go back up the road the way you came, with a new field dressing in your tunic.[/if]
+
+    Your name will be in the casualty lists in the paper, sooner or later, and your mother reads the lists. There's a letter to write before the post goes.
   choices:
+    - id: write_truth
+      text: Tell her straight where it is, and that it isn't bad.
+      effects: [ { set: flag.wd_light_truth }, { war_ack: wound } ]
+      text_after: |
+        You put where it went in, and the aid post, and the label, and that it's not even a Blighty
+        one, so she's not to go looking for you in the hospital lists. You read it over. It sounds
+        like somebody else.
+      next: "@war"
+    - id: write_joke
+      text: Make a joke of it. A scratch, and a fortnight's holiday.
+      effects: [ { set: flag.wd_light_joke }, { war_ack: wound } ]
+      text_after: |
+        You put that you've had a scratch and the army's giving you a fortnight's holiday for it,
+        with jam. You draw the jam tin in the margin. It takes you longer than the truth would have.
+      next: "@war"
     - id: go_down
-      text: Go down the line.
-      effects: [ { war_ack: wound } ]
+      text: Say nothing about it. She'd only worry.
+      effects: [ { set: flag.wd_light_quiet }, { war_ack: wound } ]
+      text_after: |
+        You write about the weather, and the cat at the rest station, and that you're in the pink.
+        Not a word about it. You put "hoping this finds you as it leaves me", and it nearly does.
       next: "@war"
 
 - id: x_wound_severe
@@ -31,22 +63,46 @@
   text: |
     Hit {wound_where}.
 
-    You don't remember the first part. You remember a stretcher, the bearers swearing at the mud,
-    the sky going past in strips between the trench walls. Morphia at the aid post, warm and heavy,
-    like falling asleep in front of the fire. A tent at the clearing station, a long row of you,
-    chloroform and wet canvas. A train with the windows painted over. A boat. The Channel's rough
-    and the man in the cot above you is sick all the way across, and you don't care, because
-    somebody said Southampton.
+    [if war.corps == air][if war.wound_cause == shell]Archie bursts beside you, close, and everything goes white and loud at once.[else]The bullets come up through the floor of the cockpit. You hear them going through the fabric, like somebody tearing calico in the shop.[/if] You remember the gun ring cold against your cheek, and your pilot's face turned round to look at you, his mouth open. Then not much.
 
-    A hospital in England. Clean sheets that crackle. A nurse from Leeds who calls everybody "my
-    lad" and smells of soap. Your mother comes on the train with a cake in a tin and sits by the
-    bed for two hours not knowing what to say, and it's the best two hours of the war.
+    He gets her down. You never remember the landing. You remember hands lifting you, and the dope on the wings smelling of pear drops, and the ambulance tender bouncing over the grass.[elif war.corps == tank][if war.wound_cause == shell]A shell in the tank park, at night. You're asleep under the tarpaulin off her side, and then you're not anywhere. The crew dig you out of the mud with their hands and carry you to the aid post at the farm on a sheet of corrugated iron, swearing at you to hang on.[else]Something comes through her plate. A white flash inside her, and a noise you feel in your teeth, and the dark full of fumes. The crew get you out of the door in her side, into the mud, and two of them carry you back along her tracks between them, swearing at you to hang on, till they find the infantry's aid post.[/if][else][if war.wound_cause == battle]You don't remember the first part.[elif war.wound_cause == shell]The shell that does it lands close enough to lift you. You come round with earth in your mouth and somebody's hands on you, and one of your legs not answering.[elif war.wound_cause == sortie][if war.result_key == bearer]You're carrying a man in when it happens. The front of the stretcher goes down, and the other three get him in, and then come back for you.[elif war.result_key == signals]You're running with a message. You remember the message. You keep trying to tell them it, after.[elif war.result_key == snipe]They find your hide. One round, through the loophole. You don't remember the rest of that day.[elif war.result_key == tunnel || war.path == tunnel]Underground, listening. They blow first. You remember the dark coming down the gallery at you, and then the dark staying.[elif war.result_key == carrying]Up the communication trench in the dark, under a box of bombs, at the crossroads the machine gun sweeps every night.[elif war.result_key == raid || war.result_key == patrol || war.result_key == wiring || war.result_key == listening || war.result_key == bomb || war.result_key == lewis]Out in front, in the dark. A flare, and the machine gun that was waiting for it.[else]One you never see coming, and never see where it came from.[/if][elif war.wound_cause == assign]Behind the line, on the job that wasn't meant to be the dangerous one. A shell on the road.[elif war.wound_cause == underground]The timbers go, and the dark comes down. They dig you out, in the end, by the boots.[else]A stray one, from nowhere anybody saw.[/if] You remember a stretcher, the bearers swearing at the mud, the sky going past in strips between the trench walls.[/if]
+    [break]
+    Morphia [if war.corps == air]from the medical officer on the aerodrome[else]at the aid post[/if], warm and heavy, like falling asleep in front of the fire. A label on your button that somebody wrote in a hurry. An ambulance that finds every hole in the road. At the casualty clearing station a long tent, a row of you, chloroform and wet canvas, and a nursing sister with a lamp who reads your name off the label as if she knew you.
 
-    In a couple of months the wound will close, and they'll send you back.
+    A train with cots in tiers, swaying, and an orderly coming down the middle with a jug of water. A hospital by the sea, where a doctor reads your label, and writes on it, and somebody says the word. Blighty.
+
+    A boat. The Channel's rough and the man in the cot above you is sick all the way across, and you don't care, because somebody said Southampton. Then a train through England, green fields going by, and at a station a lady pushes a cup of tea in through the window.
+
+    A hospital in England. Clean sheets that crackle. A nurse from Leeds who calls everybody "my lad" and smells of soap. [if war.commissioned]Officers don't get the blue suit: you're in a big house in London that a lady has given over to wounded officers, with flowers in the hall and a gramophone, and on Thursdays she takes three of you out in her motor car.[else]When you can stand they give you hospital blues, a blue flannel suit that fits nobody, a white shirt and a red tie, so anybody in the street can see what you are, and old men stop you to shake your hand.[/if]
+
+    Your mother comes on the train with a cake in a tin and sits by the bed for two hours not knowing what to say, and it's the best two hours of the war.[if flag.wd_light_quiet] Before she goes she says she saw your name in the paper the other time, in the wounded, the week you wrote about the weather. She doesn't say anything else about it.[elif flag.wd_light_joke] She's brought your letter about the scratch and the fortnight's holiday. "I'm keeping that," she says, "to show you when you're old."[elif flag.wd_light_truth] "You told me straight, last time," she says. "Tell me straight now." So you do, most of it.[/if]
+
+    In a couple of months the wound closes. A convalescent camp of huts, physical jerks in the mornings and route marches that get longer every week. A few days at home. [if war.commissioned]A medical board, three doctors at a table, who pass you fit.[elif war.corps == tank]The depot at Wool, and the smell of petrol again.[elif war.corps == air]A depot, and a long wait for a posting, and your old squadron asking for you back.[else]The depot, and a drill sergeant who's never been out, and the musketry all over again.[/if][if war.stage >= 3] A wound stripe to sew on your left sleeve, a strip of brass no longer than a match.[/if] Then your name on a draft, and Folkestone, and the boat the other way.
+
+    There's time in hospital, more than you've had since you joined, and a lady comes round the ward with a trolley of paper and pencils.
   choices:
+    - id: write_section
+      text: "[if war.corps == tank]Write to the crew. Make them laugh.[elif war.corps == air]Write to the fitters. Make them laugh.[else]Write to the lads in the section. Make them laugh.[/if]"
+      effects: [ { set: flag.wd_blighty_section }, { war_ack: wound } ]
+      text_after: |
+        You tell them about the sheets, and the nurse from Leeds, and the egg you had for your
+        breakfast, a whole egg, boiled. You know where it'll be read: by a candle in a dugout, out
+        loud, with the good bits twice.
+      next: "@war"
+    - id: write_home
+      text: Write home, and for once put down what it's like.
+      effects: [ { set: flag.wd_blighty_home }, { war_ack: wound } ]
+      text_after: |
+        No officer reads this one. The censor's on the other side of the water. You put down what
+        it's like. Not all of it, but more than you've ever put. It takes four pages and most of a
+        night, and in the morning you nearly tear it up, and then you post it.
+      next: "@war"
     - id: mend
-      text: Get well. Then go back.
-      effects: [ { war_ack: wound } ]
+      text: Say nothing to anybody. Sleep, eat, get well.
+      effects: [ { set: flag.wd_blighty_quiet }, { war_ack: wound } ]
+      text_after: |
+        You sleep fourteen hours at a stretch and wake up hungry. When your mother asks what it's
+        like out there you say, "Oh, you know," and she doesn't, and she doesn't ask again.
       next: "@war"
 
 # A written friend killed, for a town whose friends have no scenes of their own yet.

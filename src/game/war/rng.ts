@@ -3,7 +3,8 @@
 // game and the kill-gate prototype play identical wars from identical seeds (tests/war-equivalence).
 // Streams keep systems apart: adding a draw to battles does not shift every shell in the line.
 
-export const STREAMS = ['fire', 'duty', 'section', 'battle', 'career', 'leave'] as const;
+// 'close': the close moments (FRAME-PLAYTEST2 A), on their own stream so adding them shifts no other draw
+export const STREAMS = ['fire', 'duty', 'section', 'battle', 'career', 'leave', 'close'] as const;
 export type StreamName = (typeof STREAMS)[number];
 export type Streams = Record<StreamName, number>;
 

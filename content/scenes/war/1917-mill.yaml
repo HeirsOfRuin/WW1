@@ -294,6 +294,11 @@
       text: "Get down and let the barrage go on ahead. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_arras_2
   chapter: front
@@ -321,6 +326,11 @@
       text: "Get down in their trench and fire on the road. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_arras_3
   chapter: front
@@ -343,6 +353,11 @@
     - id: ground
       text: "Keep down in the shell hole. Fire from cover. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 # ---- Passchendaele, August 1917 -----------------------------------------------------------------
@@ -376,6 +391,11 @@
       text: "Go to ground on the nearest rim. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_pass_2
   chapter: front
@@ -400,6 +420,11 @@
       text: "Get down behind the rim and wait for it to be over. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_pass_3
   chapter: front
@@ -422,6 +447,11 @@
     - id: ground
       text: "Stay down in the water. Fire over the rim. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 - id: b_pass_4
@@ -447,11 +477,17 @@
       text: "Wait in the hole for the shelling to stop. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 # ---- the 1917 leave ----------------------------------------------------------------------------
 
 - id: l_mill_1917
   chapter: front
+  on_enter: [ { if: flag.ro_sw_wed17, then: [ { set: flag.ro_sw_married } ] } ]
   title: Home on leave
   text: |
     The third December. Your mother looks smaller. She's had her hair cut short, for the mill, and
@@ -464,6 +500,10 @@
     it and won't have any.
 
     [if war.mate1 && flag.best_man]Edith brings the baby round. He grabs your finger and won't let go, and Edith laughs and says he's got his father's grip, and you look at the little fist and think of Shaw's hand on the rung of the ladder at Loos.[/if][if war.mate1 && flag.best_man && flag.wet_babys_head] "Albert wrote that the whole section drank his health," she says. "In rum. I hope you all had headaches."[/if][if war.mate1 && flag.best_man && flag.stood_shaws_watch] "His long letter came," she says. "Six pages. He said a pal stood his watch for him." She looks at you.[/if][if war.mate1 && flag.after_the_war]Edith Holt is married, to the lad from the gasworks. You see her in the Co-op queue. She looks at you and away.[/if][if war.mate1 && flag.after_the_war && flag.sat_with_shaw] You think of the firestep, and the half cigarette, and you look away first.[/if][if !war.mate1 && flag.best_man]Edith brings the baby round. She's in black. The baby grabs your finger and won't let go. "He's got his dad's grip," she says, and then she has to go outside.[/if]
+
+    [if flag.ro_sw_wed16]Nellie's at your mother's when you come in, with the baby in a shawl tied round the both of them, the Lancashire way, and you stand in the kitchen in your greatcoat not knowing how to hold her. [if flag.ro_sw_named]She has the name you wrote. Your mother says it's a name for a duchess, and says it all day.[else]She's called after Nellie's mother, and you find you don't mind.[/if] At night you lie awake listening to her breathe in the drawer they've made a bed of, the way you used to listen for shells.[/if][if flag.ro_sw_wed17]You and Nellie are wed at chapel on the Thursday, by licence, with the girls from the alley at the back in their shawls. There's no icing on the cake; there's no sugar for icing in the town. Her brothers shake your hand like men pulling on a rope. You have one night at her aunt's in Rochdale, in a back bedroom, with the goods trains going by.[/if][if flag.ro_sw_after && !flag.ro_sw_wed17]Nellie wears the ring on a ribbon round her neck at the looms, for the shuttles, and on her finger on Sundays. You walk up to the tower in sleet. [if flag.ro_sw_wait2]"After," she says at the top. "You said it again." She laughs, and it isn't much of a laugh.[else]She doesn't ask you anything, and you could kiss her for that, and do.[/if][/if][if flag.ro_sw_jilted]You see Nellie on Bury Road with Jack Kenyon, his stiff arm through hers, and she sees you see her. She comes over on her own. "I'm sorry," she says. "I am." [if flag.ro_sw_blessed]"I kept your letter." You tell her he looks a decent sort, and he does.[else]You say it doesn't matter, and she knows that's a lie, and lets you have it.[/if][/if][if flag.ro_sw_let_go]Nellie Whittaker is walking out with a lad from the card room, your mother says, and seems happy.[/if]
+
+    [if flag.ro_fr_writes]In your pack there are three letters from Ternecourt, in French, that you can read about half of. You don't take them out in this house.[/if]
 
     [if war.mate3]Mrs Pilling asks if he's eating. He's eighteen and he's killed men, and he's still not eating, and you tell her he is.[/if][if !war.mate3 && flag.wrote_to_mrs_pilling]Mrs Pilling has your letter in a frame, next to his photograph.[/if]
 

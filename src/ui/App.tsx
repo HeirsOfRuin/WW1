@@ -67,7 +67,9 @@ export function App({ content }: { content: ContentBundle }) {
           {page === 0 && artUrl(artOf(state, v.sceneId)) && <img class="band" src={artUrl(artOf(state, v.sceneId))} alt="" width={400} height={200} />}
           <h2>{v.title}</h2>
           {paras(pages[Math.min(page, pages.length - 1)] ?? '')}
-          {v.ended
+          {v.ended && !last
+            ? <div class="stack"><button data-action="continue" onClick={() => setPage(page + 1)}>Continue ({page + 1} / {pages.length})</button></div>
+            : v.ended
             ? <>{(content.registry.endings[v.ended.ending]?.label ?? 'The end') !== v.title && <h2>{content.registry.endings[v.ended.ending]?.label ?? 'The end'}</h2>}{v.ended.cause && <p>{v.ended.cause}</p>}
                 <button class="primary" data-act="new" onClick={() => setState(null)}>Play again</button></>
             : !last
@@ -112,6 +114,7 @@ function Soldier({ r }: { r: SoldierRecord }) {
       <p class="hint">{r.role}, {r.town}. Age {r.age}.</p>
       <p><strong>Nerve</strong>: {r.nerve.word} {bar(r.nerve.value, 100)}</p>
       <p><strong>Standing</strong>: {r.standing}</p>
+      {r.next.length > 0 && <><h3>The next step</h3>{lines(r.next, '')}</>}
 
       <h3>From home</h3>
       {lines(r.home, 'Nothing chosen yet.')}

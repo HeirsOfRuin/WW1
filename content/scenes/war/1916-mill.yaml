@@ -253,6 +253,11 @@
       text: "Get down. Wait for the fire to slacken. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_somme_2
   chapter: front
@@ -281,6 +286,11 @@
     - id: ground
       text: "Get down into the dugout entrance and stay there. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 - id: b_somme_3
@@ -311,6 +321,11 @@
       text: "Stay under the parapet. Throw blind. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_somme_4
   chapter: front
@@ -336,6 +351,11 @@
     - id: ground
       text: "Crawl, shell hole to shell hole, as slow as it takes. ({risk_ground})"
       effects: [ { war: ground } ]
+      next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
       next: "@war"
 
 # ---- the Somme, October --------------------------------------------------------------------------
@@ -368,6 +388,11 @@
       text: "Get down in a shell hole, water or not. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_somme_autumn_2
   chapter: front
@@ -391,6 +416,11 @@
       text: "Get down behind the traverse and hold it. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 - id: b_somme_autumn_3
   chapter: front
@@ -412,11 +442,17 @@
       text: "Stay down in the water and fire over the top. ({risk_ground})"
       effects: [ { war: ground } ]
       next: "@war"
+    - id: lead
+      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      visible_if: war.can_lead
+      effects: [ { war: lead } ]
+      next: "@war"
 
 # ---- the 1916 leave -------------------------------------------------------------------------------
 
 - id: l_mill_1916
   chapter: front
+  on_enter: [ { if: flag.ro_sw_wed16, then: [ { set: flag.ro_sw_married } ] } ]
   title: Home on leave
   text: |
     December again, the second one. The town's quieter than you remember, and it takes you till the
@@ -432,6 +468,10 @@
     [if war.mate3]Mrs Pilling has a new hat. [if flag.urged_pilling_go]"They lost the papers," she says, "can you credit it," and looks at you as if she knows exactly who didn't lose them.[/if][if flag.let_pilling_stay]"He wrote me," she says. "He says he's needed." She says it with her mouth tight, proud and furious at once.[/if][/if][if !war.mate3]The Pillings have taken in a lodger, a Belgian. Mrs Pilling doesn't go out.[/if]
 
     [if flag.brought_discs]Somewhere in this town a mother has a disc on a cord that you cut by feel in the dark. You'll never know which one. You look at every woman in black at chapel and wonder.[/if]
+
+    [if flag.ro_sw_wed16]You and Nellie are wed at chapel on the Wednesday, by licence, because there's no time for anything else. She's in a borrowed costume, blue, with a spray of wax flowers from the market, and her brothers stand at the back in their Sunday collars like bailiffs. The Sunday school does the tea: ham, and a cake her mother saved the sugar for since Whitsun. You have two nights in a boarding house at Blackpool, out of season, the wind off the sea rattling the sash and the landlady's clock on the landing striking every quarter. You hear every one.[/if][if flag.ro_sw_after]On the second night you walk Nellie up to the tower in the frost and give her the ring from the jeweller's on Market Street. She puts it on herself before you can, and holds her hand up against the lights of the town below to see it. "After," she says. "You said after. I'm holding you to it."[/if][if flag.ro_sw_let_go]Nellie Whittaker is across the aisle at chapel with her mother. At the door she nods to you, kind, the way she'd nod to any lad home on leave. You go home the long way.[/if][if flag.ro_sw_silent]Nellie Whittaker crosses Bury Road when she sees you coming. You let her.[/if][if flag.ro_sw_first && !flag.ro_sw_16 && !flag.ro_sw_ended]Nellie walks up to the tower with you on the Sunday, and back, and you talk about the shed and the girls at the munitions and nothing at all, and neither of you says the thing. At her door she says, "Well," and goes in.[/if]
+
+    [if flag.ro_fr_met]Your mother wants to know what the French eat. Egg and chips, you tell her, and she doesn't believe a word of it.[/if]
 
     Your mother took your father to see the Somme film at the Hippodrome in the summer. She tells you
     about it at tea: the guns, the men going over, the wounded smiling at the camera. She wants to

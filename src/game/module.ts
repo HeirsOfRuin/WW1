@@ -14,9 +14,10 @@ import type { GameState } from './state';
 import {
   run, decide, setHome, newsOf, aliveFriends, grade, dutyHit, missionHit, phaseHit, battleOf,
   RANKS, ROLES, DUTIES, STAGES, SORTIES, sortieHit, type Decision, type War, type SortieChoice,
-  homeTier, sentHomeOf, lsd, ASSIGNMENTS, CORPS_BATTLES, corpsOf, rankName, rankFull,
+  homeTier, sentHomeOf, lsd, ASSIGNMENTS, CORPS_BATTLES, corpsOf, rankName, rankFull, canLead, CLOSE, type CloseChoice,
 } from './war/index';
 import { warMonth, seasonOf, monthName, monthOfClock } from './war/calendar';
+import { CLOSE_CALLS } from './close-calls';
 
 const st = (s: CoreState) => s as GameState;
 const ct = (c: CoreContent) => c as ContentBundle;
@@ -147,6 +148,18 @@ export function whereOf(cause: string): string {
   return 'in France';
 }
 
+/** A recorded cause, by kind: in a battle, by a shell (or Archie), on a duty or mission, on an
+ *  assignment, underground, or something else. The wound and death scenes are written by kind. */
+export function causeKind(cause: string): 'battle' | 'shell' | 'sortie' | 'assign' | 'underground' | 'other' {
+  const c = cause.replace(/(, severe wound, downgraded|: [^:]*)$/, '').trim();
+  if (BATTLES.has(c)) return 'battle';
+  if (c === 'shellfire' || c === 'shelled in support' || c === 'shelled in the tank park' || c === 'anti-aircraft fire') return 'shell';
+  if (c === 'mine collapse or camouflet') return 'underground';
+  if (c === 'escorting prisoners' || c === 'guiding the relief') return 'assign';
+  if (DUTY_NAMES[c] || ROLE_WHERE[c] || c in DUTIES) return 'sortie';
+  return 'other';
+}
+
 /** The ending in one sentence. */
 export function endingLine(w: War): string {
   const why = w.endWhy;
@@ -251,8 +264,8 @@ export function statusOf(s: CoreState): { rank: string; role: string; nerve: str
 
 // ---- paths -------------------------------------------------------------------------------------
 
-const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key', 'month', 'home_tier', 'assign', 'stake', 'back_from_wound', 'lost_last', 'promoted_last', 'award_last', 'first_tour', 'back_from_leave', 'detailed_last', 'detailed_ok', 'corps', 'corps_offer', 'shot_down', 'after', 'after_fought', 'after_why', 'after_lost', 'after_hit', 'after_award', 'after_promoted', 'after_near'] as const;
-const PENDING = ['none', 'tunnel', 'corps', 'duty', 'mission', 'sick', 'course', 'battle', 'leave', 'step', 'tour', 'assign'];
+const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key', 'month', 'home_tier', 'assign', 'stake', 'back_from_wound', 'lost_last', 'promoted_last', 'award_last', 'first_tour', 'back_from_leave', 'detailed_last', 'detailed_ok', 'corps', 'corps_offer', 'shot_down', 'after', 'after_fought', 'after_why', 'after_lost', 'after_hit', 'after_award', 'after_promoted', 'after_near', 'duty_nco', 'can_lead', 'sent', 'sent_friend', 'sent_killed', 'close_where', 'close_battle', 'close_phase', 'close_key', 'killed', 'prisoners', 'wound_cause', 'end_cause', 'commissioned'] as const;
+const PENDING = ['none', 'tunnel', 'corps', 'close', 'duty', 'mission', 'sick', 'course', 'battle', 'leave', 'step', 'tour', 'assign'];
 const ENDINGS = ['none', 'armistice', 'posting', 'captured', 'invalided', 'killed', 'broken', 'court_martial'];
 /** content ids are lower_snake_case; the war layer's ending names are its own */
 const endingId = (e: string) => (e === 'courtMartial' ? 'court_martial' : e);
@@ -275,6 +288,23 @@ function value(s: CoreState, field: string): number | string | boolean | undefin
     case 'path': return w.path;
     case 'transferred': return w.transferred;
     case 'corps': return corpsOf(w) ?? 'none';
+    // rank that changes the question (FRAME-PLAYTEST2 B)
+    case 'duty_nco': return p?.kind === 'duty' && !!p.nco;
+    // a man in front of him (FRAME-PLAYTEST2 A)
+    case 'close_where': return p?.kind === 'close' ? p.where : 'none';
+    case 'close_battle': return p?.kind === 'close' && p.battle ? battleSlug(p.battle) : 'none';
+    case 'close_phase': return p?.kind === 'close' && p.phase !== undefined ? p.phase + 1 : 0;
+    case 'close_key': return p?.kind === 'close' && p.key ? p.key : 'none';
+    // what kind of thing it was, for the wound and death scenes (FRAME-PLAYTEST2 E)
+    case 'wound_cause': return w.cursor.at === 'done' || !w.news?.wound ? 'none' : causeKind(w.news.wound.cause);
+    case 'end_cause': return w.cursor.at === 'done' && w.ending ? causeKind(w.endWhy) : 'none';
+    case 'commissioned': return w.commissioned;
+    case 'killed': return w.stats.killed ?? 0;
+    case 'prisoners': return w.stats.prisoners ?? 0;
+    case 'can_lead': return p?.kind === 'battle' && canLead(w);
+    case 'sent': return w.cursor.at !== 'done' && w.news?.sent ? w.news.sent.key : 'none';
+    case 'sent_friend': return (w.news?.sent?.who ?? -1) >= 0;
+    case 'sent_killed': return !!w.news?.sent?.killed;
     // the overview after a battle, fought or missed (playtest 2)
     case 'after': { const b = afterBattle(w); return b ? battleSlug(b.name) : 'none'; }
     case 'after_fought': return !!afterBattle(w)?.fought;
@@ -348,7 +378,7 @@ export const module: GameModule = {
     return (FIELDS as readonly string[]).includes(field ?? '') ? null : `unknown war field in "${path}" (${FIELDS.join(', ')})`;
   },
   labelFor: (_c, path) => ({ 'war.nerve': 'Nerve', 'war.standing': 'Standing', 'war.section': 'The section', 'war.rank': 'Rank' })[path],
-  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.duty' ? ['none', ...Object.keys(DUTIES)] : path === 'war.wound' ? ['none', 'light', 'severe'] : path === 'war.sortie' || path === 'war.result_key' || path === 'war.detailed_last' ? ['none', ...Object.keys(SORTIES)] : path === 'war.result' ? ['none', 'ok', 'failed', 'turned'] : path === 'war.course' ? ['none', 'bomb', 'lewis', 'snipe', 'signals', 'bearer', 'lead'] : path === 'war.assign' ? ['none', ...Object.keys(ASSIGNMENTS)] : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.corps' ? ['none', 'tunnel', 'tank', 'air'] : path === 'war.corps_offer' ? ['none', 'tank', 'air'] : path === 'war.after' ? BATTLE_SLUGS : path === 'war.after_why' ? ['none', 'course', 'wound'] : path === 'war.after_hit' ? ['none', 'light', 'severe'] : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
+  namedValues: (c, path) => (path === 'start' ? Object.keys(ct(c).starts) : path === 'war.battle' ? BATTLE_SLUGS : path === 'war.duty' ? ['none', ...Object.keys(DUTIES)] : path === 'war.wound' ? ['none', 'light', 'severe'] : path === 'war.sortie' || path === 'war.result_key' || path === 'war.detailed_last' ? ['none', ...Object.keys(SORTIES)] : path === 'war.result' ? ['none', 'ok', 'failed', 'turned'] : path === 'war.course' ? ['none', 'bomb', 'lewis', 'snipe', 'signals', 'bearer', 'lead'] : path === 'war.assign' ? ['none', ...Object.keys(ASSIGNMENTS)] : path === 'war.pending' ? PENDING : path === 'war.ending' ? ENDINGS : path === 'war.corps' ? ['none', 'tunnel', 'tank', 'air'] : path === 'war.corps_offer' ? ['none', 'tank', 'air'] : path === 'war.after' ? BATTLE_SLUGS : path === 'war.sent' ? ['none', ...Object.keys(DUTIES)] : path === 'war.wound_cause' || path === 'war.end_cause' ? ['none', 'battle', 'shell', 'sortie', 'assign', 'underground', 'other'] : path === 'war.close_where' ? ['none', 'battle', 'sortie'] : path === 'war.close_battle' ? BATTLE_SLUGS : path === 'war.close_key' ? ['none', 'raid', 'bomb'] : path === 'war.after_why' ? ['none', 'course', 'wound'] : path === 'war.after_hit' ? ['none', 'light', 'severe'] : path === 'war.path' ? Object.keys(PATH_NAMES) : undefined),
   effects: {
     /** character creation: the two hometown skills from the town's list */
     war_home(s, _c, e) {
@@ -370,8 +400,9 @@ export const module: GameModule = {
     /** a wound or a friend's death has been shown: clear it so the route moves on */
     war_ack(s, _c, e) {
       const w = war(s);
-      const what = (e as { war_ack: 'wound' | 'fallen' | 'sortie' | 'battle' }).war_ack;
+      const what = (e as { war_ack: 'wound' | 'fallen' | 'sortie' | 'battle' | 'sent' }).war_ack;
       if (what === 'battle') newsOf(w).battle = null;
+      else if (what === 'sent') newsOf(w).sent = null;
       else if (what === 'sortie') newsOf(w).sortie = null;
       else if (what === 'wound') newsOf(w).wound = null;
       else { const f = writtenFallen(w); if (f) newsOf(w).fallen.splice(newsOf(w).fallen.indexOf(f), 1); }
@@ -399,6 +430,8 @@ export const module: GameModule = {
       newsOf(w).wound = null;
       newsOf(w).sortie = null; // shown already, or happened in a war that has moved on
       newsOf(w).restored = { rest: 0, leave: 0 };
+      newsOf(w).close = null;
+      newsOf(w).named = false;
       const before = { nerve: w.nerve, standing: w.standing, rank: w.rank, section: aliveFriends(w), awards: w.awards.length };
       decide(w, d as Decision);
       // what the choice cost, then what rest and leave gave back, apart (playtest 2)
@@ -423,8 +456,27 @@ export const module: GameModule = {
     if (!p) return;
     // every battle choice risks his life, so saying so under each one tells the player nothing
     if ((p.kind === 'duty' && d === 'volunteer') || (p.kind === 'mission' && d === 'go')) put('life', 'Your life', STAKES_RANK.life, -1);
-    if (p.kind === 'duty' && d === 'volunteer' && p.friendAtRisk) put('friend', 'Covers a friend', STAKES_RANK.rel, 0);
+    if (p.kind === 'duty' && d === 'volunteer' && p.friendAtRisk && !p.nco) put('friend', 'Covers a friend', STAKES_RANK.rel, 0);
+    if (p.kind === 'duty' && d === 'send_friend') put('friend', 'A man from home goes', STAKES_RANK.rel, -1);
     if (p.kind === 'leave') put('war', d === 'back' || d === 'commission' ? 'Back to the front' : 'Your war ends', STAKES_RANK.life, 0);
+  },
+  /** the close call the last roll came to, under the choice's outcome (FRAME-PLAYTEST2 D) */
+  outcomeNote(s) {
+    const n = war(s).news;
+    // how near the sortie just ended came, from the same score that decided it
+    const so = n?.sortie;
+    const margin = so && !so.turned && so.margin !== undefined && war(s).cursor.at !== 'done'
+      ? (so.ok ? (so.margin < 0.3 ? 'It held, just.' : so.margin > 2.5 ? 'It went as well as these things ever go.' : '') : (so.margin > -0.3 ? 'It so nearly came off.' : so.margin < -2.5 ? 'It was never going to work.' : ''))
+      : '';
+    const named = n?.named && war(s).cursor.at !== 'done' ? 'Your name is read out in battalion orders.' : '';
+    const c = n?.close;
+    if (!c) return [margin, named].filter(Boolean).join(' ') || undefined;
+    const w = war(s);
+    // inside a tank or in the air a near miss is not the infantry's: their own tables
+    const bkey = w.path === 'tank' || w.path === 'air' ? `battle_${w.path}` : `battle_${c.key}`;
+    const lines = CLOSE_CALLS[c.kind === 'battle' ? bkey : c.key] ?? CLOSE_CALLS[c.kind === 'battle' ? 'battle' : 'step'] ?? [];
+    const line = lines.length ? lines[(c.n + war(s).clock) % lines.length]! : '';
+    return [line, margin, named].filter(Boolean).join(' ') || undefined;
   },
   textVar(name, s) {
     const w = war(s); const p = w.pending;
@@ -464,6 +516,12 @@ export const module: GameModule = {
       case 'duty_name': return p?.kind === 'duty' ? DUTY_NAMES[p.duty] ?? p.duty : '';
       case 'duty_risk': return p?.kind === 'duty' ? riskWord(dutyHit(w, p.duty)) : '';
       case 'duty_cost': return p?.kind === 'duty' ? `${DUTIES[p.duty]!.nerve} nerve` : '';
+      case 'risk_close_shoot': case 'risk_close_bayonet': case 'risk_close_prisoner': case 'risk_close_spare':
+        return p?.kind === 'close' ? stepRiskWord(CLOSE.choices[name.slice(11) as CloseChoice].hit) : '';
+      case 'duty_risk_draft': return p?.kind === 'duty' ? riskWord(dutyHit(w, p.duty) * 1.4) : '';
+      case 'sent_name': { const i = w.news?.sent?.who ?? -1; return i >= 0 ? SECTION_NAMES[w.town]![i]! : ''; }
+      case 'sent_first': { const i = w.news?.sent?.who ?? -1; return i >= 0 ? SECTION_NAMES[w.town]![i]!.split(' ')[0]! : ''; }
+      case 'sent_duty': return w.news?.sent ? DUTY_NAMES[w.news.sent.key] ?? w.news.sent.key : '';
       case 'friend_line': return p?.kind === 'duty' && p.friendAtRisk ? 'One of the section from home has been detailed for it.' : 'Nobody from home is going.';
       case 'mission_name': return p?.kind === 'mission' ? ROLES[p.role]!.mission : '';
       case 'mission_risk': return p?.kind === 'mission' ? riskWord(missionHit(w, p.role)) : '';
@@ -471,10 +529,10 @@ export const module: GameModule = {
       case 'battle_name': return p?.kind === 'battle' ? p.battle : '';
       case 'phase_line': return p?.kind === 'battle' ? PHASE_LINES[p.type] ?? '' : '';
       case 'phase_count': return p?.kind === 'battle' ? `Phase ${p.phase + 1} of ${battleOf(w).phases.length}.` : '';
-      case 'risk_push': case 'risk_help': case 'risk_ground': {
+      case 'risk_push': case 'risk_help': case 'risk_ground': case 'risk_lead': {
         if (p?.kind !== 'battle') return '';
         const b = battleOf(w);
-        const choice = name.slice(5) as 'push' | 'help' | 'ground';
+        const choice = name.slice(5) as 'push' | 'help' | 'ground' | 'lead';
         return riskWord(phaseHit(w, b, b.phases[p.phase]![0], p.type, choice));
       }
       case 'offer0': case 'offer1': case 'offer2': return p?.kind === 'leave' ? offerWords(p.offers[Number(name.slice(5))] ?? '') : '';
@@ -499,7 +557,7 @@ export const module: GameModule = {
     }
     return undefined;
   },
-  checkTextVar: (name) => (['rank_a', 'lost_last_name', 'award_last_name', 'risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line', 'money_line', 'sent_home', 'after_name', 'after_lost_names', 'after_award_name'].includes(name) ? [] : undefined),
+  checkTextVar: (name) => (['rank_a', 'lost_last_name', 'award_last_name', 'risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line', 'money_line', 'sent_home', 'after_name', 'after_lost_names', 'after_award_name', 'duty_risk_draft', 'sent_name', 'sent_first', 'sent_duty', 'risk_lead', 'risk_close_shoot', 'risk_close_bayonet', 'risk_close_prisoner', 'risk_close_spare'].includes(name) ? [] : undefined),
   // the year's title page: where he stands, and who of the nine has died since the last page
   cardRows: (_c, s) => {
     const w = war(s);

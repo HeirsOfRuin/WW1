@@ -199,3 +199,17 @@ key ones (marked *) before SOURCES.md calls the row checked.
 | Richthofen "the red one" asked about at home, December 1917 (four leave scenes) | Not confirmable. His red machine was known to RFC pilots in 1917; no 1917 British print use of the red found ("Red Baron" first in British print May 1918, after his death, per Holman) | https://airminded.org/2018/08/20/when-was-the-red-baron/ * | not edited (shared files): suggested cut of "the red one" in the report |
 
 "The red one" was cut from the four 1917 leave scenes (2026-11-14).
+
+## Playtest 2 content (2026-11-16): not yet checked
+
+The writers of the close moments, wounds and death, the dated missions, the Whippet and the
+romances used these; none was opened against a source. Each stays unchecked until it is.
+- New Army battalions with Lewis guns by summer 1915 ("only a few"): probably later in 1915.
+- The Messines mines "shook the billets twenty miles off".
+- Whippets: crew of three, engine in front and cab behind, Hotchkiss guns, a steering wheel; first in
+  action in late March 1918 (no village named).
+- The King's message of sympathy sent with Army Form B.104-82; letters from hospitals in England
+  outside the field censor; the memorial plaque "about a saucer" across; the wound stripe.
+- Church bells tolled one stroke a year of the dead man's age (the farm town).
+- Green envelopes for letters not read by the platoon officer; wartime weddings by licence on leave.
+

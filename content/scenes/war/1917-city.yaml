@@ -225,6 +225,7 @@
 
 - id: l_city_1917
   chapter: front
+  on_enter: [ { if: flag.ro_sw_wed17, then: [ { set: flag.ro_sw_married } ] } ]
   title: Home on leave
   text: |
     Victoria again. London's grey and tired and hungry. There are queues outside every grocer's in
@@ -242,6 +243,10 @@
     underground with nobody shooting.[if flag.c17_wrote_gothas] Your mother takes the good blanket.[/if]
 
     [if flag.c17_florence_waac && flag.c17_proud_of_florence]Florence isn't here. She's in France, at the base, in her khaki and her little cap. At the office there's a new girl at your desk, and on the desk, in a frame, a postcard from Florence of the sea at Boulogne, addressed to you, care of the Gresham and Lombard.[/if][if flag.c17_florence_waac && !flag.c17_proud_of_florence]Florence isn't at the office. She's in France. You go to the Lyons on the corner on your own and sit where she sat.[/if][if flag.c16_florence && !flag.c17_florence_waac]Florence meets you at the Lyons on the corner again. She's thinking of joining the women's army, she says, they want clerks in France. You don't know what to say. You say she'd be good at it.[/if]
+
+    [if flag.ro_sw_wed16]Ivy and the baby are at your mother's, in your old room, and the house smells of drying napkins and the baby's noise goes up and down the stairs. [if flag.ro_sw_named]She has the name you wrote. Your father says it's a name for a duchess, and says it at breakfast every day.[else]She's called after Ivy's mother, and you find you don't mind.[/if] At night you lie and listen to her breathe in the drawer they've made a bed of, the way you used to listen for the next shell.[/if][if flag.ro_sw_wed17]You and Ivy are married at St Mary's on the Thursday, by licence, the girls from the exchange in the front pews. There's no icing on the cake; there's no sugar in London for icing. One night at her aunt's in Walthamstow, and the guns going in the parks for a raid that doesn't come.[/if][if flag.ro_sw_after && !flag.ro_sw_wed17]Ivy wears the ring on a ribbon at the exchange, under her blouse, and on her finger on Sundays. You walk to the Hollow Ponds in sleet. [if flag.ro_sw_wait2]"After," she says. "You said it again." She laughs, and it isn't much of a laugh.[else]She doesn't ask you anything, and you could kiss her for that, and do.[/if][/if][if flag.ro_sw_jilted]You see Ivy Lambert on the High Road with Mr Pratt from the exchange, in his thick spectacles, and she sees you see her. She comes over on her own. "I'm sorry," she says. "I am." [if flag.ro_sw_blessed]"I kept your letter." You tell her he looks a good sort, and he does.[else]You tell her it doesn't matter, and she knows it does, and lets you say it.[/if][/if][if flag.ro_sw_let_go]Ivy Lambert is walking out with a clerk from the Prudential, your mother says, and seems happy.[/if]
+
+    [if flag.ro_fr_writes]In your pack there are three letters from Ternecourt, in French, that you can read about half of. You don't take them out in this house.[/if]
 
     [if flag.c17_pickwick]You find a copy of Pickwick at the second-hand stall in Leyton market and buy it for fourpence, and read the cricket match on the tram, and laugh out loud, and the woman opposite moves seats.[/if]
 
