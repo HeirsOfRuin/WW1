@@ -450,7 +450,9 @@ export const module: GameModule = {
       if (w.rank > before.rank) ctx.changes.push(`Promoted: ${rankName(w)}`);
       if (w.awards.length > before.awards) ctx.changes.push(`Awarded: ${w.awards.slice(before.awards).join(', ')}`);
       const lost = before.section - aliveFriends(w);
-      if (lost > 0) ctx.changes.push(lost === 1 ? 'A man of the section killed' : `${lost} men of the section killed`);
+      // not when his war has just ended: the section's fate to 1918 is then played out in one go, and
+      // "6 men of the section killed" read as if it happened that moment (playtest 3)
+      if (lost > 0 && w.cursor.at !== 'done') ctx.changes.push(lost === 1 ? 'A man of the section killed' : `${lost} men of the section killed`);
       syncClock(s, c, ctx.changes);
     },
   },

@@ -252,6 +252,24 @@ describe('playtest 2', () => {
     }
     expect(missed).toBeGreaterThan(10);
   }, 60_000);
+  // Playtest 3: at Loos the man in front of him came before the scene where the gas goes over. The
+  // close moment comes after a phase's order, so a battle's first screen is always its first phase.
+  it('a battle opens on its first phase, and a close moment follows an order', () => {
+    let closes = 0;
+    for (let i = 0; i < 200; i++) {
+      const w = newWar({ seed: 6100 + i, town: TOWNS[i % 4]! });
+      let prev: string | null = null;
+      for (let g = 0; g < 5000 && !w.ending; g++) {
+        run(w); if (!w.pending) break;
+        const k = w.pending.kind;
+        if (k === 'close' && w.pending.where === 'battle') { closes++; expect(prev, 'a close moment in battle follows a battle order').toBe('battle'); }
+        if (k === 'battle' && prev !== 'battle' && prev !== 'close') expect(w.pending.phase, 'a battle opens on phase 1').toBe(0);
+        prev = k;
+        decide(w, decideFor(WAR_POLICIES.adaptive!, w, w.pending, battleOf) as never);
+      }
+    }
+    expect(closes).toBeGreaterThan(50);
+  }, 60_000);
   // "Nerve +7" after a raid: the rest that followed was counted as the raid's.
   it('nerve won back at rest is shown apart from what the choice cost', () => {
     let seen = 0;

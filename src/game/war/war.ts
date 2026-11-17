@@ -569,15 +569,17 @@ function closeRoll(w: War): number {
   if (w.rng.close === undefined) w.rng.close = (hashString(`${w.seed}|close`) >>> 0) || 1;
   return raw(w.rng, 'close');
 }
-function askPhase(w: War, b: Battle, i: number): void {
-  const [, , ptype] = b.phases[i]!;
-  if ((ptype === 'advance' || ptype === 'trench') && w.path !== 'tank' && w.path !== 'air' && w.path !== 'bearer' && closeRoll(w) < CLOSE.battleChance) {
-    w.pending = { kind: 'close', where: 'battle', battle: b.name, phase: i };
-    return;
-  }
-  askOrder(w, b, i);
+/** A man in front of him, in the advance or the enemy trench he has just been ordered into: after
+ *  the phase's order, not before it (playtest 3: at Loos he met the German in the gas before the
+ *  scene where the gas goes over). */
+function closeAfter(w: War, b: Battle, i: number): boolean {
+  const ptype = b.phases[i]![2];
+  if (!((ptype === 'advance' || ptype === 'trench') && w.path !== 'tank' && w.path !== 'air' && w.path !== 'bearer')) return false;
+  if (closeRoll(w) >= CLOSE.battleChance) return false;
+  w.pending = { kind: 'close', where: 'battle', battle: b.name, phase: i };
+  return true;
 }
-function askOrder(w: War, b: Battle, i: number): void {
+function askPhase(w: War, b: Battle, i: number): void {
   const [, , ptype] = b.phases[i]!;
   if (w.path === 'air') { w.pending = { kind: 'battle', battle: b.name, phase: i, type: 'air', stalled: false }; return; }
   const stalled = (ptype === 'advance' || ptype === 'trench') && ch(w, 'battle', STALL);
@@ -892,6 +894,7 @@ export function decide(w: War, d: Decision): War {
       if (stageOf(w).battles[w.r]) friendLosses(w, fp, b.name);
       if (w.out > 0) { finishBattle(w, c.pts); break; }
       if (w.nerve <= 0) { end(w, 'broken', `${b.name}: shell shock`); w.cursor = { at: 'tally' }; break; }
+      if (closeAfter(w, b, c.i)) return w;
       c.i += 1;
       if (c.i < b.phases.length) { askPhase(w, b, c.i); return w; }
       finishBattle(w, c.pts);
@@ -921,8 +924,12 @@ export function decide(w: War, d: Decision): War {
         const c = w.cursor as Extract<Cursor, { at: 'battle' }>;
         c.pts += e.pts;
         if (w.out > 0) { const bn = newsOf(w).battle; if (bn && newsOf(w).wound) bn.hit = newsOf(w).wound!.kind; finishBattle(w, c.pts); break; }
-        askOrder(w, battleOf(w), p.phase!);
-        return w;
+        const b = battleOf(w);
+        if (w.nerve <= 0) { end(w, 'broken', `${b.name}: shell shock`); w.cursor = { at: 'tally' }; break; }
+        c.i += 1;
+        if (c.i < b.phases.length) { askPhase(w, b, c.i); return w; }
+        finishBattle(w, c.pts);
+        break;
       }
       const c = w.cursor as Extract<Cursor, { at: 'sortie' }>;
       c.pts += e.pts * 0.4;

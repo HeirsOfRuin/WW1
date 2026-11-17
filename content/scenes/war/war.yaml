@@ -470,14 +470,15 @@
   text: |
     {ending_line}
 
-    Morphia at the dressing station, a label tied to your tunic button, a train with the windows
-    painted over. The hospital ship smells of carbolic and vomit and the sea. In England a woman
-    gives you tea with sugar in it and you cry like a child and can't stop and she just holds the
-    cup for you till you can.
+    [if war.end_cause == battle && war.corps != tank && war.corps != air]You lie where you fell till the light goes, and the stretcher-bearers find you by your calling. You don't remember calling.[/if][if war.end_cause == shell && war.corps != air]The shell comes down in the bay and the next thing you know you're on the duckboards with a man you don't know kneeling on your arm to stop the bleeding.[/if][if war.end_cause == sortie]Out in front, in the dark. The others drag you back through the wire on a groundsheet, and every yard of it you feel.[/if][if war.end_cause == assign || war.end_cause == other || war.end_cause == underground]It happens fast, the way it always does, and then for a long while nothing happens at all.[/if][if war.corps == tank && war.end_cause != sortie]Splinters and the heat inside her, and then you're on the ground beside her tracks, and somebody is cutting your sleeve off.[/if][if war.corps == air && war.end_cause != sortie]The pilot gets the machine down on our side of the line, and men run out to you from a battery, and you don't remember the landing.[/if]
 
-    You go home in hospital blue, then in your own clothes that don't fit. [if war.stage >= 2]A silver badge on your
-    lapel, so that nobody in the street hands you a white feather.[else]In the street a girl you've never seen
-    pushes a white feather into your buttonhole, because you're young and out of uniform, and you let her.[/if] The wound aches when it rains.
+    Morphia at the dressing station, a label tied to your tunic button, the clearing station, the ambulance train. The hospital ship smells of carbolic and vomit and the sea. In England a woman gives you tea with sugar in it, and you cry like a child and can't stop, and she just holds the cup for you till you can.
+
+    Weeks in a hospital bed. Then a medical board: three officers at a table, your papers, a doctor's hand on the wound. No longer physically fit for war service. They give you a paper to say so, and a pension of a few shillings a week, by the size of the wound.
+
+    You go home in hospital blue, then in your own clothes that don't fit. [if war.stage >= 3 || war.stage == 2 && war.month >= 9]A silver badge on your lapel, so that nobody in the street hands you a white feather.[else]In the street a girl you've never seen pushes a white feather into your buttonhole, because you're young and out of uniform, and you let her.[/if] The wound aches when it rains.
+
+    [if start == mill]The mill takes you back on lighter work, sweeping and carrying for the tacklers, and the women in the weaving shed stop the looms for a minute when you come in, and then start them again.[/if][if start == pit]You can't go back down. They find you a job on the screens at the pit head, picking stone out of the coal with the old men and the boys, and every morning you watch the cage go down without you.[/if][if start == farm]Your father puts you on the light work, and doesn't say anything about it, and gets up an hour earlier himself so there's less for you to do.[/if][if start == city]The firm keeps your desk, as it promised. The other desks fill with women and old men, and the casualty lists go up in the front hall, and you read them every morning before you take your coat off.[/if][if war.mate1 || war.mate2 || war.mate3] Letters come from the section. You read the names in them, and the names that aren't in them.[/if]
 
     Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
 

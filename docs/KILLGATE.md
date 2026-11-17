@@ -220,9 +220,12 @@ often; he is killed more (at his officer's side in the attacks, and the first of
 and he ends the war lower in rank (no stripe at leave while he serves). Grade level.
 
 Tuned on the gate: as first set (hit 1.2, rest +1.5) careful play, which always takes it and goes to
-ground, reached the Armistice more often than best play (5.95% to 5.3%). Now a servant is hit 1.35
-times as often in battle, gets +1.0 nerve at rest, and going to ground is no shelter (his officer goes
-on: ground counts as help). Gate after: best play 5.0% +-0.5, careful 4.9%, survives 1915 71.4%.
+ground, reached the Armistice more often than best play (5.95% to 5.3%). Now a servant gets +1.0 nerve at
+rest and going to ground is no shelter (his officer goes on: ground counts as help); his battle hit is
+1.2 (1.35 for a day pushed best play under the floor, 4.8%). Then, on 2026-11-17, the share of hits that
+kill went from 0.32 to 0.30 (best play had slid to the 5% floor across the close moments and this road;
+in the BEF about one casualty in four was killed). Gate after: best play 5.7% +-0.5, careful 5.1%,
+half 5.1%, reckless 1.6%, survives 1915 73.3%.
 
 ### Skills: nothing is decoration
 

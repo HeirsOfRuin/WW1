@@ -140,7 +140,9 @@ export const DUTIES: Record<string, Duty> = {
 };
 
 // What a hit does. Shares of hits.
-export const WOUND = { killed: 0.32, severe: 0.23, light: 0.45, downgrade: 0.35 };
+// killed 0.32 to 0.30 on 2026-11-17 (the gate's best play had slipped to the 5% floor after the close
+// moments and the servant road; in the BEF about one casualty in four was killed, so still on the high side)
+export const WOUND = { killed: 0.30, severe: 0.23, light: 0.47, downgrade: 0.35 };
 
 // Path modifiers in battle: hit chance multiplier, award multiplier, section-loss multiplier.
 export const PATHS: Record<string, PathMods> = {
@@ -310,4 +312,4 @@ export const CLOSE = {
 // Germans aim); section: away from the section, his friends are lost this much more often;
 // officerKilled: the chance a later officer is killed in a battle (the first is killed at Loos, as
 // the farm's story has it). Tuned, not sourced.
-export const SERVANT = { dutyChance: 0.5, rest: 1.0, payPence: 3, hit: 1.35, section: 1.1, officerKilled: 0.25 };
+export const SERVANT = { dutyChance: 0.5, rest: 1.0, payPence: 3, hit: 1.2, section: 1.1, officerKilled: 0.25 };
