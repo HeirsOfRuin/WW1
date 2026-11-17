@@ -293,3 +293,8 @@ ro_fr_let_go: { description: "Told Marthe to marry Gaston, who stays (1918)" }
 # A man in front of you (content/scenes/war/close.yaml; docs/FRAME-PLAYTEST2.md item A)
 cl_close_kill: { description: "Killed a German at arm's length in a close moment (bayonet, cosh, bomb, revolver or rifle butt)" }
 cl_let_go: { description: "Let a German go in a close moment" }
+
+# The officer's servant (content/scenes/war/servant.yaml; docs/FRAME-SERVANT.md). The farm's first
+# offer sets farm_servant (1915-farm.yaml); these are set when the officer he served is killed.
+sv_first_killed: { description: "Was servant to the first officer, killed at Loos (outside the farm he wrote to the mother); the Armistice ending remembers the family" }
+sv_second_killed: { description: "Was servant to the second officer, killed in a later battle; his family writes at the Armistice" }

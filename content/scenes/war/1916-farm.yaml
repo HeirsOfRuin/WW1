@@ -48,13 +48,13 @@
   requires: [ "war.tour >= 10" ]
   title: Mr Rudd
   text: |
-    The new platoon officer is Mr Rudd, from Birmingham, who was a clerk in a brass foundry and
+    [if war.servant == 2]You've been Mr Rudd's servant since Loos.[else]Mr Rudd has had the platoon since Loos.[/if] He's from Birmingham, who was a clerk in a brass foundry and
     went to the grammar school on a scholarship. Temporary gentlemen, the old officers call them,
     behind their backs. He's twenty and he talks too much and he doesn't know a ewe from a wether.
 
     The men from Dunsworthy don't take to him. He isn't Mr Venn. He doesn't know their mothers.[if war.mate1] He calls Will Cottle "Cottle" in the voice Mr Venn used for his dogs.[/if]
 
-    [if flag.farm_servant]He asks if you'll be his servant, as you were Mr Venn's.[else]He asks the sergeant who knows the ground, and the sergeant points at you.[/if]
+    [if war.servant == 2]Now he wants to learn the ground, and he asks you, because you're his servant and the only man in the platoon who'll tell him the truth.[else]He asks the sergeant who knows the ground, and the sergeant points at you.[/if]
   choices:
     - id: help
       text: Help him. He's trying, and he's as frightened as you were.
@@ -364,7 +364,7 @@
 
     [if flag.ro_fr_met]Your mother wants to know what the French eat. Egg and chips, you tell her, and she doesn't believe a word of it.[/if]
 
-    [if flag.f16_wrote_vellacott]At market your father sells two heifers to Mr Vellacott and doesn't speak to him, and Mr Vellacott doesn't look at you.[/if][if flag.f16_helped_rudd] A letter comes for you at the farm from Mr Rudd, in Birmingham on leave too, to wish you a happy Christmas. Your mother puts it on the dresser with the others.[/if]
+    [if flag.f16_wrote_vellacott]At market your father sells two heifers to Mr Vellacott and doesn't speak to him, and Mr Vellacott doesn't look at you.[/if][if flag.f16_helped_rudd && !flag.sv_second_killed] A letter comes for you at the farm from Mr Rudd, in Birmingham on leave too, to wish you a happy Christmas. Your mother puts it on the dresser with the others.[/if]
 
     {money_line}
 

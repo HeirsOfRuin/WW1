@@ -11,7 +11,7 @@ import { chance, float, pick, raw, seedStreams, hashString, type Streams, type S
 import {
   TOWNS, DEFAULT_GENERAL, WAR_SKILLS, SPECIALIST, APTITUDE, TOWN_COURSE, WAR_WORK, STAGES, DUTIES, WOUND, PATHS,
   CHOICES, GRADE, SECTION_SIZE, SUBALTERN, TOP_OR, RANKS, REST, FRIEND_BATTLE, PHASE_HIT, STALL, ROLES, ROLE, PAY,
-  PROMO, SERGEANT, CSM, LIEUTENANT, CAPTAIN, ASSIGN, ASSIGNMENTS, CORPS, CORPS_BATTLES, AIR_RANKS, CLOSE, type CloseChoice, type Corps,
+  PROMO, SERGEANT, CSM, LIEUTENANT, CAPTAIN, ASSIGN, ASSIGNMENTS, CORPS, CORPS_BATTLES, AIR_RANKS, CLOSE, SERVANT, type CloseChoice, type Corps,
   COMMISSION_BOARD, SORTIES, SORTIE_CHOICE, type SortieChoice, type Town, type Ending, type BattleChoice, type Battle, type Stage,
 } from './data';
 
@@ -22,6 +22,8 @@ export type Pending =
   | { kind: 'tunnel' }
   /** the start of a tour in the line: a story stop, no decision (the tour's passage, the year page, an event) */
   | { kind: 'tour' }
+  /** his platoon officer wants a soldier-servant: the first officer, or the next after the first is killed */
+  | { kind: 'servant'; officer: 1 | 2 }
   /** a German in front of him, before a battle phase or in a raid (FRAME-PLAYTEST2 A) */
   | { kind: 'close'; where: 'battle' | 'sortie'; battle?: string; phase?: number; key?: string }
   /** nco: he is an NCO with his section, so he picks who goes (FRAME-PLAYTEST2 B) */
@@ -110,11 +112,16 @@ export interface War {
     /** the roll just made came near: a close call to show under the choice (FRAME-PLAYTEST2 D) */
     close?: { kind: 'step' | 'battle'; key: string; n: number } | null;
     /** his name read out in battalion orders after the sortie just ended */
-    named?: boolean };
+    named?: boolean;
+    /** the officer he served was killed: which (1, 2) */
+    officer?: number | null };
   stats: WarStats;
   /** which corps he transferred to, if any (absent in saves before the tanks: a transferred man
    *  there is a tunneller; read with corpsOf); training tours left; air missions that went well */
   corps?: Corps; corpsTraining?: number; corpsOk?: number;
+  /** the officer he is servant to (1 the first, 2 the next; 0 or absent: none), the offer waiting, and
+   *  whether the first offer has been made (docs/FRAME-SERVANT.md) */
+  servant?: number; servantOffer?: number; servantAsked?: boolean;
   /** why he is out of the line, for the missed-battle overview */
   outWhy?: 'course' | 'wound';
   /** pence sent home so far (absent in saves before pay was sent home: read with sentHomeOf) */
@@ -197,7 +204,7 @@ export function battleAt(w: War, st: Stage, r: number): Battle | undefined {
 /** Pence he sends home this tour: a share of a month's pay by rank and role. Draws nothing. */
 export function payHome(w: War): number {
   const c = corpsOf(w);
-  const daily = c === 'tunnel' ? PAY.tunnelPence : PAY.rankPence[w.rank]! + (c ? CORPS[c].payPence : ROLES[w.path] ? PAY.rolePence : 0);
+  const daily = (c === 'tunnel' ? PAY.tunnelPence : PAY.rankPence[w.rank]! + (c ? CORPS[c].payPence : ROLES[w.path] ? PAY.rolePence : 0)) + (w.servant ? SERVANT.payPence : 0);
   return Math.round(daily * PAY.daysPerTour * (w.commissioned ? PAY.officerAllot : PAY.allot));
 }
 export const sentHomeOf = (w: War) => w.sentHome ?? 0;
@@ -300,7 +307,7 @@ function friendLosses(w: War, p: number, why: string): void {
 
 function sectionMod(w: War): number {
   if (!withSection(w)) return 1;
-  let m = home(w, 'firstaid') ? 0.85 : 1;
+  let m = (home(w, 'firstaid') ? 0.85 : 1) * (w.servant ? SERVANT.section : 1);
   if (w.path === 'nco' || w.path === 'subaltern') m *= 1 - 0.05 * skill(w, 'lead');
   return m;
 }
@@ -310,6 +317,7 @@ function promote(w: War, why: string): void {
   if (w.commissioned || w.rank >= SERGEANT) return;
   w.rank += 1; w.promotedThisStage = true;
   say(w, `promoted to ${RANKS[w.rank]} (${why})`);
+  if (w.servant) { w.servant = 0; w.servantOffer = 0; say(w, 'a stripe: no longer a servant'); }
 }
 
 function award(w: War, pts: number): void {
@@ -326,7 +334,7 @@ function award(w: War, pts: number): void {
 
 function rest(w: War): void {
   const present = withSection(w) ? aliveFriends(w) : w.transferred && w.out === 0 ? CORPS[corpsOf(w)!].crew : 0;
-  const pay = (isRole(w) ? ROLE.restBonus : 0) + (corpsOf(w) === 'air' ? CORPS.air.restBonus : 0);
+  const pay = (isRole(w) ? ROLE.restBonus : 0) + (corpsOf(w) === 'air' ? CORPS.air.restBonus : 0) + (w.servant ? SERVANT.rest : 0);
   const before = w.nerve;
   w.nerve = clamp(w.nerve + REST.base + REST.voice * home(w, 'voice') + REST.perFriend * present + pay, -10, 100);
   const r = (newsOf(w).restored ??= { rest: 0, leave: 0 }); r.rest += w.nerve - before;
@@ -418,9 +426,16 @@ function step(w: War): void {
         if (!w.transferred) friendLosses(w, 1 - b.phases.reduce((a, [base]) => a * (1 - base * FRIEND_BATTLE), 1), b.name);
         nb.done = true;
         say(w, `missed: ${b.name} (${nb.why})`);
+        if (stageOf(w).battles[w.r]) officerFate(w);
       }
       // a story stop at the start of every tour he is in the line for (the author, 2026-11-09:
       // "follow a story more"); it draws nothing, so it changes no numbers
+      // the servant's offers: his platoon officer's on the second tour of 1915; the next officer's after
+      // the first is killed (docs/FRAME-SERVANT.md)
+      if (w.out === 0 && !w.transferred && !w.commissioned && w.rank === 0) {
+        if (st.n === 1 && w.r === 1 && !w.servantAsked && !isRole(w)) { w.servantAsked = true; w.cursor = { at: 'tour' }; w.pending = { kind: 'servant', officer: 1 }; return; }
+        if (w.servantOffer === 2) { w.cursor = { at: 'tour' }; w.pending = { kind: 'servant', officer: 2 }; return; }
+      }
       if (w.out === 0 && st.n === CORPS.air.stage && w.r === CORPS.air.atRotation && airEligible(w)) { w.cursor = { at: 'tour' }; w.pending = { kind: 'corps', corps: 'air' }; return; }
       if (w.out === 0) { w.cursor = { at: 'tour' }; w.pending = { kind: 'tour' }; return; }
       rotationStart(w, st);
@@ -511,7 +526,8 @@ function rotationStart(w: War, st: Stage): void {
   const keys = Object.keys(DUTIES);
   // one duty, on some tours: two every tour made the war a list of missions (the author,
   // 2026-11-09: story and generic missions 50/50 for a man who volunteers half the time)
-  const offered = w.transferred || !ch(w, 'duty', ROLE.dutyChance) ? [] : [pick(w.rng, 'duty', keys)];
+  // a servant is excused most fatigues (docs/FRAME-SERVANT.md)
+  const offered = w.transferred || !ch(w, 'duty', ROLE.dutyChance * (w.servant ? SERVANT.dutyChance : 1)) ? [] : [pick(w.rng, 'duty', keys)];
   w.cursor = { at: 'duty', sectionP, offered, i: 0, cover: 1 };
 }
 
@@ -570,6 +586,18 @@ function askOrder(w: War, b: Battle, i: number): void {
 
 function battleOf(w: War): Battle { return battleAt(w, stageOf(w), w.r)!; }
 
+/** The officer he serves after a battle: the first is killed at Loos (the farm's story: Mr Venn read
+ *  out with the dead), a later one one time in four; then he is back with the section, and after the
+ *  first he is offered the next officer. Drawn on the close stream: no other draw moves. */
+function officerFate(w: War): void {
+  if (!w.servant) return;
+  if (w.servant === 1 || closeRoll(w) < SERVANT.officerKilled) {
+    newsOf(w).officer = w.servant;
+    say(w, `officer ${w.servant} killed`);
+    w.servantOffer = w.servant === 1 ? 2 : 0;
+    w.servant = 0;
+  }
+}
 function finishBattle(w: War, pts: number): void {
   const n = w.awards.length;
   award(w, pts);
@@ -582,6 +610,7 @@ function finishBattle(w: War, pts: number): void {
   if (w.out === 0) rest(w);
   w.cursor = { at: 'tally' };
   if (bn && !bn.done) { bn.promoted = w.rank > bn.rank; bn.done = true; }
+  officerFate(w);
 }
 
 // ---- risk: one derivation for what is shown under a choice and what is resolved -----------------
@@ -607,7 +636,11 @@ export function missionHit(w: War, role: string): number {
 /** Chance of being hit in a battle phase for a choice, as resolved (freezing aside). */
 export function phaseHit(w: War, b: Battle, base: number, type: string, choice: BattleChoice): number {
   const path = PATHS[w.path]!;
-  let hp = base * PHASE_HIT[type as keyof typeof PHASE_HIT][choice] * path.hit * trenchMod(w);
+  // a servant goes where his officer goes: going to ground is no shelter when the officer goes on
+  // (without this, careful play matched best play on the gate: docs/FRAME-SERVANT.md)
+  const row = PHASE_HIT[type as keyof typeof PHASE_HIT];
+  const mult = w.servant && choice === 'ground' ? Math.max(row.ground, row.help) : row[choice];
+  let hp = base * mult * path.hit * trenchMod(w) * (w.servant ? SERVANT.hit : 1);
   if (b.defence && path.defence) hp *= path.defence;
   return hp;
 }
@@ -718,12 +751,12 @@ export function decide(w: War, d: Decision): War {
   const st = stageOf(w);
   switch (p.kind) {
     case 'tunnel': {
-      if (d === 'transfer') { w.transferred = true; w.corps = 'tunnel'; w.war.tunnel = 2; say(w, 'transferred to a tunnelling company'); }
+      if (d === 'transfer') { w.servant = 0; w.servantOffer = 0; w.transferred = true; w.corps = 'tunnel'; w.war.tunnel = 2; say(w, 'transferred to a tunnelling company'); }
       break;
     }
     case 'corps': {
       if (d === 'transfer') {
-        w.transferred = true; w.corps = p.corps; w.corpsOk = 0;
+        w.servant = 0; w.servantOffer = 0; w.transferred = true; w.corps = p.corps; w.corpsOk = 0;
         if (p.corps === 'tank') { w.corpsTraining = CORPS.tank.training; say(w, 'transferred to the Tank Corps'); }
         else { w.path = 'air'; w.corpsTraining = CORPS.air.training; say(w, 'transferred to the Royal Flying Corps as an aerial gunner'); }
       } else say(w, `refused the ${p.corps === 'tank' ? 'Tank Corps' : 'Flying Corps'}`);
@@ -868,6 +901,12 @@ export function decide(w: War, d: Decision): War {
       stepSortie(w, d as SortieChoice);
       break;
     }
+    case 'servant': {
+      w.servantOffer = 0;
+      if (d === 'take') { w.servant = p.officer; w.standing = clamp(w.standing + 2, 0, 100); say(w, `servant to officer ${p.officer}`); }
+      else say(w, p.officer === 1 ? 'declined to be a servant' : 'back to the section');
+      break;
+    }
     case 'close': {
       const k = d as CloseChoice; const e = CLOSE.choices[k];
       if (e.kill) w.stats.killed = (w.stats.killed ?? 0) + 1;
@@ -903,7 +942,7 @@ export function decide(w: War, d: Decision): War {
         return w;
       }
       if (d === 'commission' && p.commission) { w.commissioned = true; w.rank = SUBALTERN; }
-      else if (!w.commissioned && w.rank < SERGEANT) promote(w, 'returned to the front');
+      else if (!w.commissioned && w.rank < SERGEANT && !w.servant) promote(w, 'returned to the front'); // a servant stays a private
       else if (!w.commissioned && w.rank === SERGEANT) csmVacancy(w, PROMO.csmAtLeave, 'a vacancy at leave');
       else w.standing = clamp(w.standing + 10, 0, 100);
       w.stage += 1;

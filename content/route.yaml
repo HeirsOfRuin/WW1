@@ -37,6 +37,8 @@ switch:
   - { if: "war.fallen >= 1", go: x_fallen }
   # the overview after a battle, fought or missed (content/scenes/war/battle-after.yaml; playtest 2)
   - { if: "war.after != none", go: x_battle_after }
+  # the officer he served is killed (content/scenes/war/servant.yaml; docs/FRAME-SERVANT.md)
+  - { if: "war.officer_killed >= 1", go: x_officer_killed }
   # how a sortie went, then its next step (content/scenes/war/sorties.yaml)
   - { if: ["war.result != none", "war.result_key == raid"], go: x_raid_done }
   - { if: ["war.result != none", "war.result_key == patrol"], go: x_patrol_done }
@@ -193,6 +195,10 @@ switch:
   - { if: ["war.pending == assign", "war.assign == burial"], go: a_burial }
   - { if: ["war.pending == assign", "war.assign == instructor"], go: a_instructor }
   - { if: ["war.pending == assign", "war.assign == concert"], go: a_concert }
+  # the officer's servant (docs/FRAME-SERVANT.md): the farm keeps Mr Venn's scene
+  - { if: ["war.pending == servant", "war.servant_offer == 1", "start == farm"], go: v_farm_venn }
+  - { if: ["war.pending == servant", "war.servant_offer == 1"], go: w_servant }
+  - { if: "war.pending == servant", go: w_servant_next }
   # a man in front of him (content/scenes/war/close.yaml; FRAME-PLAYTEST2 A)
   - { if: "war.pending == close", go: c_close }
   - { if: "war.pending == battle", go: w_battle }

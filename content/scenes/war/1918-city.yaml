@@ -224,6 +224,8 @@
 
     The Roll of Honour in the front hall at the Gresham and Lombard has four panels now. You stand in front of it on your first morning back and read every name, and then you go up to the third floor, and sit down at a desk, and look out at the fog on the river.
 
+    [if war.servant >= 1]Mr Carew's mother has you to tea in Kensington, with the cake on a stand and a maid to pass it, and thanks you for bringing him home. He walks you to the Underground after, and shakes your hand on the steps.[/if][if flag.sv_second_killed]Mrs Carew writes from Surrey on black-edged paper, to thank you for the cap. She'd forgotten he had it.[/if][if flag.sv_first_killed && war.servant == 0 && !flag.sv_second_killed]Mr Pryor's name is on the first panel. His uncle has you up to the board room that morning, and shakes your hand, and says the firm won't forget, and you go back down to Fire a grade up, at Mr Pryor's old desk.[/if]
+
     You are {age} years old and {rank_a}.
 
     Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.

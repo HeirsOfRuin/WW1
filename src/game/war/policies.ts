@@ -16,6 +16,8 @@ interface Policy {
   corps?(w: War, corps: 'tank' | 'air'): boolean;
   /** as an NCO not going himself: send a man from home or a new man (default: a new man, to spare the section) */
   send?(w: War, key: string): 'send_friend' | 'send_draft';
+  /** be the officer's servant (default: no; the careful and adaptive soldier say yes) */
+  servant?(w: War, officer: number): boolean;
   /** a man in front of him (default: shoot while he has nerve, else take him prisoner) */
   close?(w: War): CloseChoice;
   /** take a special assignment, or try to get out of it (default: take all but the firing party when shaky) */
@@ -31,7 +33,7 @@ const always = { sick: () => false, course: () => true, tunnel: () => false, mis
 const steady = (): SortieChoice => 'steady';
 
 const reckless: Policy = { ...always, close: () => 'bayonet', send: () => 'send_friend', corps: () => true, step: () => 'bold', volunteer: () => true, battle: () => 'push', leave: (_w, _o, c) => (c ? 'commission' : 'back') };
-const careful: Policy = { close: () => 'spare', corps: () => false, step: () => 'careful', volunteer: () => false, mission: () => false, battle: () => 'ground', sick: (w) => w.nerve < 40, course: () => true, tunnel: () => true, leave: () => 'back' };
+const careful: Policy = { servant: () => true, close: () => 'spare', corps: () => false, step: () => 'careful', volunteer: () => false, mission: () => false, battle: () => 'ground', sick: (w) => w.nerve < 40, course: () => true, tunnel: () => true, leave: () => 'back' };
 const mates: Policy = {
   close: () => 'prisoner', corps: () => false, step: steady,
   volunteer: (_w, _k, _d, f) => f, mission: (w) => w.nerve > 60,
@@ -50,6 +52,7 @@ const PHASE_RULE: Record<PhaseType, (w: War) => BattleChoice> = {
   air: (w) => (w.nerve > 50 ? 'push' : 'help'),
 };
 const adaptive: Policy = {
+  servant: () => true, // the servant's road pays in nerve and Armistices (KILLGATE): best play takes it
   corps: (w, c) => w.nerve > (c === 'tank' ? 50 : 55),
   step: (w) => (w.nerve > 55 ? 'steady' : 'careful'),
   volunteer: (w, _k, d) => (d.hit <= 0.04 ? w.nerve > 55 : w.nerve > 75), mission: (w) => w.nerve > 50,
@@ -64,6 +67,7 @@ const half: Policy = {
   volunteer: (w) => (w.stats.volunteered + w.stats.detailed + w.clock) % 2 === 0,
   mission: (w) => (w.stats.missions + w.clock) % 2 === 0,
   step: () => 'steady',
+  servant: (_w, officer) => officer === 1,
   close: (w) => ((w.stats.killed ?? 0) + (w.stats.prisoners ?? 0) + w.clock) % 2 === 0 ? 'shoot' : 'prisoner',
 };
 const quitter = (n: number): Policy => ({ ...adaptive, leave: (w, o, c) => (w.stage >= n && o.length ? 'posting' : c ? 'commission' : 'back') });
@@ -111,6 +115,7 @@ export function decideFor(p: Policy, w: War, q: Pending, battleOf: (w: War) => B
     }
     case 'step': return p.step(w, q.key, q.step);
     case 'close': return (p.close ?? defaultClose)(w);
+    case 'servant': return (p.servant ?? (() => false))(w, q.officer) ? 'take' : 'decline';
     case 'leave': {
       const c = p.leave(w, q.offers, q.commission);
       return c === 'posting' ? 'posting:0' : c;

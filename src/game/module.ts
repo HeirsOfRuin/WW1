@@ -264,8 +264,8 @@ export function statusOf(s: CoreState): { rank: string; role: string; nerve: str
 
 // ---- paths -------------------------------------------------------------------------------------
 
-const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key', 'month', 'home_tier', 'assign', 'stake', 'back_from_wound', 'lost_last', 'promoted_last', 'award_last', 'first_tour', 'back_from_leave', 'detailed_last', 'detailed_ok', 'corps', 'corps_offer', 'shot_down', 'after', 'after_fought', 'after_why', 'after_lost', 'after_hit', 'after_award', 'after_promoted', 'after_near', 'duty_nco', 'can_lead', 'sent', 'sent_friend', 'sent_killed', 'close_where', 'close_battle', 'close_phase', 'close_key', 'killed', 'prisoners', 'wound_cause', 'end_cause', 'commissioned'] as const;
-const PENDING = ['none', 'tunnel', 'corps', 'close', 'duty', 'mission', 'sick', 'course', 'battle', 'leave', 'step', 'tour', 'assign'];
+const FIELDS = ['pending', 'ending', 'done', 'stalled', 'friend_at_risk', 'offers', 'commission', 'nerve', 'standing', 'rank', 'stage', 'section', 'path', 'transferred', 'battle', 'phase', 'tour', 'mate1', 'mate2', 'mate3', 'duty', 'call', 'wound', 'fallen', 'fallen_present', 'course', 'take', 'sortie', 'step', 'can_back', 'vol', 'result', 'result_key', 'month', 'home_tier', 'assign', 'stake', 'back_from_wound', 'lost_last', 'promoted_last', 'award_last', 'first_tour', 'back_from_leave', 'detailed_last', 'detailed_ok', 'corps', 'corps_offer', 'shot_down', 'after', 'after_fought', 'after_why', 'after_lost', 'after_hit', 'after_award', 'after_promoted', 'after_near', 'duty_nco', 'can_lead', 'sent', 'sent_friend', 'sent_killed', 'close_where', 'close_battle', 'close_phase', 'close_key', 'killed', 'prisoners', 'wound_cause', 'end_cause', 'commissioned', 'servant_offer', 'servant', 'officer_killed'] as const;
+const PENDING = ['none', 'tunnel', 'corps', 'close', 'servant', 'duty', 'mission', 'sick', 'course', 'battle', 'leave', 'step', 'tour', 'assign'];
 const ENDINGS = ['none', 'armistice', 'posting', 'captured', 'invalided', 'killed', 'broken', 'court_martial'];
 /** content ids are lower_snake_case; the war layer's ending names are its own */
 const endingId = (e: string) => (e === 'courtMartial' ? 'court_martial' : e);
@@ -299,6 +299,10 @@ function value(s: CoreState, field: string): number | string | boolean | undefin
     case 'wound_cause': return w.cursor.at === 'done' || !w.news?.wound ? 'none' : causeKind(w.news.wound.cause);
     case 'end_cause': return w.cursor.at === 'done' && w.ending ? causeKind(w.endWhy) : 'none';
     case 'commissioned': return w.commissioned;
+    // the officer's servant (docs/FRAME-SERVANT.md)
+    case 'servant_offer': return p?.kind === 'servant' ? p.officer : 0;
+    case 'servant': return w.servant ?? 0;
+    case 'officer_killed': return w.cursor.at === 'done' ? 0 : w.news?.officer ?? 0;
     case 'killed': return w.stats.killed ?? 0;
     case 'prisoners': return w.stats.prisoners ?? 0;
     case 'can_lead': return p?.kind === 'battle' && canLead(w);
@@ -400,8 +404,9 @@ export const module: GameModule = {
     /** a wound or a friend's death has been shown: clear it so the route moves on */
     war_ack(s, _c, e) {
       const w = war(s);
-      const what = (e as { war_ack: 'wound' | 'fallen' | 'sortie' | 'battle' | 'sent' }).war_ack;
+      const what = (e as { war_ack: 'wound' | 'fallen' | 'sortie' | 'battle' | 'sent' | 'officer' }).war_ack;
       if (what === 'battle') newsOf(w).battle = null;
+      else if (what === 'officer') newsOf(w).officer = null;
       else if (what === 'sent') newsOf(w).sent = null;
       else if (what === 'sortie') newsOf(w).sortie = null;
       else if (what === 'wound') newsOf(w).wound = null;

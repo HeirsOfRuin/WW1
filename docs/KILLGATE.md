@@ -205,6 +205,25 @@ man who takes a home posting at the 1917 leave (quit3), the air road is not a be
   subaltern (an air run ended as a lieutenant still flying). A shell in support no longer counts
   as shot down.
 
+### The officer's servant (2026-11-17; paired seeds)
+
+Adaptive soldier, 8,000 wars; the 7,234 where the offer came (a private with no specialist role on
+the second tour of 1915), each played taking it and refusing it. ± is 1 SE.
+
+| | Armistice | Killed | Broken or court-martialled | Survives 1915 | Friends home | Grade | Rank |
+|---|---|---|---|---|---|---|---|
+| Takes it | **5.5% ±0.3** | 61.7% | **14.5%** | 73.6% | 3.64 | 30.6 | 1.87 |
+| Refuses it | 4.9% ±0.3 | **58.6%** | 19.4% | **77.9%** | 3.69 | 30.4 | **2.13** |
+
+A real trade: the servant keeps his nerve (rest, fewer duties) and reaches the Armistice a little more
+often; he is killed more (at his officer's side in the attacks, and the first officer dies at Loos),
+and he ends the war lower in rank (no stripe at leave while he serves). Grade level.
+
+Tuned on the gate: as first set (hit 1.2, rest +1.5) careful play, which always takes it and goes to
+ground, reached the Armistice more often than best play (5.95% to 5.3%). Now a servant is hit 1.35
+times as often in battle, gets +1.0 nerve at rest, and going to ground is no shelter (his officer goes
+on: ground counts as help). Gate after: best play 5.0% +-0.5, careful 4.9%, survives 1915 71.4%.
+
 ### Skills: nothing is decoration
 
 All 15 skills change end states when switched off (1,920 runs each, every policy, town and

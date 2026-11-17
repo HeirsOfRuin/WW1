@@ -303,3 +303,11 @@ export const CLOSE = {
     spare: { pts: 0, standing: -1, nerve: -1, hit: 0.03, kill: false },
   } as Record<CloseChoice, { pts: number; standing: number; nerve: number; hit: number; kill: boolean }>,
 };
+
+// The officer's servant (docs/FRAME-SERVANT.md; the author, 2026-11-17). dutyChance: a duty is offered
+// this share as often (excused most fatigues); rest: nerve back at rest on top (food, a dry corner);
+// payPence a day from the officer; hit: in battle at his officer's side (a runner, where the
+// Germans aim); section: away from the section, his friends are lost this much more often;
+// officerKilled: the chance a later officer is killed in a battle (the first is killed at Loos, as
+// the farm's story has it). Tuned, not sourced.
+export const SERVANT = { dutyChance: 0.5, rest: 1.0, payPence: 3, hit: 1.35, section: 1.1, officerKilled: 0.25 };

@@ -1,0 +1,109 @@
+# The officer's servant (docs/FRAME-SERVANT.md), written to the voice in content/style-guide.md.
+# The first offer comes on the second tour of 1915 (the farm keeps v_farm_venn in 1915-farm.yaml).
+# The first officer is killed at Loos in every town; the second can be killed in any later battle.
+# Officers, by town: the mill, Mr Ainsworth (the master's younger son), then Mr Kershaw (a ranker
+# from Bolton); the pit, Mr Straker (the manager's son), then Mr Hindmarsh (a schoolmaster from
+# Morpeth); the city, Mr Pryor (a director's nephew at the Gresham and Lombard), then Mr Carew
+# (nineteen, from a school in Surrey); the farm, Mr Venn, then Mr Rudd (1916-farm.yaml).
+# x_officer_killed can show while he is in hospital (the officer's fate is settled when the battle
+# ends, wounded or not), so it never puts him at the officer's side or in the dugout.
+
+- id: w_servant
+  chapter: front
+  title: A servant
+  text: |
+    [if start == mill]The platoon officer is Mr Ainsworth, the master's younger son. You've known his face since you were a half-timer. On a Friday he'd come through the weaving shed behind his father in a straw boater, with his fingers in his ears against the looms, and the weavers would mee-maw about him over the frames. He's twenty-two now. He still can't abide a loud noise, and he hides it better than you'd think.
+
+    He stops you in the support line, by the sump where the water seeps in brown. He wants a servant, he says, and he wants a man from the shed. "Weavers are quick with their hands. And they don't talk. My father always says so." He goes pink, as if he's said something about wages.[/if][if start == pit]The platoon officer is Mr Straker, the manager's son, from the house at the top of the rows. He did his year at the face before he went to the college in Newcastle, the way the managers' sons do, in pit clothes that were too clean, with the deputy at his elbow, and he was a month on your father's shift. You showed him how to hold a pick so it didn't jar his wrists.[if war.mate2] Jim Bell showed him the union rule book, page by page, at bait time, till the deputy moved Bell to another flat.[/if]
+
+    He finds you on the firestep at stand-down, with the mist coming off the wire and the smell of the cookers frying. He remembers the pick. "You'll keep your head down, and you'll keep a dugout dry," he says. "A pitman would." He wants a servant.[/if][if start == city]The platoon officer is Mr Pryor, whose uncle sits on the board of the Gresham and Lombard. He spent a summer in the Fire department two desks from yours, learning the business before he went up to Oxford, and he never learned it. You did his totals for him in the afternoons, and on Fridays he bought you a bath bun at the ABC in Cornhill and ate two himself.
+
+    He finds you in the bay at stand-down, with the tea coming round in a dixie that tastes of the petrol can it came up in. He wants a servant. "You've a good hand," he says. "And you always knew where everything was. I never did." He asks it the way he used to ask for the totals, as if you could say no.[/if]
+
+    Somebody to keep his kit and fetch his water, cook his bit of supper, carry his messages, wake him for stand-to. A soldier-servant: a batman. You'd be let off most fatigues and duties. You'd sleep near the officers' dugout, out of the wet, and eat what comes back from their table, and he'd give you threepence a day on top of your shilling. In the line you'd be with him always. When the company goes over, you go where he goes, and an officer goes in front.
+
+    And a servant stays a private. Nobody puts up a stripe on his officer's batman.
+  choices:
+    - id: take
+      text: "Say yes, sir. (Excused most fatigues and duties, better rest, a few pence from him; you go where he goes in an attack; a servant stays a private.)"
+      effects: [ { war: take } ]
+      text_after: |
+        [if start == mill]You learn him in a week: two sugars, a collar stud that's always lost, his mother's photograph up on the shelf in every dugout before anything else. At night he talks to you about the mill as if you both still worked there, the new looms his father won't buy, the girls they've took on in the card room.[if war.mate2] Duckworth bows to you in the trench and calls you his lordship's man, and pinches your sugar.[/if][/if][if start == pit]His valise smells of camphor and his mother's lavender bags. You dry his socks on a string over the brazier and black his boots with spit, and in the evenings he asks you about seams and props as if the pit was still there under the dugout floor.[if war.mate2] Bell says you're the manager's man now, and spits in the brazier, and helps you carry the valise up the trench anyway.[/if][/if][if start == city]His kit is every item on the outfitter's list, some of them twice. You keep his mess book the way you kept the Fire ledgers, in ink, ruled off on Saturdays, and he signs it without reading it, the way he used to sign them.[if war.mate1] Webb writes in his notebook that you've gone into service.[/if][/if]
+      next: "@war"
+    - id: decline
+      text: Say no, sir. You'd sooner stop with the section.
+      effects: [ { war: decline } ]
+      text_after: |
+        [if start == mill]"Quite right," he says, the way his father says it at the mill gate to a man who's asked for a rise. He takes a lad from the card room instead, who was a footman once at a big house in Southport and knows what a fish knife's for.[if war.mate1] Shaw says you're soft in the head. Later, on sentry, he says he's glad.[/if][/if][if start == pit]Mr Straker goes red to the ears. "Of course," he says. "Quite right." He takes a groom from Alnwick who's never been down a pit and keeps boots like glass.[if war.mate2] Bell shakes your hand in front of the whole bay.[/if][/if][if start == city]Mr Pryor says of course, he quite understands, and goes off along the duckboards whistling something from a show, out of tune. He takes a man from the transport lines. Some evenings you see him writing his own letters by a candle in a tin, slowly, and crossing out.[/if]
+      next: "@war"
+
+- id: w_servant_next
+  chapter: front
+  title: The new officer
+  text: |
+    [if start == mill]Since Loos the platoon's had Mr Kershaw. He was a colour sergeant in the regulars twenty years, India and South Africa, and they gave him a commission after the first winter because there was nobody else left to give it to. He's from Bolton. His mother was a weaver, and he says so in the officers' mess, on purpose, to watch their faces. He has a voice you could hear over a shed of four hundred looms, and he smells of carbolic and Nosegay twist.
+
+    He knows you were Mr Ainsworth's man. "I've blacked my own boots since eighteen ninety-four," he says. "I'm not stopping now. But I want a man who knows where the tea is, and I'm told you do." He doesn't say he's sorry about Mr Ainsworth. He looks at you a bit longer than he needs to.[/if][if start == pit]Since Loos the platoon's had Mr Hindmarsh, a schoolmaster from Morpeth who taught Standard Four in a pit village up the coast. He knows what a marra is, and a deputy, and a putter, and he asks the men the names of their bairns and writes them down in a little book. He smells of chalk and pipe tobacco, and his spectacles are held on with a bit of string round the back of his head.
+
+    He knows you were Mr Straker's man. He asks you the way he'd ask a big lad to stop behind after school and see to the stove. "You needn't," he says. "Mind, I'd be glad of you."[/if][if start == farm]Since Loos the platoon's had Mr Rudd, from Birmingham, who came up with the draft in a new tunic with the shop creases still in it. He's got Mr Venn's dugout, and Mr Venn's candle-box for a table, and the smell of Mr Venn's pipe still in the blanket over the door, and he doesn't know what to do with any of it. He sits on the end of the bunk as if he's waiting to be asked in.
+
+    The sergeant has told him you were Mr Venn's man. He asks you himself, standing up too quick and hitting his head on the roof: "Only if you'd want to. I don't know how it's done."[/if][if start == city]Since Loos the platoon's had Mr Carew, who is nineteen and came out from a school in Surrey with a cadet corps, a pocket Horace, and a new revolver he's never fired at anything but a tin. His mother writes to him every day, and so do two aunts. He says "I say" about everything, the gas, the rats, the cold, in the same voice.
+
+    He knows you were Mr Pryor's man. He asks you politely, the way he'd ask his housemaster's leave, and he goes pink, the way Mr Pryor used to.[/if]
+
+    You know the work now, and you know how it can end: you've packed one officer's valise already, and sent it home. Back with the section you'd do your share of the fatigues with the men from home, and stand where they stand, and go over beside them.
+  choices:
+    - id: take
+      text: "Say yes, sir. (Excused most fatigues and duties, better rest, a few pence from him; you go where he goes in an attack; a servant stays a private.)"
+      effects: [ { war: take } ]
+      text_after: |
+        [if start == mill]He's no trouble. He shaves in cold water and eats what the men eat, and talks to you about the Wanderers and his wife's mother, and never once about Mr Ainsworth. The first night he hands you his boots, and then takes them back, and blacks them himself on the firestep while you hold the candle.[/if][if start == pit]He's as untidy as a lad. You find his spectacles for him twice a day and his pipe three times, and in the evenings he reads to you out of a little book of poems, the way he read to Standard Four, and stops when the shelling starts, and goes on from the same line when it stops.[/if][if start == farm]You show him how Mr Venn had his tea, and then you learn how he has his, which is stewed black, three sugars, in a pint mug. He writes to his mother most nights.[if war.mate1] Cottle calls him the brass button behind his back.[/if][/if][if start == city]His kit's all new, and he's frightened of the lot of it. You sew his name tapes in and take the school buttons off his greatcoat, and at night he asks you what Loos was like, and you tell him some of it.[/if]
+      next: "@war"
+    - id: decline
+      text: Say no, sir. Go back to the section and the men from home.
+      effects: [ { war: decline } ]
+      text_after: |
+        [if start == mill]Mr Kershaw nods once, the way a colour sergeant nods at a rifle that'll do. You go back to the section and straight into a wiring party, and your first night is the old firestep, wet to the knees.[if war.mate1] Shaw makes room for you on the step and gives you half his bread without a word.[/if][/if][if start == pit]Mr Hindmarsh says he'd have done the same, and writes something in his little book. You carry your kit back to the section's dugout on your shoulder.[if war.mate1] Tommy Robson shifts up on the floor to make room.[/if][/if][if start == farm]"No," Mr Rudd says. "Of course." He stands there, and you watch him decide not to ask the sergeant for anybody else.[if war.mate2] Pearce has kept your old place on the firestep, and there's a rabbit in a sandbag under it.[/if][/if][if start == city]"Oh," Mr Carew says. "Right-oh." He colours up, and goes off to ask the sergeant. You go back to the section, and the fatigues, and the bay you stood in before.[if war.mate2] Fenton's waiting with a mug of tea and the football results out of a week-old paper.[/if][/if]
+      next: "@war"
+
+- id: x_officer_killed
+  chapter: front
+  title: Your officer
+  on_enter: [ { if: "war.officer_killed == 1", then: [ { set: flag.sv_first_killed } ] }, { if: "war.officer_killed == 2", then: [ { set: flag.sv_second_killed } ] } ]
+  text: |
+    [if war.officer_killed == 1][if start == farm]The word gets to you about Mr Venn the way it gets to everybody: a name said low by somebody going past, and then said again.
+
+    You know what's in his valise, because you packed it. The camp bed, the canvas bucket, a photograph of the spaniels in a leather frame, the socks his mother knitted with a V worked into the tops. It'll go home to the big house by way of the army, and somebody at the big house will undo the straps. You keep hoping it's the housekeeper.[/if][if start == mill]The word gets to you about Mr Ainsworth the way it gets to everybody: a name said low by somebody going past, and then said again. He was in front. He was always going to be in front.
+
+    You know what's in his valise, because you packed it. His mother's photograph. A shaving brush with a silver back, and a tin of Gold Flake with three left in it. His letters from home in a bundle, tied with a length of red weft you found in your own pocket, from the shed. It'll go home to the house on the hill by way of the army, and his mother will open it.
+
+    You write to her, a page in pencil: that he was well looked after, that he never went short of his tea, that he talked about the mill. You put Dear Mrs Ainsworth at the top and Yours respectfully at the bottom, and your number, and then you sit with it a good while, because you don't know if a weaver's lad is let write to the house on the hill.[/if][if start == pit]The word gets to you about Mr Straker the way it gets to everybody: a name said low by somebody going past, and then said again.
+
+    You know what's in his valise, because you packed it. The pit boots he brought out for the mud, that you laughed at and then wished you'd brought. A slide rule in a leather case. Letters from his mother, and a few in another hand, from Jesmond, that he kept apart. It'll go home to the house at the top of the rows by way of the army, and his mother will open it.
+
+    You write to Mrs Straker, in pencil, slow. You tell her about the pit boots, because she'll find them and wonder, and that he could hold a pick right by the end, and that he was in front. You don't know how to finish it, so you put your lamp number from the pit under your army one.[/if][if start == city]The word gets to you about Mr Pryor the way it gets to everybody: a name said low by somebody going past, and then said again.
+
+    You know what's in his valise, because you packed it. An Oxford scarf. A Baedeker for northern France with the corners gone soft. A box of Turkish cigarettes, half full, that the dugout smelled of for weeks. His uncle's letters on the firm's paper, and his mother's on her own. It'll go home to Surrey by way of the army, and his mother will open it.
+
+    You write to her in your best office hand, the hand he said was good: that he was cheerful, that the men liked him, that he spoke of her. You read it over three times for blots, as if the chief clerk was going to see it.[/if][else][if start == mill]The word gets to you about Mr Kershaw the way it got to you about Mr Ainsworth: a name said low, and then said again.
+
+    You know what's in his valise, because you packed it, and it isn't much. A razor and a strop. His South Africa medal with two clasps, in a matchbox. A photograph of a woman and four children on a back step in Bolton, all in clogs, all scrubbed. A few letters in a hand that pressed hard through the paper. It fills half the valise. You stuff the rest with straw so it won't rattle on the way home.
+
+    You write to Mrs Kershaw. You tell her he blacked his own boots to the end.[/if][if start == pit]The word gets to you about Mr Hindmarsh the way it got to you about Mr Straker: a name said low, and then said again.
+
+    You know what's in his valise, because you packed it. The spare spectacles, with the string still on. The book of poems with the corners turned down. And the little book with the bairns' names in it, every man in the platoon, written small, with their birthdays. You keep that back one night, and copy your own page out into your pay book, and then you put it in with the rest for Mrs Hindmarsh in Morpeth.[/if][if start == farm]The word gets to you about Mr Rudd the way it got to you about Mr Venn: a name said low, and then said again.
+
+    You know what's in his valise, because you packed it. A shorthand primer. A tin of Birmingham toffee nobody would eat. His mother's letters from Small Heath, forty or fifty, one for every one of his, done up with pink tape from the foundry office.
+
+    [if flag.f16_helped_rudd]You write to his mother that the Dunsworthy men came round to him, which is true, and that he always said please, which she'll know.[else]You write to his mother that he was a good officer. You don't know if it's true. You think it might have been, given time.[/if][/if][if start == city]The word gets to you about Mr Carew the way it got to you about Mr Pryor: a name said low, and then said again.
+
+    You know what's in his valise, because you packed it. His mother's letters, one for every day, in a pile you kept squared. The pocket Horace. A cake tin with a quarter of a seed cake left in it, from one of the aunts. And right at the bottom, folded flat, his school cap, that he never told you he'd brought.
+
+    You write to his mother in the office hand, and you don't know what to put about a boy of nineteen, so you tell her about the cap.[/if]
+
+    Nobody asks you to be anybody's man again. The company sergeant major puts you back in the section, and on the fatigue roster, with the men from home.[/if]
+  choices:
+    - id: on
+      text: "[if war.officer_killed == 1 && start == farm]Think of the big house.[elif war.officer_killed == 1]Post the letter.[else]Post the letter, and go back to the section.[/if]"
+      effects: [ { war_ack: officer } ]
+      next: "@war"

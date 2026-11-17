@@ -49,6 +49,7 @@ answers (`docs/KILLGATE.md`, 2026-11-09). Design: `docs/DESIGN.md`, draft for ap
 | 2026-11-14 | The tank road's 1917 stays story-heavy (67% against the 45-60% target: Cambrai's extra battle screens count as story). The facts the tank and air writers added, unchecked, are checked now; then build as Claude sees fit | "1. Yes 2. Check now. Then build as you see fit" |
 | 2026-11-16 | Playtest 2 (FRAME-PLAYTEST2.md) approved in the recommended order: visible risk, rank that changes decisions, close moments in battle, wounds and death told, the Whippet and smaller recognition, tour order and dated missions, a sweetheart and a girl in France. The Soldier tab shows a count of men killed. One named sweetheart for each town | "yes, then yes on number, players would like that, then your recomendation" |
 | 2026-11-17 | A Map tab: a pixel map of the Western Front, Dover to Sedan, with the line for the month, where he is, and the battles he fought or missed (src/game/warmap.ts, pixelmap.ts) | "I think a pixle map of the overall war would be really handy for players to understand what is going on and where they are" |
+| 2026-11-17 | The officer's servant becomes a real road in every town (docs/FRAME-SERVANT.md): excused most duties, better rest, pay from the officer; hit more in battle, shields the section less, stays a private while serving; the officer's fate decides what follows | "What does being an officers man servent lead you into?" ... "Go ahead" |
 
 ## Pitch
 

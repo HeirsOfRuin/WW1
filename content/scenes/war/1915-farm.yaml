@@ -85,10 +85,6 @@
 
 - id: v_farm_venn
   chapter: front
-  kind: pool
-  pool: front_1915_farm
-  once: true
-  requires: [ "war.tour >= 2", flag.farm_first_night ]
   title: Mr Venn
   text: |
     The platoon officer is young Mr Venn from the big house. You were a beater on his father's
@@ -101,21 +97,21 @@
     He wants a servant. Somebody to keep his kit, bring his water, make his tea, look after him. A
     soldier-servant. You'd be excused fatigues. You'd be with him in the line, always.
   choices:
-    - id: accept
-      text: Say yes. He's from home.
-      effects: [ { set: flag.farm_servant }, { war_mood: { standing: 2 } } ]
+    - id: take
+      text: "Say yes. He's from home. (Excused most fatigues and duties, better rest, a few pence from him; you go where he goes in an attack; a servant stays a private.)"
+      effects: [ { set: flag.farm_servant }, { war: take } ]
       text_after: |
         You clean his boots in the dugout by candlelight, and he sits writing to his mother, and
         sometimes reads you a line, about the dogs, about the house, as if you were at home together
         in the gunroom. You find you don't mind. You find you like him.
-      next: "@return"
+      next: "@war"
     - id: decline
       text: Say no, sir. You'd sooner stop with the lads.
-      effects: [ { war_mood: { nerve: 1 } } ]
+      effects: [ { war: decline } ]
       text_after: |
         "Of course," he says. "Of course." He takes a lad from Taunton instead. When he passes you in
         the trench after, he nods, and it's as if you'd both been caught at something.
-      next: "@return"
+      next: "@war"
 
 - id: v_farm_bell
   chapter: front

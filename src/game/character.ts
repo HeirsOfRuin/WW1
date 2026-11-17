@@ -112,6 +112,7 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
     else if ((m = /^(light|severe) wound \((.*)\)/.exec(e.msg))) career.push({ label: `Wounded, ${when(e)}`, note: `${m[1] === 'severe' ? 'Badly, ' : 'Lightly, '}${whereOf(m[2]!)}` });
     else if ((m = /^awarded (\w+)$/.exec(e.msg))) { awards.push({ label: AWARD_NAMES[m[1]!] ?? m[1]!, note: when(e) }); career.push({ label: `${AWARD_NAMES[m[1]!] ?? m[1]}, ${when(e)}` }); }
     else if ((m = /^named in orders \((\w+)\)$/.exec(e.msg))) awards.push({ label: 'Named in battalion orders', note: when(e) });
+    else if ((m = /^servant to officer (\d)$/.exec(e.msg))) career.push({ label: `Officer's servant, ${when(e)}`, note: m[1] === '1' ? 'His platoon officer\'s batman' : 'The new officer\'s batman' });
     else if (/^transferred to a tunnelling company/.test(e.msg)) career.push({ label: `To the tunnellers, ${when(e)}`, note: 'Royal Engineers' });
     else if (/^transferred to the Tank Corps/.test(e.msg)) career.push({ label: `To the tanks, ${when(e)}`, note: 'Heavy Branch, Machine Gun Corps; the Tank Corps from July 1917' });
     else if (/^transferred to the Royal Flying Corps/.test(e.msg)) career.push({ label: `To the Flying Corps, ${when(e)}`, note: 'Aerial gunner, a two-seater squadron' });
@@ -186,6 +187,7 @@ function nextStep(w: War): Line[] {
     else if (w.rank === LIEUTENANT) out.push({ label: 'Acting captain', note: `A vacancy after a battle, with standing ${PROMO.captStanding} (you have ${has(w.standing)}).` });
     return out;
   }
+  if (w.servant) out.push({ label: 'An officer\'s servant', note: 'A servant stays a private: no stripe at a leave while you serve. A stripe from a battle or a mission ends it.' });
   if (w.rank < SERGEANT) out.push({ label: RANKS[w.rank + 1]!, note: `Going back after a leave; a vacancy after a battle, with standing ${45 + 10 * w.rank} (you have ${has(w.standing)}); or a role mission that goes well.` });
   if (w.rank === SERGEANT) out.push({ label: 'Company sergeant major', note: `A vacancy, with standing ${PROMO.csmStanding} (you have ${has(w.standing)}): about one leave in eight, or one battle in twenty-five.` });
   if (corpsOf(w) === 'tank' || corpsOf(w) === 'air') out.push({ label: 'A commission', note: 'Not from the tanks or the Flying Corps: a commission would put you back in the infantry.' });
