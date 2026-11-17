@@ -25,6 +25,17 @@ So a "confirmed" below means confirmed across search sources, not read in full.
 | A Fordson tractor in 1917 (farm) | The first Fordsons reached Britain in December 1917 | "a grey American thing" (fixed on 2026-11-12, before the check) |
 | Tube shelter in Leytonstone (city, 1917) | No Underground station there until the 1940s | The church crypt (fixed before the check) |
 
+- **Gas kit by date** (the author's question, 2026-11-17): a carrying party's gas alarm had him pull
+  on a rubber mask with eyepieces, a small box respirator, in any year. The box respirator came from
+  August 1916; before it, the flannel gas helmet soaked in chemicals. Now the helmet in 1915-16 and
+  the mask in 1917-18. A German dugout's "gas curtain" on a raid that can fall in 1915 is now a
+  blanket. Checked against the rest: no gas before Loos except the alarm; Loos is right (the first
+  British gas, released at 5.50 a.m. on 25 September 1915; the first chlorine attack was German, at
+  Ypres on 22 April 1915; in 1914 only small tear-gas trials).
+- **Shotguns** (the same question): at home only, as the farm boy's skill ("a shotgun for the
+  rooks"): right for a Devon farm in 1914. The pump-action trench shotgun was the American Army's,
+  1917-18; the game never puts one in a British trench.
+
 ## Confirmed (the main ones)
 
 - **1915.**

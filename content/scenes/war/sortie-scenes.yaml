@@ -86,7 +86,7 @@
     opens his mouth.
 
     There's a dugout entrance two yards on, steps going down, a blanket over the door, light under it.[/if][if war.stake == 1]Down into their trench, and you land on duckboards that rock under you like a punt. A dugout
-    entrance, a gas curtain across it, and down below a gramophone going, a waltz, tinny and slow.
+    entrance, a blanket hung across it, and down below a gramophone going, a waltz, tinny and slow.
 
     And coming up the steps, bent under the curtain, a man with two mess tins of coffee, steaming. He
     straightens up and sees you, and doesn't drop them.[/if]
@@ -464,7 +464,11 @@
   text: |
     [if war.stake == 0]Halfway up, the battery starts. Whizz-bangs, you hear them after they arrive: a crack and a
     flash and earth coming down on your helmet like rain on a slate roof. The trench is knee-deep in
-    places and the duckboards float. Somebody ahead is shouting to keep moving.[/if][if war.stake == 1]Gas. Somebody's banging a shell case up ahead, and the shout comes back down the line, and you're
+    places and the duckboards float. Somebody ahead is shouting to keep moving.[/if][if war.stake == 1 && war.stage <= 2]Gas. Somebody's banging a shell case up ahead, and the shout comes back down the line, and you're
+    getting your gas helmet on with a box of bombs on your shoulder, one-handed: the flannel bag over
+    your head, wet and stinking of chemicals, the tail tucked into your collar, the eyepieces steaming up
+    so the trench goes to fog. Then the shells start, behind the gas. You can't see the duckboards and
+    you can't see the man in front.[/if][if war.stake == 1 && war.stage >= 3]Gas. Somebody's banging a shell case up ahead, and the shout comes back down the line, and you're
     getting your mask on with a box of bombs on your shoulder, one-handed, the rubber stinking, the
     eyepieces steaming up so the trench goes to fog. Then the shells start, behind the gas. You can't
     see the duckboards and you can't see the man in front.[/if]
