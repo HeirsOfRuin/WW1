@@ -11,6 +11,8 @@ import { phaseHit, battleOf, newWar, run, decide, decideFor, homeTier, sentHomeO
 import { riskWord, whereOf, endingLine } from '../src/game/module';
 import { share } from '../tools/story-share';
 import { recordOf } from '../src/game/character';
+import { mapOf, project, EXTENT } from '../src/game/warmap';
+import { rasterize, MAP_W, MAP_H, MAP_COLOURS } from '../src/game/pixelmap';
 
 const content = loadContent();
 const TOWNS = ['pit', 'mill', 'city', 'farm'] as const;
@@ -267,6 +269,34 @@ describe('playtest 2', () => {
       }
     }
     expect(seen).toBeGreaterThan(0);
+  }, 60_000);
+});
+
+describe('the war map', () => {
+  // The author, 2026-11-17: "a pixel map of the overall war". Every month has a line and a place for
+  // him on the map (or England, or a prison camp), every battle in his log is marked, and the marker
+  // for him is drawn where the map says he is.
+  it('places him, his battles and the line for every month of real wars', () => {
+    for (let i = 0; i < 60; i++) {
+      const w = newWar({ seed: 8100 + i, town: TOWNS[i % 4]! });
+      for (let g = 0; g < 5000 && !w.ending; g++) {
+        run(w); if (!w.pending) break;
+        const v = mapOf(w);
+        expect(v.line.points.length).toBeGreaterThan(5);
+        if (v.here.at) {
+          const [lat, lon] = v.here.at;
+          expect(lat >= EXTENT.lat0 && lat <= EXTENT.lat1 && lon >= EXTENT.lon0 && lon <= EXTENT.lon1, `${v.month} ${v.here.where}`).toBe(true);
+        }
+        const fought = w.log.filter((l) => / \| battle: /.test(l)).length;
+        expect(v.battles.filter((b) => b.fought).length).toBeLessThanOrEqual(fought);
+        decide(w, decideFor(WAR_POLICIES.half!, w, w.pending, battleOf) as never);
+      }
+      const v = mapOf(w);
+      if (v.here.at) {
+        const px = rasterize(v); const [x, y] = project(v.here.at, MAP_W, MAP_H); const k = (y * MAP_W + x) * 4;
+        expect([px[k], px[k + 1], px[k + 2]]).toEqual([...MAP_COLOURS.here]);
+      }
+    }
   }, 60_000);
 });
 

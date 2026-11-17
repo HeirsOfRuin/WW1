@@ -1,9 +1,9 @@
 // The screens. Reads the engine's view(), computes nothing. Same hooks as every scaffolded game,
 // so tools/smoke.mjs drives it unchanged: [data-act] for title and menu actions, .hud .turn for
 // the clock, [data-action] for choices, [data-tab] for tabs.
-import { useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import type { ContentBundle } from '../content/schema';
-import { newGame, view, choose, startsOf, statusOf, artOf, recordOf, type GameState, type SceneView, type SoldierRecord } from '../game/index';
+import { newGame, view, choose, startsOf, statusOf, artOf, recordOf, mapOf, rasterize, MAP_W, MAP_H, MAP_COLOURS, type GameState, type SceneView, type SoldierRecord } from '../game/index';
 
 // Scene pictures (DESIGN §11): tools/art.ts writes src/art/<key>.png; the game asks artOf(state) which one.
 const ART = import.meta.glob('../art/*.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
@@ -20,7 +20,7 @@ const paras = (t: string) => t.trim().split(/\n\s*\n/).map((p) => <p>{p}</p>);
 
 export function App({ content }: { content: ContentBundle }) {
   const [state, setState] = useState<GameState | null>(null);
-  const [tab, setTab] = useState<'story' | 'soldier' | 'journal' | 'menu'>('story');
+  const [tab, setTab] = useState<'story' | 'soldier' | 'map' | 'journal' | 'menu'>('story');
   const [page, setPage] = useState(0);
   const [note, setNote] = useState<string | null>(null);
   const commit = (s: GameState | null) => { setState(s); setPage(0); if (s) lsSet(SAVE_KEY, JSON.stringify(toSave(s, content))); };
@@ -86,6 +86,7 @@ export function App({ content }: { content: ContentBundle }) {
                   ))}</div>}
         </>}
         {tab === 'soldier' && <Soldier r={recordOf(content, state)} />}
+        {tab === 'map' && <WarMap s={state} />}
         {tab === 'journal' && <><h2>Journal</h2>{state.journal.length
           ? <ol class="journal">{[...state.journal].reverse().map((j) => <li><strong>{j.sceneTitle ?? j.scene}</strong>: {j.choice}{j.changes.length > 0 && <small> ({j.changes.join(' · ')})</small>}</li>)}</ol>
           : <p class="empty">Empty so far: every choice you make is written here.</p>}</>}
@@ -96,9 +97,33 @@ export function App({ content }: { content: ContentBundle }) {
           <p class="hint">Saves live in this browser on this device. A save code moves a game to another.</p></>}
       </main>
       <nav class="tabs">
-        {(['story', 'soldier', 'journal', 'menu'] as const).map((t) => <button data-tab={t} class={tab === t ? 'on' : ''} onClick={() => setTab(t)}>{t[0]!.toUpperCase() + t.slice(1)}</button>)}
+        {(['story', 'soldier', 'map', 'journal', 'menu'] as const).map((t) => <button data-tab={t} class={tab === t ? 'on' : ''} onClick={() => setTab(t)}>{t[0]!.toUpperCase() + t.slice(1)}</button>)}
       </nav>
     </>
+  );
+}
+
+// The Map tab (the author, 2026-11-17: "a pixel map of the overall war"): mapOf() says what,
+// rasterize() decides every pixel; this only puts them on a canvas.
+const rgb = (c: readonly number[]) => `rgb(${c.join(',')})`;
+function WarMap({ s }: { s: GameState }) {
+  const v = mapOf(s.war);
+  const ref = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const ctx = ref.current?.getContext('2d');
+    if (ctx) ctx.putImageData(new ImageData(rasterize(v) as Uint8ClampedArray<ArrayBuffer>, MAP_W, MAP_H), 0, 0);
+  });
+  const key: [readonly number[], string][] = [[MAP_COLOURS.line, 'The front line now'], [MAP_COLOURS.first, 'The line in 1915'], [MAP_COLOURS.german, 'Held by the Germans'], [MAP_COLOURS.here, 'You'], [MAP_COLOURS.fought, 'Battle fought (x)'], [MAP_COLOURS.missed, 'Battle missed (o)']];
+  return (
+    <div class="warmap">
+      <h2>The front, {v.month}</h2>
+      <canvas ref={ref} width={MAP_W} height={MAP_H} class="pixelmap" role="img" aria-label={`Map of the Western Front, ${v.month}. ${v.here.where}.`} />
+      <p><strong>You</strong>: {v.here.where}.</p>
+      <p class="hint">{v.line.caption}</p>
+      <ul class="legend">{key.map(([c, t]) => <li><span class="swatch" style={{ background: rgb(c) }} />{t}</li>)}</ul>
+      {v.battles.length > 0 && <><h3>Your battles</h3><dl class="lines">{v.battles.map((b) => <><dt>{b.words}</dt><dd>{b.fought ? 'Fought' : 'Missed'}</dd></>)}</dl></>}
+      <p class="hint">The line is drawn to within a few miles; the places the battalion was are the story's.</p>
+    </div>
   );
 }
 

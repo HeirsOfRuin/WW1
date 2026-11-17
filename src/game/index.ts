@@ -18,6 +18,8 @@ export { describeDate } from '@engine/calendar';
 export { heroOf } from '@engine/character';
 export type { GameState } from './state';
 export { statusOf, artOf } from './module';
+export { mapOf, type MapView } from './warmap';
+export { rasterize, MAP_W, MAP_H, MAP_COLOURS } from './pixelmap';
 export { recordOf, type SoldierRecord } from './character';
 
 export interface NewGameOptions { start: string; seed: number; name: string; sex?: Sex }

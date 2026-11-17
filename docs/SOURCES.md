@@ -224,3 +224,16 @@ romances used these; none was opened against a source. Each stays unchecked unti
 - Church bells tolled one stroke a year of the dead man's age (the farm town).
 - Green envelopes for letters not read by the platoon officer; wartime weddings by licence on leave.
 
+## The war map (2026-11-17): drawn approximately
+
+The Map tab's front lines (src/game/warmap.ts) are simplified from the general maps of the Western
+Front, to within a few miles, for ten states: 1915 (after Second Ypres and Loos), after the Somme,
+after the German withdrawal to the Hindenburg Line with Arras, Vimy and Messines, after
+Passchendaele, after Cambrai, after the German spring offensives (the Lys and Amiens), after Amiens,
+on the Hindenburg Line in September 1918, after it was broken in October, and on 11 November 1918.
+Not checked point by point against a source map. The battalion's places follow the story: the Loos
+sector in 1915; on 1 July 1916 the town's ground (Serre for the mill, after the Lancashire Pals; La
+Boisselle, Mametz and Gommecourt as the pit, farm and city texts have them); Arras and Ypres in 1917;
+the salient in the winter of 1917-18, then the Somme front for the German offensive of 21 March 1918
+(the story's retreat over Albert and La Boisselle), Amiens, the Hindenburg Line, Le Cateau, Mons.
+
