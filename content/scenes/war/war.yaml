@@ -369,7 +369,7 @@
       effects: [ { war: ground } ]
       next: "@war"
     - id: lead
-      text: "[if war.stalled]Get up and get the section moving, wire or no wire.[else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
+      text: "[if war.stalled]Get up and [if war.battle == somme_autumn || war.battle == passchendaele]drag the section on through the mud.[else]get the section moving, wire or no wire.[/if][else][if war.battle == spring_offensive]Go along the bay and hold the section together.[else]Get them across: go out in front and take the section with you.[/if][/if] ({risk_lead})"
       visible_if: war.can_lead
       effects: [ { war: lead } ]
       next: "@war"

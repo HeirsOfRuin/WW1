@@ -182,7 +182,9 @@ export const isRole = (w: War) => w.path in ROLES;
 /** An NCO with his section picks who goes on a duty; a private waits to be picked (FRAME-PLAYTEST2 B). */
 export const ncoDuty = (w: War) => w.rank >= 1 && !w.commissioned && !w.transferred;
 /** A sergeant or an officer with his men may take them across himself: the fourth order in battle. */
-export const canLead = (w: War) => (w.rank >= SERGEANT || w.commissioned) && !w.transferred && w.path !== 'air';
+// not a signaller, a sniper or a stretcher-bearer: their sergeants do their own work, not a rifle
+// section's (playtest 3: a signalling sergeant was offered "get the section moving")
+export const canLead = (w: War) => (w.rank >= SERGEANT || w.commissioned) && !w.transferred && !['air', 'signals', 'snipe', 'bearer'].includes(w.path);
 /** His corps, if he has left the battalion: a save from before the tanks had only tunnellers. */
 export const corpsOf = (w: War): Corps | null => w.corps ?? (w.transferred ? 'tunnel' : null);
 /** Who is offered the tanks (FRAME-TANK.md): any town, machinery from home or the Lewis gun at 2;
