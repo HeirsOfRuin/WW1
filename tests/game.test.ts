@@ -290,6 +290,30 @@ describe('playtest 2', () => {
   }, 60_000);
 });
 
+describe('an event shows only its own nerve', () => {
+  // Playtest 3: an evening with Marthe (nerve +1) read "Nerve −7": the tour's own cost, charged as the
+  // event closed, was added to it. The tour's change is labelled apart.
+  it('a story event\'s "Nerve" change is the event\'s own', () => {
+    let n = 0;
+    for (let i = 0; i < 24; i++) {
+      let s = newGame(content, { start: TOWNS[i % 4]!, seed: 300 + i * 7, name: 'Tom' });
+      for (let k = 0; k < 4000 && !s.ended; k++) {
+        const v = view(content, s); const sc = content.scenes[v.sceneId];
+        const ok = v.choices.filter((c) => c.available);
+        const pick = s.war.pending && sc?.kind !== 'pool' && !/^(x_|y_|c_)/.test(v.sceneId) ? decideFor(WAR_POLICIES.half!, s.war, s.war.pending, battleOf).replace(':', '_') : ok[0]?.id;
+        const id = ok.some((c) => c.id === pick) ? pick! : ok[0]?.id; if (!id) break;
+        s = choose(content, s, id).state;
+        if (sc?.kind !== 'pool') continue;
+        const effects = (sc.choices.find((c) => c.id === id)?.effects ?? []) as { war_mood?: { nerve?: number } }[];
+        const own = effects.reduce((a, e) => a + (e.war_mood?.nerve ?? 0), 0);
+        const shown = (view(content, s).outcome?.changes ?? []).find((c) => /^Nerve [+−]/.test(c));
+        if (shown) { n++; expect(shown, `${sc.id}/${id}`).toBe(`Nerve ${own > 0 ? '+' : '−'}${Math.abs(own)}`); }
+      }
+    }
+    expect(n).toBeGreaterThan(10);
+  }, 60_000);
+});
+
 describe('the sweetheart in every ending', () => {
   // Playtest 3: a farm man who had asked Rose to marry him on his next leave was killed before it,
   // and his death ending never mentioned her. Every ending now carries her road.

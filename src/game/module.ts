@@ -419,11 +419,11 @@ export const module: GameModule = {
       const clampN = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
       if (m.nerve) {
         const before = w.nerve; w.nerve = clampN(w.nerve + m.nerve, -10, 100);
-        const dn = w.nerve - before; if (dn) ctx.changes.push(`Nerve ${dn > 0 ? '+' : '−'}${Math.abs(dn)}`);
+        const dn = Math.round(w.nerve - before); if (dn) ctx.changes.push(`Nerve ${dn > 0 ? '+' : '−'}${Math.abs(dn)}`); // rounded: "Nerve +1.0000000000000018" was possible
       }
       if (m.standing) {
         const before = w.standing; w.standing = clampN(w.standing + m.standing, 0, 100);
-        const ds = w.standing - before; if (ds) ctx.changes.push(`Standing ${ds > 0 ? '+' : '−'}${Math.abs(ds)}`);
+        const ds = Math.round(w.standing - before); if (ds) ctx.changes.push(`Standing ${ds > 0 ? '+' : '−'}${Math.abs(ds)}`);
       }
     },
     /** the player's answer to the war's question */
@@ -438,15 +438,19 @@ export const module: GameModule = {
       newsOf(w).close = null;
       newsOf(w).named = false;
       const before = { nerve: w.nerve, standing: w.standing, rank: w.rank, section: aliveFriends(w), awards: w.awards.length };
+      // the tour moves on after its story event (w_tour_on), so its cost lands on the event's result:
+      // labelled apart, or "Nerve +1" from an evening with Marthe and the tour's −8 read as "Nerve −7"
+      // (the author, playtest 3: "a scene you would think would calm you down ... actually cost you nerve")
+      const inLine = w.pending.kind === 'tour';
       decide(w, d as Decision);
       // what the choice cost, then what rest and leave gave back, apart (playtest 2)
       const back = newsOf(w).restored ?? { rest: 0, leave: 0 };
       const dn = Math.round(w.nerve - before.nerve - back.rest - back.leave);
-      if (dn) ctx.changes.push(`Nerve ${dn > 0 ? '+' : '−'}${Math.abs(dn)}`);
+      if (dn) ctx.changes.push(`${inLine ? 'In the line: nerve' : 'Nerve'} ${dn > 0 ? '+' : '−'}${Math.abs(dn)}`);
       if (Math.round(back.rest) > 0) ctx.changes.push(`Out at rest: nerve +${Math.round(back.rest)}`);
       if (Math.round(back.leave) > 0) ctx.changes.push(`Home on leave: nerve +${Math.round(back.leave)}`);
       const ds = Math.round(w.standing - before.standing);
-      if (ds) ctx.changes.push(`Standing ${ds > 0 ? '+' : '−'}${Math.abs(ds)}`);
+      if (ds) ctx.changes.push(`${inLine ? 'In the line: standing' : 'Standing'} ${ds > 0 ? '+' : '−'}${Math.abs(ds)}`);
       if (w.rank > before.rank) ctx.changes.push(`Promoted: ${rankName(w)}`);
       if (w.awards.length > before.awards) ctx.changes.push(`Awarded: ${w.awards.slice(before.awards).join(', ')}`);
       const lost = before.section - aliveFriends(w);
