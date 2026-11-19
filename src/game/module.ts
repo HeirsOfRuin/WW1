@@ -546,6 +546,8 @@ export const module: GameModule = {
       case 'friends_home': return `${aliveFriends(w)} of the nine`;
       case 'awards_line': return w.awards.length ? w.awards.join(', ') : 'none';
       case 'ending_line': return endingLine(w);
+      // the sweetheart at home, by town (content/scenes/war/romance.yaml)
+      case 'sweetheart': return ({ mill: 'Nellie', pit: 'Lizzie', farm: 'Rose', city: 'Ivy' } as Record<string, string>)[w.town] ?? '';
       // how near the sortie just ended came, and his name in orders: at the end of its result, after the
       // result is told (playtest 3: "read out in battalion orders" came before the screen said it went well)
       case 'result_note': {
@@ -563,7 +565,7 @@ export const module: GameModule = {
     }
     return undefined;
   },
-  checkTextVar: (name) => (['rank_a', 'lost_last_name', 'award_last_name', 'risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line', 'money_line', 'sent_home', 'after_name', 'after_lost_names', 'after_award_name', 'duty_risk_draft', 'sent_name', 'sent_first', 'sent_duty', 'risk_lead', 'risk_close_shoot', 'risk_close_bayonet', 'risk_close_prisoner', 'risk_close_spare', 'result_note'].includes(name) ? [] : undefined),
+  checkTextVar: (name) => (['rank_a', 'lost_last_name', 'award_last_name', 'risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line', 'money_line', 'sent_home', 'after_name', 'after_lost_names', 'after_award_name', 'duty_risk_draft', 'sent_name', 'sent_first', 'sent_duty', 'risk_lead', 'risk_close_shoot', 'risk_close_bayonet', 'risk_close_prisoner', 'risk_close_spare', 'result_note', 'sweetheart'].includes(name) ? [] : undefined),
   // the year's title page: where he stands, and who of the nine has died since the last page
   cardRows: (_c, s) => {
     const w = war(s);

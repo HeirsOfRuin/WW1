@@ -974,4 +974,6 @@
 
     You are {age} years old and {rank_a}.
 
+    [if flag.ro_sw_first][if flag.ro_sw_ended || flag.ro_sw_jilted]{sweetheart} is married to somebody else. You see her at the war memorial when they unveil it, and she squeezes your hand once, and lets go.[else][if flag.ro_sw_married]{sweetheart} is at the station.[if flag.ro_sw_named] So is the baby, who isn't a baby now, and looks at you as if you were a stranger, which you are.[/if][else][if flag.ro_sw_wed16 || flag.ro_sw_wed17]You marry {sweetheart} in the spring of 1919, the bells ringing properly now, every one.[else][if flag.ro_sw_after || flag.ro_sw_wait2]{sweetheart} waited till it was over. You're married in the spring of 1919.[else]You walk out with {sweetheart} on Sundays, the way you did before, and neither of you says much, and that's all right.[/if][/if][/if][/if][/if][if flag.ro_fr_promise || flag.ro_fr_address] In the summer of 1919 a letter comes from France, from Marthe, and you go to the station and ask how much a ticket is.[/if]
+
     Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.

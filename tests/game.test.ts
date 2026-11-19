@@ -290,6 +290,15 @@ describe('playtest 2', () => {
   }, 60_000);
 });
 
+describe('the sweetheart in every ending', () => {
+  // Playtest 3: a farm man who had asked Rose to marry him on his next leave was killed before it,
+  // and his death ending never mentioned her. Every ending now carries her road.
+  it('every ending scene tells the sweetheart\'s road', () => {
+    const missing = Object.values(content.scenes).filter((sc) => sc.kind === 'ending' && sc.id !== 'e_armistice' && sc.id !== 'e_error' && !(sc.text ?? '').includes('ro_sw_')).map((sc) => sc.id);
+    expect(missing).toEqual([]);
+  });
+});
+
 describe('the war map', () => {
   // The author, 2026-11-17: "a pixel map of the overall war". Every month has a line and a place for
   // him on the map (or England, or a prison camp), every battle in his log is marked, and the marker
