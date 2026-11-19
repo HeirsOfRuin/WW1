@@ -97,11 +97,12 @@
     up." He saves bits of his biscuit for them, soaked in his tea.
   choices:
     - id: help
-      text: Help him look after them. Learn the message tubes.
+      text: "[if war.path == signals]Help him look after them. Show him the message tubes.[else]Help him look after them. Learn the message tubes.[/if]"
       effects: [ { set: flag.p16_birds }, { war_mood: { standing: 1 } } ]
       text_after: |
-        He shows you how to roll the flimsy and slide it into the tube, and how to hold a bird so
-        it doesn't panic: firm round the wings, its feet between your fingers. It's warm, and its
+        [if war.path == signals]You show him how to roll the flimsy and slide it into the tube, and he shows you how to
+        hold a bird so it doesn't panic:[else]He shows you how to roll the flimsy and slide it into the tube, and how to hold a bird so
+        it doesn't panic:[/if] firm round the wings, its feet between your fingers. It's warm, and its
         heart goes like a watch. "If I'm down," Robson says, "you take the basket." It's the most
         he's said about the first of July.
       next: "@return"

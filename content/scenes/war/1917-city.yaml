@@ -112,29 +112,36 @@
   requires: [ "war.tour >= 21", war.mate3 ]
   title: Signals
   text: |
-    Marsh has been to the signals course. He came back with crossed flags on his sleeve and a head
+    [if war.path == signals]Marsh has been to the signals course, and they've sent him to you: the newest man in your
+    signal section, with crossed flags on his sleeve so new they're still bright, a buzzer he holds
+    like a hymn book, and two pigeons in a basket.[else]Marsh has been to the signals course. He came back with crossed flags on his sleeve and a head
     full of Morse, and now he's the company's signaller, with a buzzer and a field telephone and a
-    reel of wire and two pigeons in a basket.
+    reel of wire and two pigeons in a basket.[/if]
 
     He's good at it. Better than good. It turns out a man who learned the eye chart by heart in a
     night can learn anything by heart. He taps out Morse on his knee in his sleep. "It's like the
     books of the Bible," he says. "You learn the order, and then it's yours."
 
-    But signallers go out to mend the wire when it's cut, and it's always cut.
+    But signallers go out to mend the wire when it's cut, and it's always cut.[if war.path == signals] And now you're
+    the one who sends them.[/if]
   choices:
     - id: help
-      text: Learn the Morse with him. You might be needed.
+      text: "[if war.path == signals]Take him out on the line yourself till he knows it.[else]Learn the Morse with him. You might be needed.[/if]"
       effects: [ { set: flag.c17_learned_morse }, { war_mood: { nerve: 1 } } ]
       text_after: |
-        He teaches you on sentry, tapping on your arm in the dark, letter by letter, the whole
+        [if war.path == signals]You take him out on the line at night, the two of you, the wire running through your
+        fingers, and show him where the breaks come and how to find them by feel. In a week he splices
+        in the dark faster than you do. "Like the books of the Bible," he says.[else]He teaches you on sentry, tapping on your arm in the dark, letter by letter, the whole
         alphabet in a week. By the end you can send your name and HELP and WATER and ALL WELL. "That's
-        all anybody ever needs to send," Marsh says.
+        all anybody ever needs to send," Marsh says.[/if]
       next: "@return"
     - id: no
-      text: Leave him to it.
+      text: "[if war.path == signals]Let him learn the line the way you did.[else]Leave him to it.[/if]"
       text_after: |
-        You leave him to it. On bad nights you hear the buzzer going in the signals dugout, short,
-        long, short, and you know it's him, and you lie and try to read it, and can't.
+        [if war.path == signals]You let him find it for himself, the way you had to. On bad nights you send him out, and
+        lie in the signals dugout listening to the buzzer, short, long, short, until his test call
+        comes through.[else]You leave him to it. On bad nights you hear the buzzer going in the signals dugout, short,
+        long, short, and you know it's him, and you lie and try to read it, and can't.[/if]
       next: "@return"
 
 - id: v17c_gothas
