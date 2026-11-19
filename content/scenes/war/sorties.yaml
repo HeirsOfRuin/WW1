@@ -31,6 +31,8 @@
   title: Back in
   text: |
     [if war.result == ok]It went the way it was meant to. The sergeant nods at you, which from him is a speech.[/if][if war.result == failed]It went wrong, the way these things do, and nobody can say quite where.[/if][if war.result == turned]You came back without doing it. Nobody says anything. Everybody knows.[/if]
+
+    {result_note}
   choices:
     - id: on
       text: Get your head down while you can.

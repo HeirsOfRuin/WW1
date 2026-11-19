@@ -25,6 +25,29 @@ export function App({ content }: { content: ContentBundle }) {
   const [note, setNote] = useState<string | null>(null);
   const commit = (s: GameState | null) => { setState(s); setPage(0); if (s) lsSet(SAVE_KEY, JSON.stringify(toSave(s, content))); };
   const begin = (start: string) => { commit(newGame(content, { start, seed: (Math.random() * 2 ** 31) >>> 0, name: 'Tom' })); setTab('story'); };
+  // Loading a save code (playtest 3: a 5,000-character code pasted into the phone's prompt() box came
+  // through cut short, "damaged or incomplete", and the game was lost). A text box in the page holds
+  // any length; a failed load changes nothing; and a save link carries the code in the address.
+  const [loading, setLoading] = useState(false);
+  const [code, setCode] = useState('');
+  const loadCode = async (t: string) => {
+    try { commit(fromSave(await decodeSaveCode(t.trim()), content).state); setTab('story'); setLoading(false); setCode(''); setNote(null); return true; }
+    catch (e) { setNote(`That code did not load: ${(e as Error).message} It has ${t.trim().length} characters; a whole one has several thousand.`); return false; }
+  };
+  useEffect(() => {
+    const h = location.hash;
+    if (!h.startsWith('#save=')) return;
+    history.replaceState(null, '', location.pathname + location.search);
+    void loadCode(decodeURIComponent(h.slice(6)));
+  }, []);
+  const loadBox = loading && (
+    <div class="stack loadbox">
+      <label for="code"><strong>Paste the whole save code</strong> (it starts TRENCH1.)</label>
+      <textarea id="code" rows={6} value={code} onInput={(e) => setCode((e.target as HTMLTextAreaElement).value)} autocomplete="off" spellcheck={false} />
+      <button class="primary" data-act="load-go" onClick={() => void loadCode(code)}>Load it</button>
+      <button data-act="load-cancel" onClick={() => { setLoading(false); setCode(''); }}>Cancel</button>
+    </div>
+  );
 
   if (!state) {
     const saved = load(content);
@@ -33,14 +56,16 @@ export function App({ content }: { content: ContentBundle }) {
         <h1>{content.config.title}</h1>
         <p class="lede">{document.querySelector('meta[name="description"]')?.getAttribute('content')}</p>
         {!STORAGE_OK && <p class="warn">This browser is refusing to store anything for this page, so progress will not be kept. Menu &gt; Save code still works.</p>}
-        <div class="stack">
+        {note && <p class="banner">{note} <button onClick={() => setNote(null)}>OK</button></p>}
+        {loadBox || <div class="stack">
           {saved && <button class="primary" data-act="continue" onClick={() => setState(saved)}>Continue</button>}
           {startsOf(content).map((id, i) => (
             <button class={!saved && i === 0 ? 'primary' : ''} data-act={i === 0 ? 'new' : `new-${id}`} onClick={() => begin(id)}>
               <strong>{content.starts[id]!.label}</strong><br /><small>{content.starts[id]!.summary}</small>
             </button>
           ))}
-        </div>
+          <button data-act="load-code" onClick={() => setLoading(true)}>Load a save code</button>
+        </div>}
       </main>
     );
   }
@@ -91,10 +116,11 @@ export function App({ content }: { content: ContentBundle }) {
           ? <ol class="journal">{[...state.journal].reverse().map((j) => <li><strong>{j.sceneTitle ?? j.scene}</strong>: {j.choice}{j.changes.length > 0 && <small> ({j.changes.join(' · ')})</small>}</li>)}</ol>
           : <p class="empty">Empty so far: every choice you make is written here.</p>}</>}
         {tab === 'menu' && <><h2>Menu</h2><div class="stack">
-          <button data-act="code" onClick={async () => { const c = await encodeSaveCode(toSave(state, content)); try { await navigator.clipboard.writeText(c); setNote('Save code copied.'); } catch { setNote(c); } }}>Save code (copy)</button>
-          <button data-act="load-code" onClick={async () => { const t = prompt('Paste a save code'); if (!t) return; try { commit(fromSave(await decodeSaveCode(t.trim()), content).state); setTab('story'); } catch (e) { setNote(`That code did not load: ${(e as Error).message}`); } }}>Load a save code</button>
+          <button data-act="code" onClick={async () => { const c = await encodeSaveCode(toSave(state, content)); try { await navigator.clipboard.writeText(c); setNote(`Save code copied (${c.length} characters).`); } catch { setNote(c); } }}>Save code (copy)</button>
+          <button data-act="link" onClick={async () => { const c = await encodeSaveCode(toSave(state, content)); const url = `${location.origin}${location.pathname}#save=${c}`; try { await navigator.clipboard.writeText(url); setNote('Save link copied: open it on any device to carry on from here.'); } catch { setNote(url); } }}>Save link (copy)</button>
+          {loadBox || <button data-act="load-code" onClick={() => setLoading(true)}>Load a save code</button>}
           <button data-act="quit" onClick={() => setState(null)}>Back to the title</button></div>
-          <p class="hint">Saves live in this browser on this device. A save code moves a game to another.</p></>}
+          <p class="hint">Saves live in this browser on this device. A save code or a save link moves a game to another.</p></>}
       </main>
       <nav class="tabs">
         {(['story', 'soldier', 'map', 'journal', 'menu'] as const).map((t) => <button data-tab={t} class={tab === t ? 'on' : ''} onClick={() => setTab(t)}>{t[0]!.toUpperCase() + t.slice(1)}</button>)}

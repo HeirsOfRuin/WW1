@@ -114,6 +114,8 @@
     [if war.result == ok]You come back in through our wire with the dawn starting, and a prisoner, or near enough: a pay book, a shoulder strap, something the intelligence officer can read. The colonel sends down a rum ration for the raiders. The cork won't come off your face for two days. You keep finding it in your ears.[/if][if war.result == failed]It goes wrong somewhere between the wire and the way back. Their machine gun wakes up early. Two of the party don't come in. You lie in the sap afterwards, shaking so hard your teeth click, and somebody puts a lit cigarette in your mouth without a word.[/if][if war.result == turned]The raid goes over without you. You hear it from the firestep: the bombs, the shouting, their flares going up one after another. When they come back in, nobody looks at you.[/if]
 
     [if war.stage == 1]Behind their line the sun comes up over the slag heaps, and the chalk of their parapet goes pink, then white.[elif war.stage == 2][if war.month <= 6]Over the Somme downland a lark goes up out of no man's land as the light comes.[else]Over the Somme the morning comes up grey, and at seven the guns start again, the way they have every morning since July.[/if][elif war.stage == 3][if war.month <= 4]Snow comes on again over Arras, soft and wet, and fills in the tracks you made.[elif war.month <= 5]Over Arras the sun comes up hot already, and the chalk throws it back.[else]Over the salient the rain comes on again out of a low sky, steady, as if it meant to stay.[/if][else][if war.month <= 3]By morning the frost is down hard on the salient, and the shell holes are skinned with ice.[elif war.month <= 7]Behind the new line a cock's crowing in a farmyard that still has hens in it.[else]By noon the battalion's moving again, east, along a road lined with poplars, through a village with its windows still in.[/if][/if]
+
+    {result_note}
   choices:
     - id: on
       text: Get your head down.
@@ -227,6 +229,8 @@
     [if war.result == ok]You report to the company officer in his dugout, standing with the mud drying on you, and he writes down what you say about the sunken road and the patrol in it and the new wire. He gives you his own tin of cigarettes. Two days later, our guns shell the sunken road all night.[/if][if war.result == failed]You come back with nothing anybody can use. The corporal tells the officer it was too dark, and it was. You lie awake till stand-to, seeing that helmet against the sky.[/if][if war.result == turned]The corporal reports you came back because you'd heard something. He doesn't say what. He doesn't look at you while he says it.[/if]
 
     [if war.stage == 1]Outside, the mist lies low over the chalk, and a pit wheel stands up out of it on their side, stopped.[elif war.stage == 2][if war.month <= 6]Up above it's a quiet Somme morning, the dew grey on the sandbags.[elif war.month <= 9]Up above, the Somme's baking already, and the flies are up.[else]Up above, the rain's still coming down on the Somme, and the shell holes you crawled through are filling.[/if][elif war.stage == 3][if war.month <= 4]Up above, the frost's still white on the sandbags in front of Arras.[elif war.month <= 5]Up above, the chalk in front of Arras is drying white in the sun.[else]Up above, the salient's grey and wet, and the pillboxes on their side sit in the mist like stones in a flooded field.[/if][else][if war.month <= 3]Up above, the salient's white with frost, and quiet, and nobody likes it quiet.[elif war.month <= 7]Up above, the corn in no man's land is a hand higher than it was last week.[else]Up above, the village in front is burning, and the smoke goes straight up in the still air.[/if][/if]
+
+    {result_note}
   choices:
     - id: on
       text: Get your head down.
@@ -325,6 +329,8 @@
     [if war.result == ok]In the morning you look over the parapet with a periscope and there it is, your wire, a new belt of it, grey and nasty in the daylight. You put that there. It's a strange thing to be proud of.[/if][if war.result == failed]In daylight the new belt is a mess, half of it lying flat, a gap at one end you could drive a cart through. The officer looks at it through the periscope and says nothing, and you'll be out there again tonight.[/if][if war.result == turned]The others come in after it's light, with the wire done. The corporal hands you a cup of tea and doesn't say a word.[/if]
 
     [if war.stage == 1]Out in front the new wire lies on the white chalk like a scribble on a slate.[elif war.stage == 2][if war.month <= 6]Behind the line the lorries and the guns come up for the push all day now, and nobody bothers to hide them any more.[elif war.month <= 9]Out in front the stumps of the wood stand up behind the new wire, black.[else]The rain comes on again, and the pickets out in front lean a little further over.[/if][elif war.stage == 3][if war.month <= 4]Out in front of Arras a crust of snow has settled along the new wire, and it glitters when the sun gets on it.[elif war.month <= 5]Out in front of Arras the new wire's grey against the white chalk, plain as handwriting.[else]Out in the salient the new wire's already sinking into the mud, picket by picket.[/if][else][if war.month <= 3]Out in front the frost has furred every barb white.[elif war.month <= 7]Out in front a hare comes out of the corn and sits by the new wire, washing its face.[else]By the next night the battalion's moved on, and the wire's left behind for nobody.[/if][/if]
+
+    {result_note}
   choices:
     - id: on
       text: Get your head down.
@@ -423,6 +429,8 @@
     [if war.result == ok]Two nights later a German raid comes over on exactly that stretch, and walks into rifles that are waiting for it. The company sergeant major makes a point of saying who heard them coming.[/if][if war.result == failed]Nobody comes, that you know of. The night was full of sounds and you can't swear to any of them. You come in with your ears ringing from listening.[/if][if war.result == turned]You came in early. Nobody saw anything on that stretch all night, so it doesn't matter, except that it does.[/if]
 
     [if war.stage == 1]Lying down after, you'd swear you can still feel the miners at work under the chalk, through the floor of the dugout.[elif war.stage == 2][if war.month <= 6]Behind you the guns go on coming up for the push, and the rumble of them comes through the ground all night.[elif war.month <= 9]The smell from no man's land is in your clothes, and it stays there all day.[else]Your greatcoat takes two days to dry, steaming by the brazier.[/if][elif war.stage == 3][if war.month <= 4]Your ears ache with the Arras frost till noon.[elif war.month <= 5]In the Arras sun you sleep the morning through on the firestep, and wake with chalk dust in your mouth.[else]The salient's mud dries on you grey, and cracks every time you move.[/if][else][if war.month <= 3]Out in the salient the ice in the shell holes creaks as the sun gets on it.[elif war.month <= 7]Behind the line a French farmer is out ploughing, in full view of their balloon.[else]By the next night the line has moved on again, and the post's a mile behind it.[/if][/if]
+
+    {result_note}
   choices:
     - id: on
       text: Get your head down.
@@ -521,6 +529,8 @@
     [if war.result == ok]Everything gets up. The front line has its ammunition and its wire and, still warm, its tea. A sergeant you don't know shakes your hand as if you'd brought him a letter from home.[/if][if war.result == failed]Half of it doesn't get up. The tea's spilt and the bread's soaked and an ammunition box is somewhere at the bottom of the trench water. The front line goes without, tonight.[/if][if war.result == turned]You came back without it. Somebody else takes it up.[/if]
 
     [if war.stage == 1][if war.month <= 9]The white dust of the chalk trench is in your hair and your ears and your bread for a day after.[else]The chalk slurry dries on your puttees white and hard, like plaster.[/if][elif war.stage == 2][if war.month <= 6]Behind you the dumps for the push grow every night, stacked under nets in the fields.[elif war.month <= 9]Your shoulders are raw from the ropes, and the Somme dust has got into the sores.[else]The Somme mud's on you to the thighs, and it dries grey and stinks of what's in it.[/if][elif war.stage == 3][if war.month <= 5]You come back down through the caves under Arras and sleep in the warm, under the electric light.[else]You sleep in a pillbox with its door facing their way, with twenty other men and the smell of all of them.[/if][else][if war.month <= 3]Your hands are split from the frozen ropes, and they bleed into your mittens.[elif war.month <= 7]On the way back you fill your water bottle at a farm pump, and the water's sweet and cold.[else]On the way back a Frenchwoman at a cottage door gives you an apple, and says something you don't catch.[/if][/if]
+
+    {result_note}
   choices:
     - id: on
       text: Get your head down.
@@ -617,6 +627,8 @@
     [if war.result == ok]Their trench is blocked for a hundred yards and there's a dugout that won't be used again. The bombing officer says the brigadier has heard. You can't get the smell of the explosive off your hands, sweet and chemical, like pear drops.[/if][if war.result == failed]It went wrong. Their bombers were waiting. The sergeant's arm is in a sling and two of the eight aren't back.[/if][if war.result == turned]They went without you. The bombing officer has your name in his notebook now, and not in the good column.[/if]
 
     [if war.stage == 1]The chalk from their trench is in your hair and your eyebrows, white as a miller's.[elif war.stage == 2][if war.month <= 6]Behind the line, the guns for the push are coming up even by daylight now.[elif war.month <= 9]In the morning the stumps of the wood are still smoking where the bombs went in.[else]The Somme rain washes the burnt cork off your face in streaks.[/if][elif war.stage == 3][if war.month <= 5]Back in a cellar under Arras somebody has a brazier going, and you sit by it till your hands stop.[else]Back at the pillbox the rain's coming in at the door, and you sleep in it anyway.[/if][else][if war.month <= 3]The bomb smoke hung in the frost, and the smell of it's in your coat still.[elif war.month <= 7]In the morning a skylark goes up out of the young corn between the lines.[else]By noon you're on the move again, east, and you pass the trench you bombed, and it's empty.[/if][/if]
+
+    {result_note}
   choices:
     - id: on
       text: Get your head down.
@@ -713,6 +725,8 @@
     [if war.stake == 0 && war.result == ok]The raid came back in under your fire, every man of it, and the raid officer comes along the trench afterwards to find the gunner. You're cleaning the gun. You keep cleaning it while he talks. Your hands won't stop otherwise.[/if][if war.stake == 0 && war.result == failed]The gun was quiet when it was needed. Somebody out there paid for it. Nobody blames you to your face.[/if][if war.stake == 0 && war.result == turned]You didn't take the gun up. Somebody else's team did.[/if][if war.stake == 1 && war.result == ok]He didn't come back. Whether you hit him nobody can say, and the artillery observer two bays down says it was his rifle, but their battery never got its range, and the cookhouse is still standing at tea time. The company sergeant major gives you an extra tot.[/if][if war.stake == 1 && war.result == failed]He came back an hour later and finished his shoot. At four o'clock their heavies came down on the support line exactly where he'd marked it, and the stretcher-bearers were busy till dark.[/if][if war.stake == 1 && war.result == turned]You didn't put the gun up. He finished his shoot, and at four o'clock their heavies came down on the support line.[/if]
 
     [if war.stage == 1]The chalk dust has got into the gun's works, fine as flour, and it takes you an hour with the oil and a rag.[elif war.stage == 2][if war.month <= 6]In the afternoon the gun teams practise for the push again, running with the guns through the beet.[elif war.month <= 9]The flies are at the empty cases round your feet, for the oil.[else]The Somme mud's in the drum pans, and you clean them one by one with a stick.[/if][elif war.stage == 3][if war.month <= 4]The oil's gone thick as treacle in the Arras cold, and the gun feels it.[elif war.month <= 5]In the Arras sun the gun's too hot to touch by noon, and you clean it in the shade of the parados.[else]In the salient the damp gets into the gun overnight, and in the morning there's rust on the bolt.[/if][else][if war.month <= 3]The barrel's so cold in the salient morning it takes the skin off your fingers.[elif war.month <= 7]In the hedge bottom a blackbird starts up again, once the gun's quiet.[else]By noon the gun's on your shoulder again, going east across the stubble.[/if][/if]
+
+    {result_note}
   choices:
     - id: on
       text: Clean the gun.
@@ -801,6 +815,8 @@
     [if war.result == ok]The line holds till morning. The colonel gets his company commander, and the company gets its guns when it needs them. The signals sergeant gives you a slice of his wife's cake, which is the highest honour in the signals.[/if][if war.result == failed]The line goes again within the hour. They send a runner, in the end, and he doesn't come back.[/if][if war.result == turned]You didn't go. Another signaller did.[/if]
 
     [if war.stage == 1]The chalk from the joint is in the cracks of your hands, and it won't wash out.[elif war.stage == 2][if war.month <= 6]Behind you the burying parties are still digging the cable trench for the push, six feet down, a mile of it.[elif war.month <= 9]The Somme dust has got into the buzzer, and it rasps like a cricket in a hearth.[else]In the Somme rain the cable you mended is sinking into the mud already.[/if][elif war.stage == 3][if war.month <= 5]Back in the cellar under Arras the signals sergeant is frying bacon on a primus.[else]In the pillbox the pigeon basket's on a shelf, and the birds croon in the dark.[/if][else][if war.month <= 3]By morning the wire's iced to the duckboards.[elif war.month <= 7]The cows are back in the field by the hedge, and they've their eye on the wire again.[else]By afternoon the battalion's moved on, and the line has to be run out all over again, a mile further east.[/if][/if]
+
+    {result_note}
   choices:
     - id: on
       text: Get your head down.
@@ -897,6 +913,8 @@
     [if war.result == ok]The observer's notebook goes back to the sniping officer with two entries in it, and a sketch of the loophole. Nobody shaves at that mirror again. You eat your bully beef in the dark afterwards and it tastes of the inside of the tin.[/if][if war.result == failed]A day in the hide with nothing in the notebook but times and weather. Their side was careful today. So were you.[/if][if war.result == turned]You came out early. The notebook's blank.[/if]
 
     [if war.stage == 1]Dusk comes down over the slag heaps, and you come out of the hide stiff as a board.[elif war.stage == 2][if war.month <= 6]Over the Somme the light goes off the downland slowly, and their side goes quiet for its supper.[elif war.month <= 9]Over the smashed wood the evening's hot and still, and the flies are thick.[else]The Somme dusk comes on at four, wet, and you come out of the hide stiff.[/if][elif war.stage == 3][if war.month <= 4]Out of the hide, your feet are dead with the Arras cold, and they come back with pins and needles.[elif war.month <= 5]Out of the hide, the evening over Arras smells of chalk dust and hawthorn.[else]The salient's grey at dusk, and the pillboxes on their side go black one by one.[/if][else][if war.month <= 3]At dusk the frost comes down on the salient again, and you can hear it crack in the mud.[elif war.month <= 7]At dusk the corn between the lines goes blue, and a wood pigeon calls from their wood.[else]At dusk a church bell rings in the village in front, once, and stops.[/if][/if]
+
+    {result_note}
   choices:
     - id: on
       text: Clean the rifle.
@@ -992,6 +1010,8 @@
     [if war.result == ok]Their gallery is gone. The listening officer says there's been no digging since. You sleep twelve hours in the tunnellers' dugout and dream of nothing, which is the best kind.[/if][if war.result == failed]It went off too soon, or too late. Our gallery came in at the end. Two men are still down there, and you know their names, and the officer has started a new shaft.[/if][if war.result == turned]You came up. Somebody else went down.[/if]
 
     [if war.stage == 1]Up top, the chalk from the gallery is stacked in sandbags under a sheet, where their aeroplanes won't see it white.[elif war.stage == 2][if war.month <= 6]Up top the Somme's quiet, and the spoil from the big galleries goes away at night, a sandbag at a time.[elif war.month <= 9]Up top it's hot, and after the gallery the air smells of grass and burning.[else]Up top it's raining on the Somme, and you stand in it a minute and let it wash you.[/if][elif war.stage == 3][if war.month <= 4]Up top, the Arras frost takes your breath after the warm of the gallery.[elif war.month <= 5]Up top, the Arras sun hurts your eyes after the candle.[else]Up top the salient's grey and wet, and the pumps are going, and you go down again tomorrow.[/if][else][if war.month <= 3]Up top the salient's frozen hard, and your wet clothes stiffen on you before you reach the dugout.[elif war.month <= 7]Up top there's a farm cat sitting on the sandbags round the shaft, washing.[else]Up top the company's packing up the pumps and the windlass to move on east.[/if][/if]
+
+    {result_note}
   choices:
     - id: on
       text: Wash the clay off, if you can.
@@ -1086,6 +1106,8 @@
     [if war.result == ok]You got him in. At the aid post the doctor looks at him, and then at you, and says he'll live, probably, and you go outside and sit on the sandbags and your hands start shaking and don't stop for an hour. Somebody brings you tea.[/if][if war.result == failed]He was dead when you got him to the aid post. Maybe before. The doctor doesn't say which, and you don't ask. You wash his blood off your hands in a shell hole full of rainwater, and it doesn't come off.[/if][if war.result == turned]You didn't go out. Somebody else did, or nobody did, and in the morning the calling has stopped.[/if]
 
     [if war.stage == 1]The aid post smells of iodine, and of the coal in the cottage range.[elif war.stage == 2][if war.month <= 6]The aid post's new, dug deep for the push, and it smells of fresh timber and carbolic.[elif war.month <= 9]Outside the aid post the stretchers lie in rows in the Somme sun.[else]Outside the aid post the Somme mud's to the ankles, and the stretchers come in grey with it.[/if][elif war.stage == 3][if war.month <= 5]The caves under Arras smell of wet chalk and ether, and the bulbs on the wire flicker when a shell lands up top.[else]In the salient the next stretcher party is already going out along the duckboards.[/if][else][if war.month <= 3]The frost is down again on the salient, and you think of the ones still out in it.[elif war.month <= 7]In the farmhouse yard the doctor washes his hands at the pump, and the ducks watch him.[else]By evening the aid post's moved on again, and the farm it was in has its own people back, sweeping out.[/if][/if]
+
+    {result_note}
   choices:
     - id: on
       text: Wash your hands.

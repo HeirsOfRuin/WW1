@@ -469,21 +469,13 @@ export const module: GameModule = {
   },
   /** the close call the last roll came to, under the choice's outcome (FRAME-PLAYTEST2 D) */
   outcomeNote(s) {
-    const n = war(s).news;
-    // how near the sortie just ended came, from the same score that decided it
-    const so = n?.sortie;
-    const margin = so && !so.turned && so.margin !== undefined && war(s).cursor.at !== 'done'
-      ? (so.ok ? (so.margin < 0.3 ? 'It held, just.' : so.margin > 2.5 ? 'It went as well as these things ever go.' : '') : (so.margin > -0.3 ? 'It so nearly came off.' : so.margin < -2.5 ? 'It was never going to work.' : ''))
-      : '';
-    const named = n?.named && war(s).cursor.at !== 'done' ? 'Your name is read out in battalion orders.' : '';
-    const c = n?.close;
-    if (!c) return [margin, named].filter(Boolean).join(' ') || undefined;
+    const c = war(s).news?.close;
+    if (!c) return undefined;
     const w = war(s);
     // inside a tank or in the air a near miss is not the infantry's: their own tables
     const bkey = w.path === 'tank' || w.path === 'air' ? `battle_${w.path}` : `battle_${c.key}`;
     const lines = CLOSE_CALLS[c.kind === 'battle' ? bkey : c.key] ?? CLOSE_CALLS[c.kind === 'battle' ? 'battle' : 'step'] ?? [];
-    const line = lines.length ? lines[(c.n + war(s).clock) % lines.length]! : '';
-    return [line, margin, named].filter(Boolean).join(' ') || undefined;
+    return lines.length ? lines[(c.n + war(s).clock) % lines.length] : undefined;
   },
   textVar(name, s) {
     const w = war(s); const p = w.pending;
@@ -554,6 +546,13 @@ export const module: GameModule = {
       case 'friends_home': return `${aliveFriends(w)} of the nine`;
       case 'awards_line': return w.awards.length ? w.awards.join(', ') : 'none';
       case 'ending_line': return endingLine(w);
+      // how near the sortie just ended came, and his name in orders: at the end of its result, after the
+      // result is told (playtest 3: "read out in battalion orders" came before the screen said it went well)
+      case 'result_note': {
+        const so = w.news?.sortie; if (!so || w.cursor.at === 'done') return '';
+        const m = so.turned || so.margin === undefined ? '' : so.ok ? (so.margin < 0.3 ? 'It held, just.' : so.margin > 2.5 ? 'It went as well as these things ever go.' : '') : (so.margin > -0.3 ? 'It so nearly came off.' : so.margin < -2.5 ? 'It was never going to work.' : '');
+        return [m, w.news?.named ? 'Your name is read out in battalion orders.' : ''].filter(Boolean).join(' ');
+      }
       case 'after_name': return afterBattle(w)?.name ?? '';
       case 'after_lost_names': {
         const b = afterBattle(w); if (!b?.lost.length) return '';
@@ -564,7 +563,7 @@ export const module: GameModule = {
     }
     return undefined;
   },
-  checkTextVar: (name) => (['rank_a', 'lost_last_name', 'award_last_name', 'risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line', 'money_line', 'sent_home', 'after_name', 'after_lost_names', 'after_award_name', 'duty_risk_draft', 'sent_name', 'sent_first', 'sent_duty', 'risk_lead', 'risk_close_shoot', 'risk_close_bayonet', 'risk_close_prisoner', 'risk_close_spare'].includes(name) ? [] : undefined),
+  checkTextVar: (name) => (['rank_a', 'lost_last_name', 'award_last_name', 'risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line', 'money_line', 'sent_home', 'after_name', 'after_lost_names', 'after_award_name', 'duty_risk_draft', 'sent_name', 'sent_first', 'sent_duty', 'risk_lead', 'risk_close_shoot', 'risk_close_bayonet', 'risk_close_prisoner', 'risk_close_spare', 'result_note'].includes(name) ? [] : undefined),
   // the year's title page: where he stands, and who of the nine has died since the last page
   cardRows: (_c, s) => {
     const w = war(s);
