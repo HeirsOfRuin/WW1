@@ -14,7 +14,7 @@ import type { GameState } from './state';
 import {
   run, decide, setHome, newsOf, aliveFriends, grade, dutyHit, missionHit, phaseHit, battleOf,
   RANKS, ROLES, DUTIES, STAGES, SORTIES, sortieHit, type Decision, type War, type SortieChoice,
-  homeTier, sentHomeOf, lsd, ASSIGNMENTS, CORPS_BATTLES, corpsOf, rankName, rankFull, canLead, CLOSE, type CloseChoice,
+  homeTier, sentHomeOf, lsd, ASSIGNMENTS, CORPS_BATTLES, corpsOf, rankName, rankFull, canLead, CLOSE, phaseNerve, type CloseChoice,
 } from './war/index';
 import { warMonth, seasonOf, monthName, monthOfClock } from './war/calendar';
 import { CLOSE_CALLS } from './close-calls';
@@ -532,7 +532,10 @@ export const module: GameModule = {
         if (p?.kind !== 'battle') return '';
         const b = battleOf(w);
         const choice = name.slice(5) as 'push' | 'help' | 'ground' | 'lead';
-        return riskWord(phaseHit(w, b, b.phases[p.phase]![0], p.type, choice));
+        // the nerve the order costs, from the same function that charges it, and a plain warning when it
+        // is more than he has left: the breakdown is then shown before it happens, not after
+        const cost = Math.round(phaseNerve(w, b, p.phase, choice));
+        return `${riskWord(phaseHit(w, b, b.phases[p.phase]![0], p.type, choice))}, ${cost} nerve${w.nerve - cost <= 0 ? ': more than you have left' : ''}`;
       }
       case 'offer0': case 'offer1': case 'offer2': return p?.kind === 'leave' ? offerWords(p.offers[Number(name.slice(5))] ?? '') : '';
       case 'money_line': return MONEY_LINES[w.town]![homeTier(w)]!;

@@ -270,6 +270,12 @@ function learn(w: War, k: string, amt: number): void {
 export const trenchMod = (w: War) => 1 - 0.06 * skill(w, 'trench');
 const nerveMod = (w: War) => (home(w, 'stamina') ? 0.88 : 1);
 function spendNerve(w: War, amt: number): void { w.nerve = clamp(w.nerve - amt * nerveMod(w), -10, 100); }
+/** What a battle phase's order costs in nerve, as resolved and as shown under the order (playtest 3:
+ *  a man went into Passchendaele with 40 nerve, its phases took 13 a time, and nothing on the screen
+ *  said so until "Your nerve went at Passchendaele"). Friends killed beside him cost more on top. */
+export function phaseNerve(w: War, b: Battle, i: number, choice: BattleChoice): number {
+  return b.phases[i]![1] * (PATHS[w.path]?.battleNerve ?? 1) * nerveMod(w) - CHOICES[choice].nerve;
+}
 
 function hit(w: War, cause: string): void {
   const r = raw(w.rng, 'fire');
@@ -876,8 +882,7 @@ export function decide(w: War, d: Decision): War {
       if (w.ending) { w.cursor = { at: 'tally' }; break; }
       if (b.capture && w.path !== 'air' && ch(w, 'battle', b.capture * (choice === 'ground' ? 2 : 1))) { end(w, 'captured', `${b.name}: overrun`); w.cursor = { at: 'tally' }; break; }
       if (path.advanceCapture && (p.type === 'advance' || p.type === 'stalled') && ch(w, 'battle', path.advanceCapture)) { end(w, 'captured', `${b.name}: ditched beyond the line`); w.cursor = { at: 'tally' }; break; }
-      spendNerve(w, ncost * (path.battleNerve ?? 1));
-      w.nerve = clamp(w.nerve + cm.nerve, -10, 100);
+      w.nerve = clamp(w.nerve - phaseNerve(w, b, c.i, choice), -10, 100); void ncost;
       w.standing = clamp(w.standing + (p.stalled && choice === 'ground' ? 0 : cm.standing), 0, 100);
       c.pts += cm.award * path.award * float(w.rng, 'battle', 0.5, 1.5);
       if (ch(w, 'battle', cm.lead * 0.5)) {
