@@ -1,0 +1,88 @@
+# The words of content/scenes/war/romance.yaml: Ternecourt and the Delattres (real French on the
+# signs and in French mouths, and the soldiers' French he answers in; docs/FRAME-WORDS.md section 2),
+# and the mill, pit, farm and City words of the four sweethearts' letters. A French phrase is one
+# term, so one tap gives the whole line. Format and rules: base.yaml, FRAME-WORDS.md section 1.
+
+# ---- Ternecourt: signs and places
+- { term: "Estaminet du Bon Coin", means: "The sign over the door: the Estaminet of the Good Corner, a common name for a French village bar." }
+- { term: "Oeufs et frites, Vin blanc, Bière", means: "Eggs and chips, white wine, beer: all a village estaminet sold, and all a soldier wanted." }
+- { term: mairie, means: "The village hall of a French commune, where the mayor kept the registers and signed the passes." }
+- { term: poilu, also: [poilus], means: "A French infantry soldier; the word means hairy, for the beards of 1914." }
+
+# ---- French in French mouths
+- { term: Bonsoir, means: "French for good evening." }
+- { term: "Bonne nuit", means: "French for good night." }
+- { term: "Bonjour, monsieur", means: "French for good day, sir; said to any stranger in a village street." }
+- { term: "Très bon. Merci beaucoup", means: "Proper French for very good, and thank you very much." }
+- { term: Tiens, means: "French for well, look: said on seeing somebody you did not expect." }
+- { term: "les Boches", also: [Boches, Boche], means: "The French name for the Germans, and not a kind one; British officers and newspapers took it up." }
+- { term: "C'est la guerre", means: "French for it's the war: said with a shrug of every shortage, loss and hardship." }
+- { term: "À dimanche", means: "French for till Sunday: a goodbye that fixes the next meeting." }
+- { term: "Eau-de-vie", means: "French for water of life: a strong clear spirit a farmer made from his own fruit." }
+- { term: "Merci bien", means: "French for thank you kindly." }
+- { term: "Vous m'écrirez", means: "French for you will write to me." }
+- { term: "Elle est jolie", means: "French for she is pretty." }
+- { term: "Ici tout va bien. Il neige encore", means: "French for all is well here, it is still snowing." }
+- { term: "Bonne chance", means: "French for good luck." }
+- { term: "mon petit", means: "French for my little one: what an older woman calls a young man she is fond of." }
+- { term: "C'est fini", means: "French for it is finished. The soldiers' napoo meant much the same." }
+- { term: Angleterre, means: "French for England." }
+- { term: "Tenez bon", means: "French for hold fast." }
+- { term: "Après la guerre", means: "French for after the war: what every plan and promise in France waited on." }
+- { term: "Il reste", means: "French for he stays." }
+- { term: "Un bon souvenir de Ternecourt", means: "French for a kind remembrance from Ternecourt: a usual thing to write on a postcard." }
+- { term: "on permission", means: "Her French showing through her English: permission is the French soldier's word for leave." }
+
+# ---- soldiers' French, mangled by ear
+- { term: "tray bon", means: "Soldiers' French for très bon: very good. The opposite was no bon." }
+- { term: mamzelle, means: "Soldiers' French for mademoiselle: miss, any young Frenchwoman." }
+- { term: "merci boko", means: "Soldiers' French for merci beaucoup: thank you very much." }
+- { term: "parley-voo", means: "Soldiers' French, from parlez-vous, do you speak: the French language, or any talk with a French girl." }
+- { term: compree, means: "Soldiers' French for compris: understood, or as a question, do you understand?" }
+- { term: napoo, means: "Soldiers' French, from il n'y en a plus: none left, finished, gone, or dead." }
+- { term: Tommy, also: [Tommies], means: "A British private soldier, from Tommy Atkins, the name on the army's specimen forms. The French used it too." }
+- { term: padre, means: "An army chaplain." }
+
+# ---- the mill (Nellie)
+- { term: mee-maw, means: "To talk with big silent lip movements, as weavers did across the din of the looms." }
+- { term: shuttle, also: [shuttles], means: "The pointed wooden carrier that shot the thread across a loom; one flying out could maim a weaver." }
+- { term: "warp size", means: "The starch paste put on the lengthwise threads to strengthen them; a weaving shed smelt of it." }
+- { term: "short time", means: "Fewer hours or days of work a week, on less pay, when a mill was short of cotton or orders." }
+- { term: Whitsun, means: "The Whit Sunday holiday, seven weeks after Easter; the great yearly holiday of the mill towns." }
+- { term: overlooker, means: "The man in charge of a set of looms and their weavers; in Lancashire also called a tackler." }
+- { term: piecework, means: "Work paid by the piece made, not by the hour, so quick hands earned more." }
+- { term: Hippodrome, means: "A variety theatre; most big towns had one, with comic turns, singers and acrobats twice nightly." }
+- { term: Co-op, means: "The Co-operative Society's shop, owned by its members, who shared the profit as a dividend." }
+
+# ---- weddings, money and the men at home (all four towns)
+- { term: "by licence", means: "Married on a bought licence instead of three weeks of banns; quick enough for a soldier's leave." }
+- { term: banns, means: "Notice of a coming marriage, read out in church on three Sundays before the wedding." }
+- { term: "buff form", means: "The War Office form, on buff paper, that told a family their soldier was dead." }
+- { term: "separation allowance", means: "The weekly sum the army paid a soldier's wife, with a part allotted from his own pay." }
+- { term: "walking out with", means: "Courting: being seen out together as a couple, the step before an engagement." }
+- { term: "silver badge", means: "The Silver War Badge, given to men discharged for wounds or sickness, to show they had served." }
+- { term: "white feather", also: [white feathers], means: "Women handed one to a young man out of uniform, to call him a coward." }
+- { term: tribunal, also: [tribunals], means: "The local board that, from 1916, decided which men could be excused the call-up." }
+
+# ---- the pit (Lizzie)
+- { term: "in service", means: "Working as a servant living in somebody else's house." }
+- { term: followers, means: "A maidservant's young men; most mistresses forbade them to call at the house." }
+- { term: "board school", means: "A plain elementary school run by the local school board, free, for working people's children." }
+- { term: waggonway, also: [waggonways], means: "A colliery's own railway, carrying coal waggons from the pit to the river or the sea." }
+- { term: deputy, also: [deputies], means: "The pit official in charge of safety and the men in one district underground." }
+- { term: putter, also: [putters], means: "A pit lad who pushed or drove the coal tubs from the coal face to the haulage road." }
+- { term: "pit check", means: "A numbered brass token a miner handed in going down the pit, to show who was below." }
+- { term: nowt, means: "Northern for nothing." }
+- { term: owt, means: "Northern for anything." }
+- { term: marra, also: [marras], means: "Pit word for a workmate, the man you share a place and its dangers with." }
+- { term: hinny, means: "A Tyneside word of fondness, like dear or honey." }
+
+# ---- the farm (Rose)
+- { term: "the carrier", means: "A man with a horse and cart who took parcels and passengers between the villages and the market town." }
+- { term: "grubbed out", means: "Dug up by the roots." }
+
+# ---- the city (Ivy)
+- { term: cachous, means: "Small scented sweets, sucked to sweeten the breath." }
+- { term: "caught a crab", also: ["catch a crab"], means: "Missed the stroke with an oar in rowing, and was knocked backwards off the seat." }
+- { term: "Nunc Dimittis", means: "The evening hymn from the prayer book: Lord, now lettest thou thy servant depart in peace." }
+- { term: cruet, means: "A small stand of salt, pepper and vinegar bottles for the table; a usual wedding present." }

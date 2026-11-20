@@ -59,7 +59,7 @@
 
     Under it, smaller, squeezed in: I still go up to the tower of a Sunday.
 
-    The paper smells of the shed, size and warm oil, and you hold it under your nose on the firestep
+    The paper smells of the shed, of warp size and warm oil, and you hold it under your nose on the firestep
     like a lad with a bag of chips.
   choices:
     - id: truth
@@ -118,7 +118,7 @@
       text: Tell her how it is, as near as the officer will pass.
       effects: [ { set: flag.ro_sw_truth }, { war_mood: { nerve: 1 } } ]
       text_after: |
-        You tell her it's like the face with the roof off: wet, dark at the wrong times, every man
+        You tell her it's like the coal face with the roof off: wet, dark at the wrong times, every man
         listening. You tell her about the rats. The platoon officer reads every letter before it
         goes, so you write it for him as well, and it comes out like a report to the deputy. At the
         bottom, small, the way she did, you put that you think about the waggonway.
@@ -275,8 +275,8 @@
       text: Ask her to wait for you, till it's over.
       effects: [ { set: flag.ro_sw_after }, { war_mood: { nerve: 1 } } ]
       text_after: |
-        You put it carefully. That you'll not have her a wife for ten days and then a widow on a buff
-        form. That you'd like to come home to her, after, if she'll have you then. She writes back that
+        You put it carefully. That you'll not have her a wife for ten days and then a widow on a
+        buff form. That you'd like to come home to her, after, if she'll have you then. She writes back that
         she will, and that she'll hold you to it, and you're to bring the ring yourself at Christmas
         and not send one in a parcel like a pair of socks.
       next: "@return"
@@ -517,9 +517,9 @@
 
     [if flag.ro_sw_after && !flag.ro_sw_married]"I have not changed my mind and I shan't. But they are being married every leave now, by licence, and I stand at the back of church and cry like a fool at every one of them, and I am tired of being the one at the back. If you asked me again I would say the other thing this time. I am only saying."[/if]
 
-    [if flag.ro_sw_little && !flag.ro_sw_married && !flag.ro_sw_after]"I waited to hear from you properly, and I have had cards. I don't blame you. I expect you can't, out there, and it's not for me to know why. But I have to tell you I have been walking out with[if start == mill] Jack Kenyon from the dye works, who came home from Gallipoli with his arm stiff and wears the silver badge so nobody gives him a feather[/if][if start == pit] Ned Forster, the deputy's lad, that the pit would not let go for a soldier[/if][if start == farm] Harry Moule, the carrier's son, that the doctors turned down for his chest[/if][if start == city] a Mr Pratt, a telephone engineer at the exchange, who was turned down three times for his eyes and tried a fourth[/if], and he has asked me, and I have said yes. He is kind, and he is here. I hope you won't think too hard of me. I shall pray for you every night. I always have."[/if]
+    [if flag.ro_sw_little && !flag.ro_sw_married && !flag.ro_sw_after]"I waited to hear from you properly, and I have had cards. I don't blame you. I expect you can't, out there, and it's not for me to know why. But I have to tell you I have been walking out with[if start == mill] Jack Kenyon from the dye works, who came home from Gallipoli with his arm stiff and wears the silver badge so nobody gives him a white feather[/if][if start == pit] Ned Forster, the deputy's lad, that the pit would not let go for a soldier[/if][if start == farm] Harry Moule, the carrier's son, that the doctors turned down for his chest[/if][if start == city] a Mr Pratt, a telephone engineer at the exchange, who was turned down three times for his eyes and tried a fourth[/if], and he has asked me, and I have said yes. He is kind, and he is here. I hope you won't think too hard of me. I shall pray for you every night. I always have."[/if]
 
-    [if flag.ro_fr_spoke && war.transferred]In with it, sent on by somebody in the battalion, there's a picture postcard of the church at Ternecourt, with its crooked weathercock. On the back, in pencil, in careful English: For the soldier who said erfs. We are all well. Lucien is home on permission and eats everything. Marthe. You read it twice, and put it in your pay book, and feel like a thief.[/if]
+    [if flag.ro_fr_spoke && war.transferred]In with it, sent on by somebody in the battalion, there's a picture postcard of the church at Ternecourt, with its crooked weathercock. On the back, in pencil: Un bon souvenir de Ternecourt. Under it, in careful English: For the soldier who said erfs. We are all well. Lucien is home on permission and eats everything. Marthe. You read it twice, and put it in your pay book, and feel like a thief.[/if]
   choices: &ro_17_choices
     - id: wife_truth
       text: Write back the truth. You're frightened, for her and for you.
@@ -796,36 +796,40 @@
   title: Ternecourt
   text: &ro_fr1_text |
     The battalion comes down south in the thaw and goes into billets at Ternecourt, a long street
-    of brick and whitewash behind Albert, with a pond at one end and a church whose weathercock has
-    been shot crooked. You're in a barn with forty others and a hen who lays in somebody's helmet.
+    of brick and whitewash behind Albert, with a pond at one end, a mairie no bigger than a cottage, and a church whose
+    weathercock has been shot crooked. You're in a barn with forty others and a hen who lays in somebody's helmet.
 
-    The estaminet is the front room of the house by the pond. A stove going, oilcloth on the tables,
-    a crucifix, a picture of the President cut out of a paper. The mother does the frying in the back
+    The estaminet is the front room of the house by the pond: Estaminet du Bon Coin over the door in
+    faded paint, and chalked on the shutter, Oeufs et frites, Vin blanc, Bière. A stove going,
+    oilcloth on the tables, a crucifix, a picture of the President cut out of a paper. The mother does the frying in the back
     in a pan the size of a cartwheel, and the smell of hot fat and onions comes through the door and
     down the street and fetches men out of the barns like a dinner bell.
 
     The daughter carries the plates. She's twenty, perhaps, with her sleeves pushed up and a burn on
     one wrist from the pan, and she has the English the Tommies have taught her, some of it not fit,
-    which she doesn't know. "Egg-chip," she says, and puts it down in front of you. "Two egg. The
-    beer is no good, the English say. Drink the wine."
+    which she doesn't know. "Bonsoir, Tommy," she says to every man through the door; you're all
+    Tommy to her. "Egg-chip." She puts it down in front of you. "Two egg. La bière, no good, the
+    English say. Drink the wine."
 
     [if flag.ro_sw_first && !flag.ro_sw_ended]There's a letter from home in your breast pocket, half answered.[/if]
   choices: &ro_fr1_choices
     - id: speak
-      text: Try your French on her. Merci, mam'selle, and whatever else you've got.
+      text: Try your French on her. Merci boko, mamzelle, and whatever else you've got.
       effects: [ { set: flag.ro_fr_spoke }, { war_mood: { nerve: 1 } } ]
       text_after: |
-        You've got about six words and you use them all on the eggs. She laughs, not quite at you,
-        and puts you right: oeufs, not erfs, with her lips pushed out, and makes you say it till you
-        do. Her name's Marthe. The lads have been calling her Martha for a month and she lets them.
-        When you go she says "Bonne nuit," and then, carefully, in English, "Mind the step," and you
-        go out and miss it.
+        You've got about six words and you use them all on the eggs. "Tray bon, mamzelle.
+        Merci boko." She laughs, not quite at you, and puts you right: "Très bon. Merci beaucoup."
+        Then oeufs, not erfs, with her lips pushed out, and she makes you say it till you do. Her name's
+        Marthe. The lads have been calling her Martha for a month and she lets them. When you go she
+        says "Bonne nuit, Tommy," and then, carefully, in English, "Mind the step," and you go out
+        and miss it.
       next: "@return"
     - id: eat
       text: Eat up, pay, and get back to the barn.
       text_after: |
         You eat it fast, with the yolk on your chin, and leave your coppers on the oilcloth. Behind
-        you the lads are trying their French on her all at once, and she's laughing at them, and the
+        you the lads are trying their French on her all at once, "Parley-voo, mamzelle?" and worse,
+        and she's laughing at them, and the
         stove's roaring, and you go out into the dark street and your blanket.
       next: "@return"
 
@@ -876,20 +880,22 @@
   title: Marthe
   text: &ro_fr2_text |
     Out at rest at Ternecourt again, what's left of the battalion, after the summer. The street's
-    the same. The weathercock's the same. The barn has new straw, and nobody says who slept where
-    last time.
+    the same. The weathercock's the same. The old woman at the pump says "Bonjour, monsieur" to
+    every one of you, as she did in the spring. The barn has new straw, and nobody says who slept
+    where last time.
 
     Marthe knows you. She puts the plate down and stands there with the cloth over her arm and says,
-    "You. Erfs," and you both laugh, and it's the first time you have since July.
+    "Tiens! Monsieur Erfs," and you both laugh, and it's the first time you have since July.
 
-    She has a letter from her brother, Lucien. He's at Verdun. It's six weeks old and the French
+    She has a letter from her brother, Lucien, a poilu since the first week. He's at Verdun. It's six weeks old and the French
     censor has been at it with scissors, so it's more holes than letter, and she reads you what's
     left in French, slowly, and you understand one word in four. Il tient. He holds. She says it
     twice, so you'll know it.
 
     Her father is too old for the army and the farm behind the house wants the beet lifting before
-    the frost, and there's nobody to lift it. On Sunday, she says, if the English have nothing for you
-    to do. She doesn't look at you when she says it.
+    the frost, and there's nobody to lift it; les Boches have seen to that. "C'est la guerre," she
+    says, as they all do, with the shoulders. On Sunday, she says, if the English have nothing for
+    you to do. She doesn't look at you when she says it.
 
     [if flag.ro_sw_wed16]In your pocket is the letter that says yes. You're to be married at Christmas. You haven't said.[/if][if flag.ro_sw_after]In your pocket is the letter about the ring. You haven't said.[/if]
   choices: &ro_fr2_choices
@@ -899,18 +905,19 @@
       text_after: |
         Beet all morning, in clay that holds on to your boots like a hand, the old man working beside
         you without a word. After, she walks you back along the stream at the bottom of the village,
-        and shows you where Lucien used to catch eels, and talks, in French, and you don't follow
-        half of it and it doesn't matter. She doesn't take your arm. At the barn she says, in
-        English, "Next Sunday," the way you'd say the day the post goes.
+        and shows you where Lucien used to catch eels, and talks, in French, and you say "Compree" where
+        it seems to be wanted and don't follow half of it, and it doesn't matter. She doesn't take
+        your arm. At the barn she says "À dimanche," and then, to be sure of you, in English, "Next
+        Sunday," the way you'd say the day the post goes.
       next: "@return"
     - id: field
       text: Lift the beet with her father, and leave it at that.
       effects: [ { set: flag.ro_fr_friend }, { war_mood: { nerve: 1 } } ]
       text_after: |
         Beet all day with the old man, who says nothing at all, and at the end of it gives you a
-        glass of something clear out of an unlabelled bottle that takes the skin off your throat. He
-        shakes your hand. Marthe gives you a dozen eggs in your cap to take back to the barn, and
-        thanks you, and it's enough.
+        glass of something clear out of an unlabelled bottle that takes the skin off your throat.
+        "Eau-de-vie," he says, his one word of the day, and shakes your hand. Marthe gives you a
+        dozen eggs in your cap to take back to the barn. "Merci bien," she says, and it's enough.
       next: "@return"
 
 - id: ro_fr_16b_pit
@@ -961,13 +968,14 @@
     and the estaminet windows are steamed so thick you can't see in, only the shapes of men and the
     red of the stove.
 
-    Marthe has your plate ready before you've sat down. When she comes back for it she has a bit of
+    Marthe has your plate ready before you've sat down. "Bière, napoo," she says, which she had from
+    the Tommies, and brings the wine. When she comes back for the plate she has a bit of
     paper folded small, and puts it under the salt. Delattre, Estaminet du Bon Coin, Ternecourt,
     Somme, in a hand like a schoolmistress's.
 
-    [if flag.ro_fr_walked]Five Sundays you walked by the stream. Once, in the rain, under the willows, she took your arm, and then let go of it when her mother came to the door.[/if][if flag.ro_fr_friend]You lifted the beet, and the potatoes after, and the old man gave you the clear stuff every time, and called you something in French the lads say means son-in-law, and laughed.[/if][if flag.ro_sw_married] She knows about your wife. She asked to see the photograph, and held it near the lamp, and gave it back and said she was pretty, which she is.[/if]
+    [if flag.ro_fr_walked]Five Sundays you walked by the stream. Once, in the rain, under the willows, she took your arm, and then let go of it when her mother came to the door.[/if][if flag.ro_fr_friend]You lifted the beet, and the potatoes after, and the old man gave you the clear stuff every time, and called you mon gendre, which the lads say means son-in-law, and laughed.[/if][if flag.ro_sw_married] She knows about your wife. She asked to see the photograph, and held it near the lamp, and gave it back and said "Elle est jolie," which she is.[/if]
 
-    "You write," she says. It isn't quite a question.
+    "Vous m'écrirez," she says, and then in English, "You write." It isn't quite a question.
   choices: &ro_fr3_choices
     - id: promise
       text: Take the address. Promise to write.
@@ -975,15 +983,17 @@
       text_after: |
         You write the first one on the march, at a halt, on your knee, in English, with three words of
         French at the end from the phrase book in the YMCA hut. The officer who censors it raises an
-        eyebrow at the French and passes it. Her answer finds you in a fortnight: two sides in French
-        you can read about half of, and one line in English. The eggs are not so good with no you.
+        eyebrow at the French and passes it. Her answer finds you in a fortnight: two sides in French.
+        "Ici tout va bien. Il neige encore," it starts, and the padre, who has French, gives you the
+        rest: all well, more snow, the hens not laying. Then one line in English, her own. The eggs
+        are not so good with no you.
       next: "@return"
     - id: part
       text: Say goodbye properly, and leave it there.
       effects: [ { set: flag.ro_fr_parted } ]
       text_after: |
         You shake her hand, and her father's, and her mother's, who kisses you on both cheeks and
-        smells of onions and lavender. Marthe stands in the door with the light behind her while the
+        says "Bonne chance, mon petit," and smells of onions and lavender. Marthe stands in the door with the light behind her while the
         company forms up in the snow. You don't look back till the bend in the road, and when you do
         the door's shut.
       next: "@return"
@@ -1045,7 +1055,8 @@
     the estaminet in her lap, holding it like a baby. Marthe sees you, and stops in the road so the
     cart behind has to pull up.
 
-    "Ternecourt," she says. "Fini." The guns behind you, going on and on. "The English will hold?"
+    "Ternecourt," she says. "C'est fini. Les Boches arrivent." You don't need French for that, with
+    the guns behind you going on and on. "The English will hold?"
     [if flag.ro_fr_writes]Her last letter came a fortnight ago, about the hens.[/if]
   choices: &ro_fr4_choices
     - id: address
@@ -1053,7 +1064,8 @@
       effects: [ { set: flag.ro_fr_address } ]
       text_after: |
         You write it on the back of a field postcard against the cart wheel, with a stub of pencil,
-        your mother's street and the town, and she puts it inside her coat. The column moves. The
+        your mother's street and the town. "Angleterre," she says, reading it, as if it were the moon,
+        and puts it inside her coat. The column moves. The
         last you see is the clock on the cart, swaying, and her hand up.
       next: "@return"
     - id: help
@@ -1062,7 +1074,7 @@
       text_after: |
         You put your shoulder to the tailboard with two others, and the cart goes over the bridge
         with the hens complaining, and you give the old man your bread and half your bully. Marthe
-        says something to you in French you don't understand, and then, in English, "You hold," and
+        says "Tenez bon," and sees you haven't got it, and says it in English, "You hold," and
         goes.
       next: "@return"
 
@@ -1116,22 +1128,22 @@
     into Ternecourt. You'd not have known it but for the pond. The church has no tower. The barn
     you slept in is a heap of brick with a beam standing up out of it like a finger.
 
-    The estaminet has three walls and no roof. There's a man up on the rafters, nailing a tarpaulin,
-    one-handed, a French soldier with his left sleeve pinned up; and below him, handing up the
+    The estaminet has three walls and no roof, and Estaminet du Bon Coin still over the door. There's
+    a man up on the rafters, nailing a tarpaulin, one-handed, a poilu with his left sleeve pinned up; and below him, handing up the
     nails, is Marthe.
 
     [if flag.ro_fr_cart]They went as far as Amiens on the cart, she says, and came back on foot with a pass from the mairie, the day after the English came through.[else]They went west in March, she says, and came back on foot with a pass from the mairie, the day after the English came through.[/if] Lucien is in hospital at Lyon with his lungs, but alive. The man on the roof is Gaston, from the next farm, who was with Lucien at Verdun and came home without his hand. He looks down at you once, and goes on nailing.
 
     You've ten minutes while the company falls out. She brings you a cup of something hot that might
     be coffee, and stands with her arms folded, and asks you straight, the way she says everything
-    in English, because she hasn't the words to go round. "After. You come back? Or you do not?"
+    in English, because she hasn't the words to go round. "Après la guerre. After. You come back? Or you do not?"
   choices: &ro_fr5_choices
     - id: come_back
       text: Tell her you'll come back for her, after.
       visible_if: [ { not: flag.ro_sw_married }, { not: flag.c18_proposed } ]
       effects: [ { set: flag.ro_fr_promise }, { war_mood: { nerve: 2 } } ]
       text_after: |
-        You tell her. She nods, once, as if you'd told her the price of something, and then she turns
+        You tell her, and get the French right for once: après la guerre. She nods, once, as if you'd told her the price of something, and then she turns
         round and goes into the roofless room and stands there with her back to you, and Gaston on
         the rafters stops nailing. The whistle goes. When you look back from the road she's in the
         doorway with her hand flat on the door frame, the way your mother stands.
@@ -1141,8 +1153,9 @@
       effects: [ { set: flag.ro_fr_let_go } ]
       text_after: |
         You say it badly, in English, and she understands every word. She looks up at the roof, and
-        back at you, and says "Yes. He stays," and takes the cup out of your hands though you've not
-        finished it. Gaston climbs down to shake your hand, left-handed, and you go back to the road.
+        back at you, and says "Oui. Il reste. He stays," and takes the cup out of your hands though you've not
+        finished it. Gaston climbs down to shake your hand, left-handed. "Bonne chance, Tommy," he says, and you
+        go back to the road.
       next: "@return"
 
 - id: ro_fr_18b_pit
