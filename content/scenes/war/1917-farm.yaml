@@ -14,7 +14,7 @@
     April, and snow, and the whole army waiting in and under Arras. On the road out of the town the
     cavalry are waiting too, a whole division of them in the fields, the horses standing in the snow
     under their rugs with their heads down and their backs white, steaming, stamping, waiting for a
-    gap that the infantry are meant to make in the morning.
+    gap that the brass hats say the infantry will make in the morning.
 
     You go down to look. You can't help it. It's the smell: horse and hay and wet leather, the
     stable on a winter morning before your father lights the lantern. A big bay hunter turns its
@@ -24,7 +24,7 @@
     once been in a charge. "Tomorrow," he says. "They keep saying tomorrow."
   choices:
     - id: bread
-      text: Give the bay your bread ration. Stand with him a bit.
+      text: Give the hunter your bread ration. Stand with him a bit.
       effects: [ { set: flag.f17_fed_the_bay }, { war_mood: { nerve: 2 } } ]
       text_after: |
         He takes it off your palm with his lips, soft as anything, and then pushes his nose into your
@@ -70,7 +70,7 @@
       text_after: |
         A German prisoner shepherding on Vellacott's land, up on the hill with the ewes, and the moor behind him.
         You read it three times. You don't know what you feel about it. You look over the parapet at
-        their line, a field away, and think of him.
+        Jerry's line, a field away, and think of him.
       next: "@return"
 
 - id: v17f_fly
@@ -192,7 +192,7 @@
       text_after: |
         He doesn't understand a word you say, and he understands everything. He gives you the
         handles. The cow's a cow, but you talk to her, low, the way you'd talk to Blossom, and the
-        furrow goes straight to the hedge. The old man walks it and kicks the soil and nods. Then he
+        furrow goes straight to the hedge. The old man walks it and kicks the soil and nods. "C'est droit," he says: it's straight. Then he
         takes the handles back, and does the next one straight himself.
       next: "@return"
     - id: watch
@@ -212,7 +212,7 @@
   requires: [ "war.tour >= 28" ]
   title: The gateway
   text: |
-    October in Flanders. You know this mud. It's the mud in the gateway to the Long Field in
+    October in Flanders, out beyond Wipers. You know this mud. It's the mud in the gateway to the Long Field in
     February, where the cattle have trodden it to soup, the mud that takes your boot and keeps it.
     Only here it's every field, and it goes on to the sky, and there are horses in it.
 
@@ -220,7 +220,7 @@
     the girth and can't get out, and the drivers shoot it where it stands and push it aside, and the
     next one comes on. Along the plank road they lie every few yards, half under.
 
-    [if flag.f17_fed_the_bay]You think of the big bay at Arras, in the snow, taking bread off your hand.[/if]
+    [if flag.f17_fed_the_bay]You think of the big bay hunter at Arras, in the snow, taking bread off your hand.[/if]
   choices:
     - id: on
       text: Keep your eyes on the planks.

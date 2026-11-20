@@ -13,7 +13,7 @@
   chapter: front
   title: In front of you
   text: |
-    [if war.close_battle == loos && war.close_phase == 1]The smoke and the gas have got mixed out here, and you're walking blind in it, in the hood, your own breath roaring in your ears. A shell hole opens at your feet. There's a German in it. He's got a wet rag tied over his mouth and nose and his eyes are streaming, and he's coughing, a dry bark you can hear through the flannel. A grey moustache. He's old enough to be your father. His rifle's across his knees, and he looks up at you through the gas, waiting to see what you are.[/if]
+    [if war.close_battle == loos && war.close_phase == 1]The smoke and the gas have got mixed out here, and you're walking blind in it, in the flannel gas helmet, your own breath roaring in your ears. A shell hole opens at your feet. There's a German in it. He's got a wet rag tied over his mouth and nose and his eyes are streaming, and he's coughing, a dry bark you can hear through the flannel. A grey moustache. He's old enough to be your father. His rifle's across his knees, and he looks up at you through the gas, waiting to see what you are.[/if]
 
     [if war.close_battle == loos && war.close_phase == 2]Over their parapet, and you drop, and the chalk floor of the trench jars your teeth. A yard away a man is pressed flat against the trench wall. White dust all down him, in his eyebrows, in the creases of his neck, like a baker at the end of a shift. His hands are half up. There's a gold ring on one of them. His rifle's leaning on the wall where he could have it in a second. Along the trench somebody is screaming in German, and he's breathing through his mouth, fast, the same as you.[/if]
 

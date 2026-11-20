@@ -1,0 +1,104 @@
+# The words of the Tank Corps and Flying Corps roads (content/scenes/war/corps-tank.yaml and
+# corps-air.yaml), to the rules in docs/FRAME-WORDS.md sections 1 and 2. A term here is matched in
+# every scene of the game, so a word with another everyday sense is listed only in a form that
+# cannot be mistaken ("the show", "Crossley tender", "photographic plates", "got the wind up").
+# Where another glossary file lists the same term, the first file read wins (tools/content-loader.ts).
+
+# ---- the tanks ----
+- { term: Heavy Branch, means: "The first name of the Tank Corps, a branch of the Machine Gun Corps until July 1917." }
+- { term: sponson, also: [sponsons], means: "The steel box built out from each side of a heavy tank, which held her guns and gunners." }
+- { term: gearsman, also: [gearsmen], means: "One of two men at the back of a heavy tank who worked each track's gears on the driver's signal." }
+- { term: unditching beam, means: "A heavy baulk of timber chained to a stuck tank's tracks, which dragged it under her to give grip." }
+- { term: fascine, also: [fascines], means: "A great bundle of brushwood bound with chains, dropped into a wide trench so a tank could cross." }
+- { term: splash, means: "Hot flecks of lead and steel thrown about inside a tank when bullets struck her plates outside." }
+- { term: Whippets, also: [Whippet], means: "A light, fast tank with a crew of three and four machine guns, first in action in March 1918." }
+- { term: Hotchkiss, also: [Hotchkisses], means: "A machine gun of French design, fed by strips or belts of cartridges; the Whippet carried four." }
+- { term: tankodrome, means: "The Tank Corps' own word for a camp where tanks were kept and mended, copied from aerodrome." }
+- { term: Mark V, means: "A newer heavy tank that one man could drive without gearsmen; it reached France in May 1918." }
+- { term: heavies, means: "Soldiers' short word for the heavy guns; in the Tank Corps, the big tanks as against the Whippets." }
+- { term: fitters, also: [fitter], means: "A mechanic who kept engines running; in the Flying Corps, the man answerable for one aeroplane's engine." }
+- { term: start line, means: "The line an attack sets off from at the fixed minute, often marked on the ground with tape." }
+- { term: railhead, means: "The place where the railway stopped behind the front; men, stores and tanks were unloaded there." }
+- { term: Govan, means: "A district of Glasgow on the Clyde, full of shipyards." }
+- { term: Cradley Heath, means: "A town of foundries and chain-makers in the Black Country, west of Birmingham." }
+- { term: "Yow'll", means: "Black Country speech for 'you'll'." }
+- { term: "Ah'd", means: "Glasgow speech for 'I'd'." }
+- { term: General omnibus, means: "A motor bus of the London General Omnibus Company, the red buses of the London streets." }
+- { term: winding engines, means: "The steam engines at a pit head that wound the cage of men and coal up and down the shaft." }
+- { term: threshing engine, means: "A steam engine that drove the machine that beat the grain out of the corn at harvest." }
+- { term: munitions, means: "The factories filling shells; the explosive turned the women workers' skin yellow and made many ill." }
+- { term: the pictures, means: "The cinema: silent films, shown with a piano playing." }
+
+# ---- the aeroplanes ----
+- { term: aerodrome, means: "A flying field with its sheds and huts; what was later called an airfield." }
+- { term: RE8, means: "A slow, steady British two-seater aeroplane, used to direct the guns and photograph the German line." }
+- { term: Harry Tate, means: "The airmen's rhyming name for the RE8, after a music-hall comedian of the day." }
+- { term: scout, also: [scouts], means: "A fast aeroplane with one seat, built to fight other aeroplanes; later called a fighter." }
+- { term: Scarff ring, means: "A ring-shaped mounting round the back cockpit that let the gunner swing his gun to any side." }
+- { term: Archie, means: "The airmen's name for anti-aircraft guns and their shell bursts, from a music-hall song." }
+- { term: artillery shoot, means: "A flight to watch a battery's shells fall and signal each miss until the guns are on the target." }
+- { term: contact patrol, means: "A low flight over an attack to find how far the infantry have got, by their flares." }
+- { term: line patrol, means: "A flight up and down our own side of the front, watching for German machines." }
+- { term: Klaxon, means: "A loud electric horn; an aeroplane sounded it to ask the infantry below to light their flares." }
+- { term: Very light, means: "A coloured flare fired into the air from a brass pistol, used as a signal." }
+- { term: wireless, means: "Signalling without wires, by Morse. A machine like the RE8 could send to the guns but not hear them." }
+- { term: Air Mechanic, means: "A Flying Corps rank for a tradesman in the ranks, about equal to a private." }
+- { term: dope, means: "The varnish painted on an aeroplane's linen skin to tighten and weatherproof it; it smelt of pear drops." }
+- { term: castor oil, means: "The oil burnt in the spinning rotary engines of many scouts; its smell hung about them." }
+- { term: turnbuckle, means: "A small screw fitting that tightens one of the bracing wires of an aeroplane." }
+- { term: fuselage, means: "The body of an aeroplane." }
+- { term: cowling, means: "The metal cover round an aeroplane's engine." }
+- { term: photographic plates, means: "Sheets of glass coated to take a photograph; the air cameras of the time used them, not film." }
+- { term: Crossley tender, means: "The light open motor lorry of the Flying Corps, used to carry men and stores." }
+- { term: flight commander, means: "The captain in charge of a flight, one of the three groups of about six machines in a squadron." }
+- { term: Home Establishment, means: "The Flying Corps in Britain; a worn-out airman was posted there to rest and to teach." }
+- { term: NYD, means: "Not Yet Diagnosed: what the doctors wrote on the label of a man whose nerves had given way." }
+- { term: Hun, means: "The papers' and officers' name for the Germans; to an airman, any enemy machine or the man in it." }
+- { term: ranker, means: "A soldier in the ranks, not an officer." }
+- { term: Poplar, means: "A district of East London. German aeroplanes bombed a school there in June 1917 and killed eighteen children." }
+- { term: stoppage, means: "A jam: a machine gun stops firing until the gunner finds the fault and clears it." }
+- { term: cocking handle, means: "The handle on the side of a machine gun, pulled back to load it or to clear a jam." }
+- { term: tracer, means: "A bullet that burns as it flies, so the gunner can see where his fire is going." }
+
+# ---- the army ----
+- { term: Lewis gun, also: [Lewis guns, Lewis-gun, Lewis], means: "A light machine gun one man could carry, fed from a flat round drum of cartridges on top." }
+- { term: pannier, means: "A canvas carrier for the Lewis gun's spare drums of cartridges." }
+- { term: barrage, means: "A wall of bursting shells laid down by the guns, often moving forward just ahead of the infantry." }
+- { term: zero, means: "The minute fixed for an attack to begin." }
+- { term: traverse, also: [traverses], means: "A bend or buttress of earth built into a trench, so no shell or gun could sweep its length." }
+- { term: pillbox, also: [pillboxes], means: "A small, low fort of thick concrete with slits for machine guns." }
+- { term: salient, means: "A bulge in the front line, open to fire from three sides; here the one round Ypres." }
+- { term: Hindenburg Line, means: "A belt of deep trenches, concrete and wire the Germans built and fell back to early in 1917." }
+- { term: field gun, also: [field guns], means: "A light gun pulled by horses, firing a shell of about eighteen pounds." }
+- { term: battery, means: "A group of four or six guns and the men who serve them." }
+- { term: over open sights, means: "Aimed straight at a target the gunners can see, at close range." }
+- { term: limbering up, means: "Hooking the guns to their horse teams, ready to move off." }
+- { term: sunken road, means: "A lane worn down below the level of the fields, with a bank on each side." }
+- { term: sapper, means: "A soldier of the Royal Engineers: digging, bridges, mines and explosives." }
+- { term: sap, also: [saps], means: "A short trench dug forward from the front line towards the enemy." }
+- { term: loophole, means: "A small opening to watch or fire through; a sniper kept his rifle on the enemy's." }
+- { term: dressing station, means: "The first place behind the line where the wounded were bandaged and sorted." }
+- { term: padre, means: "The army's name for a chaplain." }
+- { term: pip, also: [pips], means: "The star on an officer's cuff or shoulder that shows his rank; a second lieutenant wore one." }
+- { term: sergeants' mess, means: "The hut where a unit's sergeants ate and spent their evenings, apart from the men and the officers." }
+- { term: shoulder title, means: "The brass letters on a soldier's shoulder strap that named his regiment." }
+- { term: chit, means: "The army's word for any note or written report." }
+- { term: bully beef, means: "Tinned corned beef, the soldier's standing ration." }
+- { term: cordite, means: "The explosive that fired British cartridges and shells; its smoke had a sharp, sweetish smell." }
+- { term: lousy, means: "Having lice. In the trenches nearly every man had them." }
+- { term: tackler, also: ["tackler's", tacklers], means: "A weaving-shed overlooker, who kept the looms running and the weavers at their work." }
+- { term: nowt, means: "Northern speech for 'nothing'." }
+- { term: give over, means: "Northern speech for 'stop it'." }
+- { term: fore shift, means: "The early morning shift at a pit." }
+- { term: hurricane lamp, means: "An oil lamp with a glass chimney, which the wind cannot blow out." }
+
+# ---- French, and the slang they picked up ----
+- { term: Jerry, also: ["Jerry's"], means: "The soldiers' name for the Germans, or a German, from 1917." }
+- { term: Kamerad, means: "German for 'comrade'; what a German soldier called out when he gave himself up." }
+- { term: Pas de bagarre, means: "French for 'no fighting'." }
+- { term: redcap, means: "A military policeman, from the red cover on his cap." }
+- { term: diggers, means: "The Australians, a name they gave themselves in 1917." }
+- { term: five-nines, also: [five-nine], means: "A German shell 5.9 inches across, and the gun that fired it; heavy enough to wreck a trench." }
+- { term: Blighty one, means: "A wound bad enough to get a man sent home to Britain, and not bad enough to kill him." }
+- { term: got the wind up, means: "Lost his nerve; was frightened." }
+- { term: the show, means: "Soldiers' and airmen's word for an attack or a battle." }

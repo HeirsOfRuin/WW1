@@ -1,0 +1,162 @@
+# The city town's words (docs/FRAME-WORDS.md, 2026-11-20): a London insurance clerk's office, his
+# suburb and his chapel friends, the army terms his scenes use, and the French and soldiers' slang
+# added to them. Same format as base.yaml. Where another file lists the same term, the first one
+# loaded wins, so a term shared with another town is spelled here exactly as it is there.
+
+# ---- the office and the City ------------------------------------------------------------------
+- { term: Cornhill, means: "A street in the City, London's square mile of banks and insurance offices, where the clerks worked." }
+- { term: Assurance, means: "The old word for insurance, above all life insurance; many firms had it in their name." }
+- { term: ledger, also: [ledgers], means: "A big bound book in which an office wrote every sum owed and paid, by hand, in ink." }
+- { term: Marine, means: "The department of an insurance office that insured ships and their cargoes." }
+- { term: petty cash, means: "The small sum an office kept in a tin for stamps and cab fares, every penny written down." }
+- { term: office hand, means: "The neat, even handwriting a clerk was trained in for keeping ledgers." }
+- { term: carried forward, means: "In book-keeping, a page's total copied to the top of the next page, so the count never stops." }
+- { term: blotter, means: "A pad of soft paper on a desk, for drying wet ink." }
+- { term: gilt, also: [gilder], means: "Lettering in thin gold leaf; the gilder was the craftsman who laid it." }
+- { term: Roll of Honour, means: "A board in an office, church or school listing its men who had gone to the war, and those killed." }
+- { term: Prudential, also: [Pru], means: "The largest insurance company in London, with thousands of clerks; 'the Pru' for short." }
+- { term: "Lloyd's", means: "The great London market where ships and cargoes were insured." }
+- { term: Lombard Street, means: "The street of banks in the City of London." }
+- { term: Liverpool Street, means: "The big railway station on the edge of the City, where the trains from east London came in." }
+- { term: office eleven, means: "The firm's own football team of eleven men, which played other offices on Saturday afternoons." }
+- { term: see her right, also: [see Mother right], means: "Look after her properly; here, that the firm will go on paying her money." }
+
+# ---- London and home --------------------------------------------------------------------------
+- { term: Leyton, means: "A suburb of small terraced houses in east London, a short train ride from the City." }
+- { term: Victoria, means: "The London railway station where the leave trains from the Channel boats came in." }
+- { term: the Underground, means: "London's electric railway, running in tunnels under the streets." }
+- { term: gas mantle, means: "The small gauze hood on a gas lamp that glowed white when lit; houses were lit by gas." }
+- { term: scullery, means: "The small back room of a house with the sink and the wash boiler, where washing was done." }
+- { term: rent book, means: "The little book the landlord's collector signed each week when the rent was paid." }
+- { term: front parlour, also: [front-room, front room], means: "The best room, facing the street, kept for visitors and Sundays; its curtains drawn by day meant a death." }
+- { term: tea caddy, means: "A tin for keeping tea in; many families kept their important papers in it too." }
+- { term: Huntley and Palmers, means: "A famous make of English biscuits, sold in decorated tins." }
+- { term: Pears soap, means: "A well-known English soap, clear and amber-coloured; a small comfort from home." }
+- { term: Zeppelin, also: [Zeppelins], means: "A huge German airship; from 1915 they crossed the sea at night to bomb London and other towns." }
+- { term: airship, also: [airships], means: "A long gas-filled craft driven by engines, such as the German Zeppelins that bombed London by night." }
+- { term: dinner time, means: "Midday; working people called the midday meal dinner." }
+- { term: quid, means: "A pound: about three weeks of a private soldier's pay." }
+- { term: "ha'penny", means: "A halfpenny, the small copper coin a child might be given for running an errand." }
+- { term: betting slips, means: "Bets written on scraps of paper and run to a street bookmaker; against the law, and everybody did it." }
+- { term: Gamages, means: "A big, cheap department store in Holborn, London, famous for sports goods and toys." }
+- { term: Lyons, means: "A J. Lyons teashop, one of a chain all over London: cheap, clean, with waitresses in black and white." }
+- { term: Coliseum, means: "A big London variety theatre, with songs, comic sketches and turns." }
+- { term: music-hall, means: "A theatre of comic songs and turns; its songs were what everybody knew and sang." }
+- { term: Bank Holiday, means: "A public holiday, when all London crowded on to trains and trams for a day out." }
+- { term: Pickwick, means: "The Pickwick Papers, Charles Dickens's comic novel of 1837, loved and often read aloud." }
+- { term: Southend, means: "The Londoner's seaside town on the Thames estuary, with a pier more than a mile long." }
+- { term: Hollow Ponds, means: "A boating lake on the edge of Epping Forest, 'the Forest', where east London couples walked on Saturdays." }
+- { term: caught a crab, also: [catch a crab], means: "In rowing, to miss the stroke or dig the oar too deep, and be knocked off the seat." }
+- { term: muff, means: "A tube of fur or cloth a woman carried in winter to keep both hands warm." }
+- { term: costume, means: "A woman's matching jacket and skirt, her best outdoor clothes." }
+- { term: wedding breakfast, means: "The meal given after a wedding, whatever the time of day." }
+- { term: by licence, means: "Married quickly on a bought licence, without the three weeks of notice read out in church." }
+- { term: walking out with, means: "Courting; a couple seen out walking together were understood to be serious." }
+- { term: the exchange, means: "The telephone exchange, where rows of young women at switchboards connected every call by hand." }
+- { term: Number please, means: "What the telephone operator said when a caller lifted the receiver, before she connected the call." }
+- { term: drying napkins, means: "A baby's cloth napkins, washed every day and hung up indoors to dry." }
+- { term: the lists, means: "The casualty lists: columns of the killed, wounded and missing, printed in the newspapers." }
+- { term: War Bonds, means: "Loans from the public to pay for the war; a touring tank sold them in town squares." }
+- { term: council school, means: "A free school run by the local council, where working people's children went." }
+- { term: whist, means: "A card game for four, played in pairs." }
+- { term: Gay Gordons, means: "A Scottish dance for couples, marched and turned to a brisk tune." }
+- { term: black-edged paper, means: "Writing paper with a black border, used by a family in mourning." }
+
+# ---- church and chapel ------------------------------------------------------------------------
+- { term: chapel, means: "A Methodist or Baptist church; chapel people were strict and close-knit, and everybody knew everybody's business." }
+- { term: Sunday school, means: "Bible classes for children at church or chapel on Sundays, taught by members of the congregation." }
+- { term: Sunday school treat, means: "The Sunday school's yearly outing for the children, with tea and buns." }
+- { term: evensong, means: "The evening service in the Church of England." }
+- { term: crypt, means: "The stone vault under a church, where the old tombs are." }
+
+# ---- football and the men from other towns ----------------------------------------------------
+- { term: centre-forward, means: "The football player in the middle of the front line, whose job is to score." }
+- { term: half-backs, also: [right half], means: "The three players behind the forwards in the football of the day; the right half played on the right." }
+- { term: bladder, means: "The rubber bag inside a leather football that holds the air." }
+- { term: stubble, means: "The short cut stalks left standing in a field after the harvest." }
+- { term: pitmen, means: "Coal miners; here the men of the battalion's company from a northern pit town." }
+- { term: coal tub, means: "A small iron truck that carried coal along the rails of a mine." }
+- { term: Howay, means: "'Come on', as they say it in the north-east of England." }
+
+# ---- the army ---------------------------------------------------------------------------------
+- { term: battalion, means: "About a thousand infantrymen under a lieutenant-colonel; the unit a soldier belonged to." }
+- { term: B Company, also: [C Company, D Company], means: "One of a battalion's four companies of about two hundred men, lettered A to D." }
+- { term: division, also: [divisions], means: "About twelve battalions with their own guns, some eighteen thousand men, under a general." }
+- { term: brigadier, means: "The general commanding a brigade, which was three or four battalions." }
+- { term: adjutant, means: "The officer who ran a battalion's office and paperwork for its commander." }
+- { term: orderly room, also: [orderly-room], means: "The battalion's office, where its records and orders were kept." }
+- { term: indents, means: "Written orders for stores; nothing was issued in the army without one." }
+- { term: MO, means: "The medical officer: the battalion's doctor." }
+- { term: censor, means: "The officer who read the men's letters and cut out anything of use to the enemy." }
+- { term: on a charge, means: "Formally accused of breaking army rules, and brought before an officer for punishment." }
+- { term: pay book, also: [pay books], means: "The small brown book every soldier carried: his record, his pay, and a page for his will." }
+- { term: field postcard, means: "A printed army card with set phrases; the soldier crossed out the ones that did not apply." }
+- { term: tour, means: "A spell of some days in the trenches before the battalion was relieved." }
+- { term: at rest, means: "Out of the trenches for some days, lodged in a village behind the line." }
+- { term: communication trench, means: "A trench running back from the front line, so men could come and go under cover." }
+- { term: bay, also: [bays], means: "One straight stretch of a trench between two corners, held by a few men." }
+- { term: dugout, also: [dugouts], means: "A shelter dug into the side or floor of a trench, roofed with timber and earth." }
+- { term: stand-to, also: [stand to], means: "The order for every man to man the firestep, armed; given at dawn, at dusk and when attacked." }
+- { term: no man's land, means: "The strip of open ground between the two front lines, belonging to neither side." }
+- { term: over the top, means: "Up out of the trench and over its front bank, to attack across open ground." }
+- { term: at the port, means: "With the rifle held slanting across the chest, as men were ordered to advance." }
+- { term: carrying party, means: "Men sent up the line at night loaded with rations, water, wire or ammunition." }
+- { term: ration dump, means: "The place behind the line where each night's food and stores were left to be carried up." }
+- { term: mess tin, means: "The soldier's two-part metal tin, to cook in and eat and drink from." }
+- { term: tot, means: "A small measure of rum, given out before an attack or after a cold night." }
+- { term: greatcoat, means: "The soldier's heavy woollen overcoat, reaching below the knee." }
+- { term: housewife needle, means: "A needle from his 'housewife', the soldier's small roll of needles, thread and buttons." }
+- { term: entrenching tool, means: "The small spade and pick every infantryman carried to dig himself cover." }
+- { term: gas cylinders, means: "Iron bottles of poison gas dug in under the front bank; opened, the wind carried the cloud across." }
+- { term: gas hood, means: "A flannel bag soaked in chemicals, worn over the whole head, with a small window; the 1915 gas mask." }
+- { term: chloride of lime, means: "A harsh-smelling white powder scattered in trenches and latrines against disease." }
+- { term: bombers, also: [bomber], means: "Men trained to throw hand grenades, then called bombs; they cleared trenches and cellars." }
+- { term: Mills bombs, means: "The British hand grenade from 1915: a ribbed iron egg with a pin and a lever." }
+- { term: "No. 2", means: "The second man of a machine-gun team, who carried the ammunition and changed the drums." }
+- { term: smoke candles, means: "Tins that burned to pour out thick white smoke, lit to hide an attack." }
+- { term: feint, means: "A sham attack, made to draw the enemy's guns and reserves away from the real one." }
+- { term: real push, means: "The main attack; 'the push' was the soldiers' word for a great offensive." }
+- { term: brazier, means: "An iron basket or pierced bucket of burning coke, for warmth." }
+- { term: buzzer, means: "A signaller's small set for sending Morse code down a telephone wire." }
+- { term: Morse, means: "A code of short and long signals for each letter, sent by buzzer, lamp or flag." }
+- { term: sanitary men, means: "The soldiers who dug and limed the latrines and kept the camp clean." }
+- { term: redoubt, also: [redoubts], means: "A strongpoint built to hold out even when surrounded." }
+- { term: to the book, means: "To the depth and pattern the army manual laid down, and no further." }
+- { term: guns registering, means: "Guns firing single ranging shots to fix their aim on a target before a bombardment." }
+- { term: base camp, also: [base offices], means: "The army's great camps and offices on the French coast, far behind the fighting." }
+- { term: down the line, means: "Back from the front, towards the hospitals and the coast." }
+- { term: WAACs, also: [WAAC], means: "Women of the Women's Army Auxiliary Corps: clerks, cooks and drivers in khaki, in France from 1917." }
+- { term: coat-frock, means: "A one-piece dress cut like a coat and buttoned down the front; the WAAC uniform." }
+- { term: demobbed, means: "Demobilised: released from the army after the war ended." }
+- { term: Richthofen, means: "The German airman in the red aeroplane, who shot down more machines than any other." }
+
+# ---- places in France and Flanders ------------------------------------------------------------
+- { term: Tower Bridge, means: "The soldiers' name for the twin iron pit towers at Loos, after the bridge in London." }
+- { term: Double Crassier, means: "A long double slag heap south of Loos; crassier is the French for a slag heap." }
+- { term: Gommecourt, means: "A fortified village and wood north of the Somme front, attacked on 1 July 1916 as a diversion." }
+- { term: Funky Villas, means: "The soldiers' name for Foncquevillers, the ruined village behind the British line at Gommecourt." }
+- { term: "Queen Victoria's", means: "The Queen Victoria's Rifles, one of the London battalions that attacked at Gommecourt." }
+- { term: Flanders, means: "The flat, wet country of Belgium around Ypres." }
+- { term: Wipers, means: "The soldiers' name for Ypres, the Belgian town the British held all through the war." }
+- { term: Passchendaele, means: "A ridge and village near Ypres; the battle for it in 1917 was fought in rain and deep mud." }
+- { term: Cambrai, means: "The battle of November 1917, where massed tanks broke the German line; the ground was lost again within a fortnight." }
+
+# ---- French, and the slang the soldiers picked up ---------------------------------------------
+- { term: Vins et bières, means: "French for 'wines and beers': the sign on a café-bar." }
+- { term: Pas bon, means: "French for 'no good'." }
+- { term: La guerre est finie, means: "French for 'the war is over'." }
+- { term: merci boko, means: "Soldiers' French for 'merci beaucoup': thank you very much." }
+- { term: oofs, means: "Soldiers' French for 'oeufs', eggs; egg and chips was what every estaminet sold." }
+- { term: napoo, means: "Soldiers' French, from 'il n'y en a plus': finished, none left, gone, dead." }
+- { term: san fairy ann, means: "Soldiers' French for 'ça ne fait rien': it doesn't matter." }
+- { term: vin blank, means: "Soldiers' French for 'vin blanc', the cheap white wine sold behind the line." }
+- { term: Fritz, means: "The soldiers' name for a German, or the Germans." }
+- { term: Alleyman, means: "An early soldiers' name for the Germans, from the French 'Allemand'." }
+- { term: Jocks, means: "The soldiers' name for Scottish troops." }
+- { term: Tommy, means: "The ordinary British soldier, from 'Tommy Atkins', the name on the army's sample forms." }
+- { term: brass hats, means: "The soldiers' name for staff officers and generals, from the gold braid on their caps." }
+- { term: base wallahs, means: "Soldiers' name for men with safe jobs at the base, far behind the line." }
+- { term: minnies, means: "German trench-mortar bombs, from 'Minenwerfer': big, slow, and seen coming down." }
+- { term: char, means: "Soldiers' word for tea, picked up by the old army in India." }
+- { term: cushy, means: "Soldiers' word for easy, comfortable or safe." }
+- { term: gone west, means: "Soldiers' words for killed." }

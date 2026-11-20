@@ -83,9 +83,9 @@
   on_enter: [ { set: flag.y17_after_arras } ]
   title: Aeroplanes
   text: |
-    Since Arras the sky has been full of aeroplanes, theirs and ours, and every afternoon there's a
-    fight up there that you watch with your neck cricked back, like a football crowd. Ours keep
-    falling. The lads called April Bloody April, and they meant the Flying Corps.
+    Since Arras the sky has been full of aeroplanes, Jerry's and ours, and every afternoon there's a
+    fight up there, Archie bursting black all round it, that you watch with your neck cricked back, like a football crowd. Ours keep
+    falling. The lads call it Bloody April, and they mean the Flying Corps.
 
     One comes down near your bay in the evening, on fire, slowly, turning over and over, and you
     can see a man in it. It hits beyond the support line with a sound like a dropped tray.
@@ -203,7 +203,7 @@
     - id: leave_him
       text: Leave him be. He'll want to be on his own.
       text_after: |
-        You leave him be. In the morning he's the same as always, and nobody mentions Edith Holt
+        You leave him be. In the morning he's the same as always. "San fairy ann," he says, when the corporal asks about the letter, and nobody mentions Edith Holt
         again, ever.
       next: "@return"
 
@@ -366,7 +366,7 @@
   chapter: front
   title: Flanders
   text: |
-    It hasn't stopped raining since the end of July. The ground here was always low and wet, and
+    In front of Wipers, and it hasn't stopped raining since the end of July. The ground here was always low and wet, and
     the shelling has smashed the ditches that used to drain it, and now it's not ground. It's a sea
     of mud and water with shell holes in it, rim to rim, each one full to the brim with green water
     and some of them with men in.
@@ -458,7 +458,7 @@
   chapter: front
   title: Flanders
   text: |
-    Night, and the relief. Getting out is worse than getting in. It takes six men to carry one
+    Night, and the relieving battalion comes up. Getting out is worse than getting in. It takes six men to carry one
     stretcher across this, and they have to put it down every fifty yards, and there are more
     stretchers than there are men.
 
@@ -493,7 +493,7 @@
     The third December. Your mother looks smaller. She's had her hair cut short, for the mill, and
     she touches the back of her neck all the time as if she's forgotten.
 
-    [if war.corps == tank]The bells rang for Cambrai, your mother says, every church in the town, and folk stood in Bury Road to hear them; and a fortnight after, the paper said the ground was lost again, and nobody rang anything. Everybody wants to know what it's like inside one. At the Co-op the manager asks is it right there's a gramophone in them. In the mill yard at dinner time the weavers crowd round, and you tell them it's hot and loud and you can't hear yourself speak, and they laugh, because that's the shed. There's a tank coming to the town hall after Christmas, a real one, for the War Bonds, and your mother wants you to go down and stand by it in your uniform.[if flag.tk17_told_mother] She's told the whole street you're in one. The name's written on a card behind the clock.[/if][if flag.tk17_kept_quiet] She had you in the motor transport. She looks at you a long while over the teapot, and doesn't say anything about the letter.[/if][/if][if war.corps == air]The whole street knows you fly. Our Jack's told everybody. He's got aeroplanes cut out of the papers pinned all round his bed, and he wants to know if you've seen Richthofen, and how many you've brought down, and whether you carry a revolver. You tell him you've seen a lot of sky. He asks why you don't learn to fly them yourself, and you say it'd mean months at a school in England, and your mother, at the sink, says "Well, then," and doesn't turn round. Your father wants to know what the flying pay comes to, to the penny, and writes it on the back of the rent book, and looks at it, and says it's more than a tackler gets, and doesn't sound pleased. Somebody at the mill has told your mother the airmen get sent home after a while, to teach. She asks you if it's true. You say sometimes.[/if]
+    [if war.corps == tank]The bells rang for Cambrai, your mother says, every church in the town, and folk stood in Bury Road to hear them; and a fortnight after, the paper said the ground was lost again, and nobody rang anything. Everybody wants to know what it's like inside one. At the Co-op the manager asks is it right there's a gramophone in them. In the mill yard at dinner time the weavers crowd round, and you tell them it's hot and loud and you can't hear yourself speak, and they laugh, because that's the weaving shed. There's a tank coming to the town hall after Christmas, a real one, for the War Bonds, and your mother wants you to go down and stand by it in your uniform.[if flag.tk17_told_mother] She's told the whole street you're in one. The name's written on a card behind the clock.[/if][if flag.tk17_kept_quiet] She had you in the motor transport. She looks at you a long while over the teapot, and doesn't say anything about the letter.[/if][/if][if war.corps == air]The whole street knows you fly. Our Jack's told everybody. He's got aeroplanes cut out of the papers pinned all round his bed, and he wants to know if you've seen Richthofen, and how many you've brought down, and whether you carry a revolver. You tell him you've seen a lot of sky. He asks why you don't learn to fly them yourself, and you say it'd mean months at a school in England, and your mother, at the sink, says "Well, then," and doesn't turn round. Your father wants to know what the flying pay comes to, to the penny, and writes it on the back of the rent book, and looks at it, and says it's more than a tackler gets, and doesn't sound pleased. Somebody at the mill has told your mother the airmen get sent home after a while, to teach. She asks you if it's true. You say sometimes.[/if]
 
     There's no sugar in the tea and the bread's grey, war bread, with potato in it. She's saved
     the butter ration for a week so you can have it on your first morning, and she watches you eat
@@ -501,7 +501,7 @@
 
     [if war.mate1 && flag.best_man]Edith brings the baby round. He grabs your finger and won't let go, and Edith laughs and says he's got his father's grip, and you look at the little fist and think of Shaw's hand on the rung of the ladder at Loos.[/if][if war.mate1 && flag.best_man && flag.wet_babys_head] "Albert wrote that the whole section drank his health," she says. "In rum. I hope you all had headaches."[/if][if war.mate1 && flag.best_man && flag.stood_shaws_watch] "His long letter came," she says. "Six pages. He said a pal stood his watch for him." She looks at you.[/if][if war.mate1 && flag.after_the_war]Edith Holt is married, to the lad from the gasworks. You see her in the Co-op queue. She looks at you and away.[/if][if war.mate1 && flag.after_the_war && flag.sat_with_shaw] You think of the firestep, and the half cigarette, and you look away first.[/if][if !war.mate1 && flag.best_man]Edith brings the baby round. She's in black. The baby grabs your finger and won't let go. "He's got his dad's grip," she says, and then she has to go outside.[/if]
 
-    [if flag.ro_sw_wed16]Nellie's at your mother's when you come in, with the baby in a shawl tied round the both of them, the Lancashire way, and you stand in the kitchen in your greatcoat not knowing how to hold her. [if flag.ro_sw_named]She has the name you wrote. Your mother says it's a name for a duchess, and says it all day.[else]She's called after Nellie's mother, and you find you don't mind.[/if] At night you lie awake listening to her breathe in the drawer they've made a bed of, the way you used to listen for shells.[/if][if flag.ro_sw_wed17]You and Nellie are wed at chapel on the Thursday, by licence, with the girls from the alley at the back in their shawls. There's no icing on the cake; there's no sugar for icing in the town. Her brothers shake your hand like men pulling on a rope. You have one night at her aunt's in Rochdale, in a back bedroom, with the goods trains going by.[/if][if flag.ro_sw_after && !flag.ro_sw_wed17]Nellie wears the ring on a ribbon round her neck at the looms, for the shuttles, and on her finger on Sundays. You walk up to the tower in sleet. [if flag.ro_sw_wait2]"After," she says at the top. "You said it again." She laughs, and it isn't much of a laugh.[else]She doesn't ask you anything, and you could kiss her for that, and do.[/if][/if][if flag.ro_sw_jilted]You see Nellie on Bury Road with Jack Kenyon, his stiff arm through hers, and she sees you see her. She comes over on her own. "I'm sorry," she says. "I am." [if flag.ro_sw_blessed]"I kept your letter." You tell her he looks a decent sort, and he does.[else]You say it doesn't matter, and she knows that's a lie, and lets you have it.[/if][/if][if flag.ro_sw_let_go]Nellie Whittaker is walking out with a lad from the card room, your mother says, and seems happy.[/if]
+    [if flag.ro_sw_wed16]Nellie's at your mother's when you come in, with the baby in a shawl tied round the both of them, the Lancashire way, and you stand in the kitchen in your greatcoat not knowing how to hold her. [if flag.ro_sw_named]She has the name you wrote. Your mother says it's a name for a duchess, and says it all day.[else]She's called after Nellie's mother, and you find you don't mind.[/if] At night you lie awake listening to her breathe in the drawer they've made a bed of, the way you used to listen for shells.[/if][if flag.ro_sw_wed17]You and Nellie are wed at chapel on the Thursday, by licence, with the girls from her loom alley at the back in their shawls. There's no icing on the cake; there's no sugar for icing in the town. Her brothers shake your hand like men pulling on a rope. You have one night at her aunt's in Rochdale, in a back bedroom, with the goods trains going by.[/if][if flag.ro_sw_after && !flag.ro_sw_wed17]Nellie wears the ring on a ribbon round her neck at the looms, for the shuttles, and on her finger on Sundays. You walk up to the tower in sleet. [if flag.ro_sw_wait2]"After," she says at the top. "You said it again." She laughs, and it isn't much of a laugh.[else]She doesn't ask you anything, and you could kiss her for that, and do.[/if][/if][if flag.ro_sw_jilted]You see Nellie on Bury Road with Jack Kenyon, his stiff arm through hers, and she sees you see her. She comes over on her own. "I'm sorry," she says. "I am." [if flag.ro_sw_blessed]"I kept your letter." You tell her he looks a decent sort, and he does.[else]You say it doesn't matter, and she knows that's a lie, and lets you have it.[/if][/if][if flag.ro_sw_let_go]Nellie Whittaker is walking out with a lad from the card room, your mother says, and seems happy.[/if]
 
     [if flag.ro_fr_writes]In your pack there are three letters from Ternecourt, in French, that you can read about half of. You don't take them out in this house.[/if]
 

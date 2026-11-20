@@ -10,7 +10,7 @@ const count = (t: string | undefined) => {
   words += t.split(/\s+/).length; return n;
 };
 for (const sc of Object.values(content.scenes)) {
-  const n = count(sc.text) + (sc.choices ?? []).reduce((a, c) => a + count((c as { text_after?: string }).text_after), 0);
+  const n = count(sc.text) + (sc.choices ?? []).reduce((a, c) => a + count(c.text) + count((c as { text_after?: string }).text_after), 0);
   screens++; if (n) withWord++; marked += n;
 }
 const unused = content.glossary.filter((g) => !used.has(g.term)).map((g) => g.term);

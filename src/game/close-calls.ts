@@ -90,7 +90,7 @@ export const CLOSE_CALLS: Record<string, string[]> = {
     "The candle flame shrinks and goes blue, the way it does before the air goes bad. Then it steadies.",
     "A charge goes up somewhere close, theirs. The gallery shakes, clay pattering down off the boards, and the props hold.",
     "A stone rolls off the spoil and knocks on the timbers. On the other side of the clay the German digging stops. After a long minute it starts again.",
-    "A camouflet blows in the gallery next to yours. The wall bulges toward you, and holds.",
+    "A camouflet, a small charge to wreck a gallery, blows in the one next to yours. The wall bulges toward you, and holds.",
     "The man passing spoil behind you goes quiet and slumps with the gas. Your own head stays clear.",
   ],
   bearer: [
@@ -98,7 +98,7 @@ export const CLOSE_CALLS: Record<string, string[]> = {
     "A shell bursts near enough that the earth comes down on the stretcher and on you.",
     "A sniper's bullet chips the stretcher pole an inch from your fingers.",
     "The stretcher nearly goes over at the lip of a shell hole. The wounded man grips the side and doesn't cry out.",
-    "A flare goes up and lights the whole party, down to the SB on your arm. Nobody fires.",
+    "A flare goes up and lights the whole party, down to the stretcher-bearer's band on your arm. Nobody fires.",
     "A shell comes down behind you and doesn't go off. It lies in the mud, steaming.",
   ],
   tank: [
@@ -175,12 +175,12 @@ export const CLOSE_CALLS: Record<string, string[]> = {
     "Something heavy hits the roof with a clang you feel in your teeth, and doesn't come through.",
     "A fleck of splash catches the chain of your mask instead of your eye.",
     "She lurches into a shell hole nose first and hangs there, engine roaring, until the tracks catch.",
-    "After a hit near the sponson the petrol stink gets stronger, and nothing catches.",
+    "After a hit near the gun housing on her side the petrol stink gets stronger, and nothing catches.",
   ],
   battle_air: [
     "Machine-gun fire from the ground comes up through the floor and out through the top wing.",
     "Archie bursts right in front of the nose, and you fly through the black smoke of it. The engine doesn't miss a beat.",
-    "A scout comes in from below, and his burst stitches a line of holes along the fuselage behind your seat.",
+    "A German scout comes in from below, and his burst stitches a line of holes along the fuselage behind your seat.",
     "A rifle bullet from a trench below clangs off the gun ring by your hand.",
     "A burst of Archie under the wing throws the machine on its side. Then she comes level.",
     "A shell from our own guns passes so close the machine bucks in the wind of it.",

@@ -30,7 +30,7 @@
   text: |
     [if war.fallen_present]It happens {fallen_where}. Fenton's running, the way he always runs, as if there's a ball in front of him, and then he goes down, sliding, the way a centre-forward goes down in a tackle on a wet pitch, and lies there, and you wait for him to get up, because he always gets up.
 
-    He doesn't get up.[else][if war.transferred]Word comes over from the battalion, a week late. Percy Fenton. Killed {fallen_where}.[else]Somebody tells you at the water cart. Percy Fenton. Killed {fallen_where}.
+    He doesn't get up.[else][if war.transferred]Word comes over from the battalion, a week late. Percy Fenton. Killed {fallen_where}.[else]Somebody tells you at the water cart. "Fenton's gone west." Percy Fenton. Killed {fallen_where}.
 
     You think of him on the wing at Walthamstow on a Saturday, in the mud, with the whole office shouting.[/if][/if][if flag.city_played] You played behind him once, against the pitmen, in a stubble field in France.[/if]
   choices:

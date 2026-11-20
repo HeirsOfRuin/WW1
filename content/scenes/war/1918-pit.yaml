@@ -13,13 +13,14 @@
   requires: [ "war.tour == 30", { not: war.transferred } ]
   title: The new posts
   text: |
-    January, and the battalion's moved south into a quiet stretch the French have handed over.
+    January, and the battalion's moved south into a quiet stretch the French have handed over,
+    the poilus' wine bottles still in the dugouts.
     The new idea is posts, little islands of men in the chalk a hundred yards apart, with
     nothing between them but frost.
 
     And new men. A Tyneside battalion has been broken up, there aren't enough men to go round any
     more, and sixty of them come into the company in one night. Pitmen, most of them, from
-    Ashington and Bedlington and Choppington, with the same blue marks on their foreheads as you,
+    Ashington and Bedlington and Choppington, with the same blue coal scars on their foreheads as you,
     and they stand in the snow with their kit at their feet and won't look at anybody, because
     their battalion's gone, and their pals with it.
 
@@ -51,7 +52,7 @@
   title: Lance-Corporal Bell
   text: |
     They've given Bell a stripe. Jim Bell, who argued with every sergeant in France, who read the
-    Herald in the beer vat, who drank to the Russians. A lance-corporal.
+    Herald in the beer vat, who drank to the Russians. A lance jack.
 
     "They've run out of men," he says. "That's all it is. They've run clean out." But he's sewn it
     on straight, you notice, and he's the first up at stand-to now, and he goes round the new lads
@@ -102,7 +103,7 @@
       effects: [ { set: flag.p18_showed_todd }, { war_mood: { standing: 1 } } ]
       text_after: |
         You show him where to stand, when to duck, how to keep his feet, the sound of the shells
-        that matter. He listens the way he'd listen to a deputy. At the end of it he says, "You've
+        that matter, the whizz-bang and the five-nine. He listens the way he'd listen to a deputy. At the end of it he says, "You've
         changed." You don't know what to say to that, so you say nowt.
       next: "@return"
     - id: cold
@@ -157,7 +158,8 @@
   text: |
     Going forward through villages the Germans have held since 1914, and in one of them an old
     farmer standing in his yard with nothing in it. No cow. No pig. No horse. The Germans took the
-    lot. He's stood looking at the empty stalls.
+    lot. "Les Boches," he says. "Il n'y en a plus." Napoo, the lads make of that: all gone. He's
+    stood looking at the empty stalls.
 
     Charlton's with the transport, coming up the road behind the battalion, and he sees the old
     man, and stops. He's got a spare mule, lame in the off fore, that the transport officer's
@@ -194,9 +196,9 @@
   text: |
     January, and the mining war's over, near enough. Nobody's digging under anybody's line now.
     The company's put to dugouts for headquarters, and subways, and bridges, and once, for a
-    week, a bath-house for a general.
+    week, a bath-house for a brass hat.
 
-    [if !flag.p17_lost_pascoe]Pascoe says it's the first time in thirty year he's dug a hole that nobody wanted to blow up.[/if][if flag.p17_lost_pascoe]Evans says it's a waste of good miners. He says it every day, the way Pascoe used to say his prayers.[/if] Mott says he'd sooner have the Tube.
+    [if !flag.p17_lost_pascoe]Pascoe says it's the first time in thirty year he's dug a hole that nobody wanted to blow up.[/if][if flag.p17_lost_pascoe]Evans says it's a waste of good miners. He says it every day, the way Pascoe used to say his prayers.[/if] Mott says san fairy ann, a hole's a hole, but he'd sooner have the Tube.
 
     And the officer wants the dugout under the forward post sunk deep, in case they come in the
     spring.
@@ -258,7 +260,7 @@
   requires: [ "war.tour >= 37", war.transferred ]
   title: Traps
   text: |
-    Going forward, and the Germans have left their dugouts full of presents. A helmet on a table
+    Going forward, and Jerry has left his dugouts full of presents. A helmet on a table
     with a wire under it. A loose duckboard on the stairs. A stove that will go up when it's lit.
     And worse: charges buried under crossroads and bridges with clocks on them, acid eating
     through a copper wire, set to go days after the last German has gone.
@@ -298,7 +300,7 @@
   requires: [ "war.tour == 31" ]
   title: The ground
   text: |
-    February. They're coming. Everybody knows it. The deserters say it, the airmen say it.
+    February. Jerry's coming. Everybody knows it. The deserters say it, the airmen say it.
 
     [if war.transferred]Down in your dugout you lie with your ear to the floor at night, the way you'd listen to a roof, and the ground's alive with it. Not picks: wheels, thousands of them, and hooves, and the deep thud of guns being dug in, miles off, coming through the chalk like through a drum.[/if][if !war.transferred && war.mate1]Robson's on his knees on the floor of the post with his ear to the chalk, the way he was the first night in 1915. He stays there a long time. "Wheels," he says. "Thousands. And guns, being dug in. It's coming through the ground like a drum."[/if][if !war.transferred && !war.mate1]You put your ear to the floor of the post at night, the way Robson did the first night in 1915. Wheels, thousands of them, and the thud of guns being dug in, miles off, coming through the chalk like through a drum.[/if]
   choices:

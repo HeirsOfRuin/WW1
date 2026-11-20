@@ -22,7 +22,7 @@
 
     The tin hats come up with the rations, a whole limber of them. They're heavier than they look
     and they sit on your head like a basin, and the leather lining smells of somebody else's sweat
-    already. The sergeant says they'll stop shrapnel but not a bullet, so don't go getting ideas.
+    already. The sergeant says they'll stop a splinter off a whizz-bang but not a bullet, so don't go getting ideas.
 
     [if war.mate2]Duckworth wears his on the back of his head and calls it his Sunday best.[/if] A draft comes up the same week: Derby men, attested
     last autumn, some of them older than your father, one with a cough you can hear three bays off.
@@ -85,7 +85,7 @@
 
     He comes and finds you behind the cook-house with the paper folded small in his fist.
 
-    "I'm not going," he says. "I'm not leaving you lot. They'll put me in a bloody bakery, and
+    "I'm not going," he says. "I'm not leaving you lot. They'll put me in a bloody bakery at Eat Apples with the base wallahs, and
     you'll all be up here." His voice cracks on bloody, and he's furious about it.
   choices:
     - id: tell_him_go
@@ -120,7 +120,7 @@
     You can't sleep and then you sleep standing up.
 
     The colonel comes round. Walking pace, he says. Keep your dressing. The guns will have done
-    it for you; you'll be in their third line by dinner.
+    it for you; you'll be in their third line by dinner time.
 
     [if flag.last_letter]Your letter from Loos is still in your pay book, gone soft as cloth.[/if] The company sergeant major is round with the pay books again.
   choices:
@@ -155,7 +155,7 @@
     taste it.
 
     The battalion that walked out on the first of July was eight hundred men and some. The one that
-    answered the roll the next day you could have got in the chapel.
+    answered the roll the next day you could have got in the chapel. Napoo, the old hands say, and that's all they say.
 
     One night they ask for men to go out and bring in identity discs. Just the discs. So the
     mothers will know.
@@ -207,7 +207,7 @@
   title: A letter from the old line
   text: |
     A letter comes from a man you knew at the depot, who went to the other battalion. They're in
-    your old line now, by the crater. He writes that it's quiet. He writes that they've had three
+    your old line now, by the crater. He writes that it's cushy, nothing doing. He writes that they've had three
     men killed in a month, all in the same bay, all through the head, all in the morning.
 
     "The lads call him Fritz-at-the-crater," he writes, as if you wouldn't know. "Somebody says he
@@ -232,12 +232,12 @@
     got. It's like a sack of flour on your shoulders, and the sack has to walk.
 
     At twenty past seven, away to the south, a mine goes up under their line. The ground lifts
-    under your boots like the shed floor when the engine starts. Then our guns stop, all of them,
+    under your boots like the weaving shed floor when the engine starts. Then our guns stop, all of them,
     and in the quiet you can hear a man three bays down being sick, and a bird, and your heart.
 
     Half past seven. Whistles.
 
-    [if war.path == rifleman]You go up the ladder behind your corporal with {mate} on the next rung down.[/if][if war.path == nco]The section's yours now. Seven men on the ladder behind you, looking at your back to see when to go.[/if][if war.path == lewis]You go in the second line with the gun on your shoulder and your No. 2 behind you with the drums. Twenty-eight pounds of gun on top of the sixty.[/if][if war.path == signals]You go with the company officer, a reel of cable paying out behind you and the telephone banging on your hip. Battalion will want to know where the company is. The line has to get there with you.[/if][if war.path == bomb]You're with the bombers, a bucket of Mills bombs in each hand. Their trench is your job, if anybody gets there.[/if][if war.path == snipe]You go behind the second line with the scoped rifle wrapped in sacking. Their machine gunners are your job, if you can find them.[/if][if war.path == bearer]You go over behind the first wave with a stretcher, a red cross on your arm and no rifle, and the whole of no man's land in front of you is going to be your work.[/if]
+    [if war.path == rifleman]You go up the ladder behind your corporal with {mate} on the next rung down.[/if][if war.path == nco]The section's yours now. Seven men on the ladder behind you, looking at your back to see when to go.[/if][if war.path == lewis]You go in the second line with the Lewis gun on your shoulder and your No. 2 behind you with the drums. Twenty-eight pounds of gun on top of the sixty.[/if][if war.path == signals]You go with the company officer, a reel of cable paying out behind you and the telephone banging on your hip. Battalion will want to know where the company is. The line has to get there with you.[/if][if war.path == bomb]You're with the bombers, a bucket of Mills bombs in each hand. Their trench is your job, if anybody gets there.[/if][if war.path == snipe]You go behind the second line with the scoped rifle wrapped in sacking. Their machine gunners are your job, if you can find them.[/if][if war.path == bearer]You go over behind the first wave with a stretcher, a red cross on your arm and no rifle, and the whole of no man's land in front of you is going to be your work.[/if]
 
     [if war.stalled]By the time you're up, the first line is lying down in rows forty yards out, and the noise from the ridge has started: their machine guns, the whole length of the ridge at once, like every loom in the shed starting together. Their wire is standing. Nobody cut it. It's thick as a hedge, and there are men hung up on it like washing.[else]The first line is walking, rifles at the port, and the noise from the ridge has started: their machine guns, the whole length of the ridge at once, like every loom in the shed starting together. Men go down in rows, neatly, the way washing comes off the line in a wind. Some get up again.[/if]
   choices:

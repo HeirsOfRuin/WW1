@@ -18,13 +18,13 @@
     man in front. Then the firestep, and your rifle, and the dark.
 
     You've been out on the moor at night after a lost ewe, with no moon and the fog down. You know
-    dark. This dark is wrong. It smells wrong, of lime and something sweet under it, and it's never
+    dark. This dark is wrong. It smells wrong, of chloride of lime and something sweet under it, and it's never
     quiet the way a field's quiet. A flare goes up and everything stands still, wire and posts and
     a tree with no top, like rabbits in a lamp.
 
     And then, behind the line somewhere, in what's left of a wood, a nightingale starts.
 
-    [if war.mate2]Pearce has his head up over the parapet, which you're not to do, sniffing the air like a dog. "There's a hare out there," he says. "In the wire. I can see her ears." He's got a bit of brass wire in his pocket. Of course he has. "Back in ten minutes."[else]Down the bay a lad from Brendon has his head up over the parapet, which you're not to do. "There's a hare out there," he says. "In the wire."[/if]
+    [if war.mate2]Pearce has his head up over the parapet, which you're not to do, sniffing the air like a dog. "There's a hare out there," he says. "In the wire. I can see her ears." He's got a snare of brass wire in his pocket. Of course he has. "Back in ten minutes. Fritz'll never know."[else]Down the bay a lad from Brendon has his head up over the parapet, which you're not to do. "There's a hare out there," he says. "In the wire."[/if]
   choices:
     - id: go_with
       text: Go over with Pearce. Somebody has to watch his back.
@@ -58,11 +58,11 @@
     the way.
 
     "Dear Son, I hope this finds you as it leaves us. Your father is ploughing the Long Field with
-    old Blossom on her own since they took Prince and Duke for the army, and it takes him the week.
+    old Blossom on her own since they took Prince and Duke for army horses, and it takes him the week.
     He says the mare is too old for it and so is he. The squire has taken on two maids from the
     town for the dairy and they do not know one end of a cow from the other.
 
-    [if war.mate1]Mr Cottle says to tell Will that Fly is off her food and lies by the gate in the evenings looking up the lane.[else]Mr Cottle has not been to market since the letter came about Will. Fly lies by the gate in the evenings looking up the lane.[/if]
+    [if war.mate1]Mr Cottle says to tell Will that his dog Fly is off her food and lies by the gate in the evenings looking up the lane.[else]Mr Cottle has not been to market since the letter came about Will. Will's dog Fly lies by the gate in the evenings looking up the lane.[/if]
 
     Keep your feet dry. Your loving Mother."
   choices:
@@ -72,14 +72,14 @@
       text_after: |
         You tell her the French farm the same as us, only worse, with oxen and their women at the
         plough. You tell your father to rest the mare. You tell her the cream came sour and you ate
-        it anyway, with a spoon, in the bottom of the trench, and it tasted of home.
+        it anyway, with a spoon, in the bottom of the trench, with the coal boxes going over, and it tasted of home.
       next: "@return"
     - id: postcard
       text: Send the field postcard. Cross out what doesn't apply.
       effects: [ { set: flag.farm_postcard } ]
       text_after: |
-        I am quite well. You strike out the rest. The saffron cake goes round the bay in a quarter
-        of an hour, and the lads from the town have never had it before, and want to know what makes
+        I am quite well. You strike out the rest. The saffron cake goes round the bay and it's napoo in a
+        quarter of an hour, and the lads from the town have never had it before, and want to know what makes
         it yellow.
       next: "@return"
 
@@ -135,7 +135,7 @@
       text: Let him ring it once. Say it was you, if anybody asks.
       effects: [ { set: flag.farm_bert_rang }, { war_mood: { nerve: 2, standing: -2 } } ]
       text_after: |
-        He pulls, once, the way you'd ring a tenor down, and the bell speaks, one deep note that goes
+        He pulls, once, with his whole weight, and the bell speaks, one deep note that goes
         out over the broken roofs and the orchards. Somewhere a dog starts barking. Men come out of
         barns with their masks half on. The sergeant major wants to know who. You say it was you.
         Bert stands behind you with his face shining like a lad at his first wedding.
@@ -157,9 +157,9 @@
   requires: [ "war.tour >= 4", flag.farm_letter, war.mate2 ]
   title: Pearce
   text: |
-    The military police have got Pearce. Behind the lines, at rest, with two hares and a brace of
-    French partridges in the bottom of his pack and a set of wires in his pocket. The farmer's
-    complained. The French farmers complain about everything, and this time they've a case.
+    The redcaps, the military police, have got Pearce. Behind the lines, at rest, with two hares and a brace of
+    French partridges in the bottom of his pack and a set of snare wires in his pocket. The farmer's
+    come shouting "Voleur!", thief, at every man in khaki. The French farmers complain about everything, and this time they've a case.
 
     It's Field Punishment Number One. Tied to a limber wheel for two hours a day, in the open, by
     the road, where everybody going past can see. Twenty-eight days of it.
@@ -206,10 +206,10 @@
       text: Go in and help. Find a scythe.
       effects: [ { set: flag.farm_harvested }, { war_mood: { nerve: 2 } } ]
       text_after: |
-        The farmer's wife finds you two scythes in the barn, rusty, and you stone them up, and go
+        The farmer's wife finds you two scythes in the barn, rusty, and you put an edge on them with a stone, and go
         into the oats in a line, swinging. You haven't forgotten. The body never does. By evening
         the field's down and stooked, the way your father taught you, and the old woman brings you
-        cider in a jug and won't take any money, and kisses you on both cheeks. Your back aches like
+        cider in a jug and won't take any money. "Merci, mes braves," she says, and kisses you on both cheeks. Your back aches like
         home.
       next: "@return"
     - id: rest
@@ -336,7 +336,7 @@
     At ten to six the gas goes over. A hiss all down the line, like the threshing engine letting off
     steam at the end of a day, and the cloud comes up, white and greenish, and leans out over no
     man's land. Then the wind drops, and some of it comes back. Pepper and pineapple and a sting
-    under it. You pull the hood down. Wet flannel, the stink, your own breath hot against the
+    under it. You pull the gas hood down. Wet flannel, the stink, your own breath hot against the
     window.
 
     Through the eyepiece, the tree, in the smoke, on its own.
@@ -410,14 +410,14 @@
     Shouting on the left. Then the rifles, picking up the way the rain does on the barn roof, a few
     drops and then all of it.
 
-    "Stand to! They're coming back!"
+    "Stand to! Alleyman's coming back!"
   choices:
     - id: push
       text: "Up on the parapet. Fire till they stop coming. ({risk_push})"
       effects: [ { war: push } ]
       next: "@war"
     - id: help
-      text: "Keep {mate} fed with clips. Stay low beside him. ({risk_help})"
+      text: "Keep {mate} fed with clips of cartridges. Stay low beside him. ({risk_help})"
       effects: [ { war: help } ]
       next: "@war"
     - id: ground
@@ -460,7 +460,7 @@
 
     [if flag.farm_spoke_at_roll]At church a woman from Brendon takes your hand at the lych-gate. "You were the one who told them about our Sid," she says. "They wrote it was quick." You tell her it was.[/if][if flag.farm_silent_at_roll]At market a woman is telling everybody her lad's only missing, missing means taken, he'll turn up. You saw. You buy your father's tobacco and go without your change.[/if]
 
-    [if flag.ro_sw_truth]On the Sunday Rose Huxtable waits by the lych-gate after church in her good coat, with flour still in the creases of her hands where it never comes out. You walk the lane down to the mill and along the river, loud with the rain, and she has your letters by heart and asks after the rats by name. At the footbridge she takes your hand, as if it was nothing, and keeps it to the mill door.[/if][if flag.ro_sw_cheer]Rose Huxtable walks the lane down to the mill with you on the Sunday, and halfway she stops and says, "Cider," and you're quarrelling before you know it: the lists in the Western Times, the Brendon boys, the letters full of French farms. By the river she cries, cross, into her sleeve, and you stand there like a gatepost. Going back up she takes your arm, hard, as if you'd bolt.[/if][if flag.ro_sw_little]Rose Huxtable sees you at market and comes across between the pens, and stops a yard off. "I had your card," she says. "Quite well." She looks at you. "I'm glad you're quite well." Her father calls her from the cart, and she goes, and looks back once.[/if]
+    [if flag.ro_sw_truth]On the Sunday Rose Huxtable waits by the lych-gate after church in her good coat, with flour still in the creases of her hands where it never comes out. You walk the lane down to the mill and along the river, loud with the rain, and she has your letters by heart and asks after the rats by name. At the footbridge she takes your hand, as if it was nothing, and keeps it to the mill door.[/if][if flag.ro_sw_cheer]Rose Huxtable walks the lane down to the mill with you on the Sunday, and halfway she stops and says, "Cider," and you're quarrelling before you know it: the casualty lists in the Western Times, the Brendon boys, the letters full of French farms. By the river she cries, cross, into her sleeve, and you stand there like a gatepost. Going back up she takes your arm, hard, as if you'd bolt.[/if][if flag.ro_sw_little]Rose Huxtable sees you at market and comes across between the pens, and stops a yard off. "I had your card," she says. "Quite well." She looks at you. "I'm glad you're quite well." Her father calls her from the cart, and she goes, and looks back once.[/if]
 
     At night the quiet keeps waking you. Then an owl, and you sleep.
 

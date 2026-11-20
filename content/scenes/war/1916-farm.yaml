@@ -20,7 +20,7 @@
     And the tribunals are letting farmers' sons off. A letter from your mother: the Vellacotts' two
     boys at Higher Barton went before the tribunal at South Molton, and their father stood up and
     said they were needed for the harvest, and the magistrate, who hunts with Mr Vellacott, gave
-    them both exemption. Two great lads, twenty and twenty-two, at home on the farm. And you out
+    them both exemption. Two great lads, twenty and twenty-two, cushy at home on the farm. And you out
     here, with the Dunsworthy lads.
 
     [if war.mate2]Pearce reads it over your shoulder. "Vellacotts," he says. "I'd have their pheasants, when I get home. Every one." He means it as a comfort, and it is, a bit.[/if]
@@ -50,7 +50,7 @@
   text: |
     [if war.servant == 2]You've been Mr Rudd's servant since Loos.[else]Mr Rudd has had the platoon since Loos.[/if] He's from Birmingham, who was a clerk in a brass foundry and
     went to the grammar school on a scholarship. Temporary gentlemen, the old officers call them,
-    behind their backs. He's twenty and he talks too much and he doesn't know a ewe from a wether.
+    behind their backs. He's twenty, a one-pip wonder, and he talks too much and he doesn't know a ewe from a wether.
 
     The men from Dunsworthy don't take to him. He isn't Mr Venn. He doesn't know their mothers.[if war.mate1] He calls Will Cottle "Cottle" in the voice Mr Venn used for his dogs.[/if]
 
@@ -157,7 +157,7 @@
     Mametz, a shrine, and he puts his finger on it. "There's a machine gun there," he says. "And it
     can see the whole of this slope. When we go over, it'll have us."
 
-    Everybody's been told the wire's cut and the Germans are dead in their dugouts. Everybody
+    Everybody's been told the wire's cut and Fritz is dead in his dugouts. Everybody
     looks at the clay.
   choices:
     - id: letter
@@ -248,12 +248,12 @@
   title: The first of July
   text: |
     The first of July comes up hot, mist in the dip, burning off, and by seven the sun's on your
-    neck. Larks going up over the slope. You're in the trench at the edge of Mansel Copse, sixty
+    neck and the tin hat's hot to the hand. Larks going up over the slope. You're in the trench at the edge of Mansel Copse, sixty
     pounds on your back.
 
     Half past seven. The guns stop. The whistles.
 
-    [if war.path == rifleman]You go up the ladder with {mate} on the rung below you, and out of the trees into the open.[/if][if war.path == nco]Seven men behind you on the ladder, watching your back.[/if][if war.path == lewis]You go in the second line with the gun on your shoulder and your No. 2 behind with the drums.[/if][if war.path == signals]You go with the company officer, a reel of wire paying out behind you.[/if][if war.path == bomb]You go with the bombers, a bucket of Mills bombs in each hand.[/if][if war.path == snipe]You go behind the second line with the scoped rifle, looking for the shrine.[/if][if war.path == bearer]You go out of the copse behind the first wave with the stretcher, and the slope fills with your work before you're ten yards out.[/if][if flag.f16_learned_ground] You know the ground. You know where the bank is.[/if]
+    [if war.path == rifleman]You go up the ladder with {mate} on the rung below you, and out of the trees into the open.[/if][if war.path == nco]Seven men behind you on the ladder, watching your back.[/if][if war.path == lewis]You go in the second line with the Lewis gun on your shoulder and your No. 2 behind with the drums.[/if][if war.path == signals]You go with the company officer, a reel of wire paying out behind you.[/if][if war.path == bomb]You go with the bombers, a bucket of Mills bombs in each hand.[/if][if war.path == snipe]You go behind the second line with the telescope-sighted rifle, looking for the shrine.[/if][if war.path == bearer]You go out of the copse behind the first wave with the stretcher, and the slope fills with your work before you're ten yards out.[/if][if flag.f16_learned_ground] You know the ground. You know where the bank is.[/if]
 
     The machine gun by the crucifix opens up before the first wave is twenty yards out of the copse.
     It's exactly where the officer said. It sweeps the slope like a man scything, left to right, and
@@ -287,7 +287,7 @@
     dust and the smell of old cider from a smashed press, and Germans in every cellar.
 
     It goes on all afternoon. Cellar by cellar. A bomb down the steps, wait, then down after it. A
-    German officer comes up out of one with his hands up and his hat on straight, and asks for a
+    German officer comes up out of one with his hands up and his hat on straight, says "Kamerad" once, and asks for a
     receipt for his men. Out of the next one comes a machine gun.
 
     [if war.stalled]The village won't go. Every time the bombers get to a cellar, the next one opens up.[else]By evening the village is ours, or what's left of it is.[/if]
@@ -360,9 +360,9 @@
 
     [if war.mate3 && flag.f16_bert_peal]On Sunday the ringers ring for your leave. The two girls from the school are on the treble and the second, and old Mr Squance on the tenor, Bert's bell. You stand in the tower and listen, and it's like being let out of something.[/if][if war.mate3 && !flag.f16_bert_peal]On Sunday the bells ring, short-handed, for the men home on leave. They keep the tenor rope looped up for Bert.[/if][if !war.mate3]The tenor's rung half-muffled on Sundays now, for the Dunsworthy dead, and the girl who rings it was taught by Bert's old tower captain.[/if]
 
-    [if flag.ro_sw_wed16]You and Rose are married at Dunsworthy church on the Wednesday, the banns read three Sundays while you were still in France. The ringers ring what bells they have. She's in her mother's dress let out, with a sprig of holly because there's nothing else in December, and her father gives her away with flour on his good black coat. The breakfast's at the mill: ham, cider, and a cake her mother saved the sugar for since Michaelmas. One night at the inn in South Molton, with the market under the window at five in the morning, cattle and dogs and men shouting prices, and Rose laughing into the pillow.[/if][if flag.ro_sw_after]On the Sunday you walk Rose down to the mill, and on the footbridge, with the river going under brown and loud, you give her the ring from the jeweller's in Barnstaple. She puts it on herself before you can. "After," she says. "You said after. I'll hold you to it."[/if][if flag.ro_sw_let_go]Rose Huxtable is three pews ahead in church. At the lych-gate she shakes your hand and asks after your feet, kind, the way she'd ask any of the boys home.[/if][if flag.ro_sw_silent]Rose Huxtable says good morning at market the way she'd say it to the corn merchant.[/if][if flag.ro_sw_first && !flag.ro_sw_16 && !flag.ro_sw_ended]Rose walks the lane to the mill with you on the Sunday, and back, and you talk about the hoist and the tribunal and nothing at all, and neither of you says the thing. At the mill door she says, "Well," and goes in.[/if]
+    [if flag.ro_sw_wed16]You and Rose are married at Dunsworthy church on the Wednesday, the banns read three Sundays while you were still in France. The ringers ring what bells they have. She's in her mother's dress let out, with a sprig of holly because there's nothing else in December, and her father gives her away with flour on his good black coat. The wedding breakfast's at the mill: ham, cider, and a cake her mother saved the sugar for since Michaelmas. One night at the inn in South Molton, with the market under the window at five in the morning, cattle and dogs and men shouting prices, and Rose laughing into the pillow.[/if][if flag.ro_sw_after]On the Sunday you walk Rose down to the mill, and on the footbridge, with the river going under brown and loud, you give her the ring from the jeweller's in Barnstaple. She puts it on herself before you can. "After," she says. "You said after. I'll hold you to it."[/if][if flag.ro_sw_let_go]Rose Huxtable is three pews ahead in church. At the lych-gate she shakes your hand and asks after your feet, kind, the way she'd ask any of the boys home.[/if][if flag.ro_sw_silent]Rose Huxtable says good morning at market the way she'd say it to the corn merchant.[/if][if flag.ro_sw_first && !flag.ro_sw_16 && !flag.ro_sw_ended]Rose walks the lane to the mill with you on the Sunday, and back, and you talk about the hoist and the tribunal and nothing at all, and neither of you says the thing. At the mill door she says, "Well," and goes in.[/if]
 
-    [if flag.ro_fr_met]Your mother wants to know what the French eat. Egg and chips, you tell her, and she doesn't believe a word of it.[/if]
+    [if flag.ro_fr_met]Your mother wants to know what the French eat. Oofs and chips, you tell her, eggs, and she doesn't believe a word of it.[/if]
 
     [if flag.f16_wrote_vellacott]At market your father sells two heifers to Mr Vellacott and doesn't speak to him, and Mr Vellacott doesn't look at you.[/if][if flag.f16_helped_rudd && !flag.sv_second_killed] A letter comes for you at the farm from Mr Rudd, in Birmingham on leave too, to wish you a happy Christmas. Your mother puts it on the dresser with the others.[/if]
 

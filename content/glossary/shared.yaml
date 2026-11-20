@@ -1,0 +1,218 @@
+# The soldier's words in the scenes every player sees (docs/FRAME-WORDS.md sections 1 and 2): the
+# tour page, duties and missions, wounds, death, the close moments, the battle overview, the servant
+# and the special jobs. Same format as base.yaml; the first meaning of a term wins across files.
+# Whole words only, so common words are listed in the form the text uses ("the section", "a show
+# coming", "at the copper") to keep them off other senses (a show at a theatre, copper wire).
+
+# ---- the trench and the line ----
+- { term: "up the line", also: ["in the line", "out of the line"], means: "The line was the front trenches. Up the line meant towards them; out of the line meant resting behind." }
+- { term: tour, also: [tours], means: "A spell of some days holding the front trenches before another battalion took over." }
+- { term: "no man's land", means: "The strip of ground between the two front lines, held by neither side." }
+- { term: bay, also: [bays], means: "One short straight length of a trench. Trenches were dug in bays so a shell burst could not travel along." }
+- { term: traverse, means: "The thick buttress of earth between two bays of a trench, which the trench bends round." }
+- { term: sap, also: [saps], means: "A narrow trench dug forward from the front line towards the enemy, for listening or for a gun." }
+- { term: "communication trench", also: ["communication trenches"], means: "A trench running back from the front line, so men and stores could come up under cover." }
+- { term: "support line", also: ["support trench"], means: "The second trench, a few hundred yards behind the front line, where the men in reserve waited." }
+- { term: dugout, also: [dugouts], means: "A shelter dug into the side or floor of a trench, roofed with timber and earth." }
+- { term: duckboards, also: [duckboard], means: "Slatted wooden boards laid along a trench floor or over mud to walk on." }
+- { term: sump, means: "A pit dug in the trench floor for the water to drain into." }
+- { term: latrine, also: [latrines], means: "The trench privy: a pit or a row of buckets in a short side trench." }
+- { term: stand-to, means: "The hour before dawn and at dusk when every man stood on the firestep, armed, in case of attack." }
+- { term: stand-down, means: "The order that ended stand-to; after it in the morning came breakfast." }
+- { term: redoubt, means: "A strong point in a trench line, built to hold out by itself when attacked from all sides." }
+- { term: pillbox, also: [pillboxes], means: "A small concrete fort with slits for machine guns; the Germans built hundreds in Flanders." }
+- { term: salient, means: "A bulge in the line. The salient round Ypres was overlooked and shelled from three sides." }
+- { term: "Hindenburg Line", means: "The Germans' strongest trench system, built behind their front in the winter of 1916-17." }
+- { term: "the retreat", means: "The British falling back before the great German attack of March 1918." }
+- { term: loophole, means: "A small hole or slit in the parapet to watch and shoot through." }
+- { term: periscope, means: "A box of mirrors on a stick, for looking over the parapet without showing your head." }
+- { term: pickets, also: [picket, "screw pickets", "screw picket"], means: "Iron stakes to hang barbed wire on. Screw pickets were twisted into the ground, quieter than hammering." }
+- { term: "slag heaps", also: ["slag heap"], means: "Hills of waste rock tipped beside coal mines." }
+
+# ---- the work of the line ----
+- { term: "wiring party", means: "Men sent out at night to put up or mend the barbed wire in front of the trench." }
+- { term: "listening post", means: "A hole out in no man's land where two men lay at night to listen for the enemy." }
+- { term: "carrying party", also: ["carrying parties"], means: "Men who carried food, water, ammunition and stores up to the front line by hand, at night." }
+- { term: "working party", also: ["working parties"], means: "Men detailed for a job of labour: digging, carrying, mending the trench." }
+- { term: fatigues, also: [fatigue], means: "The army's chores: digging, carrying, cleaning. Every private did them unless excused." }
+- { term: "over the top", means: "Out of the trench over the parapet, into the open. Going over the top meant attacking." }
+- { term: "the push", means: "Soldiers' word for a great attack." }
+- { term: "big show", also: ["a show in the morning", "a show coming", "the last show"], means: "A show was soldiers' slang for an attack or a battle." }
+- { term: barrage, means: "A wall of shell fire laid down by the guns, often moving ahead of the attacking men." }
+- { term: "ration dump", also: [dump, dumps], means: "A place behind the trenches where food and stores were left to be carried forward." }
+- { term: "horse lines", also: ["transport lines"], means: "Where a unit's horses and wagons were kept, a mile or two behind the trenches." }
+- { term: railhead, means: "The end of the railway nearest the front, where men and supplies got off the trains." }
+- { term: buzzer, means: "A field telephone set that could also send Morse code as a buzz along the wire." }
+
+# ---- the army and its ranks ----
+- { term: "the section", also: ["your section"], means: "The smallest group in the infantry: about a dozen men under a corporal." }
+- { term: platoon, means: "About fifty men, four sections, led by a junior officer with a sergeant under him." }
+- { term: "the company", also: ["your company"], means: "About two hundred infantrymen under a captain. Four companies made a battalion." }
+- { term: battalion, means: "About a thousand infantrymen under a lieutenant-colonel: the unit a soldier belonged to and lived in." }
+- { term: brigade, means: "Four battalions under a brigadier-general, and the headquarters that gave them their orders." }
+- { term: brigadier, means: "The general commanding a brigade." }
+- { term: division, also: [divisional], means: "About eighteen thousand men under a major-general: three brigades with their own guns and engineers." }
+- { term: "the staff", means: "The officers at headquarters who planned the fighting, well behind the trenches." }
+- { term: "brass hats", means: "Soldiers' name for senior officers and the staff, from the gold braid on their caps." }
+- { term: "red tabs", means: "Staff officers, from the red patches they wore on their collars." }
+- { term: "the Old Man", means: "Soldiers' name for their commanding officer, the colonel of the battalion." }
+- { term: "quarter bloke", means: "Soldiers' name for the quartermaster sergeant, who kept the stores and issued kit." }
+- { term: NCO, means: "A non-commissioned officer: a corporal or a sergeant, promoted from the ranks." }
+- { term: stripe, also: [stripes], means: "A cloth chevron on the sleeve showing rank: one for a lance corporal, two a corporal, three a sergeant." }
+- { term: pip, means: "The star on an officer's cuff that showed his rank: one for a second lieutenant, three for a captain." }
+- { term: commission, means: "The King's written authority that made a man an officer." }
+- { term: "the regulars", means: "The small professional army of before the war, as against the volunteers of 1914." }
+- { term: "colour sergeant", means: "The senior sergeant of a company in the old regular army." }
+- { term: "old sweat", means: "An old soldier; properly a regular from before the war." }
+- { term: draft, also: [drafts], means: "A batch of new men sent out from England to fill the gaps in a battalion." }
+- { term: depot, means: "The regiment's barracks in England, where recruits and men back from hospital were trained and sent out." }
+- { term: "battalion orders", also: ["in orders"], means: "The daily written notices of a battalion: duties, promotions, punishments and awards." }
+- { term: "officers' mess", means: "Where the officers of a unit ate together, and the officers as a body." }
+- { term: court-martial, also: [court-martialled], means: "A military court of officers that tried soldiers for crimes such as desertion." }
+- { term: censor, means: "Every soldier's letter was read by an officer, who struck out anything of use to the enemy." }
+- { term: padre, means: "The army chaplain." }
+- { term: MO, means: "The medical officer: the battalion's doctor." }
+
+# ---- kit, food and comforts ----
+- { term: puttees, means: "Long strips of khaki cloth wound round the leg from ankle to knee." }
+- { term: greatcoat, also: [greatcoats], means: "The soldier's heavy woollen overcoat." }
+- { term: webbing, means: "The belt, straps and pouches of woven cotton that carried a soldier's ammunition and kit." }
+- { term: "blue serge", means: "Blue cloth uniforms issued to the 1914 volunteers because there was not enough khaki." }
+- { term: valise, means: "An officer's canvas roll that held his bedding and belongings." }
+- { term: "pay book", also: ["pay books"], means: "The small brown book every soldier carried, with his name, number, pay and will." }
+- { term: "identity discs", means: "Two fibre tags on a cord round the neck, stamped with a man's name, number and religion." }
+- { term: "mess tin", also: ["mess tins"], means: "The soldier's metal dish with a folding handle, for cooking and eating." }
+- { term: dixie, also: [dixies], means: "A large iron cooking pot with a lid; the company's stew and tea came up the line in them." }
+- { term: "bully beef", also: [bully], means: "Tinned corned beef, the soldier's standing ration." }
+- { term: pozzy, means: "Soldiers' word for jam." }
+- { term: char, means: "Soldiers' word for tea, brought home from India by the old regular army." }
+- { term: gasper, also: [gaspers], means: "A cheap cigarette." }
+- { term: "rum ration", means: "A spoonful or two of strong rum issued to each man in the trenches, in cold or after hard work." }
+- { term: tot, means: "One man's measure of rum." }
+- { term: brazier, also: [braziers], means: "A bucket or drum with holes punched in it, burning coke or charcoal for warmth." }
+- { term: primus, means: "A small brass stove that burned paraffin under pressure." }
+- { term: chloride, means: "Chloride of lime, put in drinking water to make it safe; it tasted like a swimming bath." }
+- { term: "whale oil", means: "Issued to rub into the feet and skin against wet and cold." }
+- { term: "trench foot", means: "Feet rotted by days of standing in cold water. A unit with many cases was held to blame." }
+- { term: chats, means: "Soldiers' word for lice. Every man in the trenches had them, in the seams of his clothes." }
+- { term: mufflers, means: "Knitted scarves." }
+- { term: "route marches", also: ["route march"], means: "Long marches by road in full kit, to harden men's feet and legs." }
+- { term: "physical jerks", means: "Army exercises: bending and stretching to an instructor's count." }
+- { term: musketry, means: "The army's word for training in shooting with the rifle." }
+- { term: "playing nap", means: "Nap, short for Napoleon, was a card game played for small stakes." }
+
+# ---- weapons ----
+- { term: "Mills bombs", also: ["Mills bomb"], means: "The British hand grenade: a cast-iron egg with a pin and a lever. The army called grenades bombs." }
+- { term: bombers, also: [bomber], means: "Soldiers trained to throw hand grenades, which the army called bombs." }
+- { term: "potato mashers", also: ["potato masher"], means: "Soldiers' name for the German hand grenade, a tin of explosive on a wooden handle." }
+- { term: cosh, also: [coshes], means: "A short heavy club, made in the trenches for silent work on raids." }
+- { term: entrenching-tool, means: "The soldier's small spade and pick, carried on his belt; the wooden handle came off." }
+- { term: "Lewis gun", also: ["Lewis guns", "the Lewis gun", "the Lewis guns", "the Lewis"], means: "A light machine gun one man could carry, fed from a flat round drum of 47 rounds on top." }
+- { term: "No. 2", means: "The second man of a gun team, who carried the spare drums and loaded for the gunner." }
+- { term: battery, means: "A group of four or six guns, sited and fired together." }
+- { term: ranging, means: "Correcting a gun's aim shot by shot, with a man watching, until the shells fall on the target." }
+- { term: heavies, means: "The heavy guns, which fired the biggest shells from far behind the line." }
+- { term: "whizz-bangs", means: "Light fast German shells that arrived before you heard them coming: a whizz, then the bang." }
+- { term: five-nines, also: [five-nine], means: "German shells 5.9 inches across, from their commonest heavy gun." }
+- { term: minnies, also: [minnie], means: "German trench mortar bombs, from Minenwerfer: big, slow, and visible tumbling through the air." }
+- { term: "trench mortar", means: "A short gun in the trench that lobbed a heavy bomb high into the enemy's trench close by." }
+- { term: "morning hate", means: "Soldiers' name for the shelling the Germans sent over at the same hour every day." }
+- { term: cordite, means: "The explosive that drove British bullets and shells; its smoke had a sharp, sweet smell." }
+- { term: "small-arms ammunition", means: "Cartridges for rifles and machine guns, packed in wooden boxes of a thousand." }
+- { term: "gas helmet", means: "The first gas mask: a flannel hood soaked in chemicals, with eyepieces, tucked into the collar." }
+
+# ---- the tunnellers ----
+- { term: gallery, also: [galleries], means: "A mine tunnel dug under no man's land towards or beneath the enemy's trenches." }
+- { term: "listening stick", means: "A short rod held between the teeth or to the ear, to hear digging through the ground." }
+- { term: "bags of spoil", also: ["the spoil"], means: "Spoil is the earth dug out of a tunnel, bagged and carried away so the enemy would not see it." }
+- { term: ammonal, means: "The explosive the tunnellers used for mines, a grey powder packed in tins or bags." }
+- { term: tamp, means: "To pack sandbags tight behind a charge, so the blast goes forward and not back along the tunnel." }
+- { term: windlass, means: "A hand-turned drum and rope at the top of a shaft, for hauling up men and bags." }
+
+# ---- tanks and the air ----
+- { term: tankodrome, means: "The tank men's name for their camp and workshops behind the line." }
+- { term: fitters, also: [fitter], means: "The mechanics who looked after engines." }
+- { term: Whippets, also: [Whippet], means: "Light, faster tanks with machine guns only, used from 1918 to follow up a break in the line." }
+- { term: aerodrome, means: "A flying field with its sheds and huts." }
+- { term: "the machines", means: "What airmen called their aeroplanes." }
+- { term: riggers, also: [rigger], means: "The men who looked after an aeroplane's wings, wires and fabric." }
+- { term: dope, means: "The varnish painted on an aeroplane's cloth skin to tighten and proof it." }
+- { term: Archie, means: "Airmen's name for anti-aircraft fire, and the guns that sent it up." }
+- { term: "German scouts", also: ["German scout"], means: "A scout was a fast single-seat fighting aeroplane." }
+
+# ---- wounds and hospitals ----
+- { term: bearers, also: [stretcher-bearers, stretcher-bearer], means: "Stretcher-bearers: men of the battalion who went out unarmed to carry in the wounded." }
+- { term: "field dressing", also: ["field dressings"], means: "A sealed packet of bandage and pad that every soldier carried sewn inside his tunic." }
+- { term: "aid post", also: ["aid posts"], means: "The battalion doctor's post just behind the trenches: the first stop for a wounded man." }
+- { term: "dressing station", means: "The next stop behind the aid post, where wounds were cleaned and dressed before the ambulance." }
+- { term: "clearing station", also: ["casualty clearing station"], means: "A hospital of tents and huts some miles back, where the surgeons operated." }
+- { term: "rest station", means: "A small hospital behind the line for the sick and lightly wounded who would soon go back." }
+- { term: orderly, means: "A soldier who did the fetching, carrying and nursing at a medical post." }
+- { term: "nursing sister", means: "A trained army nurse." }
+- { term: "sick parade", means: "The morning hour when men who felt ill lined up to see the medical officer." }
+- { term: "swinging the lead", means: "Pretending to be ill or hurt to get out of duty." }
+- { term: morphia, means: "Morphine: the strong drug given to wounded men for pain." }
+- { term: lockjaw, means: "Tetanus, a deadly infection from dirt in a wound. From 1915 every wounded man was injected against it." }
+- { term: carbolic, means: "A strong-smelling disinfectant used in hospitals, and in soap." }
+- { term: "hospital blue", also: ["hospital blues"], means: "The bright blue suit, white shirt and red tie worn by wounded soldiers in hospitals in Britain." }
+- { term: "wound stripe", means: "A short brass bar worn upright on the left cuff, one for each time a man was wounded." }
+- { term: "silver badge", means: "The Silver War Badge, given from September 1916 to men discharged for wounds or sickness." }
+- { term: "white feather", means: "Given by some women to young men out of uniform, to call them cowards." }
+- { term: neurasthenia, means: "The doctors' word of the time for a breakdown of the nerves." }
+- { term: "in the pink", means: "In good health: a stock phrase of soldiers' letters home." }
+
+# ---- the enemy, and soldiers' French and slang ----
+- { term: Fritz, means: "The British soldier's name for a German, or for the Germans." }
+- { term: Jerry, means: "Soldiers' name for the Germans, common from 1917." }
+- { term: Alleyman, means: "Early soldiers' name for the Germans, from the French Allemand." }
+- { term: Kamerad, means: "German for comrade: what a German soldier called out to surrender." }
+- { term: napoo, means: "Finished, gone, done for: soldiers' French, from il n'y en a plus, there is no more." }
+- { term: "San fairy ann", means: "It doesn't matter: soldiers' French, from ça ne fait rien." }
+- { term: oofs, means: "Eggs: soldiers' French, from oeufs. Egg and chips was the great treat behind the line." }
+- { term: "C'est la guerre", means: "French: it's the war. Said with a shrug, of anything that could not be helped." }
+- { term: boulangerie, means: "French: a baker's shop." }
+- { term: "gone west", means: "Killed: soldiers' slang, as the sun goes down in the west." }
+- { term: "stopped one", means: "Been hit, by a bullet or a piece of shell." }
+- { term: "the wind up", means: "To have the wind up was to be frightened and on edge." }
+- { term: cushy, means: "Easy, comfortable, safe: a word the old army brought back from India." }
+- { term: Wipers, means: "The soldiers' way of saying Ypres, the ruined Belgian town the British held all through the war." }
+- { term: "Hell Fire Corner", means: "A crossroads on the Menin Road outside Ypres, in full view of German guns and shelled day and night." }
+- { term: "Eat Apples", means: "The soldiers' way of saying Étaples, the great British camp and hospital town on the French coast." }
+
+# ---- home, and what came from it ----
+- { term: "War Office", means: "The government department in London that ran the army." }
+- { term: "Army Form B.104-82", means: "The printed form, filled in by hand, that told a soldier's family he was dead." }
+- { term: Ludendorff, means: "The general who directed the German armies in 1918." }
+- { term: "separation allowance", means: "The weekly sum the government paid a soldier's wife while he was away." }
+- { term: "wedding lines", means: "A marriage certificate." }
+- { term: banns, means: "The notice of a coming marriage, read out in church on three Sundays." }
+- { term: "walking out with", also: ["walk out with"], means: "Courting: keeping company with a sweetheart." }
+- { term: "blinds down", means: "A house drew its blinds when someone in the family had died." }
+- { term: "at the copper", means: "The copper was the big tub over a fire, in the scullery, for boiling the weekly wash." }
+- { term: "the tenor", means: "The deepest bell in a church tower, tolled for a death." }
+- { term: Co-op, means: "The Co-operative Society's shop, owned by its customers, in every northern working town." }
+- { term: brilliantine, means: "Scented oil for the hair." }
+- { term: squire, means: "The chief landowner of a country parish, landlord to most of its farms." }
+- { term: "the keeper", means: "The gamekeeper, who guarded the squire's pheasants and rabbits from poachers." }
+- { term: byre, means: "A cowshed." }
+- { term: stooks, means: "Sheaves of cut corn stood on end in the field to dry." }
+- { term: "weaving shed", means: "The great single-storey room of a cotton mill, with hundreds of power looms." }
+- { term: tackler, also: [tacklers], means: "The man in a weaving shed who set up and mended the looms, and oversaw the weavers." }
+- { term: half-timer, means: "A child who worked half the day in the mill and went to school the other half." }
+- { term: mee-maw, means: "To talk by lip-reading and mouthing, as weavers did over the din of the looms." }
+- { term: "card room", means: "The room in a cotton mill where the raw cotton was combed out before spinning." }
+- { term: weft, means: "The thread that runs across a piece of cloth, carried by the shuttle." }
+- { term: "Nosegay twist", means: "A brand of strong, dark pipe tobacco, sold in a twisted rope." }
+- { term: "Gold Flake", means: "A brand of cigarettes, dearer than the soldier's usual smoke." }
+- { term: marra, means: "A pitman's workmate, his partner at the coal face; a north-east word." }
+- { term: "at the face", means: "At the coal face: the end of a mine tunnel where the coal is cut." }
+- { term: "fore shift", means: "The first shift of the day down a north-east pit, going down in the small hours." }
+- { term: "bait tins", also: ["bait time"], means: "Bait is the pitman's word for the food he takes to work." }
+- { term: "snap tin", means: "A miner's tin for carrying his food down the pit." }
+- { term: deputy, means: "The pit official in charge of safety and the men in one district underground." }
+- { term: putter, means: "A lad who pushed or drove the coal tubs from the face to the shaft." }
+- { term: "on the screens", means: "The screens were the moving belts at the pit top where stone was picked out of the coal." }
+- { term: "Standard Four", means: "The fourth class of an elementary school, children of about ten." }
+- { term: "the ABC", means: "A chain of cheap London tea shops, the Aerated Bread Company's." }
+- { term: Baedeker, means: "A German make of travellers' guide book, in red covers." }
+- { term: "pocket Horace", means: "A small copy of the Roman poet Horace, read in Latin at the public schools." }

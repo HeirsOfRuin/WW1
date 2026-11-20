@@ -11,7 +11,8 @@ function index(glossary: Gloss[]) {
   if (!c) {
     const by = new Map<string, Gloss>();
     for (const g of glossary) for (const t of [g.term, ...(g.also ?? [])]) by.set(t.toLowerCase(), g);
-    const alts = [...by.keys()].sort((a, b) => b.length - a.length).map(esc).join('|');
+    // a space in a term matches any run of white space: the text wraps lines inside phrases
+    const alts = [...by.keys()].sort((a, b) => b.length - a.length).map((t) => esc(t).replace(/ +/g, '\\s+')).join('|');
     c = { re: new RegExp(`(?<![\\p{L}\\p{N}])(${alts || '\\b\\B'})(?![\\p{L}\\p{N}])`, 'giu'), by };
     cache.set(glossary, c);
   }
@@ -22,7 +23,7 @@ export function glossOf(text: string, glossary: Gloss[], seen = new Set<string>(
   const { re, by } = index(glossary);
   const out: Piece[] = []; let at = 0;
   for (const m of text.matchAll(re)) {
-    const g = by.get(m[0].toLowerCase())!;
+    const g = by.get(m[0].toLowerCase().replace(/\s+/g, ' '))!;
     if (seen.has(g.term)) continue;
     seen.add(g.term);
     if (m.index > at) out.push(text.slice(at, m.index));

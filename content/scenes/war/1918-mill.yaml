@@ -15,8 +15,8 @@
   title: The French line
   text: |
     January, and they've moved you south, a long way south, to take over a stretch of line from
-    the French. The French have left it the way the French leave things: a stove in every dugout,
-    empty wine bottles in the sump, a cat that won't come out from under the duckboards, and a
+    the French. The poilus have left it the way the French leave things: a stove in every dugout,
+    empty vin blank bottles in the sump, a cat that won't come out from under the duckboards, and a
     picture of a woman in stockings pasted on the dugout wall. Nobody chips her off this time.
 
     It's quiet. The old hands say it's too quiet, and then laugh at themselves for saying it. On a
@@ -56,7 +56,7 @@
   requires: [ "war.tour == 31" ]
   title: Waiting
   text: |
-    February. They're coming. Everybody knows it. The prisoners say it, the airmen say it, the
+    February. Jerry's coming. Everybody knows it. The prisoners say it, the airmen say it, the
     deserters who come over in the night with their hands up say it, and give dates, and the dates
     are all different.
 
@@ -65,7 +65,7 @@
     single shell here, a single shell there, careful, like a man tapping the walls of a house he
     means to buy.
 
-    At stand-to you look at the grey wire and the grey sky and think about the shed at half past
+    At stand-to you look at the grey wire and the grey sky and think about the weaving shed at half past
     five on a winter morning, the gas mantles popping on one after another down the long room and
     the first looms starting up. You'd give your back teeth for that noise.
 
@@ -155,7 +155,7 @@
       text: Stay at duty. Everybody's got it.
       effects: [ { set: flag.had_the_flu }, { war_mood: { nerve: -1, standing: 1 } } ]
       text_after: |
-        You stand your sentry with your teeth going and the wire swimming in front of you. At dawn
+        Nobody's going to say you were swinging the lead. You stand your sentry with your teeth going and the wire swimming in front of you. At dawn
         the sergeant takes one look and sends you down anyway, and you cry all the way to the aid
         post. It's the fever, you tell yourself. It's only the fever.
       next: "@return"
@@ -171,7 +171,7 @@
   text: |
     Americans, at last. A company of them comes up to learn the line, big and well fed, with
     cigarettes in packets of twenty with pictures on, and tinned peaches, and they call everybody
-    buddy, and they want to see a German so badly it hurts to watch.
+    buddy, and they want to see a Jerry so badly it hurts to watch.
 
     Duckworth adopts one, a long lad from somewhere called Ohio who has never seen a mill and wants
     to hear all about it. So Duckworth tells him. The shed, the noise, the tackler, the weavers
@@ -469,7 +469,7 @@
     the boots and the whisky, and couldn't believe it, and some of them are drunk in the cellars.
     They thought we were starving.
 
-    New men come up on your right in slouch hats, Australians, who look at you as if you're
+    New men come up on your right in slouch hats, Aussies, who look at you as if you're
     something the cat brought in, and give you their water.
 
     At dusk the grey lines come up the slope at you one more time.
@@ -631,11 +631,11 @@
   chapter: front
   title: The village
   text: |
-    A village, still standing, with roofs on, and people in it.
+    A village, still standing, with roofs on, and people in it. The German board, Kommandantur, is still nailed over the door of the Mairie.
 
     They come up out of the cellars when the firing's moved on: old men, women, children with faces
     the colour of candles. Four years they've been behind the German lines. An old woman in a black
-    shawl kisses you on both cheeks and smells of onions and cellars, and pushes a cup into your
+    shawl kisses you on both cheeks and smells of onions and cellars. "Enfin," she keeps saying, "enfin, les Anglais," at last, at last, and she pushes a cup into your
     hands. It's coffee made of roasted barley, and it's the best thing you've ever tasted.
 
     There's a machine gun in the church tower. It's firing down the street.
@@ -712,7 +712,7 @@
 
     [if war.mate1 && flag.best_man]Shaw sits down in the road and gets the photograph out, and doesn't put it away again all day.[/if][if war.mate1 && flag.promised_shaw] "Well," he says. "You got me home, then." It isn't true yet. You let him have it.[/if][if !war.mate1 && flag.promised_shaw]You told Shaw you'd get him home to see the lad walk. You think of Edith, and the little fist round your finger.[/if][if war.mate2] Duckworth starts to tell a joke and can't get to the end of it.[/if][if war.mate2 && flag.tackler_tale] "There's a lad in Ohio," he says, "telling the one about the pigeon. That's what I did in the war."[/if][if !war.mate2 && flag.gave_fags] You light a Woodbine and think of Duckworth, who owed you one, and paid up.[/if][if war.mate3] Pilling stands in the road and doesn't know what to do, and in the end he takes his tin hat off and throws it as far as he can into a field of turnips.[/if][if !war.mate3] You think of Walter Pilling, sixteen at Loos, who'd have been twenty in March.[/if]
 
-    You don't get home till the spring. The letters come. The influenza's in the street, the bad
+    You don't get back to Blighty till the spring. The letters come. The influenza's in the street, the bad
     sort this time; Mrs Ormerod's two girls; the schools shut. On the day, your mother says, every
     mill buzzer in the town went off at eleven, all at once, and the chapel bells after, and your
     father stood in the yard and wouldn't come in for an hour.[if flag.had_the_flu] You've had it,

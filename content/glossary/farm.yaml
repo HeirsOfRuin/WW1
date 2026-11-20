@@ -1,0 +1,140 @@
+# The farm town's words (Dunsworthy, the Devons): the army's, the farm's, the bell tower's, and the
+# French and soldiers' slang added 2026-11-20 (docs/FRAME-WORDS.md). Format as in base.yaml.
+# Dated slang: Alleyman and coal boxes are used in 1915 only, Jerry from 1917.
+
+# ---- the army ----
+- { term: communication trench, means: "A trench running back from the front line, so men and supplies could come up under cover." }
+- { term: scabbard, means: "The sheath a man's bayonet hung in at his belt." }
+- { term: bay, also: [bays], means: "One straight length of a trench between two bends, held by a few men." }
+- { term: stand-to, also: ["stand to"], means: "The hour at dawn and dusk when every man stood armed on the firestep, in case of attack." }
+- { term: support line, means: "The second line of trenches, a short way behind the front line." }
+- { term: fatigues, means: "Work parties: the digging, carrying and cleaning that filled a soldier's days out of battle." }
+- { term: dugout, also: [dugouts], means: "A shelter dug into the side or floor of a trench, roofed with timber and earth." }
+- { term: at rest, means: "Out of the trenches for a few days, lodged in a village some miles behind the line." }
+- { term: billet, also: [billets], means: "A soldier's lodging behind the line: a barn, a loft or a room in a village house." }
+- { term: limber, means: "The two-wheeled cart a gun or wagon was hooked to, for hauling by horses." }
+- { term: orderly room, means: "The company or battalion office, where charges against a man were heard." }
+- { term: "no man's land", means: "The open ground between the two front lines, held by neither side." }
+- { term: gas cylinders, means: "Steel bottles of chlorine gas; at Loos the British opened them for the wind to carry it across." }
+- { term: gas hood, means: "The gas mask of 1915: a flannel bag soaked in chemicals, pulled over the head and tucked into the collar." }
+- { term: pay book, also: [pay books], means: "The small book every soldier carried, recording his pay; its last page was a form for his will." }
+- { term: reads the roll, means: "Calls every man's name from the list; no answer means killed, wounded or missing." }
+- { term: battalion, means: "About a thousand men at full strength; the body a soldier lived, fought and was counted in." }
+- { term: platoon, means: "About fifty men under a junior officer, in four sections." }
+- { term: section, means: "The smallest body of infantry: about ten men under a corporal." }
+- { term: Second Lieutenant, means: "The lowest rank of officer; he commanded a platoon." }
+- { term: War Office, means: "The government department in London that ran the army and sent out the news of casualties." }
+- { term: tunic, means: "The soldier's khaki uniform jacket." }
+- { term: at the port, means: "With the rifle held slantwise across the chest, as drilled for advancing at a walk." }
+- { term: traverse, means: "A sharp bend built into a trench, so that a blast or bullets could not travel along it." }
+- { term: bombers, also: [bomber], means: "Men trained to throw hand grenades, which the army called bombs." }
+- { term: Mills bombs, also: [Mills bomb], means: "The British hand grenade from 1915: a cast-iron egg with a pin and a lever." }
+- { term: chloride of lime, means: "A white disinfecting powder scattered in trenches and over the dead; it smelt sharp, like bleach." }
+- { term: field postcard, means: "A printed army card: the soldier crossed out the lines that did not apply and could add nothing." }
+- { term: brazier, means: "An iron basket or pierced bucket of burning coke, for warmth in a trench." }
+- { term: Lewis gun, means: "A light machine gun one man could carry, fed from a round drum of cartridges." }
+- { term: "No. 2", means: "The gunner's mate on a Lewis gun, who carried the ammunition drums and fed the gun." }
+- { term: Devons, also: [Devonshires], means: "The Devonshire Regiment, the county's own infantry." }
+- { term: tribunal, also: [tribunals], means: "A local panel that heard men's claims to be let off conscription, for their work, health or conscience." }
+- { term: Temporary gentlemen, means: "The regular officers' sneer at wartime officers from clerks' and tradesmen's families." }
+- { term: trooper, means: "A private soldier of the cavalry." }
+- { term: carrying party, means: "Men sent up the line at night loaded with rations, wire, timber or ammunition." }
+- { term: brigade, means: "The headquarters next above the battalion; a brigade was four battalions, three from 1918." }
+- { term: depot, means: "The regiment's base at home, where recruits were trained and sent out to fill the gaps." }
+- { term: ration dump, means: "The place behind the line where the day's food was left for each company to fetch after dark." }
+- { term: Flanders, means: "The flat, wet farmland of western Belgium around Ypres." }
+- { term: Cambrai, means: "The great tank attack of November 1917; most of the ground won was lost again within days." }
+- { term: War Bonds, means: "Government savings papers sold to the public to pay for the war." }
+- { term: Richthofen, means: "The German airman with the most victories, called the Red Baron for his red machine." }
+
+# ---- soldiers' slang and French ----
+- { term: Fritz, means: "The soldiers' name for the Germans, or for any one German." }
+- { term: Alleyman, means: "An early soldiers' name for the Germans, from the French 'Allemand'." }
+- { term: Jerry, means: "The soldiers' name for the Germans in the last two years of the war." }
+- { term: Kamerad, means: "German for 'comrade'; what a German soldier called out when he surrendered." }
+- { term: coal boxes, means: "The soldiers' name for heavy German shells that burst in a cloud of black smoke." }
+- { term: napoo, means: "Soldiers' French, from 'il n'y en a plus': finished, all gone, done for." }
+- { term: redcaps, means: "The military police, from the red covers on their caps." }
+- { term: cushy, means: "A soldiers' word brought from India: easy, comfortable, safe." }
+- { term: one-pip wonder, means: "The soldiers' name for a second lieutenant, who wore a single star, or pip, as his badge." }
+- { term: brass hats, means: "The soldiers' name for generals and staff officers, from the gold braid on their caps." }
+- { term: padre, means: "The soldiers' name for an army chaplain." }
+- { term: conchie, means: "The soldiers' and newspapers' word for a conscientious objector, a man who refused to fight." }
+- { term: Wipers, means: "The soldiers' way of saying Ypres, the Belgian town the army held all through the war." }
+- { term: copped it, means: "Soldiers' slang: was killed, or badly hit." }
+- { term: oofs, means: "The soldiers' way of saying 'oeufs', the French for eggs." }
+- { term: oeufs, means: "French for eggs, said something like 'uh'; the soldiers said 'oofs'." }
+- { term: Voleur, means: "French for 'thief'." }
+- { term: mes braves, means: "French: 'my brave lads'; what French country people called the soldiers." }
+- { term: "C'est droit", means: "French: 'It is straight.'" }
+
+# ---- the farm, the village and Devon ----
+- { term: "You'm", also: ["She'm"], means: "Devon speech: 'you'm' is 'you are', 'she'm' is 'she is'." }
+- { term: ewe, also: [ewes], means: "A female sheep." }
+- { term: wether, means: "A male sheep that has been castrated." }
+- { term: heifers, means: "Young cows that have not yet had a calf." }
+- { term: snare, means: "A wire noose set on an animal's path to catch it: the poacher's tool." }
+- { term: brace, means: "A pair; said of game birds or animals that have been shot or caught." }
+- { term: the keeper, means: "The gamekeeper: the man a landowner paid to rear his game birds and catch poachers." }
+- { term: squire, means: "The chief landowner of a country parish, who owned most of its farms and cottages." }
+- { term: parish, means: "A village and the country round it that share one church." }
+- { term: gunroom, means: "The room in a big country house where the sporting guns were kept and cleaned." }
+- { term: hunting flask, means: "A small flat bottle of spirits, carried in the pocket out hunting." }
+- { term: groom, means: "The servant who looked after the horses at a big house." }
+- { term: the lodge gates, means: "The gates at the foot of a big house's drive, with the gatekeeper's cottage beside them." }
+- { term: binder twine, means: "The rough string used to tie sheaves of corn; a farm used it for everything." }
+- { term: binder, means: "A horse-drawn machine that cut the corn and tied it in sheaves, dropping them in rows." }
+- { term: corn, means: "In England, any grain crop: wheat, barley or oats." }
+- { term: sickles, means: "Short hooked blades, held in one hand, for cutting corn." }
+- { term: stooks, also: [stooked], means: "Cut sheaves of corn stood on end together in the field to dry; to stook is to set them up." }
+- { term: harvest home, means: "The feast a farmer gave his workers when the last of the harvest was in." }
+- { term: threshing engine, means: "A steam engine that drove the machine for beating the grain out of the cut corn." }
+- { term: threshing drum, means: "The big boxed machine, driven by a steam engine, that beat the grain out of the corn." }
+- { term: traction engine, means: "A steam engine on wheels that hauled loads along the road and drove farm machines." }
+- { term: shafts, means: "The two poles a horse stands between to pull a cart." }
+- { term: furrow, also: [furrows], means: "The long cut a plough opens and turns over in the soil." }
+- { term: girth, means: "The strap round a horse's belly that holds its saddle or pack on." }
+- { term: bay hunter, means: "A brown horse with a black mane and tail, bred for riding after hounds." }
+- { term: whickers, means: "Makes the soft low neigh a horse gives in greeting." }
+- { term: field clamp, means: "A heap of potatoes or roots kept in the field through winter under straw and earth." }
+- { term: rooks, also: [rookery], means: "Black birds of the crow kind that nest together in treetops; their colony is a rookery." }
+- { term: cockerel, means: "A young cock, the male farmyard fowl." }
+- { term: copse, means: "A small wood." }
+- { term: bracken, means: "A tall coarse fern that covers moors and hillsides." }
+- { term: land girl, means: "A woman of the Women's Land Army, sent to do farm work in place of the men at war." }
+- { term: breeches, means: "Trousers ending at the knee, worn with leggings; a startling thing on a woman in 1917." }
+- { term: carter, means: "A man who drove and looked after a farm's cart horses." }
+- { term: "the carrier's cart", means: "The horse and cart that took goods, post and passengers between a village and its market town." }
+- { term: saffron cake, means: "A yellow West Country fruit loaf, coloured and flavoured with saffron." }
+- { term: pasty, means: "A West Country pastry case baked with meat and potato inside, made to be carried to work." }
+- { term: twist, means: "A little tea, sugar or tobacco wrapped in a twisted scrap of paper." }
+- { term: muslin, means: "A thin cotton cloth, used in the kitchen to cover and strain food." }
+- { term: sixpence, means: "A small silver coin, six pennies; a private soldier's pay was two of them a day." }
+- { term: finds you as it leaves us, means: "A stock opening for letters of the time: I hope you are as well as we are." }
+- { term: Christian name, means: "A man's first name; an officer called his men by their surnames only." }
+- { term: wash-house, means: "An outhouse with a boiler for hot water, where clothes, and muddy men, were washed." }
+- { term: dresser, means: "A kitchen sideboard with open shelves above for the plates." }
+- { term: warming pan, means: "A lidded brass pan of hot coals on a long handle, slid between the sheets to warm a bed." }
+- { term: copperplate, means: "The neat, sloping handwriting taught in schools." }
+- { term: fortnight, means: "Two weeks." }
+- { term: blinds down, also: [blinds are down, blinds were down], means: "A house drew its window blinds in daylight to show there was a death in the family." }
+- { term: lych-gate, means: "The roofed gate into a churchyard." }
+- { term: banns, means: "The notice of a coming marriage, read out in church on three Sundays beforehand." }
+- { term: wedding breakfast, means: "The meal after a wedding, whatever the hour." }
+- { term: walking out, means: "Courting: seen about together as a couple." }
+- { term: Michaelmas, means: "29 September, a quarter day, when rents fell due and farm workers were hired." }
+- { term: Lady Day, means: "25 March, a quarter day, when farm rents fell due and tenancies changed hands." }
+- { term: "All Souls' Day", means: "2 November, the church's day of prayer for the dead." }
+
+# ---- the bell tower ----
+- { term: nave, means: "The main body of a church, where the people sit." }
+- { term: the tenor, means: "The largest, deepest bell in a church tower; it rings last in each round." }
+- { term: treble, also: [trebles], means: "The smallest, highest bell in a tower; it rings first." }
+- { term: sally, means: "The thick woolly grip woven into a bell rope, where the ringer's hands take hold." }
+- { term: peal, means: "A long set piece of ringing, with every bell in the tower rung in changing order." }
+- { term: quarter peal, means: "About three-quarters of an hour of unbroken ringing, 1,260 changes, rung to mark an occasion." }
+- { term: peal book, means: "The tower's record of the ringing done there, and who rang." }
+- { term: Grandsire Doubles, means: "A set pattern for ringing five bells in changing order, with the tenor keeping time behind." }
+- { term: the changes, means: "The orders the bells are rung in, one after another, no order repeated; ringers learn them by heart." }
+- { term: tower captain, means: "The leader of a church's band of bell-ringers." }
+- { term: half-muffled, means: "Rung with a leather pad on one side of the clapper, so alternate strokes sound dull; rung for the dead." }

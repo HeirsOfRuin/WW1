@@ -22,10 +22,19 @@ function Gloss({ word, means }: { word: string; means: string }) {
   return <><span class="gloss" role="button" tabIndex={0} aria-expanded={open} onClick={() => setOpen(!open)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setOpen(!open); }}>{word}</span>{open && <span class="glossed" role="note"> ({means}) </span>}</>;
 }
 let GLOSSARY: ContentBundle['glossary'] = [];
+// A choice is a button, so its words cannot be tapped: the soldier's words in the choices are listed
+// above them instead (those the passage itself has not already marked).
+const choiceWords = (texts: string[], body: string) => {
+  const seen = new Set<string>(); glossOf(body, GLOSSARY, seen);
+  const found = texts.flatMap((t) => glossOf(t, GLOSSARY, seen).filter((x): x is { word: string; means: string } => typeof x !== 'string'));
+  return found.length > 0 && <p class="hint choicewords">In the choices: {found.map((x, i) => <>{i > 0 && ', '}<Gloss word={x.word} means={x.means} /></>)}</p>;
+};
 const paras = (t: string) => { const seen = new Set<string>(); return t.trim().split(/\n\s*\n/).map((p) => <p>{glossOf(p, GLOSSARY, seen).map((x) => (typeof x === 'string' ? x : <Gloss key={x.word} word={x.word} means={x.means} />))}</p>); };
 
 export function App({ content }: { content: ContentBundle }) {
-  GLOSSARY = content.glossary;
+  // the soldier's words can be switched off in the Menu (kept in this browser)
+  const [words, setWords] = useState(() => lsGet('trenches.words') !== 'off');
+  GLOSSARY = words ? content.glossary : [];
   const [state, setState] = useState<GameState | null>(null);
   const [tab, setTab] = useState<'story' | 'soldier' | 'map' | 'journal' | 'menu'>('story');
   const [page, setPage] = useState(0);
@@ -107,6 +116,7 @@ export function App({ content }: { content: ContentBundle }) {
             : !last
               ? <div class="stack"><button data-action="continue" onClick={() => setPage(page + 1)}>Continue ({page + 1} / {pages.length})</button></div>
               : <div class="stack">{v.deadEnd && <p class="warn">No choice is open here: this is a content bug. Menu &gt; Save code, and send it with a note.</p>}
+                  {choiceWords(v.choices.map((c) => c.text), pages[Math.min(page, pages.length - 1)] ?? '')}
                   {v.choices.map((c) => (
                     <button data-action={c.id} disabled={!c.available} class={c.lethal ? 'danger' : ''} onClick={() => act(c.id)}>
                       {c.text}
@@ -128,6 +138,7 @@ export function App({ content }: { content: ContentBundle }) {
           <button data-act="code" onClick={async () => { const c = await encodeSaveCode(toSave(state, content)); try { await navigator.clipboard.writeText(c); setNote(`Save code copied (${c.length} characters).`); } catch { setNote(c); } }}>Save code (copy)</button>
           <button data-act="link" onClick={async () => { const c = await encodeSaveCode(toSave(state, content)); const url = `${location.origin}${location.pathname}#save=${c}`; try { await navigator.clipboard.writeText(url); setNote('Save link copied: open it on any device to carry on from here.'); } catch { setNote(url); } }}>Save link (copy)</button>
           {loadBox || <button data-act="load-code" onClick={() => setLoading(true)}>Load a save code</button>}
+          <button data-act="words" onClick={() => { lsSet('trenches.words', words ? 'off' : 'on'); setWords(!words); }}>Underline the soldier's words: {words ? 'on' : 'off'}</button>
           <button data-act="quit" onClick={() => setState(null)}>Back to the title</button></div>
           <p class="hint">Saves live in this browser on this device. A save code or a save link moves a game to another.</p></>}
       </main>

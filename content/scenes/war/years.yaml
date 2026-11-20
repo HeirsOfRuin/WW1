@@ -6,7 +6,7 @@
   on_enter: [ { set: flag.year_1915 } ]
   title: France
   text: |
-    You come off the boat at Boulogne into rain, and march up a cobbled hill past French women who
+    You come off the boat at Boulogne into rain, and march up a cobbled hill past a shuttered boulangerie and French women who
     don't look at you, to a camp of wet tents on a cliff. The sea's grey and the sky's grey and
     somewhere inland, so faint you think it's thunder, you can hear the guns.
 

@@ -36,7 +36,7 @@
   text: |
     [if war.fallen_present]It happens {fallen_where}. Duckworth's halfway through a joke, the one about the tackler and the parson's wife, and then he isn't. There's no sound to it that you can pick out from all the other noise. He's just down, face first, with his rifle under him, and when you turn him over the joke's still on his face.
 
-    You stay with him longer than you should. Somebody has to kick your boot.[else][if war.transferred]Word comes over from the battalion, a week late. Duckworth. Killed {fallen_where}.[else]Somebody tells you at the water cart. Duckworth. Killed {fallen_where}.
+    You stay with him longer than you should. Somebody has to kick your boot.[else][if war.transferred]Word comes over from the battalion, a week late. Duckworth. Killed {fallen_where}.[else]Somebody tells you at the water cart. Duckworth's gone west. Killed {fallen_where}.
 
     "He wouldn't have known a thing," they say. You hope it's true. You hope it hard, like a prayer, standing there with the water tins.[/if][/if]
   choices:

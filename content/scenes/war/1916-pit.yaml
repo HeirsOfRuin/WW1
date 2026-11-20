@@ -19,8 +19,8 @@
     grey-white with chalk from head to foot, blinking at the daylight the way you used to at bank.
     They walk different already. They walk like men going home.
 
-    The infantry don't like them. The infantry say they're paid six times as much to stay out of
-    the rain. Then one night a camouflet goes up under the next company's sap, and in the morning
+    The infantry don't like them. The infantry say it's a cushy job, six times the pay to stay out
+    of the rain. Then one night a camouflet goes up under the next company's sap, and in the morning
     the tunnellers carry out four of their own, wrapped in groundsheets, and nobody says it again.
 
     [if war.mate1]Robson watches them go down every evening. "I could have," he says.[/if]
@@ -53,7 +53,7 @@
     he's been quiet since the Miners' Hall.
 
     It comes out on sentry. His brother Matty, the young one, who's not down the pit because he
-    was bad with his chest as a bairn and works in the Store. He's had his papers under the new Act,
+    was bad with his chest as a bairn and works in the Store. He's had his calling-up papers under the new Act,
     and he's gone before the tribunal and said he won't. Won't fight, won't wear the uniform, won't
     carry a stretcher. Conscience. The tribunal gave him nothing. He's in the guardroom at Newcastle,
     and they say he'll go to prison.
@@ -126,7 +126,7 @@
     hearing it, the way you stop hearing the screens at bank, and then you only hear it when it
     stops for a minute and the quiet hits you like cold water.
 
-    The lads are cheerful. Nothing can live under that. We'll walk over, the officers say. Take a
+    The lads are cheerful. Fritz is napoo, they say. Nothing can live under that. We'll walk over, the officers say. Take a
     walking stick.
 
     In front of you, across the valley, the German line goes up past the village on a little rise,
@@ -147,7 +147,7 @@
     - id: sleep
       text: Try to sleep. You'll need it.
       text_after: |
-        You lie on the firestep with your helmet over your face and the guns going and you
+        You lie on the firestep with your tin hat over your face and the guns going and you
         sleep, an hour, two, and dream you're at the face with your father, and the roof's talking,
         and he says it's all right, it's only the roof.
       next: "@return"
@@ -274,7 +274,7 @@
     in the chalk, and you know them by their breathing in the dark.
 
     Evans is from the Rhondda, a hewer, short and wide, with a voice that fills a gallery when he
-    forgets to whisper. He came out with the rest of South Wales last July. "They called us
+    forgets to whisper. He came out on strike with the rest of South Wales last July. "They called us
     traitors," he says, "and then they sent for us to dig." Pascoe's a tin miner from Camborne, old,
     forty if he's a day, who's dug in Cornwall and South Africa and Montana and never once raised his
     voice. And Mott, the kicker, a little Londoner who dug the tunnels for the Underground railway
@@ -389,7 +389,8 @@
   title: The battalion
   text: |
     The battalion's out at rest in a village four miles back, and you walk over on your afternoon
-    off to find the lads. It takes you an hour to find anybody you know.
+    off to find the lads. You try the estaminet first, Vins et Bières over the door. It takes you an
+    hour to find anybody you know.
 
     It's a third of what it was. There are new faces everywhere, lads from Sunderland and Hull and
     places you've never heard of, in Blackhaugh's company.
@@ -466,7 +467,7 @@
     minutes it rains chalk: lumps the size of a man's head, then stones, then dust, white over
     everything, in your mouth, tasting of chalk and burnt ammonal.
 
-    Half past seven. Whistles. Somewhere on the left, pipes.
+    Half past seven. Whistles. Somewhere on the left, bagpipes.
 
     [if war.path == rifleman]You go up the ladder with {mate} on the next rung, chalk dust coming down on you both like flour.[/if][if war.path == nco]Seven men on the ladder behind you, watching your back to see when to go.[/if][if war.path == lewis]You go in the second line with the gun on your shoulder and your No. 2 behind you with the drums.[/if][if war.path == signals]You go with the company officer, a reel of wire paying out behind you.[/if][if war.path == bomb]You go with the bombers, a bucket of Mills bombs in each hand, for the crater.[/if][if war.path == snipe]You go behind the second line with the scoped rifle wrapped in sacking, looking for their machine guns.[/if][if war.path == tunnel]You go over in the second wave with a party of sappers, for the crater, to blow in any dugout that still has Germans in it.[/if][if war.path == bearer]You go over in the second wave with the stretcher, into the chalk dust, a red cross on your arm and no rifle.[/if]
 
@@ -501,7 +502,7 @@
 
     On the far lip, what's left of their trench. Their dugouts go down thirty feet into the chalk,
     timbered better than any pit you ever worked, and there are Germans in them still, and the
-    bombs start coming over the lip at you.
+    potato mashers start coming over the lip at you.
 
     [if war.path == bomb]This is your work. Pin, throw, count, along the lip.[/if][if war.path == tunnel]A dugout entrance, smoke coming out of it. You've a charge in your haversack and a fuse.[/if][if war.path == nco]You count your men. Four.[/if][if war.path == lewis]The gun's choked with chalk. You strip it with your fingers shaking.[/if][if war.path == rifleman]{mate} is beside you on the lip, white with chalk, like a man come up from the screens.[/if]
   choices:
@@ -566,7 +567,7 @@
     You know what you'd do if a man was trapped at the face. Everybody would go. Nobody would wait to
     be asked.
 
-    But this isn't the face, and the flares are going up, and their machine guns traverse the valley
+    But this isn't the face, and the flares are going up, and their machine guns swing across the valley
     every few minutes, slow, like a man sweeping a yard.
   choices:
     - id: push
@@ -596,7 +597,7 @@
     October. The rain hasn't stopped in a fortnight and the ground's gone to a paste that takes your
     boots off. In front of you, across a mile of it, there's a hill, if you can call it a hill: a
     great white mound of chalk, bare, with nothing growing on it, like the pit heap at home if the
-    pit heap were made of bone. They call it the Butte. The Germans have tunnelled it through and
+    pit heap were made of bone. They call it the Butte. Fritz has tunnelled it through and
     through, and it's full of machine guns.
 
     [if war.path == tunnel]You're up with the infantry to dig them in on whatever they take, and to find the tunnels in the Butte if anybody gets there.[/if][if war.path == rifleman]{mate} goes over the bag beside you and sinks to his knees in the first yard.[/if][if war.path == nco]Your section goes over the bags behind you, slow, the mud holding every step.[/if][if war.path == lewis]The gun's caked. The drums are caked. You've wrapped the gun in a sandbag and you'll unwrap it when you get there.[/if][if war.path == signals]No wire across this. Runners. You're the runner.[/if][if war.path == bomb]The bombs are in a sandbag on your back, wrapped against the wet.[/if][if war.path == snipe]Your rifle's wrapped in sacking. You're looking for the slits in the chalk.[/if][if war.path == bearer]The stretcher's no use in this mud. You'll carry them on your back, one at a time, if you can carry them at all.[/if]
@@ -658,7 +659,7 @@
     tin of rum and it's the only warm thing in France.
 
     Before dawn they come down the Butte at you, out of the tunnels, out of the chalk, like men
-    coming up out of a drift.
+    coming up out of a drift mine.
   choices:
     - id: push
       text: "Stand up in the ditch and fire into them. ({risk_push})"
@@ -697,9 +698,9 @@
 
     [if !war.transferred && flag.p16_read_lists]You know every house with the blinds down. You read them all, in France, in small print. You go round them, one a day, and sit in their kitchens, and tell the mothers what you can.[/if][if !war.transferred && !flag.p16_read_lists]You didn't read the lists. You learn them now, walking up the rows, a blind at a time.[/if]
 
-    [if flag.ro_sw_wed16]You and Lizzie are wed at the chapel on the Wednesday, by licence, in a week. She's in a borrowed costume with her tram cap on top, because the girls from the depot dared her and she never could refuse a dare, and the back pews are full of conductresses. The tea's in the schoolroom: ham, pease pudding, a cake her mother saved the sugar for since October. You have one night at Whitley Bay in a boarding house that smells of mothballs and the sea, and walk the empty front in the morning with the waves coming up grey over the rocks.[/if][if flag.ro_sw_after]On the Sunday you walk Lizzie to the end of the waggonway, where it looks over the sea, and give her the ring from the jeweller's in Grainger Street. She puts it on herself before you can. "After," she says. "You said after. I'll hold you to it, mind."[/if][if flag.ro_sw_let_go]Lizzie Milburn is in chapel with your mother, the way she said she'd be every Sunday. At the door she shakes your hand, kind, and asks after your feet.[/if][if flag.ro_sw_silent]Lizzie Milburn passes you in the rows and says good morning, the way she'd say it to the insurance man.[/if][if flag.ro_sw_first && !flag.ro_sw_16 && !flag.ro_sw_ended]Lizzie walks the waggonway with you on the Sunday, and you talk about the trams and the pit and nothing at all, and neither of you says the thing. At her mother's gate she says, "Well, then," and goes in.[/if]
+    [if flag.ro_sw_wed16]You and Lizzie are wed at the chapel on the Wednesday, by licence, in a week. She's in a borrowed costume with her tram cap on top, because the girls from the depot dared her and she never could refuse a dare, and the back pews are full of conductresses. The tea's in the schoolroom: ham, pease pudding, a cake her mother saved the sugar for since October. You have one night at Whitley Bay in a boarding house that smells of mothballs and the sea, and walk the empty promenade in the morning with the waves coming up grey over the rocks.[/if][if flag.ro_sw_after]On the Sunday you walk Lizzie to the end of the waggonway, where it looks over the sea, and give her the ring from the jeweller's in Grainger Street. She puts it on herself before you can. "After," she says. "You said after. I'll hold you to it, mind."[/if][if flag.ro_sw_let_go]Lizzie Milburn is in chapel with your mother, the way she said she'd be every Sunday. At the door she shakes your hand, kind, and asks after your feet.[/if][if flag.ro_sw_silent]Lizzie Milburn passes you in the rows and says good morning, the way she'd say it to the insurance man.[/if][if flag.ro_sw_first && !flag.ro_sw_16 && !flag.ro_sw_ended]Lizzie walks the waggonway with you on the Sunday, and you talk about the trams and the pit and nothing at all, and neither of you says the thing. At her mother's gate she says, "Well, then," and goes in.[/if]
 
-    [if flag.ro_fr_met]Your mother wants to know what the French eat. Egg and chips, you tell her, and she doesn't believe a word of it.[/if]
+    [if flag.ro_fr_met]Your mother wants to know what the French eat. Egg and chips, you tell her; oofs, the lads call them. She doesn't believe a word of it.[/if]
 
     [if war.mate2 && flag.p16_backed_matty]Mrs Bell takes you aside at the Store. Matty's in prison, in Durham. Jim wrote that you stuck up for him. She doesn't say thank you. She gives you a quarter of black bullets and goes.[/if][if !war.mate2]Bell's father doesn't come to the Miners' Hall any more. Matty's in prison. Jim's in France, under it.[/if]
 

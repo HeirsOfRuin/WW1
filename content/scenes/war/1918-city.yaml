@@ -11,7 +11,7 @@
   requires: [ "war.tour == 30" ]
   title: Posts
   text: |
-    January, south, in the old French line. The new idea is posts, little islands of men a hundred
+    January, south, in the old French line, with the poilus' names still cut in the chalk. The brass hats' new idea is posts, little islands of men a hundred
     yards apart in the chalk, with wire round them, and the redoubts behind. On the map they look
     tidy as a ledger. On the ground they look like what they are: a few men, alone, in the frost.
 
@@ -30,7 +30,7 @@
       effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
         To the book. You finish early and spend the evening playing whist on an ammunition box with a
-        candle in a bottle, and win fourpence.
+        candle in a vin blank bottle, and win fourpence.
       next: "@return"
 
 - id: v18c_waiting
@@ -42,7 +42,7 @@
   requires: [ "war.tour == 31" ]
   title: The returns
   text: |
-    February. They're coming. Everybody knows it.
+    February. Jerry's coming. Everybody knows it.
 
     [if war.mate1 && flag.c17_webb_clerk]Webb, in the orderly room, has seen the intelligence summaries, the returns from brigade. He can't tell you what's in them. He tells you anyway, in the dark, in a whisper, the way he'd tell you a figure that didn't balance. "Forty divisions," he says. "Opposite us. They've moved forty divisions." He's not writing it in his notebook. That frightens you more than the number.[/if][if war.mate1 && !flag.c17_webb_clerk]Webb has the numbers anyway. The prisoners, the deserters, the airmen, every rumour, entered in his notebook with the date and the source, and added up. "It's coming," he says. "It doesn't balance any other way."[/if][if !war.mate1]You find yourself counting, the way Webb used to: the carts at night, the guns registering, the deserters. It doesn't balance any other way. It's coming.[/if]
   choices:
@@ -141,11 +141,11 @@
   requires: [ "war.tour == 37" ]
   title: The new trench
   text: |
-    The end of August, going forward, and the road goes past Gommecourt. The park with its broken
+    The end of August, going forward, and the road goes through Funky Villas and past Gommecourt. The park with its broken
     trees. The German wire, still there, rusted brown.
 
     And out in front of where our line was, a ditch running across the grass, fallen in, grown over.
-    The new trench. The one the whole division dug in no man's land in a week in 1916, three thousand
+    The new trench. The one the whole division dug in no man's land in three nights in 1916, three thousand
     clerks with picks, at night, under the moon. You can follow it with your eye the whole way across.
 
     [if flag.c16_counted_smoke]You counted the smoke candles in that trench. Forty to a bay.[/if]
@@ -206,7 +206,8 @@
     [if war.mate3 && flag.c18_read_the_lamp]Marsh takes it down. At ten to seven in the morning, on the buzzer, in the signals dugout: Hostilities will cease at 1100 hours today. He reads it twice, and takes his spectacles off, and cleans them, and reads it again, and then he puts his head out of the dugout and says it to you, quite quietly, like a man reading out a hymn number.[/if][if !war.mate3 || !flag.c18_read_the_lamp]It comes up in the morning on a message form. Hostilities will cease at 1100 hours today. Nobody believes it, and then everybody does.[/if]
 
     The guns go on to the last minute. Then eleven, and the quiet, so sudden you can hear your own
-    watch.
+    watch. "La guerre est finie?" an old woman asks from a doorway, and somebody says, "Oui, madame.
+    Napoo," and she cries into her apron.
 
     [if war.mate1]Webb gets out his notebook, and writes the time and the date, and rules a double line under it, in pencil, with the edge of his pay book, and writes Closed. Then he closes the book and puts it away and doesn't take it out again.[/if][if !war.mate1]You think of Webb, who would have ruled the line.[/if][if war.mate2] Fenton's found a football somewhere, a French one, half flat, and he kicks it high up into the quiet, and nobody shoots at it.[/if][if !war.mate2] Somewhere on the Double Crassier there's a football, gone to leather and grass.[/if][if !war.mate3] You think of Marsh, who learned the eye chart by heart.[/if]
 
@@ -224,7 +225,7 @@
 
     The Roll of Honour in the front hall at the Gresham and Lombard has four panels now. You stand in front of it on your first morning back and read every name, and then you go up to the third floor, and sit down at a desk, and look out at the fog on the river.
 
-    [if war.servant >= 1]Mr Carew's mother has you to tea in Kensington, with the cake on a stand and a maid to pass it, and thanks you for bringing him home. He walks you to the Underground after, and shakes your hand on the steps.[/if][if flag.sv_second_killed]Mrs Carew writes from Surrey on black-edged paper, to thank you for the cap. She'd forgotten he had it.[/if][if flag.sv_first_killed && war.servant == 0 && !flag.sv_second_killed]Mr Pryor's name is on the first panel. His uncle has you up to the board room that morning, and shakes your hand, and says the firm won't forget, and you go back down to Fire a grade up, at Mr Pryor's old desk.[/if]
+    [if war.servant >= 1]Mr Carew's mother has you to tea in Kensington, with the cake on a stand and a maid to pass it, and thanks you for bringing him home. He walks you to the Underground after, and shakes your hand on the steps.[/if][if flag.sv_second_killed]Mrs Carew writes from Surrey on black-edged paper, to thank you for the cap. She'd forgotten he had it.[/if][if flag.sv_first_killed && war.servant == 0 && !flag.sv_second_killed]Mr Pryor's name is on the first panel. His uncle has you up to the board room that morning, and shakes your hand, and says the firm won't forget, and you go back down to the Fire ledgers a grade up, at Mr Pryor's old desk.[/if]
 
     You are {age} years old and {rank_a}.
 

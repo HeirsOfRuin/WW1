@@ -69,7 +69,7 @@
         He's a big quiet man from a place called Waihi, a gold miner, and he talks timber with you
         for an hour in the electric light like two men at the pit gates on a Sunday. When you go
         he shakes your hand. "Good luck in the morning, mate," he says. "Keep your head down when
-        you come out the top. That's where they'll be looking."
+        you come out the top. That's where Fritz'll be looking."
       next: "@return"
     - id: letter
       text: Write a letter for the pay book.
@@ -152,8 +152,7 @@
   requires: [ "war.tour >= 26", { not: war.transferred }, war.mate3 ]
   title: The horse lines
   text: |
-    Flanders, and the shells come down on the horse lines at night the way they come down on
-    everything. In the morning there are horses dead in their rows, still tied, and mules lying
+    Flanders, and Jerry shells the horse lines at night the way he shells everything. In the morning there are horses dead in their rows, still tied, and mules lying
     in the mud with their legs out stiff, and a smell of singed hair and blood and dung.
 
     [if flag.pit_helped_charlton]Charlton's been up all night with them. He's sat in the mud with a horse's head in his lap, a big grey that can't get up, and he's stroking its face and talking to it, and he won't let the farrier near it yet.[else]Charlton went down to the horse lines as soon as he heard. He's sat in the mud with a big grey's head in his lap, a horse that can't get up, stroking its face, talking to it, and won't let the farrier near.[/if]
@@ -216,7 +215,7 @@
   requires: [ "war.tour >= 21", war.transferred ]
   title: The canary
   text: |
-    After a blow, the gallery fills with the fumes, and the fumes don't smell of anything, and that's
+    After a mine is blown, the gallery fills with the fumes, and the fumes don't smell of anything, and that's
     what kills you. You know that. Every pitman knows that. It's afterdamp. It's the thing that
     killed the men at every disaster your father ever told you about.
 
@@ -224,7 +223,7 @@
     the gallery mouth is on its back on the floor of the cage.
 
     There's a Proto set hanging in the shaft dugout, the breathing apparatus, the same as the rescue
-    brigade's at Blackhaugh, that you trained on once on a Sunday in the welfare hall. The rescue
+    brigade's at Blackhaugh, that you trained on once on a Sunday in the Miners' Hall. The rescue
     men are coming. They're ten minutes away.
   choices:
     - id: go_in
@@ -336,8 +335,8 @@
   requires: [ "war.tour >= 27", war.transferred ]
   title: Singing
   text: |
-    Autumn, and the rain, and the company building deep dugouts behind the line in Flanders, forty
-    feet down in the clay, for headquarters that will move in when they're done and never say thank
+    Autumn, and the rain, and the company building deep dugouts behind the line at Wipers, forty
+    feet down in the clay, for red tabs who will move in when they're done and never say thank
     you.
 
     At the end of a shift, in the dugout, Evans starts to sing. Not loud. In Welsh, a hymn, slow,

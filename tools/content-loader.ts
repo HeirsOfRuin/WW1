@@ -28,8 +28,13 @@ export function loadContent(dir = CONTENT_DIR): ContentBundle {
     hash.update(readFileSync(p));
     for (const g of (readYaml(p) as unknown[]) ?? []) {
       const e = parse(GlossSchema, g, rel(p));
+      // a form (the term or an `also`) belongs to the first entry that lists it: two files listing
+      // "tin hat" and "tin hats" under different terms left one of them matching nothing
       if (seenTerm.has(e.term.toLowerCase())) continue;
-      seenTerm.add(e.term.toLowerCase()); glossary.push(e);
+      seenTerm.add(e.term.toLowerCase());
+      const also = (e.also ?? []).filter((a) => !seenTerm.has(a.toLowerCase()));
+      also.forEach((a) => seenTerm.add(a.toLowerCase()));
+      glossary.push(also.length ? { ...e, also } : { term: e.term, means: e.means });
     }
   }
   // The war's route (content/route.yaml) replaces every next: "@war", so it is written once and

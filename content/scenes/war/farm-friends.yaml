@@ -32,7 +32,7 @@
   text: |
     [if war.fallen_present]It happens {fallen_where}. Pearce was always quick. He's quick now: up and then down, all at once, flat in the grass with his face turned to you, surprised, as if somebody had come on him with a gun when he'd thought the keeper was miles off.
 
-    "Well," he says. "They've had me, then." And that's Dan Pearce.[else][if war.transferred]Word comes over from the battalion, a week late. Dan Pearce. Killed {fallen_where}.[else]Somebody tells you at the water cart. Dan Pearce. Killed {fallen_where}.
+    "Well," he says. "They've had me, then." And that's Dan Pearce.[else][if war.transferred]Word comes over from the battalion, a week late. Dan Pearce. Killed {fallen_where}.[else]Somebody tells you at the water cart. "Pearce has copped it." Dan Pearce. Killed {fallen_where}.
 
     You think of him going through the long grass the first night like water. Nobody ever caught Dan Pearce. Fifteen years the keeper tried.[/if][/if][if flag.farm_shared_pearce] Fourteen days on the wheel together, side by side, and he never once stopped talking.[/if]
   choices:

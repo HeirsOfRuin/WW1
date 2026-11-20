@@ -24,7 +24,7 @@
 
     The trench stinks of chloride of lime and something sweet under it.
 
-    [if war.mate1]Beside you Webb has his little black notebook out, the one he kept the petty cash in, and a stub of pencil, and every time a shell comes over he makes a mark. "Fourteen," he whispers. "Since stand-to. I'll want the totals." He's writing down everything. Time, weather, the names of the trenches.[else]Down the bay a clerk from the Prudential has a notebook out, and every time a shell comes over he makes a mark. "Fourteen," he whispers. "I'll want the totals."[/if]
+    [if war.mate1]Beside you Webb has his little black notebook out, the one he kept the petty cash in, and a stub of pencil, and every time a shell comes over he makes a mark. "Fourteen," he whispers. "Since stand-to. Whizz-bangs entered separately. I'll want the totals." He's writing down everything. Time, weather, the names of the trenches.[else]Down the bay a clerk from the Prudential has a notebook out, and every time a shell comes over he makes a mark. "Fourteen," he whispers. "I'll want the totals."[/if]
   choices:
     - id: warn
       text: Tell Webb diaries are forbidden. If he's taken, they read it.
@@ -92,7 +92,7 @@
   text: |
     A long envelope with the firm's crest: the Gresham and Lombard Assurance, Cornhill. The manager
     writes to all the men from the office on active service, every quarter, a typed letter. The
-    firm is proud of you. Your salary is being made up and paid to your mother. There is a Roll of
+    firm is proud of you. The difference between your army pay and your salary is being paid to your mother. There is a Roll of
     Honour in the front hall, in gilt, and four names on it already in a separate column.
 
     And a second sheet, folded inside, handwritten.
@@ -132,7 +132,8 @@
 
     It's in a stubble field with a goal at each end made of rifles. The pitmen are short and wide and
     don't run, they barge, and they've a man in goal who's built like a coal tub. Half the battalion
-    is round the edge of the field, shouting.
+    is round the edge of the field, shouting. The farmer stands at his gate saying "Pas bon, pas bon," till
+    somebody gives him a tin of bully, and then he stays to watch.
 
     Fenton played centre-forward for the office eleven on Saturday afternoons at Walthamstow. He's
     better than anybody on the field and everybody knows it.
@@ -149,7 +150,8 @@
     - id: watch
       text: Watch from the edge with a mug of tea.
       text_after: |
-        You stand on the edge with the others and shout yourself hoarse. The pitmen win four goals
+        You stand on the edge with the others, a mug of char going cold in your hand, and shout yourself
+        hoarse. The pitmen win four goals
         to two. Fenton scores both and walks off the field with his arm round their goalkeeper, and
         the two of them are talking about Newcastle United like old friends.
       next: "@return"
@@ -210,7 +212,7 @@
 
     Along the parapet, under sacking, the gas cylinders.
 
-    [if war.mate2]Fenton's got his football out of his pack. He's pumping it up with the bicycle pump he brought for the purpose. "When we go over," he says, "I'm kicking this across. First man to put it in their trench gets a quid." Nobody tells him he's daft. Somebody asks if it's a real quid.[/if][if war.mate1] Webb's writing in the notebook. Everything. The towers, the cylinders, the weather.[/if]
+    [if war.mate2]Fenton's got his football out of his pack. He's pumping it up with the bicycle pump he brought for the purpose. "When we go over," he says, "I'm kicking this across. First man to put it in Fritz's trench gets a quid." Nobody tells him he's daft. Somebody asks if it's a real quid.[/if][if war.mate1] Webb's writing in the notebook. Everything. The towers, the cylinders, the weather.[/if]
 
     The company sergeant major comes round with pay books. If you want to write anything, now's
     the time.
@@ -311,7 +313,7 @@
 
     At ten to six the gas goes over. A hiss all down the line, like every gas main in Leyton opened
     at once, and the cloud comes up white and greenish and leans out towards their wire. Some of it
-    hangs. Some of it comes back. Pepper and pineapple and a bite under it. You pull the hood down.
+    hangs. Some of it comes back. Pepper and pineapple and a bite under it. You pull the gas hood down.
     Wet flannel, the stink, your own breath hot against the little window.
 
     Through the eyepiece, through the smoke, Tower Bridge.
@@ -344,7 +346,7 @@
   chapter: front
   title: Loos
   text: |
-    Their trench, and then the edge of the village. Loos, under the iron towers: the Scots are going through the streets on your left, and your part is the southern end, the last houses and the cemetery, where the Germans have dug in among the graves. Every cellar has to be bombed, and the noise in
+    Their trench, and then the edge of the village. Loos, under the iron towers: the Jocks are going through the streets on your left, and your part is the southern end, the last houses and the cemetery, where the Germans have dug in among the graves. Every cellar has to be bombed, and the noise in
     the narrow streets is like the Underground when the train comes in, only it doesn't stop.
 
     In the cemetery a German machine gun behind a family vault. Marble angels with their faces
@@ -384,7 +386,7 @@
     Then shouting on the left, and rifle fire, picking up the way rain does on the glass roof at
     Liverpool Street.
 
-    "Stand to! They're coming back!"
+    "Stand to! Alleyman's coming back!"
   choices:
     - id: push
       text: "Up on the parapet. Fire till they stop coming. ({risk_push})"
@@ -411,7 +413,7 @@
   title: Home on leave
   text: |
     The leave train comes in to Victoria at night, and you get off it in your mud, as you are, with your rifle and your greatcoat and France on your boots, and the women on the platform with their
-    furs step out of your way. A lady gives you a cup of tea from an urn and calls you a brave boy.
+    furs step out of your way. A lady gives you a cup of tea from an urn and calls you a brave boy, and you say "Merci boko" before you can stop yourself.
     The station smells of steam and soot and wet umbrellas, and of a thousand men off the boat.
 
     The streets are darker than you left them, the lamps half painted over for the Zeppelins. You

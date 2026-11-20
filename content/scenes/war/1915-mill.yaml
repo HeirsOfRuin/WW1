@@ -22,7 +22,7 @@
     could hear it slopping and couldn't see it.
 
     Now you're on the firestep with your rifle and the dark is full of noises. Somewhere to the
-    left a machine gun is traversing, and the bullets come over in a long crack-crack-crack like a
+    left a machine gun is sweeping to and fro, and the bullets come over in a long crack-crack-crack like a
     lad running a stick along the park railings. A flare goes up, white, and hangs. Everything
     stops. Wire, posts, a tree with no top, a boot in the wire with something still in it. Then
     the flare dies and it all moves again.
@@ -101,7 +101,7 @@
   title: A letter from home
   text: |
     The post comes up after dark with the rations, the mailbags slung in among the bread and the
-    tins of bully and the jars of plum and apple. There's a parcel for you, brown paper and string
+    tins of bully and the jars of pozzy, plum and apple as ever. There's a parcel for you, brown paper and string
     knotted three times, which is how your mother knots everything.
 
     Socks. A tin of toffee from the Co-op. A bar of carbolic, and the smell of it in the dugout is
@@ -121,7 +121,7 @@
       effects: [ { set: flag.wrote_home }, { war_mood: { nerve: 2 } } ]
       text_after: |
         You tell her the food is good. You tell her about the farm woman at the billet who
-        laughs at the way you say eggs. You don't tell her about the boot in the wire. By the time
+        laughs when you ask her for oofs. You don't tell her about the boot in the wire. By the time
         the candle goes your hand has cramped, and you sleep better than you have since you came
         out.
       next: "@return"
@@ -143,7 +143,7 @@
   title: Eggs and chips
   text: |
     Behind the lines, in the village with half a church. The estaminet is somebody's front room
-    with a counter put in, a stove going, and a woman who knows exactly enough English: egg, chip,
+    with a counter put in and Oeufs et frites chalked on the shutter, a stove going, and a woman who knows exactly enough English: egg, chip,
     beer, no, finish. You eat egg and chips off a cracked plate, the yolk running into the chips,
     and the beer is thin and sour and you'd fight a man for the next one. For a quarter of an
     hour the war is somewhere else.
@@ -205,7 +205,7 @@
     - id: leave_it
       text: Leave it. Duck as you pass, and tell the new men.
       text_after: |
-        You duck there every time, the way you'd duck the low beam in the shed. You stop thinking
+        You duck there every time, the way you'd duck the low beam in the weaving shed. You stop thinking
         about it. That's the part that frightens you, when you notice it.
       next: "@return"
 
@@ -304,7 +304,7 @@
 
     [if flag.built_up_crater]Your bit of parapet is still level, a bit slumped, holding. You put your hand flat on it going past, the way you'd pat a horse.[else]The sack is still over the low place. It's rotted through at one corner and nobody's mended it.[/if]
 
-    On the second morning a draft lad from Rochdale stands up two bays along to look at the
+    On the second morning, after the morning hate, a draft lad from Rochdale stands up two bays along to look at the
     sunrise. You hear the shot after.
 
     Fritz-at-the-crater is still there. He's had the whole of Loos and he's still there.
@@ -326,7 +326,7 @@
     like every steam pipe in the shed letting go at once. Then the cloud comes up, white and
     greenish, and leans towards their wire. Not all of it. A drift of it comes back along the
     trench, smelling of pepper and pineapple and something under both that bites the back of your
-    throat. You pull the hood down. Wet flannel, the chemical stink of it, your own breath going
+    throat. You pull the gas hood down. Wet flannel, the chemical stink of it, your own breath going
     hot against the little window.
 
     Half past six. The guns stop. In the gap a man down the bay is saying the Lord's Prayer too
@@ -362,7 +362,7 @@
   title: Loos
   text: |
     Their front line is a ditch of white chalk and grey men. Some of the grey men are dead. Some
-    have their hands up. One of them, a lad with spectacles, keeps saying the same word over and
+    have their hands up, calling Kamerad, Kamerad. One of them, a lad with spectacles, keeps saying some other word over and
     over, and you don't know what it means, and you will never know.
 
     Your ears have gone. Everything comes through cotton wool, like the shed when you've done a

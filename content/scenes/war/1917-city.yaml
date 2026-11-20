@@ -11,13 +11,13 @@
   title: The orderly room
   text: |
     The adjutant wants a clerk. The orderly-room sergeant has gone sick and battalion headquarters
-    is drowning in returns: ration strengths, casualty returns, indents for boots, the whole army
+    is drowning in returns: so many men to ration, so many casualties, indents for boots, the whole army
     run on paper, and nobody in the battalion who can keep a ledger straight.
 
     Somebody's told him about Webb.
 
     It's a dugout three hundred yards behind the front line, with a table and a lamp and a typewriter.
-    It's still the line. But it's not a firestep. Webb looks at you. He's asking.
+    It's still the line. But it's not a firestep. Cushy, the section would call it. Webb looks at you. He's asking.
   choices:
     - id: take_it
       text: Tell him to take it. Somebody should keep the real books.
@@ -49,7 +49,7 @@
     same damp, the same press of bodies, the same smell of wet wool and pipe smoke and too many
     people breathing.
 
-    Somebody in the next bay has a copy of Pickwick, and he's reading it aloud, the bit about the
+    Somebody in the next cave has a copy of Pickwick, and he's reading it aloud, the bit about the
     cricket match, doing all the voices, and a whole chamber of men is listening and laughing in the
     wrong places and the right ones.
   choices:
@@ -57,7 +57,7 @@
       text: Sit and listen to Pickwick.
       effects: [ { set: flag.c17_pickwick }, { war_mood: { nerve: 1 } } ]
       text_after: |
-        You sit on the chalk with your back against a sandbag and listen to Mr Pickwick and Mr Jingle
+        You sit on your tin hat with your back against a sandbag and listen to Mr Pickwick and Mr Jingle
         and Dingley Dell, and for an hour there isn't a war. When the reader's voice gives out, a man
         from Bermondsey takes the book and carries on, worse, and nobody minds.
       next: "@return"
@@ -81,7 +81,7 @@
     A letter from Florence, and it isn't on the firm's paper. It's on Army paper.
 
     She's joined the Women's Army Auxiliary Corps. They want women for clerks in France, to free the
-    men in the base offices for the line, and she can do a ledger as well as any man in Cornhill,
+    base wallahs for the line, and she can do a ledger as well as any man in Cornhill,
     and better than some. She's at a base camp on the coast. She doesn't say where; she can't. She has a khaki coat-frock to her ankles and a little cap and she shares a hut with eleven girls from
     Glasgow.
 
@@ -176,7 +176,7 @@
       text: Keep it with the others.
       text_after: |
         It goes in your breast pocket. You read the bit about the infants' class again, and put it away,
-        and stand your sentry looking at the German line, and don't think anything at all for two hours.
+        and stand your sentry looking at Jerry's line, and don't think anything at all for two hours.
       next: "@return"
 
 - id: v17c_fenton
@@ -187,7 +187,7 @@
   requires: [ "war.tour >= 26", war.mate2 ]
   title: The battalion cup
   text: |
-    At rest, in July, before Flanders, the brigade has a football cup. Twelve teams, a pitch marked
+    At rest, in July, before Wipers, the brigade has a football cup. Twelve teams, a pitch marked
     out in a field with lime from the sanitary men, a real cup that the brigadier bought in
     Amiens.
 
@@ -200,7 +200,7 @@
       effects: [ { set: flag.c17_cup_played }, { war_mood: { nerve: 2 } } ]
       text_after: |
         You play. You lose in the semi-final to a Welsh battalion, three goals to one, and Fenton
-        scores the one, and the whole battalion sings on the way back to the billets, all the towns
+        scores the one and says san fairy ann, there's next year, and the whole battalion sings on the way back to the billets, all the towns
         together, pitmen and weavers and farm lads and clerks, the same songs. For a night you're one
         thing.
       next: "@return"

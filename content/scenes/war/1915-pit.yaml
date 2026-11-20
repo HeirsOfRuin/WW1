@@ -24,11 +24,11 @@
 
     The trench stinks of chloride of lime, and under the lime of something sweet.
 
-    [if war.mate1]Robson's not looking over the parapet. He's down on his knees on the duckboards with his ear flat to the trench wall, the way he'd listen to the roof at the face. He stays like that a long time. Then he looks up at you.
+    [if war.mate1]Robson's not looking over the parapet. He's down on his knees on the duckboards with his ear flat to the trench wall, the way he'd listen to the roof at the coal face. He stays like that a long time. Then he looks up at you.
 
     "They're working," he says. "Under us. Can you not hear it?"
 
-    You put your ear where his was. Wet clay, cold on your cheek. And then, so faint you think it's your own blood, a tap. A wait. A tap.[else]Somebody along the bay is down on his knees with his ear to the trench wall, the way a man listens to the roof at the face. "They're working," he says. "Under us." You put your ear to the clay. Wet, cold. A tap. A wait. A tap.[/if]
+    You put your ear where his was. Wet clay, cold on your cheek. And then, so faint you think it's your own blood, a tap. A wait. A tap.[else]Somebody along the bay is down on his knees with his ear to the trench wall, the way a man listens to the roof at the coal face. "They're working," he says. "Under us." You put your ear to the clay. Wet, cold. A tap. A wait. A tap.[/if]
   choices:
     - id: report
       text: Go and tell the officer. Now, tonight.
@@ -70,8 +70,8 @@
       text: Write back tonight, two sides, by a candle end.
       effects: [ { set: flag.pit_wrote_home }, { war_mood: { nerve: 2 } } ]
       text_after: |
-        You tell her the cake came whole. You tell her the French have pits too, with the winding
-        towers just like at home, and you can see them on a clear day from the support line. You
+        You tell her the cake came whole. You tell her the French have pits too, a fosse they call one, with
+        the winding towers just like at home, and you can see them on a clear day from the support line. You
         tell your father to go to the doctor, which he won't, and you know it.
       next: "@return"
     - id: postcard
@@ -80,7 +80,7 @@
       text_after: |
         I am quite well. Letter follows at first opportunity. You strike out the rest. The black
         bullets you share round the bay, and the lads suck them on sentry, and the whole trench
-        smells of aniseed for a night.
+        smells of peppermint for a night.
       next: "@return"
 
 - id: v_pit_pigeons
@@ -127,15 +127,15 @@
   requires: [ "war.tour >= 4", "war.tour <= 5", flag.pit_letter, war.mate2 ]
   title: The baths
   text: |
-    Baths, at a brewery behind the lines: the big vats filled with hot water, ten men to a
+    Baths, at a brewery behind the lines, BRASSERIE still painted on the wall: the big vats filled with hot water, ten men to a
     vat, steam up to the rafters and the whole place smelling of old beer and carbolic and men.
-    You get your uniform back from the fumigator still warm, and the lice in the seams are
+    You get your uniform back from the fumigator still warm, and the chats in the seams are
     sleeping, not dead.
 
     Bell's in the vat with you, up to his chest, a newspaper held up out of the water. The Herald,
     a week old.
 
-    "The Welsh lads came out," he says. "Two hundred thousand of them, in July. They called them
+    "The Welsh lads came out on strike," he says. "Two hundred thousand of them, in July. They called them
     traitors in the Commons." He folds the paper so you can see. "The owners are making more out of
     coal than they ever made, and the Welsh lads asked for their share, and they're traitors." His
     voice is getting louder. "First bath the army's given us. You know what? It's the first bath
@@ -172,8 +172,8 @@
   title: The mine
   text: |
     It goes up at stand-to, in the grey, four bays along. You feel it before you hear it: the
-    firestep lifts under your boots like the cage when it takes the weight, and then the noise,
-    and then the earth comes down, clods of it, stones, sandbags, a boot, rattling on your helmet
+    firestep lifts under your boots like the pit cage when it takes the weight, and then the noise,
+    and then the earth comes down, clods of it, stones, sandbags, a boot, rattling down round you
     like hail on a tin roof. Where the bay was there's a crater you could put the chapel in, still
     smoking, stinking like the shot-firer's smoke after a round at the face, a hundred times over.
 
@@ -181,7 +181,7 @@
 
     Men are buried in it. You can hear one of them.
 
-    And across the way, their whistles. They'll be coming for the crater lip.
+    And across the way, Fritz's whistles. He'll be coming for the crater lip.
   choices:
     - id: dig
       text: Get in the crater with a shovel. Dig for the buried men.
@@ -359,10 +359,10 @@
     Their front line, chalk and grey men, and then the village beyond it, and it's a pit village.
     Rows of little brick houses, back to back, with their yards and their wash-houses and their
     netties at the bottom, the same as Blackhaugh, only smashed. A woman's apron on a line. A
-    birdcage in a window with no glass.
+    birdcage in a window with no glass. Over a shop door, in blue paint, Épicerie.
 
     The Germans are in the cellars. You go along the rows, house by house, and the bombs go down the
-    cellar steps, and the cellars cough smoke and plaster dust, and sometimes men.
+    cellar steps, and the cellars cough smoke and plaster dust, and sometimes men, hands up, calling Kamerad.
 
     [if war.stalled]A machine gun in the end house opens up straight down the row, and the bombers go flat in the yards, and don't get up, and the row is theirs again.[else]The sergeant's lost his hood and half his ear. "Down the row! Clear the cellars! Go on, go on!"[/if]
   choices:
@@ -388,7 +388,8 @@
   chapter: front
   title: Loos
   text: |
-    By the afternoon you're dug in at the foot of a slag heap, and the rain's come on. The heap's
+    By the afternoon you're dug in at the foot of a slag heap, a crassier on the
+    officers' maps, and the rain's come on. The heap's
     been burning inside for years, the way they do, and where the shells have opened it the smoke
     comes out yellow and stinking of sulphur, the smell of the pit heap at home on a wet night, so
     strong you could cry.
@@ -425,9 +426,9 @@
     where it's been burning since your grandfather's time, and then the smell of it through the
     carriage window, sulphur and smoke, and you have to put your face against the glass.
 
-    The rows are dark. The buzzer goes for the night shift while you're walking up from the station,
+    The rows are dark. The pit buzzer goes for the night shift while you're walking up from the station,
     and you stop dead in the street, because you haven't heard it in seven months, and it sounds
-    like a shell coming.
+    like a coal box coming over.
 
     Your mother has the set-pot boiling before you're through the door. She doesn't say anything.
     She puts the tin bath in front of the fire, the way she has for your father every day of his
@@ -494,7 +495,7 @@
 
     [if flag.pit_reported]"Somebody in this company heard them digging last summer," he says, "and told his officer, and we had that bay down to two sentries before it went." He looks round the barn. You keep quiet.[/if][if flag.pit_mine && !flag.pit_reported]"You'll have seen what a mine does," he says. "Last summer, four bays along. Eight men. That's what we're for."[/if]
 
-    [if war.mate1]Robson listens to all of it with his arms folded. "It's the face," he says to you after. "Only the face, with Germans at the far end of it." He doesn't put his name down. "I'm stopping with the lads," he says. "Somebody has to."[/if][if war.mate2] Bell says he came out to fight Germans, not to dig for them, and he's not leaving the section.[/if]
+    [if war.mate1]Robson listens to all of it with his arms folded. "It's the face," he says to you after. "Only the face, with Fritz at the far end of it." He doesn't put his name down. "I'm stopping with the lads," he says. "Somebody has to."[/if][if war.mate2] Bell says he came out to fight the Alleyman, not to dig for him, and he's not leaving the section.[/if]
   choices:
     - id: transfer
       text: Go to the tunnellers. You'll leave the section.

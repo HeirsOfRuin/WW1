@@ -31,8 +31,8 @@
       text: Dig to the book and no more. Save your back.
       effects: [ { war_mood: { nerve: 1 } } ]
       text_after: |
-        You dig it to the book. Your back thanks you. At night you sit round the French stove the last
-        lot left behind and roast potatoes you've found in a field clamp, and they taste of home.
+        You dig it to the book. Your back thanks you. At night you sit round the stove the poilus left
+        behind and roast potatoes you've found in a field clamp, and they taste of home.
       next: "@return"
 
 - id: v18f_rooks
@@ -50,7 +50,7 @@
     the rooks have gone. All of them, in a week. Nobody else has noticed. You've noticed. At home the
     rooks leave a wood before it's felled; they know before the men come with the saws.
 
-    [if war.mate2]Pearce has noticed too. "Rooks've gone," he says, low, at stand-to, not looking at you. "Something's coming through that wood. Guns, I'd say."[/if]
+    [if war.mate2]Pearce has noticed too. "Rooks've gone," he says, low, at stand-to, not looking at you. "Jerry's bringing something up through that wood. Guns, I'd say."[/if]
   choices:
     - id: tell
       text: Tell the officer about the rooks.
@@ -204,8 +204,9 @@
   requires: [ "war.tour >= 37", war.mate1, flag.f16_kept_dog ]
   title: Home
   text: |
-    Going forward through villages the Germans have held for four years, and in one of them the
-    French Fly stops dead in the street, and whines, and runs.
+    Going forward through villages the Germans have held for four years, with old women at the
+    doors saying "Les Boches sont partis," the Boche are gone, and in one of them the French Fly
+    stops dead in the street, and whines, and runs.
 
     Down a lane, into a farmyard, a burnt-out farm with the walls standing. Cottle goes after her. She's
     sitting in the yard by the ruin of the dairy, looking at the door. It's where she came from. You
@@ -240,7 +241,7 @@
     {ending_line}
 
     It comes up in the morning on a message form. Hostilities will cease at 1100 hours today.
-    Nobody believes it, and then everybody does.
+    "Guerre napoo," somebody says. Nobody believes it, and then everybody does.
 
     The guns go on to the last minute. Then eleven. And the quiet comes down like snow on the moor,
     so you can hear a long way: a dog, a cart, a cockerel in a farm behind the line that doesn't know

@@ -45,7 +45,7 @@
   chapter: front
   title: Prisoners
   text: |
-    Thirty German prisoners from the last show, to be marched back to the cage at the railhead, eight
+    Thirty German prisoners from the last show, to be marched back to the prisoners' cage at the railhead, eight
     miles, and you're one of the four escorts.
 
     They're sat in a field in their grey, filthy, some of them bandaged, some of them boys and some of
@@ -150,7 +150,7 @@
       text: Go to the school.
       effects: [ { war: take } ]
       text_after: |
-        Two weeks of it. A bed. Eggs. Lads straight off the boat, keen and stupid and frightened, and
+        Two weeks of it. A bed. Oofs and chips in the village of an evening. Lads straight off the boat, keen and stupid and frightened, and
         you tell them what you wish somebody had told you, and some of them listen. At night you lie in
         the sheets and can't sleep for the quiet, and think about the section in the line without you,
         and what's happening to them while you're eating eggs.

@@ -10,9 +10,9 @@
   title: The raid
   text: |
     [if war.stake == 0][if war.vol]You put your name down.[else]The sergeant picked you.[/if] Burnt cork on your face and hands, cap badge off, pay
-    book left with the quartermaster. A cosh made of an entrenching-tool handle with a nut bolted on
+    book left with the quarter bloke. A cosh made of an entrenching-tool handle with a nut bolted on
     the end. The officer goes through it again in a whisper in the sap: out through our wire, across,
-    in at the place where their parapet's been knocked about, a prisoner if we can, back in twenty
+    in where the Boche parapet's been knocked about, a prisoner if we can, back in twenty
     minutes.
 
     Out in front the grass is wet and it's dark as a coal hole, and the dark smells of turned earth and cordite.
@@ -94,7 +94,7 @@
     - id: bold
       text: "Grab the man with the mess tins. He's your prisoner. ({risk_bold})"
       effects: [ { war: bold } ]
-      text_after: He doesn't fight. He drops the tins and puts his hands up, and the stew goes all over your boots, and it's still hot.
+      text_after: He doesn't fight. "Kamerad," he says, and drops the tins and puts his hands up, and what was in them goes all over your boots, still hot.
       next: "@war"
     - id: steady
       text: "Bomb the dugout and get out the way you came. ({risk_steady})"
@@ -111,7 +111,7 @@
   chapter: front
   title: After the raid
   text: |
-    [if war.result == ok]You come back in through our wire with the dawn starting, and a prisoner, or near enough: a pay book, a shoulder strap, something the intelligence officer can read. The colonel sends down a rum ration for the raiders. The cork won't come off your face for two days. You keep finding it in your ears.[/if][if war.result == failed]It goes wrong somewhere between the wire and the way back. Their machine gun wakes up early. Two of the party don't come in. You lie in the sap afterwards, shaking so hard your teeth click, and somebody puts a lit cigarette in your mouth without a word.[/if][if war.result == turned]The raid goes over without you. You hear it from the firestep: the bombs, the shouting, their flares going up one after another. When they come back in, nobody looks at you.[/if]
+    [if war.result == ok]You come back in through our wire with the dawn starting, and a prisoner, or near enough: a pay book, a shoulder strap, something the intelligence officer can read. The colonel sends down a rum ration for the raiders. The cork won't come off your face for two days. You keep finding it in your ears.[/if][if war.result == failed]It goes wrong somewhere between the wire and the way back. Their machine gun wakes up early. Two of the party don't come in. You lie in the sap afterwards, shaking so hard your teeth click, and somebody puts a lit gasper in your mouth without a word.[/if][if war.result == turned]The raid goes over without you. You hear it from the firestep: the bombs, the shouting, their flares going up one after another. When they come back in, nobody looks at you.[/if]
 
     [if war.stage == 1]Behind their line the sun comes up over the slag heaps, and the chalk of their parapet goes pink, then white.[elif war.stage == 2][if war.month <= 6]Over the Somme downland a lark goes up out of no man's land as the light comes.[else]Over the Somme the morning comes up grey, and at seven the guns start again, the way they have every morning since July.[/if][elif war.stage == 3][if war.month <= 4]Snow comes on again over Arras, soft and wet, and fills in the tracks you made.[elif war.month <= 5]Over Arras the sun comes up hot already, and the chalk throws it back.[else]Over the salient the rain comes on again out of a low sky, steady, as if it meant to stay.[/if][else][if war.month <= 3]By morning the frost is down hard on the salient, and the shell holes are skinned with ice.[elif war.month <= 7]Behind the new line a cock's crowing in a farmyard that still has hens in it.[else]By noon the battalion's moving again, east, along a road lined with poplars, through a village with its windows still in.[/if][/if]
 
@@ -181,7 +181,7 @@
     - id: steady
       text: "Lie flat and count them. That's what you're out here for. ({risk_steady})"
       effects: [ { war: steady } ]
-      text_after: Seven. One has a machine pistol. One is smoking under his coat, the fool. You count them twice.
+      text_after: Seven. One has a long pistol. One is smoking under his coat, the fool. You count them twice.
       next: "@war"
     - id: careful
       text: "Ease back out of the road, an inch at a time. ({risk_careful})"
@@ -198,8 +198,8 @@
   chapter: front
   title: Patrol
   text: |
-    [if war.stake == 0]Coming back is the dangerous bit, everybody says, and everybody's right. Our own sentries are
-    jumpy. The password this week is Blackpool. The gap in our wire is somewhere ahead, and in the
+    [if war.stake == 0]Coming back is the dangerous bit, everybody says, and everybody's right. Our own sentries have
+    the wind up. The password this week is Blackpool. The gap in our wire is somewhere ahead, and in the
     dark one stretch of wire looks like every other.[/if][if war.stake == 1]Coming in, and the fog has come up off the low ground while you were out, white and thick, and
     now there's no parapet anywhere, ours or theirs. You've lost the line of the road. Somewhere ahead
     is our wire and the gap in it, and somewhere behind is theirs, and in this they're the same.
@@ -263,7 +263,7 @@
     - id: careful
       text: "Do the work close to our own wire, where there's cover. ({risk_careful})"
       effects: [ { war: careful } ]
-      text_after: You do the easy end. Nobody says anything. Somebody has to do the far end.
+      text_after: You do the cushy end. Nobody says anything. Somebody has to do the far end.
       next: "@war"
 
 - id: s_wiring_2
@@ -326,7 +326,7 @@
   chapter: front
   title: After wiring
   text: |
-    [if war.result == ok]In the morning you look over the parapet with a periscope and there it is, your wire, a new belt of it, grey and nasty in the daylight. You put that there. It's a strange thing to be proud of.[/if][if war.result == failed]In daylight the new belt is a mess, half of it lying flat, a gap at one end you could drive a cart through. The officer looks at it through the periscope and says nothing, and you'll be out there again tonight.[/if][if war.result == turned]The others come in after it's light, with the wire done. The corporal hands you a cup of tea and doesn't say a word.[/if]
+    [if war.result == ok]In the morning you look over the parapet with a periscope and there it is, your wire, a new belt of it, grey and nasty in the daylight. You put that there. It's a strange thing to be proud of.[/if][if war.result == failed]In daylight the new belt is a mess, half of it lying flat, a gap at one end you could drive a cart through. The officer looks at it through the periscope and says nothing, and you'll be out there again tonight. San fairy ann.[/if][if war.result == turned]The others come in after it's light, with the wire done. The corporal hands you a mug of char and doesn't say a word.[/if]
 
     [if war.stage == 1]Out in front the new wire lies on the white chalk like a scribble on a slate.[elif war.stage == 2][if war.month <= 6]Behind the line the lorries and the guns come up for the push all day now, and nobody bothers to hide them any more.[elif war.month <= 9]Out in front the stumps of the wood stand up behind the new wire, black.[else]The rain comes on again, and the pickets out in front lean a little further over.[/if][elif war.stage == 3][if war.month <= 4]Out in front of Arras a crust of snow has settled along the new wire, and it glitters when the sun gets on it.[elif war.month <= 5]Out in front of Arras the new wire's grey against the white chalk, plain as handwriting.[else]Out in the salient the new wire's already sinking into the mud, picket by picket.[/if][else][if war.month <= 3]Out in front the frost has furred every barb white.[elif war.month <= 7]Out in front a hare comes out of the corn and sits by the new wire, washing its face.[else]By the next night the battalion's moved on, and the wire's left behind for nobody.[/if][/if]
 
@@ -344,7 +344,7 @@
   title: Listening post
   text: |
     [if war.stake == 0]A hole in the ground out past our wire, two men in it, a string running back to the trench. One
-    tug for all right, two for something moving, three for them coming. You've a rifle, four bombs
+    tug for all right, two for something moving, three for them coming. You've a rifle, four Mills bombs
     and a flask of cold tea, and three hours to lie here.
 
     In the hole with you is {mate}. His knee is pressed against yours. You can feel it trembling, or
@@ -428,7 +428,7 @@
   text: |
     [if war.result == ok]Two nights later a German raid comes over on exactly that stretch, and walks into rifles that are waiting for it. The company sergeant major makes a point of saying who heard them coming.[/if][if war.result == failed]Nobody comes, that you know of. The night was full of sounds and you can't swear to any of them. You come in with your ears ringing from listening.[/if][if war.result == turned]You came in early. Nobody saw anything on that stretch all night, so it doesn't matter, except that it does.[/if]
 
-    [if war.stage == 1]Lying down after, you'd swear you can still feel the miners at work under the chalk, through the floor of the dugout.[elif war.stage == 2][if war.month <= 6]Behind you the guns go on coming up for the push, and the rumble of them comes through the ground all night.[elif war.month <= 9]The smell from no man's land is in your clothes, and it stays there all day.[else]Your greatcoat takes two days to dry, steaming by the brazier.[/if][elif war.stage == 3][if war.month <= 4]Your ears ache with the Arras frost till noon.[elif war.month <= 5]In the Arras sun you sleep the morning through on the firestep, and wake with chalk dust in your mouth.[else]The salient's mud dries on you grey, and cracks every time you move.[/if][else][if war.month <= 3]Out in the salient the ice in the shell holes creaks as the sun gets on it.[elif war.month <= 7]Behind the line a French farmer is out ploughing, in full view of their balloon.[else]By the next night the line has moved on again, and the post's a mile behind it.[/if][/if]
+    [if war.stage == 1]Lying down after, you'd swear you can still feel the miners at work under the chalk, through the floor of the dugout.[elif war.stage == 2][if war.month <= 6]Behind you the guns go on coming up for the push, and the rumble of them comes through the ground all night.[elif war.month <= 9]The smell from no man's land is in your clothes, and it stays there all day.[else]Your greatcoat takes two days to dry, steaming by the brazier.[/if][elif war.stage == 3][if war.month <= 4]Your ears ache with the Arras frost till noon.[elif war.month <= 5]In the Arras sun you sleep the morning through on the firestep, and wake with chalk dust in your mouth.[else]The salient's mud dries on you grey, and cracks every time you move.[/if][else][if war.month <= 3]Out in the salient the ice in the shell holes creaks as the sun gets on it.[elif war.month <= 7]Behind the line a French farmer is out ploughing, in full view of their balloon. "C'est la guerre," he says to anybody who tells him so.[else]By the next night the line has moved on again, and the post's a mile behind it.[/if][/if]
 
     {result_note}
   choices:
@@ -445,8 +445,8 @@
   text: |
     [if war.stake == 0]The ration dump at the end of the communication trench: boxes of small-arms ammunition, coils of
     wire, duckboards, sandbags of bread, a dixie of tea for the front line with the lid tied on with
-    string. You're to take it all up. Two miles of trench, in the dark, in the wet, under a German
-    battery that knows the route as well as you do.[/if][if war.stake == 1]Rations and ammunition as usual from the dump, and on top of them tonight trench mortar bombs, the
+    string. You're to take it all up. Two miles of trench, in the dark, in the wet, under a
+    battery of five-nines that knows the route as well as you do.[/if][if war.stake == 1]Rations and ammunition as usual from the dump, and on top of them tonight trench mortar bombs, the
     ones the lads call toffee apples, a ball on a stick, slung on poles between pairs of men. If one goes off, the carrying party goes with it. Nobody
     smokes. Nobody even talks about smoking.[/if]
   choices:
@@ -471,7 +471,7 @@
   title: Carrying party
   text: |
     [if war.stake == 0]Halfway up, the battery starts. Whizz-bangs, you hear them after they arrive: a crack and a
-    flash and earth coming down on your helmet like rain on a slate roof. The trench is knee-deep in
+    flash and earth coming down on your load like rain on a slate roof. The trench is knee-deep in
     places and the duckboards float. Somebody ahead is shouting to keep moving.[/if][if war.stake == 1 && war.stage <= 2]Gas. Somebody's banging a shell case up ahead, and the shout comes back down the line, and you're
     getting your gas helmet on with a box of bombs on your shoulder, one-handed: the flannel bag over
     your head, wet and stinking of chemicals, the tail tucked into your collar, the eyepieces steaming up
@@ -502,7 +502,7 @@
   title: Carrying party
   text: |
     [if war.stake == 0]The last stretch. There's a man down in the trench in front of you, one of the party, sitting in
-    the water holding his leg and swearing, quietly, in a steady stream, like a man reading a list.[/if][if war.stake == 1]The last stretch, and a man of the party is down in front of you. Not hit: just down, sat in the
+    the water holding his leg and swearing, quietly, in a steady stream, like a man reading a list.[/if][if war.stake == 1]The last stretch, and a man of the party is down in front of you. He hasn't stopped one: he's just down, sat in the
     water with his back to the trench wall and his load beside him, saying he can't, he can't do another
     yard, he's not hurt, he just can't. His eyes are fixed on nothing at all.[/if]
   choices:
@@ -526,9 +526,9 @@
   chapter: front
   title: After the carrying party
   text: |
-    [if war.result == ok]Everything gets up. The front line has its ammunition and its wire and, still warm, its tea. A sergeant you don't know shakes your hand as if you'd brought him a letter from home.[/if][if war.result == failed]Half of it doesn't get up. The tea's spilt and the bread's soaked and an ammunition box is somewhere at the bottom of the trench water. The front line goes without, tonight.[/if][if war.result == turned]You came back without it. Somebody else takes it up.[/if]
+    [if war.result == ok]Everything gets up. The front line has its ammunition and its wire and, still warm, its tea. A sergeant you don't know shakes your hand as if you'd brought him a letter from home.[/if][if war.result == failed]Half of it doesn't get up. The tea's napoo and the bread's soaked and an ammunition box is somewhere at the bottom of the trench water. The front line goes without, tonight.[/if][if war.result == turned]You came back without it. Somebody else takes it up.[/if]
 
-    [if war.stage == 1][if war.month <= 9]The white dust of the chalk trench is in your hair and your ears and your bread for a day after.[else]The chalk slurry dries on your puttees white and hard, like plaster.[/if][elif war.stage == 2][if war.month <= 6]Behind you the dumps for the push grow every night, stacked under nets in the fields.[elif war.month <= 9]Your shoulders are raw from the ropes, and the Somme dust has got into the sores.[else]The Somme mud's on you to the thighs, and it dries grey and stinks of what's in it.[/if][elif war.stage == 3][if war.month <= 5]You come back down through the caves under Arras and sleep in the warm, under the electric light.[else]You sleep in a pillbox with its door facing their way, with twenty other men and the smell of all of them.[/if][else][if war.month <= 3]Your hands are split from the frozen ropes, and they bleed into your mittens.[elif war.month <= 7]On the way back you fill your water bottle at a farm pump, and the water's sweet and cold.[else]On the way back a Frenchwoman at a cottage door gives you an apple, and says something you don't catch.[/if][/if]
+    [if war.stage == 1][if war.month <= 9]The white dust of the chalk trench is in your hair and your ears and your bread for a day after.[else]The chalk slurry dries on your puttees white and hard, like plaster.[/if][elif war.stage == 2][if war.month <= 6]Behind you the dumps for the push grow every night, stacked under nets in the fields.[elif war.month <= 9]Your shoulders are raw from the ropes, and the Somme dust has got into the sores.[else]The Somme mud's on you to the thighs, and it dries grey and stinks of what's in it.[/if][elif war.stage == 3][if war.month <= 5]You come back down through the caves under Arras and sleep in the warm, under the electric light.[else]You sleep in a pillbox with its door facing their way, your tin hat for a pillow, with twenty other men and the smell of all of them.[/if][else][if war.month <= 3]Your hands are split from the frozen ropes, and they bleed into your mittens.[elif war.month <= 7]On the way back you fill your water bottle at a farm pump, and the water's sweet and cold.[else]On the way back a Frenchwoman at a cottage door gives you an apple. "Les Boches sont partis," she says: gone, they're gone, and you understand that much.[/if][/if]
 
     {result_note}
   choices:
@@ -574,7 +574,7 @@
   text: |
     [if war.stake == 0]In their trench. This is the work: along it a bay at a time. Pin, throw over the traverse, count,
     down, the bang, then round the corner fast before they can throw back. Their bombs come over
-    too, the stick ones, turning end over end in the light of the last explosion.[/if][if war.stake == 1]Their trench, and it's a maze: a turn every few yards, a sap going off, a dugout, another turn,
+    too, the potato mashers, a tin on a stick, turning end over end in the light of the last explosion.[/if][if war.stake == 1]Their trench, and it's a maze: a turn every few yards, a sap going off, a dugout, another turn,
     and you can't tell which way their bombers are coming from. A stick bomb comes over the traverse
     turning end over end and somebody kicks it on into the next bay, where it goes off. Your ears have
     gone. You're working by the light of the bangs.[/if]
@@ -685,7 +685,7 @@
     - id: steady
       text: "[if war.stake == 0]Clear it properly, by the drill.[else]Short bursts, the way you were taught, and lead him.[/if] ({risk_steady})"
       effects: [ { war: steady } ]
-      text_after: "[if war.stake == 0]First position, second position. Your No. 2 hands you the drum without being asked.[else]Short bursts. Lead him. Short bursts. Your No. 2 has a drum ready before you call for it.[/if]"
+      text_after: "[if war.stake == 0]Handle back, look, clear it, by the numbers. Your No. 2 hands you the drum without being asked.[else]Short bursts. Lead him. Short bursts. Your No. 2 has a drum ready before you call for it.[/if]"
       next: "@war"
     - id: careful
       text: "[if war.stake == 0]Get the gun down out of sight while you clear it.[else]Duck under the parapet while he passes, and fire when he's going away.[/if] ({risk_careful})"
@@ -934,7 +934,7 @@
     - id: bold
       text: "Work the face, kicking the clay out fast. ({risk_bold})"
       effects: [ { war: bold } ]
-      text_after: You lie on the cross and kick at the clay with the grafting tool, and the spoil goes back down the line.
+      text_after: You lie back on the plank cross and kick the spade into the clay with both feet, and the spoil goes back down the line.
       next: "@war"
     - id: steady
       text: "Work it quietly, the way you were taught. ({risk_steady})"
