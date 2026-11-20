@@ -18,8 +18,9 @@
 - { term: calico, means: "Plain, cheap cotton cloth, the kind the Lancashire mills wove by the mile." }
 - { term: Co-op, means: "The Co-operative Society shop, owned by its customers; most mill families bought their groceries there." }
 - { term: allotment, means: "A small plot of rented ground, away from the house, where a working man grew vegetables." }
+- { term: "your allotment", means: "The part of a soldier's pay he signed over to his family, paid to them weekly at the post office." }
 - { term: scullery, means: "The small back room of a house, with the sink, where the washing and washing-up were done." }
-- { term: the copper, means: "A big metal tub built over a small fire, for boiling the family's washing." }
+- { term: "in the copper", also: ["to the copper", "the copper's", "runs the copper", "for the copper"], means: "A big metal tub built over a small fire, for boiling the family's washing." }
 - { term: carbolic, means: "Strong-smelling red soap that killed germs; every kitchen and washhouse smelt of it." }
 - { term: Woodbines, also: [Woodbine], means: "The cheapest and most popular cigarettes of the time, sold five to a paper packet." }
 - { term: fag, means: "A cigarette." }
@@ -48,7 +49,7 @@
 - { term: bay, also: [bays], means: "One short straight length of a trench, between two bends; a few men held each." }
 - { term: traverse, means: "A solid block of earth left in a trench, making a bend, so a blast could not travel along it." }
 - { term: dugout, also: [dugouts], means: "A room dug into the side or floor of a trench, for shelter and sleep." }
-- { term: stand-to, also: ["stand to", "stood to"], means: "The hour at dawn and dusk when every man stood ready on the firestep, in case of attack." }
+- { term: stand-to, also: ["Stand to!"], means: "The hour at dawn and dusk when every man stood ready on the firestep, in case of attack." }
 - { term: chloride of lime, means: "A white bleaching powder scattered in trenches against disease and the smell of the dead." }
 - { term: duckboards, also: [duckboard], means: "Slatted wooden boards laid along the bottom of a trench or across mud, to walk on." }
 - { term: sump, means: "A pit dug under the trench floor for water to drain into." }
@@ -60,10 +61,10 @@
 - { term: pillbox, also: [pillboxes], means: "A small, low concrete fort with slits for machine guns; the Germans built hundreds in Flanders." }
 - { term: billet, means: "A barn, house or cellar behind the line where soldiers were lodged." }
 - { term: ration dump, also: [dumps], means: "A place behind the line where food, ammunition and stores were piled for collecting." }
-- { term: aid post, means: "The battalion doctor's dugout just behind the line, where the wounded were first bandaged." }
+- { term: aid post, also: ["aid posts"], means: "The battalion doctor's dugout just behind the line, where the wounded were first bandaged." }
 - { term: orderly room, means: "The battalion's office, where its papers, orders and records were kept." }
 - { term: depot, means: "The regiment's barracks at home, where recruits were trained and sent out from." }
-- { term: draft, also: [drafts], means: "A batch of new men sent out from home to fill a battalion's losses." }
+- { term: "a draft", also: ["the draft", "last draft", "new draft", "first draft", "draft lad", drafts], means: "A batch of new men sent out from home to fill a battalion's losses." }
 - { term: limber, also: [limbers], means: "A two-wheeled horse-drawn cart for ammunition and stores; a gun was hooked on behind one." }
 - { term: cookers, means: "The company's field kitchens on wheels, with a fire and boilers for stew and tea." }
 - { term: dixie, means: "A large iron cooking pot with a lid; the company's stew and tea came up the line in them." }
@@ -76,7 +77,7 @@
 - { term: attestation, also: [attested], means: "The form a recruit signed and swore to on joining, giving his age." }
 - { term: field postcard, also: [field card], means: "A printed army card of ready-made sentences; you crossed out the ones that were not true." }
 - { term: identity discs, means: "The two tags on a cord round a soldier's neck, stamped with his name, number and religion." }
-- { term: field dressing, means: "The packet of bandage every soldier carried sewn inside his tunic." }
+- { term: field dressing, also: ["field dressings"], means: "The packet of bandage every soldier carried sewn inside his tunic." }
 - { term: puttees, means: "Long strips of cloth wound round the leg from ankle to knee." }
 - { term: webbing, means: "The soldier's harness of woven belts and straps that carried his pouches, pack and water bottle." }
 - { term: groundsheet, means: "A waterproof sheet to lie on, also worn as a cape in rain." }

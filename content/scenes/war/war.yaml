@@ -307,7 +307,7 @@
     one, and he's seen every way there is of swinging the lead.
   choices:
     - id: report
-      text: Report sick. The MO may give you a tour out of the line.
+      text: "Report sick. The MO may give you a tour out of the line. ({sick_odds})"
       effects: [ { war: report } ]
       next: "@war"
     - id: carry_on

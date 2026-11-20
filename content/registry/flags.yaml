@@ -355,3 +355,19 @@ rv_home_met: { description: "Shook Rudge's hand at the railhead" }
 rv_home_passed: { description: "Nodded to Rudge at the railhead and went on" }
 rv_home_dead: { description: "Rudge died of the influenza at home in 1918, the week before he was to report" }
 # RV_FLAGS_END
+
+# Life behind the line, 1916-17 (content/scenes/war/life.yaml)
+lf_shirt: { description: "Wore the clean shirt from the baths with R. Hollis's name in it (1916); read at the burial" }
+lf_stood: { description: "Stood the section egg and chips on pay night (1916); remembered at the betting hat in 1917" }
+lf_saved: { description: "Kept a five-franc note back on pay night (1916); it goes on the farmer's gate in 1917" }
+lf_fair: { description: "Owned up to the hand on the goal line against the gunners (1916); the bombardier knows him in 1917" }
+lf_handled: { description: "Kept quiet about the hand on the goal line (1916); the bombardier knows him in 1917" }
+lf_tibbs: { description: "Took on Tibbs, the conscript of the July draft (1916); Tibbs shows in the 1917 winter and the cellar" }
+lf_tank_faith: { description: "Believed the tanks would end the war (September 1916); read when America comes in" }
+lf_grave_lie: { description: "Told the padre Lumb's death was quick, for the mother's letter (1916); read at the Messines mines" }
+lf_grave_truth: { description: "Told the padre how Lumb died and let him choose (1916); read at the Messines mines" }
+lf_called: { description: "Answered the German who called good morning (January 1917); read at the Messines mines" }
+lf_told: { description: "Showed the sniper where the German's voice came from (January 1917); read at the Messines mines" }
+lf_gate: { description: "Burned the farmer's gate in the hard winter (1917); the company paid for it" }
+lf_bet_soon: { description: "Put a franc on the war ending in 1917 when America came in; read on the duckboard track" }
+# LF_FLAGS_END

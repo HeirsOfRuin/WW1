@@ -17,7 +17,7 @@
 - { term: sap head, means: "The far end of a short trench dug out towards the enemy from the front line." }
 - { term: Minenwerfer, means: "German for 'mine-thrower': their heavy trench mortar. The men called its bombs minnies." }
 - { term: the Act, means: "The Military Service Act of 1916, which brought in conscription for single men, then married ones." }
-- { term: the badge, means: "The 'On War Service' badge, worn by men in reserved jobs to show they were not shirking." }
+- { term: "wears the badge", also: ["has the badge"], means: "The 'On War Service' badge, worn by men in reserved jobs to show they were not shirking." }
 - { term: special constable, also: [special constables], means: "An unpaid part-time policeman, sworn in for the war to replace men who had gone." }
 - { term: combed out, also: [combed him out], means: "Taken for the army from a job that had kept a man exempt, as the need for men grew." }
 - { term: labour company, means: "A unit of older or less fit men who unloaded, dug and mended roads behind the front." }

@@ -6,12 +6,12 @@
 - { term: communication trench, means: "A trench running back from the front line, so men and supplies could come up under cover." }
 - { term: scabbard, means: "The sheath a man's bayonet hung in at his belt." }
 - { term: bay, also: [bays], means: "One straight length of a trench between two bends, held by a few men." }
-- { term: stand-to, also: ["stand to"], means: "The hour at dawn and dusk when every man stood armed on the firestep, in case of attack." }
-- { term: support line, means: "The second line of trenches, a short way behind the front line." }
+- { term: stand-to, also: ["Stand to!"], means: "The hour at dawn and dusk when every man stood armed on the firestep, in case of attack." }
+- { term: support line, also: ["support trench"], means: "The second line of trenches, a short way behind the front line." }
 - { term: fatigues, means: "Work parties: the digging, carrying and cleaning that filled a soldier's days out of battle." }
 - { term: dugout, also: [dugouts], means: "A shelter dug into the side or floor of a trench, roofed with timber and earth." }
 - { term: at rest, means: "Out of the trenches for a few days, lodged in a village some miles behind the line." }
-- { term: billet, also: [billets], means: "A soldier's lodging behind the line: a barn, a loft or a room in a village house." }
+- { term: billet, also: [billets, "billeted"], means: "A soldier's lodging behind the line: a barn, a loft or a room in a village house." }
 - { term: limber, means: "The two-wheeled cart a gun or wagon was hooked to, for hauling by horses." }
 - { term: orderly room, means: "The company or battalion office, where charges against a man were heard." }
 - { term: "no man's land", means: "The open ground between the two front lines, held by neither side." }
@@ -21,7 +21,7 @@
 - { term: reads the roll, means: "Calls every man's name from the list; no answer means killed, wounded or missing." }
 - { term: battalion, means: "About a thousand men at full strength; the body a soldier lived, fought and was counted in." }
 - { term: platoon, means: "About fifty men under a junior officer, in four sections." }
-- { term: section, means: "The smallest body of infantry: about ten men under a corporal." }
+- { term: "whole section", also: ["next section", "same section", "signal section", "a section together"], means: "The smallest body of infantry: about ten men under a corporal." }
 - { term: Second Lieutenant, means: "The lowest rank of officer; he commanded a platoon." }
 - { term: War Office, means: "The government department in London that ran the army and sent out the news of casualties." }
 - { term: tunic, means: "The soldier's khaki uniform jacket." }
@@ -39,8 +39,9 @@
 - { term: Temporary gentlemen, means: "The regular officers' sneer at wartime officers from clerks' and tradesmen's families." }
 - { term: trooper, means: "A private soldier of the cavalry." }
 - { term: carrying party, means: "Men sent up the line at night loaded with rations, wire, timber or ammunition." }
-- { term: brigade, means: "The headquarters next above the battalion; a brigade was four battalions, three from 1918." }
+- { term: "the brigade", also: ["at brigade", "from brigade", "to brigade", "Brigade laughed", "brigade wants", "whole brigade"], means: "The headquarters next above the battalion; a brigade was four battalions, three from 1918." }
 - { term: depot, means: "The regiment's base at home, where recruits were trained and sent out to fill the gaps." }
+- { term: "tram depot", means: "The sheds where a town's electric trams were kept; in the war women took the men's places on them." }
 - { term: ration dump, means: "The place behind the line where the day's food was left for each company to fetch after dark." }
 - { term: Flanders, means: "The flat, wet farmland of western Belgium around Ypres." }
 - { term: Cambrai, means: "The great tank attack of November 1917; most of the ground won was lost again within days." }
@@ -121,7 +122,6 @@
 - { term: lych-gate, means: "The roofed gate into a churchyard." }
 - { term: banns, means: "The notice of a coming marriage, read out in church on three Sundays beforehand." }
 - { term: wedding breakfast, means: "The meal after a wedding, whatever the hour." }
-- { term: walking out, means: "Courting: seen about together as a couple." }
 - { term: Michaelmas, means: "29 September, a quarter day, when rents fell due and farm workers were hired." }
 - { term: Lady Day, means: "25 March, a quarter day, when farm rents fell due and tenancies changed hands." }
 - { term: "All Souls' Day", means: "2 November, the church's day of prayer for the dead." }

@@ -405,7 +405,7 @@ function step(w: War): void {
       w.clockInStage = 0; // the date reads the stage's first month until its first rotation
       w.cursor = { at: 'path' };
       if (st.n === 2 && w.town === 'pit' && home(w, 'dig') && !w.transferred) w.pending = { kind: 'tunnel' };
-      if (st.n === CORPS.tank.stage && tankEligible(w)) w.pending = { kind: 'corps', corps: 'tank' };
+      if (st.n === CORPS.tank.stage && (tankEligible(w) || (!w.transferred && !w.commissioned && w.rank <= SERGEANT && closeRoll(w) < CORPS.tank.call))) w.pending = { kind: 'corps', corps: 'tank' };
       return;
     }
     case 'path': {
@@ -623,6 +623,9 @@ function finishBattle(w: War, pts: number): void {
   officerFate(w);
 }
 
+/** The chance the medical officer excuses him a tour when he reports sick: by his standing. */
+export const sickChance = (w: War) => clamp(0.2 + w.standing / 200, 0.2, 0.7);
+
 // ---- risk: one derivation for what is shown under a choice and what is resolved -----------------
 
 /** Chance of being hit on a duty, as resolved. */
@@ -834,7 +837,10 @@ export function decide(w: War, d: Decision): War {
         end(w, 'posting', 'sent home by the medical officer, worn out: Home Establishment');
         break;
       }
-      if (d === 'report' && ch(w, 'career', 0.5)) {
+      // the medical officer believes a man the company thinks well of, and suspects one known for hanging
+      // back of swinging the lead (2026-11-20: with 1917-18 eased, always going to ground and reporting
+      // sick had become the best way to the Armistice)
+      if (d === 'report' && ch(w, 'career', sickChance(w))) {
         w.out = Math.max(w.out, 1); w.standing = clamp(w.standing - 4, 0, 100);
         say(w, 'reported sick: excused one tour');
       }

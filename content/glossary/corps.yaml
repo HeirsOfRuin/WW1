@@ -34,6 +34,7 @@
 - { term: RE8, means: "A slow, steady British two-seater aeroplane, used to direct the guns and photograph the German line." }
 - { term: Harry Tate, means: "The airmen's rhyming name for the RE8, after a music-hall comedian of the day." }
 - { term: scout, also: [scouts], means: "A fast aeroplane with one seat, built to fight other aeroplanes; later called a fighter." }
+- { term: "the bombers and the scouts", means: "Aeroplanes: bombers carried bombs to drop on bridges and roads; scouts were the fast single-seat fighters." }
 - { term: Scarff ring, means: "A ring-shaped mounting round the back cockpit that let the gunner swing his gun to any side." }
 - { term: Archie, means: "The airmen's name for anti-aircraft guns and their shell bursts, from a music-hall song." }
 - { term: artillery shoot, means: "A flight to watch a battery's shells fall and signal each miss until the guns are on the target." }
@@ -55,7 +56,7 @@
 - { term: NYD, means: "Not Yet Diagnosed: what the doctors wrote on the label of a man whose nerves had given way." }
 - { term: Hun, means: "The papers' and officers' name for the Germans; to an airman, any enemy machine or the man in it." }
 - { term: ranker, means: "A soldier in the ranks, not an officer." }
-- { term: Poplar, means: "A district of East London. German aeroplanes bombed a school there in June 1917 and killed eighteen children." }
+- { term: "in Poplar", also: ["at Poplar"], means: "A district of East London. German aeroplanes bombed a school there in June 1917 and killed eighteen children." }
 - { term: stoppage, means: "A jam: a machine gun stops firing until the gunner finds the fault and clears it." }
 - { term: cocking handle, means: "The handle on the side of a machine gun, pulled back to load it or to clear a jam." }
 - { term: tracer, means: "A bullet that burns as it flies, so the gunner can see where his fire is going." }
@@ -97,7 +98,7 @@
 - { term: Kamerad, means: "German for 'comrade'; what a German soldier called out when he gave himself up." }
 - { term: Pas de bagarre, means: "French for 'no fighting'." }
 - { term: redcap, means: "A military policeman, from the red cover on his cap." }
-- { term: diggers, means: "The Australians, a name they gave themselves in 1917." }
+- { term: "mentions the diggers", means: "The diggers were the Australians, a name they gave themselves in 1917." }
 - { term: five-nines, also: [five-nine], means: "A German shell 5.9 inches across, and the gun that fired it; heavy enough to wreck a trench." }
 - { term: Blighty one, means: "A wound bad enough to get a man sent home to Britain, and not bad enough to kill him." }
 - { term: got the wind up, means: "Lost his nerve; was frightened." }

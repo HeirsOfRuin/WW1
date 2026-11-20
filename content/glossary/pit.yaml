@@ -24,7 +24,7 @@
 - { term: the roof was working, also: ["the roof's talking", "the roof talking"], means: "Pit talk: the rock overhead creaking and shifting, as it does before it comes down." }
 - { term: hewer, means: "The pitman who cuts the coal at the face: the hardest and best-paid work underground." }
 - { term: timbering, also: [timbered], means: "Setting wooden props and frames to hold up the roof and sides of a tunnel or dugout." }
-- { term: props, also: [prop], means: "Upright timbers set to hold up the roof of a mine or dugout." }
+- { term: props, also: ["a prop"], means: "Upright timbers set to hold up the roof of a mine or dugout." }
 - { term: coal-cutter, also: [the cutter], means: "A machine with a toothed wheel that cuts under the coal; it makes a great clatter." }
 - { term: drift mine, means: "A pit entered by a sloping tunnel from the hillside, with no shaft." }
 - { term: "your father's seam", also: [a hard seam, about seams], means: "A seam is a layer of coal in the rock, from a foot to six feet thick." }
@@ -34,7 +34,7 @@
 - { term: the banner, means: "The union lodge's great painted silk banner, carried at galas and at a member's funeral." }
 - { term: "Miners' Hall", means: "The union's hall in a pit village, for meetings, the reading room and the lodge's business." }
 - { term: pay notes, means: "The colliery office's slips showing what a pitman earned in the fortnight, and what was stopped." }
-- { term: starred men, also: [starred], means: "Men in work marked as too needed at home for the army to take them." }
+- { term: starred men, also: ["to be starred"], means: "Men in work marked as too needed at home for the army to take them." }
 
 # ---- the village and its speech ----
 - { term: cree, means: "A north-east word for a pigeon loft: a shed where a man keeps his racing birds." }
@@ -42,7 +42,7 @@
 - { term: bairn, also: [bairns], means: "North-east and Scots word for a child." }
 - { term: gannin, means: "Tyneside speech for going." }
 - { term: Geordie, means: "A man from Tyneside; in the army, any north-east pitman." }
-- { term: the burn, means: "North-country and Scots word for a stream." }
+- { term: "wading the burn", also: ["the burn below"], means: "The burn: north-country and Scots word for a stream." }
 - { term: end of the rows, also: [round the rows, in the rows, up the rows, bottom of the rows, into the rows, over the rows, top of the rows], means: "The rows: the terraces of pit cottages owned by the colliery, where the pitmen's families live." }
 - { term: at the Store, also: [in the Store, from the Store], means: "The Co-operative shop, owned by its members; a pit village bought nearly everything there." }
 - { term: black bullets, means: "Dark peppermint boiled sweets, a Tyneside favourite." }
@@ -71,7 +71,7 @@
 - { term: shillings, also: [shilling], means: "Twenty shillings made a pound. An infantry private was paid one shilling a day." }
 - { term: the new Act, means: "The Military Service Act of 1916, which made single men of 18 to 41 liable for the army." }
 - { term: navvies, means: "Labourers who dug canals, railways and tunnels with pick and shovel." }
-- { term: the Tube, means: "London's deep underground railway, bored through clay." }
+- { term: "on the Tube", also: ["about the Tube", "as the Tube", "have the Tube", "see the Tube"], means: "The Tube: London's deep underground railway, bored through clay." }
 - { term: the Rhondda, means: "A coal-mining valley in South Wales." }
 - { term: "my 'andsome", means: "A Cornishman's friendly name for another man." }
 - { term: boyo, means: "A Welshman's friendly name for another man." }

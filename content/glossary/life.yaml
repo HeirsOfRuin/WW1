@@ -1,0 +1,15 @@
+# Words of life behind the line, 1916-17 (content/scenes/war/life.yaml; docs/FRAME-WORDS.md sections
+# 1 and 2). Only words that no other glossary file lists; format as content/glossary/base.yaml.
+# npm run gloss checks each is used.
+- { term: francs, also: [franc, five-franc], means: "French money. The army paid its men in francs; one was worth about ninepence." }
+- { term: pay parade, means: "The fortnightly queue at a table where an officer paid each man and signed his pay book." }
+- { term: conscripts, means: "Men made to join the army by the Act of 1916, as against the volunteers before them." }
+- { term: bombardier, means: "A corporal in the artillery." }
+- { term: wagon lines, means: "Where a battery kept its horses, wagons and spare men, a mile or two behind its guns." }
+- { term: pioneers, means: "The battalion's own carpenters and handymen, who made its crosses, duckboards and latrine seats." }
+- { term: surplice, means: "The loose white linen gown a clergyman puts on over his clothes to take a service." }
+- { term: chilblains, means: "Red, itching swellings on the toes and fingers, brought on by cold and damp." }
+- { term: interpreter, means: "A French soldier attached to a British unit to deal with farmers, mayors and claims for damage." }
+- { term: spill, means: "A twist of paper or a thin stick, used to carry a flame to a fire or a pipe." }
+- { term: petrol tins, also: [petrol tin], means: "Two-gallon cans that water was carried up the line in. The water tasted of petrol." }
+- { term: Yanks, means: "The British soldier's name for the Americans." }

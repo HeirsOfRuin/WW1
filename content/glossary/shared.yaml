@@ -35,7 +35,6 @@
 - { term: "carrying party", also: ["carrying parties"], means: "Men who carried food, water, ammunition and stores up to the front line by hand, at night." }
 - { term: "working party", also: ["working parties"], means: "Men detailed for a job of labour: digging, carrying, mending the trench." }
 - { term: fatigues, also: [fatigue], means: "The army's chores: digging, carrying, cleaning. Every private did them unless excused." }
-- { term: "over the top", means: "Out of the trench over the parapet, into the open. Going over the top meant attacking." }
 - { term: "the push", means: "Soldiers' word for a great attack." }
 - { term: "big show", also: ["a show in the morning", "a show coming", "the last show"], means: "A show was soldiers' slang for an attack or a battle." }
 - { term: barrage, means: "A wall of shell fire laid down by the guns, often moving ahead of the attacking men." }
@@ -47,15 +46,13 @@
 # ---- the army and its ranks ----
 - { term: "the section", also: ["your section"], means: "The smallest group in the infantry: about a dozen men under a corporal." }
 - { term: platoon, means: "About fifty men, four sections, led by a junior officer with a sergeant under him." }
-- { term: "the company", also: ["your company"], means: "About two hundred infantrymen under a captain. Four companies made a battalion." }
+- { term: "the company", also: ["your company"], means: "About two hundred men under a captain or major. Four companies made an infantry battalion." }
 - { term: battalion, means: "About a thousand infantrymen under a lieutenant-colonel: the unit a soldier belonged to and lived in." }
-- { term: brigade, means: "Four battalions under a brigadier-general, and the headquarters that gave them their orders." }
 - { term: brigadier, means: "The general commanding a brigade." }
 - { term: division, also: [divisional], means: "About eighteen thousand men under a major-general: three brigades with their own guns and engineers." }
 - { term: "the staff", means: "The officers at headquarters who planned the fighting, well behind the trenches." }
 - { term: "brass hats", means: "Soldiers' name for senior officers and the staff, from the gold braid on their caps." }
 - { term: "red tabs", means: "Staff officers, from the red patches they wore on their collars." }
-- { term: "the Old Man", means: "Soldiers' name for their commanding officer, the colonel of the battalion." }
 - { term: "quarter bloke", means: "Soldiers' name for the quartermaster sergeant, who kept the stores and issued kit." }
 - { term: NCO, means: "A non-commissioned officer: a corporal or a sergeant, promoted from the ranks." }
 - { term: stripe, also: [stripes], means: "A cloth chevron on the sleeve showing rank: one for a lance corporal, two a corporal, three a sergeant." }
@@ -64,7 +61,6 @@
 - { term: "the regulars", means: "The small professional army of before the war, as against the volunteers of 1914." }
 - { term: "colour sergeant", means: "The senior sergeant of a company in the old regular army." }
 - { term: "old sweat", means: "An old soldier; properly a regular from before the war." }
-- { term: draft, also: [drafts], means: "A batch of new men sent out from England to fill the gaps in a battalion." }
 - { term: depot, means: "The regiment's barracks in England, where recruits and men back from hospital were trained and sent out." }
 - { term: "battalion orders", also: ["in orders"], means: "The daily written notices of a battalion: duties, promotions, punishments and awards." }
 - { term: "officers' mess", means: "Where the officers of a unit ate together, and the officers as a body." }

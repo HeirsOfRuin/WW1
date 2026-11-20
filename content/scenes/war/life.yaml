@@ -1,0 +1,611 @@
+# Life behind the line, 1916-17. The author, 2026-11-20: "a bit more story in through 16 and 17":
+# both years had tours with no story event. Twelve events about the battalion between the fighting,
+# six a year, written once and shared by all four towns (`pools:`), each with a choice that says
+# something about him. A flag set in 1916 is read in 1917 where it comes naturally.
+#
+# 1916 (tours 10-19; battles on 14 and 18):
+#   lf_baths    11-13  the brewery baths; a clean shirt with a man's name in it (lf_shirt: wore it)
+#   lf_pay      11-16  pay night in the estaminet (lf_stood: fed the section; lf_saved: kept a note)
+#   lf_gunners  12-13  football against the battery (lf_fair: owned up to the hand; lf_handled: did not)
+#   lf_draft    15-17  the draft after July: Derby men and conscripts; Tibbs (lf_tibbs: took him on)
+#   lf_tanks    17     the tanks going up at night (lf_tank_faith). Not in the mill pool: the mill
+#                      has its own tank event (v16_tank) and a man should not meet them twice.
+#   lf_blanket  16-19  a burial; what the padre is told for the mother (lf_grave_lie, lf_grave_truth)
+# 1917 (tours 20-29; battles on 23 and 27):
+#   lf_morning  20     no truce at Christmas; the voice opposite (lf_called, lf_told)
+#   lf_gate     20-21  the hard winter; the farmer's gate (lf_gate); reads lf_tibbs, lf_saved
+#   lf_stove    22     the country the Germans left in March; the laid stove; reads lf_tibbs, lf_gate
+#   lf_yanks    22-24  America in the war; the book on when it ends (lf_bet_soon); reads lf_tank_faith, lf_stood
+#   lf_mines    25     the Messines mines heard from a day's march off; reads lf_grave_*, lf_called, lf_told
+#   lf_track    28-29  the duckboard track; the man in the shell hole; reads lf_fair, lf_handled, lf_bet_soon
+#
+# All are guarded { not: war.transferred } (a tunneller, tank man or air man has left the battalion).
+# Events a commissioned officer would not be in (the vats, the pay queue, the barn, the betting tin)
+# are guarded "war.rank < 5". No event falls on a battle tour. {mate} is used only in mid-sentence:
+# with no friend living it reads "a man from the next section". Words follow FRAME-WORDS sections
+# 1 and 2 (Jerry only from 1917); the new ones are in content/glossary/life.yaml.
+# The word "allotment" (pay signed over to a mother) is avoided: the glossary has it as a garden.
+
+# ==== 1916 ========================================================================================
+
+- id: lf_baths
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  pools: [front_1916_pit, front_1916_farm, front_1916_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 11", "war.tour <= 13", "war.rank < 5", { not: war.transferred } ]
+  title: The baths
+  text: |
+    The company marches four miles to the baths, which are a brewery. The vats are the baths: wooden
+    tubs a man could drown in, twelve men to a tub, the water hot for the first lot and grey as
+    dishwater by the third. You are in the third. You get five minutes by a corporal's watch and a
+    square of yellow soap between two.
+
+    Your uniform has gone through a hatch. Behind it women with hot irons run them down the seams,
+    where the eggs are. The tunic comes back warm and smelling of scorch, and by tomorrow night
+    you'll be chatting again like everybody else. Nobody would miss the baths for a week's pay.
+
+    At the far door an orderly hands out clean shirts off a pile, any size, as they come. Yours is
+    a good one, thick flannel, nearly new. Somebody has inked a name inside the neckband: R. HOLLIS,
+    and a number. Low on the left side there is a darn the size of a penny, neatly done.
+  choices:
+    - id: wear
+      text: Put it on. It's the best shirt on the pile.
+      effects: [ { set: flag.lf_shirt } ]
+      text_after: |
+        It's warm and it fits. Somebody washed it and somebody darned it, and R. Hollis may be in a
+        bed in Blighty asking where his shirt went. You wonder about him for a mile of the march
+        back, and then you stop.
+
+        For one night nothing bites you. You had forgotten what that was like.
+      next: "@return"
+    - id: swap
+      text: Swap it with the next man for his thin one.
+      text_after: |
+        The next man is a lad who thinks it's his birthday. He doesn't look in the neckband and you
+        don't tell him to. The one you get from him is worn thin as a dishcloth and has no name in
+        it at all.
+
+        Two years ago you would have laughed at a man who did that. You do your buttons up and
+        fall in.
+      next: "@return"
+
+- id: lf_pay
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  pools: [front_1916_pit, front_1916_farm, front_1916_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 11", "war.tour <= 16", "war.rank < 5", { not: war.transferred } ]
+  title: Pay night
+  text: |
+    The pay table is a blanket over two ammunition boxes in the farmyard. You come up in your turn
+    and salute, the officer says "Ten francs" and signs your pay book, and you salute again and go.
+    Two five-franc notes, soft as rag. Half your shilling a day never comes to France at all. You
+    signed it over to your mother at the depot.
+
+    By six the estaminet at the crossroads is full to the door. Madame fries eggs and chips on the
+    stove, two plates at a time, and her daughter carries the vin blank round at a franc the
+    bottle. In the back room a man is calling House, the one game the army allows. "Eyes down.
+    Clickety-click, sixty-six."
+
+    Your section has a table. Two of them have nothing in front of them. They found the Crown and
+    Anchor board behind the barn before they found the estaminet, and the man with the board has
+    their ten francs now. They are watching the plates go past.
+  choices:
+    - id: stand
+      text: Stand the whole table egg and chips.
+      effects: [ { set: flag.lf_stood }, { war_mood: { standing: 1 } } ]
+      text_after: |
+        "Oofs for the lot, madame. Compree?" She counts heads and holds out her hand first. That is
+        one note gone and most of the other.
+
+        Eight plates. Nobody says thank you, because that isn't how it's done. Somebody pushes the
+        bottle your way, and one of the two who lost their pay wipes his plate with his bread and
+        says he'll see you right, pay night after next.
+      next: "@return"
+    - id: own
+      text: Eat your own supper. They knew what the board was.
+      text_after: |
+        You eat your eggs with your elbows in. The two of them look at the table. After a bit one
+        gets up and goes out, and the other sits on and drinks water.
+
+        It's good, the egg. You'd thought it would taste better than it does.
+      next: "@return"
+    - id: save
+      text: One plate, one glass, and keep a note back.
+      effects: [ { set: flag.lf_saved } ]
+      text_after: |
+        You eat, and drink one glass, and when the bottle comes round again you put your hand over
+        the glass. The other five-franc note goes inside the cover of your pay book, folded small.
+
+        You don't know what it is for yet. There'll be something. There always is.
+      next: "@return"
+
+- id: lf_gunners
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  pools: [front_1916_pit, front_1916_farm, front_1916_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 12", "war.tour <= 13", { not: war.transferred } ]
+  title: The gunners
+  text: |
+    At rest. The battery of eighteen-pounders that shoots for your brigade has its wagon lines in
+    the next orchard, and on Sunday their bombardier walks over with a real football under his arm
+    and a challenge. Gunners against infantry. Greatcoats for goalposts and their farrier sergeant
+    to referee, since he owns the whistle.
+
+    The gunners are big men. They sleep dry and eat hot, and they play like it. But it's one goal
+    each with a minute to go and half the battalion on the touchline with francs on it.
+
+    Then a corner, and a scramble on your own goal line, and the ball is going in. It hits your
+    hand. It didn't just hit it. You put your hand there, and the ball goes round the coat and
+    out.
+
+    The farrier sergeant was behind three men. He looks at the ball and at the coat and blows for
+    a goal kick. Nobody saw. The bombardier is looking at you, but he can't be sure.
+  choices:
+    - id: own_up
+      text: Put your hand up. "Hand, Sergeant. Mine."
+      effects: [ { set: flag.lf_fair } ]
+      text_after: |
+        The whistle goes again. The bombardier takes the penalty himself and puts it where a
+        goalkeeper would need a ladder. Two goals to one, and that is the match.
+
+        There is some language on the touchline from men who have lost a franc. The bombardier
+        shakes your hand with a hand like a shovel. "Next time one of ours drops short on your
+        lot," he says, "you tell them it wasn't my gun."
+      next: "@return"
+    - id: quiet
+      text: Say nothing. Take the goal kick.
+      effects: [ { set: flag.lf_handled } ]
+      text_after: |
+        One goal each. All bets off, the money goes back, and both sides say they'd have won it
+        with ten minutes more.
+
+        The bombardier picks up his ball. He looks at your hand and then at your face, and tucks
+        the ball under his arm, and walks back to his orchard.
+      next: "@return"
+
+- id: lf_draft
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  pools: [front_1916_pit, front_1916_farm, front_1916_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 15", "war.tour <= 17", "war.rank < 5", { not: war.transferred } ]
+  title: The draft
+  text: |
+    The draft comes up from the railhead on a wet evening. A hundred and forty men, for a battalion
+    that wants four hundred. They aren't from home. They wore three other regiments' badges until
+    last week at the base. Some are Derby men, who waited to be fetched. Some are the first of the
+    conscripts, who were fetched.
+
+    What is left of the old company watches from the barn door. "Took an Act of Parliament to
+    shift that lot," somebody says, loud enough.
+
+    [if war.rank >= 2]You have a list and a lamp, and six of them are yours. The last on the list is Tibbs.[else]One of them is given the space next to yours in the straw. Tibbs.[/if] He is thirty-four,
+    a grocer's assistant from Leicester, with spectacles in a tin case and a wife and two children.
+    Twelve weeks ago he had never held a rifle. He has heard what the old hands said at the door.
+    He folds his blanket square, and then squarer.
+
+    "What's it like?" he says. "Up there. Nobody at the base would say."
+  choices:
+    - id: take
+      text: Take him on. Show him what the base never did.
+      effects: [ { set: flag.lf_tibbs } ]
+      text_after: |
+        You tell him. Sleep with your boots under your head or you'll wake without them. Keep the
+        bolt of your rifle wrapped. The shell you can hear a long way off is going somewhere else.
+        Never look over the top twice in the same place.
+
+        He writes it down in a penny notebook, under headings. A grocer. In a week he knows more
+        than you did after a month, and he has stopped folding his blanket square.
+      next: "@return"
+    - id: leave
+      text: Leave him to learn it the way you did.
+      text_after: |
+        "You'll see," you say, and turn over.
+
+        You came out with men you had trained beside for a year, and you have helped to bury a
+        good many since the first of July. You are in no hurry to learn another name. He finds
+        things out, slower, from the other drafted men, who have some of it wrong.
+      next: "@return"
+
+- id: lf_tanks
+  chapter: front
+  kind: pool
+  pool: front_1916_pit
+  pools: [front_1916_farm, front_1916_city]
+  once: true
+  weight: 25
+  requires: [ "war.tour == 17", { not: war.transferred } ]
+  title: Under the sheets
+  text: |
+    September. For three nights the road up has been shut to everything after dusk, and tonight
+    the redcaps put your carrying party off it into the ditch and tell you to stop there.
+
+    What comes is not lorries. You feel the engines in your teeth before you see anything. No
+    lights. A man walks in front with a shaded lamp, and behind him comes a thing as long as a
+    cottage and higher than a man, all iron, with a belt of iron plates crawling round the whole
+    of it and a gun stuck out of a box on each side. Then another. Six of them, at the pace of a
+    funeral, and the road breaks up under them like pie crust.
+
+    "Tanks," somebody says. That is the word that has been given out for them.
+
+    When they have gone the ditch is full of talk. One of the new draft says that's it, then, the
+    war will be over by Christmas. An old hand says they told him that about the gas at Loos, and
+    again about the guns in June.
+  choices:
+    - id: believe
+      text: Believe in them. Something has to end it.
+      effects: [ { set: flag.lf_tank_faith }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You carry your load up that night a little lighter. Somebody at home has been thinking,
+        then. Somebody has built a thing that can walk through wire.
+
+        Two days later you pass one in a sunken road with a track off, and its crew sitting on the
+        bank drinking tea out of a petrol tin. You go on believing. It isn't the crew's fault.
+      next: "@return"
+    - id: wait
+      text: Believe it when you see their wire lying flat.
+      text_after: |
+        You say so, and nobody argues. The road is open again by midnight and you take the load
+        up over the broken stones.
+
+        Two days later you pass one in a sunken road with a track off, and its crew sitting on the
+        bank drinking tea out of a petrol tin. You don't say anything to them. They look as tired
+        as anybody.
+      next: "@return"
+
+- id: lf_blanket
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  pools: [front_1916_pit, front_1916_farm, front_1916_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 16", "war.tour <= 19", { not: war.transferred } ]
+  title: A blanket
+  text: |
+    A quiet week in a quiet part of the line. One whizz-bang comes over at four in the afternoon
+    and kills Lumb, a boy from one of the drafts, who had been three weeks in France. He takes
+    most of an hour over it in the bottom of the trench. He asks for his mother, and then for
+    water, which the bearers won't give him because of where he is hit.
+
+    They bury him at dusk behind the support line, where there is a row already. He is sewn into
+    his blanket. The padre has walked up from the transport with a surplice in his haversack, and
+    he reads the service fast and low with his tin hat on, because the row can be seen from the
+    ridge.[if flag.lf_shirt] You have R. Hollis's shirt on under your tunic. You had not thought of it for weeks.[/if]
+
+    [if war.rank >= 5]He was in your platoon, so it is you the padre turns to after.[else][if war.rank >= 2]He was in your section, so it is you the padre turns to after.[else]You were with him in the trench, you and {mate}, so it is you the padre turns to after.[/if][/if]
+    He has a notebook, and a pencil on a string.
+
+    "I must write to his mother," he says. "Were you there? How was it?"
+  choices:
+    - id: quick
+      text: '"It was quick, Padre. He never knew."'
+      effects: [ { set: flag.lf_grave_lie } ]
+      text_after: |
+        He writes it down. Then he looks at you over the notebook. He has done a good many of
+        these, and he knows what he has been given.
+
+        "Thank you," he says. "That is what I shall tell her."
+
+        The pioneers have the cross ready, with the name punched into a strip of tin. You fill
+        the grave in. It doesn't take long.
+      next: "@return"
+    - id: truth
+      text: Tell him how it was. Let him choose what she hears.
+      effects: [ { set: flag.lf_grave_truth } ]
+      text_after: |
+        You tell him all of it: the hour, and the water. He listens with the pencil still. He
+        doesn't write any of it down.
+
+        "I shall tell her he was not alone," he says at the end. "That much is true, and she may
+        keep it." He shuts the notebook. "I am glad somebody knows the rest. It ought not to be
+        only me."
+
+        The pioneers have the cross ready, with the name punched into a strip of tin.
+      next: "@return"
+
+# ==== 1917 ========================================================================================
+
+- id: lf_morning
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [front_1917_pit, front_1917_farm, front_1917_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour == 20", { not: war.transferred } ]
+  title: Good morning, Tommy
+  text: |
+    Christmas was in the line. The order was read to every company beforehand: no truce, no
+    meeting, no calling across, and any German who showed himself to be fired on. At noon on
+    Christmas Day the guns behind you gave them five minutes, to make sure of it, and theirs gave
+    it back.
+
+    It's January now, and the Christmas parcels have come at last. A cake gone hard as a brick.
+    Socks. A tin of fifty cigarettes.
+
+    Their line is eighty yards from your bay, and there is a man in it who calls across every
+    morning after stand-down. "Good morning, Tommy." Good English, learned somewhere. This
+    morning it is, "Tommy! Happy New Year. It is cold, yes?" And a hand comes up over their
+    parapet with a bottle in it, and wags.
+
+    Everybody in the bay looks at everybody else. The company sniper is two bays down. He has
+    heard it too, and he is looking at you, because it is your bay the voice is meant for.
+  choices:
+    - id: call
+      text: Call back. "Morning, Jerry. Cold enough."
+      effects: [ { set: flag.lf_called } ]
+      text_after: |
+        They laugh over there, more than one of them. "After the war, Tommy!" And the bottle
+        goes down.
+
+        Nothing comes of it. He calls the next morning and the one after, and somebody in the bay
+        always answers now, and nobody above the rank of sergeant is ever there to hear. Then the
+        battalion is relieved, and you never learn what he looked like.
+      next: "@return"
+    - id: silent
+      text: Keep your head down and your mouth shut.
+      text_after: |
+        Orders are orders. The voice tries twice more. "Tommy? ... Tommy." Then it gives up, and
+        the hand goes down.
+
+        You break a piece off the hard cake and it takes some swallowing. The next morning he
+        doesn't call, nor the one after.
+      next: "@return"
+    - id: point
+      text: Show the sniper where the voice comes from.
+      effects: [ { set: flag.lf_told }, { war_mood: { nerve: -1 } } ]
+      text_after: |
+        You show him: left of the broken post, where the sandbags are newer. He nods. He was a
+        gamekeeper once, and he can wait.
+
+        He waits two mornings. On the third the hand comes up with the bottle in it, and there is
+        one shot, and the bottle breaks. Nobody calls good morning after that. The sniper writes
+        in his little book. You smoke the Christmas cigarettes. They are good ones.
+      next: "@return"
+
+- id: lf_gate
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [front_1917_pit, front_1917_farm, front_1917_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 20", "war.tour <= 21", "war.rank < 5", { not: war.transferred } ]
+  title: The gate
+  text: |
+    The hardest winter anybody can remember. At rest the company is in a barn with half its tiles
+    gone. The water freezes in the bottles by your heads and the bread has to be sawn. The coal
+    is one sandbag a day for forty men, and it is burnt by noon.[if flag.lf_tibbs] Tibbs has chilblains that have split, and wraps his feet in newspaper, and says nothing about it.[/if]
+
+    Every fence rail for a mile went on the fires of the battalions before you. What is left is
+    the farmer's field gate. Oak, five bars, older than he is. He has chained it to its post, and
+    he watches it from his kitchen window.
+
+    At ten at night four of the section are stood looking at it. Then they look at you[if war.rank >= 2], because you are the one with the stripes and yours is the name that will go in[/if].
+  choices:
+    - id: burn
+      text: Burn it. Forty men will sleep.
+      effects: [ { set: flag.lf_gate }, { war_mood: { standing: 1 } } ]
+      text_after: |
+        It comes off its hinges quietly enough and burns until four, and forty men sleep.
+
+        In the morning the farmer is at the orderly room with the adjutant and an interpreter. The
+        price put on a gate is sixty francs, to come out of the company's pay at the next pay
+        parade.[if flag.lf_saved] The note you kept back in your pay book goes towards it. So that is what it was for.[/if][if war.rank >= 2] You get five minutes from the company commander, who slept in a bed.[/if]
+        Nobody grumbles about the money. It was a good gate.
+      next: "@return"
+    - id: leave_it
+      text: Leave it. Double the blankets and sleep two and two.
+      text_after: |
+        You sleep in pairs, back to back, every blanket and greatcoat on top and your boots in
+        with you so they'll go on in the morning. You share with {mate}. Nobody is warm. Nobody
+        thanks you.
+
+        The gate is there at first light with the frost on it like fur. The battalion that has the
+        barn after you burns it the first night.
+      next: "@return"
+
+- id: lf_stove
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [front_1917_pit, front_1917_farm, front_1917_city]
+  once: true
+  weight: 25
+  requires: [ "war.tour == 22", { not: war.transferred } ]
+  title: The stove
+  text: |
+    For three weeks the battalion has walked through the country Jerry left. He went back in
+    March, in his own time, to a new line the papers call the Hindenburg Line, and he took
+    everything that would move and broke what wouldn't. The villages are heaps of brick. Every
+    crossroads is a crater. The apple trees are sawn through a yard up and laid in rows, all
+    pointing the same way, and there is dung down the wells.
+
+    And he has left things about. A helmet on a nail. A new spade stood in a corner. Each with a
+    wire on it. The battalion in front lost five men on a dugout stair. The sappers go ahead and
+    chalk the doors they have looked at, and there aren't enough sappers.
+
+    Your lot gets a cellar, the one whole room in the village. It's dry. There is a stove with a
+    pipe going up through the roof, and the stove is laid: paper, sticks, a bucket of coal beside
+    it. Outside it is sleeting. Nobody has chalked the door.[if flag.lf_gate] You burned a farmer's gate in January to be half as warm as that stove would make you.[/if][if flag.lf_tibbs] Tibbs has his matches out before he thinks. He looks at them, and puts them away again.[/if]
+  choices:
+    - id: light
+      text: Send them all up the steps. Light it yourself.
+      effects: [ { war_mood: { standing: 1 } } ]
+      text_after: |
+        You look up the pipe with a candle first, and through the coal, and under the plate. You
+        find nothing, which proves nothing. Then you light it with a long spill and stand where
+        you are.
+
+        It draws. It is a stove. In ten minutes they are all down again with their boots off and
+        their socks steaming, and nobody mentions that you were down there alone.
+      next: "@return"
+    - id: yard
+      text: Leave it be. Sleep in the yard, under the wall.
+      text_after: |
+        Groundsheets, and sleet. Nobody sleeps much, and nobody says it is your fault, though it
+        is your doing.
+
+        In the morning a sapper goes down with a lamp, and comes up, and chalks the door. "Nothing
+        in it," he says. "There was one the same in the last village. Took a whole section." You
+        were cold for nothing. You'd do it again.
+      next: "@return"
+
+- id: lf_yanks
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [front_1917_pit, front_1917_farm, front_1917_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 22", "war.tour <= 24", "war.rank < 5", { not: war.transferred } ]
+  title: The Yanks
+  text: |
+    America is in the war. It is on the front of a Daily Mail that came up with the rations[if war.tour >= 24], weeks old and gone soft at the folds[else], a few days old[/if]: declared on the sixth of April.
+
+    The lads read it over one another's shoulders. "How many of them are there?" A hundred
+    million, somebody says, in the whole country. "And how many soldiers?" Nobody knows. A man
+    with an uncle in Pittsburgh says they have no army to speak of. They'll have to make one from
+    nothing, the way Kitchener made this one, and everybody here knows how long that took.
+
+    "The Yanks'll be here for 1919, then."
+
+    "They can have my place in the queue."
+
+    A corporal turns his tin hat over and starts a book on when the war ends. A franc a go, name
+    your month, nearest takes the hat.[if flag.lf_tank_faith] You believed in the tanks, last September.[/if] The hat comes round to you.
+  choices:
+    - id: soon
+      text: A franc on this year. Over by Christmas.
+      effects: [ { set: flag.lf_bet_soon }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        They laugh at you, and three more put their francs where yours is. The corporal writes
+        the names on the back of the newspaper.
+
+        It's a franc. It buys you something to look at when you shut your eyes, and that's cheap
+        at the price.
+      next: "@return"
+    - id: late
+      text: A franc on 1919. You've seen how long an army takes.
+      text_after: |
+        "Cheerful beggar," the corporal says, and writes it down.
+
+        Two years more. You have said it aloud now, and nobody told you that you were wrong. You
+        go and clean your rifle.
+      next: "@return"
+    - id: keep
+      text: Keep your franc. Pass the hat on.
+      text_after: |
+        You pass the hat on.[if flag.lf_stood] "He'll not bet," somebody says, "but he'll buy the whole table its supper." It's a year since the egg and chips, and they have not forgotten.[/if]
+
+        The war will end when it ends. You've seen too many men name the month. The newspaper
+        goes for lighting the brazier that night, the front page with the rest.
+      next: "@return"
+
+- id: lf_mines
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [front_1917_pit, front_1917_farm, front_1917_city]
+  once: true
+  weight: 25
+  requires: [ "war.tour == 25", { not: war.transferred } ]
+  title: Ten past three
+  text: |
+    The seventh of June. The battalion is on its way north, a day's march behind the line and
+    asleep in an orchard. At three in the morning everybody is awake, because the guns have
+    stopped. It is the quiet that wakes you. There is a nightingale going somewhere in the hedge.
+
+    Then the ground moves. It comes from a long way off, a shudder, like a cart going over a
+    bridge you are stood under. Along the edge of the sky a red light stands up and spreads. The
+    sound comes after it, a long door slamming, and then every gun in Flanders opens at once.
+
+    "Mines," says a man who had it from a sapper. "Under the ridge at Messines. They've been
+    digging them since 1915."
+
+    The padre is out in the grass in his greatcoat with his boots unlaced.[if flag.lf_grave_lie] "Quick, that," he says, to nobody. You know which grave he is thinking of.[/if][if flag.lf_grave_truth] "Nobody will need to tell me how that was," he says, to nobody. You know which grave he is thinking of.[/if][if flag.lf_called] You think of a voice that said good morning, Tommy, and of a ridge full of men like him.[/if][if flag.lf_told] You think of a hand with a bottle in it.[/if]
+
+    All through the orchard men are starting to cheer.
+  choices:
+    - id: cheer
+      text: Cheer with the rest.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You cheer till your throat is sore. For three years it has been done to you. This one is
+        being done to them.
+
+        By breakfast the word is that the ridge was taken in a morning with hardly a man lost. So
+        the cheering was fair. You march on north at eight, towards Wipers, singing.
+      next: "@return"
+    - id: watch
+      text: Stand and watch the light, and say nothing.
+      text_after: |
+        You know what it is to have the ground go from under you. There were men on that ridge at
+        ten past three writing letters and boiling water.
+
+        You aren't sorry. You don't cheer. You stand beside {mate} until the red has gone out of
+        the sky, and then you roll your blanket, because the battalion marches at eight, north,
+        towards Wipers.
+      next: "@return"
+
+- id: lf_track
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [front_1917_pit, front_1917_farm, front_1917_city]
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 28", { not: war.transferred } ]
+  title: The track
+  text: |
+    It rained all August. [if war.tour >= 29]It's October now and the rain is back.[else]September has dried the top of the ground to a crust, and under the crust nothing has changed.[/if] The salient is shell holes lip to lip, every one full of water, and the only way over it
+    is the duckboard track, two boards wide, that Jerry has the range of to a yard. Off the track
+    the mud is to the knee, and deeper in the holes. Men have gone into them and not come out.
+    The order for carrying parties is plain: keep moving, and leave the track for nothing.
+
+    You go up after dark with [if war.rank >= 2]ten men and [/if]the water, in petrol tins. Halfway, a battery of field
+    guns is sunk to the axles beside the track.[if flag.lf_fair] The bombardier knows you. "You're the one who owned up," he says. "Mind how you go."[/if][if flag.lf_handled] The bombardier knows you. "Handy on a goal line, you were," he says. "Mind how you go."[/if]
+
+    Past the guns a voice comes from the left of the track. A man in a shell hole, in to the
+    waist: a runner from some other battalion, there since dusk. He isn't struggling. He knows
+    better.
+
+    "I'm not hit," he says. "I'm only stuck."
+
+    Four men, the rifle slings buckled together, and half an hour stood still where the shells
+    come.
+  choices:
+    - id: pull
+      text: Stop. Get the slings off the rifles.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        It takes three-quarters of an hour and they shell the track twice while you are at it.
+        He comes out an inch at a time, and the mud keeps his boots and his trousers. He sits on
+        the boards in his shirt, shaking, and says thank you to each man by turn, like a child at
+        a party.
+
+        The water gets up two hours late.[if war.rank >= 2] It is you who answers for that. The officer hears why, and doesn't write it down.[else] The corporal answers for it. The officer hears why, and doesn't write it down.[/if][if flag.lf_bet_soon] You have a franc on the war being over by Christmas. You'd forgotten it till now.[/if]
+      next: "@return"
+    - id: go_on
+      text: Keep moving. Tell the next post where he is.
+      effects: [ { war_mood: { nerve: -1 } } ]
+      text_after: |
+        "There's bearers behind us," you tell him. You don't know that there are. He says, "Right
+        you are," quite steadily, and you go on.
+
+        You tell them at the pillbox, and they say they'll send somebody. The water is up on time.
+        Coming back at first light you find the hole, and he isn't in it. He may have been got out.
+        You don't ask at the pillbox.[if flag.lf_bet_soon] You have a franc on the war being over by Christmas.[/if]
+      next: "@return"

@@ -111,18 +111,18 @@ export const STAGES: Stage[] = [
   { n: 2, year: 1916, rotations: 10, fire: 0.046, sectionLoss: 0.0075, nerve: 8,
     battles: {
       4: { name: 'Somme, 1 July', phases: [[0.40, 13, 'advance'], [0.26, 10, 'trench'], [0.22, 9, 'hold'], [0.14, 7, 'hold']] },
-      8: { name: 'Somme, autumn', phases: [[0.25, 10, 'advance'], [0.22, 9, 'trench'], [0.14, 8, 'hold']] },
+      8: { name: 'Somme, autumn', phases: [[0.22, 10, 'advance'], [0.19, 9, 'trench'], [0.13, 8, 'hold']] },
     } },
-  { n: 3, year: 1917, rotations: 10, fire: 0.051, sectionLoss: 0.0075, nerve: 9,
+  { n: 3, year: 1917, rotations: 10, fire: 0.046, sectionLoss: 0.0075, nerve: 7,
     battles: {
-      3: { name: 'Arras', phases: [[0.25, 10, 'advance'], [0.22, 9, 'trench'], [0.16, 8, 'hold']] },
-      7: { name: 'Passchendaele', phases: [[0.26, 13, 'advance'], [0.25, 13, 'trench'], [0.22, 12, 'hold'], [0.16, 11, 'hold']] },
+      3: { name: 'Arras', phases: [[0.22, 10, 'advance'], [0.19, 9, 'trench'], [0.14, 8, 'hold']] },
+      7: { name: 'Passchendaele', phases: [[0.24, 11, 'advance'], [0.22, 11, 'trench'], [0.19, 10, 'hold'], [0.14, 9, 'hold']] },
     } },
-  { n: 4, year: 1918, rotations: 10, fire: 0.046, sectionLoss: 0.0075, nerve: 9,
+  { n: 4, year: 1918, rotations: 10, fire: 0.042, sectionLoss: 0.0075, nerve: 8,
     battles: {
-      2: { name: 'Spring Offensive', defence: true, capture: 0.05, phases: [[0.26, 12, 'defence'], [0.23, 11, 'defence'], [0.20, 10, 'defence'], [0.16, 9, 'defence']] },
-      6: { name: 'Hundred Days, August', phases: [[0.22, 9, 'advance'], [0.16, 8, 'trench'], [0.14, 7, 'hold']] },
-      9: { name: 'Hundred Days, October', phases: [[0.20, 9, 'advance'], [0.14, 8, 'trench'], [0.12, 7, 'hold']] },
+      2: { name: 'Spring Offensive', defence: true, capture: 0.03, phases: [[0.23, 10, 'defence'], [0.20, 9, 'defence'], [0.17, 8, 'defence'], [0.14, 7, 'defence']] },
+      6: { name: 'Hundred Days, August', phases: [[0.19, 9, 'advance'], [0.14, 8, 'trench'], [0.12, 7, 'hold']] },
+      9: { name: 'Hundred Days, October', phases: [[0.17, 9, 'advance'], [0.12, 8, 'trench'], [0.10, 7, 'hold']] },
     } },
 ];
 
@@ -227,7 +227,9 @@ export const ROLES: Record<string, Role> = {
 // the section at rest, the corps pay, and how he still helps the battalion in its battles.
 export type Corps = 'tunnel' | 'tank' | 'air';
 export const CORPS = {
-  tank: { stage: 3, atRotation: 0, crew: 4, payPence: 4, training: 2, supportBattles: ['Arras', 'Hundred Days, August'], supportChoice: 'help', supportMult: 0.8 },
+  // call: the Heavy Branch asked every battalion for volunteers, so a man with neither trade is asked
+  // this often (the author, 2026-11-20: "Yes widen them": no pit man was ever offered the tanks)
+  tank: { stage: 3, atRotation: 0, crew: 4, payPence: 4, training: 2, call: 0.3, supportBattles: ['Arras', 'Hundred Days, August'], supportChoice: 'help', supportMult: 0.8 },
   air: { stage: 3, atRotation: 4, training: 1, crew: 2, payPence: 24, restBonus: 2, supportChoice: 'push', supportMult: 0.85, qualifyAfter: 2, homeOffer: 0.7, moHome: 0.5, moNerve: 25 },
   tunnel: { crew: 4 },
 } as const;

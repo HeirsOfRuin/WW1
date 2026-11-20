@@ -51,7 +51,7 @@
 - { term: costume, means: "A woman's matching jacket and skirt, her best outdoor clothes." }
 - { term: wedding breakfast, means: "The meal given after a wedding, whatever the time of day." }
 - { term: by licence, means: "Married quickly on a bought licence, without the three weeks of notice read out in church." }
-- { term: walking out with, means: "Courting; a couple seen out walking together were understood to be serious." }
+- { term: walking out with, also: ["walk out with"], means: "Courting; a couple seen out walking together were understood to be serious." }
 - { term: the exchange, means: "The telephone exchange, where rows of young women at switchboards connected every call by hand." }
 - { term: Number please, means: "What the telephone operator said when a caller lifted the receiver, before she connected the call." }
 - { term: drying napkins, means: "A baby's cloth napkins, washed every day and hung up indoors to dry." }
@@ -73,7 +73,7 @@
 - { term: centre-forward, means: "The football player in the middle of the front line, whose job is to score." }
 - { term: half-backs, also: [right half], means: "The three players behind the forwards in the football of the day; the right half played on the right." }
 - { term: bladder, means: "The rubber bag inside a leather football that holds the air." }
-- { term: stubble, means: "The short cut stalks left standing in a field after the harvest." }
+- { term: stubble, means: "The short cut stalks left in a field after harvest; on a man's face, a few days' unshaved beard." }
 - { term: pitmen, means: "Coal miners; here the men of the battalion's company from a northern pit town." }
 - { term: coal tub, means: "A small iron truck that carried coal along the rails of a mine." }
 - { term: Howay, means: "'Come on', as they say it in the north-east of England." }
@@ -81,7 +81,7 @@
 # ---- the army ---------------------------------------------------------------------------------
 - { term: battalion, means: "About a thousand infantrymen under a lieutenant-colonel; the unit a soldier belonged to." }
 - { term: B Company, also: [C Company, D Company], means: "One of a battalion's four companies of about two hundred men, lettered A to D." }
-- { term: division, also: [divisions], means: "About twelve battalions with their own guns, some eighteen thousand men, under a general." }
+- { term: division, also: [divisions, divisional], means: "A general's command of all arms; an infantry division was twelve battalions, some eighteen thousand men." }
 - { term: brigadier, means: "The general commanding a brigade, which was three or four battalions." }
 - { term: adjutant, means: "The officer who ran a battalion's office and paperwork for its commander." }
 - { term: orderly room, also: [orderly-room], means: "The battalion's office, where its records and orders were kept." }
@@ -90,41 +90,41 @@
 - { term: censor, means: "The officer who read the men's letters and cut out anything of use to the enemy." }
 - { term: on a charge, means: "Formally accused of breaking army rules, and brought before an officer for punishment." }
 - { term: pay book, also: [pay books], means: "The small brown book every soldier carried: his record, his pay, and a page for his will." }
-- { term: field postcard, means: "A printed army card with set phrases; the soldier crossed out the ones that did not apply." }
-- { term: tour, means: "A spell of some days in the trenches before the battalion was relieved." }
+- { term: field postcard, also: ["field card"], means: "A printed army card with set phrases; the soldier crossed out the ones that did not apply." }
+- { term: tour, also: [tours], means: "A spell of some days, most often in the front trenches, before the battalion was relieved." }
 - { term: at rest, means: "Out of the trenches for some days, lodged in a village behind the line." }
-- { term: communication trench, means: "A trench running back from the front line, so men could come and go under cover." }
+- { term: communication trench, also: ["communication trenches"], means: "A trench running back from the front line, so men could come and go under cover." }
 - { term: bay, also: [bays], means: "One straight stretch of a trench between two corners, held by a few men." }
 - { term: dugout, also: [dugouts], means: "A shelter dug into the side or floor of a trench, roofed with timber and earth." }
-- { term: stand-to, also: [stand to], means: "The order for every man to man the firestep, armed; given at dawn, at dusk and when attacked." }
+- { term: stand-to, also: ["Stand to!"], means: "The order for every man to man the firestep, armed; given at dawn, at dusk and when attacked." }
 - { term: no man's land, means: "The strip of open ground between the two front lines, belonging to neither side." }
-- { term: over the top, means: "Up out of the trench and over its front bank, to attack across open ground." }
+- { term: "go over the top", also: ["go up over the top", "head over the top", "fire over the top", "blind over the top"], means: "Out of the trench over the parapet, into the open. Going over the top meant attacking." }
 - { term: at the port, means: "With the rifle held slanting across the chest, as men were ordered to advance." }
-- { term: carrying party, means: "Men sent up the line at night loaded with rations, water, wire or ammunition." }
+- { term: carrying party, also: ["carrying parties"], means: "Men sent up the line at night loaded with rations, water, wire or ammunition." }
 - { term: ration dump, means: "The place behind the line where each night's food and stores were left to be carried up." }
-- { term: mess tin, means: "The soldier's two-part metal tin, to cook in and eat and drink from." }
+- { term: mess tin, also: ["mess tins"], means: "The soldier's two-part metal tin, to cook in and eat and drink from." }
 - { term: tot, means: "A small measure of rum, given out before an attack or after a cold night." }
-- { term: greatcoat, means: "The soldier's heavy woollen overcoat, reaching below the knee." }
+- { term: greatcoat, also: ["greatcoats"], means: "The soldier's heavy woollen overcoat, reaching below the knee." }
 - { term: housewife needle, means: "A needle from his 'housewife', the soldier's small roll of needles, thread and buttons." }
 - { term: entrenching tool, means: "The small spade and pick every infantryman carried to dig himself cover." }
 - { term: gas cylinders, means: "Iron bottles of poison gas dug in under the front bank; opened, the wind carried the cloud across." }
 - { term: gas hood, means: "A flannel bag soaked in chemicals, worn over the whole head, with a small window; the 1915 gas mask." }
 - { term: chloride of lime, means: "A harsh-smelling white powder scattered in trenches and latrines against disease." }
 - { term: bombers, also: [bomber], means: "Men trained to throw hand grenades, then called bombs; they cleared trenches and cellars." }
-- { term: Mills bombs, means: "The British hand grenade from 1915: a ribbed iron egg with a pin and a lever." }
+- { term: Mills bombs, also: ["Mills bomb"], means: "The British hand grenade from 1915: a ribbed iron egg with a pin and a lever." }
 - { term: "No. 2", means: "The second man of a machine-gun team, who carried the ammunition and changed the drums." }
 - { term: smoke candles, means: "Tins that burned to pour out thick white smoke, lit to hide an attack." }
 - { term: feint, means: "A sham attack, made to draw the enemy's guns and reserves away from the real one." }
 - { term: real push, means: "The main attack; 'the push' was the soldiers' word for a great offensive." }
-- { term: brazier, means: "An iron basket or pierced bucket of burning coke, for warmth." }
-- { term: buzzer, means: "A signaller's small set for sending Morse code down a telephone wire." }
+- { term: brazier, also: ["braziers"], means: "An iron basket or pierced bucket of burning coke, for warmth." }
+- { term: buzzer, means: "A signaller's small set for sending Morse code down a wire; at home, the pit or mill hooter." }
 - { term: Morse, means: "A code of short and long signals for each letter, sent by buzzer, lamp or flag." }
 - { term: sanitary men, means: "The soldiers who dug and limed the latrines and kept the camp clean." }
 - { term: redoubt, also: [redoubts], means: "A strongpoint built to hold out even when surrounded." }
 - { term: to the book, means: "To the depth and pattern the army manual laid down, and no further." }
 - { term: guns registering, means: "Guns firing single ranging shots to fix their aim on a target before a bombardment." }
 - { term: base camp, also: [base offices], means: "The army's great camps and offices on the French coast, far behind the fighting." }
-- { term: down the line, means: "Back from the front, towards the hospitals and the coast." }
+- { term: "go down the line", also: ["goes down the line", "you down the line"], means: "Down the line: back from the front, towards the hospitals and the coast." }
 - { term: WAACs, also: [WAAC], means: "Women of the Women's Army Auxiliary Corps: clerks, cooks and drivers in khaki, in France from 1917." }
 - { term: coat-frock, means: "A one-piece dress cut like a coat and buttoned down the front; the WAAC uniform." }
 - { term: demobbed, means: "Demobilised: released from the army after the war ended." }
@@ -153,7 +153,7 @@
 - { term: Fritz, means: "The soldiers' name for a German, or the Germans." }
 - { term: Alleyman, means: "An early soldiers' name for the Germans, from the French 'Allemand'." }
 - { term: Jocks, means: "The soldiers' name for Scottish troops." }
-- { term: Tommy, means: "The ordinary British soldier, from 'Tommy Atkins', the name on the army's sample forms." }
+- { term: "a Tommy", also: ["all Tommy", "Orange, Tommy", Tommies], means: "The ordinary British soldier, from 'Tommy Atkins', the name on the army's sample forms." }
 - { term: brass hats, means: "The soldiers' name for staff officers and generals, from the gold braid on their caps." }
 - { term: base wallahs, means: "Soldiers' name for men with safe jobs at the base, far behind the line." }
 - { term: minnies, means: "German trench-mortar bombs, from 'Minenwerfer': big, slow, and seen coming down." }
