@@ -237,3 +237,18 @@ Boisselle, Mametz and Gommecourt as the pit, farm and city texts have them); Arr
 the salient in the winter of 1917-18, then the Somme front for the German offensive of 21 March 1918
 (the story's retreat over Albert and La Boisselle), Amiens, the Hindenburg Line, Le Cateau, Mons.
 
+## The wording pass, the lasses and the rivals (2026-11-20): not yet checked
+
+- The slang and its dates (docs/FRAME-WORDS.md): from general knowledge of the period's slang, not
+  opened against a source. Dated conservatively: Alleyman to 1916, tin hat from 1916, Jerry and
+  digger from 1917. "Redcaps" (military police) is used and is not on the FRAME's list.
+- Billets villages are invented and not checked against real communes: Vauquelin-les-Mines,
+  Aubrimont, Belincourt, Herimont (and Ternecourt, earlier).
+- A nursing sister at a casualty clearing station (rest stations had none); a WAAC's hours out of
+  camp; Gothas bombing Poperinghe in 1917; a long-range gun on a mining village behind Loos.
+- "NYD" in a pilot's mouth in February 1918; the tank Polaris as a "female" (machine guns only).
+- Trench mortars firing to a timetable ("Tea-time Otto"); Crown and Anchor; battalion boxing; a
+  tribunal exemption ended in 1918 and the influenza.
+- Fixed in passing by the writers: no steel helmets in 1915 scenes; a machine pistol (1918) on an
+  earlier raider; "welfare hall" (1920s) now Miners' Hall; the London Rifle Brigade at Gommecourt.
+

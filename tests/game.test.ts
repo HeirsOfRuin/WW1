@@ -323,6 +323,16 @@ describe('the sweetheart in every ending', () => {
   });
 });
 
+describe('rivals on the Soldier tab', () => {
+  // The author, 2026-11-20: "I think we should add more rivals". Each shows once its arc has begun.
+  it('each rival appears when its first flag is set', () => {
+    const s = newGame(content, { start: 'mill', seed: 5, name: 'Tom' });
+    expect(recordOf(content, s).rivals).toEqual([]);
+    const t = { ...s, flags: { ...s.flags, rv_sgt: true, rv_hal: true, rv_otto: true, rv_home: true, met_fritz: true } } as GameState;
+    expect(recordOf(content, t).rivals.map((r) => r.label)).toEqual(expect.arrayContaining(['Fritz-at-the-crater', 'Sergeant Maddock', 'Ted Hallam', 'Tea-time Otto', 'Stanley Rudge']));
+  });
+});
+
 describe('the war map', () => {
   // The author, 2026-11-17: "a pixel map of the overall war". Every month has a line and a place for
   // him on the map (or England, or a prison camp), every battle in his log is marked, and the marker

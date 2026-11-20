@@ -1,0 +1,798 @@
+# More rivals (docs/FRAME-WORDS.md section 4). The author, 2026-11-20: "I think we should add more
+# rivals." Until now the only one was the mill's sniper, Fritz-at-the-crater. Four more, each an arc
+# of three or four events across the years, written once and shared by all four towns (`pools:`).
+# Each is a person with a reason, not a villain. The Soldier tab (src/game/character.ts, `rivals`)
+# reads the rv_ flags and its note follows the arc.
+#
+# 1. Sergeant Maddock, a regular sent from the first battalion (India, South Africa, Ypres in 1914).
+#    1915 rifle inspection (rv_sgt; took it or answered back); 1916 after 1 July, the roll, the drink
+#    (sat with him or left him); 1917 drunk in the line, he asks a favour before the court-martial
+#    and is reduced to the ranks either way (rv_sgt_broken; spoke for him or said only what he saw);
+#    1918 (tours 33-34) the bridge in the retreat: left him with the gun (missing, rv_sgt_dead) or stayed and both
+#    got over (rv_sgt_stayed; he has his stripes back). His reason: he buried one trained battalion.
+# 2. Ted Hallam, a man of the platoon from another town, after the same stripe. 1915 he takes the
+#    credit for a prisoner (rv_hal; rv_hal_reported, or faced him, or let it go); 1916 the Crown and Anchor board and
+#    the boxing (fought, friend or outdo); 1917 he gets a stripe and cannot read the map (helped or
+#    left; rv_hal_first when the player was still a private); 1918 the player is buried by a shell:
+#    Hallam digs him out and carries him in (rv_hal_carried) if they fought, played or he helped,
+#    otherwise (rv_hal_4_cold) other men do and Hallam is the corporal with the roll (rv_hal_cold; a hand offered
+#    is rv_hal_peace). His reason: threepence a day more, sent home to six.
+# 3. Tea-time Otto, a German trench-mortar crew that fires three bombs at five. 1916 before the
+#    Somme (rv_otto; timed him or asked for the guns); 1917 the raid on his pit (went: a body,
+#    rv_otto_body; stayed: the pit was empty, rv_otto_left); 1918 a prisoner on the road in the
+#    advance (asked: rv_otto_prisoner; did not: rv_otto_unknown).
+# 4. Stanley Rudge, the man who stayed at home, exempted by the tribunal in 1916. For a man with a
+#    sweetheart he sees her to her gate; for a man without he has his place (the choir, the band,
+#    the horses, the office stool). 1916 the mother's letter (rv_home; asked or left him out); 1917
+#    his own parcel and letter (wrote back or not); 1918 combed out and met at a railhead with a
+#    labour company (needs rv_home_wrote; shook his hand rv_home_met, or passed rv_home_passed), or
+#    the mother's letter that the influenza took him (rv_home_dead). Shirker or weak chest: the
+#    letters leave it open until the end. His events are in the tank and air pools too.
+#
+# Rivals 1-3 are guarded { not: war.transferred }: a tunneller, a tank man or an air man has left
+# the battalion. No event falls on a battle tour (the engine shows none there). Words follow
+# FRAME-WORDS sections 1 and 2; the hard ones are in content/glossary/rivals.yaml.
+
+# ==== 1. Sergeant Maddock ========================================================================
+
+- id: rv_sgt_1
+  chapter: front
+  kind: pool
+  pool: front_1915_mill
+  pools: [front_1915_pit, front_1915_farm, front_1915_city]
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 2", { not: war.transferred } ]
+  on_enter: [ { set: flag.rv_sgt } ]
+  title: Sergeant Maddock
+  text: |
+    The company has a new sergeant, sent across from the first battalion to stiffen it. Maddock.
+    Twenty-one years in. The ribbons on his chest are South Africa and the brown of his face is
+    India, and he came out in August of 1914 with a battalion that is mostly under the ground at
+    Wipers now. An old sweat. He is the only man in the company whose puttees stay up.
+
+    He takes rifle inspection behind the billets, in the smell of the midden and wet straw. He stops
+    at you. He has stopped at you every day this week. He puts his thumbnail in your breech and
+    holds it up to the light, and then under your nose. You can smell gun oil on him, and pipe.
+
+    "What's that, lad?"
+
+    "Rust, Sergeant."
+
+    "Rust. In Rawalpindi I'd have had a man in the cells for that." He says it flat, for the whole
+    rank to hear, and he is still looking at you. "Kitchener's mob. Shop boys playing at soldiers.
+    And you're the worst of them, because you think you're the best. I'll see it again in an hour.
+    Jildi."[if war.rank >= 1]
+
+    The stripe on your arm makes it worse. He looks at it the way he'd look at a button undone.[/if]
+  choices:
+    - id: clean
+      text: Clean it again. Give him nothing to find.
+      effects: [ { set: flag.rv_sgt_took }, { war_mood: { standing: 1 } } ]
+      text_after: |
+        You beg a mess tin of boiling water off the cooks and pour it down the barrel, and pull it
+        through till the flannelette comes out white, and oil the bolt until your fingers stink of
+        it. He takes the rifle and looks down it at the sky for longer than he needs to.
+
+        "It'll do," he says, and gives it back.
+
+        The next morning he stops at you again.
+      next: "@return"
+    - id: answer
+      text: Tell him it fired well enough at the Germans last week.
+      effects: [ { set: flag.rv_sgt_cheek }, { war_mood: { standing: -1 } } ]
+      text_after: |
+        "Did it," he says. Nothing moves in his face. "And how many did you hit?"
+
+        You don't know. Nobody knows. He nods as if that was the answer he wanted, and you carry the
+        latrine buckets for a week, down the duckboards to the pit and back, with the lime catching
+        in your throat. The lads stand you a beer for it at the estaminet. Maddock is in the corner
+        with his pipe, and lifts his glass an inch when you look across.
+      next: "@return"
+
+- id: rv_sgt_2
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  pools: [front_1916_pit, front_1916_farm, front_1916_city]
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 15", flag.rv_sgt, { not: war.transferred } ]
+  title: The roll
+  text: |
+    What is left of the battalion is under canvas in a field behind the line, and the drafts are
+    coming in by the lorry-load, boys with clean buttons.
+
+    Maddock is sat on an ammunition box outside the company office with the roll on his knee and
+    a stub of indelible pencil, putting a line through names. Four regulars came to this battalion
+    from the first. He is the one left. The other three went on the first of July, inside the
+    same quarter of an hour.
+
+    He doesn't look up. "They went over in line," he says. "Dressed by the right, at the walk. I
+    never saw the Guards do it better at Aldershot." He wets the pencil on his tongue and it leaves
+    a purple mark on his lip. "Playing at soldiers."
+
+    There is whisky on him, at ten in the morning. Nobody has smelt drink on Maddock before.[if flag.rv_sgt_cheek] "You gave me lip once," he says. "About your rifle." It seems to be all he means to say about it.[/if][if flag.rv_sgt_took] His eye goes to your rifle, by habit, and comes away again.[/if]
+  choices:
+    - id: sit
+      text: Sit down by him. Read him the names.
+      effects: [ { set: flag.rv_sgt_sat }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You read and he puts the line through. He knows every one of them, and what each was bad
+        at: this one never could keep step, that one fired high. It takes most of the morning, with
+        the flies on the canvas and a mouth-organ going somewhere down the lines.
+
+        At the end he shuts the book. "I buried one battalion that knew its trade," he says. "I
+        thought if I could knock half of it into you lot in the time." He doesn't finish. He holds
+        out his tobacco tin, and you take a fill, though you haven't a pipe.
+      next: "@return"
+    - id: leave
+      text: Leave him to it. He'd not thank you.
+      text_after: |
+        You go and see to the draft instead. Forty boys in a row with rifles they've fired twenty
+        rounds from. You find you have your thumbnail in a lad's breech and are holding it up to
+        the light, and you know whose voice is going to come out of your mouth before it does.
+      next: "@return"
+
+- id: rv_sgt_3
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [front_1917_pit, front_1917_farm, front_1917_city]
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 24", flag.rv_sgt, { not: war.transferred } ]
+  on_enter: [ { set: flag.rv_sgt_broken } ]
+  title: A favour
+  text: |
+    Maddock has been drinking since the Somme. Everybody has known it and nobody has said. This
+    week the orderly officer found him asleep in a dugout in the support line with the platoon's
+    rum jar between his knees, when he should have been taking the ration party up. You were with
+    that ration party, stood an hour in the rain while the bread went to paste in the sacks.
+
+    Drunk in the line. It is to be a court-martial.
+
+    He finds you behind the cookhouse the night before, sober, shaved so close there's blood on
+    his collar. [if war.rank >= 3]He calls you Sergeant now, one sergeant to another, and you can hear what it costs him.[else]He has never asked a man below him for anything, and he stands as if he was reporting to you.[/if]
+
+    "They'll call you," he says. "I'm not asking you to lie. I'm asking you to tell them what I
+    was the other nights." His hands are behind his back, as on parade. They are not quite still.
+    "Twenty-three years. I'd like to go out of it a soldier."
+  choices:
+    - id: speak
+      text: Speak for him. Tell the court what he was on the first of July.
+      effects: [ { set: flag.rv_sgt_spoke } ]
+      text_after: |
+        A schoolroom, a blanket over the table, three officers behind it and the smell of chalk
+        and wet serge. You say what you saw that night, because you must. Then you say the rest:
+        the first of July, and the nights after it when he went out for the wounded, and that
+        there's not a man in the company who can't strip a rifle blind, because of him. The
+        president writes it all down.
+
+        Reduced to the ranks. Nothing more.
+
+        In the morning Private Maddock is on parade in the rear rank, with the cloth darker on his
+        sleeves where the stripes were. His puttees are still the best in the company.
+      next: "@return"
+    - id: plain
+      text: Say what you saw that night, and no more.
+      text_after: |
+        A schoolroom, a blanket over the table, three officers behind it. You say what you saw:
+        the jar, the man asleep, the ration party stood in the rain. It is the truth and it takes
+        two minutes. Nobody asks you anything else, and you don't offer it.
+
+        Reduced to the ranks, and twenty-eight days of Field Punishment Number One. Two hours each
+        evening he is tied by the wrists to a wagon wheel at the transport lines, where the drafts
+        can see him. You pass with the mules once. He looks at the sky over your head, the way he
+        used to look down a rifle barrel.
+
+        When the month is done he comes back to the company a private.
+      next: "@return"
+
+- id: rv_sgt_4
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  pools: [front_1918_pit, front_1918_farm, front_1918_city]
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 33", "war.tour <= 34", flag.rv_sgt_broken, { not: war.transferred } ]
+  title: The bridge
+  text: |
+    The Germans are still coming on, and it is another day of going back. The company is to cross a canal by a
+    plank bridge the sappers have wired to blow, and somebody has to stay on this bank with a
+    Lewis gun until the last of them is over.
+
+    Private Maddock has the gun. He took it off a dead man on the second day and nobody argued.
+    His team is two boys of eighteen from the last draft, who have been in France a fortnight and
+    look at him as chicks look at a hen.
+
+    [if war.rank >= 5]It is for you to say who stays. He knows it, and doesn't wait. "With respect, sir. Take these two children over. I want one man who knows his business to feed the gun, and then he can go too."[/if][if war.rank >= 3 && war.rank <= 4]You have the stripes he used to have, and it is for you to say who stays. He doesn't wait. "Take these two children over, Sergeant. I want one man who knows his business to feed the gun, and then he can go too."[/if][if war.rank <= 2]He sends the two boys over the planks with a jerk of his head, and looks round the men who are left, and stops at you. He has always stopped at you. "You. You'll feed the gun till the drums are done, and then you'll go."[/if]
+
+    The mist is coming off the water, and it smells of mud and cordite. There's a water bottle by
+    his knee that doesn't smell of water. His hands on the gun are steady as a table.
+  choices:
+    - id: go
+      text: Feed the gun till the drums are done. Then go, as he says.
+      effects: [ { set: flag.rv_sgt_dead } ]
+      text_after: |
+        Four drums. Grey shapes on the far road, coming on through the mist in no hurry. The gun
+        hammers by your ear and the hot brass goes down your neck. He fires short bursts, as the
+        book says, and counts them under his breath.
+
+        "Off you go[if war.rank >= 5], sir[/if]." He doesn't turn his head.
+
+        You run the planks. From the far bank you can hear the gun still, three rounds and four,
+        and then the sappers blow the bridge and you can hear nothing for a while.
+
+        Missing, the roll says. A man in D Company swears he saw him marched off down the road with
+        his hands on his head. Another says he went into the canal with the gun. [if flag.rv_sgt_spoke]There is nobody to write to. He had put the battalion down as his next of kin.[else]You think of the wagon wheel, and of what you didn't say in the schoolroom, and it doesn't come out even whichever way you add it.[/if]
+      next: "@return"
+    - id: stay
+      text: Stay till the gun is empty. Go over with him.
+      effects: [ { set: flag.rv_sgt_stayed }, { war_mood: { nerve: -1 } } ]
+      text_after: |
+        He swears at you in Hindustani, and then he stops wasting his breath. Four drums, and the
+        grey shapes coming on through the mist. The gun hammers by your ear. When the last drum is
+        done he takes the bolt out and throws it in the canal, and you get him by the belt and go
+        over the planks with him in front, because he would not have gone in front otherwise.
+
+        The sappers blow it with the two of you ten yards clear. Bits of timber come down in the
+        water around you like rooks.
+
+        On the far bank he sits with his back to a poplar, breathing like an old horse. "Kitchener's
+        mob," he says, and that is all you get. Inside the month he has his stripes back[if war.rank >= 5], and the paper that asks for them has your name at the foot of it[/if].
+      next: "@return"
+
+# ==== 2. Ted Hallam ==============================================================================
+
+- id: rv_hal_1
+  chapter: front
+  kind: pool
+  pool: front_1915_mill
+  pools: [front_1915_pit, front_1915_farm, front_1915_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 3", { not: war.transferred } ]
+  on_enter: [ { set: flag.rv_hal } ]
+  title: Hallam's prisoner
+  text: |
+    Ted Hallam came to the platoon with the first draft. He is your age to the month, from [if start == mill]Salford[/if][if start == pit]Sunderland[/if][if start == farm]Plymouth[/if][if start == city]Bermondsey, over the river[/if], with quick hands and a tenor voice, and half the platoon would follow him to the estaminet and back. He wants the next stripe that's going. So do you, and he knows it.
+
+    Last night the two of you had the listening post, a shell hole forty yards out, with the wet
+    coming up through your tunic. Near three a German came crawling to the wire with his hands
+    held up, a boy, whispering "Kamerad" over and over like a man calling a cat. You saw him
+    first. You went out and got him by the collar and dragged him in through the gap, your heart
+    going in your ears. Hallam walked him down to company headquarters. You stayed on the post.
+
+    This morning it is Hallam's prisoner. The captain has shaken his hand. He is telling it in the
+    bay over a mess tin of tea, and it's a good tale, and you are not in it.
+  choices:
+    - id: report
+      text: Go to the sergeant and tell him how it was.
+      effects: [ { set: flag.rv_hal_reported }, { war_mood: { standing: -1 } } ]
+      text_after: |
+        The sergeant hears you out, picking his teeth with a match. "So you want it put down that
+        you had him first." He puts it down. Hallam is sent for, and comes back with his ears red.
+
+        The platoon has it by dinner, and what they have is that you went to the sergeant. Nobody
+        shifts up to make room for you at the brazier that night. You stand at the edge of it with
+        the smoke in your eyes.
+      next: "@return"
+    - id: face
+      text: Tell Hallam to his face, in front of them all.
+      text_after: |
+        "Did I say I got him?" He looks round the bay, all innocence. "I said we got him. Didn't
+        I say we?"
+
+        He hadn't. The lads laugh, and you can't tell at which of you. He holds out a Woodbine.
+        You don't take it, and he shrugs and lights it himself.
+      next: "@return"
+    - id: let_go
+      text: Let it go. There'll be other prisoners.
+      text_after: |
+        You drink your tea. It tastes of the petrol tin it came up in. That night you put your name
+        down for the wiring party, and the night after. Somebody will notice, you tell yourself,
+        with a coil of barbed wire biting through your gloves.
+      next: "@return"
+
+- id: rv_hal_2
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  pools: [front_1916_pit, front_1916_farm, front_1916_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 11", flag.rv_hal, { not: war.transferred } ]
+  title: The card school
+  text: |
+    Rest billets, a barn with half its roof. Hallam runs the Crown and Anchor board on a
+    groundsheet by a candle, against orders, calling the odds like a man at a fair. After it there
+    is brag, and he deals. He wins more than luck would give him, and it goes back in beer for
+    whoever is short that week, and they love him for it.[if flag.rv_hal_reported] When you come in, the talk stops. "Mind what you say, lads," somebody says. Hallam grins at his cards.[/if]
+
+    The battalion boxing is on Saturday in the field behind the billets: a ring of rope on four
+    pickets, the quartermaster with a watch. The list is pinned on the orderly room door. Hallam's name is
+    on it, at your weight, with a blank beside it.
+  choices:
+    - id: fight
+      text: Put your name down against him.
+      effects: [ { set: flag.rv_hal_fought }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        Three rounds in your socks on trodden grass, with half the battalion shouting. He is
+        quicker. You hit harder. In the second he opens your lip and you taste it like a penny in
+        your mouth. In the third you put him down, and he gets up at eight, laughing, with blood on
+        his teeth. They give it to him on points.
+
+        He finds you after at the pump, the two of you with your heads under it by turns. "That
+        prisoner," he says, into the water. "You had him by the collar. I know you did."
+
+        He has not said it to anyone else and he won't. It will do.
+      next: "@return"
+    - id: cards
+      text: Sit in at his card school. Lose a few francs.
+      effects: [ { set: flag.rv_hal_friend } ]
+      text_after: |
+        You lose four francs and win one back. Once he deals you a card off the bottom, slow
+        enough to be seen, and watches whether you'll say. You play the card. After that there is
+        a place for you on the groundsheet.
+
+        Late on, with the candle guttering and the others asleep in the straw, he counts the
+        takings into a sock. It goes home, all of it. His father is dead and there are six behind
+        him. A lance jack gets threepence a day more than a private. "That's what the stripe is,"
+        he says. "Threepence."
+      next: "@return"
+    - id: outdo
+      text: Leave him his cards. Be first man on every working party.
+      effects: [ { set: flag.rv_hal_outdo }, { war_mood: { standing: 1 } } ]
+      text_after: |
+        While they play you are out in the yard with a bucket and a rag, cleaning the Lewis drums
+        that nobody told you to clean. The sergeant sees. So does the platoon. "After a stripe,"
+        somebody says in the dark of the barn, loud enough, and Hallam says, "Leave him be. One of
+        us has to be."
+      next: "@return"
+
+- id: rv_hal_3
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [front_1917_pit, front_1917_farm, front_1917_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 20", flag.rv_hal, { not: war.transferred } ]
+  on_enter:
+    - { set: flag.rv_hal_striped }
+    - { if: "war.rank == 0", then: [ { set: flag.rv_hal_first } ] }
+  title: The stripe
+  text: |
+    Orders come up with the rations. [if war.rank == 0]Hallam is made lance-corporal. Your name is not in them.[else]Hallam is made lance-corporal at last, a long way behind you.[/if] He sews the stripe on that night by a candle end, neat as a tailor, with the thread in his teeth.[if flag.rv_hal_friend] He brings the tunic over for you to say if it's straight. It is.[/if][if flag.rv_hal_fought && !flag.rv_hal_friend] He taps the stripe and puts his fists up at you, grinning.[/if][if flag.rv_hal_reported && !flag.rv_hal_friend && !flag.rv_hal_fought] He looks across at you once while he sews, and bites off the thread.[/if]
+
+    The first job they give him is a carrying party: twenty men with duckboards and wire, up to
+    the front line by night, by a way he has not been. He has the trench map on his knee. He has
+    had it there half an hour, the same way up. You watch his finger go along the wrong line, and
+    come back, and you understand why Ted Hallam talks so well, and why you've never seen him
+    with a newspaper.
+
+    He sees you looking. He folds the map up small.
+  choices:
+    - id: help
+      text: Sit by him and go through the route. Make nothing of it.
+      effects: [ { set: flag.rv_hal_helped } ]
+      text_after: |
+        You do it as if it was your own party: the dump, the second sap on the left, the place
+        where the boards are gone and a man can go in to the waist. He says it back to you twice
+        with his eyes shut. He takes twenty men up and brings twenty back before it's light, and the
+        sergeant says, "Smart work, Corporal," and Hallam says nothing, for once.
+
+        A week on there's a tin of pears on your blanket, from nobody.
+      next: "@return"
+    - id: leave
+      text: Leave him to find his own way. He always has.
+      text_after: |
+        He takes them up the wrong sap. They are two hours late and out in the open when it starts
+        to get light, and by luck nobody is hit. The sergeant has him in front of the company for
+        it in the morning.
+
+        He keeps the stripe. He doesn't look at you for a week, and you find you don't want him to.
+      next: "@return"
+
+- id: rv_hal_4
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  pools: [front_1918_pit, front_1918_farm, front_1918_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 33", flag.rv_hal_striped, "flag.rv_hal_friend || flag.rv_hal_fought || flag.rv_hal_helped", { not: war.transferred } ]
+  on_enter: [ { set: flag.rv_hal_carried } ]
+  title: Buried
+  text: |
+    A five-nine lands on the parados behind you and the trench comes in. There's no noise that
+    you remember. Earth in your mouth and your nose, your arms held, a load on your chest like a
+    cart stood on it, and the dark. A long way off somebody is shouting your name.
+
+    It is Hallam's hands that find your face. You know them by the quickness. He clears your
+    mouth with two fingers and gets the rest off you with an entrenching tool and then his nails,
+    swearing at you the whole time for a clumsy great lump. He gets you across his shoulders.
+    Three hundred yards of communication trench to the aid post, with the shells still coming, and
+    he talks every yard of it: the prisoner, [if flag.rv_hal_fought]the boxing, [/if][if flag.rv_hal_friend]what you owe him at brag[else]what you owe him for this[/if][if war.rank >= 5], sir[/if].
+
+    The medical officer looks in your ears and gives you a number nine and a night on a
+    stretcher. Hallam is sat on an ammunition box outside when you come out, asleep, with your
+    blood down his back.
+  choices:
+    - id: his
+      text: Tell him the prisoner was his. Let him have it.
+      text_after: |
+        He opens one eye. "Ours," he says. "I always said ours." He never did, and he knows you
+        know. He shuts the eye again. You sit down on the duckboards by him, with your ears still
+        singing, and wait for the tea to come up.
+      next: "@return"
+    - id: owe
+      text: Tell him he took his time about it.
+      text_after: |
+        Your voice comes out like a rook's.
+
+        "Three hundred yards," says Hallam, without opening his eyes. "You weigh more than that
+        German did[if war.rank >= 5], sir[/if]."
+      next: "@return"
+
+- id: rv_hal_4_cold
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  pools: [front_1918_pit, front_1918_farm, front_1918_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 33", flag.rv_hal_striped, { not: flag.rv_hal_friend }, { not: flag.rv_hal_fought }, { not: flag.rv_hal_helped }, { not: war.transferred } ]
+  on_enter: [ { set: flag.rv_hal_cold } ]
+  title: Buried
+  text: |
+    A five-nine lands on the parados behind you and the trench comes in. There's no noise that
+    you remember. Earth in your mouth and your nose, your arms held, a load on your chest like a
+    cart stood on it, and the dark. A long way off somebody is shouting your name.
+
+    It is two men from the next platoon who dig you out, and lay you on the firestep, and thump
+    your back till you bring up half the trench. Corporal Hallam comes along when it's done. He
+    has two stripes now, and he's good at them: the men go where he says and laugh while they do
+    it.
+
+    He looks down at you with the roll book in his hand. "You'll live[if war.rank >= 5], sir[/if]," he says, and writes
+    something, and goes on up the bay to see who won't.
+
+    The medical officer gives you a number nine and a night on a stretcher.
+  choices:
+    - id: hand
+      text: Next day, find him and hold out your hand.
+      effects: [ { set: flag.rv_hal_peace } ]
+      text_after: |
+        He looks at the hand a moment before he takes it. His is dry and quick.
+
+        "That prisoner," he says. "In 'fifteen. I'd six at home and a stripe was threepence a day."
+        He lets go. "You'd have had it sooner, else. I've thought so."
+
+        He goes off down the trench calling for his ration party. It is three years late and he
+        said it sideways, and you find it's enough.
+      next: "@return"
+    - id: turn
+      text: Leave it. He has his stripes and you have your skin.
+      text_after: |
+        You see him most days. He nods and you nod. The platoon sings when he's with it, and you
+        sing too, a half-beat behind.
+      next: "@return"
+
+# ==== 3. Tea-time Otto ===========================================================================
+
+- id: rv_otto_1
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  pools: [front_1916_pit, front_1916_farm, front_1916_city]
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 10", "war.tour <= 13", { not: war.transferred } ]
+  on_enter: [ { set: flag.rv_otto } ]
+  title: Tea-time Otto
+  text: |
+    This bit of line has a trench mortar opposite. Every evening at five, as the dixies of tea
+    come up the communication trench, he sends over three. You hear the pop from behind their
+    wire, soft, like a cork out of a bottle. Then you see it: a black thing the size of an oil
+    drum, turning over and over against the sky and taking its time. Every man watches, to see
+    which way to run. The ground jumps, the air claps your ears flat, and there is a hole you
+    could stable a horse in.
+
+    Three, and then no more till tomorrow. The lads call him Tea-time Otto. They say he has a
+    wife who won't have him late for his supper.
+
+    Yesterday his second one came down on the orderlies with the tea. Two men. The dixie was
+    found forty yards off, flat as a plate.
+  choices:
+    - id: time_him
+      text: Time him. Chalk his hours on the dugout beam.
+      effects: [ { set: flag.rv_otto_timed }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        Five o'clock by the sergeant's watch, and three minutes between each. A week of chalk
+        marks, and not one of them out by more than a minute. The platoon officer has the tea
+        brought up at half past four.
+
+        At five Otto fires his three at an empty trench. You drink your tea with your back against
+        the chalk and listen to them land. A careful man, you think. A man who doesn't change a
+        thing that works.
+      next: "@return"
+    - id: guns
+      text: Ask the officer to put the guns on him.
+      effects: [ { set: flag.rv_otto_guns } ]
+      text_after: |
+        The officer telephones. At a quarter to five the eighteen-pounders put twenty rounds into
+        Otto's corner, and the lads cheer every one. For two evenings there is nothing, and the tea
+        comes up hot, and men stand about in the trench with their mugs like a chapel outing.
+
+        On the third evening, at five, the pop. It comes from fifty yards left of where he was.
+        Three bombs. He has moved his pit and kept his hour.
+      next: "@return"
+
+- id: rv_otto_2
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [front_1917_pit, front_1917_farm, front_1917_city]
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 20", "war.tour <= 26", flag.rv_otto, { not: war.transferred } ]
+  title: The raid on Otto
+  text: |
+    The battalion is back in the bit of line it held in the spring of last year, and so is he.
+    Five o'clock. Three bombs.[if flag.rv_otto_timed] Your chalk marks are still on the dugout beam, gone grey.[/if] Somebody at brigade has counted: eleven men of the division since you were last here, and a company cook.
+
+    There is to be a raid. Thirty men with blackened faces, bombs and clubs, and two sappers with
+    a slab of gun-cotton for the mortar. In by the gap at the sap head, forty yards along their
+    front trench to the pit, out again inside twelve minutes. [if war.rank >= 3]They want an NCO who knows the ground to go in behind the officer, and there are not many left who were here last year.[else]They want men who know the ground, and there are not many left who were here last year.[/if]
+  choices:
+    - id: go
+      text: Go on the raid. See the man at last.
+      effects: [ { set: flag.rv_otto_body }, { war_mood: { nerve: -1 } } ]
+      text_after: |
+        Burnt cork on your face, your pay book left behind. Their trench is deeper than yours and
+        better made, and it smells of different tobacco. Somebody bombs the pit before you reach it.
+
+        It is roofed with railway iron. Inside it smells of cordite and coffee. The mortar is a
+        squat thing on a wooden bed. Two of the crew have run. The third is lying by the bomb store,
+        an oldish man with a grey moustache and steel spectacles, a corporal, dead. On a nail by
+        the sights hangs a tin watch, and under it a photograph: a woman and four children outside
+        a baker's shop.
+
+        The sappers light their fuse. Somebody takes the watch. It is right to the minute.
+
+        Nobody fires from that corner at five the next day, or any day after. The lads say the man
+        in the spectacles was Otto, and you let them.
+      next: "@return"
+    - id: stay
+      text: Leave it to the volunteers.
+      effects: [ { set: flag.rv_otto_left } ]
+      text_after: |
+        You watch from the firestep. Flares, the bombs going like doors slamming in an empty
+        house, a machine gun that starts and won't stop. Twenty-two come back of the thirty, with
+        no prisoner.
+
+        The pit was empty, they say. The mortar was gone and its bed was still warm.
+
+        The next evening at five, the pop, from somewhere further back. Three.
+      next: "@return"
+
+- id: rv_otto_3
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  pools: [front_1918_pit, front_1918_farm, front_1918_city]
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 37", flag.rv_otto, { not: flag.rv_otto_body }, { not: war.transferred } ]
+  title: The man from the mortars
+  text: |
+    The advance. Prisoners come back down the road all day in grey columns, with one of ours and
+    a fixed bayonet to every fifty, carrying your wounded on doors. They smell of sweat and wet
+    wool and something sour, the same as you.
+
+    At a halt by a smashed sugar factory a batch of them is sat along the bank. One is an oldish
+    corporal with spectacles mended with wire. Corporal Lunt of the next platoon, who was a waiter
+    in a German hotel before the war, is talking to him for the practice. He calls across to you.
+
+    "This one was on the trench mortars. Minenwerfer. Says he had the spring of 'sixteen opposite
+    us, by the brickstacks, and the winter after."
+  choices:
+    - id: ask
+      text: Ask him, through Lunt, about five o'clock.
+      effects: [ { set: flag.rv_otto_prisoner } ]
+      text_after: |
+        Lunt asks. The German looks at you for a time, and laughs once, short, and stops.
+
+        Five o'clock, yes. Three bombs. Three a day was the order from his officer, and he fired
+        them at five because his own ration party came at six, and he liked to have the day's work
+        done and eat in peace. Your guns killed his loader that spring, a boy from his own street.
+        He asks, through Lunt, whether it's true that the English tea came up at five.
+
+        You say it did.
+
+        He nods, as a man nods when a sum comes out. He was a baker, Lunt says, at a place you
+        can't pronounce. He asks for a cigarette. You give him one, and light it for him because
+        his hands shake, and the column gets up and goes on down the road.
+      next: "@return"
+    - id: pass
+      text: Let him be. Fall in with the platoon.
+      effects: [ { set: flag.rv_otto_unknown } ]
+      text_after: |
+        You look at him while the platoon falls in. Grey stubble, the mended spectacles, his hands
+        hanging between his knees. There were a hundred mortar crews on that front, and most of the
+        men in them were oldish, and tired.
+
+        You don't ask. Tea-time Otto goes on being a pop like a cork at five o'clock, and nobody
+        you will ever know.
+      next: "@return"
+
+# ==== 4. Stanley Rudge, the man who stayed at home ===============================================
+
+- id: rv_home_1
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  pools: [front_1916_pit, front_1916_farm, front_1916_city]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 11" ]
+  on_enter: [ { set: flag.rv_home } ]
+  title: The man who stayed
+  text: |
+    A letter from your mother, and most of one side of it is Stanley Rudge.
+
+    You were at school with him: a long pale lad who sat by the stove in winter and was let off
+    drill. He has been before the tribunal, with the rest who were called when the Act came in,
+    and come away with his paper.
+
+    [if start == mill]"The manager went and spoke for him, the shed being all on khaki now and him a tackler's learner. They do say as well it is his chest, which he has always had. He wears the badge on his coat so the girls will not give him a feather."[/if][if start == pit]"The pit will not let a hewer go now, with the coal wanted for the ships, and he has the badge to say so. They do say as well it is his chest. His mother says so, any road."[/if][if start == farm]"They have let him off till after harvest and will look at him again, his father having only him and old Jan for a hundred and twenty acres. They do say as well it is his chest, which he has always had."[/if][if start == city]"His firm appealed for him, shipping being war work now. They do say as well it is his chest, which he has always had. He wears the badge on his coat so the girls on the tram will not give him a feather."[/if]
+
+    [if flag.ro_sw_first && !flag.ro_sw_ended]"He has been seeing {sweetheart} home of a Sunday night, the lamps being out now. I thought you should have it from me before you had it from somebody else. I am sure there is nothing in it."[else][if start == mill]"They have put him in your place in the chapel choir, with the tenors. He has not your voice."[/if][if start == pit]"The bandmaster has given him your cornet in the colliery band. Only till you are home, he says."[/if][if start == farm]"He is working your pair of horses at the farm, two days in the week. They go well enough for him."[/if][if start == city]"They have given him your stool at the office, and your ledgers. Only till you are home, Mr Gedge says."[/if][/if]
+
+    At the bottom, after her name: "He asked to be remembered to you."
+
+    You read it with the rain coming through the roof of the dugout onto the page. The lads have a
+    word for a man like that. You have used it yourself.
+  choices:
+    - id: ask
+      text: Write back and ask what is said of him at home.
+      text_after: |
+        Her answer is a fortnight coming. "Some say one thing and some another. Somebody sent him
+        a white feather through the post, and his mother says he put it on the mantelpiece and
+        looks at it. He does his day's work and then he is out three nights in the week as a
+        special constable, and coughs all the way home, you can hear him pass. I do not know what
+        to tell you. He is here and you are not, that is all I know."
+      next: "@return"
+    - id: weather
+      text: Write home about the weather. Leave Rudge out of it.
+      text_after: |
+        You write about the larks, which sing here through everything, and a dog the company has
+        taken up with. Nothing about Stanley Rudge. On the march next day they sing the one about
+        the man who stopped at home, and you sing it louder than any of them.
+      next: "@return"
+
+- id: rv_home_2
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [front_1917_pit, front_1917_farm, front_1917_city, front_1917_tank, front_1917_air]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 21", flag.rv_home ]
+  title: A parcel from Rudge
+  text: |
+    A parcel, addressed in a hand you don't know till you find the name inside. Stanley Rudge.
+    Fifty Woodbines, a tin of cocoa, and a pair of socks that somebody has knitted badly.
+
+    "I hope you will not take this amiss. I went before the board again this winter and they have
+    put me back six months more. I did not ask them to. I know what is said of me. I would
+    sooner be where you are than hear it, and that is God's truth, though I don't look for you to
+    believe it. I would not, in your place.
+
+    [if flag.ro_sw_first && !flag.ro_sw_ended]"{sweetheart} is well. I see her to her gate of a Sunday because your mother asked me to, and for no other reason, and she talks of nobody but you the whole road.[else][if start == mill]"I am keeping your place in the tenors as well as I can. I cannot get the top notes and the choirmaster looks at the ceiling. It is yours the day you are home.[/if][if start == pit]"I am keeping your cornet clean. I have not the wind for it, and the bandmaster looks at the ceiling. It is yours the day you are home.[/if][if start == farm]"Your pair are well. The mare looks down the lane for you yet of a morning. They are yours the day you are home.[/if][if start == city]"I am keeping your ledgers as near as I can to how you kept them. The stool is yours the day you are home.[/if][/if] Yours sincerely, S. Rudge."
+
+    The others look at the Woodbines, and then at you. "Every shirker in England has a chest," one
+    of them says. Another says his own brother was turned down for a chest, and died of it in
+    the spring.
+  choices:
+    - id: write
+      text: Write and thank him. Smoke his Woodbines.
+      effects: [ { set: flag.rv_home_wrote }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        A short letter. Thanks for the socks, which fit, and the cocoa. You tell him the lads
+        smoked his Woodbines and one of them said something civil. That is not quite how it went.
+        You don't know what else a man is to write.
+      next: "@return"
+    - id: no_answer
+      text: Share out the Woodbines. Send no answer.
+      effects: [ { set: flag.rv_home_cut } ]
+      text_after: |
+        They are gone in a day. The socks go to a lad who has none. You mean to
+        write, and don't. Then it's a month, and each week it gets easier not to.
+      next: "@return"
+
+- id: rv_home_3_met
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  pools: [front_1918_pit, front_1918_farm, front_1918_city, front_1918_tank, front_1918_air]
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 35", flag.rv_home_wrote ]
+  title: Rudge in France
+  text: |
+    At the railhead, in the dust and the coal smoke, a labour company is unloading duckboards from
+    the trucks: old men, and men the doctors have marked low, in khaki that doesn't fit. One of
+    them straightens up with his hand flat on his chest and coughs till he has to hold on to the
+    truck.
+
+    It is Stanley Rudge.
+
+    They combed him out in April, when the Germans broke through and the new Act took everybody.
+    The board that had put him back three times passed him B2 in four minutes: fit for labour
+    abroad. He has been in France three weeks. He's thinner than you ever saw him, with a blue look round
+    the mouth.
+
+    He sees you. [if war.rank >= 5]He comes to attention, badly, with a duckboard still in one hand.[else]He wipes his hand down his trousers and doesn't know whether to hold it out.[/if][if flag.ro_sw_first && !flag.ro_sw_ended] "She's well," he says, before you can ask. "She was well when I left."[/if]
+  choices:
+    - id: hand
+      text: Shake his hand. Find him a mug of tea.
+      effects: [ { set: flag.rv_home_met }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You sit on a stack of duckboards with him for ten minutes, and he gives you the news of
+        home between coughs: who is married, who has the telegram, what bread costs.
+
+        "I told the first tribunal I'd go," he says. "The doctor said I'd be dead of a winter out
+        here. I thought he was being kind." He looks at the tea. "I never knew which I was, you
+        know. Some mornings I was glad of the chest."
+
+        His sergeant shouts. He gets up and takes the end of a duckboard, and looks back once.
+      next: "@return"
+    - id: nod
+      text: Nod to him and go on. You have your own work.
+      effects: [ { set: flag.rv_home_passed } ]
+      text_after: |
+        You nod. He nods. That seems to be the size of it, after all this time.
+
+        From the road you look back. He is bent double over the side of the truck, and from here
+        you can't tell if it's the cough or the load.
+      next: "@return"
+
+- id: rv_home_3_word
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  pools: [front_1918_pit, front_1918_farm, front_1918_city, front_1918_tank, front_1918_air]
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 35", flag.rv_home, { not: flag.rv_home_wrote } ]
+  on_enter: [ { set: flag.rv_home_dead } ]
+  title: Word of Rudge
+  text: |
+    Your mother's letter is short this time.
+
+    "Stanley Rudge is dead. It was this influenza that is going about, and with his chest the
+    doctor said he had no chance. He was three days. They had combed him out at last, with the new
+    Act, and he was to report on the Monday. His papers were on the mantelpiece by that feather.
+
+    "He had been working double time since the spring, and out with the special constables at
+    night besides. His mother says he would not be told.[if flag.ro_sw_first && !flag.ro_sw_ended] {sweetheart} and I went to the burying. There were not many.[/if][if flag.rv_home_cut] She asked me if you ever had his parcel. I said the post is bad out there."[else] She asked to be remembered to you."[/if]
+
+    You read it twice. The paper smells of your mother's kitchen, and it is hot, and somewhere
+    a man is hammering a tent peg.
+  choices:
+    - id: write_mother
+      text: Write four lines to his mother.
+      text_after: |
+        That you were at school with him. [if flag.rv_home_cut]That you had the parcel, and the socks fitted, and you are sorry you were so long saying so.[else]That you are sorry to hear it, and that he asked to be remembered to you once, and you did remember.[/if] You don't put what you thought of him, because you never settled it, and now there is nobody to settle it with.
+      next: "@return"
+    - id: fold
+      text: Fold the letter up. There is nothing to write.
+      text_after: |
+        You put it in your pay book with the others. The song about the man who stopped at home
+        comes round again one night in the canteen. You open your mouth for it and find you'd
+        rather save your breath.
+      next: "@return"

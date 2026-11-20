@@ -298,3 +298,60 @@ cl_let_go: { description: "Let a German go in a close moment" }
 # offer sets farm_servant (1915-farm.yaml); these are set when the officer he served is killed.
 sv_first_killed: { description: "Was servant to the first officer, killed at Loos (outside the farm he wrote to the mother); the Armistice ending remembers the family" }
 sv_second_killed: { description: "Was servant to the second officer, killed in a later battle; his family writes at the Armistice" }
+
+# More lasses (content/scenes/war/lasses.yaml; docs/FRAME-WORDS.md)
+la_bound_home: { description: "Worked out on entering each lasses event: married, or engaged to the sweetheart and not ended; a flirt then costs nerve" }
+la_bound_fr: { description: "Worked out on entering each lasses event: walking out with Marthe, writing to her, or promised; a flirt then costs nerve" }
+la_strayed: { description: "Flirted with another woman while spoken for (the sweetheart or Marthe); the later meetings read it" }
+la_baker: { description: "Queued at the bakery at Vauquelin-les-Mines (1915); he comes back to the shelled village after Loos" }
+la_baker_spoke: { description: "Spoke to Odile Carlier, the baker's daughter, and knows her name (1915)" }
+la_baker_sweet: { description: "Flirted with Odile Carlier at the bakery (1915)" }
+la_orange_spoke: { description: "Bought from or flirted with Léonie, the girl with the basket of oranges (1916); he looks for her on the same road later" }
+la_orange_sweet: { description: "Flirted with Léonie on the road (1916); she told him he was too young and too dirty" }
+la_widow_known: { description: "Mended Madame Caudron's pump or carried her pails at Aubrimont (1916); the retreat of 1918 passes her empty farm" }
+la_cellar_spoke: { description: "Spoke to Céline in the cellar café in Arras (1917); he looks for the cellar after the battle" }
+la_cellar_sweet: { description: "Told Céline he would come back tomorrow (Arras, 1917)" }
+la_pop: { description: "Sat in the tea room with the green shutters at Poperinghe (1917); he comes back to the bombed street in the autumn" }
+la_pop_spoke: { description: "Godelieve, the Belgian refugee at the tea room, told him about her village (1917)" }
+la_pop_sweet: { description: "Stayed at the tea room till he could say Godelieve's name (1917)" }
+la_road_helped: { description: "Pushed the girl's wheelbarrow, with her grandmother in it, to the crossroads in the March retreat (1918)" }
+la_tank_wash: { description: "Tank man: spoke to Adèle, who takes in the company's washing at Hérimont (1917); she has his shirt in 1918" }
+la_tank_sweet: { description: "Tank man: brought Adèle the tin of grease for her hands (1917)" }
+la_air_farm: { description: "Air man: spoke to Lucie at the farm by the aerodrome, who counts the machines home (1917); he flies over the farm in 1918" }
+la_air_sweet: { description: "Air man: asked Lucie to count him in particular, and waved his scarf going over (1917)" }
+# LA_FLAGS_END
+
+# More rivals (content/scenes/war/rivals.yaml; docs/FRAME-WORDS.md)
+rv_sgt: { description: "Met Sergeant Maddock, the regular who rides him (1915); he shows on the Soldier tab" }
+rv_sgt_took: { description: "Cleaned the rifle again for Maddock (1915)" }
+rv_sgt_cheek: { description: "Answered Maddock back (1915); he remembers it in 1916" }
+rv_sgt_sat: { description: "Sat with Maddock over the roll after 1 July and heard his reason" }
+rv_sgt_broken: { description: "Maddock was court-martialled for drink and reduced to the ranks (1917); opens the bridge in 1918" }
+rv_sgt_spoke: { description: "Spoke for Maddock at the court-martial" }
+rv_sgt_dead: { description: "Left Maddock with the gun at the bridge (1918); he is missing" }
+rv_sgt_stayed: { description: "Stayed with Maddock at the bridge; both got over, and he has his stripes back" }
+rv_hal: { description: "Ted Hallam took the credit for the prisoner (1915); he shows on the Soldier tab" }
+rv_hal_reported: { description: "Reported Hallam to the sergeant; the platoon held it against him" }
+rv_hal_fought: { description: "Boxed Hallam behind the billets (1916); he owned up after" }
+rv_hal_friend: { description: "Sat in at Hallam's card school (1916) and learned why he wants the stripe" }
+rv_hal_outdo: { description: "Left Hallam his cards and outworked him (1916)" }
+rv_hal_striped: { description: "Hallam has his stripe (1917); opens the burial in 1918" }
+rv_hal_first: { description: "Hallam had his stripe while the player was still a private" }
+rv_hal_helped: { description: "Went through the map with Hallam, who cannot read it" }
+rv_hal_carried: { description: "Hallam dug him out and carried him in (1918)" }
+rv_hal_cold: { description: "Other men dug him out; Hallam, a corporal, wrote it in the roll (1918)" }
+rv_hal_peace: { description: "Held out his hand to Hallam after the burial; Hallam owned up" }
+rv_otto: { description: "The battalion named the trench mortar opposite Tea-time Otto (1916); he shows on the Soldier tab" }
+rv_otto_timed: { description: "Timed Otto and chalked his hours on the beam" }
+rv_otto_guns: { description: "Had the guns put on Otto; he moved his pit" }
+rv_otto_body: { description: "Went on the raid on Otto's pit (1917) and saw the dead corporal and his watch" }
+rv_otto_left: { description: "Stayed out of the raid; the pit was empty and Otto fired again" }
+rv_otto_prisoner: { description: "Asked the mortar prisoner about five o'clock (1918): it was him" }
+rv_otto_unknown: { description: "Did not ask the mortar prisoner (1918); never knew" }
+rv_home: { description: "The mother's letter about Stanley Rudge, exempted by the tribunal (1916); he shows on the Soldier tab" }
+rv_home_wrote: { description: "Thanked Rudge for his parcel (1917); opens the meeting in France in 1918" }
+rv_home_cut: { description: "Sent Rudge no answer (1917)" }
+rv_home_met: { description: "Shook Rudge's hand at the railhead" }
+rv_home_passed: { description: "Nodded to Rudge at the railhead and went on" }
+rv_home_dead: { description: "Rudge died of the influenza at home in 1918, the week before he was to report" }
+# RV_FLAGS_END

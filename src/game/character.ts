@@ -129,6 +129,39 @@ export function recordOf(content: ContentBundle, s: GameState): SoldierRecord {
 
   const rivals: Line[] = [];
   if (flags.met_fritz) rivals.push({ label: 'Fritz-at-the-crater', note: flags.hunted_fritz ? 'A sniper behind their wire by the old mine crater. You went after him in 1917. After that week nobody was shot in that bay. Nobody ever saw him.' : flags.left_fritz ? 'A sniper behind their wire by the old mine crater. Somebody went after him in 1917. You never found out who fired the last shot.' : 'A sniper with a telescopic sight, behind their wire by the old mine crater. Nobody has seen him. He has killed men in your bay.' });
+  // More rivals (content/scenes/war/rivals.yaml; docs/FRAME-WORDS.md section 4): each note follows its arc.
+  if (flags.rv_sgt) rivals.push({ label: 'Sergeant Maddock', note:
+    flags.rv_sgt_dead ? 'The old regular who rode you from 1915. Broken to the ranks for drink in 1917. He kept the Lewis gun at the canal bridge in the retreat and sent you over. Missing; nobody agrees what became of him.'
+    : flags.rv_sgt_stayed ? 'The old regular who rode you from 1915. Broken to the ranks for drink in 1917. You stayed with him at the canal bridge and went over together. He has his stripes back.'
+    : flags.rv_sgt_broken ? (flags.rv_sgt_spoke ? 'Private Maddock now: reduced to the ranks for drink in the line. You spoke for him at the court-martial, and he is still with the company.' : 'Private Maddock now: reduced to the ranks for drink in the line, with twenty-eight days tied to a wagon wheel. You told the court what you saw and no more.')
+    : flags.rv_sgt_sat ? 'A regular of twenty years, the last of four who came from the first battalion. After the first of July you read him the roll. He rode you because he had buried one battalion already.'
+    : 'A regular of twenty years, India and South Africa, sent to stiffen the company. He thinks Kitchener\'s men are playing at soldiers, and he stops at you every inspection.' });
+  if (flags.rv_hal) rivals.push({ label: 'Ted Hallam', note:
+    flags.rv_hal_carried ? 'A man of your platoon, after the same stripe since 1915. When the trench came in on you in 1918 he dug you out with his hands and carried you to the aid post.'
+    : flags.rv_hal_peace ? 'Corporal Hallam. He took your prisoner in 1915 and the platoon with it. In 1918 you held out your hand and he owned up, sideways.'
+    : flags.rv_hal_cold ? 'Corporal Hallam. He took your prisoner in 1915, and he has the stripes and the platoon. You nod to each other.'
+    : flags.rv_hal_striped ? (flags.rv_hal_first ? 'Lance-Corporal Hallam. He has the stripe you were both after.' : 'Lance-Corporal Hallam, a long way behind you.') + (flags.rv_hal_helped ? ' He cannot read a map, and you went through the route with him and made nothing of it.' : ' He cannot read a map. You let him find that out in front of the company.')
+    : flags.rv_hal_fought ? 'A man of your platoon, after the same stripe. You boxed him behind the billets and lost on points. He told you after that the prisoner was yours.'
+    : flags.rv_hal_friend ? 'A man of your platoon, after the same stripe. You sit in at his card school. The winnings go home to six, and the stripe is threepence a day.'
+    : flags.rv_hal_outdo ? 'A man of your platoon, after the same stripe. He has the cards and the platoon; you have the working parties.'
+    : flags.rv_hal_reported ? 'A man of your platoon, your age, after the same stripe. He told your prisoner as his. You went to the sergeant, and the platoon has not forgotten it.'
+    : 'A man of your platoon, your age, after the same stripe. He told your prisoner as his own, and he is better liked than you.' });
+  if (flags.rv_otto) rivals.push({ label: 'Tea-time Otto', note:
+    flags.rv_otto_body ? 'The trench mortar that fired three bombs at five. You went on the raid in 1917: a dead corporal in spectacles, a watch on a nail, a photograph of a baker\'s shop. Nothing was fired from there again.'
+    : flags.rv_otto_prisoner ? 'The trench mortar that fired three bombs at five. In 1918 a prisoner on the road told you why: his own supper came at six. He was a baker. You gave him a cigarette.'
+    : flags.rv_otto_unknown ? 'The trench mortar that fired three bombs at five. In 1918 a mortar corporal sat among the prisoners, and you did not ask him. You never knew who Otto was.'
+    : flags.rv_otto_left ? 'The trench mortar that fires three bombs at five. The raid of 1917 found his pit empty and the bed still warm. He fired the next evening from further back.'
+    : flags.rv_otto_timed ? 'A German trench mortar that fires three bombs at five, when the tea comes up. You timed him, and the tea comes at half past four now. A careful man.'
+    : flags.rv_otto_guns ? 'A German trench mortar that fires three bombs at five, when the tea comes up. The guns were put on him. He moved his pit and kept his hour.'
+    : 'A German trench mortar that fires three bombs at five, when the tea comes up. Nobody has seen the crew.' });
+  if (flags.rv_home) rivals.push({ label: 'Stanley Rudge', note:
+    flags.rv_home_dead ? 'The man who stayed at home, exempted by the tribunal. The influenza took him in 1918, the week before he was to report. His chest was true. You never settled what you thought of him.'
+    : flags.rv_home_met ? 'The man who stayed at home. Combed out in 1918 and sent to France with a labour company, coughing. You shook his hand at the railhead. He never knew which he was either.'
+    : flags.rv_home_passed ? 'The man who stayed at home. Combed out in 1918 and sent to France with a labour company. You nodded to him at the railhead and went on.'
+    : flags.rv_home_wrote ? 'The man who stayed at home, exempted by the tribunal. He sent you Woodbines and a letter, and you wrote back. Shirker or weak chest: nobody at home can say.'
+    : flags.rv_home_cut ? 'The man who stayed at home, exempted by the tribunal. He sent you Woodbines and a letter. You sent no answer.'
+    : `The man who stayed at home, exempted by the tribunal in 1916. ${flags.ro_sw_first && !flags.ro_sw_ended ? 'Your mother writes that he sees your girl home on Sunday nights.' : 'Your mother writes that he has your place while you are away.'} Some say a shirker and some say his chest.` });
+
 
   const friends = names.map((n, i) => {
     const alive = !!w.friends[i];

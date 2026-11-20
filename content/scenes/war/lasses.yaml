@@ -1,0 +1,1024 @@
+# More lasses (docs/FRAME-WORDS.md section 3). The author, 2026-11-20: "I think we need more
+# opportunities for French lasses or different lasses in one life for a soldier to interact with.
+# Sometimes the lass you flirted with that one day was the last time you saw her. Sometimes the
+# village you have been taking leave in is bombed in-between your leaves."
+#
+# Eleven women besides the sweetheart at home and Marthe Delattre (romance.yaml), each written once
+# and shared by the four towns with `pools:`. Each has her own war. None is an ending: these
+# events set no flag the leaves or the Armistice read.
+#
+#   1915  Odile Carlier, the baker's daughter at Vauquelin-les-Mines (a fictional pit village
+#         behind the Loos sector). The village is shelled by a long-range gun during the battle;
+#         he comes back to it in the autumn and she is dead (la_baker_after).
+#   1916  Léonie, who sells oranges and chocolate on the road up to the Somme. Next time up the
+#         road her small brother has the basket: she has gone to a factory at Amiens.
+#   1916  Madame Caudron, a widow keeping her farm at Aubrimont (fictional), where the platoon is
+#         billeted. In the retreat of March 1918 the farm is empty and nobody is left to ask.
+#   any   Sister Mackie at the clearing station, for a man who has had a light wound.
+#   1917  Céline, in a cellar café in Arras before the battle. Afterwards the board says Fermé.
+#   1917  Godelieve, a Belgian refugee in a tea room at Poperinghe (a fictional tea room). The
+#         street is bombed in the autumn; she lived, and went into France with the other
+#         refugees, and nobody knows where.
+#   1917-18 Winnie Barlow, a WAAC clerk at the base, who types the casualty returns.
+#   1918  A girl pushing her grandmother in a wheelbarrow in the March retreat; never named.
+#   1918  Jeanne, in Bélincourt (fictional), the first village with people in it, in the advance.
+#   tank  Adèle, who takes in the company's washing at Hérimont (fictional, near Erin), 1917; she
+#         is still there in May 1918, with his shirt.
+#   air   Lucie, at the farm at the end of the aerodrome, who counts the machines home, 1917; in
+#         the spring of 1918 he flies over the farm, behind the German line.
+#
+# The sweetheart and Marthe. Every event where he can flirt first works out whether he is spoken
+# for (on_enter, *la_bind): la_bound_home (married, or engaged and not ended) and la_bound_fr
+# (walking out with Marthe, writing to her, or promised). Such a man always has the other choices;
+# if he flirts anyway it costs him a point of nerve and sets la_strayed, the text says why, and the
+# later meetings read la_strayed.
+#
+# Weights 15-30: the towns' own events are 10 unless forced, the romance events 25-40. The four
+# events in the tank and air pools alone are 60, because those pools' own events are 100 and over.
+# All but the nurse, the WAAC and the corps' own are { not: war.transferred }: a tunneller, a tank
+# man and an air man are not in the battalion's billets.
+
+# ==== 1915: the baker's daughter at Vauquelin-les-Mines ===========================================
+
+- id: la_baker
+  chapter: front
+  kind: pool
+  pool: front_1915_mill
+  pools: [ front_1915_pit, front_1915_farm, front_1915_city ]
+  once: true
+  weight: 15
+  requires: [ "war.tour >= 2", "war.tour <= 5", { not: war.transferred } ]
+  title: The bakery
+  text: |
+    Out at rest at Vauquelin-les-Mines: a mile of brick rows under a slag heap, and a pithead still
+    winding, though the line's near enough that the windows hum when the guns fire. [if start == pit]It could be home with the signs changed. [/if]The company's in the school.
+
+    There's a queue at the bakery before it's light, women in black shawls and wooden shoes, and
+    Tommies with their mess tins. BOULANGERIE CARLIER over the door, in letters gone brown. The
+    smell of it comes right down the street, hot crust and wood smoke, and you've had army biscuit
+    for a fortnight.
+
+    The daughter serves. She's eighteen or so, flour to the elbows, her hair tied up in a cloth,
+    and she takes the coppers from the women and the soldiers alike and doesn't look up. Her father
+    works the oven behind her, an old man with one shoulder higher than the other.
+
+    When you get to the counter the shelf's bare. "Il n'y en a plus," she says, and shows you her
+    empty hands. None left. "Revenez à cinq heures."
+
+    "Napoo," says the man behind you. "Same as yesterday."
+  choices:
+    - id: french
+      text: Try your French on her. Bread at five, and what's her name.
+      effects: [ { set: flag.la_baker }, { set: flag.la_baker_spoke }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        "Pain. Sank err," you say, and hold up five fingers to be sure. She looks up then. "Cinq
+        heures," she says, slowly, the way a teacher would, and waits till you've said it after her.
+
+        At five there's a loaf kept back under the counter with a cloth over it, still warm, and she
+        won't take a centime over the price. Her name's Odile. Her brother went with the army last
+        August and they've had no letter since Easter. She tells you that in French, counting the
+        months off on her floury fingers, and you understand the counting.
+      next: "@return"
+    - id: flirt
+      text: Take your cap off and tell her she's the prettiest thing in France.
+      effects: [ { set: flag.la_baker }, { set: flag.la_baker_spoke }, { set: flag.la_baker_sweet }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You say it in English, with your cap in your hand, and the queue behind you groans. She
+        doesn't follow a word of it and follows all of it. She goes red under the flour, and says
+        something quick over her shoulder that makes the old man laugh into the oven.
+
+        "Cinq heures," she tells you, and holds up her five fingers. At five there's a loaf under
+        the counter with a cloth over it, and beside it, in a twist of paper, a bun with sugar on.
+        Her name's Odile. She says yours after you and gets it wrong, and you let her have it wrong.
+      next: "@return"
+    - id: quiet
+      text: Go without, and come back at five with the rest.
+      effects: [ { set: flag.la_baker } ]
+      text_after: |
+        You come back at five with the rest of the queue, and get your loaf and your change, and
+        she doesn't look up. You eat it walking back to the school, tearing it. The crust cuts the
+        roof of your mouth. It's the best thing you've had since England.
+      next: "@return"
+
+- id: la_baker_after
+  chapter: front
+  kind: pool
+  pool: front_1915_mill
+  pools: [ front_1915_pit, front_1915_farm, front_1915_city ]
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 8", flag.la_baker, { not: war.transferred } ]
+  title: Vauquelin again
+  text: |
+    After the battle what's left of the company goes back to Vauquelin-les-Mines, to the same
+    school. It isn't the same street. All through the fighting the Germans had a long-range gun on
+    the pithead, a shell every quarter of an hour, day and night, the kind you hear coming like a
+    tram. The winding gear's down across the road. Half the row by the church stands open, with the
+    wallpaper showing and a bed hung out of an upstairs room by two legs.
+
+    Of the bakery there's the oven and the chimney, and nothing round them. The sign's in the
+    road in two pieces. The street smells of wet plaster and gas and something burnt, and not of
+    bread.
+
+    An old woman is picking whole bricks out of the heap and stacking them by the kerb. [if flag.la_baker_spoke]You ask her for Odile.[else]You ask her about the girl at the bakery, mostly with your hands.[/if]
+
+    "La petite Carlier? Elle est morte." She doesn't stop stacking. "Un obus. Le matin, au pain."
+    Dead. A shell, in the morning, at the bread. The father's alive, she says; he bakes at the oven
+    behind the Co-operative now, at the far end, and she points with a brick.[if flag.la_baker_sweet] You never did tell her your right name.[/if]
+  choices:
+    - id: father
+      text: Go and find her father at the other oven.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        He's there with his sleeves rolled, the high shoulder going up and down as he works the
+        peel. He knows you, or he knows the uniform. Neither of you has a word the other can use.
+        You buy a loaf and he won't take the money, so you leave it on the board, and he lets it
+        lie there. The loaf's warm inside your tunic all the way back to the school.
+      next: "@return"
+    - id: bricks
+      text: Stack bricks with the old woman for an hour.
+      text_after: |
+        You stack bricks. She shows you which are worth keeping, by knocking two together and
+        listening. After an hour there's a wall of them along the kerb, knee high, and your hands
+        are raw with lime. She gives you an apple out of her apron, and looks at what's left of
+        the bakery, and crosses herself, quickly, like a woman brushing off crumbs.
+      next: "@return"
+    - id: go
+      text: Go back to the school. There's nothing here to do.
+      effects: [ { war_mood: { nerve: -1 } } ]
+      text_after: |
+        You go back to the school and lie on your blanket with your boots on. You'd have said you
+        were used to it. At five o'clock you find you're listening for the queue.
+      next: "@return"
+
+# ==== 1916: the girl with the basket, on the road up to the Somme =================================
+
+- id: la_orange
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  pools: [ front_1916_pit, front_1916_farm, front_1916_city ]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 10", "war.tour <= 13", { not: war.transferred } ]
+  on_enter: &la_bind
+    - { clear: flag.la_bound_home }
+    - { clear: flag.la_bound_fr }
+    - { if: "flag.ro_sw_married || flag.ro_sw_wed16 && !flag.ro_sw_ended || flag.ro_sw_after && !flag.ro_sw_ended || flag.ro_sw_wed17 && !flag.ro_sw_ended || flag.ro_sw_wait2 && !flag.ro_sw_ended", then: [ { set: flag.la_bound_home } ] }
+    - { if: "flag.ro_fr_promise || flag.ro_fr_writes && !flag.ro_fr_let_go || flag.ro_fr_walked && !flag.ro_fr_parted && !flag.ro_fr_let_go", then: [ { set: flag.la_bound_fr } ] }
+  title: Oranges
+  text: |
+    The road up from the railhead, the battalion marching at ease, [if war.month <= 3]the chalk mud pulling at every boot[else]the dust coming up white off the chalk and into your teeth[/if]. At the crossroads, by the iron crucifix, a girl falls in beside
+    the column with a basket on her arm.
+
+    "Oranges! Chocolat! Très bon pour les soldats!"
+
+    She's seventeen, perhaps, in a man's jacket with the cuffs turned back and boots with wooden
+    soles that clap on the road. She walks at the company's own pace and sells as she goes, and
+    gives change out of a cocoa tin without once breaking step. A small boy trots behind her with
+    a second basket. The sergeant has decided not to see either of them.
+
+    She comes level with your file. "Orange, Tommy? Quatre sous." You can smell them from here,
+    sharp and clean over the sweat and the wet wool.[if flag.la_bound_home] {sweetheart}'s letter is buttoned in your breast pocket, with her answer in it.[/if]
+  choices:
+    - id: buy
+      text: Buy two, and ask her in French how trade is.
+      effects: [ { set: flag.la_orange_spoke }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        "Tray bon," you tell her, with your mouth full, and she says "Très," and makes you say it
+        again. Trade is good when the English go up, she says, and bad when they come down,
+        because then there are fewer and they don't want oranges. She says it plainly, the way
+        she gives change.
+
+        Her father was taken prisoner at Maubeuge in the first month and is in a camp in Germany.
+        The basket keeps her mother and the boy. The boy shouts her name when she gets too far
+        ahead: Léonie. At the next crossroads she turns back to meet the battalion behind yours.
+      next: "@return"
+    - id: flirt
+      text: Tell her you'll buy the whole basket if she'll walk as far as the village.
+      effects:
+        - { set: flag.la_orange_spoke }
+        - { set: flag.la_orange_sweet }
+        - &la_cost { if: "flag.la_bound_home || flag.la_bound_fr", then: [ { set: flag.la_strayed }, { war_mood: { nerve: -1 } } ], else: [ { war_mood: { nerve: 1 } } ] }
+      text_after: |
+        She understands it from your face before you've found the words. She looks you over, cap
+        to boots, the way your mother looks at a fish on the slab.
+
+        "Vous êtes trop jeune, monsieur," she says. "Et trop sale." Too young, and too dirty. The
+        whole file hears it and you'll be hearing it for a week. But she walks beside you a
+        quarter of a mile for all that, and sells you two oranges for the price of three, and the
+        small boy shouts her name when she gets too far up the road: Léonie. She looks back once
+        from the crossroads.[if flag.la_bound_home] You eat the oranges, and then you remember the letter in your pocket, and they don't sit well.[/if]
+      next: "@return"
+    - id: quiet
+      text: Keep your eyes front and your money in your pocket.
+      text_after: |
+        You keep step. She works down the column and back up the other side, calling, and the
+        smell of orange peel follows the company for a mile, on every man's hands but yours.
+      next: "@return"
+
+- id: la_orange_after
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  pools: [ front_1916_pit, front_1916_farm, front_1916_city ]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 15", "war.tour <= 17", flag.la_orange_spoke, { not: war.transferred } ]
+  title: The same road
+  text: |
+    The same road, going up again, with half the faces in the company new since July. The road's
+    the same. At the crossroads by the iron crucifix you find you're looking for her.
+
+    It's the small boy who falls in beside the column. He has the big basket now, on a strap that's
+    too long for him, so it bumps against his knees. "Oranges! Chocolat!" The same cry, an octave
+    higher.
+
+    "Léonie?" you say.
+
+    He shrugs, right up to his ears. "Partie. À Amiens. À l'usine." Gone to Amiens, to a factory.
+    Making shells, the man beside you reckons; it pays three times what a basket does. The boy
+    doesn't know which factory or which street. He holds an orange up at you. "Quatre sous."[if flag.la_orange_sweet] You wash now, when you can. She'll never know it.[/if]
+  choices:
+    - id: buy
+      text: Buy two, and give him a franc, and no change.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        He looks at the franc, and at you, and puts it in the cocoa tin, and then he gives you a
+        third orange, because he's been taught to. He drops back to meet the next company. You
+        peel one with your thumb as you march, and it's sharp and clean as the first time.
+      next: "@return"
+    - id: march
+      text: Shake your head and march on.
+      text_after: |
+        You shake your head. He's gone down the column before you've finished shaking it,
+        calling. That's the last you know of her: Amiens, a factory, a street he couldn't name.
+      next: "@return"
+
+# ==== 1916: the widow's farm at Aubrimont =========================================================
+
+- id: la_widow
+  chapter: front
+  kind: pool
+  pool: front_1916_mill
+  pools: [ front_1916_pit, front_1916_farm, front_1916_city ]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 11", "war.tour <= 17", { not: war.transferred } ]
+  on_enter: *la_bind
+  title: Madame Caudron
+  text: |
+    This rest the platoon's billet is a farm on its own at the far end of Aubrimont, a mile off the
+    main road: a yard with the dung heap steaming in the middle of it, a barn for you, and the
+    house on the other side with its shutters closed, like a face turned away.
+
+    The interpreter says the farmer was killed in 1914. His widow keeps the place with a boy of
+    twelve and an old man who is stone deaf. You see her at five in the morning, crossing the yard
+    with two pails on a yoke, in a black dress and wooden shoes. Thirty-odd. She doesn't look at
+    the barn. She has forty English soldiers in it, and on the first night somebody burned a
+    length of her fence to boil a dixie, and on the second morning she stopped the quartermaster
+    sergeant in the yard and stood in front of him till he paid for it.
+
+    On the third morning the pump handle comes off in her hand. She stands in the yard holding it,
+    with the pails empty at her feet and the cows shouting in the byre.[if flag.la_bound_home] You've a letter to {sweetheart} half written on your knee.[/if]
+  choices:
+    - id: mend
+      text: Mend the pump for her. You can see from here what's gone.
+      effects: [ { set: flag.la_widow_known }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        A sheared pin. You knock out what's left of it and make a new one from a six-inch nail,
+        with the back of an entrenching tool for a hammer. [if start == farm]It's the same pump as the one in the yard at home, near enough. [/if]She watches the whole job with her arms folded. Then she works the handle twice, and the water comes.
+
+        "Asseyez-vous," she says, in the kitchen, and gives you coffee in a bowl, and bread, and
+        sits down across the table herself. On the dresser there's a photograph of a man in the
+        long coat and the red trousers they wore that first summer. "Mon mari. Il est mort à
+        Guise." She says it flat, the way you'd give the name of a field. Then she asks, by
+        pointing, if your mother's alive. You nod. She nods too.
+      next: "@return"
+    - id: carry
+      text: Carry her pails night and morning, and tell her in French that she's belle.
+      effects:
+        - { set: flag.la_widow_known }
+        - *la_cost
+      text_after: |
+        You carry the pails four mornings, and she lets you, and says nothing. On the fourth you
+        tell her. She puts down the milking stool and looks at you, and then she laughs, the first
+        time anybody in the platoon has heard it. It's short, like a cough.
+
+        "J'ai trente-quatre ans," she says, "et vous êtes un enfant." She's thirty-four and you're
+        a child. She says it without unkindness, and goes back to the cow. But there's an egg left
+        on the barn step that evening with your pails, and one the next.[if flag.la_bound_home] You finish the letter to {sweetheart} that night, and leave the pails out of it, and know you've left them out.[/if]
+      next: "@return"
+    - id: leave
+      text: Leave her be. She has soldiers enough in her yard.
+      text_after: |
+        The old man wedges the handle back with a nail and a bit of wire, and it holds, more or
+        less. You watch from the barn door. The morning the platoon marches out she's on the step
+        with her arms folded, counting you through the gate under her breath, the way she counts
+        her hens in at night.
+      next: "@return"
+
+# -- March 1918: the retreat goes back through Aubrimont ------------------------------------------
+- id: la_widow_after
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  pools: [ front_1918_pit, front_1918_farm, front_1918_city ]
+  once: true
+  weight: 25
+  requires: [ "war.tour == 33", flag.la_widow_known, { not: war.transferred } ]
+  title: Aubrimont
+  text: |
+    The retreat goes back through country you know. On the third day the company's falling back
+    along a lane between high banks, and there's a pond, and a calvary, and it's Aubrimont, with
+    the farm at the far end.
+
+    The yard gate's open. The dung heap's cold. The house door is open too, which it never was.
+    In the kitchen there's a bowl on the table, and the stove's just warm to your hand. On the
+    dresser, where the photograph stood, there's a clean square in the dust. She took him with her.
+
+    Out in the byre a cow is bawling. She's not been milked since yesterday, and her bag's as
+    tight as a drum. The pump's still in the yard, its handle held on with a nail.
+
+    There's nobody left in Aubrimont to ask which road Madame Caudron took. The Germans are two
+    miles behind, and the sergeant's shouting from the lane.
+  choices:
+    - id: milk
+      text: Milk the cow out on to the straw. It's ten minutes.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You put your rifle against the stall and your forehead against her flank, and milk her out
+        on to the straw, because there's no time to find a pail. She stops bawling. The byre smells
+        of warm milk and old hay, and for ten minutes the guns are a long way off. Then you slip
+        her chain and leave the door wide. She follows the company up the lane for half a mile,
+        like a dog, and then stops to eat the bank.
+      next: "@return"
+    - id: gates
+      text: Turn the stock out and leave every gate wide. Nothing for Jerry.
+      text_after: |
+        You slip the cow's chain and kick open the hen house and throw the gates back, and the
+        hens go out across the yard in all directions as if it were any morning. Whatever Jerry
+        gets out of Aubrimont, he'll have to catch it first. You shut the kitchen door behind
+        you. You don't know why. It was always shut.
+      next: "@return"
+    - id: on
+      text: Keep going. The company isn't stopping.
+      effects: [ { war_mood: { nerve: -1 } } ]
+      text_after: |
+        You keep going. You can hear the cow from the lane, and from the top of the rise, and
+        then you can't tell if you're hearing her or not.
+      next: "@return"
+
+# ==== Any year: the sister at the clearing station (a man who has had a light wound) ==============
+
+- id: la_nurse
+  chapter: front
+  kind: pool
+  pool: front_1915_mill
+  pools: [ front_1915_pit, front_1915_farm, front_1915_city, front_1916_mill, front_1916_pit, front_1916_farm, front_1916_city, front_1917_mill, front_1917_pit, front_1917_farm, front_1917_city, front_1917_tank, front_1917_air, front_1918_mill, front_1918_pit, front_1918_farm, front_1918_city, front_1918_tank, front_1918_air ]
+  once: true
+  weight: 15
+  requires: [ "flag.wd_light_truth || flag.wd_light_joke || flag.wd_light_quiet" ]
+  on_enter: *la_bind
+  title: Sister
+  text: |
+    The wound hasn't healed right. It's gone hot and tight under the scab, and the medical officer
+    looks at it on sick parade and writes you a chit. You ride down on an empty ration lorry to the
+    clearing station at the railhead: marquees and huts in rows with duckboards between, and the
+    smell of carbolic and wet canvas and ether, which you'd know anywhere now.
+
+    It's a nursing sister who sees to it, in a grey dress and a white veil and a cape edged with
+    red. A Scotswoman, with her sleeves pinned back and forearms like a washerwoman's. Hers is the
+    first woman's voice you've heard in your own language this side of the Channel.
+
+    "Sit there. Look at the wall. It'll hurt, and then it won't."
+
+    It does. Behind the canvas there's a ward of men a deal worse than you, and one of them is
+    calling for her, over and over, in the same flat voice. "I'm coming, Davies," she says, and
+    doesn't turn her head. "I've only the two hands."[if flag.la_bound_home] You think about {sweetheart}, hard, to keep from shouting.[/if]
+  choices:
+    - id: talk
+      text: Ask her where she's from, to keep your mind off it.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        Dundee. Her mother's in the jute and her father was, till his chest went[if start == mill], and when you say weaving shed she says, "Aye, then you'll be deaf in the one ear too"[/if]. She's been out since the first autumn, on the trains to begin with, then here. Her name's Mackie. Sister Mackie; you don't get the rest.
+
+        She talks the whole time she's working, so you'll listen to her and not to what her hands
+        are doing, and you know it's a trick, and it does its job all the same. "You'll do," she says. "Keep
+        it dry. Which you'll not." She's away through the canvas to Davies before you've your
+        shirt on.
+      next: "@return"
+    - id: flirt
+      text: Ask her if a sister ever walks out with a private soldier.
+      effects:
+        - *la_cost
+      text_after: |
+        "With a private? Never." She doesn't stop working. "With a general, if he asks nicely and
+        has his own teeth. I'm thirty-one, laddie, I've forty beds, and I've not sat down since
+        Tuesday. Ask me after the war."
+
+        She says it so the men on the next bench can enjoy it too, and they do. But she ties off
+        the dressing gently, and gives your shoulder a push, the way you'd send a child out to
+        play.[if flag.la_bound_home] On the lorry back you take out {sweetheart}'s photograph and look at it, and feel a fool, and a bit of a liar.[elif flag.la_bound_fr] On the lorry back you think of Marthe carrying plates, and feel a fool, and a bit of a liar.[else] You grin the whole way back on the lorry.[/if]
+      next: "@return"
+    - id: quiet
+      text: Look at the wall, as you're told, and say nothing.
+      text_after: |
+        You count the knots in the tent pole. There are eleven. You count them again. "Good lad,"
+        she says when it's done, in the voice you'd use to a horse, and it's the "good lad" that
+        nearly finishes you. You get your shirt on with your back to her.
+      next: "@return"
+
+# ==== 1917: the cellar café in Arras ==============================================================
+
+- id: la_cellar
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [ front_1917_pit, front_1917_farm, front_1917_city ]
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 21", "war.tour <= 22", { not: war.transferred } ]
+  on_enter: *la_bind
+  title: The cellar
+  text: |
+    Arras, before the battle. Above ground the town's shut. The streets by the station are empty
+    all day because the Germans can see straight down them, and the big houses stand with their
+    fronts off and the snow blowing in on the beds.
+
+    Below ground people are still living. In a street off the square there's a board propped at a
+    cellar grating, chalked CAFÉ. VINS ET BIÈRES, and a flight of steps going down. At the bottom
+    there's a long vault with candles in bottles and barrels for tables, a dozen Tommies and two French gunners,
+    and a smell of spilt wine and damp chalk and a paraffin stove.
+
+    A girl serves. She's nineteen or twenty, in a man's overcoat, because it's as cold as a well down
+    here, and she goes between the barrels with six glasses in one hand. When a shell comes down
+    somewhere up in the street the candles all lean the same way and the dust sifts into the wine.
+    She doesn't stop pouring.
+
+    "Qu'est-ce que vous voulez?" She's got to you. "Vin blanc? Un franc."[if flag.la_bound_home] You've your pay book in your pocket, with {sweetheart}'s photograph in the back of it.[elif flag.la_bound_fr] It's weeks since you had an egg off Marthe's pan.[/if]
+  choices:
+    - id: talk
+      text: Ask her, in your French, why she hasn't gone.
+      effects: [ { set: flag.la_cellar_spoke }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        It takes three tries and both hands. "Je reste," she says. "C'est ma maison." She's
+        staying. It's her house: two floors over this cellar and half a roof over those, and her
+        mother in the cemetery at the end of the street, and where would she go.
+
+        Her name's Céline. The Germans were here three days in 1914, she tells you, and drank
+        this cellar dry and paid for it in paper. "Les Anglais paient," she says, and holds out
+        her hand for the franc.
+      next: "@return"
+    - id: flirt
+      text: Tell her you'll come back tomorrow night, and every night after.
+      effects:
+        - { set: flag.la_cellar_spoke }
+        - { set: flag.la_cellar_sweet }
+        - *la_cost
+      text_after: |
+        You say it half in French and half with your hands. She hears you out with her head on
+        one side. "Vous êtes gentil," she says. You're nice. Then, in English she's had off some
+        other soldier: "All the Tommies come back tomorrow."
+
+        But she fills your glass over the line and doesn't chalk it up. Her name's Céline. When
+        you go up the steps she says "À demain," and from the street you can't tell if she meant
+        it.[if flag.la_bound_home] You meant it, for as long as it took to say. It's {sweetheart} you think of, going back through the dark, and you walk faster.[elif flag.la_bound_fr] You meant it, for as long as it took to say. Marthe's letter about the hens is in your pocket, and you don't take it out tonight.[/if]
+      next: "@return"
+    - id: quiet
+      text: Drink your wine by the stove and keep to yourself.
+      text_after: |
+        You drink it by the stove, sour and cold, and watch the candles lean and straighten. The
+        gunners are singing something slow. She goes round and round with her six glasses. When
+        you go up the steps the cold in the street is a different cold, and the sky to the east is
+        flickering.
+      next: "@return"
+
+- id: la_cellar_after
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [ front_1917_pit, front_1917_farm, front_1917_city ]
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 24", "war.tour <= 25", flag.la_cellar_spoke, { not: war.transferred } ]
+  title: Fermé
+  text: |
+    After the battle, before they send the battalion north, you've an hour to yourself in Arras,
+    and you go looking for the steps.
+
+    There's more of the street lying in the road than there was. The grating's there. The board
+    has been turned face to the wall, and on the back somebody's chalked one word, FERMÉ. Two
+    planks are nailed across the cellar door. You put your face to the gap and it smells the same,
+    wine and chalk, and there's no light at the bottom.[if flag.la_cellar_sweet] À demain, she said.[/if]
+
+    At the next grating a woman's shaking a mat. "Céline?" She lifts her shoulders. "Partie. À
+    Rouen, peut-être. Chez sa tante." Gone. To Rouen, perhaps, to an aunt. Perhaps not. They
+    cleared a lot of people out before the attack, and they didn't all say where. She goes back
+    down her own steps with the mat.
+  choices:
+    - id: chalk
+      text: Chalk your name and number on the board, under FERMÉ.
+      text_after: |
+        There's a stub of chalk on the sill. You write it small, underneath: name, number,
+        regiment, the way you'd mark your kit. The first rain will have it off. You stand there
+        a minute with chalk on your fingers, and then the hour's up.
+      next: "@return"
+    - id: go
+      text: Have your drink at the YMCA hut, with the rest.
+      text_after: |
+        Cocoa, at the hut, and a man playing the piano. It's warm and it's above ground. You
+        don't taste it.
+      next: "@return"
+
+# ==== 1917: the tea room in Poperinghe ============================================================
+
+- id: la_pop
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [ front_1917_pit, front_1917_farm, front_1917_city ]
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 25", "war.tour <= 26", { not: war.transferred } ]
+  on_enter: *la_bind
+  title: The tea room
+  text: |
+    Pop. That's Poperinghe, seven miles behind the salient, and the one town up here with glass
+    left in its windows. On a rest day they let you in with a pass. Soldiers ten deep on the
+    pavements, limbers in the road, a military policeman at every corner.
+
+    Off the square there's a tea room with green shutters and a card in the window: TEA ROOM.
+    ENGLISH SPOKEN. EGGS AND CHIPS. Inside it's steam and frying, forty men at oilcloth tables,
+    and a gramophone with one record.
+
+    The girl who brings the tea is Belgian, fair, about your age, with her hair in a plait pinned
+    round her head. She sets every cup down exactly square to the edge of the table. Her name is
+    Godelieve, which nobody in the British Army can say, so the room calls her Glory and she
+    answers to it. She has French for the officers, English for the men, and Flemish for her
+    mother, who is frying in the back.[if flag.la_strayed] You've a bad conscience from the last time, and you've brought it in with you.[/if][if flag.la_bound_home] You've been meaning all week to write to {sweetheart}.[elif flag.la_bound_fr] You owe Marthe a letter.[/if]
+  choices:
+    - id: talk
+      text: Ask her where she's from, in whatever language works.
+      effects: [ { set: flag.la_pop }, { set: flag.la_pop_spoke }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        She draws it for you on the oilcloth with a wet finger. The church here. The brewery. Her
+        father's flax field, down to the stream. "Mon village est là-bas," she says. "Chez les
+        Boches." Over there, the far side of the ridge, with the Germans. From the top window of the
+        cobbler's, where the five of them have had one room since the first autumn, she can see
+        the smoke on a clear day.
+
+        Her father stayed behind to mind the house. They've had one card from him in three years,
+        by way of Holland. When the wet has dried off the oilcloth she wipes the place anyway, and
+        takes your cup.
+      next: "@return"
+    - id: flirt
+      text: Stay till you can say her name right. However many teas it takes.
+      effects:
+        - { set: flag.la_pop }
+        - { set: flag.la_pop_spoke }
+        - { set: flag.la_pop_sweet }
+        - *la_cost
+      text_after: |
+        Go-de-lee-ve. It takes four cups of tea and most of a week's pay, and by the end the whole
+        table's at it, and she's laughing with her hand over her mouth. When you get it she says
+        your name back, right the first time.
+
+        "Tomorrow you forget," she says. You tell her you won't. She gives you a look that says
+        she's heard that from the whole Second Army, and brings a fifth cup you didn't order.[if flag.la_bound_home] The letter to {sweetheart} doesn't get written that night either, and now you know why.[elif flag.la_bound_fr] Marthe's letter doesn't get written that night either, and now you know why.[/if]
+      next: "@return"
+    - id: quiet
+      text: Drink your tea and listen to the gramophone.
+      effects: [ { set: flag.la_pop } ]
+      text_after: |
+        You drink your tea. The record comes round to the beginning again and somebody winds the
+        handle. She sets down the next man's cup square to the edge, and the next. Your feet are
+        dry and it's warm, and nobody's shouting, and it's enough.
+      next: "@return"
+
+- id: la_pop_after
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [ front_1917_pit, front_1917_farm, front_1917_city ]
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 28", flag.la_pop, { not: war.transferred } ]
+  title: Pop again
+  text: |
+    Out of the salient, and a pass for Pop. You smell it before you reach the square: burnt wood
+    that's been rained on, and broken drains. The German bombers have been over every night of the
+    moon, the big Gothas, and by day the long gun in the forest can reach the station.
+
+    The street off the square has a hole in it you could lose a lorry in. The tea room's on the
+    edge of the hole. The front's gone. The green shutters are in the road. Inside, one table is
+    still standing on the tiles with its oilcloth on, and the rain's falling on it. The cobbler's
+    next door is a heap of brick.
+
+    An old man is loading a barrow. You point. "Personne n'est mort ici," he says. Nobody died
+    here; they were all in the cellar. "Les soeurs les ont emmenées. En France." The nuns took them
+    away, the mother and the four girls, with the rest of the refugees, on a train into France.
+
+    Where in France? He lifts his shoulders. France is big.[if flag.la_pop_spoke] Wherever it is, she'll not see the smoke of her village from it.[/if][if flag.la_pop_sweet] You say her name, under your breath, right the first time.[/if]
+  choices:
+    - id: look
+      text: Go in and look for something of hers.
+      text_after: |
+        Wet plaster, broken cups, the gramophone on its side with the horn flat. The record's in
+        three pieces. You find the card from the window under a chair: TEA ROOM. ENGLISH SPOKEN.
+        The ink's run. You stand it on the table, square to the edge, and come out.
+      next: "@return"
+    - id: ask
+      text: Ask at the town major's office where the refugees were sent.
+      text_after: |
+        A corporal clerk with a cold looks at you over a ledger. The army keeps lists of mules,
+        he says, and of blankets, and of men. It doesn't keep one of Belgians. "Try the nuns,"
+        he says. The convent has a hole in its roof and a notice on the door in two languages,
+        and you can't read either.
+      next: "@return"
+    - id: go
+      text: Find another tea room. There are a dozen.
+      effects: [ { war_mood: { nerve: -1 } } ]
+      text_after: |
+        There are a dozen, and you sit in one, and a girl you've never seen puts a cup down in
+        front of you any way it lands. The tea's the same. You drink half and leave.
+      next: "@return"
+
+# ==== 1917-18: the WAAC at the base ===============================================================
+
+- id: la_waac
+  chapter: front
+  kind: pool
+  pool: front_1917_mill
+  pools: [ front_1917_pit, front_1917_farm, front_1917_city, front_1917_tank, front_1917_air, front_1918_mill, front_1918_pit, front_1918_farm, front_1918_city, front_1918_tank, front_1918_air ]
+  once: true
+  weight: 20
+  requires: [ "war.tour >= 25", "war.tour <= 31" ]
+  on_enter: *la_bind
+  title: The girl from Records
+  text: |
+    They send you down to the base for a three-day gas course: a city of huts on the sand hills,
+    with the sea beyond, and a wind that blows the sand into the tea.
+
+    On the second evening, in the YMCA hut, there are women in khaki at the next table. WAACs:
+    the Women's Army Auxiliary Corps, out [if war.stage == 3]this year[else]since last year[/if] in long coat-frocks and round felt hats to
+    do the clerking and the cooking, so that the men who did it can be sent up the line. Half the
+    base hates them for exactly that.
+
+    One of them asks you to pass the sugar, in a voice from Nottingham. Winnie Barlow. A lace hand
+    before the war, and now a clerk at Records, on a typewriter.
+
+    "I type the casualty returns," she says. "Killed, wounded, missing. Eight hours a day. What's
+    your lot?" You tell her. She nods. "I've typed you. I've typed your number more times than my
+    own name."[if flag.la_strayed] You've something on your conscience already, and it's sitting at the table with you.[/if][if flag.la_bound_home] {sweetheart} is somewhere the far side of that sea.[/if]
+  choices:
+    - id: talk
+      text: Tell her about one of the names she's typed.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You pick one, and you tell her who he was: what he did before, what he sang, how he took
+        his tea. She listens with both hands round her cup.
+
+        "I'd wondered," she says. "You have to not wonder, or you can't hit the keys." She tells
+        you about the lace, and the forewoman who inspects their hair every morning, and the base
+        clerk who told her to her face that she'd as good as signed his death warrant. At nine a
+        whistle goes outside, and the WAACs form up in the road and march off to their camp in
+        fours, the same as you would.
+      next: "@return"
+    - id: flirt
+      text: Ask if the WAACs are let to walk on the sands, and if she'd walk with you.
+      effects:
+        - *la_cost
+      text_after: |
+        They're let. Till eight, in pairs, and not in the dunes. So you walk along the sands with
+        Winnie Barlow, and her friend ten yards behind with a lance corporal of the Pioneers. The
+        sea's the first you've seen since you crossed it. She takes off her shoes and carries them.
+
+        She won't give you an address. "You'll be a line on my sheet one day or you won't," she
+        says, "and I'd as soon not know which line." At eight she shakes your hand, hard, like a
+        man, and holds on to it a second longer than a man would.[if flag.la_bound_home] You walk back to your hut along the tide line, with {sweetheart}'s last letter unanswered in your pocket, and the sand in your boots feels like something you've been caught with.[elif flag.la_bound_fr] You walk back to your hut along the tide line. Marthe would have asked what the girl's name was, straight out, and you'd have had to say.[/if]
+      next: "@return"
+    - id: quiet
+      text: Pass the sugar and go back to your cocoa.
+      text_after: |
+        You pass the sugar. She says "Ta," and turns back to her own table. You hear their talk
+        over your cocoa: billets, a forewoman, somebody's brother in Salonika. It's ordinary talk
+        in women's voices. You sit and listen to it like a man at a fire.
+      next: "@return"
+
+# ==== 1918: the barrow on the road, in the March retreat ==========================================
+
+- id: la_road
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  pools: [ front_1918_pit, front_1918_farm, front_1918_city ]
+  once: true
+  weight: 25
+  requires: [ "war.tour >= 33", "war.tour <= 34", { not: war.transferred } ]
+  title: The barrow
+  text: |
+    The road west again, and the whole country on it. Guns, lorries, walking wounded holding each
+    other up, and in among the army the people: carts, prams, a man leading one goat.
+
+    Just ahead of your file a young woman is pushing a wheelbarrow, and in the wheelbarrow, sat
+    bolt upright in her Sunday black with an umbrella across her knees, is an old woman. The girl
+    has rags wound round her hands against the handles, and the rags are brown. She's been pushing
+    since yesterday's dawn. Each time the column checks she lets the barrow's legs down and stands
+    with her arms hanging, and breathes.
+
+    "Ma grand-mère ne peut pas marcher," she says, not to anybody. Her grandmother can't walk. The
+    old woman is giving her the road, loudly, and has it wrong.
+
+    The iron wheel squeals at every turn. Behind you all, the guns keep on.
+  choices:
+    - id: push
+      text: Take the handles from her. As far as the crossroads.
+      effects: [ { set: flag.la_road_helped }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        It's heavier than anything has a right to be. The old woman weighs nothing; it's the
+        barrow, all oak and iron, and you think how far the girl has brought it. You push it a
+        mile with your rifle slung, and the sergeant finds something to look at in the other
+        direction.
+
+        The girl walks alongside with her hands held up in front of her, as if they belonged to
+        somebody else. She doesn't tell you her name and you don't ask it. At the crossroads the
+        French police are sending the people south and the army west. She takes the handles
+        back. "Merci, monsieur. Que Dieu vous garde." God keep you. The old woman puts up her
+        umbrella, though it isn't raining.
+      next: "@return"
+    - id: bread
+      text: Give her your bread, and what French you've got.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        "Courage, mamzelle," you say, which is most of what you've got, and hold out the bread.
+        She takes it and breaks it and gives the bigger half to the barrow. "Merci," she says, and
+        then something long and fast that you can't follow. The old woman eats and looks you over
+        and says one word about you, and the girl nearly smiles. Then the column moves, and
+        the wheel starts squealing again, and you draw ahead of it.
+      next: "@return"
+    - id: march
+      text: Keep your place in the file. You've orders.
+      effects: [ { war_mood: { nerve: -1 } } ]
+      text_after: |
+        You keep your place. You can hear the wheel behind you for a long way, squealing, and
+        stopping, and squealing. Then there are lorries, and you can't.
+      next: "@return"
+
+# ==== 1918: the first village with people in it ===================================================
+
+- id: la_freed
+  chapter: front
+  kind: pool
+  pool: front_1918_mill
+  pools: [ front_1918_pit, front_1918_farm, front_1918_city ]
+  once: true
+  weight: 30
+  requires: [ "war.tour >= 38", { not: war.transferred } ]
+  on_enter: *la_bind
+  title: Bélincourt
+  text: |
+    [if war.month >= 10]October. [/if]For weeks the advance has gone through places that were names on the map and nothing else: brick dust, nettles, a signboard. Bélincourt has roofs, and smoke coming out of the chimneys.
+
+    Your platoon's in front. You go up the street in two files, one each side, rifles ready, and
+    the doors start to open. Old men first. Then women, and children who've never seen khaki.
+    "Les Anglais! Les Anglais!" The Germans went at four this morning, with the last of the cows
+    and the bell out of the church.
+
+    A girl comes out of a doorway at a run, straight at the leading file. She's seventeen or so
+    and thin as a rail, in a dress cut down from somebody else's. She gets both arms round the
+    neck of the first soldier she reaches, which is you, and kisses you. She smells of smoke and
+    cold cellar. She's crying and laughing in the same breath.
+
+    "Quatre ans," she says. "Quatre ans, monsieur." Four years.[if flag.la_road_helped] You think of a wheelbarrow on the road in March, going the other way.[/if][if flag.la_bound_home] It's {sweetheart} you'd thought to kiss next.[elif flag.la_bound_fr] It's Marthe you'd thought to kiss next.[/if]
+  choices:
+    - id: kiss
+      text: Kiss her back. Four years is four years.
+      effects:
+        - *la_cost
+      text_after: |
+        You kiss her back, and the platoon roars. Then she lets go of you and kisses the man
+        behind, and the man behind him, the whole file, and her mother's working down the other
+        side of the street with a flag made out of three petticoats that's been under the
+        floorboards since 1914.[if flag.la_bound_home] It was nothing. She kissed the whole file. All the same you leave it out of your next letter to {sweetheart}, and the leaving out stays with you for days.[elif flag.la_bound_fr] It was nothing. She kissed the whole file. All the same you're glad Ternecourt is a long way off, and not glad to be glad.[/if]
+      next: "@return"
+    - id: give
+      text: Give her your chocolate, and your French. C'est fini, mamzelle.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        She holds the chocolate in both hands and smells it before she'll believe in it. Then she
+        breaks it in three, for her mother and a small brother and herself, and puts her own piece
+        in her pocket for later.
+
+        Her name's Jeanne. She was thirteen when they came. There were Germans billeted in the
+        house the whole four years, and her elder brother was taken off to work in Germany two
+        winters back and hasn't written. She tells you all of it fast, in the street, holding your
+        sleeve, as if you might be gone before she's done. And you are; the whistle goes.
+      next: "@return"
+    - id: steady
+      text: Unhook her arms, gently. There may be Germans in the church yet.
+      effects: [ { war_mood: { standing: 1 } } ]
+      text_after: |
+        You take her wrists and put her to one side, as gently as you can with a rifle in your
+        hand, and go on up the street with your eyes on the church tower. There's nobody in it but
+        pigeons. When you come back down, the platoon's sitting on doorsteps with children on its
+        knees, and the girl's kissing a lance jack from the next section. She waves at you over
+        his shoulder.
+      next: "@return"
+
+# ==== The tanks: the washing at Hérimont ==========================================================
+
+- id: la_tank_wash
+  chapter: front
+  kind: pool
+  pool: front_1917_tank
+  once: true
+  weight: 60
+  requires: [ "war.tour >= 25", "war.tour <= 28" ]
+  on_enter: *la_bind
+  title: The washing
+  text: |
+    Down the lane from the tank park, at Hérimont, there's a cottage with a line of khaki shirts
+    across the garden and a board on the gate: LAVAGE. WASHING. A tank crew stinks of petrol and
+    hot oil and sweat, and its overalls stand up by themselves, so there's a path worn to that
+    gate.
+
+    A girl called Adèle and her mother take in washing for the whole company. The copper's
+    boiling by five, and the garden smells of soda and wet wool and wood smoke. Her hands are red
+    to the wrist, and split across the knuckles.
+
+    She holds your overalls up between a finger and a thumb. "Ça ne part pas," she says. It won't
+    come out. The oil. "Jamais." Then she names a price for trying.[if flag.la_bound_home] {sweetheart} has hands like that in winter.[/if]
+  choices:
+    - id: talk
+      text: Pay it, and ask her, in your French, if she's from here.
+      effects: [ { set: flag.la_tank_wash }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        She isn't. She had a place in a draper's shop in Lille, with gloves on, selling ribbon,
+        and came out on one of the last trains in 1914 with her mother and a hatbox. The hatbox is
+        on the kitchen shelf. Lille's thirty miles off and might be the moon.
+
+        "Demain. À six heures," she says, and tomorrow at six there are your overalls, folded
+        square, as black as they went in and smelling of soap. You leave a shirt for next week.
+      next: "@return"
+    - id: flirt
+      text: Bring her the tin of grease from the tank's stores, for her hands.
+      effects:
+        - { set: flag.la_tank_wash }
+        - { set: flag.la_tank_sweet }
+        - *la_cost
+      text_after: |
+        It's the white grease you use on the gun mountings, in a flat tin. You show her, on your
+        own knuckles. She smells it, and makes a face, and rubs some in, slowly, one hand with the
+        other, and doesn't say anything at all.
+
+        Next day your overalls come back with the tear in the knee mended, which nobody asked
+        for or paid for. Her name's Adèle. She says yours after you, twice, to have it right. You
+        leave a shirt for next week.[if flag.la_bound_home] {sweetheart}'s hands split too, in the cold. You've never sent her anything for them, and that night you can't get it out of your head.[elif flag.la_bound_fr] You never took Marthe anything for the burn on her wrist. That night you can't get it out of your head.[/if]
+      next: "@return"
+    - id: quiet
+      text: Pay what she asks and get back to the tank.
+      text_after: |
+        You pay. The overalls come back next day as black as they went, folded square, smelling
+        of soap for about an hour. You wear them into the tank, and by noon they smell of the tank.
+      next: "@return"
+
+- id: la_tank_wash_after
+  chapter: front
+  kind: pool
+  pool: front_1918_tank
+  once: true
+  weight: 60
+  requires: [ "war.tour >= 34", "war.tour <= 35", flag.la_tank_wash ]
+  title: A shirt
+  text: |
+    They send you back to the workshops at Erin with a lorry, three days, for spares. Hérimont's a
+    mile out of your way, and you go the mile.
+
+    You've seen enough shut doors this spring to expect another. But the line's across the garden,
+    full of shirts, and the copper's smoking. Adèle straightens up from the tub and looks at you,
+    and goes into the house without a word.
+
+    She comes out with a shirt, folded square. It's yours. You left it in the autumn, the week the
+    company went up for the last battle of the year. It's been washed and ironed and kept on a shelf
+    through the winter and the retreat. She puts it in your hands and names the price, and then
+    she laughs.
+
+    Her mother died in February, of her chest. She runs the copper on her own now, with a girl of
+    nine out of Armentières to do the pegging, whose people nobody can find.[if flag.la_tank_sweet] The flat tin's on the windowsill, scraped clean, with pins in it.[/if]
+  choices:
+    - id: wood
+      text: Pay her, and split her a week's wood for the copper.
+      effects: [ { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You split wood for an hour in your shirtsleeves, and the girl from Armentières stacks it,
+        solemn as a quartermaster. Adèle gives you coffee at the kitchen door. The hatbox is still
+        on its shelf. "Lille," she says, and tips her head east, and then, in English, "Soon?"
+        You say soon. You put the shirt on in the lorry, and it smells of soap as far as Erin.
+      next: "@return"
+    - id: pay
+      text: Pay her, and thank her, and get back to the lorry.
+      text_after: |
+        "Merci boko," you say, and she corrects it, the way she always did, and you get it wrong
+        again to please her. The driver's sounding his horn in the lane. You put the shirt inside
+        your tunic, and it's still warm from the iron.
+      next: "@return"
+
+# ==== The Flying Corps: the farm at the end of the aerodrome ======================================
+
+- id: la_air_farm
+  chapter: front
+  kind: pool
+  pool: front_1917_air
+  once: true
+  weight: 60
+  requires: [ "war.tour >= 26", "war.tour <= 29" ]
+  on_enter: *la_bind
+  title: Counting them home
+  text: |
+    At the far end of the aerodrome, where the machines come in low over the hedge, there's a
+    farm. The mess gets its milk and eggs there. This week it's your turn to walk down with the
+    can.
+
+    The farmer's daughter is in the yard with her face turned up to the sky. She's about twenty,
+    with her skirt pinned up for the mud and a hen under one arm. The morning patrol's coming
+    home. She's counting on her fingers, with her lips moving.
+
+    "Cinq," she says, when the last one's bumped down. "Il en manque un." Five. One's missing. She
+    says it the way she'd say a hen was missing. She's watched them out and counted them home
+    every day since the squadron came, and she's told nobody.
+
+    Then she sees the can. "Du lait? Des oeufs?" The yard smells of cows and warm mash, and from the
+    hangars, faint on the wind, there's the pear-drop smell of the dope.[if flag.la_bound_home] {sweetheart} reads the lists in the paper every night; she wrote and told you so.[/if]
+  choices:
+    - id: talk
+      text: Tell her, in your French, that six is the one you fly in.
+      effects: [ { set: flag.la_air_farm }, { war_mood: { nerve: 1 } } ]
+      text_after: |
+        You hold up six fingers and point at yourself and then at the sky. She understands at
+        once and looks cross, as if you'd spoilt the sum. Her name's Lucie. She has two brothers
+        with the French guns, somewhere on the Aisne, and nobody to count them home.
+
+        After that, when your machine comes in over the hedge, there's somebody in the yard with
+        an arm up. Your pilot thinks it's for him.
+      next: "@return"
+    - id: flirt
+      text: Ask her to count you in particular, and wave your scarf going over.
+      effects:
+        - { set: flag.la_air_farm }
+        - { set: flag.la_air_sweet }
+        - *la_cost
+      text_after: |
+        She laughs at your French and understands it. Her name's Lucie. Next morning you hang your
+        scarf over the side going out across the hedge, forty feet up, and there's an apron
+        waving in the yard, and your pilot shouts something back over the engine about paying
+        attention.
+
+        She counts you home at dusk. You know she does, because there are two eggs over in the
+        can every day after that, and nobody in the mess can account for them.[if flag.la_bound_home] {sweetheart} is counting too, off the lists in the paper. You think of that at six thousand feet, with nothing to do about it.[elif flag.la_bound_fr] Marthe would count too, if she knew where you were. You haven't told her you fly.[/if]
+      next: "@return"
+    - id: quiet
+      text: Fill the can, pay, and carry it back up the field.
+      text_after: |
+        Milk, two dozen eggs, the coins counted into her hand. She's looking at the sky again
+        before you're out of the yard. You carry the can back up the field, slopping, and don't
+        look up yourself.
+      next: "@return"
+
+- id: la_air_farm_after
+  chapter: front
+  kind: pool
+  pool: front_1918_air
+  once: true
+  weight: 60
+  requires: [ "war.tour >= 33", "war.tour <= 35", flag.la_air_farm ]
+  title: The old field
+  text: |
+    The squadron left the old aerodrome in March with two hours' notice, and burned what it
+    couldn't fly out. It's ten miles behind the German line now.
+
+    Today the job takes you over it, at three thousand feet. You know the wood first. Then the
+    field, with pale squares in the grass where the hangars stood. Then the hedge and the farm.
+
+    There's a roof on it. There are grey lorries in the yard, and washing on a line, and no way to
+    tell from here whose washing. Nobody's standing in the yard with an arm up. Something by the
+    barn starts firing at you, little white puffs, a long way short.[if flag.la_air_sweet] You've still got the scarf on.[/if]
+
+    You count the machines of the flight, without meaning to. All there.
+  choices:
+    - id: down
+      text: Ask your pilot to go down for a closer look.
+      effects: [ { war_mood: { nerve: -1 } } ]
+      text_after: |
+        You shout it and point. He looks, and shakes his head, and he's right. It's not the job,
+        and there's a gun by the barn. The farm slides away under the tail, getting smaller, till
+        it's a red roof and then a field. You never find out if she went or stayed.
+      next: "@return"
+    - id: on
+      text: Mark the lorries on the map and fly on.
+      effects: [ { war_mood: { standing: 1 } } ]
+      text_after: |
+        You pencil it in: transport, a dozen lorries, a gun by the barn. It's a farmyard you used
+        to buy eggs in, and now it's a mark on a map that the guns will read. You hold the pencil
+        over it a second longer than you need. Then you turn the map and look for the next thing.
+      next: "@return"
