@@ -4,8 +4,10 @@
 # village you have been taking leave in is bombed in-between your leaves."
 #
 # Eleven women besides the sweetheart at home and Marthe Delattre (romance.yaml), each written once
-# and shared by the four towns with `pools:`. Each has her own war. None is an ending: these
-# events set no flag the leaves or the Armistice read.
+# and shared by the four towns with `pools:`. Each has her own war. None is an ending, and the
+# leaves read none of their flags. The six Armistice endings carry one remembering line: Odile's
+# loaf (la_baker_spoke), or else the girl at Bélincourt (seen.la_freed; no name, because only one
+# of the three choices there learns it is Jeanne).
 #
 #   1915  Odile Carlier, the baker's daughter at Vauquelin-les-Mines (a fictional pit village
 #         behind the Loos sector). The village is shelled by a long-range gun during the battle;
@@ -13,22 +15,24 @@
 #   1916  Léonie, who sells oranges and chocolate on the road up to the Somme. Next time up the
 #         road her small brother has the basket: she has gone to a factory at Amiens.
 #   1916  Madame Caudron, a widow keeping her farm at Aubrimont (fictional), where the platoon is
-#         billeted. In the retreat of March 1918 the farm is empty and nobody is left to ask.
+#         billeted. In the retreat of spring 1918 the farm is empty and nobody is left to ask.
 #   any   Sister Mackie at the clearing station, for a man who has had a light wound.
 #   1917  Céline, in a cellar café in Arras before the battle. Afterwards the board says Fermé.
 #   1917  Godelieve, a Belgian refugee in a tea room at Poperinghe (a fictional tea room). The
 #         street is bombed in the autumn; she lived, and went into France with the other
 #         refugees, and nobody knows where.
 #   1917-18 Winnie Barlow, a WAAC clerk at the base, who types the casualty returns.
-#   1918  A girl pushing her grandmother in a wheelbarrow in the March retreat; never named.
+#   1918  A girl pushing her grandmother in a wheelbarrow in the spring retreat; never named.
 #   1918  Jeanne, in Bélincourt (fictional), the first village with people in it, in the advance.
 #   tank  Adèle, who takes in the company's washing at Hérimont (fictional, near Erin), 1917; she
-#         is still there in May 1918, with his shirt.
+#         is still there in May or July 1918, with his shirt.
 #   air   Lucie, at the farm at the end of the aerodrome, who counts the machines home, 1917; in
 #         the spring of 1918 he flies over the farm, behind the German line.
 #
 # The sweetheart and Marthe. Every event where he can flirt first works out whether he is spoken
-# for (on_enter, *la_bind): la_bound_home (married, or engaged and not ended) and la_bound_fr
+# for (on_enter, *la_bind): la_bound_home (married, or engaged and not ended; or, in the city, he
+# writes "Dear Florence" to Miss Holland of his office, c16_florence, which nothing ends: the lines
+# then say Florence, not [if flag.c16_florence]Florence[else]{sweetheart}[/if], because Ivy has let that man go) and la_bound_fr
 # (walking out with Marthe, writing to her, or promised). Such a man always has the other choices;
 # if he flirts anyway it costs him a point of nerve and sets la_strayed, the text says why, and the
 # later meetings read la_strayed.
@@ -164,7 +168,7 @@
   on_enter: &la_bind
     - { clear: flag.la_bound_home }
     - { clear: flag.la_bound_fr }
-    - { if: "flag.ro_sw_married || flag.ro_sw_wed16 && !flag.ro_sw_ended || flag.ro_sw_after && !flag.ro_sw_ended || flag.ro_sw_wed17 && !flag.ro_sw_ended || flag.ro_sw_wait2 && !flag.ro_sw_ended", then: [ { set: flag.la_bound_home } ] }
+    - { if: "flag.c16_florence || flag.ro_sw_married || flag.ro_sw_wed16 && !flag.ro_sw_ended || flag.ro_sw_after && !flag.ro_sw_ended || flag.ro_sw_wed17 && !flag.ro_sw_ended || flag.ro_sw_wait2 && !flag.ro_sw_ended", then: [ { set: flag.la_bound_home } ] }
     - { if: "flag.ro_fr_promise || flag.ro_fr_writes && !flag.ro_fr_let_go || flag.ro_fr_walked && !flag.ro_fr_parted && !flag.ro_fr_let_go", then: [ { set: flag.la_bound_fr } ] }
   title: Oranges
   text: |
@@ -179,7 +183,7 @@
     a second basket. The sergeant has decided not to see either of them.
 
     She comes level with your file. "Orange, Tommy? Quatre sous." You can smell them from here,
-    sharp and clean over the sweat and the wet wool.[if flag.la_bound_home] {sweetheart}'s letter is buttoned in your breast pocket, with her answer in it.[/if]
+    sharp and clean over the sweat and the wet wool.[if flag.la_bound_home][if flag.c16_florence] Florence's last letter is buttoned in your breast pocket, on the firm's paper.[else] {sweetheart}'s letter is buttoned in your breast pocket, with her answer in it.[/if][/if]
   choices:
     - id: buy
       text: Buy two, and ask her in French how trade is.
@@ -280,7 +284,7 @@
     sergeant in the yard and stood in front of him till he paid for it.
 
     On the third morning the pump handle comes off in her hand. She stands in the yard holding it,
-    with the pails empty at her feet and the cows shouting in the byre.[if flag.la_bound_home] You've a letter to {sweetheart} half written on your knee.[/if]
+    with the pails empty at her feet and the cows shouting in the byre.[if flag.la_bound_home] You've a letter to [if flag.c16_florence]Florence[else]{sweetheart}[/if] half written on your knee.[/if]
   choices:
     - id: mend
       text: Mend the pump for her. You can see from here what's gone.
@@ -307,7 +311,7 @@
 
         "J'ai trente-quatre ans," she says, "et vous êtes un enfant." She's thirty-four and you're
         a child. She says it without unkindness, and goes back to the cow. But there's an egg left
-        on the barn step that evening with your pails, and one the next.[if flag.la_bound_home] You finish the letter to {sweetheart} that night, and leave the pails out of it, and know you've left them out.[/if]
+        on the barn step that evening with your pails, and one the next.[if flag.la_bound_home] You finish the letter to [if flag.c16_florence]Florence[else]{sweetheart}[/if] that night, and leave the pails out of it, and know you've left them out.[/if]
       next: "@return"
     - id: leave
       text: Leave her be. She has soldiers enough in her yard.
@@ -318,7 +322,7 @@
         her hens in at night.
       next: "@return"
 
-# -- March 1918: the retreat goes back through Aubrimont ------------------------------------------
+# -- Spring 1918 (tour 33 is April): the retreat goes back through Aubrimont ------------------------------------------
 - id: la_widow_after
   chapter: front
   kind: pool
@@ -341,7 +345,7 @@
     tight as a drum. The pump's still in the yard, its handle held on with a nail.
 
     There's nobody left in Aubrimont to ask which road Madame Caudron took. The Germans are two
-    miles behind, and the sergeant's shouting from the lane.
+    miles behind, and [if war.rank >= 3]the company's nearly out of sight up the lane[else]the sergeant's shouting from the lane[/if].
   choices:
     - id: milk
       text: Milk the cow out on to the straw. It's ten minutes.
@@ -388,14 +392,14 @@
     smell of carbolic and wet canvas and ether, which you'd know anywhere now.
 
     It's a nursing sister who sees to it, in a grey dress and a white veil and a cape edged with
-    red. A Scotswoman, with her sleeves pinned back and forearms like a washerwoman's. Hers is the
-    first woman's voice you've heard in your own language this side of the Channel.
+    red. A Scotswoman, with her sleeves pinned back and forearms like a washerwoman's. It's a long
+    time since you heard a woman's voice in your own language.
 
     "Sit there. Look at the wall. It'll hurt, and then it won't."
 
     It does. Behind the canvas there's a ward of men a deal worse than you, and one of them is
     calling for her, over and over, in the same flat voice. "I'm coming, Davies," she says, and
-    doesn't turn her head. "I've only the two hands."[if flag.la_bound_home] You think about {sweetheart}, hard, to keep from shouting.[/if]
+    doesn't turn her head. "I've only the two hands."[if flag.la_bound_home] You think about [if flag.c16_florence]Florence[else]{sweetheart}[/if], hard, to keep from shouting.[/if]
   choices:
     - id: talk
       text: Ask her where she's from, to keep your mind off it.
@@ -419,7 +423,7 @@
 
         She says it so the men on the next bench can enjoy it too, and they do. But she ties off
         the dressing gently, and gives your shoulder a push, the way you'd send a child out to
-        play.[if flag.la_bound_home] On the lorry back you take out {sweetheart}'s photograph and look at it, and feel a fool, and a bit of a liar.[elif flag.la_bound_fr] On the lorry back you think of Marthe carrying plates, and feel a fool, and a bit of a liar.[else] You grin the whole way back on the lorry.[/if]
+        play.[if flag.la_bound_home] On the lorry back you take out [if flag.c16_florence]Florence's last letter[else]{sweetheart}'s photograph[/if] and look at it, and feel a fool, and a bit of a liar.[elif flag.la_bound_fr] On the lorry back you think of Marthe carrying plates, and feel a fool, and a bit of a liar.[else] You grin the whole way back on the lorry.[/if]
       next: "@return"
     - id: quiet
       text: Look at the wall, as you're told, and say nothing.
@@ -456,7 +460,7 @@
     somewhere up in the street the candles all lean the same way and the dust sifts into the wine.
     She doesn't stop pouring.
 
-    "Qu'est-ce que vous voulez?" She's got to you. "Vin blanc? Un franc."[if flag.la_bound_home] You've your pay book in your pocket, with {sweetheart}'s photograph in the back of it.[elif flag.la_bound_fr] It's weeks since you had an egg off Marthe's pan.[/if]
+    "Qu'est-ce que vous voulez?" She's got to you. "Vin blanc? Un franc."[if flag.la_bound_home] You've your pay book in your pocket, with [if flag.c16_florence]Florence's last letter folded[else]{sweetheart}'s photograph[/if] in the back of it.[elif flag.la_bound_fr] It's weeks since you had an egg off Marthe's pan.[/if]
   choices:
     - id: talk
       text: Ask her, in your French, why she hasn't gone.
@@ -483,7 +487,7 @@
 
         But she fills your glass over the line and doesn't chalk it up. Her name's Céline. When
         you go up the steps she says "À demain," and from the street you can't tell if she meant
-        it.[if flag.la_bound_home] You meant it, for as long as it took to say. It's {sweetheart} you think of, going back through the dark, and you walk faster.[elif flag.la_bound_fr] You meant it, for as long as it took to say. Marthe's letter about the hens is in your pocket, and you don't take it out tonight.[/if]
+        it.[if flag.la_bound_home] You meant it, for as long as it took to say. It's [if flag.c16_florence]Florence[else]{sweetheart}[/if] you think of, going back through the dark, and you walk faster.[elif flag.la_bound_fr] You meant it, for as long as it took to say. Marthe's letter about the hens is in your pocket, and you don't take it out tonight.[/if]
       next: "@return"
     - id: quiet
       text: Drink your wine by the stove and keep to yourself.
@@ -556,7 +560,7 @@
     round her head. She sets every cup down exactly square to the edge of the table. Her name is
     Godelieve, which nobody in the British Army can say, so the room calls her Glory and she
     answers to it. She has French for the officers, English for the men, and Flemish for her
-    mother, who is frying in the back.[if flag.la_strayed] You've a bad conscience from the last time, and you've brought it in with you.[/if][if flag.la_bound_home] You've been meaning all week to write to {sweetheart}.[elif flag.la_bound_fr] You owe Marthe a letter.[/if]
+    mother, who is frying in the back.[if flag.la_strayed] You've a bad conscience from the last time, and you've brought it in with you.[/if][if flag.la_bound_home] You've been meaning all week to write to [if flag.c16_florence]Florence[else]{sweetheart}[/if].[elif flag.la_bound_fr] You owe Marthe a letter.[/if]
   choices:
     - id: talk
       text: Ask her where she's from, in whatever language works.
@@ -585,7 +589,7 @@
         your name back, right the first time.
 
         "Tomorrow you forget," she says. You tell her you won't. She gives you a look that says
-        she's heard that from the whole Second Army, and brings a fifth cup you didn't order.[if flag.la_bound_home] The letter to {sweetheart} doesn't get written that night either, and now you know why.[elif flag.la_bound_fr] Marthe's letter doesn't get written that night either, and now you know why.[/if]
+        she's heard that from the whole Second Army, and brings a fifth cup you didn't order.[if flag.la_bound_home] The letter to [if flag.c16_florence]Florence[else]{sweetheart}[/if] doesn't get written that night either, and now you know why.[elif flag.la_bound_fr] Marthe's letter doesn't get written that night either, and now you know why.[/if]
       next: "@return"
     - id: quiet
       text: Drink your tea and listen to the gramophone.
@@ -657,7 +661,7 @@
   on_enter: *la_bind
   title: The girl from Records
   text: |
-    They send you down to the base for a three-day gas course: a city of huts on the sand hills,
+    They send you down to the base for a three-day [if war.corps == air]gunnery[else]gas[/if] course: a city of huts on the sand hills,
     with the sea beyond, and a wind that blows the sand into the tea.
 
     On the second evening, in the YMCA hut, there are women in khaki at the next table. WAACs:
@@ -670,7 +674,7 @@
 
     "I type the casualty returns," she says. "Killed, wounded, missing. Eight hours a day. What's
     your lot?" You tell her. She nods. "I've typed you. I've typed your number more times than my
-    own name."[if flag.la_strayed] You've something on your conscience already, and it's sitting at the table with you.[/if][if flag.la_bound_home] {sweetheart} is somewhere the far side of that sea.[/if]
+    own name."[if flag.la_strayed] You've something on your conscience already, and it's sitting at the table with you.[/if][if flag.la_bound_home][if flag.c17_florence_waac] Florence wears that same khaki, at another base up the coast.[else] [if flag.c16_florence]Florence[else]{sweetheart}[/if] is somewhere the far side of that sea.[/if][/if]
   choices:
     - id: talk
       text: Tell her about one of the names she's typed.
@@ -696,7 +700,7 @@
 
         She won't give you an address. "You'll be a line on my sheet one day or you won't," she
         says, "and I'd as soon not know which line." At eight she shakes your hand, hard, like a
-        man, and holds on to it a second longer than a man would.[if flag.la_bound_home] You walk back to your hut along the tide line, with {sweetheart}'s last letter unanswered in your pocket, and the sand in your boots feels like something you've been caught with.[elif flag.la_bound_fr] You walk back to your hut along the tide line. Marthe would have asked what the girl's name was, straight out, and you'd have had to say.[/if]
+        man, and holds on to it a second longer than a man would.[if flag.la_bound_home] You walk back to your hut along the tide line, with [if flag.c16_florence]Florence[else]{sweetheart}[/if]'s last letter unanswered in your pocket, and the sand in your boots feels like something you've been caught with.[elif flag.la_bound_fr] You walk back to your hut along the tide line. Marthe would have asked what the girl's name was, straight out, and you'd have had to say.[/if]
       next: "@return"
     - id: quiet
       text: Pass the sugar and go back to your cocoa.
@@ -706,7 +710,7 @@
         in women's voices. You sit and listen to it like a man at a fire.
       next: "@return"
 
-# ==== 1918: the barrow on the road, in the March retreat ==========================================
+# ==== 1918: the barrow on the road, in the spring retreat (tours 33-34 are April and May) ==========================================
 
 - id: la_road
   chapter: front
@@ -738,8 +742,7 @@
       text_after: |
         It's heavier than anything has a right to be. The old woman weighs nothing; it's the
         barrow, all oak and iron, and you think how far the girl has brought it. You push it a
-        mile with your rifle slung, and the sergeant finds something to look at in the other
-        direction.
+        mile with your rifle slung, and [if war.rank >= 3]nobody in the company says a word about it[else]the sergeant finds something to look at in the other direction[/if].
 
         The girl walks alongside with her hands held up in front of her, as if they belonged to
         somebody else. She doesn't tell you her name and you don't ask it. At the crossroads the
@@ -790,7 +793,7 @@
     neck of the first soldier she reaches, which is you, and kisses you. She smells of smoke and
     cold cellar. She's crying and laughing in the same breath.
 
-    "Quatre ans," she says. "Quatre ans, monsieur." Four years.[if flag.la_road_helped] You think of a wheelbarrow on the road in March, going the other way.[/if][if flag.la_bound_home] It's {sweetheart} you'd thought to kiss next.[elif flag.la_bound_fr] It's Marthe you'd thought to kiss next.[/if]
+    "Quatre ans," she says. "Quatre ans, monsieur." Four years.[if flag.la_road_helped] You think of a wheelbarrow on the road in the spring, going the other way.[/if][if flag.la_bound_home] It's [if flag.c16_florence]Florence[else]{sweetheart}[/if] you'd thought to kiss next.[elif flag.la_bound_fr] It's Marthe you'd thought to kiss next.[/if]
   choices:
     - id: kiss
       text: Kiss her back. Four years is four years.
@@ -800,7 +803,7 @@
         You kiss her back, and the platoon roars. Then she lets go of you and kisses the man
         behind, and the man behind him, the whole file, and her mother's working down the other
         side of the street with a flag made out of three petticoats that's been under the
-        floorboards since 1914.[if flag.la_bound_home] It was nothing. She kissed the whole file. All the same you leave it out of your next letter to {sweetheart}, and the leaving out stays with you for days.[elif flag.la_bound_fr] It was nothing. She kissed the whole file. All the same you're glad Ternecourt is a long way off, and not glad to be glad.[/if]
+        floorboards since 1914.[if flag.la_bound_home] It was nothing. She kissed the whole file. All the same you leave it out of your next letter to [if flag.c16_florence]Florence[else]{sweetheart}[/if], and the leaving out stays with you for days.[elif flag.la_bound_fr] It was nothing. She kissed the whole file. All the same you're glad Ternecourt is a long way off, and not glad to be glad.[/if]
       next: "@return"
     - id: give
       text: Give her your chocolate, and your French. C'est fini, mamzelle.
@@ -848,7 +851,7 @@
     to the wrist, and split across the knuckles.
 
     She holds your overalls up between a finger and a thumb. "Ça ne part pas," she says. It won't
-    come out. The oil. "Jamais." Then she names a price for trying.[if flag.la_bound_home] {sweetheart} has hands like that in winter.[/if]
+    come out. The oil. "Jamais." Then she names a price for trying.[if flag.la_bound_home][if flag.c16_florence] Florence's hands have ink on them, and nothing worse.[else] {sweetheart} has hands like that in winter.[/if][/if]
   choices:
     - id: talk
       text: Pay it, and ask her, in your French, if she's from here.
@@ -874,7 +877,7 @@
 
         Next day your overalls come back with the tear in the knee mended, which nobody asked
         for or paid for. Her name's Adèle. She says yours after you, twice, to have it right. You
-        leave a shirt for next week.[if flag.la_bound_home] {sweetheart}'s hands split too, in the cold. You've never sent her anything for them, and that night you can't get it out of your head.[elif flag.la_bound_fr] You never took Marthe anything for the burn on her wrist. That night you can't get it out of your head.[/if]
+        leave a shirt for next week.[if flag.la_bound_home][if flag.c16_florence] You've never sent Florence anything but letters, and that night you can't get it out of your head.[else] {sweetheart}'s hands split too, in the cold. You've never sent her anything for them, and that night you can't get it out of your head.[/if][elif flag.la_bound_fr] You never took Marthe anything for the burn on her wrist. That night you can't get it out of your head.[/if]
       next: "@return"
     - id: quiet
       text: Pay what she asks and get back to the tank.
@@ -895,7 +898,7 @@
     They send you back to the workshops at Erin with a lorry, three days, for spares. Hérimont's a
     mile out of your way, and you go the mile.
 
-    You've seen enough shut doors this spring to expect another. But the line's across the garden,
+    You've seen enough shut doors this year to expect another. But the line's across the garden,
     full of shirts, and the copper's smoking. Adèle straightens up from the tub and looks at you,
     and goes into the house without a word.
 
@@ -949,7 +952,7 @@
     every day since the squadron came, and she's told nobody.
 
     Then she sees the can. "Du lait? Des oeufs?" The yard smells of cows and warm mash, and from the
-    hangars, faint on the wind, there's the pear-drop smell of the dope.[if flag.la_bound_home] {sweetheart} reads the lists in the paper every night; she wrote and told you so.[/if]
+    hangars, faint on the wind, there's the pear-drop smell of the dope.[if flag.la_bound_home] [if flag.c16_florence]Florence[else]{sweetheart}[/if] reads the lists in the paper every night; she wrote and told you so.[/if]
   choices:
     - id: talk
       text: Tell her, in your French, that six is the one you fly in.
@@ -975,7 +978,7 @@
         attention.
 
         She counts you home at dusk. You know she does, because there are two eggs over in the
-        can every day after that, and nobody in the mess can account for them.[if flag.la_bound_home] {sweetheart} is counting too, off the lists in the paper. You think of that at six thousand feet, with nothing to do about it.[elif flag.la_bound_fr] Marthe would count too, if she knew where you were. You haven't told her you fly.[/if]
+        can every day after that, and nobody in the mess can account for them.[if flag.la_bound_home] [if flag.c16_florence]Florence[else]{sweetheart}[/if] is counting too, off the lists in the paper. You think of that at six thousand feet, with nothing to do about it.[elif flag.la_bound_fr] Marthe would count too, if she knew where you were. You haven't told her you fly.[/if]
       next: "@return"
     - id: quiet
       text: Fill the can, pay, and carry it back up the field.

@@ -23,11 +23,16 @@
 #    advance (asked: rv_otto_prisoner; did not: rv_otto_unknown).
 # 4. Stanley Rudge, the man who stayed at home, exempted by the tribunal in 1916. For a man with a
 #    sweetheart he sees her to her gate; for a man without he has his place (the choir, the band,
-#    the horses, the office stool). 1916 the mother's letter (rv_home; asked or left him out); 1917
+#    the horses, the cricket club: Miss Holland has his office desk). 1916 the mother's letter (rv_home; asked or left him out); 1917
 #    his own parcel and letter (wrote back or not); 1918 combed out and met at a railhead with a
 #    labour company (needs rv_home_wrote; shook his hand rv_home_met, or passed rv_home_passed), or
 #    the mother's letter that the influenza took him (rv_home_dead). Shirker or weak chest: the
 #    letters leave it open until the end. His events are in the tank and air pools too.
+#
+# The six Armistice endings (e_armistice_*) close each arc in one sentence, in a paragraph before
+# "You are {age} years old": rv_sgt_stayed or rv_sgt_dead; rv_hal_carried, or rv_hal_cold with or
+# without rv_hal_peace; rv_otto_body or rv_otto_prisoner (left out when the other three all show, to
+# keep the paragraph to four sentences with the woman's); rv_home_dead or rv_home_met.
 #
 # Rivals 1-3 are guarded { not: war.transferred }: a tunneller, a tank man or an air man has left
 # the battalion. No event falls on a battle tour (the engine shows none there). Words follow
@@ -153,7 +158,7 @@
     Drunk in the line. It is to be a court-martial.
 
     He finds you behind the cookhouse the night before, sober, shaved so close there's blood on
-    his collar. [if war.rank >= 3]He calls you Sergeant now, one sergeant to another, and you can hear what it costs him.[else]He has never asked a man below him for anything, and he stands as if he was reporting to you.[/if]
+    his collar. [if war.rank >= 5]He salutes you, and stands to attention in front of a man he once showed up for rust before the whole rank, and you can see what it costs him.[/if][if war.rank == 4]He calls you Sergeant-major now, and you can hear what it costs him.[/if][if war.rank == 3]He calls you Sergeant now, one sergeant to another, and you can hear what it costs him.[/if][if war.rank <= 2]He has never asked a man below him for anything, and he stands as if he was reporting to you.[/if]
 
     "They'll call you," he says. "I'm not asking you to lie. I'm asking you to tell them what I
     was the other nights." His hands are behind his back, as on parade. They are not quite still.
@@ -207,7 +212,7 @@
     His team is two boys of eighteen from the last draft, who have been in France a fortnight and
     look at him as chicks look at a hen.
 
-    [if war.rank >= 5]It is for you to say who stays. He knows it, and doesn't wait. "With respect, sir. Take these two children over. I want one man who knows his business to feed the gun, and then he can go too."[/if][if war.rank >= 3 && war.rank <= 4]You have the stripes he used to have, and it is for you to say who stays. He doesn't wait. "Take these two children over, Sergeant. I want one man who knows his business to feed the gun, and then he can go too."[/if][if war.rank <= 2]He sends the two boys over the planks with a jerk of his head, and looks round the men who are left, and stops at you. He has always stopped at you. "You. You'll feed the gun till the drums are done, and then you'll go."[/if]
+    [if war.rank >= 5]It is for you to say who stays. He knows it, and doesn't wait. "With respect, sir. Take these two children over. I want one man who knows his business to feed the gun, and then he can go too."[/if][if war.rank == 4]You have a crown on your sleeve now, where he had three stripes, and it is for you to say who stays. He doesn't wait. "Take these two children over, Sergeant-major. I want one man who knows his business to feed the gun, and then he can go too."[/if][if war.rank == 3]You have the stripes he used to have, and it is for you to say who stays. He doesn't wait. "Take these two children over, Sergeant. I want one man who knows his business to feed the gun, and then he can go too."[/if][if war.rank <= 2]He sends the two boys over the planks with a jerk of his head, and looks round the men who are left, and stops at you. He has always stopped at you. "You. You'll feed the gun till the drums are done, and then you'll go."[/if]
 
     The mist is coming off the water, and it smells of mud and cordite. There's a water bottle by
     his knee that doesn't smell of water. His hands on the gun are steady as a table.
@@ -469,7 +474,7 @@
         He looks at the hand a moment before he takes it. His is dry and quick.
 
         "That prisoner," he says. "In 'fifteen. I'd six at home and a stripe was threepence a day."
-        He lets go. "You'd have had it sooner, else. I've thought so."
+        He lets go. "You'd have had it [if war.rank >= 1]sooner[else]before me[/if], else. I've thought so."
 
         He goes off down the trench calling for his ration party. It is three years late and he
         said it sideways, and you find it's enough.
@@ -597,8 +602,8 @@
     corporal with spectacles mended with wire. Corporal Lunt of the next platoon, who was a waiter
     in a German hotel before the war, is talking to him for the practice. He calls across to you.
 
-    "This one was on the trench mortars. Minenwerfer. Says he had the spring of 'sixteen opposite
-    us, by the brickstacks, and the winter after."
+    "This one was on the trench mortars[if war.rank >= 5], sir[/if]. Minenwerfer. Says he had the spring of 'sixteen opposite
+    us, and the winter after."
   choices:
     - id: ask
       text: Ask him, through Lunt, about five o'clock.
@@ -650,7 +655,7 @@
 
     [if start == mill]"The manager went and spoke for him, the shed being all on khaki now and him a tackler's learner. They do say as well it is his chest, which he has always had. He wears the badge on his coat so the girls will not give him a feather."[/if][if start == pit]"The pit will not let a hewer go now, with the coal wanted for the ships, and he has the badge to say so. They do say as well it is his chest. His mother says so, any road."[/if][if start == farm]"They have let him off till after harvest and will look at him again, his father having only him and old Jan for a hundred and twenty acres. They do say as well it is his chest, which he has always had."[/if][if start == city]"His firm appealed for him, shipping being war work now. They do say as well it is his chest, which he has always had. He wears the badge on his coat so the girls on the tram will not give him a feather."[/if]
 
-    [if flag.ro_sw_first && !flag.ro_sw_ended]"He has been seeing {sweetheart} home of a Sunday night, the lamps being out now. I thought you should have it from me before you had it from somebody else. I am sure there is nothing in it."[else][if start == mill]"They have put him in your place in the chapel choir, with the tenors. He has not your voice."[/if][if start == pit]"The bandmaster has given him your cornet in the colliery band. Only till you are home, he says."[/if][if start == farm]"He is working your pair of horses at the farm, two days in the week. They go well enough for him."[/if][if start == city]"They have given him your stool at the office, and your ledgers. Only till you are home, Mr Gedge says."[/if][/if]
+    [if flag.ro_sw_first && !flag.ro_sw_ended]"He has been seeing {sweetheart} home of a Sunday night, the lamps being out now. I thought you should have it from me before you had it from somebody else. I am sure there is nothing in it."[else][if start == mill]"They have put him in your place in the chapel choir, with the tenors. He has not your voice."[/if][if start == pit]"The bandmaster has given him your cornet in the colliery band. Only till you are home, he says."[/if][if start == farm]"He is working your pair of horses at the farm, two days in the week. They go well enough for him."[/if][if start == city]"They have him in your place in the cricket club's second eleven, there being nobody else to ask. He has not your eye."[/if][/if]
 
     At the bottom, after her name: "He asked to be remembered to you."
 
@@ -687,12 +692,12 @@
     A parcel, addressed in a hand you don't know till you find the name inside. Stanley Rudge.
     Fifty Woodbines, a tin of cocoa, and a pair of socks that somebody has knitted badly.
 
-    "I hope you will not take this amiss. I went before the board again this winter and they have
+    "I hope you will not take this amiss. I went before the board again and they have
     put me back six months more. I did not ask them to. I know what is said of me. I would
     sooner be where you are than hear it, and that is God's truth, though I don't look for you to
     believe it. I would not, in your place.
 
-    [if flag.ro_sw_first && !flag.ro_sw_ended]"{sweetheart} is well. I see her to her gate of a Sunday because your mother asked me to, and for no other reason, and she talks of nobody but you the whole road.[else][if start == mill]"I am keeping your place in the tenors as well as I can. I cannot get the top notes and the choirmaster looks at the ceiling. It is yours the day you are home.[/if][if start == pit]"I am keeping your cornet clean. I have not the wind for it, and the bandmaster looks at the ceiling. It is yours the day you are home.[/if][if start == farm]"Your pair are well. The mare looks down the lane for you yet of a morning. They are yours the day you are home.[/if][if start == city]"I am keeping your ledgers as near as I can to how you kept them. The stool is yours the day you are home.[/if][/if] Yours sincerely, S. Rudge."
+    [if flag.ro_sw_first && !flag.ro_sw_ended]"{sweetheart} is well. I see her to her gate of a Sunday because your mother asked me to, and for no other reason, and she talks of nobody but you the whole road.[else][if start == mill]"I am keeping your place in the tenors as well as I can. I cannot get the top notes and the choirmaster looks at the ceiling. It is yours the day you are home.[/if][if start == pit]"I am keeping your cornet clean. I have not the wind for it, and the bandmaster looks at the ceiling. It is yours the day you are home.[/if][if start == farm]"Your pair are well. The mare looks down the lane for you yet of a morning. They are yours the day you are home.[/if][if start == city]"I am keeping your place in the second eleven as well as I can. I have not made ten runs yet, and the captain looks at the sky. It is yours the day you are home.[/if][/if] Yours sincerely, S. Rudge."
 
     The others look at the Woodbines, and then at you. "Every shirker in England has a chest," one
     of them says. Another says his own brother was turned down for a chest, and died of it in

@@ -300,7 +300,7 @@ sv_first_killed: { description: "Was servant to the first officer, killed at Loo
 sv_second_killed: { description: "Was servant to the second officer, killed in a later battle; his family writes at the Armistice" }
 
 # More lasses (content/scenes/war/lasses.yaml; docs/FRAME-WORDS.md)
-la_bound_home: { description: "Worked out on entering each lasses event: married, or engaged to the sweetheart and not ended; a flirt then costs nerve" }
+la_bound_home: { description: "Worked out on entering each lasses event: married, or engaged to the sweetheart and not ended; a flirt then costs nerve; a city man writing to Florence counts too" }
 la_bound_fr: { description: "Worked out on entering each lasses event: walking out with Marthe, writing to her, or promised; a flirt then costs nerve" }
 la_strayed: { description: "Flirted with another woman while spoken for (the sweetheart or Marthe); the later meetings read it" }
 la_baker: { description: "Queued at the bakery at Vauquelin-les-Mines (1915); he comes back to the shelled village after Loos" }
@@ -314,7 +314,7 @@ la_cellar_sweet: { description: "Told Céline he would come back tomorrow (Arras
 la_pop: { description: "Sat in the tea room with the green shutters at Poperinghe (1917); he comes back to the bombed street in the autumn" }
 la_pop_spoke: { description: "Godelieve, the Belgian refugee at the tea room, told him about her village (1917)" }
 la_pop_sweet: { description: "Stayed at the tea room till he could say Godelieve's name (1917)" }
-la_road_helped: { description: "Pushed the girl's wheelbarrow, with her grandmother in it, to the crossroads in the March retreat (1918)" }
+la_road_helped: { description: "Pushed the girl's wheelbarrow, with her grandmother in it, to the crossroads in the spring retreat (1918)" }
 la_tank_wash: { description: "Tank man: spoke to Adèle, who takes in the company's washing at Hérimont (1917); she has his shirt in 1918" }
 la_tank_sweet: { description: "Tank man: brought Adèle the tin of grease for her hands (1917)" }
 la_air_farm: { description: "Air man: spoke to Lucie at the farm by the aerodrome, who counts the machines home (1917); he flies over the farm in 1918" }

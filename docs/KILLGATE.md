@@ -227,6 +227,18 @@ kill went from 0.32 to 0.30 (best play had slid to the 5% floor across the close
 in the BEF about one casualty in four was killed). Gate after: best play 5.7% +-0.5, careful 5.1%,
 half 5.1%, reckless 1.6%, survives 1915 73.3%.
 
+### The balance of 2026-11-20: best play to one game in ten
+
+The author: "it can be very frustrating to never make it 94 out of 100 times. Closer to 10 would be
+better." Before: 100 / 75 / 43 / 19 of best-play men reached 1915 / 1916 / 1917 / 1918, and 7.6%
+the Armistice; 1917's largest single loss was breakdowns (8.3%). 1917-18 were eased (line nerve,
+shellfire, battle nerve and hit, capture in March) and 1915 left alone; the sick parade now goes by
+standing, because always hanging back had become the best road. After (2,000 per policy, +-1 SE):
+adaptive 9.5% +-0.7, half 8.7%, mates 8.6%, careful 8.3%, reckless 3.3%, survives 1915 73.0%.
+**Open:** reckless play is no longer near 0% (3.3%); the mill leads the towns at 13.8% +-1.5 (the
+tanks and the servant's road both favour it). The transfer and servant trade tables above were
+measured before this change and have not been re-run.
+
 ### Skills: nothing is decoration
 
 All 15 skills change end states when switched off (1,920 runs each, every policy, town and
