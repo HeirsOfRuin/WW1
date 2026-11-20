@@ -2,7 +2,7 @@
 import { join } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { loadBase, walkYaml, readYaml, parse, ContentError } from '@tools/content';
-import { ConfigSchema, RegistrySchema, SceneSchema, StartSchema, GAME_ID, type ContentBundle, type Start } from '../src/content/schema';
+import { ConfigSchema, RegistrySchema, SceneSchema, StartSchema, GlossSchema, GAME_ID, type ContentBundle, type Start, type Gloss } from '../src/content/schema';
 import { NextSchema, type Next } from '@engine/schema';
 import '../src/game/module'; // the rules this content is played by
 
@@ -22,6 +22,16 @@ export function loadContent(dir = CONTENT_DIR): ContentBundle {
     starts[s.id] = s;
   }
   if (!Object.keys(starts).length) throw new ContentError('content/starts/: no start');
+  // the soldier's words: every file in content/glossary/, merged; the first meaning of a term wins
+  const glossary: Gloss[] = []; const seenTerm = new Set<string>();
+  for (const p of walkYaml(join(dir, 'glossary'))) {
+    hash.update(readFileSync(p));
+    for (const g of (readYaml(p) as unknown[]) ?? []) {
+      const e = parse(GlossSchema, g, rel(p));
+      if (seenTerm.has(e.term.toLowerCase())) continue;
+      seenTerm.add(e.term.toLowerCase()); glossary.push(e);
+    }
+  }
   // The war's route (content/route.yaml) replaces every next: "@war", so it is written once and
   // the validator, bot and game all see the real switch.
   const routeFile = join(dir, 'route.yaml');
@@ -37,5 +47,5 @@ export function loadContent(dir = CONTENT_DIR): ContentBundle {
     }
   };
   sub(base.scenes);
-  return { hash: hash.digest('hex').slice(0, 12), ...base, starts };
+  return { hash: hash.digest('hex').slice(0, 12), ...base, starts, glossary };
 }

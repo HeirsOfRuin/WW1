@@ -18,7 +18,7 @@ export function chapterNumber(content: ContentBundle, chapter: string): number {
 
 export function poolCandidates(state: GameState, content: ContentBundle, group: string, exclude: string[] = []): Scene[] {
   return Object.values(content.scenes).filter((s) => {
-    if (s.kind !== 'pool' || s.pool !== group || exclude.includes(s.id)) return false;
+    if (s.kind !== 'pool' || (s.pool !== group && !s.pools?.includes(group)) || exclude.includes(s.id)) return false;
     const last = state.seen[s.id];
     if (last !== undefined) {
       if (s.once) return false;

@@ -53,7 +53,11 @@ export const StartSchema = z.object({
 }).strict();
 export type Start = z.infer<typeof StartSchema>;
 
+/** A period word and its plain meaning (content/glossary/*.yaml), tappable in the text. */
+export const GlossSchema = z.object({ term: z.string().min(2), also: z.array(z.string().min(2)).optional(), means: z.string().min(8).max(200) }).strict();
+export type Gloss = z.infer<typeof GlossSchema>;
 export interface ContentBundle extends CoreContent {
+  glossary: Gloss[];
   registry: Registry;
   scenes: Record<string, Scene>;
   starts: Record<string, Start>;

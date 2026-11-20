@@ -1,0 +1,10 @@
+# The soldier's words (the author, 2026-11-20: words for equipment, sayings and accent words "can come
+# across as confusing. But I don't want it to sound too modern either"). The text keeps its period
+# words; each one here can be tapped in the game for a plain meaning. term: as written in the text;
+# also: other spellings and plurals; means: one plain sentence, under 20 words, no modern slang.
+# npm run gloss checks every term is used in the text (rule 2: nothing declared is decoration).
+- { term: estaminet, also: [estaminets], means: "A small French café-bar behind the line that sold soldiers egg and chips, beer and wine." }
+- { term: firestep, also: [fire-step, "fire step"], means: "The raised step in a trench that a man stood on to see and fire over the top." }
+- { term: parapet, means: "The bank of earth and sandbags along the front of a trench, facing the enemy." }
+- { term: parados, means: "The bank of earth along the back of a trench." }
+- { term: Blighty, means: "Soldiers' word for Britain, home. A 'Blighty one' was a wound bad enough to get you sent there." }

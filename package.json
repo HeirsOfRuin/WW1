@@ -16,6 +16,7 @@
     "icons": "node tools/make-icons.mjs",
     "check": "npm run build && vitest run && npm run validate && npm run lint:style && npm run continuity -- --strict && npm run scan -- --strict && npm run bot -- --runs 100 && node tools/check-bundle.mjs && node tools/smoke.mjs dist",
     "validate": "tsx tools/validate.ts",
+    "gloss": "tsx tools/gloss.ts",
     "lint:style": "tsx tools/narrative/lint-style.ts",
     "continuity": "tsx tools/narrative/continuity.ts",
     "scan": "tsx tools/narrative/render-scan.ts",

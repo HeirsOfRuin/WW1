@@ -144,6 +144,7 @@ export function makeSceneSchemas<E, X extends z.ZodRawShape = {}>(EffectSchema: 
     title: z.string().optional(),
     tags: z.array(Id).default([]),
     pool: Id.optional(), // pool group for kind: pool
+    pools: z.array(Id).optional(), // more pool groups the same event is drawn from (one event shared by several towns)
     requires: CondInputSchema.optional(),
     weight: z.number().min(0).default(10),
     once: z.boolean().default(true),

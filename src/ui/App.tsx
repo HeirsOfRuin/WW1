@@ -3,7 +3,7 @@
 // the clock, [data-action] for choices, [data-tab] for tabs.
 import { useEffect, useRef, useState } from 'preact/hooks';
 import type { ContentBundle } from '../content/schema';
-import { newGame, view, choose, startsOf, statusOf, artOf, recordOf, mapOf, rasterize, MAP_W, MAP_H, MAP_COLOURS, type GameState, type SceneView, type SoldierRecord } from '../game/index';
+import { newGame, view, choose, startsOf, statusOf, artOf, recordOf, mapOf, rasterize, glossOf, MAP_W, MAP_H, MAP_COLOURS, type GameState, type SceneView, type SoldierRecord } from '../game/index';
 
 // Scene pictures (DESIGN §11): tools/art.ts writes src/art/<key>.png; the game asks artOf(state) which one.
 const ART = import.meta.glob('../art/*.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
@@ -16,9 +16,16 @@ function load(content: ContentBundle): GameState | null {
   if (!raw) return null;
   try { return fromSave(JSON.parse(raw), content).state; } catch { return null; }
 }
-const paras = (t: string) => t.trim().split(/\n\s*\n/).map((p) => <p>{p}</p>);
+// Text with the soldier's words tappable (src/game/gloss.ts cuts it; this only shows it).
+function Gloss({ word, means }: { word: string; means: string }) {
+  const [open, setOpen] = useState(false);
+  return <><span class="gloss" role="button" tabIndex={0} aria-expanded={open} onClick={() => setOpen(!open)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setOpen(!open); }}>{word}</span>{open && <span class="glossed" role="note"> ({means}) </span>}</>;
+}
+let GLOSSARY: ContentBundle['glossary'] = [];
+const paras = (t: string) => { const seen = new Set<string>(); return t.trim().split(/\n\s*\n/).map((p) => <p>{glossOf(p, GLOSSARY, seen).map((x) => (typeof x === 'string' ? x : <Gloss key={x.word} word={x.word} means={x.means} />))}</p>); };
 
 export function App({ content }: { content: ContentBundle }) {
+  GLOSSARY = content.glossary;
   const [state, setState] = useState<GameState | null>(null);
   const [tab, setTab] = useState<'story' | 'soldier' | 'map' | 'journal' | 'menu'>('story');
   const [page, setPage] = useState(0);
@@ -114,7 +121,9 @@ export function App({ content }: { content: ContentBundle }) {
         {tab === 'map' && <WarMap s={state} />}
         {tab === 'journal' && <><h2>Journal</h2>{state.journal.length
           ? <ol class="journal">{[...state.journal].reverse().map((j) => <li><strong>{j.sceneTitle ?? j.scene}</strong>: {j.choice}{j.changes.length > 0 && <small> ({j.changes.join(' · ')})</small>}</li>)}</ol>
-          : <p class="empty">Empty so far: every choice you make is written here.</p>}</>}
+          : <p class="empty">Empty so far: every choice you make is written here.</p>}
+          <h3>The soldier's words</h3><p class="hint">Tap any underlined word in the story for its meaning. All of them:</p>
+          <dl class="lines">{[...content.glossary].sort((a, b) => a.term.localeCompare(b.term)).map((g) => <><dt>{g.term}</dt><dd>{g.means}</dd></>)}</dl></>}
         {tab === 'menu' && <><h2>Menu</h2><div class="stack">
           <button data-act="code" onClick={async () => { const c = await encodeSaveCode(toSave(state, content)); try { await navigator.clipboard.writeText(c); setNote(`Save code copied (${c.length} characters).`); } catch { setNote(c); } }}>Save code (copy)</button>
           <button data-act="link" onClick={async () => { const c = await encodeSaveCode(toSave(state, content)); const url = `${location.origin}${location.pathname}#save=${c}`; try { await navigator.clipboard.writeText(url); setNote('Save link copied: open it on any device to carry on from here.'); } catch { setNote(url); } }}>Save link (copy)</button>
