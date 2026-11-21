@@ -60,6 +60,8 @@ export const GlossSchema = z.object({ term: z.string().min(2), also: z.array(z.s
   quiet: z.boolean().optional() }).strict();
 export type Gloss = z.infer<typeof GlossSchema>;
 export interface ContentBundle extends CoreContent {
+  /** the war's route, once (src/content/route.ts) */
+  warRoute?: unknown;
   glossary: Gloss[];
   registry: Registry;
   scenes: Record<string, Scene>;

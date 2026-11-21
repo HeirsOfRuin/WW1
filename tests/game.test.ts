@@ -1,6 +1,7 @@
 // In the Trenches: the content, the war through the engine, the calendar and saves.
 import { describe, expect, it } from 'vitest';
 import { loadContent } from '../tools/content-loader';
+import { packRoute, linkRoute } from '../src/content/route';
 import { validate } from '../tools/validate';
 import { runBot } from '../tools/bot';
 import { playGame } from '../tools/war-bot';
@@ -481,6 +482,15 @@ describe('the death page says the dice were cast (2026-11-21)', () => {
       if (w.lastHit && /1-in-\d+/.test(line)) battle++; else { expect(line).toContain('Nothing you chose'); other++; }
     }
     expect(battle).toBeGreaterThan(0); expect(other).toBeGreaterThan(0);
+  });
+});
+
+describe('the content file (2026-11-21: 24 MB, from 921 copies of the war route)', () => {
+  it('stores the route once, and loads back to the same scenes', () => {
+    const text = packRoute(content, content.warRoute);
+    expect(text.length).toBeLessThan(3_000_000);
+    const back = linkRoute(JSON.parse(text));
+    expect(JSON.stringify(back.scenes)).toBe(JSON.stringify(content.scenes));
   });
 });
 

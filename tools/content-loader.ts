@@ -8,7 +8,8 @@ import '../src/game/module'; // the rules this content is played by
 
 export { ContentError };
 /** `next: "@war"` in a scene: the route in content/route.yaml. */
-export const WAR_ROUTE = '@war';
+import { WAR_ROUTE } from '../src/content/route';
+export { WAR_ROUTE };
 export const CONTENT_DIR = join(import.meta.dirname, '..', 'content');
 const REGISTRY = ['flags', 'npcs', 'traits', 'injuries', 'items', 'factions', 'endings', 'lore', 'places'];
 
@@ -59,10 +60,10 @@ export function loadContent(dir = CONTENT_DIR): ContentBundle {
     if (!o || typeof o !== 'object') return;
     const r = o as Record<string, unknown>;
     for (const k of Object.keys(r)) {
-      if (k === 'next' && r[k] === WAR_ROUTE) r[k] = structuredClone(route) as Next;
+      if (k === 'next' && r[k] === WAR_ROUTE) r[k] = route as Next; // one shared table (src/content/route.ts)
       else sub(r[k]);
     }
   };
   sub(base.scenes);
-  return { hash: hash.digest('hex').slice(0, 12), ...base, starts, glossary };
+  return { hash: hash.digest('hex').slice(0, 12), ...base, starts, glossary, warRoute: route as Next };
 }
