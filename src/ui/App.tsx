@@ -10,6 +10,7 @@ const ART = import.meta.glob('../art/*.png', { eager: true, query: '?url', impor
 const artUrl = (key: string | undefined) => (key ? ART[`../art/${key}.png`] : undefined);
 import { toSave, fromSave, encodeSaveCode, decodeSaveCode, SAVE_KEY } from '../game/save';
 import { STORAGE_OK, lsGet, lsSet } from './storage.js';
+import { GAME_URL, PROFILE_URL } from './itch';
 
 function load(content: ContentBundle): GameState | null {
   const raw = lsGet(SAVE_KEY);
@@ -17,6 +18,14 @@ function load(content: ContentBundle): GameState | null {
   try { return fromSave(JSON.parse(raw), content).state; } catch { return null; }
 }
 // Text with the soldier's words tappable (src/game/gloss.ts cuts it; this only shows it).
+/** The rating ask is shown once: the first game (and scene) to show it keeps it until it is closed or rated. */
+function rateOnce(key: string, here: string): boolean {
+  const was = lsGet(key);
+  if (was === 'done') return false;
+  if (was === null || was === undefined || was === '') { lsSet(key, here); return true; }
+  return was === here;
+}
+
 function Gloss({ word, means }: { word: string; means: string }) {
   const [open, setOpen] = useState(false);
   return <><span class="gloss" role="button" tabIndex={0} aria-expanded={open} onClick={() => setOpen(!open)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setOpen(!open); }}>{word}</span>{open && <span class="glossed" role="note"> ({means}) </span>}</>;
@@ -42,6 +51,7 @@ export function App({ content }: { content: ContentBundle }) {
   const [tab, setTab] = useState<'story' | 'soldier' | 'map' | 'journal' | 'menu'>('story');
   const [page, setPage] = useState(0);
   const [note, setNote] = useState<string | null>(null);
+  const [, redraw] = useState(0);
   const commit = (s: GameState | null) => { setState(s); setPage(0); if (s) lsSet(SAVE_KEY, JSON.stringify(toSave(s, content))); };
   const begin = (start: string) => { commit(newGame(content, { start, seed: (Math.random() * 2 ** 31) >>> 0, name: 'Tom' })); setTab('story'); };
   // Loading a save code (playtest 3: a 5,000-character code pasted into the phone's prompt() box came
@@ -85,6 +95,7 @@ export function App({ content }: { content: ContentBundle }) {
           ))}
           <button data-act="load-code" onClick={() => setLoading(true)}>Load a save code</button>
         </div>}
+        <p class="hint more"><a href={PROFILE_URL} target="_blank" rel="noopener">More historical games by Heirs of Ruin</a></p>
       </main>
     );
   }
@@ -112,11 +123,20 @@ export function App({ content }: { content: ContentBundle }) {
           <h2>{v.title}</h2>
           {paras(pages[Math.min(page, pages.length - 1)] ?? '')}
           {last && (() => { const r = reviewFor(state.war, v.sceneId); return r && <WarMap s={state} review={r} />; })()}
+          {last && reviewFor(state.war, v.sceneId) && rateOnce('trenches.rate.first', `${state.seed}:${v.sceneId}`) && (
+            <p class="rate-ask" data-rate="first-stop">A year at the front. If you are finding it worth playing, a rating on itch.io helps other people find it.{' '}
+              <a href={GAME_URL} target="_blank" rel="noopener" onClick={() => { lsSet('trenches.rate.first', 'done'); redraw((n) => n + 1); }}>Rate it on itch.io</a>{' '}
+              <button onClick={() => { lsSet('trenches.rate.first', 'done'); redraw((n) => n + 1); }}>Not now</button></p>)}
           {v.ended && !last
             ? <div class="stack"><button data-action="continue" onClick={() => setPage(page + 1)}>Continue ({page + 1} / {pages.length})</button></div>
             : v.ended
             ? <>{(content.registry.endings[v.ended.ending]?.label ?? 'The end') !== v.title && <h2>{content.registry.endings[v.ended.ending]?.label ?? 'The end'}</h2>}{v.ended.cause && <p>{v.ended.cause}</p>}
-                <button class="primary" data-act="new" onClick={() => setState(null)}>Play again</button></>
+                {rateOnce('trenches.rate.end', String(state.seed)) && (
+                  <p class="rate-ask" data-rate="end">If this war stayed with you, a rating on itch.io helps other people find it.{' '}
+                    <a href={GAME_URL} target="_blank" rel="noopener" onClick={() => { lsSet('trenches.rate.end', 'done'); redraw((n) => n + 1); }}>Rate it on itch.io</a>{' '}
+                    <button onClick={() => { lsSet('trenches.rate.end', 'done'); redraw((n) => n + 1); }}>Not now</button></p>)}
+                <button class="primary" data-act="new" onClick={() => setState(null)}>Play again</button>
+                <p class="hint more"><a href={PROFILE_URL} target="_blank" rel="noopener">More historical games by Heirs of Ruin</a></p></>
             : !last
               ? <div class="stack"><button data-action="continue" onClick={() => setPage(page + 1)}>Continue ({page + 1} / {pages.length})</button></div>
               : <div class="stack">{v.deadEnd && <p class="warn">No choice is open here: this is a content bug. Menu &gt; Save code, and send it with a note.</p>}
@@ -144,7 +164,8 @@ export function App({ content }: { content: ContentBundle }) {
           {loadBox || <button data-act="load-code" onClick={() => setLoading(true)}>Load a save code</button>}
           <button data-act="words" onClick={() => { lsSet('trenches.words', words ? 'off' : 'on'); setWords(!words); }}>Underline the soldier's words: {words ? 'on' : 'off'}</button>
           <button data-act="quit" onClick={() => setState(null)}>Back to the title</button></div>
-          <p class="hint">Saves live in this browser on this device. A save code or a save link moves a game to another.</p></>}
+          <p class="hint">Saves live in this browser on this device. A save code or a save link moves a game to another.</p>
+          <p class="hint more"><a href={GAME_URL} target="_blank" rel="noopener">Rate In the Trenches on itch.io</a> · <a href={PROFILE_URL} target="_blank" rel="noopener">More games by Heirs of Ruin</a></p></>}
       </main>
       <nav class="tabs">
         {(['story', 'soldier', 'map', 'journal', 'menu'] as const).map((t) => <button data-tab={t} class={tab === t ? 'on' : ''} onClick={() => setTab(t)}>{t[0]!.toUpperCase() + t.slice(1)}</button>)}

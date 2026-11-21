@@ -100,3 +100,8 @@ textarea { width: 100%; font: 12px/1.3 ui-monospace, monospace; background: var(
 /* the soldier's words: a dotted underline; tap for the meaning, shown in place */
 .gloss { text-decoration: underline dotted var(--ink-dim); text-underline-offset: 3px; cursor: help; }
 .glossed { color: var(--ink-dim); font-size: .92em; }
+
+/* the rating ask and the profile link (src/ui/itch.ts) */
+.rate-ask { background: var(--panel); border: 1px solid var(--accent); border-radius: 8px; padding: .6em .8em; margin: .8rem 0; } /* not the alarm red: it is an ask, not a warning */
+.rate-ask button { margin-left: .4em; font-size: .9em; padding: .2em .6em; }
+.more { margin-top: 1.2rem; text-align: center; }
