@@ -1,5 +1,6 @@
 {
   "name": "in-the-trenches",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "An 18-year-old volunteer's war, 1915 to the Armistice. Choose your exposure, not the war.",
@@ -32,6 +33,9 @@
     "story": "tsx tools/story-share.ts 200"
   },
   "devDependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/cli": "^8.5.3",
+    "@capacitor/core": "^8.5.3",
     "@preact/preset-vite": "^2.10.6",
     "@types/node": "^26.6.3",
     "tsx": "^4.23.15",
