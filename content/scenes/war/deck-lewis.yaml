@@ -1,0 +1,309 @@
+# Deck for the Lewis gunner's mission (docs/FRAME-DECKS.md). Card a of each step is s_lewis_<step>
+# in sortie-scenes.yaml; these are cards b-e. Each card offers its step's own choices with card a's
+# effects; only the situation and the words change. Shared by every town.
+# Like card a, every card has two halves on war.stake: 0 is covering a raid by night, 1 is an
+# enemy two-seater ranging a battery by day; x_lewis_done reports on the same two.
+# Years: s_lewis_2_c 1915 (the chalk, the gun new to the battalion), s_lewis_2_d 1918 (open
+# country), s_lewis_3_c 1916 (the Somme), s_lewis_3_e 1918 (no trench to go back along).
+
+# ---- step 1: setting out --------------------------------------------------------------------------
+
+- id: s_lewis_1_b
+  chapter: front
+  title: The drums
+  text: |
+    [if war.stake == 0]In the dugout before the raid you fill drums by a candle stuck in a bottle, forty-seven
+    rounds to a drum, thumbing them in till the ends of your fingers are raw. The raid officer comes
+    down with his face blacked with burnt cork and a map, and shows you with a pencil: they go in at
+    the gap by the old crater, and you fire along their parapet either side of it the moment the first
+    bomb goes. Your No. 2 has stopped talking. He always stops talking about now.[/if][if war.stake == 1]You've the gun in pieces on a groundsheet in the bay, cleaning it after the night, when
+    you hear him: the steady drone of a two-seater coming from the east with the sun behind him. Men look
+    up from their tea. Somewhere behind their line a gun fires, and the shell lands in our wire, short
+    of the support line. He's ranging. Your No. 2 is down on his knees in the mud, picking up the
+    small parts and wiping them on his sleeve.[/if]
+  choices:
+    - id: bold
+      text: "[if war.stake == 0]Set up on the lip of the crater, close to where they go in.[else]Throw it together and get it up on the parados, in the open.[/if] ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: "[if war.stake == 0]The lip of the crater. The raid will go in thirty yards to your left, near enough to hear them breathing.[else]You get it together any old how and up on the parados, with the sky wide open over you.[/if]"
+      next: "@war"
+    - id: steady
+      text: "[if war.stake == 0]Set up in the bay the officer marked.[else]Put it together properly, then get it on the post.[/if] ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: "[if war.stake == 0]The bay the officer marked, a sandbag under the barrel, the gap in their wire dead ahead.[else]Piece by piece, the way you did it blindfold at the gun school. It's on the post with a drum on in two minutes.[/if]"
+      next: "@war"
+    - id: careful
+      text: "[if war.stake == 0]Fire through a loophole in the trench, under cover.[else]Fire from down in the bay, the gun propped on the parapet.[/if] ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: "[if war.stake == 0]Back in the trench, firing through a loophole. Your arc's as narrow as a door.[else]You fire from the bay with the gun tipped up on the sandbags, where he can hardly see you and you can hardly see him.[/if]"
+      next: "@war"
+
+- id: s_lewis_1_c
+  chapter: front
+  title: The fog
+  text: |
+    [if war.stake == 0]Fog. The raid's still on; the raid officer says fog's a gift, and perhaps it is for the
+    raiders, but you can't see our own wire, never mind theirs. You'll be firing at where their
+    parapet ought to be, by a compass bearing and a white tape the scouts laid out at dusk. A man
+    from the battalion you relieved, who knows this bit of line, has stayed behind to show you the
+    way. He talks in a whisper and smells of rum and wet wool.[/if][if war.stake == 1]Low cloud all morning, and everyone said there'd be no flying. Then at eleven he comes
+    out of the cloud right over the support line, so low you can see the black crosses under his
+    wings and the observer leaning over the side. An artillery officer in the next bay is shouting
+    for a Lewis gun. That's you. The gun's in the dugout under a groundsheet, with the drums, and
+    the steps are slippery with clay.[/if]
+  choices:
+    - id: bold
+      text: "[if war.stake == 0]Take the gun out past the end of the tape, nearer their wire.[else]Get the gun up on the parapet and fire as soon as it's on.[/if] ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: "[if war.stake == 0]You go past the end of the tape into the fog, counting paces, till you can smell their trench.[else]You heave it up on the parapet and stand on the firestep behind it, the whole top half of you above the sandbags.[/if]"
+      next: "@war"
+    - id: steady
+      text: "[if war.stake == 0]Set up at the end of the tape, where he shows you.[else]Get it on the post, the way you were drilled.[/if] ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: "[if war.stake == 0]He takes you to the end of the tape and squeezes your arm, and is gone into the fog.[else]Onto the post, a drum on, the cocking handle back, and he's turning towards you.[/if]"
+      next: "@war"
+    - id: careful
+      text: "[if war.stake == 0]Set up in our own wire, close to the trench.[else]Fire from the trench, the gun propped on a heap of sandbags.[/if] ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: "[if war.stake == 0]You set up in our own wire with the trench a jump behind you and nothing in front but fog.[else]You prop it on a heap of sandbags in the bay, the muzzle barely clear of the parapet.[/if]"
+      next: "@war"
+
+# ---- step 2: the work ----------------------------------------------------------------------------
+
+- id: s_lewis_2_b
+  chapter: front
+  title: The flares
+  text: |
+    [if war.stake == 0]The first bomb goes off in their trench, and you fire. Up go their flares, one after another,
+    and the whole of no man's land jumps out flat and white like a photograph. In the light you can
+    see a machine gun firing from their parapet on the right, a little winking flash, and its bullets
+    are going over the gap where the raiders are. The cooling fins are hot already; you can smell the
+    oil burning off them. Your No. 2 shouts something you can't hear.[/if][if war.stake == 1]The whole support line's firing at him now: rifles, another Lewis gun two hundred yards
+    down, a sergeant with a revolver. He doesn't seem to care. He comes round again lower, and you can
+    see the observer's head over the side, looking down, and the wire of his wireless trailing under
+    the machine. The noise of the engine fills the trench. Half your drum's gone and you've hit nothing
+    you can see.[/if]
+  choices:
+    - id: bold
+      text: "[if war.stake == 0]Swing onto their machine gun and hold the trigger down.[else]Stand up on the firestep and give him the rest of the drum.[/if] ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: "[if war.stake == 0]You swing onto the winking flash and hold the trigger down, and for a moment it stops winking.[else]You stand up and give him the rest of the drum, with every man in the bay watching you do it.[/if]"
+      next: "@war"
+    - id: steady
+      text: "[if war.stake == 0]Short bursts along their parapet, as you were told.[else]Lead him by his length and give him short bursts.[/if] ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: "[if war.stake == 0]Short bursts along their parapet, left of the gap, then right of it, the way it was drawn on the map.[else]Short bursts, leading him by his length. On the third one the observer ducks.[/if]"
+      next: "@war"
+    - id: careful
+      text: "[if war.stake == 0]Get down while the flares are up, and fire when they die.[else]Keep under the parapet till he's past, then fire after him.[/if] ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: "[if war.stake == 0]You lie flat under the flares, and fire each time one dies, at where you last saw their parapet.[else]You keep down while he goes over, and fire up after his tail as he goes away east.[/if]"
+      next: "@war"
+
+- id: s_lewis_2_c
+  chapter: front
+  title: The chalk
+  text: |
+    [if war.stake == 0]The raiders go out across the chalk, and the chalk gives them away: every man who crawls
+    over it shows grey on white, and their wire's strung across the old mine craters. Your gun's
+    mounted on a pit prop jammed into the parapet; [if start == pit]it's the same pine as the props at
+    home, the same smell of resin when you knock it.[else]there are stacks of them behind the line, from
+    the mines.[/if] A German post on the lip of a crater has seen them. Bombs flash and bang in the
+    white.[/if][if war.stake == 1]Their aeroplane has come over the slag heaps every morning this week, slow, and every
+    morning their guns have done better after. Today he's lower. Nobody in the battalion has ever fired
+    a Lewis gun at an aeroplane; the guns only came up last month. The instructor said a length in
+    front, and you can't even tell how long he is. Chalk dust blows off the parapet into your eyes.[/if]
+  choices:
+    - id: bold
+      text: "[if war.stake == 0]Fire on the crater post, close over the raiders' heads.[else]Give him the whole drum in one burst.[/if] ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: "[if war.stake == 0]You fire on the crater post a yard over our own men's heads, and the bombing stops, or moves.[else]Forty-seven rounds in one long burst, the gun bucking on its prop. Nobody told you that you mustn't.[/if]"
+      next: "@war"
+    - id: steady
+      text: "[if war.stake == 0]Fire along their parapet, as ordered, and leave the post.[else]Short bursts, a length in front, like the instructor said.[/if] ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: "[if war.stake == 0]You keep their parapet busy, as ordered, and hope somebody else has the crater post.[else]A length in front, short bursts, and the note of his engine changes, or you think it does.[/if]"
+      next: "@war"
+    - id: careful
+      text: "[if war.stake == 0]Fire high over the post, well clear of our men.[else]Wait till he's straight overhead, and fire up at him.[/if] ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: "[if war.stake == 0]You fire high into the chalk behind the post. It keeps their heads down, mostly.[else]You wait till he's straight overhead and fire up at him, where he's smallest, and so are you.[/if]"
+      next: "@war"
+
+- id: s_lewis_2_d
+  chapter: front
+  title: The open
+  text: |
+    [if war.stake == 0][if war.month <= 3]The raid's on a German post in the ruins of a farm across the mud, and you're
+    lying on what's left of another one, in the brick dust.[elif war.month <= 7]The raid's on a German post in a farm across the corn, and you're lying in the corn yourself, the gun's legs bedded in soft earth.[else]It's a fighting patrol now, not a raid, after a German post in a sunken road, and you're in a hedge with the gun.[/if]
+    The raiders go in. Somebody over there has a machine gun of his own, and the first you know of it
+    is twigs and earth flying off a foot above your head, and the whip of the bullets after.[/if][if war.stake == 1]Their aeroplanes are everywhere this year, low and bold. This one comes over at a hundred
+    feet, a two-seater with its wings painted all over in patches like a quilt, and turns over the
+    [if war.month <= 3]ruined farm[else]farm[/if] where battalion headquarters is. Their guns are ranging on it. He's so low the
+    dust of the yard blows up under him, and you can see the observer's goggles. There's no trench to
+    fire from, only a [if war.month <= 3]shell hole[else]ditch[/if].[/if]
+  choices:
+    - id: bold
+      text: "[if war.stake == 0]Get up on one knee and fire back at their flash.[else]Stand up in the open and fire at him.[/if] ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: "[if war.stake == 0]You come up on one knee with the butt in your shoulder and fire back at the flash, the two guns talking to each other.[else]You stand up in the open with the gun at your hip and fire up into the quilt of his wings.[/if]"
+      next: "@war"
+    - id: steady
+      text: "[if war.stake == 0]Shift the gun two yards and fire on it from there.[else]Lead him and give him short bursts from cover.[/if] ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: "[if war.stake == 0]You drag the gun two yards along and fire on their gun in short bursts from the new place.[else]From cover, short bursts, leading him. Your No. 2 counts the drums under his breath.[/if]"
+      next: "@war"
+    - id: careful
+      text: "[if war.stake == 0]Lie flat till it lifts, then fire.[else]Keep down, and fire only as he goes away.[/if] ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: "[if war.stake == 0]You lie flat with your face in the earth till it lifts, and then fire, late.[else]You keep down while he comes over and fire after him as he goes, a long way, getting smaller.[/if]"
+      next: "@war"
+
+- id: s_lewis_2_e
+  chapter: front
+  title: The flank
+  text: |
+    [if war.stake == 0]The raid's in, and you're firing on their parapet to the left of it, when your No. 2 grabs
+    your shoulder and points right. Shapes are coming along their trench outside the raid, then up over
+    the top of it and down into a shell hole: a German bombing party, working round behind the raiders
+    to cut them off from the gap. You'd have to swing the gun right round, and the drum's two-thirds
+    gone. Your mouth's as dry as chalk.[/if][if war.stake == 1]He isn't alone. High above him, a speck circles: a scout, watching over him while he
+    works. Every time a gun in our line fires at the two-seater, the speck tips over and comes down a
+    little, and the whine of it carries. Your No. 2 has his eyes on the speck and his hand on a fresh
+    drum. The two-seater turns over the support line again, slow and steady, as if nobody was there
+    at all.[/if]
+  choices:
+    - id: bold
+      text: "[if war.stake == 0]Swing round and fire on the bombers in the open, fast.[else]Fire at the two-seater and let the scout do what it likes.[/if] ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: "[if war.stake == 0]You swing the gun round across the parapet and fire into the shell hole as the last of them goes into it.[else]You fire at the two-seater with your back to the scout, and hear its engine change as it comes down.[/if]"
+      next: "@war"
+    - id: steady
+      text: "[if war.stake == 0]Change the drum first, then take them on.[else]Short bursts at the two-seater, your No. 2 watching the scout.[/if] ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: "[if war.stake == 0]Off with the old drum, on with the new, your hands doing it by themselves, and then you swing round onto them.[else]Short bursts at the two-seater, and your No. 2 calling the scout like a man calling a horse race.[/if]"
+      next: "@war"
+    - id: careful
+      text: "[if war.stake == 0]Fire one burst to warn the raiders, and keep low.[else]Fire when the scout's on the far side of its turn, then get down.[/if] ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: "[if war.stake == 0]One burst at the shell hole to show the raiders where the danger is, and then your head down.[else]You fire when the scout's turned away, a burst at a time, and get down every time it turns back.[/if]"
+      next: "@war"
+
+# ---- step 3: the complication, or the way back ------------------------------------------------------
+
+- id: s_lewis_3_b
+  chapter: front
+  title: The man in the wire
+  text: |
+    [if war.stake == 0]The raid's coming back, men tumbling down into the sap past you with their sacks and a
+    prisoner with his hands on his head. One of them doesn't make it: he's down in our wire twenty
+    yards out, calling, not loud. Their machine guns are sweeping the gap now, and the first shells
+    come down behind you on the sap with a smell of cordite and turned earth. Your No. 2 looks at
+    you, then at the gun.[/if][if war.stake == 1]He's gone, east, low. But he must have sent his corrections home before he went,
+    because their guns aren't ranging now: they're firing in threes along the support line, and a man
+    two bays down has been hit and is calling for the bearers. The gun's still up on the post, the
+    barrel too hot to touch, ticking as it cools.[/if]
+  choices:
+    - id: bold
+      text: "[if war.stake == 0]Leave the gun with your No. 2 and go out for him.[else]Leave the gun up and go to the man, through the shelling.[/if] ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: "[if war.stake == 0]You go out over the sandbags for him, and the wire takes the skin off your hands.[else]You leave the gun up and go along the trench to him, flat against the wall each time one comes.[/if]"
+      next: "@war"
+    - id: steady
+      text: "[if war.stake == 0]Cover the bearers out to him, then bring the gun in.[else]Get the gun down into the dugout, then go to him.[/if] ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: "[if war.stake == 0]You fire short bursts over the bearers' heads while they cut him loose, then gun and drums back into the sap.[else]Gun off the post and down the dugout steps, then along to the man, who's got his own field dressing out.[/if]"
+      next: "@war"
+    - id: careful
+      text: "[if war.stake == 0]Get the gun in, and leave him to the bearers.[else]Get down in the dugout with the gun and wait for the bearers.[/if] ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: "[if war.stake == 0]You get the gun in, and listen to the calling from the bottom of the sap.[else]You sit in the dugout with the gun across your knees, and hear the bearers go by overhead.[/if]"
+      next: "@war"
+
+- id: s_lewis_3_c
+  chapter: front
+  title: The old ground
+  text: |
+    [if war.stake == 0]The way back is across the old ground: [if war.month <= 6]long grass and old wire nobody's touched
+    since the French had this line[elif war.month <= 9]ground fought over since July, the smell of it
+    coming up off every shell hole[else]Somme mud, the shell holes run together into one long swamp,
+    water at the bottom of each[/if]. Their five-nines have started on it, a howl and then a crump that
+    you feel through your boots, and black smoke hanging after. You've the gun, three drums and
+    your No. 2, and two hundred yards to the sap.[/if][if war.stake == 1]He goes east, and you think that's it. Then their observation balloon comes up over the
+    ridge, fat and grey, and the shelling starts again, and this time it's walking up to the post where
+    the gun fired from. The man in the basket up there can see you as plainly as you see him. You can
+    feel each shell land through the duckboards.[/if]
+  choices:
+    - id: bold
+      text: "[if war.stake == 0]Run for the sap with the gun, between the shells.[else]Fire a drum at the balloon. It's a long way, but it's there.[/if] ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: "[if war.stake == 0]You run, and drop, and run, with the gun's barrel knocking your ear at every step.[else]You fire a whole drum at the balloon, high and long. It doesn't come down. It does go up higher.[/if]"
+      next: "@war"
+    - id: steady
+      text: "[if war.stake == 0]Go back by bounds, shell hole to shell hole.[else]Get the gun off the post and along to the next bay.[/if] ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: "[if war.stake == 0]Shell hole to shell hole, you and your No. 2 taking turns with the gun.[else]Off the post and along a bay. Behind you the next one lands where you stood.[/if]"
+      next: "@war"
+    - id: careful
+      text: "[if war.stake == 0]Get into a deep hole and wait for the guns to lift.[else]Leave the gun and get into the dugout till it stops.[/if] ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: "[if war.stake == 0]You lie in a deep hole with the gun on top of you and wait for them to lift, and they take their time.[else]You get into the dugout and sit with the candle jumping at every one, and think about the gun.[/if]"
+      next: "@war"
+
+- id: s_lewis_3_d
+  chapter: front
+  title: The order
+  text: |
+    [if war.stake == 0]The raiders are back, all but the officer and two men, and nobody knows where they are. The
+    company sergeant major crawls out to your hole and puts his mouth to your ear: the gun stays out
+    and keeps firing till the last of them is in. Their trench mortar has found the gap. Every few
+    minutes the minnies come over, turning end over end with their fuses sparking, and land with a
+    noise like the ground splitting open.[/if][if war.stake == 1]He's gone, and the company officer comes along the trench and wants the gun left up on
+    the post all afternoon, in case he comes back, with you beside it. Their battery has the post's
+    range now and puts a shell near it every few minutes, lazily, like a man knocking out his pipe on
+    a wall. Your tea's gone cold on the firestep, with a skin of dust on it.[/if]
+  choices:
+    - id: bold
+      text: "[if war.stake == 0]Stay out and keep firing, minnies or not.[else]Stay up on the post with the gun, as he says.[/if] ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: "[if war.stake == 0]You stay out and keep firing, and stop hearing the minnies after a while, or stop minding them.[else]You stay up on the post with the gun all afternoon, and flinch at every shell, and stay.[/if]"
+      next: "@war"
+    - id: steady
+      text: "[if war.stake == 0]Stay, but fire in bursts, and move after each.[else]Keep the gun ready in the bay below, to go up when he comes.[/if] ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: "[if war.stake == 0]A burst, then move, then a burst, so their mortar's always a yard behind you.[else]You sit in the bay below the post with the gun across your knees and your eyes on the sky.[/if]"
+      next: "@war"
+    - id: careful
+      text: "[if war.stake == 0]Pull back to the sap and fire from there.[else]Take the gun into the dugout and leave a man watching the sky.[/if] ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: "[if war.stake == 0]You pull back into the sap and fire from there, over the heads of whoever's still out.[else]You take the gun down into the dugout and leave a lad on the step watching the sky.[/if]"
+      next: "@war"
+
+- id: s_lewis_3_e
+  chapter: front
+  title: The way back
+  text: |
+    [if war.stake == 0]There's no sap to come back along, only [if war.month <= 3]a duckboard track across the mud,
+    picked out every few minutes by a flare[elif war.month <= 7]a ditch along a hedge, with the corn standing
+    high on both sides and smelling of summer[else]a sunken lane, and then the next field, and the next[/if].
+    The Germans know the way too. A machine gun from somewhere new is firing down it in long sweeps,
+    and you've the gun, four drums, and your No. 2, whose hand is bleeding through his field dressing.[/if][if war.stake == 1]He's gone home, but their guns have started on the [if war.month <= 3]ruin[else]farm[/if] where the gun
+    was firing from, and walls are no cover from shells at all. Bricks come down in the yard. The
+    road behind you is full of limbers coming up, the horses throwing their heads at every burst,
+    and somebody wants the gun out of there before it draws the shells onto them as well.[/if]
+  choices:
+    - id: bold
+      text: "[if war.stake == 0]Run for it with the gun across your shoulders, between bursts.[else]Carry the gun back down the road among the limbers, fast.[/if] ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: "[if war.stake == 0]You run with the gun across your shoulders, and drop when the sweep comes, and run.[else]You go down the road at a trot with the gun on your shoulder, between the wheels and the horses.[/if]"
+      next: "@war"
+    - id: steady
+      text: "[if war.stake == 0]Go back by bounds, gun then drums, as you were taught.[else]Take the gun back along the ditch, by bounds.[/if] ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: "[if war.stake == 0]Gun, then drums, then gun, with your No. 2 carrying what one hand can carry.[else]Along the ditch by bounds, gun then drums, the shells falling behind you on the place you left.[/if]"
+      next: "@war"
+    - id: careful
+      text: "[if war.stake == 0]Lie up in cover and wait for the gun to swing away.[else]Get down into the cellar with the gun and wait.[/if] ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: "[if war.stake == 0]You lie up with your No. 2 and tie his hand tighter while the gun sweeps over you, and wait for it to look elsewhere.[else]You get into the cellar with the gun and sit among the old potatoes, and listen to the house come down a brick at a time.[/if]"
+      next: "@war"

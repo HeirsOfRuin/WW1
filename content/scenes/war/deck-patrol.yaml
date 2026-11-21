@@ -1,0 +1,313 @@
+# The night patrol: deck cards b-e for each step (docs/FRAME-DECKS.md).
+# Card a is s_patrol_<step> in sortie-scenes.yaml. Choices and effects copy card a's for the step;
+# only the situation and the words change. Years (from/to) are set in DECKS in src/game/war/data.ts.
+
+# ---- step 1: setting out ----------------------------------------------------------------------------
+
+- id: s_patrol_1_b
+  chapter: front
+  title: Patrol
+  text: |
+    The officer taking the patrol tonight is new, out from home a fortnight, and keen. In the dugout
+    he blacks his face with a burnt cork and passes it round, and you empty your pockets of letters
+    and your pay book onto the table, so they'll have nothing off you if you don't come back.
+
+    The job is to look at their wire opposite the sap and come back. He says, if it's quiet, you
+    might go a bit further and have a look at their trench. The candle gutters, and {mate} looks at the table.
+  choices:
+    - id: bold
+      text: "Go out over the top of the sap, the quick way. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Over the sandbags at the sap head and flat on the grass beyond, with the cork greasy on your face.
+      next: "@war"
+    - id: steady
+      text: "Out through the gap, as arranged, and count your paces. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Through the gap in the wire on your belly, counting under your breath. Forty. Forty-one.
+      next: "@war"
+    - id: careful
+      text: "Go a few yards at a time, stopping to listen at each. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: A few yards, then stop and listen, and the officer's boots behind you, impatient.
+      next: "@war"
+    - id: back
+      text: "Tell the officer your stomach's bad and ask to stay back. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: He looks at you a moment by the candle and says all right, and takes somebody else.
+      next: "@war"
+
+- id: s_patrol_1_c
+  chapter: front
+  title: Patrol
+  text: |
+    A moon tonight, near full, and no cloud. You could read a letter by it on the firestep. The
+    job is a listening post out in the old crater, to hear whether they're working on something
+    over there at night: digging, or wiring, or mining, which is the one everybody thinks of.
+
+    The corporal looks at the moon and spits over the parapet. "It'll not get any darker standing
+    here." {mate} is checking his bayonet's fast, which he does when he's frightened. The dew is
+    coming down; you can smell the grass.
+  choices:
+    - id: bold
+      text: "Go now, moon or no moon, at a run for the crater. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run for it, crouched, your shadow running beside you on the grass, and drop into the crater.
+      next: "@war"
+    - id: steady
+      text: "Go along the shadow of the old hedge line, as the corporal says. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Along the black of the hedge stumps, on your knees, slow and steady.
+      next: "@war"
+    - id: careful
+      text: "Wait for the cloud coming up from the west to cover it. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait an hour on the firestep for a cloud the size of a hand, and then go under it.
+      next: "@war"
+    - id: back
+      text: "Ask the corporal to put it off till the moon's down. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: He says he'll ask. He doesn't. You don't go out tonight, and he doesn't speak to you after.
+      next: "@war"
+
+# ---- step 2: the work -------------------------------------------------------------------------------
+
+- id: s_patrol_2_b
+  chapter: front
+  title: Patrol
+  text: |
+    Out at the foot of the slag heap that stands in no man's land like a black hill, and there's a
+    smell of pipe tobacco, sweet and close. Theirs.
+
+    A listening post: a sap they've pushed out from their line, and a man at the head of it. You can
+    hear him shift his feet on the boards and knock out his pipe on the sandbags. [if start == pit]The slag
+    under your hands is the same stuff as the pit heap at home, sharp and gritty, still warm in places where it smoulders inside.[else]The slag
+    under your hands is sharp and gritty, and still warm in places where it smoulders inside.[/if]
+  choices:
+    - id: bold
+      text: "Bomb the sap head and be gone before they answer. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The bomb goes in over the sandbags and the slag lights up red, and you're away down the heap.
+      next: "@war"
+    - id: steady
+      text: "Lie still and mark where it is, paces from our wire. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You fix it in your head, so many paces left of the heap, and say it over to yourself.
+      next: "@war"
+    - id: careful
+      text: "Slide back down the heap away from him. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You go down the heap backwards, and the slag ticks and rattles under you at every move.
+      next: "@war"
+    - id: back
+      text: "Leave it, and go back in before he hears you. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You go back in without the thing you were sent for, and the smell of his pipe goes with you.
+      next: "@war"
+
+- id: s_patrol_2_c
+  chapter: front
+  title: Patrol
+  text: |
+    The concrete is there where the map said: a low grey hump in the shell holes, its slit facing
+    our way, black. You're to find out whether it's manned at night.
+
+    It is. There's a line of light under a door at the back of it, and voices, and the smell of
+    coffee, real coffee, which you've not smelled since home. Somebody in there is singing under
+    his breath. The water in the shell hole you're lying in comes up past your belt.
+  choices:
+    - id: bold
+      text: "Work round to the back and throw a bomb at the door. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Round the back, the bomb at the strip of light, and the light goes out with a bang and a yell.
+      next: "@war"
+    - id: steady
+      text: "Lie and watch, and count who comes and goes. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Two men out to piss and back, one with a dixie. Four voices, maybe five. You count them twice.
+      next: "@war"
+    - id: careful
+      text: "Ease away along the lip of the holes, back the way you came. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You go back along the lips of the holes on your elbows, through water that stinks.
+      next: "@war"
+    - id: back
+      text: "Seen enough: go straight back in. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You go back quick and say it's manned, which is true, and that's all you can say.
+      next: "@war"
+
+- id: s_patrol_2_d
+  chapter: front
+  title: Patrol
+  text: |
+    Their wire, and something hanging on it. A man of ours, from the raid three weeks back, caught
+    by the coat and left there. You know him by the shape before you're close enough to know him by
+    anything else. You can smell him, too, when the wind turns.
+
+    The job is the wire: whether it's new, how deep. It is new, a second belt behind the old one,
+    the barbs bright. Their parapet is twenty yards on. His identity disc will be on a cord at his neck.
+  choices:
+    - id: bold
+      text: "Crawl up to him and cut his disc off, under their parapet. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You cut the cord with your clasp knife, close enough to their parapet to hear a man snore.
+      next: "@war"
+    - id: steady
+      text: "Feel out the new belt, its depth, and leave him be. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Two belts, three yards between, the new one low and thick. You leave him where he is.
+      next: "@war"
+    - id: careful
+      text: "Lie flat in the grass and watch their parapet a while. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie in the long grass and watch, and the wind turns back, and the smell goes.
+      next: "@war"
+    - id: back
+      text: "Turn round and go in. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You go back with a bad taste in your mouth that the rum doesn't touch.
+      next: "@war"
+
+- id: s_patrol_2_e
+  chapter: front
+  title: Patrol
+  text: |
+    No man's land here is a farm. [if war.month <= 3]Frozen plough, the furrows like iron, and a farmhouse in front with half its roof.[elif war.month <= 8]Standing corn up to your waist, nobody to cut it, and a farmhouse in front with half its roof.[else]Stubble and a field of turnips, and a farmhouse in front with half its roof.[/if]
+    The job is to find out whether they hold the house.
+
+    A dog barks in the yard, and keeps barking, and nobody tells it to stop. There's a smell of
+    woodsmoke, and of the midden. [if start == farm]It could be a farm at home, but for the roof.[/if]
+    A shutter bangs. {mate} lies beside you with his chin on his rifle.
+  choices:
+    - id: bold
+      text: "Go in at the yard gate and see for yourself. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Through the gate at a run, and the dog goes for your legs, and you're in the yard.
+      next: "@war"
+    - id: steady
+      text: "Work round the house by the ditches, and watch the windows. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Round by the ditch, one window after another, till you see a cigarette glow in the end one.
+      next: "@war"
+    - id: careful
+      text: "Lie and watch the smoke and the dog from where you are. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie and watch till the dog gives up, and somebody inside laughs at it.
+      next: "@war"
+    - id: back
+      text: "Go back and say you couldn't get near. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You go back and say the dog would have given you away, and it might have.
+      next: "@war"
+
+# ---- step 3: the way back ---------------------------------------------------------------------------
+
+- id: s_patrol_3_b
+  chapter: front
+  title: Patrol
+  text: |
+    Coming back, you find they've got a machine gun laid on the ground in front of our wire. It
+    fires a burst every few minutes, never quite the same minute, along a fixed line at knee height.
+    You hear the bullets crack over the grass and smack into the chalk of our parapet, which shows
+    white in the dark where the spoil was thrown up.
+
+    The gap in our wire is on that line. The grass is wet and smells of chalk and
+    cordite, and your knees are raw.
+  choices:
+    - id: bold
+      text: "Count the bursts, and run for the gap straight after one. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: A burst, and you're up and running, and through the gap before the next one comes.
+      next: "@war"
+    - id: steady
+      text: "Crawl in under the line of fire, flat as you can. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Flat on your belly, cheek to the grass, the bullets going over like a flight of starlings.
+      next: "@war"
+    - id: careful
+      text: "Lie up till the gunner tires of it, then crawl in. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie out till it stops, and the cold works into you, and at last it doesn't start again.
+      next: "@war"
+
+- id: s_patrol_3_c
+  chapter: front
+  title: Patrol
+  text: |
+    On the way back you hear them before you see them: boots on wet ground, a rifle sling
+    clinking. Another patrol, theirs, going across your front between you and our wire, slow and
+    careful, the same as you.
+
+    You lie flat. They pass so close you can smell them, a smell of wet wool and some kind of
+    sausage. One of them stops and stands looking right at where you lie, and then a flare goes up
+    a long way off, and he ducks, and they go on.
+  choices:
+    - id: bold
+      text: "Get up behind them once they're past and go in quick. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You let them get twenty yards on and you're up and running for our wire behind their backs.
+      next: "@war"
+    - id: steady
+      text: "Let them clear right away, then go in the usual way. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You count three hundred after the last sound of them, then go in hole by hole.
+      next: "@war"
+    - id: careful
+      text: "Stay down a long while; they may come back the same way. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: They do come back, an hour later. You're still there. They pass you again.
+      next: "@war"
+
+- id: s_patrol_3_d
+  chapter: front
+  title: Patrol
+  text: |
+    The corporal's hit. A single shot from somewhere, nobody saw the flash, and he sits down in the
+    grass with his hand on his arm and says a word you've not heard him say before. Blood runs out
+    between his fingers, black in the dark, and he's shaking.
+
+    Our wire is a hundred yards off. He says he can walk. When he stands he goes white and sits
+    down again. {mate} gets an arm round him. The grass smells of crushed nettles.
+  choices:
+    - id: bold
+      text: "Get him up between you and go for our wire at a run. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: One on each side of him, his arms over your shoulders, and you run him in with his boots trailing.
+      next: "@war"
+    - id: steady
+      text: "Tie up his arm, then help him in at a walk. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: His own field dressing, tight round the arm, and then a slow walk in, holding him up.
+      next: "@war"
+    - id: careful
+      text: "Get him into a shell hole and wait for the dark to settle. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie in a hole with him while he swears quietly, and wait till the shooting has stopped for good.
+      next: "@war"
+
+- id: s_patrol_3_e
+  chapter: front
+  title: Patrol
+  text: |
+    Rain on the way back, sudden and heavy, so loud on the ground that you can't hear your own feet,
+    let alone theirs. It runs down inside your collar and fills your boots. The flares go up into
+    it and come down hissing, and in their light the whole of no man's land is shining and moving.
+
+    Somewhere ahead is our sentry, soaked and fed up and listening, and in this he'll hear nothing
+    until you're on top of him.
+  choices:
+    - id: bold
+      text: "Make the most of the noise and run straight for our wire. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run for it with the rain roaring, and fall into our trench on top of a sentry.
+      next: "@war"
+    - id: steady
+      text: "Keep to the patrol's line, and call out at the wire. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You call the password at the wire twice before anybody hears it, and then they pull you in.
+      next: "@war"
+    - id: careful
+      text: "Wait in a hole for the rain to ease off. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You sit in a hole filling with water till the rain stops, and go in shivering at grey light.
+      next: "@war"

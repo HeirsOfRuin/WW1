@@ -1,0 +1,289 @@
+# The listening post: deck cards b-e for each step (docs/FRAME-DECKS.md).
+# Card a is s_listening_<step> in sortie-scenes.yaml. Choices and effects copy card a's for the
+# step; only the situation and the words change. Years (from/to) are set in DECKS in
+# src/game/war/data.ts: 2_d 1917 (the salient), 2_e 1918 (open country), 3_d 1916 (our guns short).
+
+# ---- step 1: going out ------------------------------------------------------------------------------
+
+- id: s_listening_1_b
+  chapter: front
+  title: Listening post
+  text: |
+    You go out at dusk along a shallow sap that ends in nothing, then on your belly through a gap in
+    our wire to the post: a shell hole with a few sandbags round its lip, and a groundsheet in the
+    bottom that keeps nothing out. It smells of old tea leaves and wet earth.
+
+    The two you're relieving go back past you without a word. One of them touches your boot as he
+    goes, which means good luck, or nothing. The string's tied to a stake in the corner. Somebody
+    has scratched his initials into the stake, and a date, and a girl's name.
+  choices:
+    - id: bold
+      text: "Crawl out past the post, where the hearing's better. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You crawl out past the lip to a shell hole further on, where the night's closer.
+      next: "@war"
+    - id: steady
+      text: "Settle in the post with your hand on the string. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You settle in with your hand on the string, and the cold comes up through the groundsheet.
+      next: "@war"
+    - id: careful
+      text: "Keep low in the bottom of the hole. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You keep low in the bottom of the hole, and listen to the night from underneath it.
+      next: "@war"
+
+- id: s_listening_1_c
+  chapter: front
+  title: The cellar
+  text: |
+    The post tonight is the cellar of a farmhouse that was knocked flat before you came: three steps
+    down out of no man's land into a black that smells of rotten apples and old soot. A slit has
+    been knocked through the wall at ground level to listen from.
+
+    Your partner's a man from another company who's never done one, and he talks: about his girl,
+    about his feet, about a dog he had. You tell him to shut it, and he does, for a minute. Rats run
+    along the beams over your head with a sound like rain starting.
+  choices:
+    - id: bold
+      text: "Climb up into the ruin, where you can see out. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You climb up into what's left of the kitchen and lie among the bricks with your ear to the dark.
+      next: "@war"
+    - id: steady
+      text: "Take the slit and listen, the way you were told. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You take the slit, and the new man takes the string, and you listen.
+      next: "@war"
+    - id: careful
+      text: "Stay at the foot of the steps, back from the slit. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You sit at the foot of the steps in the apple smell, and the night goes on above you.
+      next: "@war"
+
+# ---- step 2: the sound ------------------------------------------------------------------------------
+
+- id: s_listening_2_b
+  chapter: front
+  title: Hammering
+  text: |
+    Hammering. Out in front, soft and steady, wood on wood: a mallet with something wrapped round
+    its head. Their wiring party's out, and close, closer than their own wire ought to be.
+
+    You can hear a man breathing hard between blows, and the squeak of wire pulled tight, and once
+    a voice, sharp, telling somebody off in German. It's the same work our own lads do, the other
+    way round. They've no idea you're here.
+  choices:
+    - id: bold
+      text: "Throw a bomb at the hammering. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The bomb goes off among them, and the hammering stops, and a man calls out, and then their machine guns start.
+      next: "@war"
+    - id: steady
+      text: "Two tugs on the string, so the trench can find them. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Two tugs. A minute later our Lewis gun opens up on the sound, and the hammering stops.
+      next: "@war"
+    - id: careful
+      text: "Lie still and count the blows. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie still and count the blows into the hundreds, and towards dawn they stop.
+      next: "@war"
+
+- id: s_listening_2_c
+  chapter: front
+  title: Kamerad
+  text: |
+    Somebody's out there, alone, and he isn't creeping. He's coming straight at the post on his
+    hands and knees, rustling, stopping, coming on again. Then a whisper, high and frightened:
+    "Kamerad. Kamerad, Tommy."
+
+    He says it again, louder. It could be a man who's had enough of it and wants to come in. It
+    could be a man sent to get you to put your head up. Your thumb's on the pin of a bomb, and your
+    mouth's gone as dry as flour.
+  choices:
+    - id: bold
+      text: "Throw the bomb at the voice. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The bomb goes off where the voice was, and nothing calls again, and their trench wakes up.
+      next: "@war"
+    - id: steady
+      text: "Two tugs on the string. Let the trench decide. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Two tugs. Behind you a whisper goes back along the trench, and somebody sends for an officer.
+      next: "@war"
+    - id: careful
+      text: "Lie still and let him come or go. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie still, and the whispering stops, and in the morning there's nothing out there.
+      next: "@war"
+
+- id: s_listening_2_d
+  chapter: front
+  title: Supper
+  text: |
+    The post's a shell hole half full of water, and you lie on the slope of it with the water at
+    your boots and the smell of the line in your nose: mud, old gas, and something under both.
+
+    Forty yards off is a German pillbox, and tonight its back door's open a crack: candlelight, the
+    clink of mess tins, a ration party come up behind it along duckboards you can hear squelching.
+    Somebody drops something and gets sworn at. Jerry's having his supper.
+  choices:
+    - id: bold
+      text: "Throw a bomb at the door while it's open. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Your bomb bursts short of the door, and the candle goes out, and the whole ridge opens up on the dark.
+      next: "@war"
+    - id: steady
+      text: "Two tugs. Let the trench know there's a ration party. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Two tugs. Ten minutes later our guns drop a few rounds behind the pillbox, and the squelching stops.
+      next: "@war"
+    - id: careful
+      text: "Lie still in the water and let them eat. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie still in the water and listen to them eat, and after a while the door shuts.
+      next: "@war"
+
+- id: s_listening_2_e
+  chapter: front
+  title: The orchard
+  text: |
+    There's no wire and no trench out here, only a hedge and a lane, and beyond them an orchard that
+    might be full of Germans or empty. Your post's the ditch under the hedge, with the string run
+    back to a line of holes in a field.
+
+    [if war.month <= 3]The trees are bare, and there's frost in the grass.[elif war.month <= 6]The
+    blossom's out, and the smell of it comes over the lane, sweet as soap.[elif war.month <= 8]The
+    wasps have been at the windfalls all day, and the lane smells of them.[else]The apples are down
+    in the long grass, and you can smell them going soft.[/if] Then a dog whines in
+    the orchard and a man hushes it in German, gently, the way you'd hush your own.
+  choices:
+    - id: bold
+      text: "Throw a bomb over the hedge at the voice. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The bomb bursts in the orchard, and the dog goes mad, and rifles crack from under the trees.
+      next: "@war"
+    - id: steady
+      text: "Two tugs on the string. Let the line know they're there. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Two tugs. The string comes back once, and behind you the digging goes quieter.
+      next: "@war"
+    - id: careful
+      text: "Lie still in the ditch and listen. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie still in the ditch, and the dog whines once more, and goes quiet.
+      next: "@war"
+
+# ---- step 3: the way back ---------------------------------------------------------------------------
+
+- id: s_listening_3_b
+  chapter: front
+  title: The string
+  text: |
+    You give the one tug for all right, the way you do every quarter of an hour, and the string
+    comes to you loose: a yard, two yards, and then the frayed end in your hand. A shell splinter
+    has cut it in the night, or a rat has.
+
+    Nobody behind knows you're still here, or that you're all right. It's an hour to stand-to. The
+    sentries in our trench will be jumpy at first light, and anything that comes in out of the dark
+    without a word is a German.
+  choices:
+    - id: bold
+      text: "Crawl back now and tell them, before it's light. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You crawl back with the frayed end in your fist and give the password three times before the sentry lowers his rifle.
+      next: "@war"
+    - id: steady
+      text: "Stay at the post till the relief comes. That's the order. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: The relief comes at last, with a new ball of string, and you go back in behind him.
+      next: "@war"
+    - id: careful
+      text: "Stay put all day if you have to, and come in after dark. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You stay out all day with the frayed string in your hand, and come in after dark, starving.
+      next: "@war"
+
+- id: s_listening_3_c
+  chapter: front
+  title: Mist
+  text: |
+    Near dawn a mist comes up out of the ground, white and thick, smelling of wet ashes. In five
+    minutes you can't see the end of your rifle. Sound goes strange in it: a cough from their line
+    seems to come from behind you, and our own sentry clearing his throat sounds a mile off.
+
+    It might last an hour. It might lift in a minute and leave you lying in the open in full
+    daylight.[if start == mill] It's like the steam in the weaving shed on a damp morning, only
+    cold.[/if]
+  choices:
+    - id: bold
+      text: "Go back now while the mist hides you. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go back through the mist bent double, and nearly walk straight past the gap in our wire.
+      next: "@war"
+    - id: steady
+      text: "Stay put till the relief finds you. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: The relief finds you by the sound of your teeth chattering, and you go back in.
+      next: "@war"
+    - id: careful
+      text: "Lie still in the hole, whatever the mist does. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: The mist lifts in a minute, and you lie in the hole all day, and come in after dark.
+      next: "@war"
+
+- id: s_listening_3_d
+  chapter: front
+  title: Short
+  text: |
+    Towards dawn our guns start, and they're firing short. The first shell goes over high and lands
+    in their wire. The next lands forty yards behind you, in ours, and the one after that is closer
+    still. Earth comes down on your back in clods, and the air is so full of noise you can feel it
+    in your teeth.
+
+    Somewhere back in the trench an officer will be on the buzzer to the battery, telling them. It
+    will take time.
+  choices:
+    - id: bold
+      text: "Go back now, between the bursts. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run for our wire between two bursts and fall into the trench with your ears singing.
+      next: "@war"
+    - id: steady
+      text: "Stay at the post till you're relieved. That's the order. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: The guns lift at last, and the relief comes out white in the face, and you crawl back in.
+      next: "@war"
+    - id: careful
+      text: "Get flat in the bottom of the hole and stay there. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie in the bottom of the hole with your arms over your head, and come in after dark.
+      next: "@war"
+
+- id: s_listening_3_e
+  chapter: front
+  title: The cough
+  text: |
+    The man with you has a cough. He's held it down all night with his face in his sleeve, but now
+    it's getting the better of him: it comes up out of him in a bark, then another. Out in front
+    something that was moving stops moving.
+
+    He looks at you with his eyes watering, ashamed, his hand over his mouth. There's grey coming up
+    behind their line. Their snipers will be at their plates within the hour.
+  choices:
+    - id: bold
+      text: "Take him back now, before it's light. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You haul him back across the open at a run, the cough going off like a dog the whole way.
+      next: "@war"
+    - id: steady
+      text: "Stay till the relief, and keep his face in your coat. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You hold his face in your coat till the relief comes, and he coughs into the wool, and nobody fires.
+      next: "@war"
+    - id: careful
+      text: "Keep him down in the hole and wait out the day. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You keep him down in the hole all day, the cough worse every hour, and come in after dark.
+      next: "@war"

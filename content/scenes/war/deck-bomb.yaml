@@ -1,0 +1,297 @@
+# Deck for the bomber's mission (docs/FRAME-DECKS.md). Card a of each step is s_bomb_<step> in
+# sortie-scenes.yaml; these are cards b-e. Each card offers its step's own choices with card a's
+# effects; only the situation and the words change. Shared by every town.
+
+# ---- step 1: setting out --------------------------------------------------------------------------
+
+- id: s_bomb_1_b
+  chapter: front
+  title: Bombing raid
+  text: |
+    You spent the evening in the bomb store putting the detonators in, forty bombs by a candle stuck
+    in a bottle, nobody talking. Now the bombing officer draws their trench on the dugout floor with
+    the point of a bayonet: our sap, their wire, the bay where you go in, the traverses either side,
+    numbered. He's drawn it three times. He's a wart, a year out of school, and he knows it, and he
+    knows you know it.
+
+    "Questions?" Nobody has any. Up in the sap a cold drizzle has started, and it makes the bombs
+    slippery in the sacks.
+  choices:
+    - id: bold
+      text: "Ask to go in first, at the head of the party. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: He looks pleased, and then worried for you, and puts you first.
+      next: "@war"
+    - id: steady
+      text: "Take your place in the order he's drawn. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You go out third, where the bayonet put you, with the sack bumping on your hip.
+      next: "@war"
+    - id: careful
+      text: "Take the last place and carry the spare sack. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You go out last with a sack on each shoulder, and nobody argues with you for the place.
+      next: "@war"
+    - id: back
+      text: "Tell him you've a fever coming on, and stay behind. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: He writes something in his notebook by the candle and doesn't ask you anything else.
+      next: "@war"
+
+- id: s_bomb_1_c
+  chapter: front
+  title: Bombing raid
+  text: |
+    Here their trench and ours are the same trench. An old communication trench runs straight across
+    between the lines, and halfway along it is a wall of sandbags, ours, and fifteen yards on another,
+    theirs. Between the two blocks nobody goes. Tonight you go over ours, bomb up as far as you can,
+    and build a new block further on.
+
+    The sergeant hands round rum in the lid of his water bottle, one swallow each, and takes none
+    himself. Somebody behind their block is snoring.
+  choices:
+    - id: bold
+      text: "Go over the block first, with a bomb in each hand. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You're over the sandbags and into the empty stretch before the man behind you is off the ground.
+      next: "@war"
+    - id: steady
+      text: "Go over in your place as second bomber, behind the bayonet man. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Over the block behind the bayonet man, your bomb ready, the two of you breathing together.
+      next: "@war"
+    - id: careful
+      text: "Stay at our block with the spare bombs and the sandbags for the new one. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You stay at the block filling sandbags in the dark, ready to pass them up when the word comes.
+      next: "@war"
+    - id: back
+      text: "Tell the sergeant your nerve's gone tonight. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: He gives the swallow you didn't drink to the next man, and tells you to go back down to the bay.
+      next: "@war"
+
+# ---- step 2: the work ------------------------------------------------------------------------------
+
+- id: s_bomb_2_b
+  chapter: front
+  title: Bombing raid
+  text: |
+    Their trench, and the bombs are going faster than anybody planned. The carriers behind are passing
+    sacks up hand to hand, a chain of men crouched in the dark, and each sack comes up lighter. Their
+    bombers are good. They throw short and let the stick bombs roll in round the traverse, and you've
+    learnt to listen for the clatter of a wooden handle on the duckboards.
+
+    Ahead, the next traverse, and the one after. Your throwing arm is starting to go.
+  choices:
+    - id: bold
+      text: "Take the last full sack and lead round the next traverse yourself. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Round, throw, down, round again. Two more bays on that sack, and then you're feeling at the bottom of it for one more.
+      next: "@war"
+    - id: steady
+      text: "Stay second man and keep the bombs coming forward to the thrower. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You pass up and pass up, a bomb into a reaching hand every time it opens, till your fingers can't feel the pins.
+      next: "@war"
+    - id: careful
+      text: "Stop here, build a block across the bay, and hold what you've got. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You fill their sandbags with their own earth and pile them across the bay chest high, and hold it.
+      next: "@war"
+
+- id: s_bomb_2_c
+  chapter: front
+  title: Bombing raid
+  text: |
+    Their trench is cut deep in the chalk, and every bomb fills the bay with white dust that hangs and
+    hangs. Only half your sack is Mills bombs. The rest are the old sort, a tin of explosive with a fuse
+    you light from a striker strapped to your wrist, like a match on a box, and in this damp one in
+    three won't catch. You've learnt to strike, count two, and throw it anyway.
+
+    The next traverse is ten yards on, and their bombers are behind it.
+  choices:
+    - id: bold
+      text: "Lead round the next traverse with the Mills bombs while they last. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go round in the white dust, throwing, and their trench gives way in front of you a bay at a time.
+      next: "@war"
+    - id: steady
+      text: "Light and throw for the man in front, the slow way, and keep at it. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Strike, count, throw. Strike, count, throw. Your wrist is raw from the striker.
+      next: "@war"
+    - id: careful
+      text: "Hold this bay and wall it off with sandbags full of chalk. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You fill sandbags with lumps of chalk and wall off the bay, and the others go on round the corner without you.
+      next: "@war"
+
+- id: s_bomb_2_d
+  chapter: front
+  title: Bombing raid
+  text: |
+    Your job tonight has a name: the minnie that has been dropping its great tumbling canisters on the
+    battalion for a fortnight. Its pit is off a short sap at the end of the next bay. You can see the
+    mouth of the sap by the light of the bombs, and the sandbags round it, and their bombers holding the
+    bay in between.
+
+    One of theirs can throw like a fast bowler. The officer taps your shoulder twice and points: that one, the
+    pit, and then home.
+  choices:
+    - id: bold
+      text: "Lead round the traverse and bomb straight up the sap to the pit. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go up the sap throwing, and something in the pit goes up with a bang that knocks you flat.
+      next: "@war"
+    - id: steady
+      text: "Throw over the traverse for the man going round, and keep him supplied. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You lob them over in a high curve, one after another, and the man ahead goes round on each bang.
+      next: "@war"
+    - id: careful
+      text: "Hold this bay and block it, so nobody comes up behind the others. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wall off the bay behind them and crouch there with a bomb in each hand, facing the wrong way.
+      next: "@war"
+
+- id: s_bomb_2_e
+  chapter: front
+  title: Bombing raid
+  text: |
+    Their line tonight isn't a trench at all but a sunken road, its banks dug into holes and posts,
+    with a light machine gun somewhere along it that the battalion has been trying to find for three
+    nights. You come in at the top end and work down. The banks are higher than your head, there's no
+    traverse to get behind, and on the open road a bomb rolls a long way.
+
+    Down the road a voice is calling a roll, name after name, as if they were counting who was left.
+    [if war.month >= 8]Beyond the bank the corn has been cut, and nobody has carted it.[/if]
+  choices:
+    - id: bold
+      text: "Go down the road in the lead, throwing ahead as you go. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go down the middle of the road throwing, and the posts in the bank go quiet one after another as you pass.
+      next: "@war"
+    - id: steady
+      text: "Keep in under the bank and throw for the man in front. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You go down the road tight against the bank, passing up bombs, the earth showering down on you at every bang.
+      next: "@war"
+    - id: careful
+      text: "Hold the top of the road behind a block of whatever you can find. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You drag a cart wheel and a door across the top of the road and lie behind them with your bombs, facing down it.
+      next: "@war"
+
+# ---- step 3: the way back ---------------------------------------------------------------------------
+
+- id: s_bomb_3_b
+  chapter: front
+  title: Bombing raid
+  text: |
+    The whistle, and out over their parapet, and somewhere between their wire and ours the party loses
+    itself. A mist has come up off the ground while you were in their trench, waist high and white, and
+    every shell hole looks like the last. Somebody's sure it's left. Somebody else is sure it's straight
+    on.
+
+    Behind you a flare goes up and makes the mist glow without showing you anything, and their machine
+    gun starts, firing blind and high, the bullets cracking over your heads.
+  choices:
+    - id: bold
+      text: "Stand up out of the mist to get your bearings, then lead them in at a run. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You stand up into the flare light for one long second, see our wire, and go.
+      next: "@war"
+    - id: steady
+      text: "Keep the party together and crawl towards the flashes of our own guns. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You go on your bellies in a line, each man with a hand on the next man's boot, towards the flashes.
+      next: "@war"
+    - id: careful
+      text: "Get down in the nearest shell hole and wait for the mist to thin. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie in a shell hole with two others till the mist thins at first light, and crawl in through our wire with the day coming.
+      next: "@war"
+
+- id: s_bomb_3_c
+  chapter: front
+  title: Bombing raid
+  text: |
+    The whistle, and out. [if war.month <= 5]The way back is over ground the snow has half filled in,
+    and every shell hole is a white bowl with black water at the bottom under a skin of ice.[else]The
+    way back is mud, and the shell holes in it are full to the brim with water the colour of tea, and
+    you can't tell a puddle from a pit until you're in it.[/if]
+
+    Halfway across, the man in front of you goes in up to his chest, and keeps going down. He doesn't
+    shout. He's afraid to. Their machine gun is searching along the line of your tracks.
+  choices:
+    - id: bold
+      text: "Go in after him while the others get clear. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go in to the waist yourself and get him by the webbing, and the mud lets go of him with a sound like a cork.
+      next: "@war"
+    - id: steady
+      text: "Get two men flat on the rim and pull him out with rifle slings, then go on together. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Three slings knotted, two men on the rim, and he comes out an inch at a time with the bullets going over.
+      next: "@war"
+    - id: careful
+      text: "Mark the place, keep going, and send help out from our wire. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You go on alone, and at our wire you tell the sentry where, and he looks at you, and then out into the dark.
+      next: "@war"
+
+- id: s_bomb_3_d
+  chapter: front
+  title: Bombing raid
+  text: |
+    The whistle, and the party starts back the way it came, bay by bay, and their bombers come after
+    you. You can hear them getting ready round the traverse: a word, a scrape of boots, the small
+    sound of a cap being unscrewed from a stick bomb.
+
+    You're nearest the corner. Behind you the sergeant is at the parapet, getting men up and over one
+    at a time, and he wants somebody to keep their heads down till the last man is out.
+  choices:
+    - id: bold
+      text: "Stay at the corner and keep bombing them till the last man is over. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You throw your last four round the corner one after another, and go up the parapet with nobody behind you.
+      next: "@war"
+    - id: steady
+      text: "Go back in turn, bay by bay, throwing as you go, the way you drilled it. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Throw, fall back a bay, the next man throws, fall back. It works the way it did on the practice trenches, nearly.
+      next: "@war"
+    - id: careful
+      text: "Get up the parapet and out while the sergeant has the others covering. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You're up the parapet and through their wire with your sack still half full.
+      next: "@war"
+
+- id: s_bomb_3_e
+  chapter: front
+  title: Bombing raid
+  text: |
+    The whistle, and out, and the way back is longer than the way in. Somebody has the times wrong:
+    our own shells, the ones meant to fall behind their trench while you got clear, are falling short,
+    across the ground you have to cross. Each salvo comes over with a noise like a train in a tunnel
+    and bursts in a row, a little nearer our wire each time.
+
+    Off to the right, from the stumps of what the map still calls a wood, a German post is firing at
+    every shape it sees.
+  choices:
+    - id: bold
+      text: "Bomb the post in the wood, so it stops firing on the party. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go along the edge of the wood and get two bombs into the post, and the firing stops.
+      next: "@war"
+    - id: steady
+      text: "Keep the party together and go back in the gaps between the salvoes. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You count the salvoes, and each time one bursts you're all up and running, and down again before the next.
+      next: "@war"
+    - id: careful
+      text: "Get into the nearest shell hole and wait for the guns to lift. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie at the bottom of a shell hole with your arms over your head till the shelling walks off towards their line.
+      next: "@war"

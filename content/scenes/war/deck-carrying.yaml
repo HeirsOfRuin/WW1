@@ -1,0 +1,275 @@
+# Deck: the carrying party (docs/FRAME-DECKS.md). Cards b-e for each step; card a is
+# s_carrying_<step> in sortie-scenes.yaml. Each card offers the step's own choices with the step's
+# own effects; only the situation changes. Years (DECKS in src/game/war/data.ts): 2_d 1917,
+# 2_e 1915, 3_d 1916, 3_e 1918; the rest any year.
+
+# ---- step 1: setting out ---------------------------------------------------------------------------------
+
+- id: s_carrying_1_b
+  chapter: front
+  title: Carrying party
+  text: |
+    Wire tonight. The engineers want it up for a new belt in front of the support line: coils of
+    barbed wire, each on a stick through the middle so two men can carry it, and iron pickets with a
+    corkscrew end, for screwing into the ground without the noise of a mallet. The sergeant has six pairs
+    of hedging gloves for twenty men. The wire takes the skin off your palms through a sandbag, and
+    off your neck if you carry it high.
+  choices:
+    - id: bold
+      text: "Take a coil on your own, and an armful of pickets besides. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You set off with the coil hooked over one shoulder and the pickets clanking under your other arm, and the barbs find your ear inside fifty yards.
+      next: "@war"
+    - id: steady
+      text: "Take your end of a coil with the man next to you. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You take the back end of the stick, which means walking into the coil every time the man in front stops.
+      next: "@war"
+    - id: careful
+      text: "Take a bundle of pickets: awkward, but no barbs. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You take the pickets, tied in a bundle with a bit of rope, and they ring like a bell whenever they touch.
+      next: "@war"
+
+- id: s_carrying_1_c
+  chapter: front
+  title: Carrying party
+  text: |
+    Water. The line's been dry two days, and there's a row of petrol tins at the dump, filled from
+    the water cart and tasting of petrol whatever the quarter bloke says. Beside them is the mail: two
+    sandbags of letters and parcels. There's a lad from the new draft with the party, out three days, who
+    asks you which end of a tin you hold. It's starting to rain, the fine sort that gets in everywhere.[if start == farm] Like carrying milk churns up from the bottom meadow, but uphill all the way.[/if]
+  choices:
+    - id: bold
+      text: "Take four tins, two on each side on a rope yoke. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You set off with four tins sloshing on a yoke of rope, and the rope cuts a groove across the back of your neck.
+      next: "@war"
+    - id: steady
+      text: "Take two tins and keep the new lad in front of you. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You take two tins and put the new lad in front of you, where you can keep an eye on him.
+      next: "@war"
+    - id: careful
+      text: "Take a sack of the mail. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You take a sack of mail. It's light, and nobody grudges it, because nobody in the line would forgive you for losing it.
+      next: "@war"
+
+# ---- step 2: the work ------------------------------------------------------------------------------------
+
+- id: s_carrying_2_b
+  chapter: front
+  title: Carrying party
+  text: |
+    The communication trench has fallen in at the low bit, so the party goes up on top beside it, in
+    the open, on a track marked with white tape. It's quiet. Then a Very light goes up from their side,
+    a slow green-white star that hangs and drifts, and everything in the field shows: the tape, the
+    shell holes, twenty men with loads on their backs standing like a row of posts. Somewhere off to
+    the left a machine gun starts feeling along the ground for you.
+  choices:
+    - id: bold
+      text: "Keep walking under the light and get across before the next one. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You keep walking, steady as a postman, and the bullets go over in a long crack, high, and then you're past the worst.
+      next: "@war"
+    - id: steady
+      text: "Stand stock still while it burns, move in the dark between. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You freeze under every light and move between them, a few yards at a time, like a game you played as a child.
+      next: "@war"
+    - id: careful
+      text: "Get down in a shell hole with the load till the lights stop. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie in a shell hole with your load on your chest and watch the lights go up for half an hour, till their man gets bored.
+      next: "@war"
+
+- id: s_carrying_2_c
+  chapter: front
+  title: Carrying party
+  text: |
+    A block. A company of another battalion is coming down the same trench on relief, packs and rifles
+    and a Lewis gun, and the trench is one man wide. Behind them is a stretcher. Nobody can pass. A
+    sergeant of theirs says his lads have been in eight days and are not stepping aside for a
+    carrying party, and your officer says something back, and you all stand there wedged. Over the
+    parapet, every minute or so, a sniper puts one into the same sandbag.
+  choices:
+    - id: bold
+      text: "Climb out onto the parados and get past along the top. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go along the top of the parados, bent double, with the load and the sky behind you, and drop back in beyond the stretcher.
+      next: "@war"
+    - id: steady
+      text: "Squeeze into a bay and let them file by, then go on. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You stand in a bay with your load against your chest while the whole of their company files past, each man treading on your feet.
+      next: "@war"
+    - id: careful
+      text: "Go back to the last traverse and wait till the trench is clear. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You go back round the traverse, sit on your load and wait, and the trench takes an hour to empty.
+      next: "@war"
+
+- id: s_carrying_2_d
+  chapter: front
+  title: Carrying party
+  text: |
+    [if war.month <= 5]No trench up here: a track of planks laid on the mud, through country the guns have ploughed and
+    sleet has filled. Off the planks a man goes in to the knee, then the thigh.[else]No trench up here: a duckboard track across the salient, laid over mud that has taken the
+    land, with shell holes either side full to the brim and green on top. A pillbox squats by the
+    track a hundred yards on.[/if] A mule is down off the boards, sunk to its belly and
+    quiet now. Their guns have the track. Every few minutes a salvo walks along it, and the boards
+    jump, and the men on them flatten where they stand.
+  choices:
+    - id: bold
+      text: "Run the shelled stretch between salvoes. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run the boards between salvoes with your load bouncing, and one board tips under you and you nearly go in, and don't.
+      next: "@war"
+    - id: steady
+      text: "Keep to the boards, five yards apart, and flatten when it comes. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Five yards apart, flat when it comes, up and on, the mud spattering your load every time.
+      next: "@war"
+    - id: careful
+      text: "Wait in cover off the track for a lull. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait in what cover there is, on the lee side, with the load in your lap, until their guns turn somewhere else.
+      next: "@war"
+
+- id: s_carrying_2_e
+  chapter: front
+  title: Carrying party
+  text: |
+    Gas cylinders, for our side. Long iron bottles near as heavy as a man, slung on a pole between
+    two of you, to be dug in under the firestep for the next attack. The sappers who came down for
+    them say you're not to use the word gas: call them the accessory. The trench is chalk, greasy
+    with rain, and white enough to show your feet. A shell lands two bays up and the man in front
+    stops dead, and you both think of the same thing.
+  choices:
+    - id: bold
+      text: "Push on past the shelled bay before the next one. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You push on at a stumbling trot with the pole biting your shoulder and the cylinder swinging, past the bay where the shell came in.
+      next: "@war"
+    - id: steady
+      text: "Get down with it between shells, then on. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You lower it gently between shells, like a coffin, and lift it again together on a count of three.
+      next: "@war"
+    - id: careful
+      text: "Lay it down in a bay and wait for the shelling to move. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lay the cylinder along the foot of a bay and sit a little way off from it, and wait for their guns to find another trench.
+      next: "@war"
+
+# ---- step 3: the complication, or the way back -----------------------------------------------------------
+
+- id: s_carrying_3_b
+  chapter: front
+  title: Carrying party
+  text: |
+    The guide has lost the way. He was sure at the last signboard, and now the trench is old and
+    empty, the sides fallen in, the sandbags rotten and split, and nobody has come along it in a
+    month. The young officer has his map out under his coat with a torch, and he turns it round twice.
+    Somewhere ahead, too close, a German is coughing. The party stands with its loads in a line in
+    the dark and waits to be told something.
+  choices:
+    - id: bold
+      text: "Climb up for a look and cut across in the open to the line. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You get up on the top and see the line by the shape of its parapet against the sky, and lead the party across to it in the open, quickly, before you can think about it.
+      next: "@war"
+    - id: steady
+      text: "Go back to the last signboard and start again from there. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You lead them back to the signboard, read it with your fingers, and take the other turning, and it's the right one.
+      next: "@war"
+    - id: careful
+      text: "Sit tight in the old trench till a runner comes looking. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You sit tight with the loads till a runner from the front line finds you, cross and out of breath, nearly at dawn.
+      next: "@war"
+
+- id: s_carrying_3_c
+  chapter: front
+  title: Carrying party
+  text: |
+    You get to the front line and the company that sent for it isn't there. They've been sidestepped
+    in the night, and the officer here says his lads need it as much as anybody's but it's indented
+    for, so it goes to them: three hundred yards along. The trench between is knocked flat in two
+    places, waist-high at best, and a machine gun opposite has it marked. A lance jack points along
+    it with his chin and says, "Keep low."
+  choices:
+    - id: bold
+      text: "Take it along at a run, across the flattened bits. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run the flattened bits doubled up under the load, and the gun opens a second late both times, and you're in.
+      next: "@war"
+    - id: steady
+      text: "Take it along on your knees where the trench is down. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You take it along on your knees, pushing the load in front of you through the broken bits, and your knees are raw by the end.
+      next: "@war"
+    - id: careful
+      text: "Leave it here and send word for them to fetch it. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You leave it stacked in a dugout entrance with a note on it, and a lance jack's word that he'll send it on.
+      next: "@war"
+
+- id: s_carrying_3_d
+  chapter: front
+  title: Carrying party
+  text: |
+    The load is bombs for a trench taken this afternoon, an old German trench the wrong way round,
+    its dugout doors facing their guns and its firestep on the wrong side. Their dead are still in it,
+    and some of ours. At the far end there's a block of sandbags and shouting behind it, and a
+    potato masher comes turning over in the air. A sergeant with a bandaged hand sees your box and
+    says, "Bombs? Thank Christ. Down here, lad."
+  choices:
+    - id: bold
+      text: "Carry the box straight up to the bombing block. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You carry the box right up to the block and drop it at the bombers' feet, and somebody tears the lid off before you've let go.
+      next: "@war"
+    - id: steady
+      text: "Pass the bombs up the chain of men, hand to hand. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You open the box and feed the bombs up a chain of men, hand to hand, two at a time, till your fingers are numb.
+      next: "@war"
+    - id: careful
+      text: "Put the box down at the first dugout and let them come for it. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You set the box down at the first dugout and call out where it is, and men come back for the bombs one at a time.
+      next: "@war"
+
+- id: s_carrying_3_e
+  chapter: front
+  title: Carrying party
+  text: |
+    [if war.month <= 2]The front isn't a trench any more up here but a string of posts in shell holes, with
+    wire between and snow on the wire, and the post you're carrying for isn't where the guide says it
+    is. You stand in the open with the load and call its name in a whisper, and nothing answers. Off
+    to the right somebody is moving on the snow.[elif war.month <= 7]You come up to where the line was this morning and it isn't there. The trench is empty: kit,
+    a dixie on its side, a dead signaller by his telephone. Somebody says the battalion's fallen back
+    to the railway. Somebody else says Jerry's in the wood. There's movement in the dark ahead, and
+    nobody knows whose.[else]The line's moved on four miles since yesterday, past where the limbers can get, so the last stretch is
+    across open fields: stubble, a hedge, a road with the trees cut down across it. The company is in a
+    sunken road beyond. There's a German machine gun still in the copse on the right that nobody has
+    got round to yet.[/if]
+  choices:
+    - id: bold
+      text: "Go straight on with the load and find them. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go straight on across the open with the load, and find the company where it was said to be, near enough.
+      next: "@war"
+    - id: steady
+      text: "Work along the hedges with the party, a field at a time. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You work along the hedges a field at a time, and the last field you cross on your belly, and then you're with them.
+      next: "@war"
+    - id: careful
+      text: "Wait in the ditch with the loads until it's clear where they are. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait in a ditch with the loads until a runner tells you where the company is, and take it up after first light.
+      next: "@war"

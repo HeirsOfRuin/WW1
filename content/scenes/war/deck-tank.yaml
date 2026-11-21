@@ -1,0 +1,293 @@
+# The tank mission's deck (docs/FRAME-DECKS.md): bringing the tank up to the start line by night.
+# Card a of each step is s_tank_<step> in corps-tank.yaml; these are cards b-e. Each card offers the
+# step's own choices with the step's own odds; only the situation and the words change. A card is
+# drawn at random, so none depends on another; the previous step's text_after joins them.
+# Years (DECKS in src/game/war/data.ts): s_tank_2_d and s_tank_3_d are 1917 only (the salient);
+# s_tank_2_e and s_tank_3_e are 1918 only. The rest read right in either year: no gearsmen and no
+# officer named, since in 1918 he may be in a Whippet with a crew of three.
+
+# ---- step 1: setting out ------------------------------------------------------------------------
+
+- id: s_tank_1_b
+  chapter: front
+  title: The railhead
+  text: |
+    She comes up by train, on a flat wagon with chains over her tracks, and the train stops at a railhead that is two lamps and a ramp of sleepers in a field. Midnight, and raining. The sleepers are greasy, and the ramp is built for a lorry, not for her. The railway transport officer stands at the bottom in a cape with a watch in his hand and says the train goes back empty in forty minutes, with her or without her. Behind her on the next wagon another crew are waiting their turn, smoking under their hands.
+  choices:
+    - id: bold
+      text: "Bring her straight off down the ramp and on to the road. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: She tips off the end of the wagon with a crash like a coal drop, and the sleepers crack under her, and she's down and on the road.
+      next: "@war"
+    - id: steady
+      text: "Chocks under the tracks, and down the ramp a foot at a time. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: A foot at a time, you walking backwards in front of her with your hands up like a man guiding a cart into a yard, and she comes down.
+      next: "@war"
+    - id: careful
+      text: "Get the ramp packed with more sleepers first, whatever the RTO says. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You carry sleepers in the rain until your shoulders are raw, and the RTO stands over you looking at his watch, and the ramp holds.
+      next: "@war"
+    - id: back
+      text: "Tell him she can't come off here tonight. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: The RTO writes your number in his book, and the train takes her back up the line with you sitting on the chains.
+      next: "@war"
+
+- id: s_tank_1_c
+  chapter: front
+  title: The tank park
+  text: |
+    Late afternoon in the wood, and the petrol has come up in two-gallon tins on a lorry. You fill her through a funnel and a square of cloth, tin after tin, while the driver goes round her tracks with a spanner and a grease gun. The guide sent from the infantry is a lad of nineteen from another battalion, new out, who has never seen a tank. He walks round her twice and asks if she floats.[if start == mill] The smell of the hot engine is the mill's engine house on a Monday morning.[/if] The light's going. The road out of the wood is on the map, and it goes past a crossroads the Germans shell every night at ten.
+  choices:
+    - id: bold
+      text: "Get her out now, in the last of the light, and be past the crossroads early. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: She noses out of the trees while there's still colour in the sky, and anybody on the ridge with glasses could see her if he looked.
+      next: "@war"
+    - id: steady
+      text: "Wait for full dark, as ordered, and go out to the timetable. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Full dark, the nets off, the lad from the other battalion out in front with his lamp held low, and she follows him on to the road.
+      next: "@war"
+    - id: careful
+      text: "Walk the road with the lad first, so he knows what she needs. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You walk the first mile with him and show him the soft verges and the low branches, and he writes it on his cuff, and you go back for her.
+      next: "@war"
+    - id: back
+      text: "Report her not fit. Tell them the magneto's playing up. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: The section officer looks at you a long while and then at her, and says he'll put it in his report, and somebody else's tank goes up the road instead.
+      next: "@war"
+
+# ---- step 2: the work ---------------------------------------------------------------------------
+
+- id: s_tank_2_b
+  chapter: front
+  title: The bridge
+  text: |
+    A stream, and a brick bridge over it no wider than she is. The engineers were meant to have shored it up. There's a notice board nailed to the parapet with a figure in chalk that might be a seven or a one, tons, and she weighs nearer thirty. The guide holds his lamp over the edge. Below, black water and the white of broken bricks where something heavy has already been through the side. Upstream there's a ford, but the banks are steep and soft, and the shelling has started on the road behind you.
+  choices:
+    - id: bold
+      text: "Take her over the bridge at speed, before it can think about it. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: She goes over with the bricks grinding under her and a piece of the parapet going into the water behind, and she's across.
+      next: "@war"
+    - id: steady
+      text: "Over the bridge at a crawl, dead centre, a man guiding on each side. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Dead centre, an inch at a time, with a lamp on either side of her nose, and the bridge creaks the whole way and holds.
+      next: "@war"
+    - id: careful
+      text: "Leave the bridge alone and try the ford, slow. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: She goes down the bank nose first into water up to her doors and climbs out the other side streaming, with weed in her tracks.
+      next: "@war"
+    - id: back
+      text: "Leave her this side of the water and get the crew back. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: You leave her by the bridge with the engine off and go back down the road in the dark to report it.
+      next: "@war"
+
+- id: s_tank_2_c
+  chapter: front
+  title: The village
+  text: |
+    The route goes through what's left of a village, one street between broken walls, and it's narrower than the map said. Halfway along, the corner of a house juts out. She'll touch it. There's a light behind a sacking curtain in the cellar, and a woman comes up the cellar steps in a shawl and stands in the road in front of her, talking fast in French and pointing at the wall, which is the only one of her house still standing. Behind you a company of infantry is waiting to come through, and their sergeant is calling up to know what the hold-up is.
+  choices:
+    - id: bold
+      text: "Wave her out of the road and drive through the corner. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The corner comes down across her roof in a cloud of plaster, and you don't look back at the woman, and the infantry cheer.
+      next: "@war"
+    - id: steady
+      text: "Back her and fill and work her past the corner a yard at a time. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Back, forward, back, forward, with the wall a hand's width off her side, and she's past with the woman still watching from the steps.
+      next: "@war"
+    - id: careful
+      text: "Find another way round, by the orchard at the back. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You take her round through the orchard, and the trees go down in front of her one after another, and the woman's wall is still there.
+      next: "@war"
+    - id: back
+      text: "Turn her in the square and go back the way you came. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: You turn her in the square with the infantry pressed against the walls to let you by, and go back.
+      next: "@war"
+
+- id: s_tank_2_d
+  chapter: front
+  title: The plank road
+  text: |
+    [if war.month >= 7]The salient.[else]The old ground behind Arras, thawed to mud.[/if] The only way up is a road of beech planks laid over it, and off the planks the ground is soup to the depth of a man. Shell holes on both sides, full to the brim, with the sky shining in them. Ahead, a tank from another company has slid off the planks and lies over on her side in the water with her tracks in the air, and the road past her is half blocked. Beyond, low and grey, a German concrete post the infantry say is empty. The guns are searching the road.[if war.month >= 8] It rained all yesterday and all last night.[/if]
+  choices:
+    - id: bold
+      text: "Squeeze her past the wreck on the half of the road that's left. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Her near track goes over the edge of the planks and spins in the mud, and catches again, and she's past the wreck with a foot to spare.
+      next: "@war"
+    - id: steady
+      text: "Get out and lay planks from the verge to widen the road, then go on. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You drag planks out of the mud by the roadside and lay them, soaked to the waist, and she comes past the wreck on them.
+      next: "@war"
+    - id: careful
+      text: "Stop her short and wait for a lull before trying it. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait with the engine ticking over, counting the shells along the road, until there's a gap long enough, and go.
+      next: "@war"
+    - id: back
+      text: "She'll go the same way as that one. Turn her back. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: You back her down the planks a yard at a time, a man walking behind with a lamp, until there's room to turn.
+      next: "@war"
+
+- id: s_tank_2_e
+  chapter: front
+  title: Across country
+  text: |
+    No tape tonight and no trenches to cross: open country, the kind nobody here has seen since 1914. The roads are full of the army going forward, guns and limbers and lorries nose to tail, and a military policeman at the crossroads tells you a tank is not going on his road, sir or no sir. So she goes across the fields by compass, between [if war.month >= 6 && war.month <= 9]standing corn higher than a man's waist[else]rows of beet and stubble[/if], with a farm burning off to the east to steer by. Somewhere ahead the German rearguard has machine guns in the hedges.
+  choices:
+    - id: bold
+      text: "Straight across country on the compass, flat out. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: She goes through hedges and over a sunk lane and across a field of something, flat out, and nobody fires at her yet.
+      next: "@war"
+    - id: steady
+      text: "A man walking ahead with the compass, and her following at his pace. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You walk in front with the compass on a lanyard, a bearing at every hedge, and she comes after you through the gaps.
+      next: "@war"
+    - id: careful
+      text: "Keep to the hedgerows and the dead ground, the long way round. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: The long way round, under the hedges, and twice you stop her and listen to the night before going on.
+      next: "@war"
+    - id: back
+      text: "Too far and nobody on the flanks. Take her back to the road. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: You turn back for the road and sit in the queue of lorries until morning.
+      next: "@war"
+
+# ---- step 3: the complication, or the way back -------------------------------------------------
+
+- id: s_tank_3_b
+  chapter: front
+  title: Gas
+  text: |
+    Gas shells, a mile short of the start line: the soft plop of them, not the bang, and then a smell like garlic and wet hay coming in through every gap in the plates. You get your respirator on, and so does the crew, and inside her you can't see for the mist on the eyepieces, and the driver can't see at all. The engine's drawing the gas in and blowing it round you. Nobody can hear the shouts through the masks. The start line is ahead, and the gas lies thickest in the hollow in front of it.
+  choices:
+    - id: bold
+      text: "Drive straight through the hollow and out the far side. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: She goes down into the hollow and up out of it with the mist on your eyepieces, and you're through, choking in the masks.
+      next: "@war"
+    - id: steady
+      text: "Masks on, a man outside leading her by the hand-lamp. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You walk in front of her through the gas with the lamp, breathing through the tube, the driver following the light.
+      next: "@war"
+    - id: careful
+      text: "Stop, close everything up, and wait for it to clear. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You shut every flap and sit in the dark inside her with the masks on, listening to your own breath, until the shelling stops.
+      next: "@war"
+    - id: back
+      text: "Get the crew out of it. Leave her. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: You get the crew out and back up the road, holding each other's belts, and leave her standing in the gas.
+      next: "@war"
+
+- id: s_tank_3_c
+  chapter: front
+  title: The engine stops
+  text: |
+    Four hundred yards from the start line, and the engine coughs and dies. In the quiet you can hear the infantry talking in their trench, and further off, the German side: a cart, a man coughing. Dirt in the petrol, the driver says, or water. To start her again needs the big starting handle at the back, three men on it, swinging, and the noise when she catches will carry. Dawn's an hour off. A German flare goes up, hangs, and comes down slowly, and all of you stand still against her side until it's out.
+  choices:
+    - id: bold
+      text: "Get the handle on and swing her now, noise or no noise. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Three of you on the handle, swinging, and on the fourth go she catches with a bang and a sheet of flame from the exhaust, and you go.
+      next: "@war"
+    - id: steady
+      text: "Clear the petrol feed first, by feel, then start her. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You clear the feed by feel with the petrol running down your sleeve, and she starts at the first swing.
+      next: "@war"
+    - id: careful
+      text: "Wait for the next shells to cover the noise before starting her. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait with your hands on the handle until our own guns open on something to the north, and swing her under the noise.
+      next: "@war"
+    - id: back
+      text: "Leave her, and come for her tomorrow night. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: You put the net over her where she stands and go back across the fields in the last of the dark.
+      next: "@war"
+
+- id: s_tank_3_d
+  chapter: front
+  title: The last of the planks
+  text: |
+    [if war.month >= 7]The salient, and the[else]The[/if] planks run out two hundred yards short of where she's wanted. Beyond is mud, and a duckboard track the infantry use, and nothing a tank can stand on. The officer of the company she's to support comes back along the duckboards, an older man with a stick and a muddy face, and says the concrete post on the rise has been firing all night. If she can get near enough to put a gun through its slit in the morning, he'll be glad of her. If she can't, he'd sooner she went home than drew the shells.
+  choices:
+    - id: bold
+      text: "Take her off the planks and on across the mud. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: She goes off the end of the planks into the mud and wallows and grinds and goes on, a yard at a time, sinking to her belly.
+      next: "@war"
+    - id: steady
+      text: "Fix the unditching beam to her tracks and go on carefully. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: With the beam chained on she goes over the mud like a man on snowshoes, slow, and you walk beside her watching it.
+      next: "@war"
+    - id: careful
+      text: "Stop her at the end of the planks and net her there. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You stop her where the planks end, and the officer looks at her and at the mud and nods, and goes back along the duckboards.
+      next: "@war"
+    - id: back
+      text: "Take his word and go home. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: You back her down the planks and leave him to it.
+      next: "@war"
+
+- id: s_tank_3_e
+  chapter: front
+  title: The flare
+  text: |
+    Nearly there, and a German aeroplane comes over low, throttled back, and drops a flare. It hangs in the sky on its little parachute and lights the whole country white, every hedge and every rut, and her standing in the middle of a field with a tail of crushed [if war.month >= 6 && war.month <= 9]corn[else]beet[/if] behind her that points like a finger. You hear the aeroplane turn. In the hedge two hundred yards ahead, where she's meant to wait for zero, the infantry have gone flat. A second flare. Then the first shell, short.
+  choices:
+    - id: bold
+      text: "Run for the hedge while the light lasts. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: She runs for the hedge in the white light with the shells walking after her, and gets in under the trees as the flare goes out.
+      next: "@war"
+    - id: steady
+      text: "Stop dead and wait for the dark, then on to the hedge. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You stop dead and sit still as a stone until the flare drops, and then on to the hedge in the dark.
+      next: "@war"
+    - id: careful
+      text: "Pull her into the ditch here and net her where she is. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You pull her down into the ditch by the field's edge and drag the net over her, and lie under it while the shells look for her.
+      next: "@war"
+    - id: back
+      text: "Turn her round and get out of his light. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: You turn her round in the field and go back the way she came, along her own track.
+      next: "@war"

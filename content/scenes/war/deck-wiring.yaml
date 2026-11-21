@@ -1,0 +1,316 @@
+# The wiring party: deck cards b-e for each step (docs/FRAME-DECKS.md).
+# Card a is s_wiring_<step> in sortie-scenes.yaml. Choices and effects copy card a's for the step;
+# only the situation and the words change. Years (from/to) are set in DECKS in src/game/war/data.ts:
+# 2_b 1915-16 (chalk), 2_d 1917 (the salient), 2_e 1918 (open country), 3_d 1917-18 (box respirator).
+
+# ---- step 1: setting out ----------------------------------------------------------------------------
+
+- id: s_wiring_1_b
+  chapter: front
+  title: Drawing the wire
+  text: |
+    You draw the stores at the sappers' dump behind the support line at dusk: coils of barbed wire,
+    screw pickets in bundles of ten, gloves that are more hole than glove. A sapper corporal ticks
+    it all off in a book by a hurricane lamp and tells you he wants the gloves back.
+
+    Then up the communication trench with a coil slung on a pick handle between you and the man
+    behind, and the coil catches at every traverse, and every man you pass in the dark says mind
+    that bloody thing. It smells of rust and wet hessian.[if start == pit] It's like carrying props
+    down a low road, except props don't bite.[/if]
+  choices:
+    - id: bold
+      text: "Get over first and get the pickets in while it's dark. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You're over the top before the others have their coils off their shoulders, and the first picket's in.
+      next: "@war"
+    - id: steady
+      text: "Go out in your turn and work with the party. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You go out in your turn, the coil between you, and kneel where the corporal points.
+      next: "@war"
+    - id: careful
+      text: "Take the near end, along our own wire. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You take the near end, close in under our wire, where there's a ditch to drop into.
+      next: "@war"
+
+- id: s_wiring_1_c
+  chapter: front
+  title: The new lad
+  text: |
+    Six in the party tonight, and one of them's a lad out from the base a week, who keeps asking in
+    a whisper what he should do with his hands. The officer takes you through it at the gap in our
+    wire: the zigzag out, the white tape laid on the ground to show where the new belt goes, a
+    picket every three paces, and nobody speaks above a breath.
+
+    It's cold enough to see your breath, and you wish you couldn't. Somewhere along their line a man
+    is whistling, the same four notes over and over. Then he stops.
+  choices:
+    - id: bold
+      text: "Go out first along the tape and set the pace. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go out first along the white tape, and the lad comes after you, treading on your heels.
+      next: "@war"
+    - id: steady
+      text: "Show the lad, and work with the others. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You put a mallet in the lad's hands and show him how to hold it, and the party goes out together.
+      next: "@war"
+    - id: careful
+      text: "Keep near our wire and leave the far end to others. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You keep in by our own wire with the lad, where the ditch is close.
+      next: "@war"
+
+# ---- step 2: the work -------------------------------------------------------------------------------
+
+- id: s_wiring_2_b
+  chapter: front
+  title: Neighbours
+  text: |
+    The ground's chalk under a skin of clay, and the screw pickets won't bite, so it's wooden stakes
+    and a mallet with sacking round its head, and every blow goes off like a knock on a door in an
+    empty house.
+
+    Then, out across the way, you hear it answered: thud, thud, a little off the beat. Their wiring
+    party, doing the same as you, sixty yards off. Nobody fires. Nobody wants to be the one who
+    starts it. You can smell their tobacco, sweeter than ours. A flare goes up from their side, a
+    long way off to your left, as if somebody aimed it there on purpose.
+  choices:
+    - id: bold
+      text: "Keep driving stakes while it's quiet. Get the belt done. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You drive stake after stake, and over there they go on hammering, and nobody fires.
+      next: "@war"
+    - id: steady
+      text: "Work when they work, and stop when they stop. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You keep time with their mallets, stopping when they stop, the two parties working like one.
+      next: "@war"
+    - id: careful
+      text: "Get down in a shell hole till you know what they're up to. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie in a shell hole listening to them hammer, and the stakes wait.
+      next: "@war"
+
+- id: s_wiring_2_c
+  chapter: front
+  title: Caught
+  text: |
+    Somebody's caught. You hear him before you see him: the wire rattling and singing along the
+    whole length of the belt, and a man swearing in a whisper. It's the youngest of the party, from
+    the last draft, and he's walked into the old wire up to his waist, and every time he pulls, the
+    whole coil shakes like a bell rope.
+
+    The corporal hisses at him to keep still. He can't. Over on their side a machine gun fires a
+    short burst, feeling for something, and stops.
+  choices:
+    - id: bold
+      text: "Go to him standing up and cut him loose. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You get to him upright with the cutters and snip him out a strand at a time, his breath hot on your neck.
+      next: "@war"
+    - id: steady
+      text: "Get flat and work your way to him along the wire. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You crawl to him along the belt and hold his arms still while the corporal cuts.
+      next: "@war"
+    - id: careful
+      text: "Get down and stay down till the gun's done. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie with your face in the dirt and listen to him rattling, and the gun doesn't fire again.
+      next: "@war"
+
+- id: s_wiring_2_d
+  chapter: front
+  title: Wiring in water
+  text: |
+    [if war.month <= 5]Since the thaw, wiring is wiring in water.[else]Wiring in the salient is wiring
+    in water.[/if] The shell holes run into each other lip to lip, every
+    one full to the brim with green scum, and the pickets go in by hand like a spoon into porridge
+    and lean over as soon as you let go. The duckboard you came out on has sunk out of sight.
+
+    Fifty yards off a German pillbox squats in the dark like a coal shed, and you can hear the men
+    inside it talking, the sound coming out flat through the slit. Your boots are full, and your
+    hands have stopped feeling the barbs.
+  choices:
+    - id: bold
+      text: "Keep working upright and get the stretch done. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go on working upright in the mud, slow as a man in a dream, and nobody in the pillbox looks out.
+      next: "@war"
+    - id: steady
+      text: "Work on your knees, low, a picket at a time. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You work on your knees in the slime, a picket at a time, and the voices go on in the pillbox.
+      next: "@war"
+    - id: careful
+      text: "Slide into the nearest hole till the talking stops. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You slide down into the cold water up to your chest and hold the coil up out of it.
+      next: "@war"
+
+- id: s_wiring_2_e
+  chapter: front
+  title: A belt in the open
+  text: |
+    There's no trench to wire in front of, only a line of holes scraped the day before in a field
+    [if war.month <= 4]of winter wheat a hand high, wet with dew[elif war.month <= 7]of young corn,
+    knee-high and soaking with dew[else]of stubble that crackles under your boots[/if]. You're putting out a single belt, loose, enough to trip a man coming in
+    the dark.
+
+    Nobody knows where Jerry is: a mile off, or the far side of the next hedge. A dog is barking at a
+    farm somewhere out in front, on and on, the way a dog does at strangers.[if start == farm]
+    Somebody drilled this field dead straight, and you wonder where he is now.[/if]
+  choices:
+    - id: bold
+      text: "Run the belt out fast while it's dark. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run the belt out at a stoop along the line of holes, and the dog goes on barking.
+      next: "@war"
+    - id: steady
+      text: "Work along it with the others, a picket at a time. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You work along with the others, picket and wire, and the field stays quiet.
+      next: "@war"
+    - id: careful
+      text: "Go flat whenever the dog stops, and wait. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: Every time the dog stops you go flat and wait, and the belt goes out slowly.
+      next: "@war"
+
+# ---- step 3: the way back ---------------------------------------------------------------------------
+
+- id: s_wiring_3_b
+  chapter: front
+  title: Whizz-bangs
+  text: |
+    They've heard something. A whizz-bang comes over, then three more, bursting short and high along
+    the new wire with a crack and a smell like a struck match. The pickets ring when the bits hit
+    them. The party's flat.
+
+    Somebody further along is groaning quietly, more surprised than hurt, by the sound of him. The
+    corporal crawls past on his elbows and whispers that there's half a coil to go, and that they'll
+    stop in a minute. They always do.
+  choices:
+    - id: bold
+      text: "Get up the second it stops and run the last half out. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You're up the second it stops, and the last half coil goes out at a run, and you come in panting.
+      next: "@war"
+    - id: steady
+      text: "Wait for the corporal, then finish with the party. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: When it stops you finish what you can with the others, and help the groaning man in.
+      next: "@war"
+    - id: careful
+      text: "Leave the half coil and crawl in while it's quiet. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You crawl back in while it's quiet, and the half coil lies out there for another night.
+      next: "@war"
+    - id: back
+      text: "Tell the corporal you've had enough, and go in first. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You go in on your own, flat on your belly, and don't look back at them.
+      next: "@war"
+
+- id: s_wiring_3_c
+  chapter: front
+  title: Forty yards more
+  text: |
+    The officer wants more. He's young and keen and he's been looking at the map, and he wants the
+    belt run on another forty yards to the lip of the crater, so their bombers can't come round
+    that way.
+
+    "It'll be light in an hour, sir," the corporal says.
+
+    "Then we'd better look sharp, Corporal."
+
+    Your hands are cut in a dozen places and stiff with cold, and your back aches from stooping. The
+    crater smells of stale water and old explosive, and something has been dead in it a while.
+  choices:
+    - id: bold
+      text: "Do what he wants. Run it to the crater. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run the wire right to the crater lip, and come in with the officer pleased and the sky going white.
+      next: "@war"
+    - id: steady
+      text: "Run what you can and come in with the party. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You get it most of the way, and the corporal brings everybody in, and the officer lets him.
+      next: "@war"
+    - id: careful
+      text: "Come in now. The crater will keep till tomorrow night. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You come in and leave the crater end open. The officer writes something in his notebook.
+      next: "@war"
+    - id: back
+      text: "Say you're done in, and go back first. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You tell the corporal you're done in, and go back on your own, and leave them to it.
+      next: "@war"
+
+- id: s_wiring_3_d
+  chapter: front
+  title: Gas shells
+  text: |
+    A soft plop out on your left, then another, not like a shell at all. Then a smell comes over on
+    the breeze, like wet hay gone bad, and back in our trench somebody starts beating on the gas
+    gong, a shell case hung on a wire, clang, clang, clang.
+
+    You get the box respirator on: the clip on your nose, the rubber mouthpiece tasting of somebody
+    else's breath, the eyepieces misting up till the wire's a grey blur. There's one length to go.
+    You can hear the others sucking air through their tubes like old men.
+  choices:
+    - id: bold
+      text: "Keep the mask on and finish the length anyway. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You finish the length half blind behind the fogged eyepieces, and come in hauling on the rubber for every breath.
+      next: "@war"
+    - id: steady
+      text: "Finish what you can in the mask, and come in with the party. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You do what you can and come in with the others in a line, one hand on the man in front.
+      next: "@war"
+    - id: careful
+      text: "Leave the wire and get in now. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You leave the last length where it lies and get in through the gap with your mask on.
+      next: "@war"
+    - id: back
+      text: "Tell the corporal you can't breathe in it, and go back first. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You go back in on your own, ahead of them, with your eyes streaming behind the glass.
+      next: "@war"
+
+- id: s_wiring_3_e
+  chapter: front
+  title: Mist
+  text: |
+    The corporal says one more length. Then the mist comes up off the low ground all at once, thick
+    and wet, smelling of ditches, and you can't see the man on the other end of the coil.
+
+    You can't see our line either. Somewhere in it is the gap you came out by, the only way back in
+    through our own wire, and the sentries behind it are nervy at this hour. All they know about mist
+    is that men come out of it.
+  choices:
+    - id: bold
+      text: "Finish the length in the mist. It's cover. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You finish the length blind, and walk in on our sentry by luck, the password already on your lips.
+      next: "@war"
+    - id: steady
+      text: "Finish what you can, then come in together along the tape. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You follow the tape back in a line, holding the coat of the man in front, and come in at the gap.
+      next: "@war"
+    - id: careful
+      text: "Leave it and feel your way in now. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You leave the last length and feel your way in along our wire till you find the gap.
+      next: "@war"
+    - id: back
+      text: "Tell the corporal you're done in, and go back first on your own. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You go back first, on your own, and our sentry nearly shoots you.
+      next: "@war"

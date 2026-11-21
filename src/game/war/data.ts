@@ -298,8 +298,28 @@ export const SORTIES: Record<string, Sortie> = {
 // the others. from/to: the years (stage 1-4) a card can be drawn in. The draw is a hash, not a stream,
 // and changes no number: the choices and their odds are the step's, whichever card is shown.
 export interface Card { id: string; from?: number; to?: number }
+// Written as 'step 1 | step 2 | step 3', a card as its letter, with @3 (that year) or @3-4 (those years).
+const DECK_CARDS: Record<string, string> = {
+  air: 'a b c | a b c d@3 e@4 | a b c d@3 e@4',
+  bearer: 'a b c | a b@2 c@3 d e | a b@4 c d@1 e',
+  bomb: 'a b c | a b c@1 d e@4 | a b c@3 d e@2',
+  carrying: 'a b c | a b c d@3 e@1 | a b c d@2 e@4',
+  lewis: 'a b c | a b c@1 d@4 e | a b c@2 d e@4',
+  listening: 'a b c | a b c d@3 e@4 | a b c d@2 e',
+  patrol: 'a b c | a b@1 c@3 d e@4 | a b@1-2 c d e',
+  raid: 'a b c | a b c@1 d@2 e@3 | a b c d@4 e@1-2',
+  signals: 'a b c | a b c d@2 e@3 | a b c d@4 e@1',
+  snipe: 'a b c | a b c@1 d@4 e | a b c@3 d e',
+  tank: 'a b c | a b c d@3 e@4 | a b c d@3 e@4',
+  tunnel: 'a b c | a b c d@1-2 e@3 | a b c d@4 e',
+  wiring: 'a b c | a b@1-2 c d@3 e@4 | a b c d@3-4 e',
+};
+const card = (t: string): Card => {
+  const [id, yrs] = t.split('@'); if (!yrs) return { id: id! };
+  const [from, to] = yrs.split('-').map(Number); return { id: id!, from, to: to ?? from };
+};
 export const DECKS: Record<string, [Card[], Card[], Card[]]> = Object.fromEntries(
-  Object.keys(SORTIES).map((k) => [k, [[{ id: 'a' }], [{ id: 'a' }], [{ id: 'a' }]]]),
+  Object.keys(SORTIES).map((k) => [k, (DECK_CARDS[k] ?? 'a | a | a').split('|').map((st) => st.trim().split(/\s+/).map(card))]),
 ) as Record<string, [Card[], Card[], Card[]]>;
 
 // A man in front of you (FRAME-PLAYTEST2 A; the author, playtest 2: "It never feels like I am killing

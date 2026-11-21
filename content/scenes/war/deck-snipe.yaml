@@ -1,0 +1,300 @@
+# Deck for the sniper's mission (docs/FRAME-DECKS.md). Card a of each step is s_snipe_<step> in
+# sortie-scenes.yaml; these are cards b-e. Each card offers its step's own choices with card a's
+# effects; only the situation and the words change. Shared by every town. The author, playtest 3:
+# "Sniping got a bit repetitive with the role missions."
+# Years: s_snipe_2_c 1915 (the slag heaps), s_snipe_2_d 1918 (the farm), s_snipe_3_c 1917 (the
+# flooded shell hole). The rest are written to read right in any year.
+
+# ---- step 1: setting out --------------------------------------------------------------------------
+
+- id: s_snipe_1_b
+  chapter: front
+  title: Past the wire
+  text: |
+    The sniping officer had a new hide made in the night: a shell hole sixty yards out in no man's
+    land, roofed over with a sheet of iron and earth thrown on top, and a gap at the front no wider
+    than a letter box. At half past three you go out through our wire with the rifle wrapped in
+    sacking so it won't knock, your observer behind you with the telescope down the front of his
+    tunic. [if war.month <= 3]The ground's frozen, and every step crackles.[elif war.month <= 9]The ground's wet with dew, and it smells of turned earth and something dead.[else]It's raining, thin and cold, and it runs down inside your collar.[/if]
+    A Very light goes up to the left, and you both lie on your faces till it dies.
+  choices:
+    - id: bold
+      text: "Go on out to the new hide in the shell hole. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The shell hole. Lying in it, under the iron, you can hear them talking in their trench.
+      next: "@war"
+    - id: steady
+      text: "Take the hide at the sap head, as you were first told. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: The sap head. Their parapet is a long grey line from here, and you have it to yourselves.
+      next: "@war"
+    - id: careful
+      text: "Go back to the hide in our parapet, behind the plate. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: The parapet hide, with a steel plate and a yard of earth in front of you. The new one can wait for another day.
+      next: "@war"
+
+- id: s_snipe_1_c
+  chapter: front
+  title: The new observer
+  text: |
+    Your observer has gone down the line with a poisoned foot, and the one they've given you came up
+    with the last draft. His puttees are done up too tight and he holds the telescope like something
+    borrowed from chapel. He asks, in the dark, if you've killed many. You tell him to keep his voice
+    down. [if war.month <= 3]It's bitter, and his breath smokes.[elif war.month <= 9]There's a mist lying on the low ground.[else]It's raining, and the trench boards squelch.[/if]
+    The quick way to the hide is up the old sap the shelling knocked half flat. The proper way is
+    round by the communication trench, half an hour longer, with a ration party coming down it.
+  choices:
+    - id: bold
+      text: "Take the old sap, bent double, and be in before light. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Along the broken sap on your hands and knees, the lad's breathing loud behind you. You're in the hide with ten minutes of dark to spare.
+      next: "@war"
+    - id: steady
+      text: "Go round by the communication trench, the proper way. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Round by the communication trench, squeezing past the ration party. The lad says sorry to every man of them.
+      next: "@war"
+    - id: careful
+      text: "Let the ration party by, then go the long way, slowly. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You go the long way, stopping at every bend to listen, and it's grey light when you get in. The lad has stopped asking things.
+      next: "@war"
+
+# ---- step 2: the work ----------------------------------------------------------------------------
+
+- id: s_snipe_2_b
+  chapter: front
+  title: The working party
+  text: |
+    Mid-morning the mist starts to come off no man's land in rags, and in one of the gaps your
+    observer goes still. Behind their wire, where the ground dips, men are working: six or eight of
+    them, with stakes and a coil of wire, thinking the mist still covers them. You hear the mallet
+    before you find it, a dull knock, coming late across the ground. One of them has stopped to light
+    his pipe, his hands cupped round the match. The mist is going fast. In a minute they'll know.
+  choices:
+    - id: bold
+      text: "Fire into them now, while they're bunched. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You fire and work the bolt and fire. They go flat into the dip and the mallet stops, and your observer can't say what you hit.
+      next: "@war"
+    - id: steady
+      text: "Pick the one giving orders, and wait for him to stand clear. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You lay the sights on the man pointing and wait for him to straighten up out of the others.
+      next: "@war"
+    - id: careful
+      text: "Mark the place for the gunners and keep still. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: Your observer draws the dip in the notebook with the time beside it, and the mallet goes on knocking.
+      next: "@war"
+    - id: back
+      text: "Get out before the mist goes and they see the hide. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: With the mist lifting, you'll be seen going as easily as staying. You go now, while you can.
+      next: "@war"
+
+- id: s_snipe_2_c
+  chapter: front
+  title: The slag heap
+  text: |
+    Behind their line the slag heaps stand up out of the flat country, grey and black, one of them
+    smoking where it's burning inside. [if start == pit]You'd know a pit heap anywhere; it smells
+    like home on a wet day.[/if] All morning your observer has watched one patch of it, and at eleven
+    he hands you the telescope without a word. Halfway up, in a hollow in the slag, there's a glint:
+    a German lying out with field glasses, looking down on our support line. Every carrying party
+    that came up this week, their guns seemed to know about. Six hundred yards, and a wind across.
+  choices:
+    - id: bold
+      text: "Take the long shot at him now. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You put the sights up and allow for the wind and fire. The glint's gone, and you'll never know why.
+      next: "@war"
+    - id: steady
+      text: "Set your sights by the range card and wait for him to move. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You check the range card and set the sights, and wait. At last he sits up to ease his back.
+      next: "@war"
+    - id: careful
+      text: "Send his place back to the gunners and leave him to them. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: Your observer writes down where he lies, and the time, and a runner takes it back to the battery.
+      next: "@war"
+    - id: back
+      text: "Pack it in. If he can see the support line, he can see you. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You think of those glasses turning your way. You close the slit, and go.
+      next: "@war"
+
+- id: s_snipe_2_d
+  chapter: front
+  title: The farm
+  text: |
+    [if war.month <= 3]The line here is a string of shell holes and old concrete, and your hide is in the
+    rubble of a farm at the end of it.[else]There's no proper trench here since the line moved, only holes
+    scraped along a hedge, and your hide is the hedge bottom, with the rifle laid out through the roots.[/if]
+    Four hundred yards off, across [if war.month <= 3]the mud[elif war.month <= 7]green corn up to a man's knee[else]the stubble[/if],
+    is another farm with half its roof gone. At ten o'clock men come out of the barn carrying
+    something heavy between them: a machine gun on its sledge. They start setting it up in a gap in
+    the yard wall, facing your company. A dog comes out after them and barks at the gun.
+  choices:
+    - id: bold
+      text: "Fire on the gun team before they're settled. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You fire into the gap in the wall till the magazine's empty. The gun's dragged back into the barn, and the dog goes with it.
+      next: "@war"
+    - id: steady
+      text: "Wait for the gunner to lie down behind it, and take him. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You wait for the gunner to get down behind the gun and settle his shoulders. You take up the slack.
+      next: "@war"
+    - id: careful
+      text: "Send word back about the gun and keep watching. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: Your observer goes back on his belly with a note for the company. You keep your eye on the gap in the wall.
+      next: "@war"
+    - id: back
+      text: "Get out. Once that gun's laid, it'll sweep this cover. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You know what that gun will do to your cover once it's laid. You go back along the ditch before it is.
+      next: "@war"
+
+- id: s_snipe_2_e
+  chapter: front
+  title: The gap
+  text: |
+    Last night our trench mortars knocked a hole in their parapet, and nobody's built it up yet. It's a
+    gap the width of a door, and every man going along their trench has to pass it. Your observer
+    counts them under his breath. Most go fast, bent double. The ninth stops in the middle of it,
+    upright, to call something back over his shoulder: a stout man with a bundle of letters in his
+    hand and the string still round them. Their post has come up. You think of the postman at home,
+    and his bag, and who'll be waiting on this one.
+  choices:
+    - id: bold
+      text: "Take him while he's stood there. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You fire. The letters go up like pigeons off a roof, and the gap is empty.
+      next: "@war"
+    - id: steady
+      text: "Lay on the gap and take the next man who's slow. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You let him go with his letters, and lay the sights on the gap, and let the fast ones by.
+      next: "@war"
+    - id: careful
+      text: "Let them cross. Mark the gap for the mortars again. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You let them all go by. Your observer marks the gap for the trench mortars, for tonight.
+      next: "@war"
+    - id: back
+      text: "Pack it in. Men don't stand in a gap like that unless they're covered. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: Somebody over there is watching that gap for men like you. You close the slit and get out.
+      next: "@war"
+
+# ---- step 3: the complication ---------------------------------------------------------------------
+
+- id: s_snipe_3_b
+  chapter: front
+  title: The whizz-bangs
+  text: |
+    Afternoon, and their field guns start on the parapet. Not the whole line, only your stretch of it,
+    a bay at a time, working along towards you: crack and slam with no time between, and the stink of
+    the smoke after. Earth comes down through the roof of the hide and into your collar. Your observer
+    has his face in the sandbags and both hands over the telescope, as if that was the thing to keep
+    safe. Two more bays. Somebody's given them the hide, or guessed it.
+  choices:
+    - id: bold
+      text: "Open the slit and look for whoever's spotting for them. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You open the slit into the smoke and look for a head, a glass, anything. The next one lands a bay off.
+      next: "@war"
+    - id: steady
+      text: "Close the slit, get flat behind the plate, and wait it out. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You lie flat behind the plate and count them in. The bay next door goes up, and then they lift.
+      next: "@war"
+    - id: careful
+      text: "Get out the back and along the trench, now. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You go out the back on your hands and knees, round two traverses, and hear the next one land where you were.
+      next: "@war"
+
+- id: s_snipe_3_c
+  chapter: front
+  title: The water
+  text: |
+    [if war.month <= 4]It snowed in the night and the thaw came at noon[elif war.month <= 5]A thunderstorm broke at noon[else]It's rained since noon[/if], and the
+    shell hole you're lying in has been filling all day, an inch an hour. The water's over your knees
+    now and into your belly, so cold it aches in your teeth. Your observer's jaw is going like a
+    sewing machine. Through the slit [if war.month <= 5]their wire runs black along the white chalk of the ridge[else]a pillbox squats
+    in the mud, grey concrete, with a slit in it like your own[/if], and you can't tell if anyone over there
+    saw the water move when you shifted. Three hours to dark.
+  choices:
+    - id: bold
+      text: "Get up on the lip, out of the water, and keep watching. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You haul yourself up onto the lip, with nothing between you and their line but a fold of mud.
+      next: "@war"
+    - id: steady
+      text: "Stay in the water and keep still till dark. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You stay in it. By dark you can't feel your feet, and your observer has to take the rifle off you.
+      next: "@war"
+    - id: careful
+      text: "Crawl back along the ditch now, and leave the hide. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You go back along the ditch on your belly with the water running out of your clothes, and leave the hole to the rats.
+      next: "@war"
+
+- id: s_snipe_3_d
+  chapter: front
+  title: The visitor
+  text: |
+    Afternoon. Someone comes crawling in at the back of the hide without asking: a young officer
+    from the battery behind you, clean-shaven, smelling of soap, with a map case and field glasses.
+    He's heard you can see their second line from here, and he wants to look at it. Before you can
+    stop him he's put his head up over the plate, not at the slit, to see better, and he's writing
+    in his notebook. Your observer says, 'Sir,' and no more. Out in front, something clicks against
+    a stone.
+  choices:
+    - id: bold
+      text: "Leave him be, and look for the man who's seen him. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You put your eye to the slit and hunt for the sniper who'll have seen that head. The officer's still writing.
+      next: "@war"
+    - id: steady
+      text: "Pull him down by the belt, and show him the slit. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You pull him down by the belt and he lands on top of you, cross, and then not cross. You show him the slit.
+      next: "@war"
+    - id: careful
+      text: "Take him out the back with you, now. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You take him out the back, the observer last, and the next bullet rings off the plate behind you all.
+      next: "@war"
+
+- id: s_snipe_3_e
+  chapter: front
+  title: The glint
+  text: |
+    Late in the day the sun comes round behind you and lights their whole line like a picture: every
+    sandbag, every stake in the wire, a rusty bucket on their parapet. It's the best light you've had
+    all day, and it's shining on the end of your telescope too. Your observer draws the glass back an
+    inch, too late, maybe. Over there a periscope that hasn't moved since morning turns, slowly, and
+    stops, looking straight at you. You can smell your own sweat in the hide.
+  choices:
+    - id: bold
+      text: "Use the light while it lasts. Shoot the periscope. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You put a bullet through the periscope. Glass jumps off their parapet, and then nothing over there moves at all.
+      next: "@war"
+    - id: steady
+      text: "Cover the glass, close the slit to a crack, and wait for dusk. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You put a sock over the end of the telescope and close the slit to a crack, and wait for the light to go.
+      next: "@war"
+    - id: careful
+      text: "Leave the hide now, the back way, low. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You go out the back of the hide flat on your belly, with your own shadow stretched out long down the trench in front of you.
+      next: "@war"

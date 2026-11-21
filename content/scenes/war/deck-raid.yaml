@@ -1,0 +1,306 @@
+# Deck for the trench raid (docs/FRAME-DECKS.md). Card a of each step is s_raid_<step> in
+# sortie-scenes.yaml; these are cards b-e. Each card offers its step's own choices with card a's
+# effects; only the situation and the words change. Shared by every town.
+
+# ---- step 1: setting out --------------------------------------------------------------------------
+
+- id: s_raid_1_b
+  chapter: front
+  title: The raid
+  text: |
+    Rain since dusk, fine and cold, the kind that gets in at the collar. In the sap the sergeant makes
+    each of you jump on the spot, and listens. Anything that rattles comes off: a tin of gaspers, a
+    clasp knife, somebody's door key from home. Then he blacks over the last pale bits of your face
+    with his thumb.
+
+    The scouts have laid a white tape out through our wire to show the way. You can just see it, a
+    grey line going off into nothing. The officer touches each man on the shoulder as he goes up the
+    ladder, counting under his breath. You're seven.
+  choices:
+    - id: bold
+      text: "Go up first behind the scouts and follow the tape at a run. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go along the tape bent double, the rain hissing in the grass, and you're at the far end of it before your breath catches up.
+      next: "@war"
+    - id: steady
+      text: "Go up in your turn and follow the tape on your belly. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You follow the tape hand over hand, the next man's boots a foot from your face.
+      next: "@war"
+    - id: careful
+      text: "Leave the tape to the others and work across from shell hole to shell hole. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: Hole to hole, slowly, lying in the water at the bottom of each one till the next flare has gone out.
+      next: "@war"
+    - id: back
+      text: "Tell the sergeant you've come over sick, and stay in the sap. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: 'He puts the back of his hand on your forehead in the dark, takes it away, and says, "Go on, then."'
+      next: "@war"
+
+- id: s_raid_1_c
+  chapter: front
+  title: The raid
+  text: |
+    Frost, and no moon, and so quiet you can hear a cart on a road somewhere behind their line. The
+    lad next to you on the firestep came out with the last draft. He's eighteen if he's a day, and
+    he's put the burnt cork on so thick it's cracking. He asks you in a whisper if it's always this
+    quiet. You tell him no.
+
+    The officer has his watch in his palm with his other hand cupped over the dial. At ten past, our
+    guns open on their trench either side of where you're going in, to keep their heads down. At ten
+    past, he says, not a minute before. It's eight minutes past.
+  choices:
+    - id: bold
+      text: "Go over the parapet the second the guns open, and run for it. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The guns open behind you with a crack like a sheet tearing, and you're halfway across before the first shells land.
+      next: "@war"
+    - id: steady
+      text: "Go out on the officer's word and keep the new lad beside you. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You go out with the lad at your elbow, and every time he stops, you stop.
+      next: "@war"
+    - id: careful
+      text: "Go out slowly at the tail, and keep the frost from crunching under you. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You put each knee down as if the ground were glass, and it creaks under you anyway.
+      next: "@war"
+    - id: back
+      text: "Tell the officer you've turned your ankle on the firestep. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: He doesn't look at your ankle. He tells you to get down off the firestep, and he doesn't watch you go.
+      next: "@war"
+
+# ---- step 2: their wire ------------------------------------------------------------------------------
+
+- id: s_raid_2_b
+  chapter: front
+  title: The raid
+  text: |
+    Their wire, and no gap in it. The guns cut one, somebody whispers, twenty yards to the right, and
+    the officer has brought you in twenty yards to the left of it. Or the guns never cut it at all.
+    He lies with his face close to the wire as if he could read it. Then he points along the front of
+    it, the way you'd send a dog.
+
+    A sentry further down fires a few rounds into the dark at nothing, the way they do on a long
+    night. You can hear the bolt working between shots.
+  choices:
+    - id: bold
+      text: "Go along the face of the wire at a crouch, find the gap and be first in. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You find the gap by falling into it, and then you're through and under their parapet with the others coming in behind you.
+      next: "@war"
+    - id: steady
+      text: "Follow the officer along the wire on your belly, in your turn. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Twenty yards on your belly with the wire at your shoulder, then the gap, and the man ahead of you going through it.
+      next: "@war"
+    - id: careful
+      text: "Stay where you are and cover the others along the wire. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie with your rifle on their parapet while the others crawl away from you along the wire, one shape after another.
+      next: "@war"
+
+- id: s_raid_2_c
+  chapter: front
+  title: The raid
+  text: |
+    Their line here runs along the lip of an old mine crater, and everything the mine threw up is
+    chalk. It shows white even at night. A man on it would stand out like a fly on a tablecloth. Their
+    wire is down in the crater, loose coils thrown over the edge, too slack to cut, so you'll have to
+    go over it.
+
+    Beyond their parapet you can make out the slag heaps behind their line, black against a sky a
+    shade less black. Somewhere over there a pit's winding wheel is still standing.
+  choices:
+    - id: bold
+      text: "Straight up the white slope and over, before a flare catches you on it. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go up the chalk on all fours, sliding back a foot for every two, and over the top, and down.
+      next: "@war"
+    - id: steady
+      text: "Go up in turn when the officer taps your boot, along the shadow of the edge. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: The tap comes, and you go, keeping to the one dark strip where the chalk has been blown grey.
+      next: "@war"
+    - id: careful
+      text: "Lie in the crater and cover their parapet while the others go up. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie at the bottom of the crater with your rifle on their parapet and watch the others go up the white slope without you.
+      next: "@war"
+
+- id: s_raid_2_d
+  chapter: front
+  title: The raid
+  text: |
+    Their wire is in two belts here, with ten yards of open ground between, and the second belt is
+    thicker than the first. [if war.month <= 8]The nights are short in summer and you started late:
+    there'll be light in the sky by half past three. The grass between the belts is long and heavy
+    with dew, and the whole party is soaked to the waist.[else]The rain has turned the ground between
+    the belts to a paste that sucks at your knees, and every man who moves in it makes a noise like
+    a cow pulling its foot out of a gateway.[/if]
+
+    You're through the first belt. Lying in the open between the two, the officer turns his head and
+    looks at the sky.
+  choices:
+    - id: bold
+      text: "Into the second belt now, cutters or no cutters, and over their parapet. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go through the second belt on your back, lifting the strands over you with your rifle, and come out under their parapet.
+      next: "@war"
+    - id: steady
+      text: "Wait for the cutters to work through the second belt, and go in your turn. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: The cutters work, and the strands spring back, and when your turn comes the gap is just wide enough for a man lying flat.
+      next: "@war"
+    - id: careful
+      text: "Stay between the belts and cover the gap while the others go through. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You stay in the open between the belts with your rifle on their parapet, and the wet soaks through your tunic to the skin.
+      next: "@war"
+
+- id: s_raid_2_e
+  chapter: front
+  title: The raid
+  text: |
+    Their front line here is shell holes, joined into a ditch where they've had the time to dig, a
+    few men in each and a scatter of loose wire in front, not much. [if war.month >= 6]Behind it, a
+    hundred yards back, a pillbox sits low in the mud, and whoever is inside it can sweep this whole
+    stretch.[else]Behind it, in what's left of a wood, their machine guns are dug in where you can't
+    see them, and they can see this whole stretch.[/if]
+
+    You're lying in the last hole short of their ditch. There's a man in it with you who has been
+    dead a long while, and he's one of ours.
+  choices:
+    - id: bold
+      text: "Up and into their ditch before anybody in it looks this way. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Ten yards of mud in three strides, and you're down in their ditch with the water over your boots.
+      next: "@war"
+    - id: steady
+      text: "Go in behind the officer on his signal, the way it was planned. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: His hand comes down and you go together, bent low, through the loose wire and into their ditch.
+      next: "@war"
+    - id: careful
+      text: "Stay in the hole and watch the ground behind while the others go in. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie beside the dead man with your rifle on the dark behind their line, and the others go in without you.
+      next: "@war"
+
+# ---- step 3: in their trench ------------------------------------------------------------------------
+
+- id: s_raid_3_b
+  chapter: front
+  title: The raid
+  text: |
+    In their trench, and it goes wrong at once. A bomb comes over from the next bay and the officer is
+    down, sitting against the trench wall with his legs straight out, saying he's all right in a voice
+    that says he isn't. The sergeant is somewhere further along.
+
+    Beside you there's a dugout entrance with a blanket over it, and voices underneath, low and quick,
+    as if they were arguing about whether to come up. The men behind you are looking at you, because
+    you're nearest.
+  choices:
+    - id: bold
+      text: "Go down the steps and bring a man up. It's what you came for. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go down three steps into the candlelight, shouting, and a man comes up past you with his hands on his head.
+      next: "@war"
+    - id: steady
+      text: "Bomb the dugout the way it was briefed, then get the officer out. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Two bombs down the steps, and then you and another man have the officer by the arms, his boots dragging.
+      next: "@war"
+    - id: careful
+      text: "Leave the dugout be. Get the officer up and everybody out, now. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You get the officer over their parapet between you before anybody comes up those steps.
+      next: "@war"
+
+- id: s_raid_3_c
+  chapter: front
+  title: The raid
+  text: |
+    Their trench is knee deep in water, and the first man you find in it is dead: sitting on the
+    firestep with his chin on his chest, killed by our guns before you came, by the look of him.
+    Further down, a sentry has seen something. A gong starts, then another, and men are shouting all
+    along their line.
+
+    The officer wants a prisoner, a live one. The intelligence officer would settle for what the dead
+    man has on him.
+  choices:
+    - id: bold
+      text: "Go on along the trench towards the shouting for a live one. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Round one traverse there's a man with his rifle half up, and he lowers it and lets you take it off him.
+      next: "@war"
+    - id: steady
+      text: "Cut the shoulder straps off the dead man, take his pay book, and go. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Your knife's blunt and the cloth is wet, and you saw at it, and then it's in your pocket and you're climbing.
+      next: "@war"
+    - id: careful
+      text: "Leave him. Get out of their trench before the whole line is awake. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You're up their parapet and into the grass before the gongs stop.
+      next: "@war"
+
+- id: s_raid_3_d
+  chapter: front
+  title: The raid
+  text: |
+    [if war.month <= 3]Their trench is fuller than it ought to be. Men are asleep along the floor of it
+    shoulder to shoulder, packs still on, new kit, as if they came in tonight and are waiting for
+    something. The officer whispers that this is exactly what brigade wants to know.[else]Their trench
+    was ours until the spring. You know it the moment you drop in: our sandbags, our duckboards, a
+    board at the corner with an English name painted on it, and the firestep cut new into what was the
+    back wall.[/if]
+
+    Nobody's awake yet. Nearest you a man is asleep sitting up in a hole cut in the trench wall, his
+    rifle across his knees and an open tin on his chest.
+  choices:
+    - id: bold
+      text: "Wake the sleeper with a hand over his mouth and take him back with you. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: He comes awake under your hand and doesn't struggle, and going over the parapet he's lighter than you expected, all bone.
+      next: "@war"
+    - id: steady
+      text: "Take his rifle and his cap, enough to show who they are, and out. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You lift the rifle off his knees as if it were a sleeping child, and he doesn't wake, and you're gone.
+      next: "@war"
+    - id: careful
+      text: "Signal the others back out before one of them wakes. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You touch the man behind you on the arm and point, and the party goes back up the way it came, one at a time, with nobody waking.
+      next: "@war"
+
+- id: s_raid_3_e
+  chapter: front
+  title: The raid
+  text: |
+    Their trench is cut deep in the chalk, and the walls are so white you can see your own shadow on
+    them by the light of a flare. You've come down into a bombing post: a bay walled off with
+    sandbags, a box of their stick bombs on the firestep, and nobody in it.
+
+    Then their guns start, not on you but behind you, a curtain of shells along no man's land, the way
+    they always answer a raid. That's between you and home now. Somewhere up the trench an Alleyman
+    is shouting the same word over and over.
+  choices:
+    - id: bold
+      text: "Go up the trench towards the shouting for a prisoner while the shelling lasts. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go round two traverses at a run and come back with a man by the collar of his tunic, and neither of you could say how.
+      next: "@war"
+    - id: steady
+      text: "Take the box of their bombs for the intelligence officer and go back between the salvoes. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You go back across with their bomb box banging on your hip, counting the seconds between the shells.
+      next: "@war"
+    - id: careful
+      text: "Get the party back over at once, before the shelling thickens. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You're out of the white trench and into the first shell hole with the chalk dust still coming down on you.
+      next: "@war"

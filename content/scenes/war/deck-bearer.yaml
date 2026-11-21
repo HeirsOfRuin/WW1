@@ -1,0 +1,300 @@
+# The stretcher-bearer's mission: deck cards b-e for each step (docs/FRAME-DECKS.md).
+# Card a is s_bearer_<step> in sortie-scenes.yaml. Choices and effects copy card a's for the step;
+# only the situation and the words change. Years (from/to) are set in DECKS in src/game/war/data.ts.
+
+# ---- step 1: setting out ----------------------------------------------------------------------------
+
+- id: s_bearer_1_b
+  chapter: front
+  title: Stretcher-bearers
+  text: |
+    A runner puts his head into the bearers' dugout, out of breath: a man hit in the forward sap,
+    a minnie, bad. You're up and into your boots with the stretcher off its hooks before he's done.
+
+    The communication trench is full. A ration party is coming down it the other way with the dixies
+    on poles, steaming, and nobody can pass anybody. You can smell the stew and the wet sandbags.
+    Up ahead, somebody in the sap is shouting for you by the only name he knows: "Bearers!"
+  choices:
+    - id: bold
+      text: "Climb out and go along the top, past the jam. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Up on the open ground, running with the stretcher on your shoulder, the trench a black line beside you.
+      next: "@war"
+    - id: steady
+      text: "Push through the trench, calling for them to make way. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: '"Stretcher-bearers, make way!" They flatten against the side and the dixies go up over your heads.'
+      next: "@war"
+    - id: careful
+      text: "Go round by the support line, the long way, under cover. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: The long way, and the whole of it you can hear him shouting, getting fainter.
+      next: "@war"
+
+- id: s_bearer_1_c
+  chapter: front
+  title: Stretcher-bearers
+  text: |
+    Morning after a raid, and two of the raiders didn't come in. The officer stands on the firestep
+    with his glasses and says one of them waved, a while ago, out by their wire. He can't swear to it.
+
+    There's a mist lying on no man's land, white and low, and the sun is coming up behind you
+    through it. In half an hour it will burn off and the whole of the ground out there will be as
+    plain as a bowling green. Your breath smokes. Somebody hands you a mug of tea and you don't drink it.
+  choices:
+    - id: bold
+      text: "Go now, while the mist holds, and go fast. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Over the top into the white, the stretcher between you, half running, the grass soaking your knees.
+      next: "@war"
+    - id: steady
+      text: "Go out along the old ditch, low, the way you'd go at night. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Along the ditch on your knees, the water in it cold as the tap in the yard.
+      next: "@war"
+    - id: careful
+      text: "Go to the sap head first and listen for him. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie at the sap head with your cap off and listen, and after a while a voice out there coughs.
+      next: "@war"
+
+# ---- step 2: the work -------------------------------------------------------------------------------
+
+- id: s_bearer_2_b
+  chapter: front
+  title: The wounded
+  text: |
+    He's one of the new draft, a lad who came up last week and still has the shine on his buttons.
+    Hit high in the shoulder, lying on the white chalk at the bottom of the trench, the blood bright
+    on it. [if war.month >= 6 && war.month <= 9]The heat is coming off the ground already and the flies have found him.[else]The chalk is wet and greasy, and the cold is coming up out of it into him.[/if]
+
+    The machine gun on the ridge sweeps along the top every minute or so; you hear it coming, a
+    sound like a stick dragged along railings. He keeps asking if he's going home.
+  choices:
+    - id: bold
+      text: "Get him on the stretcher and go between bursts. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You count the burst past, lift him, and run with him before the next one comes round.
+      next: "@war"
+    - id: steady
+      text: "Pad the shoulder and bind the arm to him, then lift. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Two dressings and his arm strapped across his chest, and you tell him yes, home, most likely.
+      next: "@war"
+    - id: careful
+      text: "Pull him into the old dugout entrance and wait for the gun to tire. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: In the dugout mouth it's cool and stinks of their tobacco, and the gun goes over and over.
+      next: "@war"
+    - id: back
+      text: "Tell him the next party will fetch him, and go. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: He says all right. He says it like a boy at school. You go.
+      next: "@war"
+
+- id: s_bearer_2_c
+  chapter: front
+  title: The wounded
+  text: |
+    He's in a shell hole half full of water, sunk to the chest, holding on to the lip with one arm.
+    The other arm is no good to him. His face is grey with cold and he's stopped shivering, which
+    the MO says is the bad sign.
+
+    The mud round the hole takes your boots to the calf and doesn't want to give them back. It
+    smells of rot and of the gas that lies in the bottoms. Every few minutes a shell comes over and
+    the water in the hole jumps.
+  choices:
+    - id: bold
+      text: "Haul him straight out by the webbing and run. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You get your hands in his straps and heave, and he comes out with a sucking noise, and you're off.
+      next: "@war"
+    - id: steady
+      text: "Lay the stretcher across the lip and work him onto it. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Stretcher across the hole for a bridge, and you ease him up onto it an inch at a time.
+      next: "@war"
+    - id: careful
+      text: "Hold his head up out of the water till the shelling eases. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie on the lip with his chin in your hand and talk to him about nothing at all.
+      next: "@war"
+    - id: back
+      text: "Stick his rifle up to mark the hole, and go back for more hands. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You push his rifle into the mud by the hole, bayonet down. You tell him you'll be back.
+      next: "@war"
+
+- id: s_bearer_2_d
+  chapter: front
+  title: The wounded
+  text: |
+    There are two of them in the hole, not one. A corporal with his foot gone and a private, a boy,
+    hit in the face, holding a field dressing to it with both hands. You've one stretcher.
+
+    The corporal says take the lad. The lad doesn't say anything; he can't. There's a smell of
+    singed cloth and of the earth turned over, sour, like a dug garden in the rain. A flare goes
+    up somewhere and the hole fills with white light, and then it's dark again.
+  choices:
+    - id: bold
+      text: "Take both: one on the stretcher, one on your back. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: The corporal on the stretcher, the lad on your back with his arms round your neck, and you go.
+      next: "@war"
+    - id: steady
+      text: "Dress them both, then take the worse one first. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: A tourniquet on the corporal, a dressing bound round the lad's head, and you take the corporal.
+      next: "@war"
+    - id: careful
+      text: "Stay in the hole with them till it's quieter. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You sit between them in the bottom of the hole and share out your water.
+      next: "@war"
+    - id: back
+      text: "Promise them another party, and get back. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: The corporal nods as if he expected it. The lad watches you go over the lip.
+      next: "@war"
+
+- id: s_bearer_2_e
+  chapter: front
+  title: The wounded
+  text: |
+    It's the officer, the young one, lying against a broken trestle of their wire with his leg
+    bent wrong under him. He's lost his cap and his hair is full of earth. When he sees the stretcher
+    he tells you to leave him and fetch his sergeant, who's somewhere further out, and he says it
+    the way he'd give an order on parade, and his voice cracks in the middle of it.
+
+    You can smell the rum on him; somebody's already given him the bottle. Further out, nobody is calling.
+  choices:
+    - id: bold
+      text: "Lift him anyway, orders or not, and go. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: '"That is an order," he says, and then he''s on the stretcher and you''re running and he stops saying it.'
+      next: "@war"
+    - id: steady
+      text: "Splint the leg to the other first, then lift him. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You bind the leg to its fellow with bandages and a rifle, and he bites on his glove and lets you.
+      next: "@war"
+    - id: careful
+      text: "Drag him into the old trench behind and wait for dark. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You get him down into the old trench, and he lies there giving you orders, quieter and quieter.
+      next: "@war"
+    - id: back
+      text: "Do as he says and go back for another party. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: '"Good man," he says. You go back. You don''t go out for the sergeant.'
+      next: "@war"
+
+# ---- step 3: the way back ---------------------------------------------------------------------------
+
+- id: s_bearer_3_b
+  chapter: front
+  title: The wounded
+  text: |
+    The aid post isn't where it was. [if war.month <= 3]They've moved it back to a farm cellar behind the support line, and the way there is over frozen plough, the ruts like iron under your boots.[elif war.month <= 7]The battalion's falling back, and the aid post went with it, and nobody can tell you how far. The road is full of limbers going the same way.[else]It's gone forward behind the advance, into a farm a mile on, and the way there is across stubble fields that nobody has shelled yet.[/if]
+
+    A long carry, then, in the open. Your arms are gone already. He's heavy and quiet, and every
+    so often you put him down and look to see if he's still breathing. A battery somewhere near is
+    firing, and each round slaps you in the chest.
+  choices:
+    - id: bold
+      text: "Run the open stretches and rest in the hedges. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run the open bits with your lungs on fire, and drop into each hedge bottom like a sack.
+      next: "@war"
+    - id: steady
+      text: "Change ends every two hundred paces and keep walking. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Two hundred paces, change ends, two hundred paces, on and on.
+      next: "@war"
+    - id: careful
+      text: "Wait in a ditch for a wagon going that way. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait in a ditch for an hour, and then a cart comes, and the driver doesn't argue.
+      next: "@war"
+
+- id: s_bearer_3_c
+  chapter: front
+  title: The wounded
+  text: |
+    Back in our trench, and the trench is no help. It's narrow and it turns every few yards round a
+    traverse, and a stretcher won't go round the corners flat. You have to tip him up, nearly on
+    his side, to get him round, and he cries out every time.
+
+    They're shelling the support line behind, steadily, a shell a minute. Earth patters down on
+    his blanket. The trench smells of wet sandbags and the latrine bucket that's been knocked over.
+  choices:
+    - id: bold
+      text: "Lift him out and carry him along the top. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Up on the parados and along it, quick, the trench running beside you like a canal bank.
+      next: "@war"
+    - id: steady
+      text: "Work him round, traverse by traverse, as gently as it goes. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Tip, turn, level, one corner after another, saying sorry to him each time.
+      next: "@war"
+    - id: careful
+      text: "Rest him in a bay until the shelling stops. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You set him down on the firestep and sit by him, counting the shells, till they stop.
+      next: "@war"
+
+- id: s_bearer_3_d
+  chapter: front
+  title: The wounded
+  text: |
+    Gas. The shout comes along the trench and somebody bangs a shell case, and you're pulling your
+    gas helmet down over your head, the flannel wet and stinking of chemicals. Then his, which is
+    harder: he fights it, the way a man does when he can't breathe already.
+
+    Through the eyepieces the trench goes to fog. You can taste it anyway, like pepper and bleach.
+    It lies in the bottom of the trench, and the bottom of the trench is where the stretcher is.
+  choices:
+    - id: bold
+      text: "Run him through it and out the other side. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run blind, the stretcher bumping the walls, breathing through the flannel in sobs.
+      next: "@war"
+    - id: steady
+      text: "Helmets tucked in, and keep the pace steady. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You check his helmet's tucked into his collar, check your own, and walk on through it.
+      next: "@war"
+    - id: careful
+      text: "Lift him up onto the firestep, above the gas, and wait. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You heave him up onto the firestep where the air is cleaner, and crouch over him while it drifts past.
+      next: "@war"
+
+- id: s_bearer_3_e
+  chapter: front
+  title: The wounded
+  text: |
+    Halfway in, one of the four of you goes down. A bullet in the calf; he sits in the mud and
+    swears and says he can walk, and he can't. That leaves three on a stretcher made for four, and
+    the weight goes all to one side.
+
+    {mate} looks at you over the stretcher. The man on it opens his eyes and asks why you've
+    stopped. There's a sound of rain coming over the fields from their side, a long hiss, and then
+    it's on you.
+  choices:
+    - id: bold
+      text: "Three of you, lopsided, and run for it. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Three of you and the stretcher tilting, half running, half falling, all the way in.
+      next: "@war"
+    - id: steady
+      text: "Change your grips, square the load, and carry on at a walk. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: One at the head, two at the feet, a walk, a slow walk, with the rain running into your eyes.
+      next: "@war"
+    - id: careful
+      text: "Get both of them into a shell hole and send for help. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lie up in a hole with the two of them while {mate} goes back for more hands.
+      next: "@war"

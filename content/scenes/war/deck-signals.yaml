@@ -1,0 +1,271 @@
+# The signaller's mission deck (docs/FRAME-DECKS.md). Card a of each step is s_signals_<step> in
+# sortie-scenes.yaml; these are cards b-e. Every card offers the step's own choices with the step's
+# own odds (bold, steady, careful; no step of this sortie allows back). Years: src/game/war/data.ts
+# DECKS. Cards with no years must read right in any year.
+
+# ---- step 1: setting out ---------------------------------------------------------------------------
+
+- id: s_signals_1_b
+  chapter: front
+  title: The message
+  text: |
+    Both lines to battalion are dead, and the company officer has written his message on a message form,
+    folded it in four and pushed it into your hand. Ammunition and bombs wanted, two men killed, the
+    Germans working on their wire. He says it twice so you'd have it if you lost the paper. The
+    communication trench is being shelled, short and regular, and the open ground beside it is quicker
+    and looks empty.
+  choices:
+    - id: bold
+      text: "Go across the open, where it's quickest. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go up over the side and run, bent double, with the form buttoned in your breast pocket.
+      next: "@war"
+    - id: steady
+      text: "Go down the communication trench, between the shells. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You count the shells, and go after the fourth, traverse by traverse, and flatten when you hear the next one coming.
+      next: "@war"
+    - id: careful
+      text: "Wait in the dugout mouth till the shelling eases. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait twenty minutes with the form in your hand, and the officer doesn't look at you once.
+      next: "@war"
+
+- id: s_signals_1_c
+  chapter: front
+  title: The new line
+  text: |
+    Grey morning, and the signals sergeant wants a second line laid out to the forward post before
+    tonight, so one shell can't cut them off again. You take a drum of cable and a new draft lad called
+    Hollins to carry the second drum and the pegs. He's eighteen, he says, and he's read all about
+    Morse. He keeps asking what the different shells are. [if start == city]He talks like the lads who
+    sold papers outside the station at home, fast and never done.[/if]
+  choices:
+    - id: bold
+      text: "Lay it out straight along the top, the short way. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run it out along the top with Hollins panting behind, and the drum rattling on its handle.
+      next: "@war"
+    - id: steady
+      text: "Lay it along the trench side, pegged up out of the feet. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You peg it along the trench wall bay by bay, and show Hollins how to hang it out of the way of boots.
+      next: "@war"
+    - id: careful
+      text: "Lay it a stretch at a time, and wait at each bay. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You lay it a stretch at a time, stopping at every bay to listen, and Hollins stops asking questions.
+      next: "@war"
+
+# ---- step 2: the work ------------------------------------------------------------------------------
+
+- id: s_signals_2_b
+  chapter: front
+  title: The lamp
+  text: |
+    The forward post has no line at all now, and won't have till dark. You have the lamp. From the
+    broken wall at the back of the post you can just see the flash of battalion's station on the rise
+    behind, a mile off, winking that it's ready. The trouble is that a lamp seen from the back can be
+    seen from the side, and the German line curls round to the left. You set the shutter and wipe the
+    glass with your sleeve.
+  choices:
+    - id: bold
+      text: "Stand up on the wall and send the whole message. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You stand up on the wall and send it all, the shutter clacking, and a bullet knocks brick dust into your eyes at the end.
+      next: "@war"
+    - id: steady
+      text: "Send it from behind the wall, as you were taught. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You send it from behind the wall, a word at a time, waiting for each to be answered.
+      next: "@war"
+    - id: careful
+      text: "Send only the short of it, and get down. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You send six words and get down, and hope battalion can make sense of them.
+      next: "@war"
+
+- id: s_signals_2_c
+  chapter: front
+  title: The pigeons
+  text: |
+    The basket has come up with the rations: two pigeons, grey and green at the neck, and a book of
+    thin message forms. The forward post has been cut off since the afternoon, and the birds are the
+    only way left. You write the message small, roll it, push it into the little tube on the bird's
+    leg. Its heart goes under your thumb like a watch. Their shelling has started again, and the smoke
+    lies over everything.
+  choices:
+    - id: bold
+      text: "Climb out and throw them up from the top, clear of the smoke. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You climb out and throw them up, and they go round once over the smoke and away west.
+      next: "@war"
+    - id: steady
+      text: "Let them go from the trench, one and then the other. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You let the first go, and then the second a minute after, as the drill says, in case of the first.
+      next: "@war"
+    - id: careful
+      text: "Keep them in the basket till the shelling stops. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You keep them in the basket under your coat, and the shelling goes on past dark.
+      next: "@war"
+
+- id: s_signals_2_d
+  chapter: front
+  title: The buried line
+  text: |
+    This year the lines go under the ground, six feet down in the chalk, so the shells can't reach
+    them. Except that one has. The fault is at a junction where a heavy shell went in, and the only
+    way to it is to dig. The working party's spades are stacked behind the support line, and the
+    crater is in plain sight of the German balloon, which hangs over their lines all day like a fat
+    grey fish.
+  choices:
+    - id: bold
+      text: "Dig down to it now, in daylight. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You dig in the crater in daylight, chalk flying, till the spade rings on the junction box.
+      next: "@war"
+    - id: steady
+      text: "Dig it at dusk, with the working party. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: At dusk six of you dig in turns, and you find the box crushed flat, and the wires in it.
+      next: "@war"
+    - id: careful
+      text: "Run a loose line over the top past it instead. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You run a loose line round the crater and join it in, and it'll do till somebody digs.
+      next: "@war"
+
+- id: s_signals_2_e
+  chapter: front
+  title: The duckboards
+  text: |
+    The line runs out along the duckboard track to the forward station, which is a German pillbox
+    with the door on the wrong side. Somewhere out there it has gone dead. You follow it board by
+    board, the wire clipped to the stakes, till the boards stop. A shell has taken twenty yards of
+    track, and the wire goes down into brown water and doesn't come up. A pack mule is lying in the
+    shell hole with only its ears showing.
+  choices:
+    - id: bold
+      text: "Wade straight in after it. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You wade in to the waist and feel along the wire with your hands, and find the break by the mule.
+      next: "@war"
+    - id: steady
+      text: "Work round the lip from shell hole to shell hole. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You work round the lip, testing every step, and pick the wire up again on the far side.
+      next: "@war"
+    - id: careful
+      text: "Lay new wire round the long way, by the next track. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You take the next track, half a mile round, and the new wire only just reaches.
+      next: "@war"
+
+# ---- step 3: the complication, or the way back -----------------------------------------------------
+
+- id: s_signals_3_b
+  chapter: front
+  title: The other battalion
+  text: |
+    Halfway back you find the line cut again, cleanly this time, with pliers. Twenty yards on, a
+    working party from another battalion is digging a new sap across your route, and a lance jack
+    is using your cable to tie up a bundle of pickets. He says it was lying about. His officer is
+    asleep in a funk hole. The buzzer at your hip will tell you nothing till the ends are joined.
+  choices:
+    - id: bold
+      text: "Take your cable back off him and join it there and then. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You take your cable back, with words, and join it up on top of their sap with them all watching.
+      next: "@war"
+    - id: steady
+      text: "Wake his officer and have it settled properly. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: The officer is polite about it, and has his men find you two good lengths, and you join it in.
+      next: "@war"
+    - id: careful
+      text: "Leave them to it and run a short new length round. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You leave them to it and run a short length round the sap, and say nothing to anybody.
+      next: "@war"
+
+- id: s_signals_3_c
+  chapter: front
+  title: The flare
+  text: |
+    The line is through, and you're on your way back along the top with the empty reel when a Very
+    light goes up from their side, high and white and slow. Everything is lit: the wire pickets, the
+    shell holes, your own hands. It hangs there, swinging a little. Somewhere to your right a
+    machine gun starts, feeling along the ground for whatever it saw.
+  choices:
+    - id: bold
+      text: "Run for the trench before it comes down. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run, and dive in over the parapet as it fizzles out, and land on a sentry.
+      next: "@war"
+    - id: steady
+      text: "Freeze where you are, and don't move a finger. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You freeze with one foot raised, and the light comes down and goes out in the mud ten yards off.
+      next: "@war"
+    - id: careful
+      text: "Drop into the nearest shell hole and wait for dark. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You drop into a shell hole, and wait there an hour with the reel on your chest, till everything is quiet.
+      next: "@war"
+
+- id: s_signals_3_d
+  chapter: front
+  title: The reel
+  text: |
+    [if war.month <= 2]The battalion is moving out of this sector, and by order the signals take their line
+    with them, every yard of it, because there's never enough cable.[elif war.month <= 4]The battalion is going back again, and the line must go back with it, or the
+    Germans get a mile of good British cable and the station at the end of it. Their shells are
+    already falling behind you as well as in front.[elif war.month <= 7]The battalion is moving out of this sector, and by order the signals take their line
+    with them, every yard of it, because there's never enough cable.[else]The battalion is going forward again, past
+    the village, and the line has to come up after it. The sergeant says the cable's worth more than
+    you are, so reel in what you can and bring it on.[/if] The reel's heavy, and the last stretch is
+    in the open.
+  choices:
+    - id: bold
+      text: "Reel in all of it, right out to the far end. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You reel in the whole of it, out to the far end and back, with the drum full and your arms dead.
+      next: "@war"
+    - id: steady
+      text: "Reel in as far as the junction, then cut and go. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You reel in to the junction, cut it there and go, and the drum's half full.
+      next: "@war"
+    - id: careful
+      text: "Cut it where you stand and leave the rest. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You cut it where you stand and leave the rest lying, and the sergeant will have something to say.
+      next: "@war"
+
+- id: s_signals_3_e
+  chapter: front
+  title: The slag heap
+  text: |
+    The way back runs along the foot of the Double Crassier, the long black slag heap that both sides
+    hold a piece of. There's a German sniper somewhere up on it, everybody says so, and there's a
+    stretch of fifty yards where the trench has been blown in and you're in his eye. The chalk dust
+    on your boots shows white against the black. [if start == pit]At home a slag heap was where you
+    went with a sledge in the snow.[/if]
+  choices:
+    - id: bold
+      text: "Run the open stretch, all in one go. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You run it with your head down, and something cracks past behind you, and you're in.
+      next: "@war"
+    - id: steady
+      text: "Crawl it along the ditch at the side. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You crawl it in the ditch at the side, black to the elbows, and nobody fires.
+      next: "@war"
+    - id: careful
+      text: "Wait for the mist off the heap at dusk. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wait three hours at the end of the trench for the dusk mist, and come in through it.
+      next: "@war"

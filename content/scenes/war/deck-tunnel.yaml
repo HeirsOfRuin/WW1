@@ -1,0 +1,292 @@
+# The tunneller's mission deck (docs/FRAME-DECKS.md). Card a of each step is s_tunnel_<step> in
+# sortie-scenes.yaml; these are cards b-e. Every card offers the step's own choices with the step's
+# own odds (bold, steady, careful; back in step 2 only, as SORTIES.tunnel allows). Years:
+# src/game/war/data.ts DECKS. Cards with no years must read right in any year, so they name no
+# ground: chalk at Loos and on the Somme, clay in the salient.
+
+# ---- step 1: setting out ---------------------------------------------------------------------------
+
+- id: s_tunnel_1_b
+  chapter: front
+  title: The night shift
+  text: |
+    The shaft head is in the cellar of a farmhouse that has no farmhouse left on top of it. The day
+    shift comes up the ladder grey and dripping and says the face is wet: water coming in at the
+    roof, and the pump at the bottom gasping. Their corporal says the Germans have been quiet all
+    day, which he doesn't like. You go down with the candle in your teeth and the water running down
+    the rungs into your sleeves.
+  choices:
+    - id: bold
+      text: "Get to the face and drive it hard, wet or not. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You drive it hard, the spoil coming away in wet slabs and slapping into the bags.
+      next: "@war"
+    - id: steady
+      text: "Work the face the way you were taught, a lump at a time. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You work it quiet and steady, a lump at a time, with the drip on the back of your neck.
+      next: "@war"
+    - id: careful
+      text: "Get the roof boarded where it's dripping before you dig. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You board the wet stretch of roof first, and the drip runs off down the walls instead of on you.
+      next: "@war"
+
+- id: s_tunnel_1_c
+  chapter: front
+  title: The attached man
+  text: |
+    The infantry lend the tunnellers men to carry spoil, and tonight you've been given one: a lad from
+    a county regiment who has never been underground in his life. At the bottom of the shaft he stops
+    and puts his hand flat on the wall, as if it might move. You show him how to pass a bag without
+    a sound and where to put his feet. [if start == pit]You were nine the first time down, with your
+    father's hand on your collar.[/if] Then you go on to the face, and he comes after you.
+  choices:
+    - id: bold
+      text: "Drive the face hard, and let him keep up. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You drive the face hard, and the bags go back to him faster than he can take them.
+      next: "@war"
+    - id: steady
+      text: "Work it as you were taught, and show him as you go. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You work it as you were taught, and show him, and by the end of an hour he's passing bags without a sound.
+      next: "@war"
+    - id: careful
+      text: "Put the frames in first, and have him hold the timbers. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You put the frames in first, with him holding the timbers, and his hands stop shaking.
+      next: "@war"
+
+# ---- step 2: the work ------------------------------------------------------------------------------
+
+- id: s_tunnel_2_b
+  chapter: front
+  title: Bad air
+  text: |
+    It starts as a headache, behind the eyes. Then the candle won't stay lit; it goes small, and smaller,
+    and gutters out, and the man behind you lights it again and it goes out again. The air pipe from
+    the bellows at the shaft has gone slack, or split. The man passing bags has sat down against the
+    wall and is smiling at nothing. You know what that means. Everybody does, down here.
+  choices:
+    - id: bold
+      text: "Finish the shift's yard first. It's only a headache. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You finish the yard with your head pounding and the candle out, digging by feel in the dark.
+      next: "@war"
+    - id: steady
+      text: "Stop, and follow the air pipe back to find the split. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You follow the pipe back on your hands and knees, and find the split, and bind it with your puttee.
+      next: "@war"
+    - id: careful
+      text: "Pull back to the shaft and report the air. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You pull back to the shaft and report it, and they work the bellows till the candle stands up straight again.
+      next: "@war"
+    - id: back
+      text: "Get everybody out, the smiling man first. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You drag the smiling man to the shaft and get everybody up, and he's sick on the ladder, and lives.
+      next: "@war"
+
+- id: s_tunnel_2_c
+  chapter: front
+  title: The water
+  text: |
+    The pump at the bottom of the shaft has stopped, and nobody knows why. The water is over your
+    boots in the gallery, then over your knees, cold enough to make your teeth hurt. The spoil bags
+    float. Up at the face you can still work, just, lying on a plank laid across two frames, with the
+    water lapping under you and the candle shaking its light on it.
+  choices:
+    - id: bold
+      text: "Keep the face going, and let them bail behind you. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You keep the face going on the plank, and behind you they bail with buckets, and the water stops rising.
+      next: "@war"
+    - id: steady
+      text: "Stop, and go back and get the pump working. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You wade back and find the pump's foot choked with clay, and clear it with your hands, and it starts.
+      next: "@war"
+    - id: careful
+      text: "Wade back and report it to the officer. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You wade back and report it, and the officer swears, softly, and sends for the fitter.
+      next: "@war"
+    - id: back
+      text: "Get everybody out before it's over the frames. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You get everybody up the shaft, and stand at the top in the cold, and the gallery fills behind you.
+      next: "@war"
+
+- id: s_tunnel_2_d
+  chapter: front
+  title: Holing through
+  text: |
+    In the chalk every blow rings, so you work the face with a bayonet, prising the lumps out and
+    catching them before they fall. Then the bayonet goes in up to the hilt, into nothing. There's air
+    on the other side, cold, and a smell of tobacco that isn't English. You make the hole a little
+    bigger. It's a gallery, theirs, with a candle-end on a ledge, not lit, and a grey coat hanging
+    on a nail.
+  choices:
+    - id: bold
+      text: "Crawl through and see where it goes. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You crawl through and along their gallery twenty yards in the dark, with the coat brushing your face, and back.
+      next: "@war"
+    - id: steady
+      text: "Stop the hole, and listen, the way you were taught. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You stop the hole with a sandbag and lie with your ear to it, and hear boots, a long way off, going away.
+      next: "@war"
+    - id: careful
+      text: "Pull back down the gallery and report it. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You pull back and report it in a whisper, and the officer goes white, and then pleased.
+      next: "@war"
+    - id: back
+      text: "Get everybody out of the gallery. Now. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You get everybody out and up, and nobody comes through after you, and in the morning you go back down.
+      next: "@war"
+
+- id: s_tunnel_2_e
+  chapter: front
+  title: The ground moving
+  text: |
+    [if war.month <= 5]Here the work is subways under Arras, long tunnels in the chalk to bring the
+    infantry up to the line underground.[else]Up here, deep under the salient, the ground is a blue clay
+    that swells when the air gets to it, like dough.[/if] Tonight the frames at the face are bending. You
+    can see it: the cap pieces bowing in the middle, a little more every hour, with a sound like a
+    door opening slowly in another room. The officer has had new timber sent for. It hasn't come.
+  choices:
+    - id: bold
+      text: "Drive on past the bad stretch, fast. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You drive on fast past the bad stretch, and the frames behind you creak all shift, and hold.
+      next: "@war"
+    - id: steady
+      text: "Stop, and double the frames with what timber there is. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You stop and double the worst frames with the timber there is, and the bowing stops, or seems to.
+      next: "@war"
+    - id: careful
+      text: "Pull back and report it to the officer. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You pull back and report it, and the officer comes and looks, and taps a cap piece, and says nothing.
+      next: "@war"
+    - id: back
+      text: "Get everybody out before it comes in. ({risk_back})"
+      effects: [ { war: back } ]
+      text_after: You get everybody out, and at three in the morning ten yards of the face come in with a sigh.
+      next: "@war"
+
+# ---- step 3: the complication, or the way back -----------------------------------------------------
+
+- id: s_tunnel_3_b
+  chapter: front
+  title: The fall
+  text: |
+    On the way back to the shaft there's a crack behind you like a branch breaking, and then the roof
+    comes down. When the dust clears enough for the candle to show anything, the gallery is shut by a
+    heap of spoil and broken frames, and two men of the shift are on the other side of it. You can
+    hear one of them knocking. Three knocks, and a wait, and three knocks.
+  choices:
+    - id: bold
+      text: "Dig at the top of the fall with your hands, where it's loosest. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You dig at the top of the fall with your hands till your nails go, and a hand comes through from the other side.
+      next: "@war"
+    - id: steady
+      text: "Clear it from the bottom, shoring as you go. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You clear it from the bottom with the others, a frame for every yard, and get them out in three hours.
+      next: "@war"
+    - id: careful
+      text: "Go back up for the rescue men and the timber. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You go up for the rescue men and the timber, and work the windlass while they go down.
+      next: "@war"
+
+- id: s_tunnel_3_c
+  chapter: front
+  title: Their blow
+  text: |
+    They blow first. Not under you: off to the side, a dull thump that you feel in your teeth more
+    than hear. The candle goes out. When it's lit again the gallery is still there, but the air is
+    full of fumes, sweet and heavy, and the man who was listening at the side gallery hasn't come
+    back. The rescue team are coming down the shaft with the breathing sets on their backs.
+  choices:
+    - id: bold
+      text: "Go in after him now, without a set. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You go in holding your breath, and find him by his boots, and drag him back, and your head swims for a day.
+      next: "@war"
+    - id: steady
+      text: "Go in with the rescue team, as you were trained. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You go in with the rescue team, roped to the man in front, and bring him out between you.
+      next: "@war"
+    - id: careful
+      text: "Work the air pump at the shaft for them. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You work the air pump at the shaft till your arms burn, and they come out one by one.
+      next: "@war"
+
+- id: s_tunnel_3_d
+  chapter: front
+  title: The charge under the road
+  text: |
+    [if war.month >= 8]The Germans have gone back, and left things behind them: under the crossroads
+    in the village, a charge in a dug pit, with a fuse in it that eats through a wire with acid and
+    fires when it's done. Nobody knows when they set it. You can hear it, with your ear to the road,
+    ticking.[elif war.month <= 2]The tunnellers are laying charges under the bridges and crossroads behind the
+    line, in case the Germans ever come through. Tonight it's the crossroads in the village: the
+    detonators to go in and the leads to run back, with an old woman watching from her door.[elif war.month <= 4]The tunnellers have charges laid under the bridges and crossroads behind the line, in
+    case the Germans come through. They have. Tonight the order comes to fire the one under the
+    crossroads, and the last of the infantry are still coming back over it.[else]The tunnellers are laying charges under the bridges and crossroads behind the
+    line, in case the Germans ever come through. Tonight it's the crossroads in the village: the
+    detonators to go in and the leads to run back, with an old woman watching from her door.[/if]
+  choices:
+    - id: bold
+      text: "Do the fuse yourself, now. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You do the fuse yourself, with your hands steady and your mouth dry, and it's done.
+      next: "@war"
+    - id: steady
+      text: "Do it by the drill, with the sergeant and the others. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You do it by the drill with the sergeant, each step called out and answered, and it's done.
+      next: "@war"
+    - id: careful
+      text: "Keep the road clear and the men back. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You keep the road clear and the men back, and wave the last of them past, and wait.
+      next: "@war"
+
+- id: s_tunnel_3_e
+  chapter: front
+  title: The shaft head
+  text: |
+    End of shift. You're at the top of the ladder, with your head just out into the grey daylight,
+    when the first minnie lands. They've found the shaft head, or guessed it. The next one tumbles over
+    and over in the air, slow enough to watch, and comes down in the trench beyond. The dugout where
+    the relief shift is sleeping is forty yards along the trench, and the trench has a lot of open
+    sky over it.
+  choices:
+    - id: bold
+      text: "Climb out and run for the dugout between them. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You climb out and run for the dugout, and go headfirst down the steps with the next one bursting behind you.
+      next: "@war"
+    - id: steady
+      text: "Wait on the ladder under the cover of the shaft head. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You wait on the ladder with the earth shaking down on your shoulders, till they stop.
+      next: "@war"
+    - id: careful
+      text: "Go back down and wait in the gallery till it stops. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You go back down and wait in the gallery an hour, where it's quiet, and come up when it stops.
+      next: "@war"

@@ -1,0 +1,257 @@
+# The air gunner's mission deck (docs/FRAME-DECKS.md): flying over the line. Card a of each step is
+# s_air_<step> in corps-air.yaml; these are cards b-e. Each card offers the step's own choices with
+# the step's own odds (turning back only at step 2); only the situation and the words change. A card
+# is drawn at random, so none depends on another; the previous step's text_after joins them.
+# Years (DECKS in src/game/war/data.ts): s_air_2_d and s_air_3_d are 1917 only (the salient, the
+# flaming onions); s_air_2_e and s_air_3_e are 1918 only (the columns, the aerodrome on the move).
+# The pilot is never named: by 1918 he may be a different man.
+
+# ---- step 1: setting out ------------------------------------------------------------------------
+
+- id: s_air_1_b
+  chapter: front
+  title: Dawn patrol
+  text: |
+    Called at four, in the dark, with a mug of tea and a biscuit. Mist lies on the aerodrome to the height of a man, so the hangars stand up out of it like boats. The mechanics walk the machine out, and one of them takes hold of the propeller. "Switch off." "Switch off." "Suck in." He swings it round twice. "Contact." The engine fires and blows the mist away in a ring round you. A line patrol: up and down your bit of the front for two hours, to keep the German two-seaters off it. Past the end of the field there's a row of poplars, and the machine is heavy with the cold.
+  choices:
+    - id: bold
+      text: "Stand up in the ring as soon as you're off and start looking. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You stand as the wheels leave the grass and the poplars go under you close enough to touch, and you're looking east before you've gained a hundred feet.
+      next: "@war"
+    - id: steady
+      text: "Test the gun with a short burst over the empty country, then watch your quarter. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: Five rounds into an empty field miles behind the line, and the gun's sweet, and you settle to the tail and the sun.
+      next: "@war"
+    - id: careful
+      text: "Sit down out of the cold until you're over the line. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You sit down in the bottom of the cockpit with your hands under your arms and let the pilot climb, and the cold gets in anyway.
+      next: "@war"
+
+- id: s_air_1_c
+  chapter: front
+  title: Under the cloud
+  text: |
+    Afternoon, and the cloud has come down to three thousand feet, grey and thick as a blanket, with rain in it. The battery has a shoot laid on and won't wait for better. So you fly under it, low enough to see the shell holes, which is low enough for every German rifle and machine gun in the support line to try his luck. The rain comes past the windscreen sideways and stings like gravel. On your knee the map's going soft in its case. The pilot shouts something back over his shoulder that the wind takes away.
+  choices:
+    - id: bold
+      text: "Lean out over the side and pick up the landmarks for him. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You lean out into the rain with the map flapping and point him on to the road, the wood, the crossroads, and you're there.
+      next: "@war"
+    - id: steady
+      text: "Watch the cloud above for anything coming out of it. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You watch the grey above you, the edge of the cloud, where they'd come from today, and nothing comes.
+      next: "@war"
+    - id: careful
+      text: "Get down behind the edge of the cockpit, out of the rain and the rifles. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You crouch out of the rain with the gun swung fore and aft, and the bullets from below go tick, tick through the wings.
+      next: "@war"
+
+# ---- step 2: the work ---------------------------------------------------------------------------
+
+- id: s_air_2_b
+  chapter: front
+  title: The map board
+  text: |
+    A reconnaissance, ten miles over. The job is yours, not the pilot's: every train in the stations, every new trench, every dump and battery, marked on the map on your knee in pencil with numb fingers. Below, a railway station with smoke standing up from three engines. A new line of trench, white chalk or brown earth, being dug across a field, and the diggers stopping to look up at you. Archie's found your height, and it's coming closer in fours. There's a road you can't make out, with something moving on it.
+  choices:
+    - id: bold
+      text: "Tell him to go down and have a proper look at the road. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: He takes her down to two thousand feet, and the road is guns, a whole column of them, and you mark them with the Archie bursting round you.
+      next: "@war"
+    - id: steady
+      text: "Mark what you can see from here, everything, in order. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You mark the trains, the trench, the dump by the wood, the time beside each, the pencil slipping in your glove.
+      next: "@war"
+    - id: careful
+      text: "Mark the station and the trench, and keep your eyes on the sky. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: Two marks on the map, the station and the trench, and the rest of the time on the sky behind the tail.
+      next: "@war"
+    - id: back
+      text: "The engine's running rough. Point him home. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: You point west and he nods and turns, and the map on your knee has two marks on it and a lot of white paper.
+      next: "@war"
+
+- id: s_air_2_c
+  chapter: front
+  title: In the cloud
+  text: |
+    The cloud comes in while you're over the line, and the pilot climbs into it to dodge the Archie, and then you're in it: wet grey, no up or down, no ground, the wings dripping. The compass swings in its bowl and won't settle. You come out of the bottom of it at two thousand feet over country neither of you knows, a river and a town with a spire, and smoke from a train, and you don't know whose side of the line you're on. The job's not done. The battery is still waiting for its first shot.
+  choices:
+    - id: bold
+      text: "Go down lower and find a landmark, then go back to the job. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: He goes down to the rooftops, and a German machine gun opens up from the station yard, and that's your answer, and you swing west and find the line.
+      next: "@war"
+    - id: steady
+      text: "Fly west by the sun, find the line, and start again from there. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You point at the sun and then west, and he flies it, and in ten minutes there's the brown smear of the line and the battery's strips.
+      next: "@war"
+    - id: careful
+      text: "Stay just under the cloud, ready to go back up into it if anything comes. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You hug the bottom of the cloud all the way west with wet grey a few feet over your head, ready to vanish into it.
+      next: "@war"
+    - id: back
+      text: "Lost, and the petrol's going. Tell him to find home and never mind the shoot. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: He nods and steers west, and the shoot is left for another day and another machine.
+      next: "@war"
+
+- id: s_air_2_d
+  chapter: front
+  title: The salient from above
+  text: |
+    [if war.month >= 7]The salient from five thousand feet: a brown bowl, and in it ten thousand shell holes full of water, every one of them throwing the sky back at you, so the whole of it shines like a smashed mirror.[else]The line from five thousand feet: a brown belt across the green, and the chalk thrown up white along the trenches.[/if] The battery wants one concrete machine-gun post, and they all look alike. You've the photograph in your lap, a white square on a grey ground, and you have to find it below. Two shells have gone down already and burst on nothing. The battery's strips say they're waiting.
+  choices:
+    - id: bold
+      text: "Get him down low enough to pick it out for certain. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: He goes down to a thousand feet and you see it, the slit and the grey roof, and a machine gun in it firing up at you, and you send the correction.
+      next: "@war"
+    - id: steady
+      text: "Match the photograph to the ground, a field at a time. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: The road, the wood, the line of the old hedge, and there it is, and the next shell lands near enough to send in the code.
+      next: "@war"
+    - id: careful
+      text: "Send the best guess and let the battery walk its shells on to it. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You send your best guess and watch the shells walk across the mud towards it, slow, a correction at a time.
+      next: "@war"
+    - id: back
+      text: "You can't find it. Tell the battery so and go home. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: You tap out that you can't see the target and he turns home, and the battery's strips go out one by one behind you.
+      next: "@war"
+
+- id: s_air_2_e
+  chapter: front
+  title: The column
+  text: |
+    A bombing job. Four small bombs under the wings, and the pilot has the toggle to drop them. Below is a road [if war.month <= 6]full of Germans coming on: a column of infantry, wagons, a battery of field guns, the horses at a trot, the whole thing a mile long[else]full of Germans going back: lorries, wagons, a battery with its guns hooked in, and a column of tired infantry walking[/if], in open country with no trenches anywhere. Your work is the Lewis gun, when he takes her down and along it. Some of them have seen you. They're running for the ditch, and some are lying in the road with their rifles up.
+  choices:
+    - id: bold
+      text: "Tell him to go along the road at fifty feet, and give them the whole drum. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: Along the road at fifty feet with the bombs gone and the gun firing, horses and men and the rifles coming up at you, a drum, and another.
+      next: "@war"
+    - id: steady
+      text: "One run along the column after the bombs, short bursts, then climb. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: The bombs go, and one run along the road in short bursts at the wagons, and then he pulls her up and away.
+      next: "@war"
+    - id: careful
+      text: "Let the bombs go from height, and keep the gun on the sky. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: He lets the bombs go from two thousand feet, and they burst by the road, and you watch the sky and not the road.
+      next: "@war"
+    - id: back
+      text: "Too many rifles. Let the bombs go anywhere and turn for home. ({risk_back})"
+      visible_if: war.can_back
+      effects: [ { war: back } ]
+      text_after: The bombs fall in a field and he turns west, and you never see what was in the column.
+      next: "@war"
+
+# ---- step 3: the complication, or the way back -------------------------------------------------
+
+- id: s_air_3_b
+  chapter: front
+  title: The pilot's hit
+  text: |
+    On the way home a burst of Archie close under the tail, and the machine jumps, and the pilot's head goes forward. Then it comes up again. He's holding his left arm against him and flying with his right, and there's blood on the sleeve of his coat and on the side of the cockpit. He looks round at you. His face is white as paper behind the goggles, and he lifts his good hand off the stick to show you he can still do it, and the nose drops. The line is three miles off.
+  choices:
+    - id: bold
+      text: "Lean over into his cockpit and help him hold her. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You lean over into his cockpit, half out of your own, and get your hand over his on the stick, and between you she comes up level.
+      next: "@war"
+    - id: steady
+      text: "Keep the gun on the sky and leave the flying to him. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You watch the sky for him and shout to him to keep him awake, and he flies her one-handed over the line, low and crooked.
+      next: "@war"
+    - id: careful
+      text: "Get down, brace yourself, and hold on. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You get down with your arms round the gun post and your eyes shut, and feel her dip and lift and dip all the way home.
+      next: "@war"
+
+- id: s_air_3_c
+  chapter: front
+  title: The petrol's low
+  text: |
+    You're over our side, but the petrol's nearly gone: a head wind all the way back, and the gauge on the pilot's board is on the stop. The engine coughs once. The aerodrome is eight miles off, past a wood. Below are little fields with hedges, a battery of heavy guns under nets, horse lines, and a long meadow by a canal with cows in it. The pilot holds up a fist and points down, then shrugs, and points ahead. It's his machine and his neck, and yours.
+  choices:
+    - id: bold
+      text: "Point ahead. Try for the aerodrome on what's left. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: He holds her up on the last of the petrol, and the engine stops over the wood, and you glide in over the hedge with the wires whistling.
+      next: "@war"
+    - id: steady
+      text: "Point at the meadow. Put her down there while there's power. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: He brings her round into the wind and down into the meadow, and the cows run, and she rolls to a stop by the canal.
+      next: "@war"
+    - id: careful
+      text: "Unship the gun, get down, and brace for whatever he picks. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You get the gun off its mounting and down on the floor where it can't come back at you, and hold on.
+      next: "@war"
+
+- id: s_air_3_d
+  chapter: front
+  title: Flaming onions
+  text: |
+    Low home across the German side at dusk, and a battery behind a wood starts sending up flaming onions: green balls of fire, a string of them, rising slowly, one after another, then faster as they come near. The men in the squadron say they're tied together on a chain to wrap round your wires. Nobody knows. They come up past the wing, hot enough to feel. There's another string starting. The pilot can't see the battery from where he sits, and you can, in the trees, the flashes.
+  choices:
+    - id: bold
+      text: "Turn the Lewis down on the battery and fire into the trees. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You lean over and fire down into the trees, and the next string goes wide, and you've no idea whether you hit anything.
+      next: "@war"
+    - id: steady
+      text: "Thump his shoulder and point which way to turn. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You thump his shoulder and point, and he swings away from the wood, and the green balls go up past where you would have been.
+      next: "@war"
+    - id: careful
+      text: "Get down out of the light and hold on. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: You get down below the edge of the cockpit with the green light flickering over the fabric, and wait for the dark.
+      next: "@war"
+
+- id: s_air_3_e
+  chapter: front
+  title: The new field
+  text: |
+    The squadron has moved while you were out: [if war.month <= 6]back again, for the third time, ahead of the German advance[else]forward again, after the advance[/if], and the new field is a meadow you've seen once on a map. It's dusk. There's smoke over the country from burning dumps, and every village looks like the last one. Below, a road, a church with half a tower, and three fields that could be it. On one of them, a light. The pilot circles and looks back at you, and you look at the map.
+  choices:
+    - id: bold
+      text: "Point him at the field with the light and go straight down. ({risk_bold})"
+      effects: [ { war: bold } ]
+      text_after: You point, and he goes down on the light, and it's a lorry on a road and the field beside it is ploughed, and he gets her down anyway.
+      next: "@war"
+    - id: steady
+      text: "Fire a Very light for the field to answer, and wait for it. ({risk_steady})"
+      effects: [ { war: steady } ]
+      text_after: You fire the Very light, and from the third field a red one comes up in answer, and there are the hangars, canvas, new.
+      next: "@war"
+    - id: careful
+      text: "Circle high until you're sure, whatever the petrol says. ({risk_careful})"
+      effects: [ { war: careful } ]
+      text_after: Round and round in the dusk with the map, until you find the church on the map, and the field beside it, and the hangars.
+      next: "@war"
