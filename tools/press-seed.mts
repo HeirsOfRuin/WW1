@@ -9,6 +9,7 @@ const want: Record<string, (id: string, s: import('../src/game/index').GameState
   loos: (id) => /^b_loos/.test(id),
   sniper: (id) => /^s_snipe_2_[b-e]$/.test(id),
   review: (id) => id === 'y_1917',
+  passchendaele: (id) => id === 'b_pass_1',
   map: (id, s) => s.war.stage === 3 && (s.war as unknown as { clockInStage: number }).clockInStage >= 7 && /^w_tour|^w_/.test(id),
 };
 const got: Record<string, string> = {};

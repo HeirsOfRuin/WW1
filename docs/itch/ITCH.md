@@ -27,7 +27,7 @@ Every count in the copy is read out of the build, not from memory.
 | Genre | Interactive Fiction |
 | Tags | historical, war, world-war-i, interactive-fiction, text-based, narrative, choices-matter, singleplayer, pixel-art, mobile-friendly |
 | Cover | `cover-630x500.png` (check `cover-preview-315x250.png`: that is how browse listings show it) |
-| Screenshots | shot1 Loos (a battle), shot2 the sniper (a mission and its risks), shot3 the year review, shot4 the map, shot5 the soldier |
+| Screenshots | shot1 Loos (a battle), shot2 Passchendaele, shot3 the sniper (a mission and its risks), shot4 the year review, shot5 the map |
 | Links | The installable copy: https://heirsofruin.github.io/WW1/ |
 | Community | Comments on, so players can post save codes with bug reports |
 

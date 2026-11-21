@@ -35,7 +35,10 @@ Hard rules
 - At the end, press "Save" (it saves the draft) and tell me the page's edit URL and anything you
   could not do.
 
-Where: https://itch.io/game/new
+Where: first open https://itch.io/dashboard. If a project called "${name}" is already there, this
+is an UPDATE: open its "Edit" page instead of making a new one, delete the old uploaded zip and the
+old screenshots, attach the new ones as below, and set every field below to these values. Otherwise
+create it at https://itch.io/game/new.
 
 Fields, in the form's order
 - Title: ${name}

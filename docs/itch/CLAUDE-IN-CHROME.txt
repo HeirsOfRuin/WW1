@@ -10,7 +10,10 @@ Hard rules
 - At the end, press "Save" (it saves the draft) and tell me the page's edit URL and anything you
   could not do.
 
-Where: https://itch.io/game/new
+Where: first open https://itch.io/dashboard. If a project called "In the Trenches" is already there, this
+is an UPDATE: open its "Edit" page instead of making a new one, delete the old uploaded zip and the
+old screenshots, attach the new ones as below, and set every field below to these values. Otherwise
+create it at https://itch.io/game/new.
 
 Fields, in the form's order
 - Title: In the Trenches
@@ -73,7 +76,7 @@ Details
 
 Images (right-hand side of the form)
 - Cover image: ask me to attach 4-page/cover-630x500.png
-- Screenshots: ask me to attach, in this order: 4-page/shot1-loos.png, 4-page/shot2-the-sniper.png, 4-page/shot3-the-year-review.png, 4-page/shot4-the-map.png, 4-page/shot5-the-soldier.png
+- Screenshots: ask me to attach, in this order: 4-page/shot1-loos.png, 4-page/shot2-passchendaele.png, 4-page/shot3-the-sniper.png, 4-page/shot4-the-year-review.png, 4-page/shot5-the-map.png
 
 Then: Save. Open the draft's page (View page) and tell me whether the game loads in its frame, and
 whether the frame looks about 390 wide by 844 tall. Do not press Publish.

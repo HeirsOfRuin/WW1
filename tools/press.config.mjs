@@ -17,6 +17,7 @@ export default {
   hide: ['.toast', '.banner'],
   shots: [
     { name: 'loos', async drive({ page, url }) { await load(page, url, 'loos'); } },
+    { name: 'passchendaele', async drive({ page, url }) { await load(page, url, 'passchendaele'); } },
     {
       name: 'the-sniper',
       async drive({ page, url }) {
@@ -33,6 +34,5 @@ export default {
       },
     },
     { name: 'the-map', async drive({ page, url }) { await load(page, url, 'map'); await page.click('[data-tab=map]'); } },
-    { name: 'the-soldier', async drive({ page, url }) { await load(page, url, 'map'); await page.click('[data-tab=soldier]'); } },
   ],
 };
