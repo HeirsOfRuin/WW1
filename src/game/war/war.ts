@@ -12,8 +12,7 @@ import {
   TOWNS, DEFAULT_GENERAL, WAR_SKILLS, SPECIALIST, APTITUDE, TOWN_COURSE, WAR_WORK, STAGES, DUTIES, WOUND, PATHS,
   CHOICES, GRADE, SECTION_SIZE, SUBALTERN, TOP_OR, RANKS, REST, FRIEND_BATTLE, PHASE_HIT, STALL, ROLES, ROLE, PAY,
   PROMO, SERGEANT, CSM, LIEUTENANT, CAPTAIN, ASSIGN, ASSIGNMENTS, CORPS, CORPS_BATTLES, AIR_RANKS, CLOSE, SERVANT, type CloseChoice, type Corps,
-  COMMISSION_BOARD, SORTIES, SORTIE_CHOICE, type SortieChoice, type Town, type Ending, type BattleChoice, type Battle, type Stage,
-} from './data';
+  COMMISSION_BOARD, SORTIES, SORTIE_CHOICE, type SortieChoice, type Town, type Ending, type BattleChoice, type Battle, type Stage, DECKS } from './data';
 
 // ---- state -------------------------------------------------------------------------------
 
@@ -38,7 +37,7 @@ export type Pending =
   | { kind: 'battle'; battle: string; phase: number; type: string; stalled: boolean }
   | { kind: 'leave'; offers: string[]; commission: boolean }
   /** a step of a duty or role mission being played out (SORTIES) */
-  | { kind: 'step'; key: string; role: boolean; step: number; of: number; vol: boolean; canBack: boolean };
+  | { kind: 'step'; key: string; role: boolean; step: number; of: number; vol: boolean; canBack: boolean; card?: string };
 
 export type Decision =
   | 'transfer' | 'stay'                 // tunnel, corps
@@ -122,6 +121,9 @@ export interface War {
   /** the officer he is servant to (1 the first, 2 the next; 0 or absent: none), the offer waiting, and
    *  whether the first offer has been made (docs/FRAME-SERVANT.md) */
   servant?: number; servantOffer?: number; servantAsked?: boolean;
+  /** cards of each sortie step's deck already shown since the deck was last reshuffled, by `key:step`
+   *  (absent in saves before decks) */
+  decks?: Record<string, string[]>;
   /** why he is out of the line, for the missed-battle overview */
   outWhy?: 'course' | 'wound';
   /** pence sent home so far (absent in saves before pay was sent home: read with sentHomeOf) */
@@ -682,7 +684,28 @@ function askStep(w: War, noClose = false): void {
     w.pending = { kind: 'close', where: 'sortie', key: c.key };
     return;
   }
-  w.pending = { kind: 'step', key: c.key, role: c.role, step: c.i, of: so.shares.length, vol: c.vol, canBack: so.back[c.i]! };
+  w.pending = { kind: 'step', key: c.key, role: c.role, step: c.i, of: so.shares.length, vol: c.vol, canBack: so.back[c.i]!, card: drawCard(w, c.key, c.i) };
+}
+
+/** The written situation for a step (docs/FRAME-DECKS.md): one of the deck's cards for this year that
+ *  has not been shown since the deck was reshuffled, never the one just shown. A hash of the seed and
+ *  the count shown picks it, so no random stream is drawn and no number in the war moves. */
+export function drawCard(w: War, key: string, step: number): string {
+  const deck = DECKS[key]?.[step] ?? [];
+  const live = deck.filter((cd) => (cd.from ?? 1) <= w.stage && w.stage <= (cd.to ?? 4)).map((cd) => cd.id);
+  if (live.length <= 1) return live[0] ?? 'a';
+  const slot = `${key}:${step}`; const used = w.decks?.[slot] ?? [];
+  let open = live.filter((id) => !used.includes(id));
+  if (!open.length) open = live.filter((id) => id !== used[used.length - 1]);
+  return open[(hashString(`${w.seed}|${slot}|${used.length}|${w.stats.sorties ?? 0}`) >>> 0) % open.length]!;
+}
+
+/** The card was shown: mark it, and reshuffle the deck once every card for this year has been seen. */
+export function markCard(w: War, key: string, step: number, card: string): void {
+  const slot = `${key}:${step}`; const decks = (w.decks ??= {});
+  const live = (DECKS[key]?.[step] ?? []).filter((cd) => (cd.from ?? 1) <= w.stage && w.stage <= (cd.to ?? 4));
+  const used = (decks[slot] ?? []).concat(card);
+  decks[slot] = live.every((cd) => used.includes(cd.id)) ? [card] : used;
 }
 
 /** A sortie he was ordered on, played steady without the player, and logged for the next tour's
@@ -917,6 +940,7 @@ export function decide(w: War, d: Decision): War {
       break;
     }
     case 'step': {
+      if (p.card) markCard(w, p.key, p.step, p.card); // shown to the player (an unseen sortie burns no card)
       stepSortie(w, d as SortieChoice);
       break;
     }

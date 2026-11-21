@@ -292,6 +292,16 @@ export const SORTIES: Record<string, Sortie> = {
   air: { shares: [0.3, 0.45, 0.25], back: [false, true, false], skill: 'lewis', need: 3.5 },
 };
 
+// Decks (docs/FRAME-DECKS.md; the author, playtest 3: "Sniping got a bit repetitive with the role
+// missions ... They should all have a deck of events that randomly get chosen"). Each step of each
+// sortie draws one written situation from its deck: scene s_<key>_<step> is card 'a', s_<key>_<step>_<id>
+// the others. from/to: the years (stage 1-4) a card can be drawn in. The draw is a hash, not a stream,
+// and changes no number: the choices and their odds are the step's, whichever card is shown.
+export interface Card { id: string; from?: number; to?: number }
+export const DECKS: Record<string, [Card[], Card[], Card[]]> = Object.fromEntries(
+  Object.keys(SORTIES).map((k) => [k, [[{ id: 'a' }], [{ id: 'a' }], [{ id: 'a' }]]]),
+) as Record<string, [Card[], Card[], Card[]]>;
+
 // A man in front of you (FRAME-PLAYTEST2 A; the author, playtest 2: "It never feels like I am killing
 // anyone, or fighting really"). Before about half the advance and trench phases of a battle, and in
 // the middle of some raids, a German is in front of him. pts: award points toward a medal (battle

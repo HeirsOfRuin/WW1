@@ -9,6 +9,8 @@ import { toSave, fromSave, encodeSaveCode, decodeSaveCode } from '../src/game/sa
 import { warMonth, seasonOf, monthName, ARMISTICE } from '../src/game/war/calendar';
 import { phaseHit, battleOf, newWar, run, decide, decideFor, homeTier, sentHomeOf, missionHit, rankFull, ROLES as WAR_ROLES, POLICIES as WAR_POLICIES } from '../src/game/war/index';
 import { riskWord, whereOf, endingLine } from '../src/game/module';
+import { DECKS, SORTIES } from '../src/game/war/data';
+import { drawCard, markCard } from '../src/game/war/war';
 import { share } from '../tools/story-share';
 import { recordOf } from '../src/game/character';
 import { mapOf, project, EXTENT } from '../src/game/warmap';
@@ -397,3 +399,41 @@ describe('saves', () => {
     expect(warDigest(b)).toBe(warDigest(a));
   });
 });
+
+describe('mission decks (docs/FRAME-DECKS.md)', () => {
+  // the author, playtest 3: "Sniping got a bit repetitive with the role missions"
+  it('every card in DECKS has its scene, and every card scene is in DECKS, with the step\'s choices', () => {
+    const ids = Object.keys(content.scenes);
+    const bad: string[] = [];
+    for (const [key, steps] of Object.entries(DECKS)) steps.forEach((deck, i) => {
+      const base = `s_${key}_${i + 1}`;
+      const want = deck.map((c) => (c.id === 'a' ? base : `${base}_${c.id}`));
+      for (const id of want) if (!content.scenes[id]) bad.push(`missing ${id}`);
+      for (const id of ids.filter((x) => x.startsWith(`${base}_`))) if (!want.includes(id)) bad.push(`not in DECKS: ${id}`);
+      const choices = (id: string) => (content.scenes[id]?.choices ?? []).map((c) => c.id).sort().join(',');
+      for (const id of want) if (content.scenes[id] && choices(id) !== choices(base)) bad.push(`${id} choices ${choices(id)} not ${choices(base)}`);
+      // every year has a card to draw
+      for (let y = 1; y <= 4; y++) if (!deck.some((c) => (c.from ?? 1) <= y && y <= (c.to ?? 4))) bad.push(`${base}: nothing in year ${y}`);
+    });
+    expect(bad).toEqual([]);
+    expect(Object.keys(DECKS).sort()).toEqual(Object.keys(SORTIES).sort());
+  });
+  it('a deck is dealt through before it repeats, and never shows the same card twice running', () => {
+    const w = newWar({ seed: 11, town: 'mill' });
+    for (const key of Object.keys(DECKS)) for (let step = 0; step < 3; step++) for (let stage = 1; stage <= 4; stage++) {
+      w.stage = stage as typeof w.stage; w.decks = {};
+      const live = DECKS[key]![step]!.filter((c) => (c.from ?? 1) <= stage && stage <= (c.to ?? 4)).map((c) => c.id);
+      const seen: string[] = [];
+      for (let n = 0; n < live.length * 3; n++) {
+        const card = drawCard(w, key, step);
+        expect(live).toContain(card);
+        if (live.length > 1 && seen.length) expect(card).not.toBe(seen[seen.length - 1]);
+        seen.push(card);
+        markCard(w, key, step, card);
+        w.stats.sorties = (w.stats.sorties ?? 0) + 1;
+      }
+      expect(new Set(seen.slice(0, live.length)).size).toBe(live.length);
+    }
+  });
+});
+

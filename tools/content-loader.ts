@@ -42,6 +42,18 @@ export function loadContent(dir = CONTENT_DIR): ContentBundle {
   const routeFile = join(dir, 'route.yaml');
   hash.update(readFileSync(routeFile));
   const route = parse(NextSchema, readYaml(routeFile), rel(routeFile));
+  // Decks (docs/FRAME-DECKS.md): every scene s_<key>_<step>_<card> is routed ahead of its step's own
+  // scene (card 'a'), on war.card, so a new card is a scene and a row in DECKS (src/game/war/data.ts)
+  const sw = (route as { switch?: { if?: unknown; go?: unknown }[] }).switch;
+  if (sw) {
+    const ids = Object.keys(base.scenes as Record<string, unknown>);
+    for (let i = sw.length - 1; i >= 0; i--) {
+      const m = typeof sw[i]!.go === 'string' ? /^s_([a-z]+)_([123])$/.exec(sw[i]!.go as string) : null;
+      if (!m) continue;
+      const cards = ids.filter((id) => id.startsWith(`${m[0]}_`)).sort();
+      sw.splice(i, 0, ...cards.map((id) => ({ if: [`war.sortie == ${m[1]}`, `war.step == ${m[2]}`, `war.card == ${id.slice(m[0].length + 1)}`], go: id })));
+    }
+  }
   const sub = (o: unknown): void => {
     if (Array.isArray(o)) { o.forEach(sub); return; }
     if (!o || typeof o !== 'object') return;
