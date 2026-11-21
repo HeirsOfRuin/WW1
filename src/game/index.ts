@@ -19,6 +19,8 @@ export { heroOf } from '@engine/character';
 export type { GameState } from './state';
 export { statusOf, artOf } from './module';
 export { mapOf, type MapView } from './warmap';
+export { reviewFor, newsSoFar, type YearReview } from './warnews';
+export { lineFor } from './warmap';
 export { glossOf, type Piece } from './gloss';
 export { rasterize, MAP_W, MAP_H, MAP_COLOURS } from './pixelmap';
 export { recordOf, type SoldierRecord } from './character';

@@ -42,11 +42,40 @@ const HINDENBURG_SOUTH: LatLon[] = [[50.06, 3.1], [50.0, 3.13], [49.86, 3.21], [
 const FLESQUIERES_1917: LatLon[] = [[50.14, 3.08], [50.13, 3.13], [50.09, 3.12]];
 
 export interface FrontLine { key: string; caption: string; points: LatLon[] }
+
+/** A line part of the way from one line to another: each point of `to` moved back toward the nearest
+ *  point of `from` (f = 0: on `from`, 1: `to`). For a battle's gains as the months went (the Somme from
+ *  July to November 1916, Passchendaele from August to November 1917): without it the map showed the
+ *  whole of a battle's ground taken on its first day (playtest 3). */
+function partWay(from: LatLon[], to: LatLon[], f: number): LatLon[] {
+  const near = ([la, lo]: LatLon): LatLon => {
+    let best: LatLon = from[0]!; let bd = Infinity;
+    for (let i = 1; i < from.length; i++) {
+      const [a0, o0] = from[i - 1]!; const [a1, o1] = from[i]!;
+      const dl = a1 - a0, dn = o1 - o0; const len = dl * dl + dn * dn;
+      const t = len ? Math.max(0, Math.min(1, ((la - a0) * dl + (lo - o0) * dn) / len)) : 0;
+      const q: LatLon = [a0 + t * dl, o0 + t * dn]; const d = (q[0] - la) ** 2 + (q[1] - lo) ** 2;
+      if (d < bd) { bd = d; best = q; }
+    }
+    return best;
+  };
+  return to.map((p) => { const q = near(p); return [q[0] + f * (p[0] - q[0]), q[1] + f * (p[1] - q[1])] as LatLon; });
+}
+const SOMME_1915 = [...VIMY_TO_SOMME_1915, ...SOUTH_OF_SOMME_1915];
+const somme = (f: number) => [...COAST_TO_YPRES, ...SALIENT_1915, ...ARMENTIERES_TO_LENS, ...VIMY_TO_SOMME_1915.slice(0, 8), ...partWay(SOMME_1915, SOMME_GAINS_1916, f), ...SOUTH_OF_SOMME_1915.slice(3)];
+// March 1917: the Germans gone back to the Hindenburg Line south of Arras; Vimy and Arras not yet attacked
+const HINDENBURG_FROM_ARRAS: LatLon[] = [[50.27, 2.83], [50.22, 2.88], [50.19, 2.92], [50.16, 2.99], [50.11, 3.03]];
+const passchendaele = (f: number) => [...COAST_TO_YPRES, ...partWay(MESSINES_1917, PASSCHENDAELE_1917, f), ...ARMENTIERES_TO_LENS.slice(1), ...VIMY_TO_HINDENBURG_1917, ...HINDENBURG_SOUTH];
 export const LINES: Record<string, FrontLine> = {
-  l1915: { key: 'l1915', caption: 'The line has hardly moved since the winter of 1914.', points: [...COAST_TO_YPRES, ...SALIENT_1915, ...ARMENTIERES_TO_LENS, ...VIMY_TO_SOMME_1915, ...SOUTH_OF_SOMME_1915] },
-  l1916: { key: 'l1916', caption: 'The Somme has pushed the line back about six miles.', points: [...COAST_TO_YPRES, ...SALIENT_1915, ...ARMENTIERES_TO_LENS, ...VIMY_TO_SOMME_1915.slice(0, 8), ...SOMME_GAINS_1916, ...SOUTH_OF_SOMME_1915.slice(3)] },
-  l1917a: { key: 'l1917a', caption: 'The Germans have gone back to the Hindenburg Line; Arras, Vimy and Messines are taken.', points: [...COAST_TO_YPRES, ...MESSINES_1917, ...ARMENTIERES_TO_LENS.slice(1), ...VIMY_TO_HINDENBURG_1917, ...HINDENBURG_SOUTH] },
-  l1917b: { key: 'l1917b', caption: 'Passchendaele: the salient a few miles deeper, for a year of mud.', points: [...COAST_TO_YPRES, ...PASSCHENDAELE_1917, ...ARMENTIERES_TO_LENS.slice(1), ...VIMY_TO_HINDENBURG_1917, ...HINDENBURG_SOUTH] },
+  l1915: { key: 'l1915', caption: 'The line has hardly moved since the winter of 1914.', points: [...COAST_TO_YPRES, ...SALIENT_1915, ...ARMENTIERES_TO_LENS, ...SOMME_1915] },
+  l1916a: { key: 'l1916a', caption: 'The Somme: a mile or so taken in the south since 1 July; in the north, almost nothing.', points: somme(0.25) },
+  l1916b: { key: 'l1916b', caption: 'The Somme: the ridge and its woods taken, yard by yard, since July.', points: somme(0.6) },
+  l1916: { key: 'l1916', caption: 'The Somme is over. It pushed the line back about six miles.', points: somme(1) },
+  l1917h: { key: 'l1917h', caption: 'The Germans have gone back to the Hindenburg Line south of Arras, wrecking everything they left.', points: [...COAST_TO_YPRES, ...SALIENT_1915, ...ARMENTIERES_TO_LENS, ...VIMY_TO_SOMME_1915.slice(0, 4), ...HINDENBURG_FROM_ARRAS, ...HINDENBURG_SOUTH] },
+  l1917a: { key: 'l1917a', caption: 'Arras: Vimy Ridge taken, and a few miles east of the town.', points: [...COAST_TO_YPRES, ...SALIENT_1915, ...ARMENTIERES_TO_LENS.slice(1), ...VIMY_TO_HINDENBURG_1917, ...HINDENBURG_SOUTH] },
+  l1917m: { key: 'l1917m', caption: 'Messines Ridge taken, south of Ypres, after the mines went up on 7 June.', points: passchendaele(0) },
+  l1917p: { key: 'l1917p', caption: 'Passchendaele: a mile or two of mud taken east of Ypres since 31 July.', points: passchendaele(0.4) },
+  l1917b: { key: 'l1917b', caption: 'Passchendaele: the salient a few miles deeper, for a year of mud.', points: passchendaele(1) },
   l1917c: { key: 'l1917c', caption: 'After Cambrai: a few miles kept at Flesquières, the rest lost again.', points: [...COAST_TO_YPRES, ...PASSCHENDAELE_1917, ...ARMENTIERES_TO_LENS.slice(1), ...VIMY_TO_HINDENBURG_1917, ...FLESQUIERES_1917, ...HINDENBURG_SOUTH] },
   l1918a: { key: 'l1918a', caption: 'The German offensive has driven the line back to Amiens and across the Lys.', points: [[51.14, 2.75], [51.03, 2.87], [50.93, 2.85], [50.89, 2.86], [50.85, 2.92], [50.81, 2.87], [50.79, 2.79], [50.78, 2.76], [50.74, 2.7], [50.71, 2.67], [50.67, 2.62], [50.6, 2.56], [50.56, 2.62], [50.52, 2.76], [50.46, 2.79], [50.43, 2.8], [50.36, 2.85], [50.33, 2.88], [50.29, 2.84], [50.23, 2.77], [50.17, 2.73], [50.14, 2.71], [50.12, 2.63], [50.06, 2.64], [50.02, 2.65], [49.98, 2.63], [49.95, 2.63], [49.87, 2.53], [49.83, 2.51], [49.77, 2.48], [49.65, 2.52], [49.62, 2.55], [49.55, 2.83], [49.45, 2.95], [49.35, 3.05]] },
   l1918b: { key: 'l1918b', caption: 'Amiens has pushed the line back to the old Somme battlefield.', points: [[51.14, 2.75], [51.03, 2.87], [50.93, 2.85], [50.89, 2.86], [50.85, 2.92], [50.81, 2.87], [50.79, 2.79], [50.78, 2.76], [50.74, 2.7], [50.71, 2.67], [50.67, 2.62], [50.6, 2.56], [50.56, 2.62], [50.52, 2.76], [50.46, 2.79], [50.43, 2.8], [50.36, 2.85], [50.33, 2.88], [50.29, 2.84], [50.23, 2.77], [50.17, 2.73], [50.14, 2.71], [50.12, 2.63], [50.06, 2.64], [50.0, 2.65], [49.94, 2.72], [49.83, 2.77], [49.7, 2.75], [49.58, 2.85], [49.45, 2.97], [49.35, 3.1]] },
@@ -60,8 +89,13 @@ export function lineFor([y, m]: [number, number]): FrontLine {
   const t = y * 12 + m;
   const at = (yy: number, mm: number) => yy * 12 + mm;
   if (t < at(1916, 7)) return LINES.l1915!;
-  if (t < at(1917, 4)) return LINES.l1916!;
-  if (t < at(1917, 8)) return LINES.l1917a!;
+  if (t < at(1916, 9)) return LINES.l1916a!;
+  if (t < at(1916, 11)) return LINES.l1916b!;
+  if (t < at(1917, 3)) return LINES.l1916!;
+  if (t < at(1917, 4)) return LINES.l1917h!;
+  if (t < at(1917, 6)) return LINES.l1917a!;
+  if (t < at(1917, 8)) return LINES.l1917m!;
+  if (t < at(1917, 10)) return LINES.l1917p!;
   if (t < at(1917, 12)) return LINES.l1917b!;
   if (t < at(1918, 4)) return LINES.l1917c!;
   if (t < at(1918, 8)) return LINES.l1918a!;
@@ -152,7 +186,7 @@ export interface MapView {
   battles: { name: string; words: string; at: LatLon; fought: boolean }[];
 }
 /** Everything the Map tab shows, from the war. */
-export function mapOf(w: War): MapView {
+export function mapOf(w: War, since?: FrontLine): MapView {
   const battles: MapView['battles'] = [];
   for (const l of w.log) {
     const f = /\| battle: (.*) as \w+$/.exec(l); const mi = /\| missed: (.*) \((course|wound)\)$/.exec(l);
@@ -161,7 +195,7 @@ export function mapOf(w: War): MapView {
     const at = battleAt(name, w.town);
     if (at && !battles.some((b) => b.name === name)) battles.push({ name, words: BATTLE_WORDS[name] ?? name, at, fought: !!f });
   }
-  return { month: monthName(warMonth(w)), line: lineFor(warMonth(w)), first: LINES.l1915!, here: hereOf(w), battles };
+  return { month: monthName(warMonth(w)), line: lineFor(warMonth(w)), first: since ?? LINES.l1915!, here: hereOf(w), battles };
 }
 
 /** A map position to a pixel on a w x h grid. */

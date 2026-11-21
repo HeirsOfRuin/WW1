@@ -13,7 +13,9 @@ import { DECKS, SORTIES } from '../src/game/war/data';
 import { drawCard, markCard } from '../src/game/war/war';
 import { share } from '../tools/story-share';
 import { recordOf } from '../src/game/character';
-import { mapOf, project, EXTENT } from '../src/game/warmap';
+import { mapOf, project, EXTENT, lineFor } from '../src/game/warmap';
+import { reviewFor, WAR_NEWS } from '../src/game/warnews';
+import { ROTATION_MONTHS } from '../src/game/war/calendar';
 import { rasterize, MAP_W, MAP_H, MAP_COLOURS } from '../src/game/pixelmap';
 
 const content = loadContent();
@@ -434,6 +436,35 @@ describe('mission decks (docs/FRAME-DECKS.md)', () => {
       }
       expect(new Set(seen.slice(0, live.length)).size).toBe(live.length);
     }
+  });
+});
+
+describe('the war beyond the battalion (playtest 3)', () => {
+  // the author: "The map makes a huge jump between 1916 and 1917. I think a review of the overall war
+  // after every home leave would help"
+  it('each year page after a leave reviews the year since the last, with the line it started from', () => {
+    const w = newWar({ seed: 5, town: 'pit' });
+    w.stage = 3 as typeof w.stage;
+    const r = reviewFor(w, 'y_1917')!;
+    expect(r.since).toBe('since February 1916');
+    expect(r.sinceLine.key).toBe('l1915');
+    const said = r.news.map((n) => n.text).join(' ');
+    for (const x of ['Verdun', 'Jutland', '1 July', 'Flers', 'Lloyd George']) expect(said).toContain(x);
+    expect(said).not.toContain('Vimy');
+    expect(reviewFor(w, 'w_tour')).toBeNull();
+    w.stage = 2 as typeof w.stage; expect(reviewFor(w, 'y_1916')!.news.length).toBeGreaterThan(5);
+    w.stage = 4 as typeof w.stage; expect(reviewFor(w, 'y_1918')!.news.map((n) => n.text).join(' ')).toContain('Passchendaele');
+  });
+  it('the line moves by stages: never more than one battle between two tours, and Messines not before June 1917', () => {
+    const order = ['l1915', 'l1916a', 'l1916b', 'l1916', 'l1917h', 'l1917a', 'l1917m', 'l1917p', 'l1917b', 'l1917c', 'l1918a', 'l1918b', 'l1918c', 'l1918d', 'l1918e'];
+    const months = [1, 2, 3, 4].flatMap((st) => ROTATION_MONTHS[st]!.rotations);
+    for (let i = 1; i < months.length; i++) {
+      const a = order.indexOf(lineFor(months[i - 1]!).key), b = order.indexOf(lineFor(months[i]!).key);
+      expect(b - a).toBeGreaterThanOrEqual(0);
+      expect(b - a).toBeLessThanOrEqual(2);
+    }
+    expect(lineFor([1917, 4]).caption).not.toContain('Messines');
+    expect(WAR_NEWS.every((n, i) => i === 0 || n.at[0] * 12 + n.at[1] >= WAR_NEWS[i - 1]!.at[0] * 12 + WAR_NEWS[i - 1]!.at[1])).toBe(true);
   });
 });
 

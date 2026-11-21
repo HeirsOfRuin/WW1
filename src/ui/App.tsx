@@ -3,7 +3,7 @@
 // the clock, [data-action] for choices, [data-tab] for tabs.
 import { useEffect, useRef, useState } from 'preact/hooks';
 import type { ContentBundle } from '../content/schema';
-import { newGame, view, choose, startsOf, statusOf, artOf, recordOf, mapOf, rasterize, glossOf, MAP_W, MAP_H, MAP_COLOURS, type GameState, type SceneView, type SoldierRecord } from '../game/index';
+import { newGame, view, choose, startsOf, statusOf, artOf, recordOf, mapOf, reviewFor, newsSoFar, rasterize, glossOf, MAP_W, MAP_H, MAP_COLOURS, type GameState, type SceneView, type SoldierRecord, type YearReview } from '../game/index';
 
 // Scene pictures (DESIGN §11): tools/art.ts writes src/art/<key>.png; the game asks artOf(state) which one.
 const ART = import.meta.glob('../art/*.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
@@ -111,6 +111,7 @@ export function App({ content }: { content: ContentBundle }) {
           {page === 0 && artUrl(artOf(state, v.sceneId)) && <img class="band" src={artUrl(artOf(state, v.sceneId))} alt="" width={400} height={200} />}
           <h2>{v.title}</h2>
           {paras(pages[Math.min(page, pages.length - 1)] ?? '')}
+          {last && (() => { const r = reviewFor(state.war, v.sceneId); return r && <WarMap s={state} review={r} />; })()}
           {v.ended && !last
             ? <div class="stack"><button data-action="continue" onClick={() => setPage(page + 1)}>Continue ({page + 1} / {pages.length})</button></div>
             : v.ended
@@ -155,23 +156,26 @@ export function App({ content }: { content: ContentBundle }) {
 // The Map tab (the author, 2026-11-17: "a pixel map of the overall war"): mapOf() says what,
 // rasterize() decides every pixel; this only puts them on a canvas.
 const rgb = (c: readonly number[]) => `rgb(${c.join(',')})`;
-function WarMap({ s }: { s: GameState }) {
-  const v = mapOf(s.war);
+function WarMap({ s, review }: { s: GameState; review?: YearReview }) {
+  const v = mapOf(s.war, review?.sinceLine);
   const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const ctx = ref.current?.getContext('2d');
     if (ctx) ctx.putImageData(new ImageData(rasterize(v) as Uint8ClampedArray<ArrayBuffer>, MAP_W, MAP_H), 0, 0);
   });
-  const key: [readonly number[], string][] = [[MAP_COLOURS.line, 'The front line now'], [MAP_COLOURS.first, 'The line in 1915'], [MAP_COLOURS.german, 'Held by the Germans'], [MAP_COLOURS.here, 'You'], [MAP_COLOURS.fought, 'Battle fought (x)'], [MAP_COLOURS.missed, 'Battle missed (o)']];
+  const was = review ? (review.since === 'since you went out' ? 'The line when you went out' : `The line in ${review.since.slice(6)}`) : 'The line in 1915';
+  const key: [readonly number[], string][] = [[MAP_COLOURS.line, 'The front line now'], [MAP_COLOURS.first, was], [MAP_COLOURS.german, 'Held by the Germans'], [MAP_COLOURS.here, 'You'], [MAP_COLOURS.fought, 'Battle fought (x)'], [MAP_COLOURS.missed, 'Battle missed (o)']];
+  const news = review ? review.news : newsSoFar(s.war);
   return (
     <div class="warmap">
-      <h2>The front, {v.month}</h2>
+      <h2>{review ? `The war ${review.since}` : `The front, ${v.month}`}</h2>
       <canvas ref={ref} width={MAP_W} height={MAP_H} class="pixelmap" role="img" aria-label={`Map of the Western Front, ${v.month}. ${v.here.where}.`} />
       <p><strong>You</strong>: {v.here.where}.</p>
       <p class="hint">{v.line.caption}</p>
       <ul class="legend">{key.map(([c, t]) => <li><span class="swatch" style={{ background: rgb(c) }} />{t}</li>)}</ul>
-      {v.battles.length > 0 && <><h3>Your battles</h3><dl class="lines">{v.battles.map((b) => <><dt>{b.words}</dt><dd>{b.fought ? 'Fought' : 'Missed'}</dd></>)}</dl></>}
-      <p class="hint">The line is drawn to within a few miles; the places the battalion was are the story's.</p>
+      {!review && v.battles.length > 0 && <><h3>Your battles</h3><dl class="lines">{v.battles.map((b) => <><dt>{b.words}</dt><dd>{b.fought ? 'Fought' : 'Missed'}</dd></>)}</dl></>}
+      {news.length > 0 && <><h3>{review ? 'What happened' : 'The war so far'}</h3><dl class="lines">{news.map((n) => <><dt>{n.month}</dt><dd>{n.text}</dd></>)}</dl></>}
+      {!review && <p class="hint">The line is drawn to within a few miles; the places the battalion was are the story's.</p>}
     </div>
   );
 }

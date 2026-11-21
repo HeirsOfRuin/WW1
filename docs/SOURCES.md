@@ -314,3 +314,13 @@ Fixed in passing by the writers (2026-11-20): no steel helmets in 1915 scenes; a
 Gommecourt.
 
 "The papers from home call it the Spanish flu" in May 1918 (the earliest British paper found is The Times, 25 June 1918): now "By the summer the papers at home will be calling it the Spanish flu" (2026-11-21).
+
+## The war beyond the battalion (2026-11-21)
+
+src/game/warnews.ts: 48 dated events, 1915-1918, from general history (the month each happened),
+not yet checked against a source from this network. Figures are rounded as the men heard them:
+Loos "close on 60,000" British casualties; 1 July 1916 "nearly 60,000"; the Somme "over 400,000";
+Messines "nineteen mines". The front line's stages within a battle (src/game/warmap.ts partWay) are
+drawn, not surveyed: the Somme a quarter of its gains by August 1916 and three fifths by October;
+Passchendaele two fifths by September 1917.
+
