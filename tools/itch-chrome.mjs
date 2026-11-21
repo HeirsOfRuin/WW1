@@ -19,6 +19,7 @@ const field = (f) => new RegExp(`^\\| ${f} \\| (.*) \\|$`, 'm').exec(md)?.[1]?.r
 const short = (await readFile(join(itch, 'short-description.txt'), 'utf8')).trim();
 const desc = (await readFile(join(itch, 'description.html'), 'utf8')).replace(/<!--[\s\S]*?-->\n?/g, '').trim();
 const single = (await readdir(KIT)).includes('2-download');
+const android = (await readdir('.github/workflows').catch(() => [])).includes('android.yml'); // the APK is built by GitHub, not in the kit
 const shots = (await readdir(join(KIT, '4-page'))).filter((f) => /^shot\d/.test(f)).sort();
 const embed = /(\d+) ?x ?(\d+)/.exec(field('Embed'));
 const tags = field('Tags').split(',').map((t) => t.trim()).filter(Boolean);
@@ -56,6 +57,10 @@ Uploads
 ${single ? `- Then a second upload: ask me to attach 2-download/${slug}.html. Do NOT tick "played in the
   browser" for this one. Tick the platforms Windows, macOS and Linux, and set its display name to
   "${name} (download: opens in any browser, plays offline)".
+` : ''}${android ? `- Then an Android upload: ask me to attach in-the-trenches.apk (I download it from GitHub:
+  Actions > Android app > the latest run > Artifacts > in-the-trenches-android, then unzip it).
+  Do NOT tick "played in the browser". Tick Android only, and set its display name to
+  "${name} (Android)".
 ` : ''}
 Embed options (they appear once the zip is marked to play in the browser)
 - Viewport dimensions: ${embed[1]} x ${embed[2]}

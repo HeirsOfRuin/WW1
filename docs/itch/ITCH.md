@@ -18,6 +18,7 @@ Every count in the copy is read out of the build, not from memory.
 |---|---|
 | Kind of project | HTML |
 | Upload 1 (played on the page) | `in-the-trenches-web.zip`, tick "This file will be played in the browser" |
+| Upload 3 (Android) | `in-the-trenches.apk`, signed with the release key (docs/ANDROID.md), from GitHub: Actions > Android app > the latest run > Artifacts. Android only ticked |
 | Upload 2 (desktop download) | `in-the-trenches.html` (2.2 MB, the whole game in one file: `node tools/single-html.mjs`), not played in the browser; platforms Windows, macOS, Linux. Opens in any browser and plays offline; Safari will not save from a file |
 | Embed | **390 x 844** (measured with `node tools/embed-measure.mjs`; table below) |
 | Mobile friendly | On, orientation portrait |

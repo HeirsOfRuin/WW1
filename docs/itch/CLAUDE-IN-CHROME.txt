@@ -30,6 +30,10 @@ Uploads
 - Then a second upload: ask me to attach 2-download/in-the-trenches.html. Do NOT tick "played in the
   browser" for this one. Tick the platforms Windows, macOS and Linux, and set its display name to
   "In the Trenches (download: opens in any browser, plays offline)".
+- Then an Android upload: ask me to attach in-the-trenches.apk (I download it from GitHub:
+  Actions > Android app > the latest run > Artifacts > in-the-trenches-android, then unzip it).
+  Do NOT tick "played in the browser". Tick Android only, and set its display name to
+  "In the Trenches (Android)".
 
 Embed options (they appear once the zip is marked to play in the browser)
 - Viewport dimensions: 390 x 844
