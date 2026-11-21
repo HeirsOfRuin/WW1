@@ -82,7 +82,7 @@
 - { term: webbing, means: "The soldier's harness of woven belts and straps that carried his pouches, pack and water bottle.", quiet: true }
 - { term: groundsheet, means: "A waterproof sheet to lie on, also worn as a cape in rain.", quiet: true }
 - { term: entrenching tool, means: "A small spade-and-pick with a short handle that every soldier carried on his belt.", quiet: true }
-- { term: tin hats, also: [tin hat], means: "The steel helmet, first issued to British soldiers early in 1916.", quiet: true }
+- { term: tin hats, also: [tin hat], means: "The steel helmet. A few reached the trenches late in 1915; every man had one by the summer of 1916.", quiet: true }
 - { term: gas hood, means: "The 1915 gas mask: a flannel bag soaked in chemicals, pulled over the whole head." }
 - { term: accessory, means: "The official code word for the poison gas cylinders at Loos; 'gas' was not to be said." }
 - { term: Loos, means: "A mining town in northern France; the British attacked there on 25 September 1915, using gas." }

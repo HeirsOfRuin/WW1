@@ -50,7 +50,7 @@
   text: |
     [if war.servant == 2]You've been Mr Rudd's servant since Loos.[else]Mr Rudd has had the platoon since Loos.[/if] He's from Birmingham, who was a clerk in a brass foundry and
     went to the grammar school on a scholarship. Temporary gentlemen, the old officers call them,
-    behind their backs. He's twenty, a one-pip wonder, and he talks too much and he doesn't know a ewe from a wether.
+    behind their backs. He's twenty, a wart, and he talks too much and he doesn't know a ewe from a wether.
 
     The men from Dunsworthy don't take to him. He isn't Mr Venn. He doesn't know their mothers.[if war.mate1] He calls Will Cottle "Cottle" in the voice Mr Venn used for his dogs.[/if]
 

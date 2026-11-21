@@ -41,13 +41,13 @@ clear from the sentence, and every one in the glossary.
 - **Soldiers' French** (mangled by ear): napoo (*il n'y en a plus*: finished, gone, dead), san fairy
   ann (*ça ne fait rien*: it doesn't matter), toot sweet (*tout de suite*: at once), compree?
   (*compris?*), tray bon / no bon, merci boko, parley-voo, alley! (*allez*: clear off),
-  mamzelle, vin blank or plonk (*vin blanc*), oofs (*oeufs*, eggs), "just-a-minute" (estaminet).
+  mamzelle, vin blank (*vin blanc*; not "plonk", which is first recorded for wine in 1927), oofs (*oeufs*, eggs), "just-a-minute" (estaminet).
 - **The enemy:** Fritz (all war), the Boche (officers, the papers, the French), the Hun (the papers,
   officers), Alleyman (from *Allemand*; 1914-16), Jerry (**from 1917 only**). "Kamerad" for surrender.
 - **Home and wounds:** Blighty; a Blighty one; gone west, copped it, stopped one (killed or hit);
   got the wind up (frightened); swinging the lead (shamming sick); cushy (easy, safe).
 - **People:** Tommy; the Old Man (the commanding officer); brass hats and red tabs (staff officers);
-  a wart or one-pip wonder (a second lieutenant); lance jack (lance corporal); quarter bloke
+  a wart (a very young second lieutenant; not "one-pip wonder", which no period source has); lance jack (lance corporal); quarter bloke
   (quartermaster sergeant); the MO (medical officer); padre or sky pilot (chaplain); old sweat (a
   pre-war regular); base wallah (a man with a safe job at the base); poilu (a French soldier); Jocks
   (Scots); Aussies (diggers **from 1917**).

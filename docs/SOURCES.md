@@ -211,18 +211,23 @@ key ones (marked *) before SOURCES.md calls the row checked.
 
 "The red one" was cut from the four 1917 leave scenes (2026-11-14).
 
-## Playtest 2 content (2026-11-16): not yet checked
+## Playtest 2 content (2026-11-16): checked 2026-11-21
 
-The writers of the close moments, wounds and death, the dated missions, the Whippet and the
-romances used these; none was opened against a source. Each stays unchecked until it is.
-- New Army battalions with Lewis guns by summer 1915 ("only a few"): probably later in 1915.
-- The Messines mines "shook the billets twenty miles off".
-- Whippets: crew of three, engine in front and cab behind, Hotchkiss guns, a steering wheel; first in
-  action in late March 1918 (no village named).
-- The King's message of sympathy sent with Army Form B.104-82; letters from hospitals in England
-  outside the field censor; the memorial plaque "about a saucer" across; the wound stripe.
-- Church bells tolled one stroke a year of the dead man's age (the farm town).
-- Green envelopes for letters not read by the platoon officer; wartime weddings by licence on leave.
+Checked by web search on 2026-11-21. No page could be opened (the session's network refused every
+site tried: fr.wikipedia.org, longlongtrail.co.uk), so every source below was read as a search
+extract only, and "Confirmed" means confirmed in the extract, not read in full.
+
+| Detail | Verdict | Source | What changed |
+|---|---|---|---|
+| The Messines mines, 7 June 1917 at 3.10 a.m., "shook the billets twenty miles off"; heard a day's march away (lf_mines); the guns stopping and a nightingale first; "digging them since 1915" | Confirmed (3.10 a.m.; said to have been heard in London and Dublin; the guns lifted and men heard nightingales; first Messines tunnels July 1915, though the IWM dates the main work to 1916) | https://www.history.com/articles/battle-messines-world-war-i-tunnels ; https://www.iwm.org.uk/history/what-you-need-to-know-about-the-battle-of-messines ; https://www.durandgroup.org.uk/durand_group_messines_mines.html (extracts) | none |
+| Army Form B.104-82 as the notice of death, with a slip of the King's and Queen's sympathy | Confirmed for the form and a King's message going with it; the exact words quoted in death.yaml were not found in any extract | https://www.qaranc.co.uk/Army-Form-B104-82-Letter-Condolence-from-King-WWI.php (extract) | none |
+| The memorial plaque "about the size of a saucer", bronze, with his name and a lion, and a scroll; after the war | Confirmed (120 mm across, Britannia and a lion, made from 1919, sent with a scroll) | https://en.wikipedia.com/wiki/Memorial_Plaque_(medallion) ; https://www.awm.gov.au/encyclopedia/memorial_scroll (extracts) | none |
+| The wound stripe | Confirmed (a gold braid stripe authorised by an Army Order of July 1916; the order's number differs between sources) | https://archive.spectator.co.uk/article/15th-july-1916/3/an-army-order-issued-last-week-authorizes-the-wear (extract) | none |
+| New Army battalions with "only a few" Lewis guns by summer 1915 | Confirmed (supplied from July 1915 to six divisions first, four a battalion) | https://thelonsdalebattalion.co.uk/wiki/Lewis_gun (extract) | none |
+| Whippets: crew of three, engines in front and cab behind, Hotchkiss guns; first action late March 1918 | Confirmed (crew 3, four Hotchkiss guns, two engines in front; 26 March 1918 near Colincamps) | https://tankmuseum.org/whippet-debut/ ; https://en.wikipedia.org/wiki/Medium_Mark_A_Whippet (extracts) | none |
+| The Whippet's steering wheel | Not confirmable (no extract mentions the controls beyond the two throttles) | same | none |
+| Letters from hospitals in England outside the field censor | Not confirmable (extracts show only that letters from the forces were censored in general, and Indian soldiers' hospital letters were) | https://api.parliament.uk/historic-hansard/commons/1918/jun/13/wounded-soldiers-letters-from-hospitals (extract) | none |
+| Green envelopes; church bells tolling a stroke for each year of the dead man's age; weddings by licence on leave | Not confirmable (one search each way returned nothing on them) | none found | none |
 
 ## The war map (2026-11-17): drawn approximately
 
@@ -237,18 +242,75 @@ Boisselle, Mametz and Gommecourt as the pit, farm and city texts have them); Arr
 the salient in the winter of 1917-18, then the Somme front for the German offensive of 21 March 1918
 (the story's retreat over Albert and La Boisselle), Amiens, the Hindenburg Line, Le Cateau, Mons.
 
-## The wording pass, the lasses and the rivals (2026-11-20): not yet checked
+## The wording pass, the lasses and the rivals (2026-11-20): checked 2026-11-21
 
-- The slang and its dates (docs/FRAME-WORDS.md): from general knowledge of the period's slang, not
-  opened against a source. Dated conservatively: Alleyman to 1916, tin hat from 1916, Jerry and
-  digger from 1917. "Redcaps" (military police) is used and is not on the FRAME's list.
-- Billets villages are invented and not checked against real communes: Vauquelin-les-Mines,
-  Aubrimont, Belincourt, Herimont (and Ternecourt, earlier).
-- A nursing sister at a casualty clearing station (rest stations had none); a WAAC's hours out of
-  camp; Gothas bombing Poperinghe in 1917; a long-range gun on a mining village behind Loos.
-- "NYD" in a pilot's mouth in February 1918; the tank Polaris as a "female" (machine guns only).
-- Trench mortars firing to a timetable ("Tea-time Otto"); Crown and Anchor; battalion boxing; a
-  tribunal exemption ended in 1918 and the influenza.
-- Fixed in passing by the writers: no steel helmets in 1915 scenes; a machine pistol (1918) on an
-  earlier raider; "welfare hall" (1920s) now Miners' Hall; the London Rifle Brigade at Gommecourt.
+Checked by web search on 2026-11-21, from search extracts only (no page could be opened; see the
+note above). Brophy and Partridge's glossary (1930) and Fraser and Gibbons (1925) are the books to
+open when a network allows; they were reached here only where another site quotes them.
 
+### The slang (docs/FRAME-WORDS.md section 2)
+
+| Detail | Verdict | Source | What changed |
+|---|---|---|---|
+| "Jerry" only from 1917 | Confirmed as a safe rule (the OED's first use is a Canadian diary of December 1915; Brophy and Partridge have it as the usual word after 1915; the game's first use is January 1917) | https://grammarphobia.com/blog/2019/12/jerry-rigged.html ; https://greensdictofslang.com/entry/bmkbz4y (extracts) | none |
+| "Alleyman" to 1916 | Confirmed for 1914-15 ("in 1914 and 1915 the ordinary terms Fritz, Boche and Alleyman"); the end date of 1916 is not stated in any extract. Latest use in the game: the Somme, June 1916 | https://thelonsdalebattalion.co.uk/wiki/Alleyman (extract) | none |
+| "tin hat" from 1916 | Confirmed (first helmets September 1915, about 50 a battalion; issued in numbers from spring 1916; a million by the summer). The glossary's "first issued early in 1916" was wrong | https://en.wikipedia.org/wiki/Brodie_helmet ; https://ww1.nam.ac.uk/timeline/introduction-brodie-helmet/ (extracts) | Wrong, fixed in glossary/mill.yaml: "A few reached the trenches late in 1915; every man had one by the summer of 1916." |
+| "digger" from 1917 | Softened (the name spread in 1917; Bean ties it to mid-1917, and the New Zealanders had it first). Used once, May 1917, after Bullecourt | https://en.wikipedia.org/wiki/Digger_(soldier) ; https://paperspast.natlib.govt.nz/newspapers/HAWST19290905.2.84 (extracts) | glossary/corps.yaml: "a name they gave themselves in 1917" -> "a name that spread among them and the New Zealanders in 1917" |
+| "strafe" from 1915 | Confirmed as a soldiers' word for a bombardment taken from the German; the year 1915 was not in an extract. Not used in any scene text (only in a flag name) | https://www.iwm.org.uk/history/first-world-war/western-front/tommy-slang-terms (extract) | none |
+| "Jack Johnson", "coal box" (1914-15) | Confirmed (Jack Johnson dated 1914 by the OED; coal box the same kind of shell). The game uses "coal box" in 1915 only | https://slll.cass.anu.edu.au/centres/andc/annotated-glossary/j (extract) | none |
+| "plonk" for vin blanc | Wrong, fixed. The wartime forms were vin blank, von blink, point blank and plinketty plonk; "plonk" for wine is first recorded in 1927 (Adelaide). No scene used it | https://wordhistories.net/2022/09/25/plonk-wine/ ; https://slll.cass.anu.edu.au/centres/andc/annotated-glossary/v (extracts) | FRAME-WORDS section 2: "vin blank or plonk" -> "vin blank (not plonk)" |
+| "vin blank", "napoo", "san fairy ann", "toot sweet" | Confirmed | https://slll.cass.anu.edu.au/centres/andc/annotated-glossary/s ; https://www.mentalfloss.com/article/58233/21-slang-terms-world-war-i (extracts) | none |
+| "one-pip wonder" | Wrong, fixed. No period use found: the attested forms are "one pip" (1919) and "one-pipper" (1940); "wart" for a very young subaltern is recorded from 1894 and in a wartime piece | https://slll.cass.anu.edu.au/centres/andc/annotated-glossary/o ; https://wehd.com/102/Wart_sb.html ; https://regimentalrogue.com/srsub/openletter.htm (extracts) | 1916-farm.yaml (Mr Rudd): "a one-pip wonder" -> "a wart"; glossary/farm.yaml entry renamed to "wart"; FRAME-WORDS section 2 |
+| "wart" | Confirmed | as above | none |
+| "Wipers", "Pop", "Plugstreet", "Eat Apples", "Ocean Villas", "Funky Villas", "Mucky Farm", "Hell Fire Corner" | Confirmed (Mouquet Farm was also "Moo Cow Farm"; one list has "Funky Villages") | https://www.wikipedia.org/wiki/English-language_names_given_by_WWI_troops_to_places_affected_by_WWI ; https://www.iwm.org.uk/history/first-world-war/western-front/tommy-slang-terms ; https://www.nam.ac.uk/node/502 (extracts) | none |
+| "brass hats", "old sweat" | Confirmed | https://Spartacus-educational.com/FWWglossary.htm (extract) | none |
+| "lance jack", "quarter bloke", "base wallah" | Confirmed (in the AIF glossary of the 1920s) | https://slll.cass.anu.edu.au/centres/andc/annotated-glossary/l ; https://slll.cass.anu.edu.au/centres/andc/annotated-glossary/b (extracts) | none |
+| "red tabs", "sky pilot", "redcaps", "swinging the lead" | Not confirmable (two searches returned no entry for any of the four; all are in general use in writing about the war, and none is dated in the game) | none found | none |
+| "whizz-bang", "five-nine", "minnie", "toffee apple", "potato masher", "Archie" (from a music-hall song), "morning hate" | Confirmed | https://www.queensu.ca/strathy/node/113 ; https://www.westernfrontassociation.com/world-war-i-articles/2008/december/great-war-terms-used-by-the-british/ ; https://slll.cass.anu.edu.au/centres/andc/annotated-glossary/w (extracts) | none |
+| "pozzy", "Maconochie", "chats", "gone west", "cushy" (1915 quotation), "char", "jankers" (OED 1916) | Confirmed | https://slll.cass.anu.edu.au/centres/andc/annotated-glossary/m ; https://notoneoffbritishisms.com/2022/07/12/cushy/ ; https://listserv.linguistlist.org/pipermail/ads-l/2013-October/128928.html (extracts) | none |
+| "gaspers" | Softened in the record only: confirmed as trench slang for a cigarette, but one glossary says it was mostly an officers' word | https://www.henrysheldonmuseum.org/wwi-slang (extract) | none |
+| Crown and Anchor forbidden, House allowed; "Clickety-click, sixty-six" | Confirmed (a 1915 paper: gambling forbidden, House openly permitted by most commanding officers; "Clickety-click" for 66 in Empey's Over the Top, 1917, and Fraser and Gibbons) | https://greensdictofslang.com/entry/bosuqxi ; https://www.iwm.org.uk/history/voices-of-the-first-world-war-wartime-leisure-and-entertainment (extracts) | none |
+
+### The facts in the new events
+
+| Detail | Verdict | Source | What changed |
+|---|---|---|---|
+| The first conscripts in the drafts of August to October 1916 (lf_draft) | Confirmed in outline (the Act in force from March 1916, married men from June; conscripts were one of the four kinds of soldier in France by late 1916). No extract dates the first conscript drafts to a month | https://www.longlongtrail.co.uk/soldiers/a-soldiers-life-1914-1918/enlisting-into-the-army/the-1916-military-service-act/ ; https://www.westernfrontassociation.com/world-war-i-articles/2013/october/unknown-soldiers-a-1918-draft/ (extracts) | none |
+| Orders against a truce at Christmas 1916, and the guns firing to make sure (lf_morning) | Confirmed (a war diary of 24 December 1916 orders a slow bombardment to 27 December to stop fraternisation; a few local attempts are recorded all the same) | https://talk.operationwardiary.org/boards/BWD0000009/discussions/DWD0001j4p ; https://www.mentalfloss.com/history/world-war-i/wwi-centennial-third-christmas-war (extracts) | none |
+| The winter of 1916-17 "the hardest anybody can remember"; bread sawn (lf_gate) | Confirmed (the coldest for a generation by local accounts; a diary of 9 February 1917 has the bread frozen too hard to cut) | https://www.iwm.org.uk/history/voices-of-the-first-world-war-winter-1916 ; https://roadstothegreatwar-ww1.blogspot.com/2022/10/cold-on-somme-winter-1916-17.html (extracts) | none |
+| The Germans "went back in March" 1917 to the Hindenburg Line; trees felled, wells fouled, booby traps (lf_stove) | Confirmed (Operation Alberich, 9 February to 20 March, the main retirement from 16 March; orchards felled, wells polluted, mines and booby traps) | https://en.wikipedia.org/wiki/Operation_Alberich ; https://www.historyhit.com/operation-alberich-how-the-germans-retreated-to-the-hindenburg-line-in-1917/ (extracts) | none |
+| Poperinghe bombed at night and shelled by a long gun in autumn 1917; "the big Gothas" (la_pop_after) | Softened. Poperinghe was shelled at long range (the station the target) and bombed from the air, and July to November 1917 saw many night raids behind the Ypres front; no extract names the machines as Gothas | https://historylearning.com/world-war-one/western-front-world-war-one/poperinge-world-war-one ; https://www.longlongtrail.co.uk/air-raid-hits-11th-casualty-clearing-station-7-july-1917/ (extracts) | lasses.yaml: "the big Gothas" -> "big twin-engined machines the lads call Gothas" |
+| A nursing sister at a casualty clearing station; grey dress, cape edged with scarlet; "out since the first autumn" (la_sister) | Confirmed (first sisters appointed to clearing stations 30 October 1914; the Reserve wore a grey cape trimmed with scarlet) | https://www.britisharmynurses.com/scarletfinders/10.html ; https://www.qaranc.co.uk/QAIMNS-Reserve-Uniform-World-War-One.php (extracts) | none |
+| Rest stations had no nursing sisters | Not confirmable (nothing found on rest stations; one sister, Kate Luard, did serve at a field ambulance in 1915). The scenes do not say it, they only show no sister there | https://www.qaranc.co.uk/Chain-Evacuation-Wounded-Soldiers-First-World-War.php (extract) | none |
+| The WAAC in France from 1917, to free men for the line | Confirmed (first draft, 14 cooks and waitresses, at Abbeville on 31 March 1917; a man released for every woman) | https://agcmuseum.org.uk/les-tommettes-army-women-of-the-first-world-war/ ; https://spartacus-educational.com/Wwaac.htm (extracts) | none |
+| The WAAC's coat-frock and round felt hat; her hours out of camp | Not confirmable (one extract has "a khaki cap, jackets and skirts"; nothing found on the coat-frock, the hat or the hours) | https://spartacus-educational.com/Wwaac.htm (extract) | none |
+| A franc "worth about ninepence" | Confirmed (25.22 to the pound before the war, 9.5d; the army's rate in September 1915 was five francs for 3s 8d, 8.8d) | https://api.parliament.uk/historic-hansard/commons/1915/sep/21/british-expeditionary-force-in-france ; https://thelonsdalebattalion.co.uk/wiki/Franc (extracts) | none |
+| Rudge's exemption ended in April 1918 under "the new Act" (rivals.yaml) | Confirmed (occupational exemptions withdrawn from 24 April 1918 by Order; the Military Service (No. 2) Act let a Proclamation end certificates) | https://archive.spectator.co.uk/article/13th-april-1918/3/it-was-intimated-on-wednesday-that-the-minister-of ; https://api.parliament.uk/historic-hansard/commons/1918/may/09/exemption-certificates-withdrawn (extracts) | none |
+| The influenza killing at home in autumn 1918 | Confirmed (the deadly second wave struck Britain in October 1918 and ran into 1919; about 228,000 dead) | https://www.historic-uk.com/HistoryUK/HistoryofBritain/The-Spanish-Flu-pandemic-of-1918/ (extract) | none |
+| "Three-day fever" in May 1918, and "the papers from home call it the Spanish flu" (1918-mill) | Not settled. "Three-day fever" is confirmed as the doctors' first name for it. The Spanish name follows the Madrid reports of late May; the first British paper found is The Times, 25 June 1918. May is a few weeks early | https://history.blog.gov.uk/2018/09/13/the-flu-that-wasnt-spanish/ ; https://link.springer.com/chapter/10.1057/978-1-137-33954-6_4 (extracts) | none (outside this pass; a later edit could move the papers' name to June) |
+| A German trench mortar firing to a timetable ("Tea-time Otto") | Not confirmable (the mortars were feared and the pop of the discharge listened for; no extract has one firing at a set hour). Otto is invented | https://www.greatwarforum.org/topic/222585-why-did-they-hate-mortars/ (extract) | none |
+| "NYDN" on the label from June 1917 (war.yaml); "NYD" in a pilot's mouth, February 1918 | Confirmed for the army in 1917 ("Not Yet Diagnosed (Nervous)", when "shell shock" was banned as a diagnosis); the month and its use in the flying corps were not in any extract | https://encyclopedia.1914-1918-online.net/article/war-psychiatry-and-shell-shock-2-0/ ; https://en.wikipedia.com/wiki/Shell_Shock (extracts) | none |
+| The Silver War Badge from September 1916 | Confirmed (12 September 1916, Army Order 316) | https://www.longlongtrail.co.uk/soldiers/how-to-research-a-soldier/campaign-medal-records/records-of-the-silver-war-badge/ (extract) | none |
+| A long-range gun on a mining village behind Loos, 1915; battalion boxing | Not confirmable (the search found long-range guns on Dunkirk in 1915, nothing on the Loos villages or on boxing) | https://veterans.gc.ca/en/node/712168 (extract) | none |
+| The tank Polaris as a "female" (machine guns only) | Not checked in this pass (one search returned nothing) | none | none |
+
+### The invented billets villages
+
+Each name was searched as an exact phrase with "commune" and "village"; none returned a place.
+
+| Detail | Verdict | Source | What changed |
+|---|---|---|---|
+| Ternecourt | Confirmed invented (nearest real: Ternas, Pas-de-Calais) | search extract; https://fr.geneawiki.com/wiki/62809_-_Ternas | none |
+| Vauquelin-les-Mines | Confirmed invented (Vauquelin is a surname; real "-les-Mines": Noeux, Marles, Auchy) | search extract | none |
+| Aubrimont | Confirmed invented (nearest real: Aurimont, Gers; Aubéguimont, Seine-Maritime) | search extract | none |
+| Bélincourt | Confirmed invented (nearest real: Blincourt, Oise; Bellicourt, Aisne; Béalencourt, Pas-de-Calais) | search extract | none |
+| Hérimont | Confirmed invented (nearest real: Herbeumont and Hargimont in Belgium; Hérimoncourt, Doubs) | search extract | none |
+
+A search extract is not a gazetteer: a hamlet or a farm of the name could exist unlisted. The check
+to make when a network allows is the INSEE commune list and the Belgian list of former communes.
+
+Fixed in passing by the writers (2026-11-20): no steel helmets in 1915 scenes; a machine pistol
+(1918) on an earlier raider; "welfare hall" (1920s) now Miners' Hall; the London Rifle Brigade at
+Gommecourt.
+
+"The papers from home call it the Spanish flu" in May 1918 (the earliest British paper found is The Times, 25 June 1918): now "By the summer the papers at home will be calling it the Spanish flu" (2026-11-21).

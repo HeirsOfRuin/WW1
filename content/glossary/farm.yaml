@@ -57,7 +57,7 @@
 - { term: napoo, means: "Soldiers' French, from 'il n'y en a plus': finished, all gone, done for." }
 - { term: redcaps, means: "The military police, from the red covers on their caps." }
 - { term: cushy, means: "A soldiers' word brought from India: easy, comfortable, safe." }
-- { term: one-pip wonder, means: "The soldiers' name for a second lieutenant, who wore a single star, or pip, as his badge." }
+- { term: wart, means: "The army's name for a very young second lieutenant, who wore a single star, or pip, as his badge." }
 - { term: brass hats, means: "The soldiers' name for generals and staff officers, from the gold braid on their caps." }
 - { term: padre, means: "The soldiers' name for an army chaplain.", quiet: true }
 - { term: conchie, means: "The soldiers' and newspapers' word for a conscientious objector, a man who refused to fight." }
