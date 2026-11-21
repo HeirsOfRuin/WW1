@@ -7,8 +7,8 @@ import { playGame } from '../tools/war-bot';
 import { newGame, view, choose, type GameState } from '../src/game/index';
 import { toSave, fromSave, encodeSaveCode, decodeSaveCode } from '../src/game/save';
 import { warMonth, seasonOf, monthName, ARMISTICE } from '../src/game/war/calendar';
-import { phaseHit, battleOf, newWar, run, decide, decideFor, homeTier, sentHomeOf, missionHit, rankFull, ROLES as WAR_ROLES, POLICIES as WAR_POLICIES } from '../src/game/war/index';
-import { riskWord, whereOf, endingLine } from '../src/game/module';
+import { phaseHit, battleOf, newWar, run, playWar, decide, decideFor, homeTier, sentHomeOf, missionHit, rankFull, ROLES as WAR_ROLES, POLICIES as WAR_POLICIES } from '../src/game/war/index';
+import { riskWord, whereOf, endingLine, fateLine } from '../src/game/module';
 import { DECKS, SORTIES } from '../src/game/war/data';
 import { drawCard, markCard } from '../src/game/war/war';
 import { share } from '../tools/story-share';
@@ -465,6 +465,22 @@ describe('the war beyond the battalion (playtest 3)', () => {
     }
     expect(lineFor([1917, 4]).caption).not.toContain('Messines');
     expect(WAR_NEWS.every((n, i) => i === 0 || n.at[0] * 12 + n.at[1] >= WAR_NEWS[i - 1]!.at[0] * 12 + WAR_NEWS[i - 1]!.at[1])).toBe(true);
+  });
+});
+
+describe('the death page says the dice were cast (2026-11-21)', () => {
+  // the author: "Every one of the 4 options I have in this game when I reach the pillbox in
+  // paschendale kills me" (the save holds the dice: every reload replayed a roll under all four)
+  it('a death from a choice gives its odds and the safest; any other says no choice changed it', () => {
+    let battle = 0, other = 0;
+    for (let i = 0; i < 400 && (battle < 3 || other < 3); i++) {
+      const w = playWar({ seed: 900 + i, town: 'farm', policy: 'adaptive' });
+      if (w.ending !== 'killed') continue;
+      const line = fateLine(w);
+      expect(line).toContain('Reloading a save replays the same dice.');
+      if (w.lastHit && /1-in-\d+/.test(line)) battle++; else { expect(line).toContain('Nothing you chose'); other++; }
+    }
+    expect(battle).toBeGreaterThan(0); expect(other).toBeGreaterThan(0);
   });
 });
 

@@ -161,6 +161,22 @@ export function causeKind(cause: string): 'battle' | 'shell' | 'sortie' | 'assig
 }
 
 /** The ending in one sentence. */
+/** On the death page: whether a choice could have changed it, and that a reload replays the same
+ *  dice (2026-11-21, the author: "Every one of the 4 options I have in this game when I reach the
+ *  pillbox in paschendale kills me". The save holds the dice, so every reload gave the same roll,
+ *  under even the safest choice's chance). */
+export function fateLine(w: War): string {
+  const n = (p: number) => Math.max(2, Math.round(1 / p));
+  const k = causeKind(w.endWhy);
+  const h = w.lastHit;
+  const replay = 'Reloading a save replays the same dice.';
+  if ((k === 'battle' || k === 'sortie') && h) {
+    const what = `The dice were cast before you chose. What you did carried about a 1-in-${n(h.p)} chance of being hit`;
+    return h.safest < h.p * 0.9 ? `${what}; the safest choice, about 1 in ${n(h.safest)}. ${replay}` : `${what}, and nothing safer was open to you. ${replay}`;
+  }
+  return `Nothing you chose that day would have changed it: the shell, or the bullet, picks no one. ${replay}`;
+}
+
 export function endingLine(w: War): string {
   const why = w.endWhy;
   switch (w.ending) {
@@ -555,6 +571,7 @@ export const module: GameModule = {
       case 'friends_home': return `${aliveFriends(w)} of the nine`;
       case 'awards_line': return w.awards.length ? w.awards.join(', ') : 'none';
       case 'ending_line': return endingLine(w);
+      case 'fate_line': return fateLine(w);
       // how the medical officer is likely to take it, from the chance the resolver uses (war.ts sickChance)
       case 'sick_odds': { const c = sickChance(w); return c >= 0.6 ? 'he knows your name: he will likely listen' : c >= 0.45 ? 'he may listen' : 'he has you down as a man who hangs back: he likely won\'t'; }
       // the sweetheart at home, by town (content/scenes/war/romance.yaml)
@@ -576,7 +593,7 @@ export const module: GameModule = {
     }
     return undefined;
   },
-  checkTextVar: (name) => (['rank_a', 'lost_last_name', 'award_last_name', 'risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line', 'money_line', 'sent_home', 'after_name', 'after_lost_names', 'after_award_name', 'duty_risk_draft', 'sent_name', 'sent_first', 'sent_duty', 'risk_lead', 'risk_close_shoot', 'risk_close_bayonet', 'risk_close_prisoner', 'risk_close_spare', 'result_note', 'sweetheart', 'sick_odds'].includes(name) ? [] : undefined),
+  checkTextVar: (name) => (['rank_a', 'lost_last_name', 'award_last_name', 'risk_bold', 'risk_steady', 'risk_careful', 'risk_back', 'wound_where', 'fallen_name', 'fallen_first', 'fallen_surname', 'fallen_where', 'mate', 'mate1', 'mate2', 'mate3', 'mate1_first', 'mate2_first', 'mate3_first', 'phase_count', 'tour_line', 'nerve_word', 'standing_word', 'rank_name', 'path_name', 'section_line', 'duty_name', 'duty_risk', 'duty_cost', 'friend_line', 'mission_name', 'mission_risk', 'course_name', 'battle_name', 'phase_line', 'risk_push', 'risk_help', 'risk_ground', 'offer0', 'offer1', 'offer2', 'offers_line', 'grade', 'friends_home', 'awards_line', 'ending_line', 'fate_line', 'money_line', 'sent_home', 'after_name', 'after_lost_names', 'after_award_name', 'duty_risk_draft', 'sent_name', 'sent_first', 'sent_duty', 'risk_lead', 'risk_close_shoot', 'risk_close_bayonet', 'risk_close_prisoner', 'risk_close_spare', 'result_note', 'sweetheart', 'sick_odds'].includes(name) ? [] : undefined),
   // the year's title page: where he stands, and who of the nine has died since the last page
   cardRows: (_c, s) => {
     const w = war(s);

@@ -124,6 +124,8 @@ export interface War {
   /** cards of each sortie step's deck already shown since the deck was last reshuffled, by `key:step`
    *  (absent in saves before decks) */
   decks?: Record<string, string[]>;
+  /** the chance of the last hit he took from a choice, and of the safest choice then (the death page) */
+  lastHit?: { p: number; safest: number };
   /** why he is out of the line, for the missed-battle overview */
   outWhy?: 'course' | 'wound';
   /** pence sent home so far (absent in saves before pay was sent home: read with sentHomeOf) */
@@ -172,9 +174,12 @@ const ch = (w: War, l: StreamName, p: number) => chance(w.rng, l, p);
 /** The same draw as ch, also saying when it came near: within `band` above the chance (playtest 2:
  *  "the risk warnings never feel real"). The odds are untouched; only what is shown changes. */
 const CLOSE_BAND = { step: 0.08, battle: 0.12 } as const;
-function riskRoll(w: War, l: StreamName, p: number, kind: 'step' | 'battle', key: string): boolean {
+let rolled: { p: number; safest: number } | null = null; // the odds of the hit riskRoll just made, for hit()
+function riskRoll(w: War, l: StreamName, p: number, kind: 'step' | 'battle', key: string, safest = p): boolean {
   const r = raw(w.rng, l);
-  if (r < p) return true;
+  // the odds of the hit, kept for the death page (2026-11-21, the author: every choice at a pillbox
+  // killed him on reload, because the save holds the dice; the page now says so)
+  if (r < p) { rolled = { p, safest: Math.min(p, safest) }; return true; }
   if (r < p + CLOSE_BAND[kind]) newsOf(w).close = { kind, key, n: Math.floor((r - p) * 1000) };
   return false;
 }
@@ -280,6 +285,9 @@ export function phaseNerve(w: War, b: Battle, i: number, choice: BattleChoice): 
 }
 
 function hit(w: War, cause: string): void {
+  // a hit from a choice keeps its odds; any other (shellfire, a close moment) clears them
+  if (rolled) w.lastHit = rolled; else delete w.lastHit;
+  rolled = null;
   const r = raw(w.rng, 'fire');
   const path = PATHS[w.path];
   const killed = path?.killed ?? WOUND.killed, captured = path?.captured ?? 0;
@@ -726,7 +734,7 @@ function stepSortie(w: War, choice: SortieChoice): void {
   const cm = SORTIE_CHOICE[eff];
   const cause = c.role ? ROLES[c.key]!.mission : c.key;
   const fullNerve = c.role ? ROLES[c.key]!.nerve : DUTIES[c.key]!.nerve;
-  if (riskRoll(w, 'duty', sortieHit(w, c.key, c.role, c.i, eff), 'step', c.key)) hit(w, cause);
+  if (riskRoll(w, 'duty', sortieHit(w, c.key, c.role, c.i, eff), 'step', c.key, sortieHit(w, c.key, c.role, c.i, 'careful'))) hit(w, cause);
   if (w.ending) { w.cursor = { at: 'tally' }; return; }
   spendNerve(w, fullNerve * so.shares[c.i]! * cm.nerve);
   c.pts += cm.gain;
@@ -910,7 +918,7 @@ export function decide(w: War, d: Decision): War {
       if (choice === 'ground' && !p.stalled && !freeze && w.standing < 25 && ch(w, 'battle', 0.03)) { end(w, 'courtMartial', `${b.name}: hung back once too often, charged with cowardice`); w.cursor = { at: 'tally' }; break; }
       const cm = CHOICES[choice];
       const path = PATHS[w.path]!;
-      if (riskRoll(w, 'battle', phaseHit(w, b, base, p.type, choice), 'battle', p.type)) { hit(w, b.name); const bn = newsOf(w).battle; if (bn && newsOf(w).wound) bn.hit = newsOf(w).wound!.kind; }
+      if (riskRoll(w, 'battle', phaseHit(w, b, base, p.type, choice), 'battle', p.type, Math.min(...(['push', 'help', 'ground'] as const).map((c) => phaseHit(w, b, base, p.type, c))))) { hit(w, b.name); const bn = newsOf(w).battle; if (bn && newsOf(w).wound) bn.hit = newsOf(w).wound!.kind; }
       if (w.ending) { w.cursor = { at: 'tally' }; break; }
       if (b.capture && w.path !== 'air' && ch(w, 'battle', b.capture * (choice === 'ground' ? 2 : 1))) { end(w, 'captured', `${b.name}: overrun`); w.cursor = { at: 'tally' }; break; }
       if (path.advanceCapture && (p.type === 'advance' || p.type === 'stalled') && ch(w, 'battle', path.advanceCapture)) { end(w, 'captured', `${b.name}: ditched beyond the line`); w.cursor = { at: 'tally' }; break; }
