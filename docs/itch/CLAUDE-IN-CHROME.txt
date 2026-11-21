@@ -1,0 +1,79 @@
+Set up a new itch.io project page for my game "In the Trenches" as a DRAFT. I am signed in to
+itch.io in this browser. Work only on itch.io.
+
+Hard rules
+- Never set the page Public, and never press any button that publishes. Visibility stays "Draft".
+- Never pay for anything, change account settings, or touch any other project.
+- When a file must be attached (the game zip, the cover, the screenshots), stop and ask me to pick
+  the file in the file chooser, naming the file and its folder exactly as below. Then carry on.
+- If a field below is not on the form, or the form has a field not listed, tell me rather than guess.
+- At the end, press "Save" (it saves the draft) and tell me the page's edit URL and anything you
+  could not do.
+
+Where: https://itch.io/game/new
+
+Fields, in the form's order
+- Title: In the Trenches
+- Project URL: in-the-trenches
+- Short description or tagline: One soldier and the eight men from home, 1915 to the Armistice. Choose how far forward you go, not the war.
+- Classification: Games
+- Kind of project: HTML
+- Release status: In development
+- Pricing: No payments
+
+Uploads
+- Upload files: ask me to attach 1-play-on-the-page/in-the-trenches-web.zip (from the kit folder).
+  When it has uploaded, tick "This file will be played in the browser".
+
+Embed options (they appear once the zip is marked to play in the browser)
+- Viewport dimensions: 390 x 844
+- Mobile friendly: ticked. Orientation: Portrait
+- Automatically start on page load: not ticked
+- Fullscreen button: ticked
+- Enable scrollbars: ticked (the game scrolls inside its frame)
+
+Details
+- Description: switch the editor to HTML (the "<>" or "Source" button) and paste exactly the HTML
+  between the two lines below. Then switch back and check it shows headings and bullet lists.
+------- description start -------
+<h2>In the Trenches</h2>
+<p><strong>One soldier from home, 1915 to the Armistice.</strong></p>
+<p>You volunteer in 1914 with eight other men from your street, your pit village, your farm parish or your corner of London, and go to France in the spring of 1915. The war is three and a half years of tours in the line, rest, leave and the great battles. You cannot change the war. You choose how far forward you go, who you go with, and what you are when it ends.</p>
+
+<h3>The game</h3>
+<ul>
+  <li>Every tour asks something of you: a duty, a role's mission, a raid you may or may not put your name down for. Every choice shows its risk before you take it.</li>
+  <li>Nine battles, from Loos in September 1915 to the Hundred Days in 1918, each fought in stages: push on, help the wounded, go to ground, or, as an NCO, lead your section.</li>
+  <li>Learn a trade (sniper, Lewis gunner, bomber, signaller, stretcher-bearer), transfer to the tunnellers, the tanks or the Flying Corps, rise from private to a commission, or keep your head down.</li>
+  <li>Your section from home lives and dies around you, and the story remembers them: letters, leave, a sweetheart, the girl at the estaminet, the men who did not come back.</li>
+  <li>Seven ways for it to end: killed, wounded out, nerve gone, court-martialled, taken prisoner, a posting home, or alive at eleven o'clock on 11 November 1918. Played well, about one war in ten reaches the Armistice.</li>
+</ul>
+
+<h3>About it</h3>
+<ul>
+  <li>Four home towns, each with its own story, about 189,000 words of text in all, and a map of the Western Front that moves as the war does.</li>
+  <li>The soldiers' words of the time are kept, and every hard one can be tapped for a plain meaning.</li>
+  <li>Plays in the browser, on a phone or a computer. Installs from <a href="https://heirsofruin.github.io/WW1/">the web version</a> and plays offline.</li>
+  <li>Saves in your browser. The menu's save code moves a game between devices.</li>
+  <li>Free. No account, no ads, no analytics. The page fetches nothing from anywhere else.</li>
+  <li>Fiction: a made-up battalion and made-up towns, in the real battles.</li>
+</ul>
+
+<p><em>Made with AI assistance. I designed the game and its systems and directed, edited and play-tested it; the code, the text and the art were generated with an AI model to that design.</em></p>
+------- description end -------
+- Genre: Interactive Fiction
+- Tags (type each and pick it from the list; if one is not offered, skip it and tell me):
+  historical, war, world-war-i, interactive-fiction, text-based, narrative, choices-matter, singleplayer, pixel-art, mobile-friendly
+- AI generation disclosure: Yes, this project contains the output of generative AI. Tick: Graphics,
+  Text and dialogue, Code. Do not tick Sound (the game has none).
+- App store links: none
+- Custom noun: leave empty
+- Community: Comments
+- Visibility & access: Draft
+
+Images (right-hand side of the form)
+- Cover image: ask me to attach 4-page/cover-630x500.png
+- Screenshots: ask me to attach, in this order: 4-page/shot1-loos.png, 4-page/shot2-the-sniper.png, 4-page/shot3-the-year-review.png, 4-page/shot4-the-map.png, 4-page/shot5-the-soldier.png
+
+Then: Save. Open the draft's page (View page) and tell me whether the game loads in its frame, and
+whether the frame looks about 390 wide by 844 tall. Do not press Publish.
