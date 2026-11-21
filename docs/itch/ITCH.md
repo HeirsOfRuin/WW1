@@ -9,6 +9,7 @@ Every count in the copy is read out of the build, not from memory.
 | File | What it is | Built by |
 |---|---|---|
 | `release/in-the-trenches-web.zip` | The game, played on the page (index.html at the zip root, no service worker) | `node tools/build-itch.mjs` |
+| `release/in-the-trenches.html` | The desktop download: the game in one file | `node tools/single-html.mjs`, then `build-itch.mjs --single=out/in-the-trenches.html` |
 | `release/in-the-trenches-itch-kit.zip` | All of the above, the page text and images, START-HERE.txt, and CLAUDE-IN-CHROME.txt (one prompt that sets the page up as a draft in Claude in Chrome) | `node tools/make-itch-kit.mjs`, then `node tools/itch-chrome.mjs` |
 
 ## Upload settings
@@ -17,6 +18,7 @@ Every count in the copy is read out of the build, not from memory.
 |---|---|
 | Kind of project | HTML |
 | Upload 1 (played on the page) | `in-the-trenches-web.zip`, tick "This file will be played in the browser" |
+| Upload 2 (desktop download) | `in-the-trenches.html` (2.2 MB, the whole game in one file: `node tools/single-html.mjs`), not played in the browser; platforms Windows, macOS, Linux. Opens in any browser and plays offline; Safari will not save from a file |
 | Embed | **390 x 844** (measured with `node tools/embed-measure.mjs`; table below) |
 | Mobile friendly | On, orientation portrait |
 | Fullscreen button | On |
@@ -90,7 +92,8 @@ a devlog for anything players would notice (`devlog.md`).
 ```
 npm run check && npm run build
 npx tsx tools/press-seed.mts && node tools/press.mjs
-node tools/build-itch.mjs --site=dist --slug=in-the-trenches --name="In the Trenches"
+node tools/single-html.mjs
+node tools/build-itch.mjs --site=dist --slug=in-the-trenches --name="In the Trenches" --single=out/in-the-trenches.html
 node tools/pre-public.mjs --zip=release/in-the-trenches-web.zip --site=dist
 node tools/make-itch-kit.mjs --slug=in-the-trenches --name="In the Trenches"
 node tools/itch-chrome.mjs --slug=in-the-trenches --name="In the Trenches"

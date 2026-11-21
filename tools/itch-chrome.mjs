@@ -18,6 +18,7 @@ const md = await readFile(join(itch, 'ITCH.md'), 'utf8');
 const field = (f) => new RegExp(`^\\| ${f} \\| (.*) \\|$`, 'm').exec(md)?.[1]?.replace(/\*\*/g, '').trim() ?? '';
 const short = (await readFile(join(itch, 'short-description.txt'), 'utf8')).trim();
 const desc = (await readFile(join(itch, 'description.html'), 'utf8')).replace(/<!--[\s\S]*?-->\n?/g, '').trim();
+const single = (await readdir(KIT)).includes('2-download');
 const shots = (await readdir(join(KIT, '4-page'))).filter((f) => /^shot\d/.test(f)).sort();
 const embed = /(\d+) ?x ?(\d+)/.exec(field('Embed'));
 const tags = field('Tags').split(',').map((t) => t.trim()).filter(Boolean);
@@ -52,7 +53,10 @@ Fields, in the form's order
 Uploads
 - Upload files: ask me to attach 1-play-on-the-page/${slug}-web.zip (from the kit folder).
   When it has uploaded, tick "This file will be played in the browser".
-
+${single ? `- Then a second upload: ask me to attach 2-download/${slug}.html. Do NOT tick "played in the
+  browser" for this one. Tick the platforms Windows, macOS and Linux, and set its display name to
+  "${name} (download: opens in any browser, plays offline)".
+` : ''}
 Embed options (they appear once the zip is marked to play in the browser)
 - Viewport dimensions: ${embed[1]} x ${embed[2]}
 - Mobile friendly: ticked. Orientation: Portrait
