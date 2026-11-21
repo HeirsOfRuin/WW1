@@ -263,6 +263,13 @@ export function artOf(s: CoreState, sceneId = ''): string | undefined {
   const w = war(s); const p = w.pending;
   if (p?.kind === 'battle' && p.battle === 'Loos' && p.phase === 0 && /^b_loos/.test(sceneId)) return 'loos_advance';
   if (p?.kind === 'leave' && st(s).start === 'mill' && /^(l_mill|w_leave)/.test(sceneId)) return 'leave_mill';
+  // the author's pictures of 2026-11-21: the first morning of the Somme (every town's first phase),
+  // Passchendaele's first phase (the infantry's, not the tank's or the air's), and the line on the
+  // tour page from 1916 (steel helmets: at Loos they wore soft caps)
+  if (p?.kind === 'battle' && p.battle === 'Somme, 1 July' && p.phase === 0 && /^b_somme(_pit|_farm|_city)?_1$/.test(sceneId)) return 'somme_advance';
+  if (p?.kind === 'battle' && p.battle === 'Passchendaele' && p.phase === 0 && sceneId === 'b_pass_1') return 'passchendaele';
+  // greatcoats and a frosty dawn: October to April only (a July page reads "the trench bakes")
+  if (sceneId === 'w_tour' && w.stage >= 2 && w.corps !== 'tank' && w.corps !== 'air' && (warMonth(w)[1] >= 10 || warMonth(w)[1] <= 4)) return 'tour_line';
   return undefined;
 }
 
