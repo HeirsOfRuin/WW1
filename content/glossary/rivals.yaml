@@ -5,24 +5,24 @@
 - { term: Hindustani, means: "The everyday language of northern India, which the old regular army borrowed its slang from." }
 - { term: midden, means: "The dung heap in a French farmyard, usually right outside the door." }
 - { term: flannelette, means: "The small square of cloth pulled through a rifle barrel on a cord to clean it." }
-- { term: orderly officer, means: "The officer on duty for the day, who went round the posts, the rations and the guard." }
+- { term: orderly officer, means: "The officer on duty for the day, who went round the posts, the rations and the guard.", quiet: true }
 - { term: rum jar, means: "The stone jar the rum ration came up in, marked SRD and kept by the sergeant." }
-- { term: reduced to the ranks, means: "Stripped of his stripes by a court and made a private again." }
+- { term: reduced to the ranks, means: "Stripped of his stripes by a court and made a private again.", quiet: true }
 - { term: Field Punishment Number One, means: "An army punishment: hard labour, and tied to a post or wheel for two hours a day." }
 - { term: Crown and Anchor, means: "A dice game played on a marked cloth for money; forbidden, and played everywhere." }
 - { term: brag, means: "A three-card gambling game, an old cousin of poker." }
 - { term: number nine, means: "A laxative pill, the medical officer's cure for nearly everything." }
 - { term: eighteen-pounders, means: "The British field guns, firing an eighteen-pound shell; the ordinary guns behind the line." }
 - { term: gun-cotton, means: "A high explosive in slabs, used by the engineers to blow up guns, wire and bridges." }
-- { term: sap head, means: "The far end of a short trench dug out towards the enemy from the front line." }
+- { term: sap head, means: "The far end of a short trench dug out towards the enemy from the front line.", quiet: true }
 - { term: Minenwerfer, means: "German for 'mine-thrower': their heavy trench mortar. The men called its bombs minnies." }
 - { term: the Act, means: "The Military Service Act of 1916, which brought in conscription for single men, then married ones." }
 - { term: "wears the badge", also: ["has the badge"], means: "The 'On War Service' badge, worn by men in reserved jobs to show they were not shirking." }
-- { term: special constable, also: [special constables], means: "An unpaid part-time policeman, sworn in for the war to replace men who had gone." }
+- { term: special constable, also: [special constables], means: "An unpaid part-time policeman, sworn in for the war to replace men who had gone.", quiet: true }
 - { term: combed out, also: [combed him out], means: "Taken for the army from a job that had kept a man exempt, as the need for men grew." }
-- { term: labour company, means: "A unit of older or less fit men who unloaded, dug and mended roads behind the front." }
+- { term: labour company, means: "A unit of older or less fit men who unloaded, dug and mended roads behind the front.", quiet: true }
 - { term: B2, means: "A medical grade: not fit to fight, but fit for labour work abroad." }
-- { term: cornet, means: "A brass instrument like a short trumpet, the leading voice of a colliery band." }
+- { term: cornet, means: "A brass instrument like a short trumpet, the leading voice of a colliery band.", quiet: true }
 - { term: tackler's learner, means: "A young man learning to be a tackler, the overlooker who set and mended the looms." }
 - { term: Rawalpindi, means: "A large British army station in northern India, now in Pakistan." }
 - { term: second eleven, means: "A cricket club's second team; eleven men make a side." }

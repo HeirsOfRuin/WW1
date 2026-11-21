@@ -882,6 +882,9 @@ export function decide(w: War, d: Decision): War {
         w.standing = clamp(w.standing - 15, 0, 100);
         say(w, 'froze; the sergeant covered for him');
       }
+      // a man who goes to ground every time is noticed: with his standing gone (under 25), each time
+      // more risks a charge (2026-11-21: always hanging back had drawn level with playing well)
+      if (choice === 'ground' && !p.stalled && !freeze && w.standing < 25 && ch(w, 'battle', 0.03)) { end(w, 'courtMartial', `${b.name}: hung back once too often, charged with cowardice`); w.cursor = { at: 'tally' }; break; }
       const cm = CHOICES[choice];
       const path = PATHS[w.path]!;
       if (riskRoll(w, 'battle', phaseHit(w, b, base, p.type, choice), 'battle', p.type)) { hit(w, b.name); const bn = newsOf(w).battle; if (bn && newsOf(w).wound) bn.hit = newsOf(w).wound!.kind; }

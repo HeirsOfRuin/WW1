@@ -54,7 +54,10 @@ export const StartSchema = z.object({
 export type Start = z.infer<typeof StartSchema>;
 
 /** A period word and its plain meaning (content/glossary/*.yaml), tappable in the text. */
-export const GlossSchema = z.object({ term: z.string().min(2), also: z.array(z.string().min(2)).optional(), means: z.string().min(8).max(200) }).strict();
+export const GlossSchema = z.object({ term: z.string().min(2), also: z.array(z.string().min(2)).optional(), means: z.string().min(8).max(200),
+  /** listed in the Journal but not underlined in the story: a word most readers know or the sentence carries
+   *  (the author, 2026-11-21: "There are too many underlined words ... firestep, no man's land, that sort of thing") */
+  quiet: z.boolean().optional() }).strict();
 export type Gloss = z.infer<typeof GlossSchema>;
 export interface ContentBundle extends CoreContent {
   glossary: Gloss[];

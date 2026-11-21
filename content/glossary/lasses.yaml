@@ -6,12 +6,12 @@
 - { term: "tray bon", means: "Soldiers' French for 'très bon': very good." }
 - { term: "merci boko", means: "Soldiers' French for 'merci beaucoup': thank you very much." }
 - { term: sous, means: "Small French coins. A sou was five centimes, about a halfpenny; twenty made a franc." }
-- { term: Jerry, means: "Soldiers' name for the Germans, or one German, in the last two years of the war." }
+- { term: Jerry, means: "Soldiers' name for the Germans, or one German, in the last two years of the war.", quiet: true }
 - { term: dixie, also: [dixies], means: "A large iron cooking pot with a lid; the company's stew and tea came up the line in them." }
-- { term: billet, also: [billets, billeted], means: "A house, barn or school where soldiers were lodged behind the line; to be lodged in one." }
+- { term: billet, also: [billets, billeted], means: "A house, barn or school where soldiers were lodged behind the line; to be lodged in one.", quiet: true }
 - { term: calvary, means: "A roadside cross with the figure of Christ on it, common at French crossroads." }
-- { term: "clearing station", also: ["casualty clearing station"], means: "A casualty clearing station: a hospital of tents and huts at a railhead, the first with nursing sisters." }
-- { term: "sick parade", means: "The morning line of men reporting sick to the medical officer." }
+- { term: "clearing station", also: ["casualty clearing station"], means: "A casualty clearing station: a hospital of tents and huts at a railhead, the first with nursing sisters.", quiet: true }
+- { term: "sick parade", means: "The morning line of men reporting sick to the medical officer.", quiet: true }
 - { term: chit, means: "A note or slip of paper giving an order or permission." }
 - { term: limbers, means: "Two-wheeled horse-drawn carts that carried a battalion's ammunition and stores." }
 - { term: salient, means: "A bulge in the line with the enemy on three sides; 'the salient' meant the one round Ypres." }

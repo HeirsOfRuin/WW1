@@ -110,7 +110,7 @@ export const STAGES: Stage[] = [
     battles: { 6: { name: 'Loos', phases: [[0.16, 10, 'advance'], [0.13, 9, 'trench'], [0.10, 8, 'hold']] } } },
   { n: 2, year: 1916, rotations: 10, fire: 0.046, sectionLoss: 0.0075, nerve: 8,
     battles: {
-      4: { name: 'Somme, 1 July', phases: [[0.40, 13, 'advance'], [0.26, 10, 'trench'], [0.22, 9, 'hold'], [0.14, 7, 'hold']] },
+      4: { name: 'Somme, 1 July', phases: [[0.37, 13, 'advance'], [0.26, 10, 'trench'], [0.22, 9, 'hold'], [0.14, 7, 'hold']] },
       8: { name: 'Somme, autumn', phases: [[0.22, 10, 'advance'], [0.19, 9, 'trench'], [0.13, 8, 'hold']] },
     } },
   { n: 3, year: 1917, rotations: 10, fire: 0.046, sectionLoss: 0.0075, nerve: 7,
@@ -118,7 +118,7 @@ export const STAGES: Stage[] = [
       3: { name: 'Arras', phases: [[0.22, 10, 'advance'], [0.19, 9, 'trench'], [0.14, 8, 'hold']] },
       7: { name: 'Passchendaele', phases: [[0.24, 11, 'advance'], [0.22, 11, 'trench'], [0.19, 10, 'hold'], [0.14, 9, 'hold']] },
     } },
-  { n: 4, year: 1918, rotations: 10, fire: 0.042, sectionLoss: 0.0075, nerve: 8,
+  { n: 4, year: 1918, rotations: 10, fire: 0.042, sectionLoss: 0.0075, nerve: 7,
     battles: {
       2: { name: 'Spring Offensive', defence: true, capture: 0.03, phases: [[0.23, 10, 'defence'], [0.20, 9, 'defence'], [0.17, 8, 'defence'], [0.14, 7, 'defence']] },
       6: { name: 'Hundred Days, August', phases: [[0.19, 9, 'advance'], [0.14, 8, 'trench'], [0.12, 7, 'hold']] },
@@ -142,7 +142,7 @@ export const DUTIES: Record<string, Duty> = {
 // What a hit does. Shares of hits.
 // killed 0.32 to 0.30 on 2026-11-17 (the gate's best play had slipped to the 5% floor after the close
 // moments and the servant road; in the BEF about one casualty in four was killed, so still on the high side)
-export const WOUND = { killed: 0.30, severe: 0.23, light: 0.47, downgrade: 0.35 };
+export const WOUND = { killed: 0.30, severe: 0.23, light: 0.47, downgrade: 0.33 }; // downgrade 0.35 to 0.33 on 2026-11-21
 
 // Path modifiers in battle: hit chance multiplier, award multiplier, section-loss multiplier.
 export const PATHS: Record<string, PathMods> = {
@@ -153,9 +153,9 @@ export const PATHS: Record<string, PathMods> = {
   // frameworks' proposed numbers, for the gate to judge (FRAME-TANK.md, FRAME-AIR.md).
   // tank: the tank draws every gun on the field; camps behind the line between battles; a hit tank
   // burns; a ditched tank beyond the line is taken
-  tank: { hit: 1.0, award: 1.6, section: 1.0, fire: 0.25, lineNerve: 0.5, battleNerve: 1.0, advanceCapture: 0.01 },
+  tank: { hit: 1.2, award: 1.6, section: 1.0, fire: 0.25, lineNerve: 0.7, battleNerve: 1.0, advanceCapture: 0.01 },
   // air: the aerodrome is miles back; no parachute; down on the wrong side of the line
-  air: { hit: 0.7, award: 2.0, section: 1.0, fire: 0.1, lineNerve: 0.5, killed: 0.45, captured: 0.15 },
+  air: { hit: 0.85, award: 2.0, section: 1.0, fire: 0.1, lineNerve: 0.5, killed: 0.45, captured: 0.15 },
   // out in the open for the wounded, unarmed; the men around him are brought in, and bearers were
   // decorated often (tuned, not sourced)
   bearer: { hit: 1.25, award: 1.4, section: 0.85 },
@@ -314,4 +314,4 @@ export const CLOSE = {
 // Germans aim); section: away from the section, his friends are lost this much more often;
 // officerKilled: the chance a later officer is killed in a battle (the first is killed at Loos, as
 // the farm's story has it). Tuned, not sourced.
-export const SERVANT = { dutyChance: 0.5, rest: 1.0, payPence: 3, hit: 1.2, section: 1.1, officerKilled: 0.25 };
+export const SERVANT = { dutyChance: 0.5, rest: 1.0, payPence: 3, hit: 1.1, section: 1.1, officerKilled: 0.25 };

@@ -235,9 +235,21 @@ the Armistice; 1917's largest single loss was breakdowns (8.3%). 1917-18 were ea
 shellfire, battle nerve and hit, capture in March) and 1915 left alone; the sick parade now goes by
 standing, because always hanging back had become the best road. After (2,000 per policy, +-1 SE):
 adaptive 9.5% +-0.7, half 8.7%, mates 8.6%, careful 8.3%, reckless 3.3%, survives 1915 73.0%.
-**Open:** reckless play is no longer near 0% (3.3%); the mill leads the towns at 13.8% +-1.5 (the
-tanks and the servant's road both favour it). The transfer and servant trade tables above were
-measured before this change and have not been re-run.
+**2026-11-21, the trades re-measured on the new balance** (adaptive, paired seeds): the easing had
+made the tanks best on everything (Armistice 28.7% to 23.1%, grade +8), the air nearly so, and the
+servant's post slightly worse than refusing. Retuned: tank battle hit 1.0 to 1.2 and line nerve 0.5
+to 0.7; air battle hit 0.7 to 0.85; servant battle hit 1.2 to 1.1. After, takes / refuses:
+tank Armistice 22.6 / 22.8, home alive 57.1 / 54.2, captured 7.2 / 4.2, grade 72.0 / 73.8;
+air 23.0 / 27.1, home alive 64.1 / 60.3, captured 14.2 / 4.4, grade 81.7 / 82.2;
+servant 9.2 / 8.8, killed 59.4 / 56.8, broken 12.5 / 16.4, grade 37.7 / 37.5. All three trades again.
+Then no policy was clearly best (adaptive 8.2, careful 8.7, mates 8.7), so: a man who goes to ground
+with his standing under 25 risks a charge (3% a time); a severe wound ends the war 33% of the time
+(was 35%); 1918 line nerve 8 to 7; the first of July's advance 0.40 to 0.37.
+Gate (2,000 per policy, +-1 SE): mates 9.4 +-0.7, adaptive 8.8 +-0.6, half 8.7 +-0.6, careful
+7.5 +-0.6, reckless 2.9 +-0.4, survives 1915 74.0 +-1.0. By town (adaptive): mill 12.4 +-1.5, farm
+8.2, pit 7.6, city 7.2.
+**Open:** reckless play is at 2.9%, not near 0%; the mill still leads the towns (it was 13.8%); the
+best policy is "mates" by a hair over "adaptive", inside the noise.
 
 ### Skills: nothing is decoration
 

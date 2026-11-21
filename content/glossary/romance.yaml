@@ -40,16 +40,16 @@
 - { term: "parley-voo", means: "Soldiers' French, from parlez-vous, do you speak: the French language, or any talk with a French girl." }
 - { term: compree, means: "Soldiers' French for compris: understood, or as a question, do you understand?" }
 - { term: napoo, means: "Soldiers' French, from il n'y en a plus: none left, finished, gone, or dead." }
-- { term: padre, means: "An army chaplain." }
+- { term: padre, means: "An army chaplain.", quiet: true }
 
 # ---- the mill (Nellie)
 - { term: mee-maw, means: "To talk with big silent lip movements, as weavers did across the din of the looms." }
-- { term: shuttle, also: [shuttles], means: "The pointed wooden carrier that shot the thread across a loom; one flying out could maim a weaver." }
+- { term: shuttle, also: [shuttles], means: "The pointed wooden carrier that shot the thread across a loom; one flying out could maim a weaver.", quiet: true }
 - { term: "warp size", means: "The starch paste put on the lengthwise threads to strengthen them; a weaving shed smelt of it." }
 - { term: "short time", means: "Fewer hours or days of work a week, on less pay, when a mill was short of cotton or orders." }
 - { term: Whitsun, means: "The Whit Sunday holiday, seven weeks after Easter; the great yearly holiday of the mill towns." }
 - { term: overlooker, means: "The man in charge of a set of looms and their weavers; in Lancashire also called a tackler." }
-- { term: piecework, means: "Work paid by the piece made, not by the hour, so quick hands earned more." }
+- { term: piecework, means: "Work paid by the piece made, not by the hour, so quick hands earned more.", quiet: true }
 - { term: Hippodrome, means: "A variety theatre; most big towns had one, with comic turns, singers and acrobats twice nightly." }
 - { term: Co-op, means: "The Co-operative Society's shop, owned by its members, who shared the profit as a dividend." }
 
@@ -78,10 +78,10 @@
 
 # ---- the farm (Rose)
 - { term: "the carrier", means: "A man with a horse and cart who took parcels and passengers between the villages and the market town." }
-- { term: "grubbed out", means: "Dug up by the roots." }
+- { term: "grubbed out", means: "Dug up by the roots.", quiet: true }
 
 # ---- the city (Ivy)
 - { term: cachous, means: "Small scented sweets, sucked to sweeten the breath." }
 - { term: "caught a crab", also: ["catch a crab"], means: "Missed the stroke with an oar in rowing, and was knocked backwards off the seat." }
 - { term: "Nunc Dimittis", means: "The evening hymn from the prayer book: Lord, now lettest thou thy servant depart in peace." }
-- { term: cruet, means: "A small stand of salt, pepper and vinegar bottles for the table; a usual wedding present." }
+- { term: cruet, means: "A small stand of salt, pepper and vinegar bottles for the table; a usual wedding present.", quiet: true }

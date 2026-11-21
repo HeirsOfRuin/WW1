@@ -803,7 +803,7 @@
         You kiss her back, and the platoon roars. Then she lets go of you and kisses the man
         behind, and the man behind him, the whole file, and her mother's working down the other
         side of the street with a flag made out of three petticoats that's been under the
-        floorboards since 1914.[if flag.la_bound_home] It was nothing. She kissed the whole file. All the same you leave it out of your next letter to [if flag.c16_florence]Florence[else]{sweetheart}[/if], and the leaving out stays with you for days.[elif flag.la_bound_fr] It was nothing. She kissed the whole file. All the same you're glad Ternecourt is a long way off, and not glad to be glad.[/if]
+        floorboards since 1914. "Jeanne!" her mother calls, laughing. "Jeanne, assez!" Enough.[if flag.la_bound_home] It was nothing. She kissed the whole file. All the same you leave it out of your next letter to [if flag.c16_florence]Florence[else]{sweetheart}[/if], and the leaving out stays with you for days.[elif flag.la_bound_fr] It was nothing. She kissed the whole file. All the same you're glad Ternecourt is a long way off, and not glad to be glad.[/if]
       next: "@return"
     - id: give
       text: Give her your chocolate, and your French. C'est fini, mamzelle.
@@ -811,7 +811,7 @@
       text_after: |
         She holds the chocolate in both hands and smells it before she'll believe in it. Then she
         breaks it in three, for her mother and a small brother and herself, and puts her own piece
-        in her pocket for later.
+        in her pocket for later. "Jeanne," she says, with her hand flat on her chest, when you point and ask.
 
         Her name's Jeanne. She was thirteen when they came. There were Germans billeted in the
         house the whole four years, and her elder brother was taken off to work in Germany two

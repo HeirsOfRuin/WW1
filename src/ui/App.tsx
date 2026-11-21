@@ -25,16 +25,19 @@ let GLOSSARY: ContentBundle['glossary'] = [];
 // A choice is a button, so its words cannot be tapped: the soldier's words in the choices are listed
 // above them instead (those the passage itself has not already marked).
 const choiceWords = (texts: string[], body: string) => {
-  const seen = new Set<string>(); glossOf(body, GLOSSARY, seen);
+  const seen = SEEN; void body;
   const found = texts.flatMap((t) => glossOf(t, GLOSSARY, seen).filter((x): x is { word: string; means: string } => typeof x !== 'string'));
   return found.length > 0 && <p class="hint choicewords">In the choices: {found.map((x, i) => <>{i > 0 && ', '}<Gloss word={x.word} means={x.means} /></>)}</p>;
 };
-const paras = (t: string) => { const seen = new Set<string>(); return t.trim().split(/\n\s*\n/).map((p) => <p>{glossOf(p, GLOSSARY, seen).map((x) => (typeof x === 'string' ? x : <Gloss key={x.word} word={x.word} means={x.means} />))}</p>); };
+// one set for the whole screen (result, passage and choices), so a word is underlined once on it
+let SEEN = new Set<string>();
+const paras = (t: string) => { const seen = SEEN; return t.trim().split(/\n\s*\n/).map((p) => <p>{glossOf(p, GLOSSARY, seen).map((x) => (typeof x === 'string' ? x : <Gloss key={x.word} word={x.word} means={x.means} />))}</p>); };
 
 export function App({ content }: { content: ContentBundle }) {
   // the soldier's words can be switched off in the Menu (kept in this browser)
   const [words, setWords] = useState(() => lsGet('trenches.words') !== 'off');
   GLOSSARY = words ? content.glossary : [];
+  SEEN = new Set<string>();
   const [state, setState] = useState<GameState | null>(null);
   const [tab, setTab] = useState<'story' | 'soldier' | 'map' | 'journal' | 'menu'>('story');
   const [page, setPage] = useState(0);

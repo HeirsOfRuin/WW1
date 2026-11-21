@@ -5,35 +5,35 @@
 # store, rows of plates, the prisoners' cage) and would be marked wrongly there.
 
 # ---- the pit ----
-- { term: coal face, also: ["short at the face", "come off the face", "It's the face", "stayed at the face", "quiet at the face"], means: "The wall of coal at the far end of the workings, where the men cut it." }
+- { term: coal face, also: ["short at the face", "come off the face", "It's the face", "stayed at the face", "quiet at the face"], means: "The wall of coal at the far end of the workings, where the men cut it.", quiet: true }
 - { term: bait, means: "Pit word for the food a man takes to work, eaten where he stands." }
-- { term: fathoms, means: "A fathom is six feet; pit depths were measured in them. Two hundred fathoms is 1,200 feet." }
-- { term: pit cage, means: "The lift in a pit shaft that carries men and coal tubs up and down." }
-- { term: winding towers, also: [winding gear], means: "The tall frames over a pit shaft, with wheels that wind the cage up and down." }
+- { term: fathoms, means: "A fathom is six feet; pit depths were measured in them. Two hundred fathoms is 1,200 feet.", quiet: true }
+- { term: pit cage, means: "The lift in a pit shaft that carries men and coal tubs up and down.", quiet: true }
+- { term: winding towers, also: [winding gear], means: "The tall frames over a pit shaft, with wheels that wind the cage up and down.", quiet: true }
 - { term: shot-firer, means: "The pitman who sets and fires the explosive charges that bring down coal or stone." }
 - { term: a fall, means: "In a pit, the roof coming down, often burying the men under it." }
-- { term: pit heap, also: [pit heaps], means: "The hill of waste stone tipped beside a pit; they often smouldered inside for years." }
+- { term: pit heap, also: [pit heaps], means: "The hill of waste stone tipped beside a pit; they often smouldered inside for years.", quiet: true }
 - { term: lamp cabin, means: "The hut at the pit top where each man collected his safety lamp before going down." }
 - { term: haulage, means: "The engine and ropes that drag the coal tubs along the roadways of a pit." }
 - { term: old working, means: "A part of a pit no longer worked, where bad air and gas collect." }
-- { term: workings, means: "The tunnels and cut-out places of a mine." }
+- { term: workings, means: "The tunnels and cut-out places of a mine.", quiet: true }
 - { term: pit buzzer, means: "The pit's steam hooter, sounded for the change of shift, and for an accident." }
-- { term: colliers, means: "Coal miners; a pit is a colliery." }
+- { term: colliers, means: "Coal miners; a pit is a colliery.", quiet: true }
 - { term: at bank, means: "At the surface of a pit, as against underground." }
 - { term: the screens, means: "Moving belts at the pit top where stone was picked out of the coal by hand." }
 - { term: the roof was working, also: ["the roof's talking", "the roof talking"], means: "Pit talk: the rock overhead creaking and shifting, as it does before it comes down." }
 - { term: hewer, means: "The pitman who cuts the coal at the face: the hardest and best-paid work underground." }
-- { term: timbering, also: [timbered], means: "Setting wooden props and frames to hold up the roof and sides of a tunnel or dugout." }
-- { term: props, also: ["a prop"], means: "Upright timbers set to hold up the roof of a mine or dugout." }
+- { term: timbering, also: [timbered], means: "Setting wooden props and frames to hold up the roof and sides of a tunnel or dugout.", quiet: true }
+- { term: props, also: ["a prop"], means: "Upright timbers set to hold up the roof of a mine or dugout.", quiet: true }
 - { term: coal-cutter, also: [the cutter], means: "A machine with a toothed wheel that cuts under the coal; it makes a great clatter." }
 - { term: drift mine, means: "A pit entered by a sloping tunnel from the hillside, with no shaft." }
-- { term: "your father's seam", also: [a hard seam, about seams], means: "A seam is a layer of coal in the rock, from a foot to six feet thick." }
+- { term: "your father's seam", also: [a hard seam, about seams], means: "A seam is a layer of coal in the rock, from a foot to six feet thick.", quiet: true }
 - { term: afterdamp, means: "The gas left in a pit after an explosion: mostly carbon monoxide, deadly, with no smell." }
 - { term: the owners, means: "The coal owners: the companies and families who owned the pits and set the men's pay." }
 - { term: lodge committee, also: ["the lodge's"], means: "The lodge was the pit's branch of the miners' union; its committee were the men elected to run it." }
 - { term: the banner, means: "The union lodge's great painted silk banner, carried at galas and at a member's funeral." }
-- { term: "Miners' Hall", means: "The union's hall in a pit village, for meetings, the reading room and the lodge's business." }
-- { term: pay notes, means: "The colliery office's slips showing what a pitman earned in the fortnight, and what was stopped." }
+- { term: "Miners' Hall", means: "The union's hall in a pit village, for meetings, the reading room and the lodge's business.", quiet: true }
+- { term: pay notes, means: "The colliery office's slips showing what a pitman earned in the fortnight, and what was stopped.", quiet: true }
 - { term: starred men, also: ["to be starred"], means: "Men in work marked as too needed at home for the army to take them." }
 
 # ---- the village and its speech ----
@@ -41,7 +41,7 @@
 - { term: da, means: "North-east word for father." }
 - { term: bairn, also: [bairns], means: "North-east and Scots word for a child." }
 - { term: gannin, means: "Tyneside speech for going." }
-- { term: Geordie, means: "A man from Tyneside; in the army, any north-east pitman." }
+- { term: Geordie, means: "A man from Tyneside; in the army, any north-east pitman.", quiet: true }
 - { term: "wading the burn", also: ["the burn below"], means: "The burn: north-country and Scots word for a stream." }
 - { term: end of the rows, also: [round the rows, in the rows, up the rows, bottom of the rows, into the rows, over the rows, top of the rows], means: "The rows: the terraces of pit cottages owned by the colliery, where the pitmen's families live." }
 - { term: at the Store, also: [in the Store, from the Store], means: "The Co-operative shop, owned by its members; a pit village bought nearly everything there." }
@@ -51,51 +51,51 @@
 - { term: fanciers, means: "Men who keep and race homing pigeons." }
 - { term: quoits, means: "A game of throwing iron rings at a pin set in clay, played for money in pit villages." }
 - { term: netties, means: "North-east word for the outdoor lavatories at the bottom of the yards." }
-- { term: wash-houses, means: "Small outbuildings in the yards, each with a boiler, where the family's washing was done." }
+- { term: wash-houses, means: "Small outbuildings in the yards, each with a boiler, where the family's washing was done.", quiet: true }
 - { term: drawn blinds, means: "A house drew its blinds when one of the family had died." }
 - { term: set-pot, means: "A boiler built into the brickwork beside the kitchen fire, for heating water." }
-- { term: mangle, means: "A machine with two rollers and a handle for wringing the water out of washing." }
+- { term: mangle, means: "A machine with two rollers and a handle for wringing the water out of washing.", quiet: true }
 - { term: the club, means: "The working men's club: the village's own bar, run by its members." }
-- { term: baccy, means: "Everyday word for tobacco." }
+- { term: baccy, means: "Everyday word for tobacco.", quiet: true }
 - { term: sea-coal, means: "Coal washed up on the beach, gathered free for the fire." }
 - { term: the Journal, means: "The Newcastle Daily Journal, a north-east newspaper that printed the casualty lists." }
 - { term: the Herald, means: "The Daily Herald, a labour newspaper that took the working man's side." }
-- { term: the Commons, means: "The House of Commons, in Parliament." }
+- { term: the Commons, means: "The House of Commons, in Parliament.", quiet: true }
 - { term: pease pudding, means: "Split peas boiled to a soft paste, eaten cold with ham in the north-east." }
-- { term: Whitley Bay, means: "A seaside town on the Northumberland coast, a short train ride from Newcastle." }
+- { term: Whitley Bay, means: "A seaside town on the Northumberland coast, a short train ride from Newcastle.", quiet: true }
 - { term: insurance man, means: "The collector who called at the door each week for the pennies of burial insurance." }
-- { term: smallholding, means: "A small plot of land, enough for hens, a pig and vegetables." }
+- { term: smallholding, means: "A small plot of land, enough for hens, a pig and vegetables.", quiet: true }
 - { term: charabanc, means: "An open motor coach with rows of seats, hired for day trips." }
-- { term: gramophone, means: "A wind-up machine with a horn, for playing records." }
-- { term: suet, means: "Hard white beef fat, used for puddings." }
-- { term: shillings, also: [shilling], means: "Twenty shillings made a pound. An infantry private was paid one shilling a day." }
+- { term: gramophone, means: "A wind-up machine with a horn, for playing records.", quiet: true }
+- { term: suet, means: "Hard white beef fat, used for puddings.", quiet: true }
+- { term: shillings, also: [shilling], means: "Twenty shillings made a pound. An infantry private was paid one shilling a day.", quiet: true }
 - { term: the new Act, means: "The Military Service Act of 1916, which made single men of 18 to 41 liable for the army." }
-- { term: navvies, means: "Labourers who dug canals, railways and tunnels with pick and shovel." }
-- { term: "on the Tube", also: ["about the Tube", "as the Tube", "have the Tube", "see the Tube"], means: "The Tube: London's deep underground railway, bored through clay." }
-- { term: the Rhondda, means: "A coal-mining valley in South Wales." }
+- { term: navvies, means: "Labourers who dug canals, railways and tunnels with pick and shovel.", quiet: true }
+- { term: "on the Tube", also: ["about the Tube", "as the Tube", "have the Tube", "see the Tube"], means: "The Tube: London's deep underground railway, bored through clay.", quiet: true }
+- { term: the Rhondda, means: "A coal-mining valley in South Wales.", quiet: true }
 - { term: "my 'andsome", means: "A Cornishman's friendly name for another man." }
 - { term: boyo, means: "A Welshman's friendly name for another man." }
 - { term: Cymru, means: "The Welsh name for Wales." }
 
 # ---- the army ----
-- { term: "the bay", means: "A short straight stretch of fire trench between two bends, held by a few men." }
-- { term: Royal Engineers, means: "The army's corps of builders, miners and signallers; its privates were called sappers." }
+- { term: "the bay", means: "A short straight stretch of fire trench between two bends, held by a few men.", quiet: true }
+- { term: Royal Engineers, means: "The army's corps of builders, miners and signallers; its privates were called sappers.", quiet: true }
 - { term: fumigator, means: "A steam or sulphur chamber for killing the lice in uniforms." }
-- { term: "assembly trench", means: "A trench where men are gathered just before they attack." }
-- { term: sergeant major, also: [company sergeant major], means: "The senior sergeant of a company; he kept its roll and its discipline." }
-- { term: leaving the section, also: [section from home, the section needs him, the section needed him], means: "A section was about ten men under a corporal, who lived and fought together." }
-- { term: a brigade, means: "Four battalions together, about four thousand men." }
-- { term: lance-corporal, means: "The lowest rank above private, with one stripe on the sleeve." }
-- { term: haversack, means: "A canvas bag slung from the shoulder, for rations and small kit." }
-- { term: groundsheets, means: "A soldier's waterproof sheet, to lie on or to wear as a cape." }
+- { term: "assembly trench", means: "A trench where men are gathered just before they attack.", quiet: true }
+- { term: sergeant major, also: [company sergeant major], means: "The senior sergeant of a company; he kept its roll and its discipline.", quiet: true }
+- { term: leaving the section, also: [section from home, the section needs him, the section needed him], means: "A section was about ten men under a corporal, who lived and fought together.", quiet: true }
+- { term: a brigade, means: "Four battalions together, about four thousand men.", quiet: true }
+- { term: lance-corporal, means: "The lowest rank above private, with one stripe on the sleeve.", quiet: true }
+- { term: haversack, means: "A canvas bag slung from the shoulder, for rations and small kit.", quiet: true }
+- { term: groundsheets, means: "A soldier's waterproof sheet, to lie on or to wear as a cape.", quiet: true }
 - { term: the hood, means: "The early gas mask: a chemical-soaked flannel bag over the whole head, with a small window." }
 - { term: the flimsy, means: "A message written on a slip of thin paper." }
 - { term: big push, means: "Soldiers' name for a great attack; in 1916, the one coming on the Somme." }
 - { term: over the bags, also: [over the bag], means: "Over the sandbags of the parapet and out to attack: the same as over the top." }
-- { term: farrier, means: "The army's horse-shoer, who also put down horses too badly hurt to save." }
+- { term: farrier, means: "The army's horse-shoer, who also put down horses too badly hurt to save.", quiet: true }
 - { term: off fore, means: "A horse's or mule's right front leg." }
-- { term: poultice, means: "A hot, wet dressing bound on to draw out a swelling or infection." }
-- { term: guardroom, means: "The room at a barracks where men under arrest were held." }
+- { term: poultice, means: "A hot, wet dressing bound on to draw out a swelling or infection.", quiet: true }
+- { term: guardroom, means: "The room at a barracks where men under arrest were held.", quiet: true }
 - { term: camouflet, means: "A small charge fired underground to wreck an enemy tunnel without breaking the surface." }
 - { term: the leads, means: "The electric wires run from a charge back to the man who fires it." }
 - { term: geophone, means: "A listening instrument: two discs pressed to the ground, with earpieces, to hear digging." }

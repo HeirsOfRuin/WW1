@@ -34,7 +34,7 @@ export function loadContent(dir = CONTENT_DIR): ContentBundle {
       seenTerm.add(e.term.toLowerCase());
       const also = (e.also ?? []).filter((a) => !seenTerm.has(a.toLowerCase()));
       also.forEach((a) => seenTerm.add(a.toLowerCase()));
-      glossary.push(also.length ? { ...e, also } : { term: e.term, means: e.means });
+      glossary.push({ term: e.term, means: e.means, ...(also.length ? { also } : {}), ...(e.quiet ? { quiet: true } : {}) });
     }
   }
   // The war's route (content/route.yaml) replaces every next: "@war", so it is written once and
