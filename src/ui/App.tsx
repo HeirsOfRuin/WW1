@@ -8,13 +8,13 @@ import { newGame, view, choose, startsOf, statusOf, artOf, recordOf, mapOf, revi
 // Scene pictures (DESIGN §11): tools/art.ts writes src/art/<key>.png; the game asks artOf(state) which one.
 const ART = import.meta.glob('../art/*.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 const artUrl = (key: string | undefined) => (key ? ART[`../art/${key}.png`] : undefined);
-import { toSave, fromSave, encodeSaveCode, decodeSaveCode, SAVE_KEY } from '../game/save';
+import { toSave, fromSave, encodeSaveCode, decodeSaveCode, loaded, SAVE_KEY } from '../game/save';
 import { STORAGE_OK, lsGet, lsSet } from './storage.js';
 
 function load(content: ContentBundle): GameState | null {
   const raw = lsGet(SAVE_KEY);
   if (!raw) return null;
-  try { return fromSave(JSON.parse(raw), content).state; } catch { return null; }
+  try { return loaded(fromSave(JSON.parse(raw), content).state); } catch { return null; }
 }
 // Text with the soldier's words tappable (src/game/gloss.ts cuts it; this only shows it).
 function Gloss({ word, means }: { word: string; means: string }) {
@@ -50,7 +50,7 @@ export function App({ content }: { content: ContentBundle }) {
   const [loading, setLoading] = useState(false);
   const [code, setCode] = useState('');
   const loadCode = async (t: string) => {
-    try { commit(fromSave(await decodeSaveCode(t.trim()), content).state); setTab('story'); setLoading(false); setCode(''); setNote(null); return true; }
+    try { commit(loaded(fromSave(await decodeSaveCode(t.trim()), content).state)); setTab('story'); setLoading(false); setCode(''); setNote(null); return true; }
     catch (e) { setNote(`That code did not load: ${(e as Error).message} It has ${t.trim().length} characters; a whole one has several thousand.`); return false; }
   };
   useEffect(() => {
@@ -143,7 +143,7 @@ export function App({ content }: { content: ContentBundle }) {
           <button data-act="link" onClick={async () => { const c = await encodeSaveCode(toSave(state, content)); const url = `${location.origin}${location.pathname}#save=${c}`; try { await navigator.clipboard.writeText(url); setNote('Save link copied: open it on any device to carry on from here.'); } catch { setNote(url); } }}>Save link (copy)</button>
           {loadBox || <button data-act="load-code" onClick={() => setLoading(true)}>Load a save code</button>}
           {/* the author twice reloaded a save before a battle and lost every way (2026-11-21, 2026-11-23): say it before, not only at the end */}
-          <p class="hint">A save keeps its dice: loading it again plays out the same luck. It moves a game between devices; it does not give a second chance.</p>
+          <p class="hint">A save made at the start of a battle, before your first order, gets new luck for that battle when you load it. Any other save keeps its dice: loading it plays out the same luck.</p>
           <button data-act="words" onClick={() => { lsSet('trenches.words', words ? 'off' : 'on'); setWords(!words); }}>Underline the soldier's words: {words ? 'on' : 'off'}</button>
           <button data-act="quit" onClick={() => setState(null)}>Back to the title</button></div>
           <p class="hint">Saves live in this browser on this device. A save code or a save link moves a game to another.</p></>}

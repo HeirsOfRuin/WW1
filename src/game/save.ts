@@ -4,6 +4,7 @@
 import { makeSaveCodec, SaveError, type SaveFile as CoreSaveFile, type LoadResult as CoreLoadResult } from '@engine/save';
 import { encodeSaveCode as encodeCode, decodeSaveCode as decodeCode } from '@engine/savecode';
 import type { GameState } from './state';
+import { rerollOpeningBattle } from './war/war';
 
 export { SaveError };
 
@@ -25,3 +26,12 @@ export const { toSave, fromSave } = makeSaveCodec<GameState>({ format: SAVE_FORM
 export const CODE_PREFIX = 'TRENCH1.';
 export const encodeSaveCode = (save: unknown) => encodeCode(CODE_PREFIX, save);
 export const decodeSaveCode = (text: string) => decodeCode(CODE_PREFIX, text);
+
+/** A save loaded by the player (a code, a link, or the game resumed on opening). A save made at the
+ *  opening of a battle gets new luck for that battle; any other keeps its dice (rerollOpeningBattle).
+ *  The tests' round trips use fromSave alone, so they stay exact. */
+export function loaded(state: GameState, salt = (Math.random() * 2 ** 32) >>> 0): GameState {
+  rerollOpeningBattle(state.war, salt);
+  return state;
+}
+

@@ -11,7 +11,7 @@ import { warMonth, seasonOf, monthName, ARMISTICE } from '../src/game/war/calend
 import { phaseHit, battleOf, newWar, run, playWar, decide, decideFor, homeTier, sentHomeOf, missionHit, rankFull, ROLES as WAR_ROLES, POLICIES as WAR_POLICIES } from '../src/game/war/index';
 import { riskWord, whereOf, endingLine, fateLine } from '../src/game/module';
 import { DECKS, SORTIES } from '../src/game/war/data';
-import { drawCard, markCard } from '../src/game/war/war';
+import { drawCard, markCard, rerollOpeningBattle } from '../src/game/war/war';
 import { share } from '../tools/story-share';
 import { recordOf } from '../src/game/character';
 import { mapOf, project, EXTENT, lineFor } from '../src/game/warmap';
@@ -478,7 +478,7 @@ describe('the death page says the dice were cast (2026-11-21)', () => {
       const w = playWar({ seed: 900 + i, town: 'farm', policy: 'adaptive' });
       if (w.ending !== 'killed') continue;
       const line = fateLine(w);
-      expect(line).toContain('Reloading a save replays the same dice.');
+      expect(line).toMatch(/replays the same dice\./);
       if (w.lastHit && /1-in-\d+/.test(line)) battle++; else { expect(line).toContain('Nothing you chose'); other++; }
     }
     expect(battle).toBeGreaterThan(0); expect(other).toBeGreaterThan(0);
@@ -491,6 +491,30 @@ describe('the content file (2026-11-21: 24 MB, from 921 copies of the war route)
     expect(text.length).toBeLessThan(3_000_000);
     const back = linkRoute(JSON.parse(text));
     expect(JSON.stringify(back.scenes)).toBe(JSON.stringify(content.scenes));
+  });
+});
+
+describe('the middle way on reloading (2026-11-23)', () => {
+  // the author: "Let's go with the middle way": a save made at a battle's opening gets new luck when
+  // loaded; any later save keeps its dice
+  it('re-rolls a battle only at its opening, before the first order', () => {
+    let opening = 0, later = 0;
+    for (let i = 0; i < 40 && (opening < 3 || later < 3); i++) {
+      const w = newWar({ seed: 300 + i, town: 'pit' });
+      const p = (WAR_POLICIES as Record<string, unknown>).adaptive;
+      for (let k = 0; k < 4000 && w.cursor.at !== 'done'; k++) {
+        if (!w.pending) { run(w); continue; }
+        const q = w.pending;
+        if (q.kind === 'battle') {
+          const before = JSON.stringify(w.rng);
+          const re = rerollOpeningBattle(w, 7);
+          expect(re).toBe(q.phase === 0 && (w.cursor as { i: number }).i === 0);
+          if (re) { opening++; expect(JSON.stringify(w.rng)).not.toBe(before); } else { later++; expect(JSON.stringify(w.rng)).toBe(before); }
+        }
+        decide(w, decideFor(p as never, w, w.pending!, battleOf) as never);
+      }
+    }
+    expect(opening).toBeGreaterThan(0); expect(later).toBeGreaterThan(0);
   });
 });
 

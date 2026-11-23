@@ -695,6 +695,19 @@ function askStep(w: War, noClose = false): void {
   w.pending = { kind: 'step', key: c.key, role: c.role, step: c.i, of: so.shares.length, vol: c.vol, canBack: so.back[c.i]!, card: drawCard(w, c.key, c.i) };
 }
 
+/** The middle way on reloading (the author, 2026-11-23: "Let's go with the middle way"). A save made
+ *  at the opening of a battle, before his first order, gets new luck when it is loaded: the battle,
+ *  the wound and the close-moment dice are drawn afresh. Any later save keeps its dice, so one choice
+ *  cannot be retried; the whole battle can. Two reloads before Passchendaele and Arras had found
+ *  every choice lost (the save held the rolls). Returns whether it re-rolled. */
+export function rerollOpeningBattle(w: War, salt: number): boolean {
+  const p = w.pending; const c = w.cursor;
+  if (w.ending || p?.kind !== 'battle' || p.phase !== 0 || c.at !== 'battle' || c.i !== 0) return false;
+  for (const l of ['battle', 'fire', 'close'] as const) w.rng[l] = (hashString(`${w.seed}|reroll|${salt}|${l}`) >>> 0) || 1;
+  say(w, `${p.battle}: new luck on loading a save made at its opening`);
+  return true;
+}
+
 /** The written situation for a step (docs/FRAME-DECKS.md): one of the deck's cards for this year that
  *  has not been shown since the deck was reshuffled, never the one just shown. A hash of the seed and
  *  the count shown picks it, so no random stream is drawn and no number in the war moves. */
