@@ -142,6 +142,8 @@ export function App({ content }: { content: ContentBundle }) {
           <button data-act="code" onClick={async () => { const c = await encodeSaveCode(toSave(state, content)); try { await navigator.clipboard.writeText(c); setNote(`Save code copied (${c.length} characters).`); } catch { setNote(c); } }}>Save code (copy)</button>
           <button data-act="link" onClick={async () => { const c = await encodeSaveCode(toSave(state, content)); const url = `${location.origin}${location.pathname}#save=${c}`; try { await navigator.clipboard.writeText(url); setNote('Save link copied: open it on any device to carry on from here.'); } catch { setNote(url); } }}>Save link (copy)</button>
           {loadBox || <button data-act="load-code" onClick={() => setLoading(true)}>Load a save code</button>}
+          {/* the author twice reloaded a save before a battle and lost every way (2026-11-21, 2026-11-23): say it before, not only at the end */}
+          <p class="hint">A save keeps its dice: loading it again plays out the same luck. It moves a game between devices; it does not give a second chance.</p>
           <button data-act="words" onClick={() => { lsSet('trenches.words', words ? 'off' : 'on'); setWords(!words); }}>Underline the soldier's words: {words ? 'on' : 'off'}</button>
           <button data-act="quit" onClick={() => setState(null)}>Back to the title</button></div>
           <p class="hint">Saves live in this browser on this device. A save code or a save link moves a game to another.</p></>}

@@ -488,6 +488,8 @@
 
     Of the section from home, {friends_home} came home. Awards: {awards_line}. The record: {grade}.
 
+    {fate_line}
+
 - id: e_broken
   chapter: end
   kind: ending
