@@ -695,17 +695,28 @@ function askStep(w: War, noClose = false): void {
   w.pending = { kind: 'step', key: c.key, role: c.role, step: c.i, of: so.shares.length, vol: c.vol, canBack: so.back[c.i]!, card: drawCard(w, c.key, c.i) };
 }
 
-/** The middle way on reloading (the author, 2026-11-23: "Let's go with the middle way"). A save made
- *  at the opening of a battle, before his first order, gets new luck when it is loaded: the battle,
- *  the wound and the close-moment dice are drawn afresh. Any later save keeps its dice, so one choice
- *  cannot be retried; the whole battle can. Two reloads before Passchendaele and Arras had found
- *  every choice lost (the save held the rolls). Returns whether it re-rolled. */
-export function rerollOpeningBattle(w: War, salt: number): boolean {
-  const p = w.pending; const c = w.cursor;
-  if (w.ending || p?.kind !== 'battle' || p.phase !== 0 || c.at !== 'battle' || c.i !== 0) return false;
-  for (const l of ['battle', 'fire', 'close'] as const) w.rng[l] = (hashString(`${w.seed}|reroll|${salt}|${l}`) >>> 0) || 1;
-  say(w, `${p.battle}: new luck on loading a save made at its opening`);
+/** The middle way on reloading (the author, 2026-11-23: "Let's go with the middle way"; 2026-11-24:
+ *  "What about a player who saves before the battle starts"). Loading a save gives his own luck under
+ *  fire afresh (the battle, close-moment, shellfire and wound, and duty dice), UNLESS the save was made
+ *  partway through a fight: after the first order of a battle, or after the first step of a duty or
+ *  mission. So a fight can be replayed from its start or from any save before it, but one choice in it
+ *  cannot be retried. The war around him (his friends' fates, promotions, leave) keeps its dice.
+ *  The first version re-rolled only a save made on a battle's opening screen: a save from the tour
+ *  before it replayed the same battle, because the battle dice are drawn nowhere else. Returns
+ *  whether it re-rolled. */
+export function rerollOnLoad(w: War, salt: number): boolean {
+  if (midFight(w)) return false;
+  for (const l of ['battle', 'fire', 'close', 'duty'] as const) w.rng[l] = (hashString(`${w.seed}|reroll|${salt}|${l}`) >>> 0) || 1;
+  say(w, 'new luck on loading a save');
   return true;
+}
+/** Partway through a fight: a battle after its first order, or a duty or mission after its first step. */
+export function midFight(w: War): boolean {
+  if (w.ending) return true;
+  const p = w.pending; const c = w.cursor;
+  if (c.at === 'battle') return !(p?.kind === 'battle' && p.phase === 0 && c.i === 0);
+  if (c.at === 'sortie') return !(p?.kind === 'step' && p.step === 0);
+  return false;
 }
 
 /** The written situation for a step (docs/FRAME-DECKS.md): one of the deck's cards for this year that

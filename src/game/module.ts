@@ -169,12 +169,12 @@ export function fateLine(w: War): string {
   const n = (p: number) => Math.max(2, Math.round(1 / p));
   const k = causeKind(w.endWhy);
   const h = w.lastHit;
-  const replay = k === 'battle' ? 'A save from the opening of the battle, before the first order, would get new luck; any later save replays the same dice.' : 'Reloading a save replays the same dice.';
+  const replay = 'A save from before this fight would get new luck; one from partway through it replays the same dice.';
   if ((k === 'battle' || k === 'sortie') && h) {
     const what = `The dice were cast before you chose. What you did carried about a 1-in-${n(h.p)} chance of being hit`;
     return h.safest < h.p * 0.9 ? `${what}; the safest choice, about 1 in ${n(h.safest)}. ${replay}` : `${what}, and nothing safer was open to you. ${replay}`;
   }
-  return `Nothing you chose that day would have changed it: the shell, or the bullet, picks no one. ${replay}`;
+  return `Nothing you chose that day would have changed it: the shell, or the bullet, picks no one. A save from before it would get new luck.`;
 }
 
 export function endingLine(w: War): string {

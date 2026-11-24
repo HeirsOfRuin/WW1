@@ -11,7 +11,7 @@ import { warMonth, seasonOf, monthName, ARMISTICE } from '../src/game/war/calend
 import { phaseHit, battleOf, newWar, run, playWar, decide, decideFor, homeTier, sentHomeOf, missionHit, rankFull, ROLES as WAR_ROLES, POLICIES as WAR_POLICIES } from '../src/game/war/index';
 import { riskWord, whereOf, endingLine, fateLine } from '../src/game/module';
 import { DECKS, SORTIES } from '../src/game/war/data';
-import { drawCard, markCard, rerollOpeningBattle } from '../src/game/war/war';
+import { drawCard, markCard, rerollOnLoad, midFight } from '../src/game/war/war';
 import { share } from '../tools/story-share';
 import { recordOf } from '../src/game/character';
 import { mapOf, project, EXTENT, lineFor } from '../src/game/warmap';
@@ -478,7 +478,7 @@ describe('the death page says the dice were cast (2026-11-21)', () => {
       const w = playWar({ seed: 900 + i, town: 'farm', policy: 'adaptive' });
       if (w.ending !== 'killed') continue;
       const line = fateLine(w);
-      expect(line).toMatch(/replays the same dice\./);
+      expect(line).toMatch(/new luck/);
       if (w.lastHit && /1-in-\d+/.test(line)) battle++; else { expect(line).toContain('Nothing you chose'); other++; }
     }
     expect(battle).toBeGreaterThan(0); expect(other).toBeGreaterThan(0);
@@ -494,27 +494,31 @@ describe('the content file (2026-11-21: 24 MB, from 921 copies of the war route)
   });
 });
 
-describe('the middle way on reloading (2026-11-23)', () => {
-  // the author: "Let's go with the middle way": a save made at a battle's opening gets new luck when
-  // loaded; any later save keeps its dice
-  it('re-rolls a battle only at its opening, before the first order', () => {
-    let opening = 0, later = 0;
-    for (let i = 0; i < 40 && (opening < 3 || later < 3); i++) {
+describe('the middle way on reloading (2026-11-23, widened 2026-11-24)', () => {
+  // the author: "Let's go with the middle way", then "What about a player who saves before the
+  // battle starts": new luck on load, except partway through a fight
+  it('re-rolls on load anywhere but partway through a battle or a duty', () => {
+    const seen = { tour: 0, opening: 0, midBattle: 0, firstStep: 0, midSortie: 0 };
+    for (let i = 0; i < 40 && Object.values(seen).some((n) => n < 2); i++) {
       const w = newWar({ seed: 300 + i, town: 'pit' });
       const p = (WAR_POLICIES as Record<string, unknown>).adaptive;
       for (let k = 0; k < 4000 && w.cursor.at !== 'done'; k++) {
         if (!w.pending) { run(w); continue; }
-        const q = w.pending;
-        if (q.kind === 'battle') {
-          const before = JSON.stringify(w.rng);
-          const re = rerollOpeningBattle(w, 7);
-          expect(re).toBe(q.phase === 0 && (w.cursor as { i: number }).i === 0);
-          if (re) { opening++; expect(JSON.stringify(w.rng)).not.toBe(before); } else { later++; expect(JSON.stringify(w.rng)).toBe(before); }
-        }
+        const q = w.pending; const c = w.cursor as { at: string; i?: number };
+        const mid = (c.at === 'battle' && !(q.kind === 'battle' && q.phase === 0 && c.i === 0)) || (c.at === 'sortie' && !(q.kind === 'step' && q.step === 0));
+        expect(midFight(w)).toBe(mid);
+        const copy = structuredClone(w); const re = rerollOnLoad(copy, 7);
+        expect(re).toBe(!mid);
+        expect(JSON.stringify(copy.rng) !== JSON.stringify(w.rng)).toBe(!mid);
+        // the war around him keeps its dice either way
+        expect([copy.rng.section, copy.rng.career, copy.rng.leave]).toEqual([w.rng.section, w.rng.career, w.rng.leave]);
+        if (q.kind === 'tour') seen.tour++;
+        if (q.kind === 'battle') { if (mid) seen.midBattle++; else seen.opening++; }
+        if (q.kind === 'step') { if (mid) seen.midSortie++; else seen.firstStep++; }
         decide(w, decideFor(p as never, w, w.pending!, battleOf) as never);
       }
     }
-    expect(opening).toBeGreaterThan(0); expect(later).toBeGreaterThan(0);
+    for (const [k, n] of Object.entries(seen)) expect(n, k).toBeGreaterThan(0);
   });
 });
 
